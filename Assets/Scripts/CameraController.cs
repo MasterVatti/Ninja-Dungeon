@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Этот класс отвечает за слежение камеры за игроком
+/// </summary>
 public class CameraController : MonoBehaviour
 {
     [SerializeField]

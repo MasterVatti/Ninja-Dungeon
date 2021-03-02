@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Этот класс отвечает за перемещения игрока в пространстве
+/// </summary>
 public class PlayerMovementController : MonoBehaviour
 {
     [SerializeField]
@@ -7,7 +10,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField]
     private Rigidbody _player;
 
-    void Update()
+    private void Update()
     {
         _player.velocity = InputController.GetDirection() * _speed;
     }
