@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
     private float _speed;
     
     private bool test;
+    private bool test2;
     
     private void Update()
     {
