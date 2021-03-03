@@ -11,7 +11,9 @@ public class CameraController : MonoBehaviour
     private Vector3 _offset;
     [SerializeField]
     private float _speed;
-
+    
+    private bool test;
+    
     private void Update()
     {
         transform.position =
