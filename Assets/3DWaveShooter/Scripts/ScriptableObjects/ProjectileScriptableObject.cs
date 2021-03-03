@@ -6,27 +6,25 @@ using Homebrew;
 [CreateAssetMenu(fileName = "Projectile", menuName = "Projectile", order = 1)]
 public class ProjectileScriptableObject : ScriptableObject
 {
-        [Foldout("Type", true)]
-
+    [Foldout("Type", true)]
     [Tooltip("Type of projectile.")]
     public ProjectileType type;
 
-        [Foldout("Values", true)]
-
+    [Foldout("Values", true)]
     [Tooltip("Damage dealth on impact.")]
     public int damage;
 
     [Tooltip("Projectile velocity when shot (type = Projectile).")]
     public float speed;
 
-    [Tooltip("Duration until the projectile gets destroyed (type = Projectile).")]
+    [Tooltip(
+        "Duration until the projectile gets destroyed (type = Projectile).")]
     public float destroyTime = 2.0f;
 
     [Tooltip("Length of the raycast to hit enemies (type = Raycast).")]
     public float raycastLength = 10.0f;
 
-        [Foldout("Multiple Projectiles", true)]
-
+    [Foldout("Multiple Projectiles", true)]
     [Tooltip("Are there multiple projectiles?")]
     public bool shootMultipleProjectiles;
 
@@ -45,13 +43,11 @@ public class ProjectileScriptableObject : ScriptableObject
         public float projectileSpreadAngle = 30;
     }
 
-        [Foldout("Projectile Object (Type = Projectile)", true)]
-
+    [Foldout("Projectile Object (Type = Projectile)", true)]
     [Tooltip("Game object of the projectile.")]
     public GameObject projectilePrefab;
 
-        [Foldout("Trail (Type = Raycast)", true)]
-
+    [Foldout("Trail (Type = Raycast)", true)]
     [Tooltip("Do we draw a projectile trail when shot?")]
     public bool drawTrail;
 
@@ -65,8 +61,7 @@ public class ProjectileScriptableObject : ScriptableObject
         public Color trailColor = Color.yellow;
     }
 
-        [Foldout("Effects", true)]
-
+    [Foldout("Effects", true)]
     [Tooltip("Do we apply effects to hit entities?")]
     public bool applyEffects;
 

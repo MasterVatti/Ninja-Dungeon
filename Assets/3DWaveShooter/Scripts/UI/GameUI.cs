@@ -34,38 +34,46 @@ public class GameUI : MonoBehaviour
 
     //Instance
     public static GameUI inst;
-    void Awake () { inst = this; }
 
-    void Update ()
+    void Awake()
     {
-        if(Player.inst.curWeapon != null)
+        inst = this;
+    }
+
+    void Update()
+    {
+        if (Player.inst.curWeapon != null)
         {
-            ammoInClipText.text = Player.inst.curWeapon.curAmmoInClip.ToString();
+            ammoInClipText.text =
+                Player.inst.curWeapon.curAmmoInClip.ToString();
             totalAmmoText.text = Player.inst.curWeapon.curAmmo.ToString();
         }
     }
 
-    void FixedUpdate ()
+    void FixedUpdate()
     {
         UpdateHealthBar();
         playerMoneyText.text = "$" + Player.inst.money;
     }
 
-    void LateUpdate ()
+    void LateUpdate()
     {
         //If we're reloading, make the reload dial follow the player's aim.
-        if(reloading)
-            reloadDial.rectTransform.position = Camera.main.WorldToScreenPoint(Player.inst.weaponPos.transform.position + (Player.inst.transform.forward * 1.5f));
+        if (reloading)
+            reloadDial.rectTransform.position =
+                Camera.main.WorldToScreenPoint(
+                    Player.inst.weaponPos.transform.position +
+                    (Player.inst.transform.forward * 1.5f));
     }
 
     //called when the player reloads their weapon.
-    public void PlayReloadDialAnimation (float reloadTime)
+    public void PlayReloadDialAnimation(float reloadTime)
     {
         StartCoroutine(PlayReloadDialAnim(reloadTime));
     }
 
     //Fills the reload dial for the duration of the reload speed.
-    IEnumerator PlayReloadDialAnim (float reloadSpeed)
+    IEnumerator PlayReloadDialAnim(float reloadSpeed)
     {
         reloadDial.gameObject.SetActive(true);
         reloading = true;
@@ -73,9 +81,10 @@ public class GameUI : MonoBehaviour
 
         float multiplier = 1.0f / reloadSpeed;
 
-        while(reloadDial.fillAmount != 0.0f)
+        while (reloadDial.fillAmount != 0.0f)
         {
-            reloadDial.fillAmount = Mathf.MoveTowards(reloadDial.fillAmount, 0.0f, multiplier * Time.deltaTime);
+            reloadDial.fillAmount = Mathf.MoveTowards(reloadDial.fillAmount,
+                0.0f, multiplier * Time.deltaTime);
             yield return null;
         }
 
@@ -84,7 +93,7 @@ public class GameUI : MonoBehaviour
     }
 
     //Updates the health bar.
-    public void UpdateHealthBar ()
+    public void UpdateHealthBar()
     {
         float rate = 1.0f / Player.inst.maxHp;
         healthBarSlider.fillAmount = rate * Player.inst.curHp;
@@ -93,16 +102,17 @@ public class GameUI : MonoBehaviour
         //   StartCoroutine(HealthBarFlash());
     }
 
-    IEnumerator HealthBarFlash ()
+    IEnumerator HealthBarFlash()
     {
         flashingHealthBar = true;
 
         Color c = healthBarBackground.color;
         healthBarBackground.color = Color.red;
 
-        while(healthBarBackground.color != c)
+        while (healthBarBackground.color != c)
         {
-            healthBarBackground.color = Color.Lerp(healthBarBackground.color, c, 15 * Time.deltaTime);
+            healthBarBackground.color = Color.Lerp(healthBarBackground.color,
+                c, 15 * Time.deltaTime);
             yield return null;
         }
 
@@ -110,25 +120,27 @@ public class GameUI : MonoBehaviour
     }
 
     //Updates the visuals on the equipped weapon icons.
-    public void UpdateEquippedWeaponIcons ()
+    public void UpdateEquippedWeaponIcons()
     {
-        for(int x = 0; x < equippedWeaponIcons.Length; ++x)
+        for (int x = 0; x < equippedWeaponIcons.Length; ++x)
         {
             //Do we have a weapon to fill out?
-            if(x < Player.inst.weapons.Count)
+            if (x < Player.inst.weapons.Count)
             {
                 equippedWeaponIcons[x].gameObject.SetActive(true);
 
                 equippedWeaponIcons[x].sprite = Player.inst.weapons[x].uiIcon;
-                
+
                 //Is this the equipped weapon?
-                if(Player.inst.curWeapon.id == Player.inst.weapons[x].id)
+                if (Player.inst.curWeapon.id == Player.inst.weapons[x].id)
                 {
-                    equippedWeaponIcons[x].color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+                    equippedWeaponIcons[x].color =
+                        new Color(1.0f, 1.0f, 1.0f, 1.0f);
                 }
                 else
                 {
-                    equippedWeaponIcons[x].color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+                    equippedWeaponIcons[x].color =
+                        new Color(1.0f, 1.0f, 1.0f, 0.5f);
                 }
             }
             else
@@ -137,13 +149,13 @@ public class GameUI : MonoBehaviour
     }
 
     //Sets the wave text to be the current wave number.
-    public void UpdateWaveText ()
+    public void UpdateWaveText()
     {
         waveText.text = EnemySpawner.inst.nextWaveIndex.ToString();
     }
 
     //Sets the wave countdown text to count down from the requested number.
-    public IEnumerator SetWaveCountdownText (int countdownFrom)
+    public IEnumerator SetWaveCountdownText(int countdownFrom)
     {
         waveCountdownText.gameObject.SetActive(true);
         waveText.text = GameManager.inst.curWave.ToString();
@@ -151,7 +163,7 @@ public class GameUI : MonoBehaviour
 
         int curNum = countdownFrom;
 
-        while(curNum != 0)
+        while (curNum != 0)
         {
             waveCountdownText.text = curNum.ToString();
             curNum--;
@@ -164,7 +176,7 @@ public class GameUI : MonoBehaviour
     }
 
     //Called when the "Next Wave" button is pressed.
-    public void OnNextWaveButton ()
+    public void OnNextWaveButton()
     {
         nextWaveButton.SetActive(false);
         openShopButton.SetActive(false);
@@ -172,18 +184,18 @@ public class GameUI : MonoBehaviour
     }
 
     //Sets the end game text, as either a victory or defeat.
-    public void SetEndGameText (bool win)
+    public void SetEndGameText(bool win)
     {
         endGameText.gameObject.SetActive(true);
 
-        if(win)
+        if (win)
             endGameText.text = "Victory!";
         else
             endGameText.text = "Game Over!";
     }
 
     //Called when a weapon icon has been pressed.
-    public void OnEquipWeapon (int weaponId)
+    public void OnEquipWeapon(int weaponId)
     {
         Player.inst.EquipWeapon(Player.inst.GetWeapon(weaponId));
     }

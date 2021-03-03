@@ -5,9 +5,10 @@ using UnityEngine;
 public class MenuCameraRotator : MonoBehaviour
 {
     public float rotateSpeed;
-    
-    void Update ()
+
+    void Update()
     {
-        transform.RotateAround(Vector3.zero, Vector3.up, rotateSpeed * Time.deltaTime);
+        transform.RotateAround(Vector3.zero, Vector3.up,
+            rotateSpeed * Time.deltaTime);
     }
 }

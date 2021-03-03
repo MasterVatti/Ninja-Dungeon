@@ -19,18 +19,23 @@ public class AudioManager : MonoBehaviour
     public AudioClip buttonClick;
 
     [Header("Prefabs")]
-    public GameObject audioSourcePrefab;        //Prefab of audio source to be spawned in for temp sounds like explosions, impacts.
+    public GameObject
+        audioSourcePrefab; //Prefab of audio source to be spawned in for temp sounds like explosions, impacts.
 
     [Header("Global Audio Sources")]
     public AudioSource uiAudioSource;
 
     //Instance
     public static AudioManager inst;
-    void Awake () { inst = this; }
 
-    void Start ()
+    void Awake()
     {
-        if(PlayerPrefs.HasKey("Volume"))
+        inst = this;
+    }
+
+    void Start()
+    {
+        if (PlayerPrefs.HasKey("Volume"))
         {
             AudioListener.volume = PlayerPrefs.GetFloat("Volume");
         }
@@ -40,15 +45,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Play (AudioSource source, AudioClip clip)
+    public void Play(AudioSource source, AudioClip clip)
     {
         source.pitch = Random.Range(0.9f, 1.1f);
         source.PlayOneShot(clip);
     }
 
-    public void Play (AudioSource source, AudioClip clip, bool changePitch)
+    public void Play(AudioSource source, AudioClip clip, bool changePitch)
     {
-        if(changePitch)
+        if (changePitch)
             source.pitch = Random.Range(0.9f, 1.1f);
         else
             source.pitch = 1.0f;
@@ -56,9 +61,10 @@ public class AudioManager : MonoBehaviour
         source.PlayOneShot(clip);
     }
 
-    public void PlayWithExternalAudioSource (AudioClip clip, Vector3 pos)
+    public void PlayWithExternalAudioSource(AudioClip clip, Vector3 pos)
     {
-        GameObject source = Pool.Spawn(audioSourcePrefab, pos, Quaternion.identity);
+        GameObject source =
+            Pool.Spawn(audioSourcePrefab, pos, Quaternion.identity);
         source.GetComponent<AudioSource>().PlayOneShot(clip);
         Pool.Destroy(source, clip.length);
     }

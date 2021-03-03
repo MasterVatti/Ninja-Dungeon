@@ -12,5 +12,9 @@ public class MobileControls : MonoBehaviour
 
     //Instance
     public static MobileControls inst;
-    void Awake () { inst = this; }
+
+    void Awake()
+    {
+        inst = this;
+    }
 }

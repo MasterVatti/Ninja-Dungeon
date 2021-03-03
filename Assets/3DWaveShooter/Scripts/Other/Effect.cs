@@ -30,8 +30,8 @@ public class Effect : MonoBehaviour
     public GameObject effectParticle;
 
     private GameObject hitEntity;
-    
-    public Effect (EffectScriptableObject effect, GameObject hitEntity)
+
+    public Effect(EffectScriptableObject effect, GameObject hitEntity)
     {
         effectType = effect.effectType;
 
@@ -53,34 +53,39 @@ public class Effect : MonoBehaviour
 
         this.hitEntity = hitEntity;
 
-        if(damageOverTime)
+        if (damageOverTime)
             DamageOverTime();
 
-        if(explosive)
+        if (explosive)
             Explode();
 
-        if(tempStatChange)
+        if (tempStatChange)
             TempStatChange();
     }
 
     //Damage the hit entity over time.
-    void DamageOverTime ()
+    void DamageOverTime()
     {
-        if(hitEntity.tag == "Enemy")
-            hitEntity.GetComponent<Enemy>().DamageOverTime(damageOverTimeOptions.damage, damageOverTimeOptions.damageRate, duration, effectParticle ? effectParticle : null);
+        if (hitEntity.tag == "Enemy")
+            hitEntity.GetComponent<Enemy>().DamageOverTime(
+                damageOverTimeOptions.damage,
+                damageOverTimeOptions.damageRate, duration,
+                effectParticle ? effectParticle : null);
     }
 
     //Explosive
-    void Explode ()
+    void Explode()
     {
         Explosion.Explode(explosiveOptions, hitEntity.transform.position);
     }
 
     //Temporarily change hit entity's stat.
-    void TempStatChange ()
+    void TempStatChange()
     {
-        if(hitEntity.tag == "Enemy")
-            hitEntity.GetComponent<Enemy>().TempStatChange(tempStatChangeOptions.statToChange, tempStatChangeOptions.statModifier, duration);
+        if (hitEntity.tag == "Enemy")
+            hitEntity.GetComponent<Enemy>().TempStatChange(
+                tempStatChangeOptions.statToChange,
+                tempStatChangeOptions.statModifier, duration);
     }
 }
 
