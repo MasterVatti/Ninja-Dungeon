@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 319051013}
   - component: {fileID: 319051012}
   - component: {fileID: 319051016}
+  - component: {fileID: 319051017}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -311,6 +312,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _portalScreen: {fileID: 135377027}
+--- !u!114 &319051017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319051011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7200e6771a342174786dfc44f9da514a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _screenDescription: "\u0421\u043F\u0443\u0441\u0442\u0438\u0442\u044C\u0441\u044F
+    \u0432 \u043F\u043E\u0434\u0437\u0435\u043C\u0435\u043B\u044C\u0435?"
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,6 +710,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1312520530 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3417450273834511105, guid: e257fd5744619f6458daefed78b48199,
+    type: 3}
+  m_PrefabInstance: {fileID: 3417450273601055334}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1338286853 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3417450272405440867, guid: e257fd5744619f6458daefed78b48199,
@@ -840,6 +867,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1360037255}
     m_Modifications:
+    - target: {fileID: 3417450272405440864, guid: e257fd5744619f6458daefed78b48199,
+        type: 3}
+      propertyPath: _progressLoadingSlider
+      value: 
+      objectReference: {fileID: 1312520530}
     - target: {fileID: 3417450272405440866, guid: e257fd5744619f6458daefed78b48199,
         type: 3}
       propertyPath: m_Name
@@ -1074,6 +1106,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3499387009364816349, guid: 820690effad37e64c90066cae09021be,
+        type: 3}
+      propertyPath: _portal
+      value: 
+      objectReference: {fileID: 319051017}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 820690effad37e64c90066cae09021be, type: 3}
 --- !u!1001 &7441288009988940438
@@ -1198,5 +1235,10 @@ PrefabInstance:
       propertyPath: _loadingScreen
       value: 
       objectReference: {fileID: 1338286854}
+    - target: {fileID: 7441288008614796693, guid: edeac3d0947f6bc4f9069c412e434045,
+        type: 3}
+      propertyPath: _loadingSceneNumber
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edeac3d0947f6bc4f9069c412e434045, type: 3}

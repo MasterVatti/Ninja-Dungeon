@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 /// <summary>
 /// Класс отвечает за окно портала(предложение спустится в инст и наоборот)
 /// </summary>
@@ -12,16 +13,14 @@ public class PortalScreen : MonoBehaviour
 {
     [SerializeField]
     private GameObject _portalScreen;
-
     [SerializeField]
     private TMP_Text _descriptionField;
-
     [SerializeField]
-    private string _screenDescription;
+    private PortalSettings _portal;
 
     private void Awake()
     {
-        _descriptionField.text = _screenDescription;
+        _descriptionField.text = _portal.ScreenDescription;
     }
 
     [UsedImplicitly]
@@ -29,5 +28,4 @@ public class PortalScreen : MonoBehaviour
     {
         _portalScreen.SetActive(false);
     }
-    
 }

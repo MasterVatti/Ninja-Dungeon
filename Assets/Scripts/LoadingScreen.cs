@@ -3,30 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-    
-    /// <summary>
-    /// Класс отвечает за окно загрузки меджу сценами
-    /// </summary>
+
+/// <summary>
+/// Класс отвечает за окно загрузки меджу сценами.
+/// </summary>
 public class LoadingScreen : MonoBehaviour
 {
-    
     [SerializeField]
-    private Slider _loadingProgressSlaider;
+    private Slider _progressLoadingSlider;
     [SerializeField]
     private GameObject _loadingScreen;
 
-    public void LoadingScreenOfFade( int loadingScene)
+    public void TurnOnLoadingScreen(int loadingScene)
     {
-        StartCoroutine(LoadingScreenFade(loadingScene));
+        StartCoroutine(LoadingScreenCoroutine(loadingScene));
     }
-     IEnumerator LoadingScreenFade(int loadingScene)
+
+    IEnumerator LoadingScreenCoroutine(int loadingScene)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(loadingScene);
+        var operation = SceneManager.LoadSceneAsync(loadingScene);
         _loadingScreen.SetActive(true);
         while (!operation.isDone)
         {
             var progress = Mathf.Clamp01(operation.progress / .9f);
-            _loadingProgressSlaider.value = progress;
+            _progressLoadingSlider.value = progress;
             yield return null;
         }
     }

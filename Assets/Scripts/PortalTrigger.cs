@@ -16,7 +16,6 @@ public class PortalTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _portalScreen.SetActive(true);
-           
         }
     }
 }
