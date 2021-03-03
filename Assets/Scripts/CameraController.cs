@@ -12,8 +12,8 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float _speed;
     
-    private bool test;
-    private bool test2;
+    private bool test = false;
+    private bool test2 = true;
     
     private void Update()
     {
