@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEngine;
 
 /// <summary>
@@ -15,7 +16,7 @@ public class PortalTrigger : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(GlobalConstants.PLAYER_TAG))
         {
             _portalScreen.GetComponent<PortalScreen>().Initialize(_settings);
             _portalScreen.SetActive(true);
