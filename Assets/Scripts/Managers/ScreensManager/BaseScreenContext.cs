@@ -1,10 +1,9 @@
-﻿namespace Managers.ScreensManager
+﻿namespace Assets.Scripts.Managers.ScreensManager
 {
     /// <summary>
-    /// Это базовый класс для представления контекста экрана
+    /// Базовый класс для представления контекста экрана
     /// </summary>
     public abstract class BaseScreenContext
     {
-        
     }
 }

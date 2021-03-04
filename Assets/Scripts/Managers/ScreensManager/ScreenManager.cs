@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Managers.ScreensManager
+namespace Assets.Scripts.Managers.ScreensManager
 {
     /// <summary>
     /// Этот менеджер управляет окнами.
@@ -13,17 +12,9 @@ namespace Managers.ScreensManager
         [SerializeField]
         private Canvas _canvas;
         [SerializeField]
-        private List<BaseScreen> _screenList;
-        private Stack<BaseScreen> _screenStack;
+        private List<BaseScreen> _allScreens;
 
-        private void Update()
-        {
-            if (Input.GetKeyUp("space"))
-            {
-                OpenScreen(ScreenType.RewardScreen,
-                    new RewardScreenContext() {Gold = 200});
-            }
-        }
+        private Stack<BaseScreen> _screenStack = new Stack<BaseScreen>();
 
         public void OpenScreen(ScreenType screenType,
             BaseScreenContext screenContext)
@@ -32,20 +23,23 @@ namespace Managers.ScreensManager
             screenPrefab.Initialize(screenType, screenContext);
 
             var screen = Instantiate(screenPrefab, _canvas.transform, false);
-            
-            // _screenStack.Push(screen);
+
+            _screenStack.Push(screen);
         }
 
         public void CloseUpperScreen()
         {
-            Destroy(_screenStack.Pop());
+            var upperScreen = _screenStack.Peek();
+            Destroy(upperScreen.gameObject);
+
+            _screenStack.Pop();
         }
 
         public void CloseAllScreens()
         {
             foreach (var screen in _screenStack)
             {
-                Destroy(screen);
+                Destroy(screen.gameObject);
             }
 
             _screenStack.Clear();
@@ -53,17 +47,20 @@ namespace Managers.ScreensManager
 
         public bool IsScreenOpened(ScreenType screenType)
         {
-            if (FindScreenByType(screenType) == null)
+            foreach (var screen in _screenStack)
             {
-                return false;
+                if (screen.ScreenType == screenType)
+                {
+                    return true;
+                }
             }
 
-            return true;
+            return false;
         }
 
         private BaseScreen FindScreenByType(ScreenType screenType)
         {
-            foreach (var screen in _screenList)
+            foreach (var screen in _allScreens)
             {
                 if (screen.ScreenType == screenType)
                 {
