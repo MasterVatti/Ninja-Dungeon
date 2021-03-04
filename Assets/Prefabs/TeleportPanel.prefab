@@ -254,18 +254,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LoadingController, Assembly-CSharp
-        m_MethodName: FadeToLevel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3499387009364816349}
         m_TargetAssemblyTypeName: PortalScreen, Assembly-CSharp
         m_MethodName: TurnOffPanel
@@ -369,10 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0411855bcf53d343a4989a1ccc654b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _portalScreen: {fileID: 3499387009364816347}
   _descriptionField: {fileID: 3499387009399854169}
-  _screenDescription: "\u0421\u043F\u0443\u0441\u0442\u0438\u0442\u044C\u0441\u044F
-    \u0432 \u0438\u043D\u0441\u0442?"
 --- !u!1 &3499387009399854168
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,20 +12,16 @@ using UnityEngine.UI;
 public class PortalScreen : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _portalScreen;
-    [SerializeField]
     private TMP_Text _descriptionField;
-    [SerializeField]
-    private PortalSettings _portal;
-
-    private void Awake()
-    {
-        _descriptionField.text = _portal.ScreenDescription;
-    }
-
+    
     [UsedImplicitly]
     public void TurnOffPanel()
     {
-        _portalScreen.SetActive(false);
+        gameObject.SetActive(false);
+    }
+
+    public void Initialize(PortalSettings portalSettings)
+    {
+        _descriptionField.text = portalSettings.ScreenDescription;
     }
 }
