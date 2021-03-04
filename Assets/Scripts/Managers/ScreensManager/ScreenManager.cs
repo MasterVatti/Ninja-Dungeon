@@ -32,8 +32,8 @@ namespace Managers.ScreensManager
             screenPrefab.Initialize(screenType, screenContext);
 
             var screen = Instantiate(screenPrefab, _canvas.transform, false);
-            screen.Initialize(screenType, screenContext);
-            _screenStack.Push(screen);
+            
+            // _screenStack.Push(screen);
         }
 
         public void CloseUpperScreen()

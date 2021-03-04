@@ -11,10 +11,7 @@ namespace Managers.ScreensManager
         public ScreenType ScreenType;
         public BaseScreenContext Context;
 
-        public virtual void Initialize(ScreenType screenType,
-            BaseScreenContext baseScreenContext)
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract void Initialize(ScreenType screenType,
+            BaseScreenContext baseScreenContext);
     }
 }

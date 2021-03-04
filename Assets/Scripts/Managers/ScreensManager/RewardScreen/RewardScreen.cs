@@ -8,11 +8,12 @@ namespace Managers.ScreensManager
         [SerializeField]
         private Text _goldLabel;
         
-        public void Initialize(ScreenType type, 
+        public override void Initialize(ScreenType type, 
             BaseScreenContext screenContext)
         {
             ScreenType = type;
             Context = screenContext;
+            Debug.Log($"HERE, context {Context}");
         }
     }
 }
