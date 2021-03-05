@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273de372e6cb1c24e9aa6d4f71f9ccf1, type: 3}
+  m_Name: BuildingSettings
+  m_EditorClassIdentifier: 
+  _connectedPlaceHolders:
+  - {fileID: 3681772152590915630, guid: 7d10e56148b4b954e88b6275c21d2c9c, type: 3}
+  - {fileID: 4270593717947160192, guid: d72f041c34166d24aad28bf6dc426c7a, type: 3}
+  _goldCost: 0
+  _lumberCost: 0
+  _prefab: {fileID: 1767658325423194123, guid: f90bade9f0499a5428388f6118339d6f, type: 3}

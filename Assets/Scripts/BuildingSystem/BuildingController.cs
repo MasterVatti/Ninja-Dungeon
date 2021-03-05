@@ -33,14 +33,17 @@ namespace BuildingSystem
 
         private void OnTriggerEnter (Collider other)
         {
-            SetConstructionSpeed();
+            _constructionSpeed = SetConstructionSpeed();
             _buildTime = Time.time;
             Build(_constructionSpeed);
         }
 
         private void OnTriggerStay (Collider other)
         {
-            Build(_constructionSpeed);
+            if(!IsConstructionFinished())
+            {
+                Build(_constructionSpeed);
+            }
         }
 
         private int SetConstructionSpeed ()
@@ -54,7 +57,11 @@ namespace BuildingSystem
                     continue;
                 }
 
-                constructionSpeed = _playerResources[i] / requiredResources[i];
+                var difference = _playerResources[i] / requiredResources[i];
+                if(constructionSpeed > difference)
+                {
+                    constructionSpeed = difference;
+                }
             }
 
             return constructionSpeed;
@@ -62,9 +69,9 @@ namespace BuildingSystem
 
         private void Build (int speed)
         {
-            var paidPerSecond = speed * _constructionSpeedMultiplier;
+            var payPerSecond = speed * _constructionSpeedMultiplier;
             var requiredResources = _building.RequiredResources;
-            if(Time.time > _buildTime)
+            if(IsCooldownExpired())
             {
                 for(int i = 0; i < _playerResources.Length; i++)
                 {
@@ -73,14 +80,14 @@ namespace BuildingSystem
                         continue;
                     }
 
-                    if(_playerResources[i] > paidPerSecond)
+                    if(_playerResources[i] > payPerSecond)
                     {
-                        _playerResources[i] -= paidPerSecond;
-                        requiredResources[i] -= paidPerSecond;
+                        _playerResources[i] -= payPerSecond;
+                        requiredResources[i] -= payPerSecond;
                         continue;
                     }
 
-                    if(_playerResources[i] <= paidPerSecond && _playerResources[i] > 0)
+                    if(_playerResources[i] <= payPerSecond && _playerResources[i] > 0)
                     {
                         _playerResources[i] -= 1;
                         requiredResources[i] -= 1;
@@ -89,18 +96,34 @@ namespace BuildingSystem
 
                 _buildTime += _buildCooldown;
             }
+
             PlayerResourcesManager.CurrentResources = _playerResources;
             _building.RequiredResources = requiredResources;
-            CheckingEndOfTheConstruction();
+            if(IsConstructionFinished())
+            {
+                OnBuildFinished?.Invoke();
+            }
         }
 
-        private void CheckingEndOfTheConstruction ()
+        private bool IsCooldownExpired ()
+        {
+            if(Time.time > _buildTime)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsConstructionFinished ()
         {
             if(_building.RequiredResources[0] <= 0 && _building.RequiredResources[1] <= 0)
             {
-                OnBuildFinished?.Invoke();
                 Destroy(gameObject);
+                return true;
             }
+
+            return false;
         }
     }
 }
