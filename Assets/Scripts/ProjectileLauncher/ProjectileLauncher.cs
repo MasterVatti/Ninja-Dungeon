@@ -6,12 +6,14 @@ public class ProjectileLauncher : MonoBehaviour
     /// <summary>
     /// Отвечает за создание пуль
     /// </summary>
+    
     [SerializeField] 
     private GameObject bulletPrefab;
     [SerializeField] 
     private float bulletsSpawnCoolDown;
     [SerializeField] 
     private EnemiesManager enemiesManager;
+    
     private float _currentTime;
     private List<GameObject> _bullets;
 
