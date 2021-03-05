@@ -5,7 +5,7 @@ namespace BuildingSystem
     /// <summary>
     /// Базовый класс для всех зданий
     /// </summary>
-    public class BuildingBase : MonoBehaviour
+    public class BuildingBase
     {
         [SerializeField]
         private BuildingSettings _nextUpgrade;
