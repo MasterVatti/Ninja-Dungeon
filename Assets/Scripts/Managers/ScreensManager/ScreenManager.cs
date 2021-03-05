@@ -20,6 +20,14 @@ namespace Assets.Scripts.Managers.ScreensManager
             BaseScreenContext screenContext)
         {
             var screenPrefab = FindScreenByType(screenType);
+
+            if (screenPrefab == null)
+            {
+                Debug.Log($"You have not added {screenType} "+
+                          "screen to screen list");
+                return;
+            }
+
             screenPrefab.Initialize(screenType, screenContext);
 
             var screen = Instantiate(screenPrefab, _canvas.transform, false);
@@ -27,7 +35,7 @@ namespace Assets.Scripts.Managers.ScreensManager
             _screenStack.Push(screen);
         }
 
-        public void CloseUpperScreen()
+        public void CloseTopScreen()
         {
             var upperScreen = _screenStack.Peek();
             Destroy(upperScreen.gameObject);

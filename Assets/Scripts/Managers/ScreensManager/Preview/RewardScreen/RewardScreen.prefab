@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 1373096649318363159}
   - component: {fileID: 6099382065373677219}
   - component: {fileID: 5283132226579256113}
-  - component: {fileID: 5287333383311130989}
+  - component: {fileID: 3614018122843469029}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -435,7 +435,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5287333383311130989
+--- !u!114 &3614018122843469029
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8127354134930743631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 165df026ec85e434a8e864813920cf89, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d8b8ee3b73c66542b13e99419161131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _okButton: {fileID: 5283132226579256113}

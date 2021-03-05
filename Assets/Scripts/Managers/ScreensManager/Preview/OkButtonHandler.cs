@@ -8,7 +8,7 @@ namespace Assets.Scripts.Managers.ScreensManager.Preview
     /// Учитывая, что синглтон еще не в мейне, пока что ищу менеджер
     /// просто по названию, так как получить по другому из префаба не могу 
     /// </summary>
-    public class OkButtonScript : MonoBehaviour
+    public class OkButtonHandler : MonoBehaviour
     {
         [SerializeField]
         private Button _okButton;
@@ -17,19 +17,19 @@ namespace Assets.Scripts.Managers.ScreensManager.Preview
 
         private void Start()
         {
-            Button btn = _okButton.GetComponent<Button>();
-            btn.onClick.AddListener(TaskOnClick);
-        }
-
-        private void TaskOnClick()
-        {
             if (_screenManager == null)
             {
                 _screenManager = GameObject.Find("ScreenManager")
                     .GetComponent<ScreenManager>();
             }
+            
+            Button button = _okButton.GetComponent<Button>();
+            button.onClick.AddListener(OnClick);
+        }
 
-            _screenManager.CloseUpperScreen();
+        private void OnClick()
+        {
+            _screenManager.CloseTopScreen();
         }
     }
 }

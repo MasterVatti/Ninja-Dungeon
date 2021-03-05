@@ -62,7 +62,7 @@ public class JoystickController : MonoBehaviour, IPointerDownHandler, IPointerUp
     private void ReturnJoystickToStartPosition()
     {
         _joystickBorder.transform.position = _startPosition;
-        _joystickCircle.rectTransform.anchoredPosition = Vector2.zero;;
+        _joystickCircle.rectTransform.anchoredPosition = Vector2.zero;
         InputDirection = Vector2.zero;
     }
 }
