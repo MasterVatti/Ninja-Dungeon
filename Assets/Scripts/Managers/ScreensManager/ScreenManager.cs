@@ -33,17 +33,16 @@ namespace Assets.Scripts.Managers.ScreensManager
         /// <summary>
         /// Открывает окно с заданным контекстом
         /// </summary>
-        public void OpenScreenWithContext(ScreenType screenType,
-            BaseContext context)
+        public void OpenScreenWithContext<TContext>(ScreenType screenType,
+            TContext context) where TContext: BaseContext
         {
             var screenPrefab =
-                FindScreenByType<BaseScreenWithContext>(screenType);
+                FindScreenByType<BaseScreenWithContext<TContext>>(screenType);
 
             InitializeScreen(screenPrefab, screenType);
             screenPrefab.ApplyContext(context);
-
+            
             var screen = Instantiate(screenPrefab, _canvas.transform, false);
-
             _screenStack.Push(screen);
         }
 
@@ -78,8 +77,8 @@ namespace Assets.Scripts.Managers.ScreensManager
             return false;
         }
 
-        private void InitializeScreen<TScreen>(TScreen screen,
-            ScreenType screenType) where TScreen : BaseScreen
+        private void InitializeScreen(BaseScreen screen,
+            ScreenType screenType)
         {
             if (screen == null)
             {

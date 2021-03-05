@@ -23,8 +23,7 @@ namespace Assets.Scripts.Managers.ScreensManager.Preview
                     .GetComponent<ScreenManager>();
             }
 
-            Button button = _okButton.GetComponent<Button>();
-            button.onClick.AddListener(OnClick);
+            _okButton.onClick.AddListener(OnClick);
         }
 
         private void OnClick()
