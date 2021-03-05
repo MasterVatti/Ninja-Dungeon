@@ -5,9 +5,13 @@ public class ProjectileShell : MonoBehaviour
     /// <summary>
     /// Движение каждой конкретной пули к ближайшему противнику
     /// </summary>
-    [SerializeField] private float bulletSpeed;
-    [SerializeField] private NearestEnemyDetector nearestEnemy;
-    [SerializeField] public int damage;
+    
+    [SerializeField] 
+    private float bulletSpeed;
+    [SerializeField] 
+    private NearestEnemyDetector nearestEnemy;
+    [SerializeField] 
+    public int damage;
     
     
     private Vector3 _nearestEnemyPosition;
