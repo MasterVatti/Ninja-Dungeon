@@ -3,7 +3,7 @@
     /// <summary>
     /// Базовый класс для представления контекста экрана
     /// </summary>
-    public abstract class BaseScreenContext
+    public abstract class BaseContext
     {
     }
 }

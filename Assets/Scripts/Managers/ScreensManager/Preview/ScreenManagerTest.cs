@@ -13,10 +13,16 @@ namespace Assets.Scripts.Managers.ScreensManager.Preview
         [SerializeField]
         private ScreenManager _screenManager;
 
+        private void Start()
+        {
+            _screenManager.OpenScreen(ScreenType.HelloScreen);
+        }
+
         private void OnCollisionEnter(Collision other)
         {
-            var context = new RewardScreenContext {Gold = 300};
-            _screenManager.OpenScreen(ScreenType.RewardScreen, context);
+            var context = new RewardContext {Gold = 300};
+            _screenManager.OpenScreenWithContext(ScreenType.RewardScreen,
+                context);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Assets.Scripts.Managers.ScreensManager.Preview
                 _screenManager = GameObject.Find("ScreenManager")
                     .GetComponent<ScreenManager>();
             }
-            
+
             Button button = _okButton.GetComponent<Button>();
             button.onClick.AddListener(OnClick);
         }

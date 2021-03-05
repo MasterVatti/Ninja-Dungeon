@@ -14,21 +14,33 @@ namespace Assets.Scripts.Managers.ScreensManager
         [SerializeField]
         private List<BaseScreen> _allScreens;
 
-        private Stack<BaseScreen> _screenStack = new Stack<BaseScreen>();
+        private readonly Stack<BaseScreen> _screenStack =
+            new Stack<BaseScreen>();
 
-        public void OpenScreen(ScreenType screenType,
-            BaseScreenContext screenContext)
+        /// <summary>
+        /// Открывает окно без контекста
+        /// </summary>
+        public void OpenScreen(ScreenType screenType)
         {
-            var screenPrefab = FindScreenByType(screenType);
+            var screenPrefab = FindScreenByType<BaseScreen>(screenType);
 
-            if (screenPrefab == null)
-            {
-                Debug.Log($"You have not added {screenType} "+
-                          "screen to screen list");
-                return;
-            }
+            InitializeScreen(screenPrefab, screenType);
+            var screen = Instantiate(screenPrefab, _canvas.transform, false);
 
-            screenPrefab.Initialize(screenType, screenContext);
+            _screenStack.Push(screen);
+        }
+
+        /// <summary>
+        /// Открывает окно с заданным контекстом
+        /// </summary>
+        public void OpenScreenWithContext(ScreenType screenType,
+            BaseContext context)
+        {
+            var screenPrefab =
+                FindScreenByType<BaseScreenWithContext>(screenType);
+
+            InitializeScreen(screenPrefab, screenType);
+            screenPrefab.ApplyContext(context);
 
             var screen = Instantiate(screenPrefab, _canvas.transform, false);
 
@@ -66,13 +78,27 @@ namespace Assets.Scripts.Managers.ScreensManager
             return false;
         }
 
-        private BaseScreen FindScreenByType(ScreenType screenType)
+        private void InitializeScreen<TScreen>(TScreen screen,
+            ScreenType screenType) where TScreen : BaseScreen
+        {
+            if (screen == null)
+            {
+                Debug.Log($"You have not added {screenType} " +
+                          "screen to screen list");
+                return;
+            }
+
+            screen.Initialize(screenType);
+        }
+
+        private TScreen FindScreenByType<TScreen>(ScreenType screenType)
+            where TScreen : BaseScreen
         {
             foreach (var screen in _allScreens)
             {
                 if (screen.ScreenType == screenType)
                 {
-                    return screen;
+                    return screen as TScreen;
                 }
             }
 

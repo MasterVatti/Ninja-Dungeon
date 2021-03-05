@@ -314,6 +314,7 @@ MonoBehaviour:
   _canvas: {fileID: 1530750752}
   _allScreens:
   - {fileID: 2037845385577808008, guid: ea713769757708c4e960ef297f59605d, type: 3}
+  - {fileID: 1077067392630259928, guid: 6a3eb10e9de7602419b4589889b5c061, type: 3}
 --- !u!4 &1269259184
 Transform:
   m_ObjectHideFlags: 0

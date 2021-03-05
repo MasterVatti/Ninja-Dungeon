@@ -6,6 +6,7 @@
     /// </summary>
     public enum ScreenType
     {
+        HelloScreen,
         RewardScreen
     }
 }
