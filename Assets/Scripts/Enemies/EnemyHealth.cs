@@ -6,9 +6,13 @@ public class EnemyHealth : MonoBehaviour
     /// Уменьшение здоровья врага при попадании пули
     /// </summary>
     
-    [SerializeField] private int health;
-    [SerializeField] private ProjectileShell bullet;
-    [SerializeField] private EnemiesManager enemiesManager;
+    [SerializeField] 
+    private int health;
+    [SerializeField] 
+    private ProjectileShell bullet;
+    [SerializeField] 
+    private EnemiesManager enemiesManager;
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
