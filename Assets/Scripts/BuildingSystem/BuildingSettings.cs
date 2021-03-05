@@ -3,7 +3,11 @@ using UnityEngine;
 
 namespace BuildingSystem
 {
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Building", order = 1)]
+    /// <summary>
+    /// Настройки для зданий:
+    /// стоимость, префаб, связанные плейс-холдеры
+    /// </summary>
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/BuildingBase", order = 1)]
     public class BuildingSettings : ScriptableObject
     {
         [SerializeField]
@@ -14,8 +18,11 @@ namespace BuildingSystem
         [SerializeField]
         private int _lumberCost;
         [SerializeField]
-        private GameObject _model;
+        private GameObject _prefab;
         public List<GameObject> ConnectedPlaceHolders => _connectedPlaceHolders;
+
+        public GameObject Prefab => _prefab;
+
         public int[] RequiredResources
         {
             get => new[] {_goldCost, _lumberCost};
@@ -26,5 +33,4 @@ namespace BuildingSystem
             }
         }
     }
-
 }

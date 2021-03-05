@@ -1,14 +1,18 @@
 using UnityEngine;
+
 namespace BuildingSystem
 {
-    public class Building : MonoBehaviour
+    /// <summary>
+    /// Базовый класс для всех зданий
+    /// </summary>
+    public class BuildingBase : MonoBehaviour
     {
         [SerializeField]
         private BuildingSettings _nextUpgrade;
 
         public void StartUpgrade ()
         {
-            
+
         }
     }
 }
