@@ -6,12 +6,15 @@ public class NearestEnemyDetector : MonoBehaviour
     /// <summary>
     /// ищет ближайшего врага к игроку
     /// </summary>
-    //[SerializeField] public List<GameObject> enemies;
-    [SerializeField] private EnemiesManager enemiesManager;
-    [SerializeField] private GameObject player;
+    
+    [SerializeField] 
+    private EnemiesManager enemiesManager;
+    [SerializeField] 
+    private GameObject player;
     
     public Vector3 nearestEnemyCoords;
     private List<GameObject> _enemies;
+    
     private void Awake()
     {
         _enemies = enemiesManager.enemies;
