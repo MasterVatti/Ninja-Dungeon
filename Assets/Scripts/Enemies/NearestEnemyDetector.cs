@@ -13,7 +13,6 @@ public class NearestEnemyDetector : MonoBehaviour
     private List<GameObject> _enemies;
 
     public Vector3 NearestEnemyCoords { get; set; }
-
     private void Awake()
     {
         _enemies = enemiesManager.enemies;

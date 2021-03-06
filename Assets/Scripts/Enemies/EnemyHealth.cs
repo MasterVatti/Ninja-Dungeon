@@ -6,12 +6,15 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] private int health;
-    [SerializeField] private ProjectileShell bullet;
-    [SerializeField] private EnemiesManager enemiesManager;
+    [SerializeField] 
+    private int health;
+    [SerializeField] 
+    private ProjectileShell bullet;
+    [SerializeField] 
+    private EnemiesManager enemiesManager;
+    
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collision.gameObject.CompareTag("Projectile"))
         if (collision.gameObject.CompareTag("Projectile"))
         {
             health -= bullet.Damage;

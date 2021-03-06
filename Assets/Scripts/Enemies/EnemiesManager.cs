@@ -10,6 +10,7 @@ public class EnemiesManager : MonoBehaviour
 {
     [SerializeField] 
     public List<GameObject> enemies;
+    
     void Start()
     {
         
