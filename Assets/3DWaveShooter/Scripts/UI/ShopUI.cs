@@ -24,20 +24,24 @@ public class ShopUI : MonoBehaviour
 
     //Instance
     public static ShopUI inst;
-    void Awake () { inst = this; }
 
-    void Start ()
+    void Awake()
+    {
+        inst = this;
+    }
+
+    void Start()
     {
         CreateWeaponButtons();
     }
 
-    void Update ()
+    void Update()
     {
         //If a wave isn't currently in progress.
-        if(!GameManager.inst.waveInProgress)
+        if (!GameManager.inst.waveInProgress)
         {
             //If player presses E, toggle the shop.
-            if(Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 ToggleShop(!shopScreen.activeInHierarchy);
             }
@@ -45,49 +49,65 @@ public class ShopUI : MonoBehaviour
     }
 
     //Creates the required amount of weapon buttons needed based on weapons in the WeaponManager.
-    void CreateWeaponButtons ()
+    void CreateWeaponButtons()
     {
         List<Weapon> weapons = WeaponManager.baseWeapons;
 
         //Loop through all the weapon buttons.
-        for(int x = 0; x < weaponButtons.Length; ++x)
+        for (int x = 0; x < weaponButtons.Length; ++x)
         {
             //If this button is going to be shown.
-            if(x < weapons.Count)
+            if (x < weapons.Count)
             {
                 weaponButtons[x].SetActive(true);
 
                 //Set icons and text.
-                weaponButtons[x].transform.Find("WeaponName").GetComponent<Text>().text = weapons[x].displayName.ToUpper();
-                weaponButtons[x].transform.Find("WeaponIcon").GetComponent<Image>().sprite = weapons[x].uiIcon;
+                weaponButtons[x].transform.Find("WeaponName")
+                        .GetComponent<Text>().text =
+                    weapons[x].displayName.ToUpper();
+                weaponButtons[x].transform.Find("WeaponIcon")
+                    .GetComponent<Image>().sprite = weapons[x].uiIcon;
 
-                Image upgradeProgressBar = weaponButtons[x].transform.Find("UpgradeButton/ProgressBar").GetComponent<Image>();
+                Image upgradeProgressBar = weaponButtons[x].transform
+                    .Find("UpgradeButton/ProgressBar").GetComponent<Image>();
 
                 //Is this the player's starting weapon?
-                if(WeaponManager.inst.weaponScriptableObjects[x] == Player.inst.startingWeapon)
+                if (WeaponManager.inst.weaponScriptableObjects[x] ==
+                    Player.inst.startingWeapon)
                 {
                     int upgrades = weapons[x].upgrades.Length;
 
                     upgradeProgressBar.color = upgradeColor;
 
                     //Does this weapon have upgrades?
-                    if(upgrades > 0)
+                    if (upgrades > 0)
                     {
                         upgradeProgressBar.fillAmount = 1.0f / (upgrades + 1);
 
-                        weaponButtons[x].transform.Find("UpgradeButton/Upgrade").GetComponent<Text>().text = "UPGRADE";
-                        weaponButtons[x].transform.Find("UpgradeButton/UpgradeCost").GetComponent<Text>().text = "$" + weapons[x].upgrades[0].cost.ToString();
+                        weaponButtons[x].transform
+                            .Find("UpgradeButton/Upgrade")
+                            .GetComponent<Text>().text = "UPGRADE";
+                        weaponButtons[x].transform
+                                .Find("UpgradeButton/UpgradeCost")
+                                .GetComponent<Text>().text = "$" +
+                            weapons[x].upgrades[0].cost.ToString();
 
                         int id = weapons[x].id;
-                        weaponButtons[x].transform.Find("UpgradeButton").GetComponent<Button>().onClick.AddListener(delegate { OnUpgradeButton(id); });
+                        weaponButtons[x].transform.Find("UpgradeButton")
+                            .GetComponent<Button>().onClick
+                            .AddListener(delegate { OnUpgradeButton(id); });
                     }
                     //Does this weapon NOT have upgrades?
                     else
                     {
                         upgradeProgressBar.fillAmount = 1.0f;
 
-                        weaponButtons[x].transform.Find("UpgradeButton/Upgrade").GetComponent<Text>().text = "UPGRADE";
-                        weaponButtons[x].transform.Find("UpgradeButton/UpgradeCost").GetComponent<Text>().text = "MAX";
+                        weaponButtons[x].transform
+                            .Find("UpgradeButton/Upgrade")
+                            .GetComponent<Text>().text = "UPGRADE";
+                        weaponButtons[x].transform
+                            .Find("UpgradeButton/UpgradeCost")
+                            .GetComponent<Text>().text = "MAX";
                     }
                 }
                 //If not do this...
@@ -95,12 +115,22 @@ public class ShopUI : MonoBehaviour
                 {
                     upgradeProgressBar.fillAmount = 1.0f;
 
-                    weaponButtons[x].transform.Find("UpgradeButton/ProgressBar").GetComponent<Image>().color = purchaseColor;
-                    weaponButtons[x].transform.Find("UpgradeButton/Upgrade").GetComponent<Text>().text = "PURCHASE";
-                    weaponButtons[x].transform.Find("UpgradeButton/UpgradeCost").GetComponent<Text>().text = "$" + weapons[x].purchaseCost.ToString();
+                    weaponButtons[x].transform
+                        .Find("UpgradeButton/ProgressBar")
+                        .GetComponent<Image>().color = purchaseColor;
+                    weaponButtons[x].transform.Find("UpgradeButton/Upgrade")
+                        .GetComponent<Text>().text = "PURCHASE";
+                    weaponButtons[x].transform
+                            .Find("UpgradeButton/UpgradeCost")
+                            .GetComponent<Text>().text =
+                        "$" + weapons[x].purchaseCost.ToString();
 
                     int id = weapons[x].id;
-                    weaponButtons[x].transform.Find("UpgradeButton").GetComponent<Button>().onClick.AddListener(delegate { OnPurchaseButton(id); });
+                    weaponButtons[x].transform.Find("UpgradeButton")
+                        .GetComponent<Button>().onClick.AddListener(delegate
+                        {
+                            OnPurchaseButton(id);
+                        });
                 }
             }
             //Otherwise disable it.
@@ -110,13 +140,13 @@ public class ShopUI : MonoBehaviour
     }
 
     //Opens or closes the shop.
-    public void ToggleShop (bool open)
+    public void ToggleShop(bool open)
     {
         shopScreen.SetActive(open);
         Player.inst.canAttack = !open;
         Player.inst.canMove = !open;
 
-        if(open)
+        if (open)
         {
             UpdateWeaponButtons();
             UpdateShop();
@@ -124,44 +154,58 @@ public class ShopUI : MonoBehaviour
     }
 
     //Updates the weapon buttons.
-    void UpdateWeaponButtons ()
+    void UpdateWeaponButtons()
     {
         List<Weapon> playerWeapons = Player.inst.weapons;
         List<Weapon> allWeapons = WeaponManager.baseWeapons;
 
         //Loop through all the weapon buttons.
-        for(int x = 0; x < weaponButtons.Length; ++x)
+        for (int x = 0; x < weaponButtons.Length; ++x)
         {
             //Make sure we're only taking care of buttons we have weapons for.
-            if(x < allWeapons.Count)
+            if (x < allWeapons.Count)
             {
                 Weapon curWeapon = allWeapons[x];
 
                 //Does the player own this weapon?
-                if(Player.inst.GetWeapon(curWeapon.id) != null)
+                if (Player.inst.GetWeapon(curWeapon.id) != null)
                 {
-                    Image upgradeProgressBar = weaponButtons[x].transform.Find("UpgradeButton/ProgressBar").GetComponent<Image>();
+                    Image upgradeProgressBar = weaponButtons[x].transform
+                        .Find("UpgradeButton/ProgressBar")
+                        .GetComponent<Image>();
 
                     int upgrades = curWeapon.upgrades.Length;
 
                     upgradeProgressBar.color = upgradeColor;
 
                     //Does this weapon have upgrades left?
-                    if(upgrades > 0 && curWeapon.nextUpgradeIndex < upgrades)
+                    if (upgrades > 0 && curWeapon.nextUpgradeIndex < upgrades)
                     {
-                        float rate = 1.0f / (float)(upgrades + 1);
-                        upgradeProgressBar.fillAmount = rate * (curWeapon.nextUpgradeIndex + 1);
+                        float rate = 1.0f / (float) (upgrades + 1);
+                        upgradeProgressBar.fillAmount =
+                            rate * (curWeapon.nextUpgradeIndex + 1);
 
-                        weaponButtons[x].transform.Find("UpgradeButton/Upgrade").GetComponent<Text>().text = "UPGRADE";
-                        weaponButtons[x].transform.Find("UpgradeButton/UpgradeCost").GetComponent<Text>().text = "$" + curWeapon.upgrades[curWeapon.nextUpgradeIndex].cost.ToString();
+                        weaponButtons[x].transform
+                            .Find("UpgradeButton/Upgrade")
+                            .GetComponent<Text>().text = "UPGRADE";
+                        weaponButtons[x].transform
+                                .Find("UpgradeButton/UpgradeCost")
+                                .GetComponent<Text>().text = "$" +
+                            curWeapon.upgrades[curWeapon.nextUpgradeIndex]
+                                .cost
+                                .ToString();
                     }
                     //Does this weapon NOT have upgrades left?
                     else
                     {
                         upgradeProgressBar.fillAmount = 1.0f;
 
-                        weaponButtons[x].transform.Find("UpgradeButton/Upgrade").GetComponent<Text>().text = "UPGRADE";
-                        weaponButtons[x].transform.Find("UpgradeButton/UpgradeCost").GetComponent<Text>().text = "MAX";
+                        weaponButtons[x].transform
+                            .Find("UpgradeButton/Upgrade")
+                            .GetComponent<Text>().text = "UPGRADE";
+                        weaponButtons[x].transform
+                            .Find("UpgradeButton/UpgradeCost")
+                            .GetComponent<Text>().text = "MAX";
                     }
                 }
             }
@@ -169,7 +213,7 @@ public class ShopUI : MonoBehaviour
     }
 
     //Updates various shop UI elements like player money.
-    void UpdateShop ()
+    void UpdateShop()
     {
         playerMoneyText.text = "$" + Player.inst.money;
 
@@ -178,30 +222,38 @@ public class ShopUI : MonoBehaviour
         refillAmmoText.text = "$" + ShopData.inst.refillAmmoCost;
 
         //Move Speed Upgrade
-        if(ShopData.inst.moveSpeedUpgrade.canUpgrade)
-            increaseSpeedText.text = "$" + ShopData.inst.moveSpeedUpgrade.curPrice;
+        if (ShopData.inst.moveSpeedUpgrade.canUpgrade)
+            increaseSpeedText.text =
+                "$" + ShopData.inst.moveSpeedUpgrade.curPrice;
         else
             increaseSpeedText.text = "MAX";
 
-        float rate = 1.0f / (float)(ShopData.inst.moveSpeedUpgrade.maxUpgrades);
-        increaseSpeedProgressBar.fillAmount = rate * ShopData.inst.moveSpeedUpgrade.upgradesDone;
+        float rate =
+            1.0f / (float) (ShopData.inst.moveSpeedUpgrade.maxUpgrades);
+        increaseSpeedProgressBar.fillAmount =
+            rate * ShopData.inst.moveSpeedUpgrade.upgradesDone;
     }
 
     //Called when a weapon's "Purchase" button is pressed.
-    public void OnPurchaseButton (int weaponId)
+    public void OnPurchaseButton(int weaponId)
     {
         Weapon weapon = WeaponManager.GetWeapon(weaponId);
 
         //Does the player have enough money to purchase?
-        if(Player.inst.money >= weapon.purchaseCost)
+        if (Player.inst.money >= weapon.purchaseCost)
         {
             //If so, remove the money and give the weapon.
             Player.inst.RemoveMoney(weapon.purchaseCost);
             Player.inst.GiveWeapon(weapon);
 
             //Change listener.
-            weaponButtons[weaponId].transform.Find("UpgradeButton").GetComponent<Button>().onClick.RemoveAllListeners();
-            weaponButtons[weaponId].transform.Find("UpgradeButton").GetComponent<Button>().onClick.AddListener(delegate { OnUpgradeButton(weaponId); });
+            weaponButtons[weaponId].transform.Find("UpgradeButton")
+                .GetComponent<Button>().onClick.RemoveAllListeners();
+            weaponButtons[weaponId].transform.Find("UpgradeButton")
+                .GetComponent<Button>().onClick.AddListener(delegate
+                {
+                    OnUpgradeButton(weaponId);
+                });
 
             //Update shop.
             UpdateWeaponButtons();
@@ -210,15 +262,17 @@ public class ShopUI : MonoBehaviour
     }
 
     //Called when a weapon's "Upgrade" button is pressed.
-    public void OnUpgradeButton (int weaponId)
+    public void OnUpgradeButton(int weaponId)
     {
         Weapon weapon = Player.inst.GetWeapon(weaponId);
 
         //Does the player have enough money to upgrade?
-        if(Player.inst.money >= weapon.upgrades[weapon.nextUpgradeIndex].cost)
+        if (Player.inst.money >=
+            weapon.upgrades[weapon.nextUpgradeIndex].cost)
         {
             //If so, remove the money and upgrade.
-            Player.inst.RemoveMoney(weapon.upgrades[weapon.nextUpgradeIndex].cost);
+            Player.inst.RemoveMoney(weapon.upgrades[weapon.nextUpgradeIndex]
+                .cost);
             weapon.Upgrade();
 
             //Update shop.
@@ -228,10 +282,10 @@ public class ShopUI : MonoBehaviour
     }
 
     //Called when the "Refill Health" button is pressed.
-    public void OnRefillHealthButton ()
+    public void OnRefillHealthButton()
     {
         //Does the player have enough money to refill?
-        if(Player.inst.money >= ShopData.inst.refillHealthCost)
+        if (Player.inst.money >= ShopData.inst.refillHealthCost)
         {
             //Is so, take the money and refill health.
             Player.inst.RemoveMoney(ShopData.inst.refillHealthCost);
@@ -244,15 +298,15 @@ public class ShopUI : MonoBehaviour
     }
 
     //Called when the "Refill Ammo" button is pressed.
-    public void OnRefillAmmoButton ()
+    public void OnRefillAmmoButton()
     {
         //Does the player have enough money to refill?
-        if(Player.inst.money >= ShopData.inst.refillAmmoCost)
+        if (Player.inst.money >= ShopData.inst.refillAmmoCost)
         {
             //Is so, take the money and refill ammo.
             Player.inst.RemoveMoney(ShopData.inst.refillAmmoCost);
 
-            for(int x = 0; x < Player.inst.weapons.Count; ++x)
+            for (int x = 0; x < Player.inst.weapons.Count; ++x)
                 Player.inst.RefillAmmo(Player.inst.weapons[x].id);
 
             //Update shop.
@@ -262,10 +316,11 @@ public class ShopUI : MonoBehaviour
     }
 
     //Called when the "Increase Speed" button is pressed.
-    public void OnUpgradeMoveSpeedButton ()
+    public void OnUpgradeMoveSpeedButton()
     {
         //Does the player have enough money to upgrade move speed?
-        if(Player.inst.money >= ShopData.inst.moveSpeedUpgrade.curPrice && ShopData.inst.moveSpeedUpgrade.canUpgrade)
+        if (Player.inst.money >= ShopData.inst.moveSpeedUpgrade.curPrice &&
+            ShopData.inst.moveSpeedUpgrade.canUpgrade)
         {
             ShopStatUpgrade upgrade = ShopData.inst.moveSpeedUpgrade;
 
@@ -273,11 +328,12 @@ public class ShopUI : MonoBehaviour
 
             Player.inst.moveSpeed *= upgrade.statIncreaseModifier;
 
-            upgrade.curPrice = Mathf.CeilToInt((float)upgrade.curPrice * upgrade.priceIncreaseRate);
+            upgrade.curPrice = Mathf.CeilToInt((float) upgrade.curPrice *
+                                               upgrade.priceIncreaseRate);
 
             upgrade.upgradesDone++;
 
-            if(upgrade.upgradesDone == upgrade.maxUpgrades)
+            if (upgrade.upgradesDone == upgrade.maxUpgrades)
                 upgrade.canUpgrade = false;
 
             //Update shop.

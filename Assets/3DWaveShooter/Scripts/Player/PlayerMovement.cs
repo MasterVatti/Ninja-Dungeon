@@ -8,41 +8,41 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Components")]
-    public Rigidbody rig;                   //Player's rigidbody component.
+    public Rigidbody rig; //Player's rigidbody component.
 
-    void Awake ()
+    void Awake()
     {
         //Get missing components
-        if(!rig) rig = GetComponent<Rigidbody>();
+        if (!rig) rig = GetComponent<Rigidbody>();
     }
 
-    void Update ()
+    void Update()
     {
         //If the player is able to move, then move the player.
-        if(Player.inst.canMove)
+        if (Player.inst.canMove)
         {
             Move();
         }
     }
 
-    void LateUpdate ()
+    void LateUpdate()
     {
         //If the player is able to move, then make them look at the mouse.
-        if(Player.inst.canMove)
+        if (Player.inst.canMove)
         {
             Look();
         }
     }
 
     //Moves the player based on keyboard inputs.
-    void Move ()
+    void Move()
     {
         //Get the horizontal and vertical keyboard inputs.
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
         //Use joystick direction if mobile controls is enabled.
-        if(MobileControls.inst.enableMobileControls)
+        if (MobileControls.inst.enableMobileControls)
         {
             x = MobileControls.inst.movementJoystick.dir.x;
             y = MobileControls.inst.movementJoystick.dir.y;
@@ -64,11 +64,11 @@ public class PlayerMovement : MonoBehaviour
         Vector3 dir = (camForward * y) + (camRight * x);
 
         //Update player state.
-        if(Player.inst.state != PlayerState.Dead)
+        if (Player.inst.state != PlayerState.Dead)
         {
-            if(dir.magnitude > 0)
+            if (dir.magnitude > 0)
             {
-                if(Player.inst.state != PlayerState.Moving)
+                if (Player.inst.state != PlayerState.Moving)
                 {
                     Player.inst.state = PlayerState.Moving;
                     Player.inst.anim.SetBool("Moving", true);
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                if(Player.inst.state != PlayerState.Idle)
+                if (Player.inst.state != PlayerState.Idle)
                 {
                     Player.inst.state = PlayerState.Idle;
                     Player.inst.anim.SetBool("Moving", false);
@@ -89,10 +89,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Rotate the player so they're facing the mouse cursor.
-    void Look ()
+    void Look()
     {
         //Are we playing on desktop?
-        if(!MobileControls.inst.enableMobileControls)
+        if (!MobileControls.inst.enableMobileControls)
         {
             //Create a plane and shoot a raycast at it to get the world position of our mouse cursor.
             Plane rayPlane = new Plane(Vector3.up, transform.position);
@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
             float rayDist;
             Vector3 worldPos = Vector3.zero;
 
-            if(rayPlane.Raycast(ray, out rayDist))
+            if (rayPlane.Raycast(ray, out rayDist))
                 worldPos = ray.GetPoint(rayDist);
 
             //Get the direction of it relative to the player.
@@ -111,21 +111,24 @@ public class PlayerMovement : MonoBehaviour
             float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
 
             //Set the angle to be the player's Y rotation.
-            transform.rotation = Quaternion.Euler(transform.rotation.x, angle, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(transform.rotation.x, angle,
+                transform.rotation.z);
         }
         //Are we playing on mobile?
         else
         {
             MobileJoystick joy = MobileControls.inst.movementJoystick;
-            
+
             //Is the joystick not in the center?
-            if(joy.dir.magnitude != 0)
+            if (joy.dir.magnitude != 0)
             {
                 //Get an angle from the joystick's direction.
-                float angle = Mathf.Atan2(joy.dir.x, joy.dir.y) * Mathf.Rad2Deg;
+                float angle = Mathf.Atan2(joy.dir.x, joy.dir.y) *
+                              Mathf.Rad2Deg;
 
                 //Set the angle to be the player's Y rotation.
-                transform.rotation = Quaternion.Euler(transform.rotation.x, angle, transform.rotation.z);
+                transform.rotation = Quaternion.Euler(transform.rotation.x,
+                    angle, transform.rotation.z);
             }
         }
     }

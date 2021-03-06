@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MobileJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
+public class MobileJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler,
+    IPointerDownHandler
 {
-    [Range(0f, 2f)] public float handleLimit = 1f;
+    [Range(0f, 2f)]
+    public float handleLimit = 1f;
 
     public Vector2 dir
     {
-        get
-        {
-            return _dir;
-        }
+        get { return _dir; }
     }
 
     private Vector2 _dir;
@@ -23,24 +22,27 @@ public class MobileJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IP
 
     private Vector2 joystickPosition;
 
-    void Start ()
+    void Start()
     {
         joystickPosition = background.position;
     }
 
-    public void OnDrag (PointerEventData eventData)
+    public void OnDrag(PointerEventData eventData)
     {
         Vector2 direction = eventData.position - joystickPosition;
-        _dir = (direction.magnitude > background.sizeDelta.x / 2f) ? direction.normalized : direction / (background.sizeDelta.x / 2f);
-        handle.anchoredPosition = (dir * background.sizeDelta.x / 2f) * handleLimit;
+        _dir = (direction.magnitude > background.sizeDelta.x / 2f)
+            ? direction.normalized
+            : direction / (background.sizeDelta.x / 2f);
+        handle.anchoredPosition =
+            (dir * background.sizeDelta.x / 2f) * handleLimit;
     }
 
-    public void OnPointerDown (PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
         OnDrag(eventData);
     }
 
-    public void OnPointerUp (PointerEventData eventData)
+    public void OnPointerUp(PointerEventData eventData)
     {
         _dir = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;

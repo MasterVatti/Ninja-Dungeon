@@ -6,7 +6,7 @@ public class ParticleDestroyer : MonoBehaviour
 {
     public ParticleSystem particle;
 
-    void OnEnable ()
+    void OnEnable()
     {
         Pool.Destroy(gameObject, particle.startLifetime);
         particle.Play();
