@@ -1,21 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-/// <summary>
-/// Класс отвечает за окно загрузки меджу сценами.
-/// </summary>
-public class LoadingScreen : MonoBehaviour
+namespace LoadingScene
 {
-    [SerializeField]
-    private Slider _progressLoading;
-
-    private void Update()
+    /// <summary>
+    /// Класс отвечает за окно загрузки меджу сценами.
+    /// </summary>
+    public class LoadingScreen : MonoBehaviour
     {
-        _progressLoading.value = LoadingController.Instance.LoadingProgress;
+        [SerializeField]
+        private Slider _loadingProgress;
+
+        private void Update()
+        {
+            _loadingProgress.value = LoadingController.Instance.LoadingProgress;
+        }
     }
 }

@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 /// <summary>
 /// Класс отвечает за настройки портала(куда отправится и описание)

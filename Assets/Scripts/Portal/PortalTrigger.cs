@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Assets.Scripts;
+using LoadingScene;
 using UnityEngine;
 
 /// <summary>
@@ -10,7 +8,7 @@ using UnityEngine;
 public class PortalTrigger : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _portalScreen;
+    private PortalScreen _portalScreen;
     [SerializeField]
     private PortalSettings _settings;
     
@@ -18,14 +16,14 @@ public class PortalTrigger : MonoBehaviour
     {
         if (other.CompareTag(GlobalConstants.PLAYER_TAG))
         {
-            _portalScreen.GetComponent<PortalScreen>().Initialize(_settings);
-            _portalScreen.SetActive(true);
+            _portalScreen.Initialize(_settings);
+            _portalScreen.gameObject.SetActive(true);
         }
     }
     
     public void StartLoading()
     {
-        _portalScreen.SetActive(false);
+        _portalScreen.gameObject.SetActive(false);
         LoadingController.Instance.StartLoad(_settings.SceneName);
     }
 }

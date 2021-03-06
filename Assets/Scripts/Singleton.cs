@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -7,25 +5,26 @@ using UnityEngine;
 /// </summary>
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static T _instansce;
+    private static T _instance;
 
     public static T Instance
     {
         get
         {
-            if (_instansce == null)
+            if (_instance == null)
             {
-                _instansce = FindObjectOfType<T>();
+                _instance = FindObjectOfType<T>();
+                DontDestroyOnLoad(_instance);
 
-                if (_instansce == null)
+                if (_instance == null)
                 {
                     var singleton = new GameObject("[SINGLETON]" + typeof(T));
-                    _instansce = singleton.AddComponent<T>();
-                    DontDestroyOnLoad(_instansce);
+                    _instance = singleton.AddComponent<T>();
+                    DontDestroyOnLoad(_instance);
                 }
             }
             
-            return _instansce;
+            return _instance;
         }
     }
 }
