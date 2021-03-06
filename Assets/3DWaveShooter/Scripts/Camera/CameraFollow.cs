@@ -8,31 +8,32 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [Header("Values")]
-    public GameObject target;           //GameObject that the camera will follow.
-    public float distance;              //Distance between the object and camera.
-    public Vector3 rotation;            //Camera rotation.
-    public Vector3 offset;              //Offset from target object.
+    public GameObject target; //GameObject that the camera will follow.
+    public float distance; //Distance between the object and camera.
+    public Vector3 rotation; //Camera rotation.
+    public Vector3 offset; //Offset from target object.
 
-    void Start ()
+    void Start()
     {
-        if(!target)
+        if (!target)
             target = Player.inst.gameObject;
     }
 
-    void Update ()
+    void Update()
     {
         //If we have a target, follow them.
-        if(target)
+        if (target)
             FollowTarget();
     }
 
     //Follows the target object.
-    void FollowTarget ()
+    void FollowTarget()
     {
         //Set the camera's rotation.
         transform.rotation = Quaternion.Euler(rotation);
 
         //Set the camera's position.
-        transform.position = (target.transform.position + offset) + (-transform.forward * distance);
+        transform.position = (target.transform.position + offset) +
+                             (-transform.forward * distance);
     }
 }

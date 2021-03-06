@@ -13,5 +13,9 @@ public class ParticleManager : MonoBehaviour
 
     //Instance
     public static ParticleManager inst;
-    void Awake () { inst = this; }
+
+    void Awake()
+    {
+        inst = this;
+    }
 }

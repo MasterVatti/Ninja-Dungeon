@@ -8,8 +8,10 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    public LevelDataScriptableObject level; //Level data file that relates to this scene.
-    public int waveCountdownTime = 5;       //How long is the countdown before wave starts?
+    public LevelDataScriptableObject
+        level; //Level data file that relates to this scene.
+    public int
+        waveCountdownTime = 5; //How long is the countdown before wave starts?
     public float curWaveTime;
     public int curWave;
 
@@ -23,33 +25,33 @@ public class GameManager : MonoBehaviour
     //Instance
     public static GameManager inst;
 
-    void Awake ()
+    void Awake()
     {
         inst = this;
     }
 
-    void Start ()
+    void Start()
     {
         StartGame();
     }
 
-    void Update ()
+    void Update()
     {
-        if(waveInProgress)
+        if (waveInProgress)
             curWaveTime += Time.deltaTime;
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
             SceneManager.LoadScene(0);
     }
 
     //Called when the game starts.
-    public void StartGame ()
+    public void StartGame()
     {
         SetNextWave();
     }
 
     //Called to start spawning the next wave.
-    public void SetNextWave ()
+    public void SetNextWave()
     {
         waveInProgress = true;
         ShopUI.inst.ToggleShop(false);
@@ -61,27 +63,27 @@ public class GameManager : MonoBehaviour
     }
 
     //Called after countdown is done from the method above.
-    void StartNextWave ()
+    void StartNextWave()
     {
         //If we refill health, do it.
-        if(refillHealthOnNewWave)
+        if (refillHealthOnNewWave)
             Player.inst.curHp = Player.inst.maxHp;
 
         //Same with ammo for all weapons.
-        if(refillAmmoOnNewWave)
-            foreach(Weapon weapon in Player.inst.weapons)
+        if (refillAmmoOnNewWave)
+            foreach (Weapon weapon in Player.inst.weapons)
                 Player.inst.RefillAmmo(weapon.id);
 
         EnemySpawner.inst.SetNewWave();
     }
 
     //Called when the wave is over.
-    public void EndWave ()
+    public void EndWave()
     {
         waveInProgress = false;
 
         //Was this the last wave? Then we win!
-        if(EnemySpawner.inst.nextWaveIndex == EnemySpawner.inst.waves.Length)
+        if (EnemySpawner.inst.nextWaveIndex == EnemySpawner.inst.waves.Length)
             WinGame();
         //Otherwise enable the next wave button which triggers the next wave.
         else
@@ -92,7 +94,7 @@ public class GameManager : MonoBehaviour
     }
 
     //Called when all waves have been killed off.
-    public void WinGame ()
+    public void WinGame()
     {
         //Set the win status to player prefs.
         PlayerPrefs.SetInt("LevelCompleted_" + level.sceneName, 1);
@@ -101,14 +103,14 @@ public class GameManager : MonoBehaviour
     }
 
     //Called when the player dies.
-    public void LoseGame ()
+    public void LoseGame()
     {
         GameUI.inst.SetEndGameText(false);
         Invoke("ReturnToMenu", 5.0f);
     }
 
     //Loads the menu scene.
-    void ReturnToMenu ()
+    void ReturnToMenu()
     {
         SceneManager.LoadScene(0);
     }

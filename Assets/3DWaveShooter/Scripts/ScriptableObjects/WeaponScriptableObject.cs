@@ -6,8 +6,7 @@ using Homebrew;
 [CreateAssetMenu(fileName = "Weapon", menuName = "Weapon", order = 1)]
 public class WeaponScriptableObject : ScriptableObject
 {
-        [Foldout("Type", true)]
-
+    [Foldout("Type", true)]
     [Tooltip("Name of the weapon.")]
     public string displayName;
 
@@ -15,11 +14,11 @@ public class WeaponScriptableObject : ScriptableObject
     public WeaponType typeOfWeapon;
 
     [Foldout("Values", true)]
-        
     [Tooltip("Default amount of ammunition.")]
     public int totalAmmo;
 
-    [Tooltip("Size of ammo clip (bullets you can shoot before needing to reload).")]
+    [Tooltip(
+        "Size of ammo clip (bullets you can shoot before needing to reload).")]
     public int clipSize;
 
     [Tooltip("Time it takes to reload the weapon.")]
@@ -28,8 +27,7 @@ public class WeaponScriptableObject : ScriptableObject
     [Tooltip("Time between shots.")]
     public float shootFrequency = 0.2f;
 
-        [Tooltip("Random angle offset.")]
-
+    [Tooltip("Random angle offset.")]
     [Range(0.0f, 5.0f)]
     public float accuracy = 0.1f;
 
@@ -42,8 +40,7 @@ public class WeaponScriptableObject : ScriptableObject
     [Tooltip("Enemy knockback.")]
     public float enemyKnockback;
 
-        [Foldout("Prefabs", true)]
-
+    [Foldout("Prefabs", true)]
     [Tooltip("Object shot by the weapon.")]
     public ProjectileScriptableObject projectile;
 
@@ -59,17 +56,16 @@ public class WeaponScriptableObject : ScriptableObject
     [Tooltip("UI icon shown on screen (500 x 500 px PNG).")]
     public Sprite uiIcon;
 
-        [Foldout("Offsets", true)]
-
+    [Foldout("Offsets", true)]
     [Tooltip("Weapon positional and rotation offsets.")]
     public WeaponOffsets offsets;
 
-        [Foldout("Upgrades / Purchase", true)]
-
+    [Foldout("Upgrades / Purchase", true)]
     [Header("How much does it cost to buy this gun in the store?")]
     public int purchaseCost;
 
-    [Tooltip("Upgrades that change this weapons stats. Player can buy them in the store.")]
+    [Tooltip(
+        "Upgrades that change this weapons stats. Player can buy them in the store.")]
     public WeaponUpgrade[] upgrades;
 }
 
@@ -93,7 +89,6 @@ public class WeaponUpgrade
     [Header("Stat Change")]
     [Header("(Only changes is value isn't 0)")]
     [Space]
-
     [Tooltip("New reload time.")]
     public float reloadTime;
 

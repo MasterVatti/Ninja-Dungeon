@@ -8,23 +8,24 @@ public class MobileButton : MonoBehaviour
     public bool pressed;
     public bool held;
 
-    public void PointerDown ()
+    public void PointerDown()
     {
         transform.localScale = new Vector3(0.9f, 0.9f, 1.0f);
         held = true;
         StartCoroutine(PressedDelay());
     }
 
-    public void PointerUp ()
+    public void PointerUp()
     {
         transform.localScale = Vector3.one;
         held = false;
     }
 
-    IEnumerator PressedDelay ()
+    IEnumerator PressedDelay()
     {
         pressed = true;
         yield return new WaitForEndOfFrame();
+
         pressed = false;
     }
 }

@@ -28,7 +28,7 @@ public class MenuUI : MonoBehaviour
     private string sceneToLoad;
 
     //Displays the sent screen, while disabling all others.
-    public void SetScreen (GameObject screen)
+    public void SetScreen(GameObject screen)
     {
         menuScreen.SetActive(false);
         playScreen.SetActive(false);
@@ -38,9 +38,9 @@ public class MenuUI : MonoBehaviour
     }
 
     //Loads options from PlayerPrefs and sets them to the UI elements on the options screen.
-    void LoadOptions ()
+    void LoadOptions()
     {
-        if(PlayerPrefs.HasKey("Volume"))
+        if (PlayerPrefs.HasKey("Volume"))
         {
             volumeSlider.value = PlayerPrefs.GetFloat("Volume");
         }
@@ -51,39 +51,40 @@ public class MenuUI : MonoBehaviour
     }
 
     //Called when the "Play" button on the menu screen is pressed.
-    public void OnPlayButton ()
+    public void OnPlayButton()
     {
         SetScreen(playScreen);
         LoadPlayScreenLevels();
     }
 
     //Called when the "Quit" button on the menu screen is pressed.
-    public void OnQuitButton ()
+    public void OnQuitButton()
     {
         Application.Quit();
     }
 
     //Called when the "Options" button (gear icon) on the menu screen is pressed.
-    public void OnOptionsButton ()
+    public void OnOptionsButton()
     {
         SetScreen(optionsScreen);
         LoadOptions();
     }
 
     //Called when the "Reset Progress" button on the options screen is pressed.
-    public void OnResetProgressButton ()
+    public void OnResetProgressButton()
     {
         //Reset saved PlayerPrefs for all levels.
-        for(int index = 0; index < levels.Length; ++index)
+        for (int index = 0; index < levels.Length; ++index)
         {
-            PlayerPrefs.SetInt("LevelCompleted_" + levels[index].sceneName, 0);
+            PlayerPrefs.SetInt("LevelCompleted_" + levels[index].sceneName,
+                0);
         }
     }
 
     //Called when a "Level" button on the play screen is pressed.
-    public void OnLevelButton (int level)
+    public void OnLevelButton(int level)
     {
-        if(levelsUnlocked[level])
+        if (levelsUnlocked[level])
         {
             sceneToLoad = levels[level].sceneName;
 
@@ -96,60 +97,69 @@ public class MenuUI : MonoBehaviour
     }
 
     //Loads the "sceneToLoad" scene.
-    void LoadTargetScene ()
+    void LoadTargetScene()
     {
         SceneManager.LoadScene(sceneToLoad);
     }
 
     //Called when the "Back" button on the play screen is pressed.
-    public void OnBackButton ()
+    public void OnBackButton()
     {
         SetScreen(menuScreen);
     }
 
     //Called when the volume slider is changed.
-    public void OnVolumeSliderChangeValue ()
+    public void OnVolumeSliderChangeValue()
     {
         AudioListener.volume = volumeSlider.value;
         PlayerPrefs.SetFloat("Volume", AudioListener.volume);
     }
 
     //Loads up all the levels and displays them on the play screen.
-    void LoadPlayScreenLevels ()
+    void LoadPlayScreenLevels()
     {
         levelsUnlocked = new bool[levels.Length];
 
         //Find out if levels are unlocked or not.
-        for(int x = 0; x < levels.Length; ++x)
+        for (int x = 0; x < levels.Length; ++x)
         {
             bool unlocked = false;
 
-            if(!levels[x].lockedAtStart)
+            if (!levels[x].lockedAtStart)
                 unlocked = true;
             else
             {
-                unlocked = PlayerPrefs.GetInt("LevelCompleted_" + levels[x].levelNeededToCompleteToUnlock.sceneName) == 0 ? false : true;
+                unlocked =
+                    PlayerPrefs.GetInt("LevelCompleted_" +
+                                       levels[x].levelNeededToCompleteToUnlock
+                                           .sceneName) ==
+                    0
+                        ? false
+                        : true;
             }
 
             levelsUnlocked[x] = unlocked;
         }
 
         //Loop through all the level buttons.
-        for(int x = 0; x < levelButtons.Length; ++x)
+        for (int x = 0; x < levelButtons.Length; ++x)
         {
             levelButtons[x].gameObject.SetActive(false);
 
             //Is this button an actual level?
-            if(x < levels.Length)
+            if (x < levels.Length)
             {
                 levelButtons[x].gameObject.SetActive(true);
-                levelButtons[x].transform.Find("LevelName").GetComponent<Text>().text = levels[x].sceneName;
+                levelButtons[x].transform.Find("LevelName")
+                    .GetComponent<Text>().text = levels[x].sceneName;
 
                 //Either display locked icon or not, based on if the level is locked.
-                if(levelsUnlocked[x])
-                    levelButtons[x].transform.Find("Locked").gameObject.SetActive(false);
+                if (levelsUnlocked[x])
+                    levelButtons[x].transform.Find("Locked").gameObject
+                        .SetActive(false);
                 else
-                    levelButtons[x].transform.Find("Locked").gameObject.SetActive(true);
+                    levelButtons[x].transform.Find("Locked").gameObject
+                        .SetActive(true);
             }
         }
     }
