@@ -1,17 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Отвечает за создание пуль
+/// </summary>
+
 public class ProjectileLauncher : MonoBehaviour
 {
-    /// <summary>
-    /// Отвечает за создание пуль
-    /// </summary>
     [SerializeField] 
     private GameObject bulletPrefab;
     [SerializeField] 
-    private float bulletsSpawnCoolDown;
+    private float bulletsSpawnCooldown;
     [SerializeField] 
     private EnemiesManager enemiesManager;
+    
     private float _currentTime;
     private List<GameObject> _bullets;
 
@@ -22,7 +24,7 @@ public class ProjectileLauncher : MonoBehaviour
 
     private void Update()
     {
-        if (_currentTime < bulletsSpawnCoolDown)
+        if (_currentTime < bulletsSpawnCooldown)
         {
             _currentTime += Time.deltaTime;
         }
@@ -33,7 +35,6 @@ public class ProjectileLauncher : MonoBehaviour
             {
                 _bullets.Add(Instantiate(bulletPrefab, transform.position, transform.rotation)); 
             }
-            
         }
     }
 }

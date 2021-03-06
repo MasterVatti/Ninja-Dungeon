@@ -1,19 +1,20 @@
 using UnityEngine;
 
+/// <summary>
+/// Уменьшение здоровья врага при попадании пули
+/// </summary>
+
 public class EnemyHealth : MonoBehaviour
 {
-    /// <summary>
-    /// Уменьшение здоровья врага при попадании пули
-    /// </summary>
-    
     [SerializeField] private int health;
     [SerializeField] private ProjectileShell bullet;
     [SerializeField] private EnemiesManager enemiesManager;
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
+        //if (collision.gameObject.CompareTag("Projectile"))
+        if (collision.gameObject.CompareTag("Projectile"))
         {
-            health -= bullet.damage;
+            health -= bullet.Damage;
             if (health <= 0)
             {
                 var enemies = enemiesManager.enemies;

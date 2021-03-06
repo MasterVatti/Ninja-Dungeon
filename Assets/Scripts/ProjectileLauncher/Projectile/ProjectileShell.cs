@@ -1,25 +1,27 @@
 using UnityEngine;
 
+/// <summary>
+/// Движение каждой конкретной пули к ближайшему противнику
+/// </summary>
+
 public class ProjectileShell : MonoBehaviour
 {
-    /// <summary>
-    /// Движение каждой конкретной пули к ближайшему противнику
-    /// </summary>
-    [SerializeField] private float bulletSpeed;
-    [SerializeField] private NearestEnemyDetector nearestEnemy;
-    [SerializeField] public int damage;
+    [SerializeField] 
+    private float bulletSpeed;
+    [SerializeField] 
+    private NearestEnemyDetector enemyDetector;
+    [SerializeField] 
+    private int damage;
     
+    public int Damage => damage;
     
     private Vector3 _nearestEnemyPosition;
     private Transform _startPosition; 
     
     private void Awake()
     {
-        if (gameObject)
-        {
-            _nearestEnemyPosition = nearestEnemy.nearestEnemyCoords;
-            _startPosition = transform;
-        }
+        _nearestEnemyPosition = enemyDetector.NearestEnemyCoords;
+        _startPosition = transform;
     }
     
     private void Update()
@@ -28,6 +30,7 @@ public class ProjectileShell : MonoBehaviour
         {
             transform.position = Vector3.Lerp(_startPosition.position,
                 _nearestEnemyPosition, Time.deltaTime * bulletSpeed);
+            
         }
     }
 

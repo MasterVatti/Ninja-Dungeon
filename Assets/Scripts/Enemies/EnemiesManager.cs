@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// тут хранятся враги
+/// </summary>
+
 public class EnemiesManager : MonoBehaviour
 {
-    /// <summary>
-    /// тут хранятся враги
-    /// </summary>
-    [SerializeField] public List<GameObject> enemies;
+    [SerializeField] 
+    public List<GameObject> enemies;
     void Start()
     {
         

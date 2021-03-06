@@ -1,17 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ищет ближайшего врага к игроку
+/// </summary>
+ 
 public class NearestEnemyDetector : MonoBehaviour
 {
-    /// <summary>
-    /// ищет ближайшего врага к игроку
-    /// </summary>
-    //[SerializeField] public List<GameObject> enemies;
     [SerializeField] private EnemiesManager enemiesManager;
     [SerializeField] private GameObject player;
-    
-    public Vector3 nearestEnemyCoords;
+
     private List<GameObject> _enemies;
+
+    public Vector3 NearestEnemyCoords { get; set; }
+
     private void Awake()
     {
         _enemies = enemiesManager.enemies;
@@ -21,36 +23,26 @@ public class NearestEnemyDetector : MonoBehaviour
     {
         if (_enemies.Count > 0)
         {
-            nearestEnemyCoords = NearestEnemy();
+            NearestEnemyCoords = GetNearestEnemy();
         }
     }
 
-    private Vector3 NearestEnemy()
+    private Vector3 GetNearestEnemy ()
     {
-        List<float> distances = new List<float>();
-        foreach (var enemy in _enemies)
-        {
-            Vector3 playerPosition = player.transform.position;
-            distances.Add(Vector3.Distance(enemy.transform.position,
-                playerPosition));
-        }
-
-        int minimalIndex = MinimalElement(distances);
-        return _enemies[minimalIndex].transform.position;
-    }
-
-    private int MinimalElement(List<float> distances)
-    {
-        float min = distances[0];
         int minimalIndex = 0;
-        for (int i = 0; i < distances.Count; i++)
+        float min = float.MaxValue;
+        for (int i = 0; i < _enemies.Count; i++)
         {
-            if (min > distances[i])
+            var enemy = _enemies[i];
+            Vector3 playerPosition = player.transform.position;
+            float distance = Vector3.Distance(enemy.transform.position,
+                playerPosition);
+            if (min > distance)
             {
-                min = distances[i];
+                min = distance;
                 minimalIndex = i;
             }
         }
-        return minimalIndex;
+        return _enemies[minimalIndex].transform.position;
     }
 }
