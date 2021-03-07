@@ -45,7 +45,6 @@ namespace Enemies
                     minimalIndex = i;
                 }
             }
-
             return _enemies[minimalIndex].transform.position;
         }
     }

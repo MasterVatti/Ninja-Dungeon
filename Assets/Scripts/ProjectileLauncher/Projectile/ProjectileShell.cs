@@ -9,7 +9,6 @@ namespace ProjectileLauncher
     public class ProjectileShell : MonoBehaviour
     {
         public static ProjectileShell Singleton { get; private set; }
-
         [SerializeField] 
         private float _bulletSpeed;
         [SerializeField] 
