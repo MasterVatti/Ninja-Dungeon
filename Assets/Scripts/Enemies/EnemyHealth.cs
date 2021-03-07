@@ -1,32 +1,32 @@
 using UnityEngine;
 
-/// <summary>
-/// Уменьшение здоровья врага при попадании пули
-/// </summary>
-
-public class EnemyHealth : MonoBehaviour
+namespace Enemies
 {
-    [SerializeField] 
-    private int health;
-    [SerializeField] 
-    private ProjectileShell bullet;
-    [SerializeField] 
-    private EnemiesManager enemiesManager;
-    
-    private void OnCollisionEnter(Collision collision)
+    /// <summary>
+    /// Уменьшение здоровья врага при попадании пули
+    /// </summary>
+    public class EnemyHealth : MonoBehaviour
     {
-        if (collision.gameObject.CompareTag("Projectile"))
+        [SerializeField] 
+        private int _health;
+        [SerializeField] 
+        private EnemiesManager _enemiesManager;
+
+        private void OnCollisionEnter(Collision collision)
         {
-            health -= bullet.Damage;
-            if (health <= 0)
+            if (collision.gameObject.CompareTag("Projectile"))
             {
-                var enemies = enemiesManager.enemies;
-                for (int i = 0;  i< enemies.Count; i++)
+                _health -= ProjectileLauncher.ProjectileShell.Singleton.Damage;
+                if (_health <= 0)
                 {
-                    if (enemies[i] == gameObject)
+                    var enemies = _enemiesManager.enemies;
+                    for (int i = 0; i < enemies.Count; i++)
                     {
-                        enemies.RemoveAt(i);
-                        Destroy(gameObject);
+                        if (enemies[i] == gameObject)
+                        {
+                            enemies.RemoveAt(i);
+                            Destroy(gameObject);
+                        }
                     }
                 }
             }

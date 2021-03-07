@@ -1,39 +1,41 @@
 using System.Collections.Generic;
+using Enemies;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-/// <summary>
-/// Отвечает за создание пуль
-/// </summary>
-
-public class ProjectileLauncher : MonoBehaviour
+namespace ProjectileLauncher
 {
-    [SerializeField] 
-    private GameObject bulletPrefab;
-    [SerializeField] 
-    private float bulletsSpawnCooldown;
-    [SerializeField] 
-    private EnemiesManager enemiesManager;
-    
-    private float _currentTime;
-    private List<GameObject> _bullets;
-
-    private void Awake()
+    /// <summary>
+    /// Отвечает за создание пуль
+    /// </summary>
+    public class ProjectileLauncher : MonoBehaviour
     {
-        _bullets = new List<GameObject>();
-    }
-
-    private void Update()
-    {
-        if (_currentTime < bulletsSpawnCooldown)
+        [SerializeField] 
+        private GameObject _bulletPrefab;
+        [SerializeField] 
+        private float _bulletsSpawnCooldown;
+        
+        public List<GameObject> shells;
+        private float _currentTime;
+        
+        private void Awake()
         {
-            _currentTime += Time.deltaTime;
+            shells = new List<GameObject>();
         }
-        else
+
+        private void Update()
         {
-            _currentTime = 0;
-            if (enemiesManager.enemies.Count > 0)
+            if (_currentTime < _bulletsSpawnCooldown)
             {
-                _bullets.Add(Instantiate(bulletPrefab, transform.position, transform.rotation)); 
+                _currentTime += Time.deltaTime;
+            }
+            else
+            {
+                _currentTime = 0;
+                if (EnemiesManager.Singleton.enemies.Count > 0)
+                {
+                    shells.Add(Instantiate(_bulletPrefab, transform.position, transform.rotation));
+                }
             }
         }
     }
