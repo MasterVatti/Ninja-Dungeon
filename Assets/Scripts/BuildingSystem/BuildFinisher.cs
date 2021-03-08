@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace BuildingSystem
@@ -11,8 +9,22 @@ namespace BuildingSystem
     /// </summary>
     public class BuildFinisher : MonoBehaviour
     {
-        public static void CreatePlaceHolders ([CanBeNull] IEnumerable<GameObject> placeHolders)
+        [SerializeField]
+        private BuildingController _buildingController;
+        [SerializeField]
+        private BuildingSettings _buildingSettings;
+        private void Start ()
         {
+            _buildingController.OnBuildFinished += delegate
+            {
+                CreatePlaceHolders();
+                CreateBuilding();
+            };
+        }
+
+        private void CreatePlaceHolders ()
+        {
+            var placeHolders = _buildingSettings.ConnectedPlaceHolders;
             if(placeHolders != null)
             {
                 foreach (var placeHolder in placeHolders)
@@ -22,8 +34,9 @@ namespace BuildingSystem
             }
         }
 
-        public static void CreateBuilding (GameObject building)
+        private void CreateBuilding ()
         {
+            var building = _buildingSettings.Prefab;
             Instantiate(building, building.transform.position, Quaternion.identity);
         }
     }

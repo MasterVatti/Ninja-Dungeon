@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using PlayerScripts;
+using ResourceSystem;
 using UnityEngine;
 
 namespace BuildingSystem
@@ -10,120 +12,119 @@ namespace BuildingSystem
     /// </summary>
     public class BuildingController : MonoBehaviour
     {
+        
+
         public event Action OnBuildFinished;
         [SerializeField]
         private BuildingSettings _building;
-        [SerializeField]
-        private int _constructionSpeedMultiplier;
-        [SerializeField]
-        private float _buildCooldown;
-        private float _buildTime;
-        private int[] _playerResources;
-        private int _constructionSpeed;
+        private List<Resource> _resourcesDeducts = new List<Resource>();
+        private PlayerResourcesManager _playerResources;
+        private float _startTime;
 
         private void Start ()
         {
-            _playerResources = PlayerResourcesManager.CurrentResources;
-            OnBuildFinished += delegate
-            {
-                BuildFinisher.CreateBuilding(_building.Prefab);
-                BuildFinisher.CreatePlaceHolders(_building.ConnectedPlaceHolders);
-            };
+            _playerResources = PlayerResourcesManager.Instance;
         }
+
 
         private void OnTriggerEnter (Collider other)
         {
-            _constructionSpeed = SetConstructionSpeed();
-            _buildTime = Time.time;
-            Build(_constructionSpeed);
+            SetResourcesDeducts();
+            _startTime = Time.time;
+            Build();
         }
 
         private void OnTriggerStay (Collider other)
         {
             if(!IsConstructionFinished())
             {
-                Build(_constructionSpeed);
+                Build();
             }
         }
-
-        private int SetConstructionSpeed ()
+        
+        private void SetResourcesDeducts ()
         {
-            var constructionSpeed = 1;
-            var requiredResources = _building.RequiredResources;
-            for(var i = 0; i < _playerResources.Length; i++)
+            _resourcesDeducts = new List<Resource>();
+            foreach (var requiredResources in _building.RequiredResources)
             {
-                if(_playerResources[i] < 1 || requiredResources[i] == 0)
-                {
-                    continue;
-                }
-
-                var difference = _playerResources[i] / requiredResources[i];
-                if(constructionSpeed > difference)
-                {
-                    constructionSpeed = difference;
-                }
+                _resourcesDeducts.Add(new Resource() {Type = requiredResources.Type, Amount = requiredResources.Amount / _building.TimeToBuild});
             }
-
-            return constructionSpeed;
         }
 
-        private void Build (int speed)
+        private void Build ()
         {
-            var payPerSecond = speed * _constructionSpeedMultiplier;
-            var requiredResources = _building.RequiredResources;
             if(IsCooldownExpired())
             {
-                for(int i = 0; i < _playerResources.Length; i++)
+                foreach (var requiredResource in _building.RequiredResources)
                 {
-                    if(requiredResources[i] <= 0)
+                    foreach (var playerResource in _playerResources.CurrentResources)
                     {
-                        continue;
-                    }
+                        if(requiredResource.Type != playerResource.Type || !(requiredResource.Amount > 0))
+                        {
+                            continue;
+                        }
 
-                    if(_playerResources[i] > payPerSecond)
-                    {
-                        _playerResources[i] -= payPerSecond;
-                        requiredResources[i] -= payPerSecond;
-                        continue;
-                    }
-
-                    if(_playerResources[i] <= payPerSecond && _playerResources[i] > 0)
-                    {
-                        _playerResources[i] -= 1;
-                        requiredResources[i] -= 1;
+                        var deductAmount = GetDeductAmount(requiredResource.Type);
+                        if(deductAmount > requiredResource.Amount || deductAmount > playerResource.Amount)
+                        {  
+                            if(playerResource.Amount > requiredResource.Amount)
+                            {
+                                playerResource.Amount -= requiredResource.Amount;
+                                requiredResource.Amount = 0;
+                            }
+                            else
+                            {
+                                requiredResource.Amount -= playerResource.Amount;
+                                playerResource.Amount = 0;
+                            }
+                            break;
+                        }
+                        playerResource.Amount -= deductAmount;
+                        requiredResource.Amount -= deductAmount;
+                        break;
                     }
                 }
 
-                _buildTime += _buildCooldown;
+                _startTime += 1;
             }
 
-            PlayerResourcesManager.CurrentResources = _playerResources;
-            _building.RequiredResources = requiredResources;
             if(IsConstructionFinished())
             {
+                Destroy(gameObject);
                 OnBuildFinished?.Invoke();
             }
         }
 
+
         private bool IsCooldownExpired ()
         {
-            if(Time.time > _buildTime)
-            {
-                return true;
-            }
+            return Time.time > _startTime;
 
-            return false;
         }
 
         private bool IsConstructionFinished ()
         {
-            if(_building.RequiredResources[0] <= 0 && _building.RequiredResources[1] <= 0)
+            return _building.RequiredResources.TrueForAll(IsResourceExpired);
+
+        }
+
+        private bool IsResourceExpired (Resource resource)
+        {
+            return resource.Amount <= 0;
+        }
+
+        private float GetDeductAmount (ResourceType type)
+        {
+            foreach (var deduct in _resourcesDeducts)
             {
-                Destroy(gameObject);
-                return true;
+                if(deduct.Type == type)
+                {
+                    Debug.Log(deduct.Type + " " + deduct.Amount);
+                    return deduct.Amount;
+                }
             }
 
-            return false;
+            return 0;
         }
     }
 }

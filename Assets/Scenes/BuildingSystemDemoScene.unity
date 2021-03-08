@@ -1518,6 +1518,7 @@ GameObject:
   - component: {fileID: 643675871037884335}
   - component: {fileID: 3485483247864672151}
   - component: {fileID: 552366316872271958}
+  - component: {fileID: 641161253699837680}
   m_Layer: 10
   m_Name: PlaceHolder 1
   m_TagString: Untagged
@@ -1525,6 +1526,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &641161253699837680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641161253699837679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e344e09ab7472e459e785b2b1445218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buildingController: {fileID: 552366316872271958}
+  _buildingSettings: {fileID: 11400000, guid: 49becd60a8d8cfa4ab50b816661ec7e8, type: 2}
 --- !u!1 &641520624745730179
 GameObject:
   m_ObjectHideFlags: 0

@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 4251027493619624685}
   - component: {fileID: 166221680424092373}
   - component: {fileID: 3871410187457389844}
+  - component: {fileID: -6368048393316933632}
   m_Layer: 10
   m_Name: PlaceHolder 1
   m_TagString: Untagged
@@ -391,6 +392,20 @@ MonoBehaviour:
   _building: {fileID: 11400000, guid: b0c3778016f69b347a288c9acd935e56, type: 2}
   _constructionSpeedMultiplier: 10
   _buildCooldown: 1
+--- !u!114 &-6368048393316933632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4248506280021078957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e344e09ab7472e459e785b2b1445218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buildingController: {fileID: 3871410187457389844}
+  _buildingSettings: {fileID: 11400000, guid: b0c3778016f69b347a288c9acd935e56, type: 2}
 --- !u!1 &4248551206662989249
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ResourceSystem;
 using UnityEngine;
 
 namespace BuildingSystem
@@ -12,25 +13,18 @@ namespace BuildingSystem
     {
         [SerializeField]
         private List<GameObject> _connectedPlaceHolders = new List<GameObject>();
-        [Header("Resources")]
         [SerializeField]
-        private int _goldCost;
-        [SerializeField]
-        private int _lumberCost;
+        private List<Resource> _requiredResources;
         [SerializeField]
         private GameObject _prefab;
+        [SerializeField]
+        private float _timeToBuild;
         public List<GameObject> ConnectedPlaceHolders => _connectedPlaceHolders;
 
         public GameObject Prefab => _prefab;
 
-        public int[] RequiredResources
-        {
-            get => new[] {_goldCost, _lumberCost};
-            set
-            {
-                _goldCost = value[0];
-                _lumberCost = value[1];
-            }
-        }
+        public List<Resource> RequiredResources => _requiredResources;
+
+        public float TimeToBuild => _timeToBuild;
     }
 }
