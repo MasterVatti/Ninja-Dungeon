@@ -12,9 +12,10 @@ namespace Enemies
         private int _health;
         [SerializeField] 
         private EnemiesManager _enemiesManager;
-        
+
         public delegate void EnemyDieHandler(GameObject enemy);
         public static event EnemyDieHandler EnemyDie;
+
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Projectile"))
@@ -31,6 +32,7 @@ namespace Enemies
                             EnemyDie?.Invoke(_enemiesManager.enemies[i]);
                         }
                     }
+
                     Destroy(gameObject);
                 }
             }
@@ -41,6 +43,4 @@ namespace Enemies
             EnemyDie -= _enemiesManager.OnEnemyDie;
         }
     }
-
-    
 }

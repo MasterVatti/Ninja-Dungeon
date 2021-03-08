@@ -13,7 +13,6 @@ namespace Enemies
         [SerializeField] 
         private Transform _playerTransform;
 
-        
         public Vector3 NearestEnemyCoords { get; private set; }
         private List<GameObject> _enemies { get; set; }
 
@@ -46,6 +45,7 @@ namespace Enemies
                     minimalIndex = i;
                 }
             }
+
             return _enemies[minimalIndex].transform.position;
         }
     }
