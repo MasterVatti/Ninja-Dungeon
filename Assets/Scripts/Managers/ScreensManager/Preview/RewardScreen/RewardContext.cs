@@ -6,5 +6,6 @@
     public class RewardContext : BaseContext
     {
         public int Gold { get; set; }
+        
     }
 }

@@ -464,7 +464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2354323107459636733
 RectTransform:
   m_ObjectHideFlags: 0
@@ -499,6 +499,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b67aebdedb4ef8a6d8028ec2d4c76b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScreenType: 1
   ScreenType: 1
   _goldCountLabel: {fileID: 2589325075904733902}
