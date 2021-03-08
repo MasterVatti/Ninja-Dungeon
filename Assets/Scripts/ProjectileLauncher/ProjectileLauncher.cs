@@ -14,6 +14,8 @@ namespace ProjectileLauncher
         private GameObject _bulletPrefab;
         [SerializeField] 
         private float _bulletsSpawnCooldown;
+        [SerializeField] 
+        private NearestEnemyDetector nearestEnemy;
         
         public List<GameObject> shells;
         private float _currentTime;
@@ -34,6 +36,7 @@ namespace ProjectileLauncher
                 _currentTime = 0;
                 if (EnemiesManager.Singleton.enemies.Count > 0)
                 {
+                    nearestEnemyNearestEnemyCoords
                     shells.Add(Instantiate(_bulletPrefab, transform.position, transform.rotation));
                 }
             }
