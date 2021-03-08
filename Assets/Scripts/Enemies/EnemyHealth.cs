@@ -12,7 +12,7 @@ namespace Enemies
         private int _health;
         [SerializeField] 
         private EnemiesManager _enemiesManager;
-        //public static event Action EnemyDie;
+        
         public delegate void EnemyDieHandler(GameObject enemy);
         public static event EnemyDieHandler EnemyDie;
         private void OnCollisionEnter(Collision collision)
