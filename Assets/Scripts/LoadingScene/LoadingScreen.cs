@@ -12,16 +12,10 @@ namespace LoadingScene
     {
         [SerializeField]
         private Slider _loadingProgress;
-        private LoadingController _loadingController;
         
-        private void Awake()
-        {
-            _loadingController = GetComponentInParent<LoadingController>();
-        }
-
         private void Update()
         {
-            _loadingProgress.value = _loadingController.LoadingProgress;
+            _loadingProgress.value = LoadingController.Instance.LoadingProgress;
         }
 
         public override void Initialize(ScreenType screenType)

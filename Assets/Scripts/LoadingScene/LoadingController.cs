@@ -8,7 +8,7 @@ namespace LoadingScene
     /// <summary>
     /// Класс отвечает за  загрузку сцены.
     /// </summary>
-    public class LoadingController : MonoBehaviour
+    public class LoadingController : Singleton<LoadingController>
     {
         public float LoadingProgress { get; private set; }
         

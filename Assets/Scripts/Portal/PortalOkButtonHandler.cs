@@ -11,19 +11,18 @@ namespace Assets.Scripts.Managers.ScreensManager
     {
         [SerializeField]
         private Button _okButton;
-        private LoadingController _loadingController;
         private string _sceneName;
         
         private void Start()
         {
             _okButton.onClick.AddListener(OnClick);
-            _loadingController = GetComponentInParent<LoadingController>();
+            
         }
 
         public override void OnClick()
         {
             ScreenManager.Instance.CloseTopScreen();
-            _loadingController.StartLoad(_sceneName);
+            LoadingController.Instance.StartLoad(_sceneName);
         }
 
         public void Initialize(string sceneName)
