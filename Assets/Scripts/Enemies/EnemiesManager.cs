@@ -12,10 +12,15 @@ namespace Enemies
         public static EnemiesManager Singleton { get; private set; }
         [SerializeField] 
         public List<GameObject> enemies;
-
+        
         private void Awake()
         {
             Singleton = this;
+        }
+
+        public void OnEnemyDie(GameObject enemy)
+        {
+            enemies.Remove(enemy);
         }
     }
 }

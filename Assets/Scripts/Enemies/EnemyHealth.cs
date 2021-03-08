@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Enemies
@@ -11,7 +12,9 @@ namespace Enemies
         private int _health;
         [SerializeField] 
         private EnemiesManager _enemiesManager;
-
+        //public static event Action EnemyDie;
+        public delegate void EnemyDieHandler(GameObject enemy);
+        public static event EnemyDieHandler EnemyDie;
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Projectile"))
@@ -24,12 +27,20 @@ namespace Enemies
                     {
                         if (enemies[i] == gameObject)
                         {
-                            enemies.RemoveAt(i);
-                            Destroy(gameObject);
+                            EnemyDie += _enemiesManager.OnEnemyDie;
+                            EnemyDie?.Invoke(_enemiesManager.enemies[i]);
                         }
                     }
+                    Destroy(gameObject);
                 }
             }
         }
+
+        private void OnDestroy()
+        {
+            EnemyDie -= _enemiesManager.OnEnemyDie;
+        }
     }
+
+    
 }

@@ -11,10 +11,11 @@ namespace Enemies
         [SerializeField] 
         private EnemiesManager _enemiesManager;
         [SerializeField] 
-        private GameObject _player;
+        private Transform _playerTransform;
 
-        private List<GameObject> _enemies;
+        
         public Vector3 NearestEnemyCoords { get; private set; }
+        private List<GameObject> _enemies { get; set; }
 
         private void Awake()
         {
@@ -36,7 +37,7 @@ namespace Enemies
             for (int i = 0; i < _enemies.Count; i++)
             {
                 var enemy = _enemies[i];
-                Vector3 playerPosition = _player.transform.position;
+                Vector3 playerPosition = _playerTransform.position;
                 float distance = Vector3.Distance(enemy.transform.position,
                     playerPosition);
                 if (min > distance)
