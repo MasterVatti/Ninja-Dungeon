@@ -12,8 +12,6 @@ namespace ProjectileLauncher
         [SerializeField] 
         private float _bulletSpeed;
         [SerializeField] 
-        private NearestEnemyDetector _enemyDetector;
-        [SerializeField] 
         private int _damage;
         [SerializeField] 
         private ProjectileLauncher _projectileLauncher;
@@ -24,33 +22,23 @@ namespace ProjectileLauncher
 
         private void Awake()
         {
-            _nearestEnemyPosition = _enemyDetector.NearestEnemyCoords;
+            _nearestEnemyPosition = _projectileLauncher.NearestEnemyCoordinates;
             _startPosition = transform;
             Singleton = this;
         }
 
         private void Update()
         {
-            if (gameObject)
-            {
-                transform.position = Vector3.Lerp(_startPosition.position,
-                    _nearestEnemyPosition, Time.deltaTime * _bulletSpeed);
-            }
+            transform.position = Vector3.Lerp(_startPosition.position,
+                _nearestEnemyPosition, Time.deltaTime * _bulletSpeed);
         }
 
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Enemy"))
             {
-                var shells = _projectileLauncher.shells;
-                for (int i = 0; i < shells.Count; i++)
-                {
-                    if (shells[i] == gameObject)
-                    {
-                        _projectileLauncher.shells.RemoveAt(i);
-                        Destroy(gameObject);
-                    }
-                }
+                _projectileLauncher.OnProjectileDestroy(gameObject);
+                Destroy(gameObject);
             }
         }
     }

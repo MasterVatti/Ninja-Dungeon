@@ -11,16 +11,27 @@ namespace Enemies
     {
         public static EnemiesManager Singleton { get; private set; }
         [SerializeField] 
-        public List<GameObject> enemies;
+        private List<GameObject> _enemies;
+        
+        public List<GameObject> Enemies => _enemies;
+        public delegate void EnemyDieHandler(GameObject enemy);
+
+        public event EnemyDieHandler EnemyDie;
         
         private void Awake()
         {
             Singleton = this;
+            EnemyDie += OnEnemyDie;
         }
-
+        
+        private void OnDestroy()
+        {
+            EnemyDie -= OnEnemyDie;
+        }
+        
         public void OnEnemyDie(GameObject enemy)
         {
-            enemies.Remove(enemy);
+            Enemies.Remove(enemy);
         }
     }
 }

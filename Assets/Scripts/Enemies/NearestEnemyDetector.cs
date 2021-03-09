@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Enemies
@@ -13,29 +12,13 @@ namespace Enemies
         [SerializeField] 
         private Transform _playerTransform;
 
-        public Vector3 NearestEnemyCoords { get; private set; }
-        private List<GameObject> _enemies { get; set; }
-
-        private void Awake()
-        {
-            _enemies = _enemiesManager.enemies;
-        }
-
-        private void Update()
-        {
-            if (_enemies.Count > 0)
-            {
-                NearestEnemyCoords = GetNearestEnemy();
-            }
-        }
-
-        private Vector3 GetNearestEnemy()
+        public Vector3 GetNearestEnemyPosition()
         {
             int minimalIndex = 0;
             float min = float.MaxValue;
-            for (int i = 0; i < _enemies.Count; i++)
+            for (int i = 0; i < _enemiesManager.Enemies.Count; i++)
             {
-                var enemy = _enemies[i];
+                var enemy = _enemiesManager.Enemies[i];
                 Vector3 playerPosition = _playerTransform.position;
                 float distance = Vector3.Distance(enemy.transform.position,
                     playerPosition);
@@ -46,7 +29,7 @@ namespace Enemies
                 }
             }
 
-            return _enemies[minimalIndex].transform.position;
+            return _enemiesManager.Enemies[minimalIndex].transform.position;
         }
     }
 }

@@ -10,12 +10,12 @@ namespace Enemies
     {
         [SerializeField] 
         private int _health;
+
+
         [SerializeField] 
-        private EnemiesManager _enemiesManager;
-
-        public delegate void EnemyDieHandler(GameObject enemy);
-        public static event EnemyDieHandler EnemyDie;
-
+        private EnemiesManager e;
+        
+        public event EnemiesManager.EnemyDieHandler EnemyDie;
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Projectile"))
@@ -23,24 +23,14 @@ namespace Enemies
                 _health -= ProjectileLauncher.ProjectileShell.Singleton.Damage;
                 if (_health <= 0)
                 {
-                    var enemies = _enemiesManager.enemies;
-                    for (int i = 0; i < enemies.Count; i++)
-                    {
-                        if (enemies[i] == gameObject)
-                        {
-                            EnemyDie += _enemiesManager.OnEnemyDie;
-                            EnemyDie?.Invoke(_enemiesManager.enemies[i]);
-                        }
-                    }
-
+                    //.EnemyDie?.Invoke(gameObject);
+                    //e.EnemyDie += enemy => 
+                    //EnemyDie?.Invoke(gameObject);
+                    e.OnEnemyDie(gameObject);
                     Destroy(gameObject);
                 }
             }
         }
 
-        private void OnDestroy()
-        {
-            EnemyDie -= _enemiesManager.OnEnemyDie;
-        }
     }
 }

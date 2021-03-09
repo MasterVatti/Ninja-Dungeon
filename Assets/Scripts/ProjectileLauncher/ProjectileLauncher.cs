@@ -15,10 +15,12 @@ namespace ProjectileLauncher
         [SerializeField] 
         private float _bulletsSpawnCooldown;
         [SerializeField] 
-        private NearestEnemyDetector nearestEnemy;
+        private NearestEnemyDetector _nearestEnemy;
         
         public List<GameObject> shells;
         private float _currentTime;
+
+        public Vector3 NearestEnemyCoordinates { get; private set; }
         
         private void Awake()
         {
@@ -34,12 +36,23 @@ namespace ProjectileLauncher
             else
             {
                 _currentTime = 0;
-                if (EnemiesManager.Singleton.enemies.Count > 0)
-                {
-                    nearestEnemyNearestEnemyCoords
-                    shells.Add(Instantiate(_bulletPrefab, transform.position, transform.rotation));
-                }
+                OnProjectileCreate();
             }
+        }
+
+        private void OnProjectileCreate()
+        {
+            if (EnemiesManager.Singleton.Enemies.Count > 0)
+            {
+                NearestEnemyCoordinates = _nearestEnemy.GetNearestEnemyPosition();
+                shells.Add(Instantiate(_bulletPrefab, transform.position, 
+                    transform.rotation));
+            }
+        }
+        
+        public void OnProjectileDestroy(GameObject projectile)
+        {
+            shells.Remove(gameObject);
         }
     }
 }
