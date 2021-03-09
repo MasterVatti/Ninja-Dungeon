@@ -12,19 +12,11 @@ namespace BuildingSystem
     /// </summary>
     public class BuildingController : MonoBehaviour
     {
-        
-
         public event Action OnBuildFinished;
         [SerializeField]
         private BuildingSettings _building;
         private List<Resource> _resourcesDeducts = new List<Resource>();
-        private PlayerResourcesManager _playerResources;
         private float _startTime;
-
-        private void Start ()
-        {
-            _playerResources = PlayerResourcesManager.Instance;
-        }
 
 
         private void OnTriggerEnter (Collider other)
@@ -57,32 +49,15 @@ namespace BuildingSystem
             {
                 foreach (var requiredResource in _building.RequiredResources)
                 {
-                    foreach (var playerResource in _playerResources.CurrentResources)
+                    if(requiredResource.Amount < 1)
                     {
-                        if(requiredResource.Type != playerResource.Type || !(requiredResource.Amount > 0))
-                        {
-                            continue;
-                        }
-
-                        var deductAmount = GetDeductAmount(requiredResource.Type);
-                        if(deductAmount > requiredResource.Amount || deductAmount > playerResource.Amount)
-                        {  
-                            if(playerResource.Amount > requiredResource.Amount)
-                            {
-                                playerResource.Amount -= requiredResource.Amount;
-                                requiredResource.Amount = 0;
-                            }
-                            else
-                            {
-                                requiredResource.Amount -= playerResource.Amount;
-                                playerResource.Amount = 0;
-                            }
-                            break;
-                        }
-                        playerResource.Amount -= deductAmount;
-                        requiredResource.Amount -= deductAmount;
-                        break;
+                        requiredResource.Amount = 0;
+                        continue;
                     }
+                    var playerResource = Resource.GetResourceByType(PlayerResourcesManager.Instance.CurrentResources, requiredResource.Type);
+                    var deductAmount = Math.Min(GetDeductAmount(requiredResource.Type), Mathf.Min(requiredResource.Amount, playerResource.Amount));
+                    playerResource.Amount -= deductAmount;
+                    requiredResource.Amount -= deductAmount;
                 }
 
                 _startTime += 1;
@@ -90,7 +65,6 @@ namespace BuildingSystem
 
             if(IsConstructionFinished())
             {
-                Destroy(gameObject);
                 OnBuildFinished?.Invoke();
             }
         }
@@ -119,7 +93,6 @@ namespace BuildingSystem
             {
                 if(deduct.Type == type)
                 {
-                    Debug.Log(deduct.Type + " " + deduct.Amount);
                     return deduct.Amount;
                 }
             }

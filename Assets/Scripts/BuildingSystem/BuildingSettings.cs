@@ -8,7 +8,7 @@ namespace BuildingSystem
     /// Настройки для зданий:
     /// стоимость, префаб, связанные плейс-холдеры
     /// </summary>
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/BuildingBase", order = 1)]
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Building", order = 1)]
     public class BuildingSettings : ScriptableObject
     {
         [SerializeField]

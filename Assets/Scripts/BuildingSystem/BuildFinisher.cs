@@ -13,13 +13,12 @@ namespace BuildingSystem
         private BuildingController _buildingController;
         [SerializeField]
         private BuildingSettings _buildingSettings;
+
         private void Start ()
         {
-            _buildingController.OnBuildFinished += delegate
-            {
-                CreatePlaceHolders();
-                CreateBuilding();
-            };
+            _buildingController.OnBuildFinished += CreatePlaceHolders;
+            _buildingController.OnBuildFinished += CreateBuilding;
+            _buildingController.OnBuildFinished += DestroyPlaceHolder;
         }
 
         private void CreatePlaceHolders ()
@@ -38,6 +37,18 @@ namespace BuildingSystem
         {
             var building = _buildingSettings.Prefab;
             Instantiate(building, building.transform.position, Quaternion.identity);
+        }
+
+        private void DestroyPlaceHolder ()
+        {
+            Destroy(gameObject);
+        }
+
+        private void OnDestroy ()
+        {
+            _buildingController.OnBuildFinished -= CreatePlaceHolders;
+            _buildingController.OnBuildFinished -= CreateBuilding;
+            _buildingController.OnBuildFinished -= DestroyPlaceHolder;
         }
     }
 }
