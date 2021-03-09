@@ -22,15 +22,14 @@ namespace ProjectileLauncher
             _nearestEnemyPosition = _projectileLauncher.NearestEnemyCoordinates;
             _startPosition = transform;
             rb.velocity = _nearestEnemyPosition * _bulletSpeed;
-            //Debug.Log(rb.velocity);
-            //Debug.Log(_nearestEnemyPosition);
+            
         }
 
         private void Update()
         {
+            rb.AddRelativeTorque(_nearestEnemyPosition);
             /*transform.position = Vector3.Lerp(_startPosition.position,
                 _nearestEnemyPosition, Time.deltaTime * _bulletSpeed);*/
-            
         }
 
         private void OnCollisionEnter(Collision collision)

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Enemies;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ProjectileLauncher
 {
@@ -12,8 +11,6 @@ namespace ProjectileLauncher
     {
         public static ProjectileLauncher Singleton { get; private set; }
         
-        public List<GameObject> Shells;
-        
         [SerializeField] 
         private GameObject _bulletPrefab;
         [SerializeField] 
@@ -21,12 +18,12 @@ namespace ProjectileLauncher
         [SerializeField] 
         private float _bulletsSpawnCooldown;
         [SerializeField] 
-        private NearestEnemyDetector _nearestEnemy;
-        
-        private float _currentTime;
+        private NearestEnemyDetector _enemyDetector;
+         private float _currentTime;
         
         public int Damage => _damage;
         public Vector3 NearestEnemyCoordinates { get; private set; }
+        public List<GameObject> Shells { get; private set; }
         
         private void Awake()
         {
@@ -51,7 +48,8 @@ namespace ProjectileLauncher
         {
             if (EnemiesManager.Singleton.Enemies.Count > 0)
             {
-                NearestEnemyCoordinates = _nearestEnemy.GetNearestEnemyPosition();
+                NearestEnemyCoordinates = 
+                    _enemyDetector.GetNearestEnemyPosition();
                 Shells.Add(Instantiate(_bulletPrefab, transform.position, 
                     transform.rotation));
             }

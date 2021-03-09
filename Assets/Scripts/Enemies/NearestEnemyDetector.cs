@@ -29,7 +29,8 @@ namespace Enemies
                 }
             }
             
-            return _enemiesManager.Enemies[minimalIndex].transform.position;
+            return _enemiesManager.
+                Enemies[minimalIndex].transform.position;
         }
     }
 }
