@@ -10,8 +10,6 @@ namespace Assets.Scripts.Managers.ScreensManager
     public class ScreenManager : Singleton<ScreenManager>
     {
         [SerializeField]
-        private Canvas _canvas;
-        [SerializeField]
         private List<BaseScreen> _allScreens;
 
         private readonly Stack<BaseScreen> _screenStack =
@@ -24,7 +22,7 @@ namespace Assets.Scripts.Managers.ScreensManager
         {
             var screenPrefab = FindScreenByType<BaseScreen>(screenType);
             
-            var screen = Instantiate(screenPrefab, _canvas.transform, false);
+            var screen = Instantiate(screenPrefab, gameObject.transform, false);
             
             InitializeScreen(screenPrefab, screenType);
             
@@ -40,7 +38,7 @@ namespace Assets.Scripts.Managers.ScreensManager
             var screenPrefab =
                 FindScreenByType<BaseScreenWithContext<TContext>>(screenType);
             
-            var screen = Instantiate(screenPrefab, _canvas.transform, false);
+            var screen = Instantiate(screenPrefab, gameObject.transform, false);
             
             InitializeScreen(screenPrefab, screenType);
             

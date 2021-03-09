@@ -325,7 +325,6 @@ GameObject:
   - component: {fileID: 1373096649318363159}
   - component: {fileID: 6099382065373677219}
   - component: {fileID: 5283132226579256113}
-  - component: {fileID: 3614018122843469029}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -434,20 +433,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6099382065373677219}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &3614018122843469029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8127354134930743631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d8b8ee3b73c66542b13e99419161131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _okButton: {fileID: 5283132226579256113}
+      m_Calls:
+      - m_Target: {fileID: 2037845385577808008}
+        m_TargetAssemblyTypeName: Assets.Scripts.Managers.ScreensManager.Preview.RewardScreen.RewardScreen,
+          Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9138659407377482671
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,3 +500,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScreenType: 1
   _goldCountLabel: {fileID: 2589325075904733902}
+  _okButton: {fileID: 0}

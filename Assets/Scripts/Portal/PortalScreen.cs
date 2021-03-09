@@ -1,18 +1,20 @@
 using Assets.Scripts.Managers.ScreensManager;
 using JetBrains.Annotations;
+using LoadingScene;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Класс отвечает за окно портала(предложение спустится в инст и наоборот)
+/// Класс отвечает за окно портала(предложение спустится в инст и наоборот) и обработку кнопки Yes
 /// </summary>
 public class PortalScreen : BaseScreenWithContext<PortalContext>
 {
     [SerializeField]
     private TMP_Text _descriptionField;
     [SerializeField]
-    private PortalOkButtonHandler _okButton;
+    private Button _okButton;
+    private string _sceneName;
     
     [UsedImplicitly]
     public void TurnOffPanel()
@@ -23,7 +25,13 @@ public class PortalScreen : BaseScreenWithContext<PortalContext>
     public override void ApplyContext(PortalContext context)
     {
         _descriptionField.text = context.Description;
-        _okButton.Initialize(context.SceneName);
+        _sceneName = context.SceneName;
+    }
+    
+    public void OnClick()
+    {
+        ScreenManager.Instance.CloseTopScreen();
+        LoadingController.Instance.StartLoad(_sceneName);
     }
 
     public override void Initialize(ScreenType screenType)
