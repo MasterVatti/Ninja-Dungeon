@@ -9,24 +9,24 @@ namespace Enemies
     /// </summary>
     public class EnemiesManager : MonoBehaviour
     {
+        //public static EnemiesManager Singleton { get; private set; }
         public static EnemiesManager Singleton { get; private set; }
         [SerializeField] 
         private List<GameObject> _enemies;
-        
-        public List<GameObject> Enemies => _enemies;
-        public delegate void EnemyDieHandler(GameObject enemy);
 
-        public event EnemyDieHandler EnemyDie;
+        [SerializeField] private EnemyHealth _enemyHealth;
+        public List<GameObject> Enemies => _enemies;
         
         private void Awake()
         {
             Singleton = this;
-            EnemyDie += OnEnemyDie;
+            EnemyHealth.Singleton.EnemyDie += OnEnemyDie;
         }
         
         private void OnDestroy()
         {
-            EnemyDie -= OnEnemyDie;
+            //_enemyHealth.EnemyDie -= OnEnemyDie;
+            EnemyHealth.Singleton.EnemyDie -= OnEnemyDie;
         }
         
         public void OnEnemyDie(GameObject enemy)

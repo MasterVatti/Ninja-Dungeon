@@ -8,6 +8,7 @@ namespace Enemies
     /// </summary>
     public class EnemyHealth : MonoBehaviour
     {
+        public static EnemyHealth Singleton { get; set; }
         [SerializeField] 
         private int _health;
 
@@ -15,16 +16,21 @@ namespace Enemies
         [SerializeField] 
         private EnemiesManager e;
         
-        public event EnemiesManager.EnemyDieHandler EnemyDie;
+        public delegate void EnemyDieHandler(GameObject enemy);
+        public event EnemyDieHandler EnemyDie;
+
+        private void Awake()
+        {
+            Singleton = this;
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Projectile"))
             {
-                _health -= ProjectileLauncher.ProjectileShell.Singleton.Damage;
+                _health -= ProjectileLauncher.ProjectileLauncher.Singleton.Damage;
                 if (_health <= 0)
                 {
-                    //.EnemyDie?.Invoke(gameObject);
-                    //e.EnemyDie += enemy => 
                     //EnemyDie?.Invoke(gameObject);
                     e.OnEnemyDie(gameObject);
                     Destroy(gameObject);

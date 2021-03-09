@@ -1,4 +1,3 @@
-using Enemies;
 using UnityEngine;
 
 namespace ProjectileLauncher
@@ -8,29 +7,30 @@ namespace ProjectileLauncher
     /// </summary>
     public class ProjectileShell : MonoBehaviour
     {
-        public static ProjectileShell Singleton { get; private set; }
         [SerializeField] 
         private float _bulletSpeed;
         [SerializeField] 
-        private int _damage;
-        [SerializeField] 
         private ProjectileLauncher _projectileLauncher;
 
+        [SerializeField] private Rigidbody rb;
         private Vector3 _nearestEnemyPosition;
         private Transform _startPosition;
-        public int Damage => _damage;
+        
 
         private void Awake()
         {
             _nearestEnemyPosition = _projectileLauncher.NearestEnemyCoordinates;
             _startPosition = transform;
-            Singleton = this;
+            rb.velocity = _nearestEnemyPosition * _bulletSpeed;
+            //Debug.Log(rb.velocity);
+            //Debug.Log(_nearestEnemyPosition);
         }
 
         private void Update()
         {
-            transform.position = Vector3.Lerp(_startPosition.position,
-                _nearestEnemyPosition, Time.deltaTime * _bulletSpeed);
+            /*transform.position = Vector3.Lerp(_startPosition.position,
+                _nearestEnemyPosition, Time.deltaTime * _bulletSpeed);*/
+            
         }
 
         private void OnCollisionEnter(Collision collision)

@@ -10,21 +10,28 @@ namespace ProjectileLauncher
     /// </summary>
     public class ProjectileLauncher : MonoBehaviour
     {
+        public static ProjectileLauncher Singleton { get; private set; }
+        
+        public List<GameObject> Shells;
+        
         [SerializeField] 
         private GameObject _bulletPrefab;
+        [SerializeField] 
+        private int _damage;
         [SerializeField] 
         private float _bulletsSpawnCooldown;
         [SerializeField] 
         private NearestEnemyDetector _nearestEnemy;
         
-        public List<GameObject> shells;
         private float _currentTime;
-
+        
+        public int Damage => _damage;
         public Vector3 NearestEnemyCoordinates { get; private set; }
         
         private void Awake()
         {
-            shells = new List<GameObject>();
+            Shells = new List<GameObject>();
+            Singleton = this;
         }
 
         private void Update()
@@ -45,14 +52,14 @@ namespace ProjectileLauncher
             if (EnemiesManager.Singleton.Enemies.Count > 0)
             {
                 NearestEnemyCoordinates = _nearestEnemy.GetNearestEnemyPosition();
-                shells.Add(Instantiate(_bulletPrefab, transform.position, 
+                Shells.Add(Instantiate(_bulletPrefab, transform.position, 
                     transform.rotation));
             }
         }
         
         public void OnProjectileDestroy(GameObject projectile)
         {
-            shells.Remove(gameObject);
+            Shells.Remove(projectile);
         }
     }
 }
