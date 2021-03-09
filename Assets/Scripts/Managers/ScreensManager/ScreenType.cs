@@ -7,6 +7,8 @@
     public enum ScreenType
     {
         HelloScreen,
-        RewardScreen
+        RewardScreen,
+        PortalScreen,
+        LoadingScreen
     }
 }

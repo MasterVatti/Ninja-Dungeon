@@ -7,10 +7,8 @@ namespace Assets.Scripts.Managers.ScreensManager
     /// Этот менеджер управляет окнами.
     /// То есть открывает окна, закрывает и т.д.
     /// </summary>
-    public class ScreenManager : MonoBehaviour
+    public class ScreenManager : Singleton<ScreenManager>
     {
-        [SerializeField]
-        private Canvas _canvas;
         [SerializeField]
         private List<BaseScreen> _allScreens;
 
@@ -23,10 +21,11 @@ namespace Assets.Scripts.Managers.ScreensManager
         public void OpenScreen(ScreenType screenType)
         {
             var screenPrefab = FindScreenByType<BaseScreen>(screenType);
-
+            
+            var screen = Instantiate(screenPrefab, gameObject.transform, false);
+            
             InitializeScreen(screenPrefab, screenType);
-            var screen = Instantiate(screenPrefab, _canvas.transform, false);
-
+            
             _screenStack.Push(screen);
         }
 
@@ -38,12 +37,15 @@ namespace Assets.Scripts.Managers.ScreensManager
         {
             var screenPrefab =
                 FindScreenByType<BaseScreenWithContext<TContext>>(screenType);
-
-            InitializeScreen(screenPrefab, screenType);
-            screenPrefab.ApplyContext(context);
             
-            var screen = Instantiate(screenPrefab, _canvas.transform, false);
+            var screen = Instantiate(screenPrefab, gameObject.transform, false);
+            
+            InitializeScreen(screenPrefab, screenType);
+            
+            screen.ApplyContext(context);
+            
             _screenStack.Push(screen);
+            
         }
 
         public void CloseTopScreen()

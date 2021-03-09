@@ -11,12 +11,17 @@ namespace Assets.Scripts.Managers.ScreensManager.Preview.RewardScreen
     {
         [SerializeField]
         private Text _goldCountLabel;
+        [SerializeField]
+        private Button _okButton;
         
         public override void Initialize(ScreenType screenType)
         {
             ScreenType = screenType;
         }
-        
+        public void OnClick()
+        {
+            ScreenManager.Instance.CloseTopScreen();
+        }
         public override void ApplyContext(RewardContext context)
         {
             _goldCountLabel.text = context.Gold.ToString();
