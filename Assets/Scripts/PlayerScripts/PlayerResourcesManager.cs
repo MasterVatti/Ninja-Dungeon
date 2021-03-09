@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using ResourceSystem;
 using UnityEngine;
 
 namespace PlayerScripts
@@ -7,17 +9,16 @@ namespace PlayerScripts
     /// </summary>
     public class PlayerResourcesManager : MonoBehaviour
     {
-        private static int _currentGold = 200;
-        private static int _currentLumber = 300;
+        [SerializeField]
+        private List<Resource> _resources;
 
-        public static int[] CurrentResources
+        public static PlayerResourcesManager Instance { get; private set; }
+
+        public List<Resource> CurrentResources => _resources;
+
+        private void Awake ()
         {
-            get => new[] {_currentGold, _currentLumber};
-            set
-            {
-                _currentGold = value[0];
-                _currentLumber = value[1];
-            }
+            Instance = this;
         }
     }
 }
