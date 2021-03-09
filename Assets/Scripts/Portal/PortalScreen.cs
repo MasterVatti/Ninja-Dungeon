@@ -10,10 +10,7 @@ using UnityEngine.UI;
 /// </summary>
 public class PortalScreen : BaseScreenWithContext<PortalContext>
 {
-    [SerializeField]
-    private TMP_Text _descriptionField;
-    [SerializeField]
-    private Button _okButton;
+    [SerializeField] private TMP_Text _descriptionField;
     private string _sceneName;
     
     [UsedImplicitly]
