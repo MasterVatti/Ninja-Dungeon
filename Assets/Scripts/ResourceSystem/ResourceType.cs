@@ -2,8 +2,8 @@
 {
     public enum ResourceType
     {
-        Gold,
-        Lumber,
-        Ore
+        Gold = 0,
+        Lumber = 1,
+        Ore = 2
     }
 }

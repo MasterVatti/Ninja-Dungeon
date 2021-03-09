@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ResourceSystem
 {
+    /// <summary>
+    /// Класс для работы с ресурсами
+    /// </summary>
     [Serializable]
     public class Resource
     {
@@ -25,16 +29,19 @@ namespace ResourceSystem
             set => _amount = value;
         }
 
+        public static Resource GetResourceByType (List<Resource> resources, ResourceType type)
+        {
+            return (from resource in resources where resource.Type == type select resource).FirstOrDefault();
+
+        }
+
         public static bool CompareResources (List<Resource> neededResources, List<Resource> availableResources)
         {
             foreach (var neededResource in neededResources)
             {
-                foreach (var availableResource in availableResources)
+                if(GetResourceByType(availableResources, neededResource.Type).Amount < neededResource.Amount)
                 {
-                    if(availableResource.Amount < neededResource.Amount)
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
 
