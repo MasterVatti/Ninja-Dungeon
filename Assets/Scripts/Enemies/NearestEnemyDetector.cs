@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Enemies
@@ -30,6 +29,7 @@ namespace Enemies
                                - _playerTransform.position;
                 }
             }
+            
             return distance;
         }
     }

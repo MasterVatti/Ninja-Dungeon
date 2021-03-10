@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +13,8 @@ namespace Enemies
         [SerializeField] 
         private List<GameObject> _enemies;
 
+        public delegate void EnemyDieHandler(GameObject enemy);
+        public event EnemyDieHandler EnemyDie;
         public List<GameObject> Enemies => _enemies;
 
         private void Awake()
@@ -23,6 +24,7 @@ namespace Enemies
 
         public void OnEnemyDie(GameObject enemy)
         {
+            EnemyDie?.Invoke(gameObject);
             Enemies.Remove(enemy);
         }
     }
