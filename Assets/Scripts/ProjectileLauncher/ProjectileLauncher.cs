@@ -19,7 +19,7 @@ namespace ProjectileLauncher
         private float _bulletsSpawnCooldown;
         [SerializeField] 
         private NearestEnemyDetector _enemyDetector;
-         private float _currentTime;
+        private float _currentTime;
         
         public int Damage => _damage;
         public Vector3 NearestEnemyCoordinates { get; private set; }

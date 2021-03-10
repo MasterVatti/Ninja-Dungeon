@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace ProjectileLauncher
@@ -13,16 +12,14 @@ namespace ProjectileLauncher
         [SerializeField] 
         private ProjectileLauncher _projectileLauncher;
 
-        [SerializeField] private Rigidbody rb;
+        [SerializeField] private Rigidbody rigidbody;
         private Vector3 _nearestEnemyPosition;
-        private Transform _startPosition;
         
 
         private void Awake()
         {
             _nearestEnemyPosition = _projectileLauncher.NearestEnemyCoordinates;
-            _startPosition = transform;
-            rb.velocity = _nearestEnemyPosition * _bulletSpeed;
+            rigidbody.velocity = _nearestEnemyPosition * _bulletSpeed;
         }
 
         private void OnCollisionEnter(Collision collision)

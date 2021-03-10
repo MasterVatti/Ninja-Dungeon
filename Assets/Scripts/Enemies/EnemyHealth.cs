@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Enemies
@@ -8,20 +7,8 @@ namespace Enemies
     /// </summary>
     public class EnemyHealth : MonoBehaviour
     {
-        public static EnemyHealth Singleton { get; set; }
         [SerializeField] 
         private int _health;
-
-        [SerializeField] 
-        private EnemiesManager e;
-        
-        public delegate void EnemyDieHandler(GameObject enemy);
-        public event EnemyDieHandler EnemyDie;
-
-        private void Awake()
-        {
-            Singleton = this;
-        }
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -30,12 +17,10 @@ namespace Enemies
                 _health -= ProjectileLauncher.ProjectileLauncher.Singleton.Damage;
                 if (_health <= 0)
                 {
-                    //EnemyDie?.Invoke(gameObject);
-                    e.OnEnemyDie(gameObject);
+                    EnemiesManager.Singleton.OnEnemyDie(gameObject);
                     Destroy(gameObject);
                 }
             }
         }
-
     }
 }
