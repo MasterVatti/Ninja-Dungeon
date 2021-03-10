@@ -50,9 +50,9 @@ namespace BuildingSystem
         {
             foreach (var requiredResource in _building.RequiredResources)
             {
-                if (requiredResource.Amount > 0 
-                    && IsPaymentTime(requiredResource) 
-                    && ResourceManager.Instance.HasEnough(requiredResource.Type, 1))
+                if (requiredResource.Amount > 0 && 
+                    IsPaymentTime(requiredResource) && 
+                    ResourceManager.Instance.HasEnough(requiredResource.Type, 1))
                 {
                     ResourceManager.Instance.Pay(requiredResource.Type, 1);
                     requiredResource.Amount--;
