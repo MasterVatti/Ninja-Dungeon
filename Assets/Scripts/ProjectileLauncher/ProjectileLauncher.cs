@@ -49,7 +49,7 @@ namespace ProjectileLauncher
             if (EnemiesManager.Singleton.Enemies.Count > 0)
             {
                 NearestEnemyCoordinates = 
-                    _enemyDetector.GetNearestEnemyPosition();
+                    _enemyDetector.GetNearestEnemyPositionToPlayer();
                 Shells.Add(Instantiate(_bulletPrefab, transform.position, 
                     transform.rotation));
             }

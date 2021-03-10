@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace ProjectileLauncher
@@ -22,14 +23,6 @@ namespace ProjectileLauncher
             _nearestEnemyPosition = _projectileLauncher.NearestEnemyCoordinates;
             _startPosition = transform;
             rb.velocity = _nearestEnemyPosition * _bulletSpeed;
-            
-        }
-
-        private void Update()
-        {
-            rb.AddRelativeTorque(_nearestEnemyPosition);
-            /*transform.position = Vector3.Lerp(_startPosition.position,
-                _nearestEnemyPosition, Time.deltaTime * _bulletSpeed);*/
         }
 
         private void OnCollisionEnter(Collision collision)

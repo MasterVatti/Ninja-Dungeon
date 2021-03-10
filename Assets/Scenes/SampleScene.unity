@@ -265,9 +265,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 1486569943}
+  _damage: 35
   _bulletsSpawnCooldown: 1.3
-  nearestEnemy: {fileID: 1967479926}
-  shells: []
+  _enemyDetector: {fileID: 1967479926}
 --- !u!1 &510607175
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,6 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
+  e: {fileID: 1081561629}
 --- !u!1 &773573455
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,6 +605,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
         type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1486569944}
+    - target: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
+        type: 3}
+      propertyPath: _bulletSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
+        type: 3}
       propertyPath: _enemyDetector
       value: 
       objectReference: {fileID: 1967479926}
@@ -640,17 +651,17 @@ PrefabInstance:
     - target: {fileID: 2660066435425416742, guid: b77933a8c45357c468592dceafcacd0f,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2660066435425416742, guid: b77933a8c45357c468592dceafcacd0f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2660066435425416742, guid: b77933a8c45357c468592dceafcacd0f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2660066435425416742, guid: b77933a8c45357c468592dceafcacd0f,
         type: 3}
@@ -702,7 +713,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 910181799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.6, y: 0.5, z: 10.64}
+  m_LocalPosition: {x: 20.31, y: 0.5, z: 18.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 510607176}
@@ -783,6 +794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
+  e: {fileID: 1081561629}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,6 +1131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
+  e: {fileID: 1081561629}
 --- !u!1 &1081561627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,13 +1175,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9632cd4cdb5d2804e9046ead80140de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
+  _enemies:
   - {fileID: 910181799}
   - {fileID: 1075624073}
   - {fileID: 747644691}
+  _enemyHealth: {fileID: 0}
 --- !u!1 &1486569943 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2660066435425416743, guid: b77933a8c45357c468592dceafcacd0f,
+    type: 3}
+  m_PrefabInstance: {fileID: 792488759}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1486569944 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 2660066435425416736, guid: b77933a8c45357c468592dceafcacd0f,
     type: 3}
   m_PrefabInstance: {fileID: 792488759}
   m_PrefabAsset: {fileID: 0}

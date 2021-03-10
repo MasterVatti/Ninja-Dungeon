@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Enemies
@@ -12,25 +13,25 @@ namespace Enemies
         [SerializeField] 
         private Transform _playerTransform;
 
-        public Vector3 GetNearestEnemyPosition()
+        public Vector3 GetNearestEnemyPositionToPlayer()
         {
-            int minimalIndex = 0;
+            Vector3 distance = new Vector3();
             float min = float.MaxValue;
             for (int i = 0; i < _enemiesManager.Enemies.Count; i++)
             {
                 var enemy = _enemiesManager.Enemies[i];
                 Vector3 playerPosition = _playerTransform.position;
-                float distance = Vector3.Distance(enemy.transform.position,
+                float distanceToPlayer = Vector3.Distance(enemy.transform.position,
                     playerPosition);
-                if (min > distance)
+                if (min > distanceToPlayer)
                 {
-                    min = distance;
-                    minimalIndex = i;
+                    min = distanceToPlayer;
+                    distance = _enemiesManager.Enemies[i].transform.position 
+                               - _playerTransform.position;
                 }
+
             }
-            
-            return _enemiesManager.
-                Enemies[minimalIndex].transform.position;
+            return distance;
         }
     }
 }
