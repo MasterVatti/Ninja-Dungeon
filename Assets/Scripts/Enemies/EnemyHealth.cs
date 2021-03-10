@@ -12,7 +12,6 @@ namespace Enemies
         [SerializeField] 
         private int _health;
 
-
         [SerializeField] 
         private EnemiesManager e;
         

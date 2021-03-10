@@ -50,7 +50,11 @@ namespace ProjectileLauncher
             {
                 NearestEnemyCoordinates = 
                     _enemyDetector.GetNearestEnemyPositionToPlayer();
-                Shells.Add(Instantiate(_bulletPrefab, transform.position, 
+                Vector3 projectilePosition = transform.position;
+                var spawningBulletPoint = 
+                    new Vector3(projectilePosition.x, 
+                        projectilePosition.y + 0.75f, transform.position.z);
+                Shells.Add(Instantiate(_bulletPrefab, spawningBulletPoint, 
                     transform.rotation));
             }
         }

@@ -29,7 +29,6 @@ namespace Enemies
                     distance = _enemiesManager.Enemies[i].transform.position 
                                - _playerTransform.position;
                 }
-
             }
             return distance;
         }
