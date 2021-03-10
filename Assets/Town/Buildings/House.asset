@@ -15,6 +15,8 @@ MonoBehaviour:
   _connectedPlaceHolders:
   - {fileID: 4248506280021078957, guid: 808781949a25abd49a45c4e45ae2c513, type: 3}
   - {fileID: 4248506280021078957, guid: 251e5f0bd93675a47a7d575e82db3272, type: 3}
-  _goldCost: 0
-  _lumberCost: 0
+  _requiredResources:
+  - _type: 0
+    _amount: 100
   _prefab: {fileID: 403395984159377603, guid: 1adb4225f6dfa2d45a0065575a6e85e9, type: 3}
+  _timeToBuild: 5

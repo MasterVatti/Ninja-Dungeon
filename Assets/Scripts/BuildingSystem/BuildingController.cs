@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using PlayerScripts;
 using ResourceSystem;
 using UnityEngine;
+using ResourceManager = Managers.ResourceManager;
 
 namespace BuildingSystem
 {
@@ -15,89 +15,76 @@ namespace BuildingSystem
         public event Action OnBuildFinished;
         [SerializeField]
         private BuildingSettings _building;
-        private List<Resource> _resourcesDeducts = new List<Resource>();
-        private float _startTime;
+        private Dictionary<ResourceType, float> _requiredCooldown;
+        private Dictionary<ResourceType, float> _currentCooldown;
 
 
-        private void OnTriggerEnter (Collider other)
+        private void OnTriggerEnter(Collider other)
         {
-            SetResourcesDeducts();
-            _startTime = Time.time;
+            SetRequiredCooldown();
             Build();
         }
 
-        private void OnTriggerStay (Collider other)
+        private void OnTriggerStay(Collider other)
         {
-            if(!IsConstructionFinished())
+            if (!IsConstructionFinished())
             {
                 Build();
             }
         }
-        
-        private void SetResourcesDeducts ()
+
+        private void SetRequiredCooldown()
         {
-            _resourcesDeducts = new List<Resource>();
-            foreach (var requiredResources in _building.RequiredResources)
+            _requiredCooldown = new Dictionary<ResourceType, float>();
+            _currentCooldown = new Dictionary<ResourceType, float>();
+            foreach (var requiredResource in _building.RequiredResources)
             {
-                _resourcesDeducts.Add(new Resource() {Type = requiredResources.Type, Amount = requiredResources.Amount / _building.TimeToBuild});
+                _requiredCooldown.Add(requiredResource.Type, 
+                    _building.TimeToBuild / requiredResource.Amount);
+                _currentCooldown.Add(requiredResource.Type, 
+                    _building.TimeToBuild / requiredResource.Amount);
             }
         }
 
-        private void Build ()
+        private void Build()
         {
-            if(IsCooldownExpired())
+            foreach (var requiredResource in _building.RequiredResources)
             {
-                foreach (var requiredResource in _building.RequiredResources)
+                if (requiredResource.Amount > 0 
+                    && IsPaymentTime(requiredResource) 
+                    && ResourceManager.Instance.HasEnough(requiredResource.Type, 1))
                 {
-                    if(requiredResource.Amount < 1)
-                    {
-                        requiredResource.Amount = 0;
-                        continue;
-                    }
-                    var playerResource = Resource.GetResourceByType(PlayerResourcesManager.Instance.CurrentResources, requiredResource.Type);
-                    var deductAmount = Math.Min(GetDeductAmount(requiredResource.Type), Mathf.Min(requiredResource.Amount, playerResource.Amount));
-                    playerResource.Amount -= deductAmount;
-                    requiredResource.Amount -= deductAmount;
+                    ResourceManager.Instance.Pay(requiredResource.Type, 1);
+                    requiredResource.Amount--;
                 }
-
-                _startTime += 1;
             }
 
-            if(IsConstructionFinished())
+            if (IsConstructionFinished())
             {
                 OnBuildFinished?.Invoke();
             }
         }
 
-
-        private bool IsCooldownExpired ()
-        {
-            return Time.time > _startTime;
-
-        }
-
-        private bool IsConstructionFinished ()
+        private bool IsConstructionFinished()
         {
             return _building.RequiredResources.TrueForAll(IsResourceExpired);
 
         }
 
-        private bool IsResourceExpired (Resource resource)
+        private bool IsResourceExpired(Resource resource)
         {
             return resource.Amount <= 0;
         }
 
-        private float GetDeductAmount (ResourceType type)
+        private bool IsPaymentTime(Resource resource)
         {
-            foreach (var deduct in _resourcesDeducts)
+            if (Time.time > _currentCooldown[resource.Type])
             {
-                if(deduct.Type == type)
-                {
-                    return deduct.Amount;
-                }
+                _currentCooldown[resource.Type] = Time.time + _requiredCooldown[resource.Type];
+                return true;
             }
 
-            return 0;
+            return false;
         }
     }
 }

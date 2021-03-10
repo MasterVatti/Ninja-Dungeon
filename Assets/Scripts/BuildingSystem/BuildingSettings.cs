@@ -11,6 +11,14 @@ namespace BuildingSystem
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Building", order = 1)]
     public class BuildingSettings : ScriptableObject
     {
+        public List<GameObject> ConnectedPlaceHolders => _connectedPlaceHolders;
+
+        public GameObject Prefab => _prefab;
+
+        public List<Resource> RequiredResources => _requiredResources;
+
+        public float TimeToBuild => _timeToBuild;
+
         [SerializeField]
         private List<GameObject> _connectedPlaceHolders = new List<GameObject>();
         [SerializeField]
@@ -19,12 +27,5 @@ namespace BuildingSystem
         private GameObject _prefab;
         [SerializeField]
         private float _timeToBuild;
-        public List<GameObject> ConnectedPlaceHolders => _connectedPlaceHolders;
-
-        public GameObject Prefab => _prefab;
-
-        public List<Resource> RequiredResources => _requiredResources;
-
-        public float TimeToBuild => _timeToBuild;
     }
 }
