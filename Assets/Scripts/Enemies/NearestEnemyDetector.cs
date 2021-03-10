@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Enemies
 {
     /// <summary>
-    /// ищет ближайшего врага к игроку
+    /// ищет ближайшего врага к игроку по отношению к игроку
     /// </summary>
     public class NearestEnemyDetector : MonoBehaviour
     {
