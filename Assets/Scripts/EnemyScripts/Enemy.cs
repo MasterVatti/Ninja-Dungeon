@@ -2,30 +2,30 @@
 
 namespace Assets.Scripts.EnemyScripts
 {
-    public abstract class Enemy: MonoBehaviour
+    public abstract class Enemy : MonoBehaviour
     {
         [Header("Stats")]
         [SerializeField]
-        private int _currentHp; //Enemy's current health.
+        private int _currentHp;
         [SerializeField]
-        private int _maxHp; //Enemy's maximum health.
+        private int _maxHp;
         [SerializeField]
-        private float _moveSpeed; //Enemy's movement speed in units per second.
+        private float _moveSpeed;
 
         [Header("Attack")]
         [SerializeField]
-        private int _attackDamage; //Damage dealt to target.
+        private int _attackDamage;
         [SerializeField]
-        private float _attackRate; //Rate at which the enemy attacks their target.
+        private float _attackRate;
 
         [Header("Bools")]
         [SerializeField]
-        private bool _canMove; //Can the enemy move?
+        private bool _canMove;
         [SerializeField]
-        private bool _canAttack; //Can the enemy attack their target?
+        private bool _canAttack;
 
         [Header("Components")]
         [SerializeField]
-        private Rigidbody _rigidbody; //Enemy's Rigidbody component.
+        private Rigidbody _rigidbody;
     }
 }
