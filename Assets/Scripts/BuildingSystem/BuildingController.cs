@@ -13,6 +13,7 @@ namespace BuildingSystem
     public class BuildingController : MonoBehaviour
     {
         public event Action OnBuildFinished;
+        private const int PAY_PER_TICK = 1;
         [SerializeField]
         private BuildingSettings _building;
         private Dictionary<ResourceType, float> _requiredCooldown;
@@ -41,8 +42,8 @@ namespace BuildingSystem
             {
                 _requiredCooldown.Add(requiredResource.Type, 
                     _building.TimeToBuild / requiredResource.Amount);
-                _currentCooldown.Add(requiredResource.Type, 
-                    _building.TimeToBuild / requiredResource.Amount);
+                _currentCooldown.Add(requiredResource.Type,
+                    float.MinValue);
             }
         }
 
@@ -52,9 +53,9 @@ namespace BuildingSystem
             {
                 if (requiredResource.Amount > 0 && 
                     IsPaymentTime(requiredResource) && 
-                    ResourceManager.Instance.HasEnough(requiredResource.Type, 1))
+                    ResourceManager.Instance.HasEnough(requiredResource.Type, PAY_PER_TICK))
                 {
-                    ResourceManager.Instance.Pay(requiredResource.Type, 1);
+                    ResourceManager.Instance.Pay(requiredResource.Type, PAY_PER_TICK);
                     requiredResource.Amount--;
                 }
             }
