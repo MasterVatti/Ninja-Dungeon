@@ -268,15 +268,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a981dd02c782a44abc29aec06764c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHp: 100
-  _maxHp: 100
-  _moveSpeed: 20
-  _attackDamage: 20
-  _attackRate: 30
-  _canMove: 1
-  _canAttack: 1
-  _rigidbody: {fileID: 54079120956016590}
-  _animator: {fileID: 0}
+  CurrentHP: 150
+  MaxHp: 150
+  MoveSpeed: 30
+  AttackDamage: 20
+  AttackRate: 1
+  CanMove: 1
+  CanAttack: 1
+  Rigidbody: {fileID: 54079120956016590}
 --- !u!1 &1528248254975706
 GameObject:
   m_ObjectHideFlags: 0

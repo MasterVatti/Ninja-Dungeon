@@ -772,11 +772,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9637f3aebb4b60a45bd2355e1de34e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHp: 50
-  _maxHp: 50
-  _moveSpeed: 30
-  _attackDamage: 40
-  _attackRate: 20
-  _canMove: 1
-  _canAttack: 1
-  _rigidbody: {fileID: 54406403011211884}
+  CurrentHP: 100
+  MaxHp: 100
+  MoveSpeed: 30
+  AttackDamage: 50
+  AttackRate: 2
+  CanMove: 1
+  CanAttack: 1
+  Rigidbody: {fileID: 54406403011211884}

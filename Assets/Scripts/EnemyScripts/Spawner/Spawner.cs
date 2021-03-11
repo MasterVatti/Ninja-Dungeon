@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
 
 namespace Assets.Scripts.EnemyScripts.Spawner
 {
-    public class EnemiesSpawner : MonoBehaviour
+    /// <summary>
+    /// Спавнер врагов
+    /// </summary>
+    public class Spawner : MonoBehaviour
     {
         public static Action AllWavesSpawned;
 
@@ -21,10 +23,10 @@ namespace Assets.Scripts.EnemyScripts.Spawner
 
         private void Awake()
         {
+            Wave.OnWaveCleared += OnWaveCleared;
+
             _currentWave = _waves[0];
             SpawnWave(_currentWave);
-
-            _nextWaveTime = Time.time + _waveCooldown;
         }
 
         private void Update()
@@ -34,7 +36,12 @@ namespace Assets.Scripts.EnemyScripts.Spawner
                 SpawnNextWave();
             }
         }
-        
+
+        private void OnWaveCleared()
+        {
+            SpawnNextWave();
+        }
+
         private bool ShouldSpawnNextWave()
         {
             if (Time.time >= _nextWaveTime)
@@ -49,12 +56,7 @@ namespace Assets.Scripts.EnemyScripts.Spawner
         {
             var currentWaveIndex =
                 _waves.FindIndex(wave => wave == _currentWave);
-
             var nextWaveIndex = currentWaveIndex + 1;
-            
-            Debug.Log($"currentWave = {currentWaveIndex}, " +
-                      $"nextWaveIndex = {nextWaveIndex}, " +
-                      $"count = {_waves.Count}");
 
             if (nextWaveIndex <= _waves.Count - 1)
             {
@@ -64,30 +66,27 @@ namespace Assets.Scripts.EnemyScripts.Spawner
             else
             {
                 AllWavesSpawned?.Invoke();
-                Debug.Log("All waves cleared");
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
 
         private void SpawnWave(Wave wave)
         {
-            foreach (var enemy in wave.Enemies)
+            foreach (var enemyWithSpawnPoint in wave.EnemiesWithSpawnPoints)
             {
-                Instantiate(enemy, GetRandomSpawnPointCoordinates(),
+                var enemy = enemyWithSpawnPoint.Enemy;
+                var spawnPoint = enemyWithSpawnPoint.SpawnPoint;
+
+                Instantiate(enemy, spawnPoint.position,
                     Quaternion.identity);
             }
-            
+
             _nextWaveTime = Time.time + _waveCooldown;
         }
 
-        private Vector3 GetRandomSpawnPointCoordinates()
+        private void OnDestroy()
         {
-            var random = new Random();
-            var randomSpawnPointIndex = random.Next(_spawnPoints.Count);
-
-            var spawnPoint = _spawnPoints[randomSpawnPointIndex];
-
-            return spawnPoint.position;
+            Wave.OnWaveCleared -= OnWaveCleared;
         }
     }
 }

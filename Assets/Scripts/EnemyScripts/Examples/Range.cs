@@ -1,7 +1,9 @@
 ﻿namespace Assets.Scripts.EnemyScripts.Examples
 {
-    public class Range: Enemy
+    /// <summary>
+    /// Представление врага-дальника
+    /// </summary>
+    public class Range : Enemy
     {
-        
     }
 }

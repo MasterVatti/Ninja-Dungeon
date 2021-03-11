@@ -2,30 +2,28 @@
 
 namespace Assets.Scripts.EnemyScripts
 {
+    /// <summary>
+    /// Базовое представление врага, хранит статы, компоненты и флаги врага
+    ///
+    /// P.S. В будущем сюда можно добавить методы атаки, передвижение,
+    /// новые компоненты, etc. 
+    /// </summary>
     public abstract class Enemy : MonoBehaviour
     {
         [Header("Stats")]
-        [SerializeField]
-        private int _currentHp;
-        [SerializeField]
-        private int _maxHp;
-        [SerializeField]
-        private float _moveSpeed;
+        public int CurrentHP;
+        public int MaxHp;
+        public float MoveSpeed;
 
         [Header("Attack")]
-        [SerializeField]
-        private int _attackDamage;
-        [SerializeField]
-        private float _attackRate;
+        public int AttackDamage;
+        public float AttackRate;
 
         [Header("Bools")]
-        [SerializeField]
-        private bool _canMove;
-        [SerializeField]
-        private bool _canAttack;
+        public bool CanMove;
+        public bool CanAttack;
 
         [Header("Components")]
-        [SerializeField]
-        private Rigidbody _rigidbody;
+        public Rigidbody Rigidbody;
     }
 }
