@@ -3,7 +3,6 @@ using JetBrains.Annotations;
 using LoadingScene;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// Класс отвечает за окно портала(предложение спустится в инст и наоборот) и обработку кнопки Yes

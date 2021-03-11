@@ -9,6 +9,7 @@
         HelloScreen,
         RewardScreen,
         PortalScreen,
-        LoadingScreen
+        LoadingScreen,
+        DoorScreen
     }
 }
