@@ -23,11 +23,9 @@ namespace ProjectileLauncher
         
         public int Damage => _damage;
         public Vector3 NearestEnemyCoordinates { get; private set; }
-        private List<GameObject> Projectiles { get; set; }
-        
+        //private GameObject Projectile { get; set; }
         private void Awake()
         {
-            Projectiles = new List<GameObject>();
             Singleton = this;
         }
 
@@ -53,15 +51,10 @@ namespace ProjectileLauncher
                 Vector3 projectilePosition = transform.position;
                 var spawningBulletPoint = 
                     new Vector3(projectilePosition.x, 
-                        projectilePosition.y + 0.75f, transform.position.z);
-                Projectiles.Add(Instantiate(_bulletPrefab, spawningBulletPoint, 
-                    transform.rotation));
+                        projectilePosition.y, transform.position.z);
+                Instantiate(_bulletPrefab, spawningBulletPoint, 
+                    transform.rotation);
             }
-        }
-        
-        public void ProjectileDestroy(GameObject projectile)
-        {
-            Projectiles.Remove(projectile);
         }
     }
 }
