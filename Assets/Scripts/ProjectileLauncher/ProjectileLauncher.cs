@@ -23,11 +23,11 @@ namespace ProjectileLauncher
         
         public int Damage => _damage;
         public Vector3 NearestEnemyCoordinates { get; private set; }
-        public List<GameObject> Shells { get; private set; }
+        private List<GameObject> Projectiles { get; set; }
         
         private void Awake()
         {
-            Shells = new List<GameObject>();
+            Projectiles = new List<GameObject>();
             Singleton = this;
         }
 
@@ -40,11 +40,11 @@ namespace ProjectileLauncher
             else
             {
                 _currentTime = 0;
-                OnProjectileCreate();
+                ProjectileCreate();
             }
         }
 
-        private void OnProjectileCreate()
+        private void ProjectileCreate()
         {
             if (EnemiesManager.Singleton.Enemies.Count > 0)
             {
@@ -54,14 +54,14 @@ namespace ProjectileLauncher
                 var spawningBulletPoint = 
                     new Vector3(projectilePosition.x, 
                         projectilePosition.y + 0.75f, transform.position.z);
-                Shells.Add(Instantiate(_bulletPrefab, spawningBulletPoint, 
+                Projectiles.Add(Instantiate(_bulletPrefab, spawningBulletPoint, 
                     transform.rotation));
             }
         }
         
-        public void OnProjectileDestroy(GameObject projectile)
+        public void ProjectileDestroy(GameObject projectile)
         {
-            Shells.Remove(projectile);
+            Projectiles.Remove(projectile);
         }
     }
 }

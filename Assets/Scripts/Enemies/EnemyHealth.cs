@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Enemies
@@ -10,8 +11,7 @@ namespace Enemies
         [SerializeField] 
         private int _health;
         
-        public delegate void EventHandler(GameObject enemy);
-        public static event EventHandler EnemyDie;
+        public static event Action<GameObject> EnemyDie;
         
         private void OnCollisionEnter(Collision collision)
         {
@@ -20,7 +20,7 @@ namespace Enemies
                 _health -= ProjectileLauncher.ProjectileLauncher.Singleton.Damage;
                 if (_health <= 0)
                 {
-                    EnemiesManager.Singleton.OnEnemyDie(gameObject);
+                    EnemyDie?.Invoke(gameObject);
                     Destroy(gameObject);
                 }
             }
