@@ -1,3 +1,5 @@
+using System;
+using Enemies;
 using UnityEngine;
 
 namespace ProjectileLauncher
@@ -19,6 +21,7 @@ namespace ProjectileLauncher
         {
             _nearestEnemyPosition = _projectileLauncher.NearestEnemyCoordinates;
             _rigidbody.velocity = _nearestEnemyPosition * _bulletSpeed;
+            EnemyHealth.DecreaseHealth += EnemyHit;
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -27,6 +30,17 @@ namespace ProjectileLauncher
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void OnDestroy()
+        {
+            EnemyHealth.DecreaseHealth -= EnemyHit;
+        }
+
+        private int EnemyHit(int health)
+        {
+            health -= _projectileLauncher.Damage;
+            return health;
         }
     }
 }

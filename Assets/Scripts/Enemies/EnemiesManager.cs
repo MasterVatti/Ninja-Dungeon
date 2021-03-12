@@ -19,7 +19,6 @@ namespace Enemies
         private void Awake()
         {
             Singleton = this;
-
             EnemyHealth.EnemyDie += OnEnemyDie;
         }
 
@@ -28,7 +27,7 @@ namespace Enemies
             EnemyHealth.EnemyDie -= OnEnemyDie;
         }
 
-        public void OnEnemyDie(GameObject enemy)
+        private void OnEnemyDie(GameObject enemy)
         {
             Enemies.Remove(enemy);
         }

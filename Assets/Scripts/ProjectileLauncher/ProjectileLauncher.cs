@@ -23,7 +23,7 @@ namespace ProjectileLauncher
         
         public int Damage => _damage;
         public Vector3 NearestEnemyCoordinates { get; private set; }
-        //private GameObject Projectile { get; set; }
+        
         private void Awake()
         {
             Singleton = this;
