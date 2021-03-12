@@ -21,7 +21,7 @@ namespace ProjectileLauncher
         {
             _nearestEnemyPosition = _projectileLauncher.NearestEnemyCoordinates;
             _rigidbody.velocity = _nearestEnemyPosition * _bulletSpeed;
-            EnemyHealth.DecreaseHealth += EnemyHit;
+            EnemyHealth.DecreaseHealth += EnemyHited;
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -34,10 +34,10 @@ namespace ProjectileLauncher
 
         private void OnDestroy()
         {
-            EnemyHealth.DecreaseHealth -= EnemyHit;
+            EnemyHealth.DecreaseHealth -= EnemyHited;
         }
 
-        private int EnemyHit(int health)
+        private int EnemyHited(int health)
         {
             health -= _projectileLauncher.Damage;
             return health;
