@@ -9,6 +9,8 @@ namespace ProjectileLauncher
     /// </summary>
     public class ProjectileLauncher : MonoBehaviour
     {
+        private Vector3 NearestEnemyPosition { get; set; }
+        
         [SerializeField] 
         private GameObject _projectilePrefab;
         [SerializeField] 
@@ -16,8 +18,6 @@ namespace ProjectileLauncher
         [SerializeField] 
         private NearestEnemyDetector _enemyDetector;
         private float _currentTime;
-        
-        private Vector3 NearestEnemyPosition { get; set; }
         
         private void Update()
         {

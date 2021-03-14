@@ -10,10 +10,10 @@ namespace Enemies
     {
         public static EnemiesManager Singleton { get; private set; }
 
+        public List<GameObject> Enemies => _enemies;
+        
         [SerializeField] 
         private List<GameObject> _enemies;
-
-        public List<GameObject> Enemies => _enemies;
         
         private void Awake()
         {

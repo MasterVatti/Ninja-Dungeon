@@ -12,6 +12,7 @@ namespace Enemies
         private int _health;
         
         public event Action<GameObject> EnemyDie;
+        
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Projectile"))
