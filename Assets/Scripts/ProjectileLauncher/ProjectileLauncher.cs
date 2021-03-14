@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Enemies;
 using UnityEngine;
 
@@ -12,16 +11,14 @@ namespace ProjectileLauncher
         public static ProjectileLauncher Singleton { get; private set; }
         
         [SerializeField] 
-        private GameObject _bulletPrefab;
+        private GameObject _projectilePrefab;
+        
         [SerializeField] 
-        private int _damage;
-        [SerializeField] 
-        private float _bulletsSpawnCooldown;
+        private float _projectileSpawnCooldown;
         [SerializeField] 
         private NearestEnemyDetector _enemyDetector;
         private float _currentTime;
         
-        public int Damage => _damage;
         public Vector3 NearestEnemyCoordinates { get; private set; }
         
         private void Awake()
@@ -31,29 +28,26 @@ namespace ProjectileLauncher
 
         private void Update()
         {
-            if (_currentTime < _bulletsSpawnCooldown)
+            if (_currentTime < _projectileSpawnCooldown)
             {
                 _currentTime += Time.deltaTime;
             }
             else
             {
                 _currentTime = 0;
-                ProjectileCreate();
+                CreateProjectile();
             }
         }
 
-        private void ProjectileCreate()
+        private void CreateProjectile()
         {
             if (EnemiesManager.Singleton.Enemies.Count > 0)
             {
-                NearestEnemyCoordinates = 
-                    _enemyDetector.GetNearestEnemyPositionToPlayer();
+                NearestEnemyCoordinates = _enemyDetector.GetNearestEnemyPosition();
                 Vector3 projectilePosition = transform.position;
-                var spawningBulletPoint = 
-                    new Vector3(projectilePosition.x, 
+                var spawningBulletPoint = new Vector3(projectilePosition.x, 
                         projectilePosition.y, transform.position.z);
-                Instantiate(_bulletPrefab, spawningBulletPoint, 
-                    transform.rotation);
+                var projectile = Instantiate(_projectilePrefab, spawningBulletPoint, transform.rotation);
             }
         }
     }

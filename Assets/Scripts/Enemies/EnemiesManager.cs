@@ -24,7 +24,8 @@ namespace Enemies
 
         private void OnDestroy()
         {
-            EnemyHealth.EnemyDie -= OnEnemyDie;
+            EnemyHealth.EnemyDie += OnEnemyDie;
+            //EnemyHealth.EnemyDie -= OnEnemyDie;
         }
 
         private void OnEnemyDie(GameObject enemy)

@@ -10,17 +10,23 @@ namespace ProjectileLauncher
     public class ProjectileLogic : MonoBehaviour
     {
         [SerializeField] 
-        private float _bulletSpeed;
+        private float _projectileSpeed;
         [SerializeField] 
         private ProjectileLauncher _projectileLauncher;
         [SerializeField] 
         private Rigidbody _rigidbody;
+        [SerializeField] 
+        private int _damage;
+
+        [SerializeField] private NearestEnemyDetector _nearestEnemy;
         private Vector3 _nearestEnemyPosition;
-        
+
+        private int Damage => _damage;
         private void Awake()
         {
             _nearestEnemyPosition = _projectileLauncher.NearestEnemyCoordinates;
-            _rigidbody.velocity = _nearestEnemyPosition * _bulletSpeed;
+            _rigidbody.velocity = _nearestEnemyPosition * _projectileSpeed;
+            //_rigidbody.angularVelocity = _nearestEnemy.VectorNormalization();
             EnemyHealth.DecreaseHealth += EnemyHited;
         }
 
@@ -39,7 +45,7 @@ namespace ProjectileLauncher
 
         private int EnemyHited(int health)
         {
-            health -= _projectileLauncher.Damage;
+            health -= Damage;
             return health;
         }
     }
