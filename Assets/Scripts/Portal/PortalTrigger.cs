@@ -2,7 +2,7 @@ using Assets.Scripts;
 using UnityEngine;
 
 /// <summary>
-/// Класс отвечает за тригер портала(вызов панели портала) и передачу настроек портала.
+/// Класс отвечает за тригер портала(вызов панели портала) 
 /// </summary>
 public class PortalTrigger : MonoBehaviour
 {

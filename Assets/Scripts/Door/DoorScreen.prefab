@@ -121,8 +121,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PortalScreen, Assembly-CSharp
+      - m_Target: {fileID: 6250927260114087653}
+        m_TargetAssemblyTypeName: Door.DoorScreen, Assembly-CSharp
         m_MethodName: TurnOffPanel
         m_Mode: 1
         m_Arguments:
