@@ -639,13 +639,18 @@ PrefabInstance:
     - target: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
         type: 3}
       propertyPath: _projectileSpeed
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
         type: 3}
       propertyPath: _projectileLauncher
       value: 
       objectReference: {fileID: 456597882}
+    - target: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
+        type: 3}
+      propertyPath: nearestEnemyVelocity
+      value: 
+      objectReference: {fileID: 1967479926}
     - target: {fileID: 2660066435425416742, guid: b77933a8c45357c468592dceafcacd0f,
         type: 3}
       propertyPath: m_RootOrder
