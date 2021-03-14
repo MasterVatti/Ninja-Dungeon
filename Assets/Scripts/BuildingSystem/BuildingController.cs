@@ -7,13 +7,13 @@ using ResourceManager = Managers.ResourceManager;
 namespace BuildingSystem
 {
     /// <summary>
-    /// Класс вычисляет скорость строительства
+    /// Класс вычисляет скорость оплаты строительства
     /// и контролирует процесс строительства
     /// </summary>
     public class BuildingController : MonoBehaviour
     {
         public event Action OnBuildFinished;
-        private const int PAY_PER_TICK = 1;
+        private const int PayPerTick = 1;
         [SerializeField]
         private BuildingSettings _building;
         private Dictionary<ResourceType, float> _requiredCooldown;
@@ -53,10 +53,10 @@ namespace BuildingSystem
             {
                 if (requiredResource.Amount > 0 && 
                     IsPaymentTime(requiredResource) && 
-                    ResourceManager.Instance.HasEnough(requiredResource.Type, PAY_PER_TICK))
+                    ResourceManager.Instance.HasEnough(requiredResource.Type, PayPerTick))
                 {
-                    ResourceManager.Instance.Pay(requiredResource.Type, PAY_PER_TICK);
-                    requiredResource.Amount--;
+                    ResourceManager.Instance.Pay(requiredResource.Type, PayPerTick);
+                    requiredResource.Amount -= PayPerTick;
                 }
             }
 
