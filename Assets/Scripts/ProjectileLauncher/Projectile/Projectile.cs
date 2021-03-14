@@ -1,4 +1,3 @@
-using System;
 using Enemies;
 using UnityEngine;
 
@@ -7,27 +6,20 @@ namespace ProjectileLauncher
     /// <summary>
     /// Движение каждой конкретной пули к ближайшему противнику
     /// </summary>
-    public class ProjectileLogic : MonoBehaviour
+    public class Projectile : MonoBehaviour
     {
         [SerializeField] 
         private float _projectileSpeed;
-        [SerializeField] 
-        private ProjectileLauncher _projectileLauncher;
         [SerializeField] 
         private Rigidbody _rigidbody;
         [SerializeField] 
         private int _damage;
 
-        private Vector3 _nearestEnemyPosition;
-
-        private int Damage => _damage;
-        private void Awake()
+        public void Initialize(Vector3 direction)
         {
-            _nearestEnemyPosition = _projectileLauncher.NearestEnemyCoordinates;
-            _rigidbody.velocity = _nearestEnemyPosition * _projectileSpeed;
-            //_rigidbody.angularVelocity = _nearestEnemy.VectorNormalization();
+            ProjectileMoving(direction);
         }
-
+        
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Enemy"))
@@ -35,6 +27,11 @@ namespace ProjectileLauncher
                 Destroy(gameObject);
                 DealDamage(collision);
             }
+        }
+
+        public void ProjectileMoving(Vector3 pointToMove)
+        {
+            _rigidbody.velocity = pointToMove * _projectileSpeed;
         }
         
         public virtual void DealDamage(Collision collision)

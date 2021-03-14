@@ -264,9 +264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a685f7f5b25553b409aa6433e95e7e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 1486569943}
-  _damage: 35
-  _bulletsSpawnCooldown: 1.3
+  _projectilePrefab: {fileID: 1486569943}
+  _projectileSpawnCooldown: 1.3
   _enemyDetector: {fileID: 1967479926}
 --- !u!1 &510607175
 GameObject:
@@ -614,6 +613,11 @@ PrefabInstance:
       objectReference: {fileID: 1486569944}
     - target: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
         type: 3}
+      propertyPath: detector
+      value: 
+      objectReference: {fileID: 1967479926}
+    - target: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
+        type: 3}
       propertyPath: rigidbody
       value: 
       objectReference: {fileID: 1486569944}
@@ -632,6 +636,11 @@ PrefabInstance:
       propertyPath: _enemyDetector
       value: 
       objectReference: {fileID: 1967479926}
+    - target: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
+        type: 3}
+      propertyPath: _projectileSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
         type: 3}
       propertyPath: _projectileLauncher

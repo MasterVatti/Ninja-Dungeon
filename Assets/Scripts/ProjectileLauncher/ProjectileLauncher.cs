@@ -1,3 +1,4 @@
+using System;
 using Enemies;
 using UnityEngine;
 
@@ -8,8 +9,6 @@ namespace ProjectileLauncher
     /// </summary>
     public class ProjectileLauncher : MonoBehaviour
     {
-        public static ProjectileLauncher Singleton { get; private set; }
-        
         [SerializeField] 
         private GameObject _projectilePrefab;
         
@@ -19,12 +18,8 @@ namespace ProjectileLauncher
         private NearestEnemyDetector _enemyDetector;
         private float _currentTime;
         
-        public Vector3 NearestEnemyCoordinates { get; private set; }
+        private Vector3 NearestEnemyPosition { get; set; }
         
-        private void Awake()
-        {
-            Singleton = this;
-        }
 
         private void Update()
         {
@@ -43,12 +38,13 @@ namespace ProjectileLauncher
         {
             if (EnemiesManager.Singleton.Enemies.Count > 0)
             {
-                NearestEnemyCoordinates = _enemyDetector.GetNearestEnemyPositionToPlayer();
-                Vector3 projectilePosition = transform.position;
-                var spawningBulletPoint = new Vector3(projectilePosition.x, 
-                        projectilePosition.y, transform.position.z);
+                NearestEnemyPosition = (_enemyDetector.GetNearestEnemy().transform.position
+                                       - transform.position).normalized;
+                var projectilePosition = transform.position;
+                var spawningBulletPoint = new Vector3(projectilePosition.x, projectilePosition.y, 
+                    projectilePosition.z);
                 var projectile = Instantiate(_projectilePrefab, spawningBulletPoint, transform.rotation);
-                //projectile.Initialize(projectile);
+                projectile.GetComponent<Projectile>().Initialize(NearestEnemyPosition);
             }
         }
     }

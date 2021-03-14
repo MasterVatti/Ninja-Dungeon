@@ -12,10 +12,10 @@ namespace Enemies
         [SerializeField] 
         private Transform _playerTransform;
 
-        public Vector3 GetNearestEnemyPositionToPlayer()
+        public GameObject GetNearestEnemy()
         {
-            var distance = new Vector3();
             var min = float.MaxValue;
+            var minIndex = 0;
             for (int i = 0; i < _enemiesManager.Enemies.Count; i++)
             {
                 var enemy = _enemiesManager.Enemies[i];
@@ -25,13 +25,11 @@ namespace Enemies
                 if (min > distanceToPlayer)
                 {
                     min = distanceToPlayer;
-                    distance = _enemiesManager.Enemies[i].transform.position 
-                               - _playerTransform.position;
+                    minIndex = i;
                 }
             }
-            
-            return distance;
+
+            return _enemiesManager.Enemies[minIndex];
         }
-        
     }
 }
