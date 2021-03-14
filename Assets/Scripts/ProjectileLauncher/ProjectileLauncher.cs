@@ -43,11 +43,12 @@ namespace ProjectileLauncher
         {
             if (EnemiesManager.Singleton.Enemies.Count > 0)
             {
-                NearestEnemyCoordinates = _enemyDetector.GetNearestEnemyPosition();
+                NearestEnemyCoordinates = _enemyDetector.GetNearestEnemyPositionToPlayer();
                 Vector3 projectilePosition = transform.position;
                 var spawningBulletPoint = new Vector3(projectilePosition.x, 
                         projectilePosition.y, transform.position.z);
                 var projectile = Instantiate(_projectilePrefab, spawningBulletPoint, transform.rotation);
+                //projectile.Initialize(projectile);
             }
         }
     }

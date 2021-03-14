@@ -18,7 +18,6 @@ namespace ProjectileLauncher
         [SerializeField] 
         private int _damage;
 
-        [SerializeField] private NearestEnemyDetector _nearestEnemy;
         private Vector3 _nearestEnemyPosition;
 
         private int Damage => _damage;
@@ -27,7 +26,6 @@ namespace ProjectileLauncher
             _nearestEnemyPosition = _projectileLauncher.NearestEnemyCoordinates;
             _rigidbody.velocity = _nearestEnemyPosition * _projectileSpeed;
             //_rigidbody.angularVelocity = _nearestEnemy.VectorNormalization();
-            EnemyHealth.DecreaseHealth += EnemyHited;
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -35,18 +33,14 @@ namespace ProjectileLauncher
             if (collision.gameObject.CompareTag("Enemy"))
             {
                 Destroy(gameObject);
+                DealDamage(collision);
             }
         }
-
-        private void OnDestroy()
+        
+        public virtual void DealDamage(Collision collision)
         {
-            EnemyHealth.DecreaseHealth -= EnemyHited;
-        }
-
-        private int EnemyHited(int health)
-        {
-            health -= Damage;
-            return health;
+            var enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
+            enemyHealth.ApplyDamage(_damage);
         }
     }
 }
