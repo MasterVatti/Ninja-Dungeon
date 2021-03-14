@@ -11,7 +11,7 @@ namespace Enemies
         [SerializeField] 
         private int _health;
         
-        public static event Action<GameObject> EnemyDie;
+        public event Action<GameObject> EnemyDie;
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Projectile"))

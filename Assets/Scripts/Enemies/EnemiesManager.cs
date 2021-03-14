@@ -18,12 +18,20 @@ namespace Enemies
         private void Awake()
         {
             Singleton = this;
-            EnemyHealth.EnemyDie += OnEnemyDie;
+            for (int i = 0; i < _enemies.Count; i++)
+            {
+                _enemies[i].GetComponent<EnemyHealth>().EnemyDie 
+                    += OnEnemyDie;
+            }
         }
 
         private void OnDestroy()
         {
-            EnemyHealth.EnemyDie -= OnEnemyDie;
+            for (int i = 0; i < _enemies.Count; i++)
+            {
+                _enemies[i].GetComponent<EnemyHealth>().EnemyDie 
+                    -= OnEnemyDie;
+            }
         }
 
         private void OnEnemyDie(GameObject enemy)

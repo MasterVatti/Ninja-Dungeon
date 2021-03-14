@@ -1,3 +1,4 @@
+using System;
 using Enemies;
 using UnityEngine;
 
@@ -11,9 +12,13 @@ namespace ProjectileLauncher
         [SerializeField] 
         private float _projectileSpeed;
         [SerializeField] 
-        private Rigidbody _rigidbody;
-        [SerializeField] 
         private int _damage;
+        private Rigidbody _rigidbody;
+        
+        private void Awake()
+        {
+            _rigidbody = GetComponent<Rigidbody>();
+        }
 
         public void Initialize(Vector3 direction)
         {

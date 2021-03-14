@@ -11,7 +11,6 @@ namespace ProjectileLauncher
     {
         [SerializeField] 
         private GameObject _projectilePrefab;
-        
         [SerializeField] 
         private float _projectileSpawnCooldown;
         [SerializeField] 
@@ -20,7 +19,6 @@ namespace ProjectileLauncher
         
         private Vector3 NearestEnemyPosition { get; set; }
         
-
         private void Update()
         {
             if (_currentTime < _projectileSpawnCooldown)
