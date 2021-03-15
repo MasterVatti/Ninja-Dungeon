@@ -26,14 +26,15 @@ namespace ProjectileLauncher
             else
             {
                 _currentTime = 0;
-                CreateProjectile();
+                if (EnemiesManager.Singleton.Enemies.Count > 0)
+                {
+                    CreateProjectile();
+                }
             }
         }
 
         protected virtual void CreateProjectile()
         {
-            if (EnemiesManager.Singleton.Enemies.Count > 0)
-            {
                 var nearestEnemyPosition = _enemyDetector.GetNearestEnemy().transform.position;
                 var nearestEnemyDirection = (nearestEnemyPosition - transform.position).normalized;
                 var projectilePosition = transform.position;
@@ -41,7 +42,6 @@ namespace ProjectileLauncher
                     projectilePosition.z);
                 var projectile = Instantiate(_projectilePrefab, spawningBulletPoint, transform.rotation);
                 projectile.Initialize(nearestEnemyDirection);
-            }
         }
     }
 }
