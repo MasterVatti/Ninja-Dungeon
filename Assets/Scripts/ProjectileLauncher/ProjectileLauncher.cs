@@ -30,7 +30,7 @@ namespace ProjectileLauncher
             }
         }
 
-        private void CreateProjectile()
+        protected virtual void CreateProjectile()
         {
             if (EnemiesManager.Singleton.Enemies.Count > 0)
             {
