@@ -13,21 +13,14 @@ namespace Enemies
         
         public event Action<GameObject> EnemyDie;
         
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.CompareTag("Projectile"))
-            {
-                if (_health <= 0)
-                {
-                    EnemyDie?.Invoke(gameObject);
-                    Destroy(gameObject);
-                }
-            }
-        }
-
         public void ApplyDamage(int damage)
         {
             _health -= damage;
+            if (_health <= 0)
+            {
+                EnemyDie?.Invoke(gameObject);
+                Destroy(gameObject);
+            }
         }
     }
 }
