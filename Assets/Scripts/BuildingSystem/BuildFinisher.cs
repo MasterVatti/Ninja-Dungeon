@@ -11,7 +11,6 @@ namespace BuildingSystem
     {
         [SerializeField]
         private BuildingController _buildingController;
-        [SerializeField]
         private BuildingSettings _buildingSettings;
 
         private void Start ()
@@ -19,6 +18,7 @@ namespace BuildingSystem
             _buildingController.OnBuildFinished += CreatePlaceHolders;
             _buildingController.OnBuildFinished += CreateBuilding;
             _buildingController.OnBuildFinished += DestroyPlaceHolder;
+            _buildingSettings = _buildingController.Building;
         }
 
         private void CreatePlaceHolders ()
@@ -28,15 +28,17 @@ namespace BuildingSystem
             {
                 foreach (var placeHolder in placeHolders)
                 {
-                    Instantiate(placeHolder, placeHolder.transform.position, Quaternion.identity);
+                    var go = Instantiate(placeHolder.PlaceHolderPrefab, placeHolder.PlaceHolder, Quaternion.identity);
+                    go.GetComponent<BuildingController>().Building = placeHolder;
                 }
             }
         }
 
         private void CreateBuilding ()
         {
-            var building = _buildingSettings.Prefab;
-            Instantiate(building, building.transform.position, Quaternion.identity);
+            var building = _buildingSettings.BuildingPrefab;
+            var spawnPosition = _buildingSettings.PlaceHolder;
+            Instantiate(building, spawnPosition, Quaternion.identity);
         }
 
         private void DestroyPlaceHolder ()

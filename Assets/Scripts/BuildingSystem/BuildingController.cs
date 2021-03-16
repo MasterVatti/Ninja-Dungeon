@@ -13,12 +13,28 @@ namespace BuildingSystem
     public class BuildingController : MonoBehaviour
     {
         public event Action OnBuildFinished;
-        private const int PayPerTick = 1;
+        private const int PAY_PER_TICK = 1;
+
+        public BuildingSettings Building
+        {
+            get => _building;
+            set => _building = value;
+        }
+        
         [SerializeField]
         private BuildingSettings _building;
+        private List<Resource> _requiredResource = new List<Resource>();
         private Dictionary<ResourceType, float> _requiredCooldown;
         private Dictionary<ResourceType, float> _currentCooldown;
 
+        private void Start()
+        {
+            foreach (var resource in _building.RequiredResources)
+            {
+                var item = new Resource() {Amount = resource.Amount, Type = resource.Type};
+                _requiredResource.Add(item);
+            }
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -38,7 +54,7 @@ namespace BuildingSystem
         {
             _requiredCooldown = new Dictionary<ResourceType, float>();
             _currentCooldown = new Dictionary<ResourceType, float>();
-            foreach (var requiredResource in _building.RequiredResources)
+            foreach (var requiredResource in _requiredResource)
             {
                 _requiredCooldown.Add(requiredResource.Type, 
                     _building.TimeToBuild / requiredResource.Amount);
@@ -49,14 +65,14 @@ namespace BuildingSystem
 
         private void Build()
         {
-            foreach (var requiredResource in _building.RequiredResources)
+            foreach (var requiredResource in _requiredResource)
             {
                 if (requiredResource.Amount > 0 && 
                     IsPaymentTime(requiredResource) && 
                     ResourceManager.Instance.HasEnough(requiredResource.Type, PayPerTick))
                 {
-                    ResourceManager.Instance.Pay(requiredResource.Type, PayPerTick);
-                    requiredResource.Amount -= PayPerTick;
+                    ResourceManager.Instance.Pay(requiredResource.Type, PAY_PER_TICK);
+                    requiredResource.Amount -= PAY_PER_TICK;
                 }
             }
 
@@ -68,7 +84,7 @@ namespace BuildingSystem
 
         private bool IsConstructionFinished()
         {
-            return _building.RequiredResources.TrueForAll(IsResourceExpired);
+            return _requiredResource.TrueForAll(IsResourceExpired);
 
         }
 
