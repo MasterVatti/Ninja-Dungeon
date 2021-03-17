@@ -6,7 +6,7 @@ namespace Door
     /// <summary>
     /// Класс отвечает за открытие окна дверей
     /// </summary>
-    public class DoorScreenOpener : MonoBehaviour,IPortalScreenOpener
+    public class DoorScreenOpener : MonoBehaviour, IPortalScreenOpener
     {
         [SerializeField]
         private DoorSettings _settings;
@@ -15,9 +15,11 @@ namespace Door
         {
             var context = new PortalContext()
             {
-                Description = _settings.ScreenDescription, SceneName = _settings.SceneName,
+                Description = _settings.ScreenDescription,
+                SceneName = _settings.SceneName,
                 DifficultyLevel = _settings.DifficultyLevel
             };
+            
             ScreenManager.Instance.OpenScreenWithContext(ScreenType.DoorScreen,
                 context);
         }
