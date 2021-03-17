@@ -5,21 +5,15 @@ namespace Managers
 {
     public class BuildingManager : MonoBehaviour
     {
-        public List<BuildingSettings> ActiveBuildings
-        {
-            get => _activeBuildings;
-            set => _activeBuildings = value;
-        }
-        
         [SerializeField]
-        private List<BuildingSettings> _activeBuildings = new List<BuildingSettings>();
+        private List<BuildingSettings> _startBuildings = new List<BuildingSettings>();
 
         private void Start()
         {
-            foreach (var building in _activeBuildings)
+            foreach (var building in _startBuildings)
             {
-                var go = Instantiate(building.PlaceHolderPrefab, building.PlaceHolder, Quaternion.identity);
-                go.GetComponent<BuildingController>().Building = building;
+                var go = Instantiate(building.PlaceHolderPrefab, building.PlaceHolderPosition, Quaternion.identity);
+                go.GetComponent<BuildingController>().BuildingSettings = building;
             }
         }
     }

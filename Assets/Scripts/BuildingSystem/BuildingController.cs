@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ResourceSystem;
 using UnityEngine;
 using ResourceManager = Managers.ResourceManager;
@@ -15,25 +16,15 @@ namespace BuildingSystem
         public event Action OnBuildFinished;
         private const int PAY_PER_TICK = 1;
 
-        public BuildingSettings Building
-        {
-            get => _building;
-            set => _building = value;
-        }
-        
-        [SerializeField]
-        private BuildingSettings _building;
+        public BuildingSettings BuildingSettings { get; set; }
         private List<Resource> _requiredResource = new List<Resource>();
         private Dictionary<ResourceType, float> _requiredCooldown;
         private Dictionary<ResourceType, float> _currentCooldown;
 
         private void Start()
         {
-            foreach (var resource in _building.RequiredResources)
-            {
-                var item = new Resource() {Amount = resource.Amount, Type = resource.Type};
-                _requiredResource.Add(item);
-            }
+            //создаём копию списка необходимых ресурсов, чтобы не менять настройки
+            _requiredResource = BuildingSettings.RequiredResources.ToList();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -50,6 +41,21 @@ namespace BuildingSystem
             }
         }
 
+        public static void CreateNewBuilding(BuildingSettings buildingSettings, bool isPlaceHolder)
+        {
+            var placeHolderPosition = buildingSettings.PlaceHolderPosition;
+            if (isPlaceHolder)
+            {
+                var placeHolderPrefab = buildingSettings.PlaceHolderPrefab;
+                var go = Instantiate(placeHolderPrefab, placeHolderPosition, Quaternion.identity);
+                go.GetComponent<BuildingController>().BuildingSettings = buildingSettings;
+            }
+            else
+            {
+                Instantiate(buildingSettings.BuildingPrefab, placeHolderPosition, Quaternion.identity);
+            }
+        }
+        
         private void SetRequiredCooldown()
         {
             _requiredCooldown = new Dictionary<ResourceType, float>();
@@ -57,7 +63,7 @@ namespace BuildingSystem
             foreach (var requiredResource in _requiredResource)
             {
                 _requiredCooldown.Add(requiredResource.Type, 
-                    _building.TimeToBuild / requiredResource.Amount);
+                    BuildingSettings.TimeToBuild / requiredResource.Amount);
                 _currentCooldown.Add(requiredResource.Type,
                     float.MinValue);
             }
@@ -69,7 +75,7 @@ namespace BuildingSystem
             {
                 if (requiredResource.Amount > 0 && 
                     IsPaymentTime(requiredResource) && 
-                    ResourceManager.Instance.HasEnough(requiredResource.Type, PayPerTick))
+                    ResourceManager.Instance.HasEnough(requiredResource.Type, PAY_PER_TICK))
                 {
                     ResourceManager.Instance.Pay(requiredResource.Type, PAY_PER_TICK);
                     requiredResource.Amount -= PAY_PER_TICK;

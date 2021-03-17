@@ -7,10 +7,9 @@ namespace BuildingSystem
     /// <summary>
     /// Настройки для зданий
     /// </summary>
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Building", order = 1)]
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/BuildingSettings", order = 1)]
     public class BuildingSettings : ScriptableObject
     {
-        public Vector3 PlaceHolder => _placeHolder;
         public List<BuildingSettings> ConnectedPlaceHolders => _connectedPlaceHolders;
 
         public GameObject BuildingPrefab => _buildingPrefab;
@@ -20,9 +19,9 @@ namespace BuildingSystem
         public List<Resource> RequiredResources => _requiredResources;
 
         public float TimeToBuild => _timeToBuild;
-
-        [SerializeField]
-        private Vector3 _placeHolder;
+        
+        public Vector3 PlaceHolderPosition => _placeHolderPosition;
+        
         [SerializeField]
         private List<BuildingSettings> _connectedPlaceHolders = new List<BuildingSettings>();
         [SerializeField]
@@ -33,5 +32,7 @@ namespace BuildingSystem
         private GameObject _placeHolderPrefab;
         [SerializeField]
         private float _timeToBuild;
+        [SerializeField]
+        private Vector3 _placeHolderPosition;
     }
 }

@@ -18,7 +18,7 @@ namespace BuildingSystem
             _buildingController.OnBuildFinished += CreatePlaceHolders;
             _buildingController.OnBuildFinished += CreateBuilding;
             _buildingController.OnBuildFinished += DestroyPlaceHolder;
-            _buildingSettings = _buildingController.Building;
+            _buildingSettings = _buildingController.BuildingSettings;
         }
 
         private void CreatePlaceHolders ()
@@ -28,17 +28,14 @@ namespace BuildingSystem
             {
                 foreach (var placeHolder in placeHolders)
                 {
-                    var go = Instantiate(placeHolder.PlaceHolderPrefab, placeHolder.PlaceHolder, Quaternion.identity);
-                    go.GetComponent<BuildingController>().Building = placeHolder;
+                    BuildingController.CreateNewBuilding(placeHolder, true);
                 }
             }
         }
 
         private void CreateBuilding ()
         {
-            var building = _buildingSettings.BuildingPrefab;
-            var spawnPosition = _buildingSettings.PlaceHolder;
-            Instantiate(building, spawnPosition, Quaternion.identity);
+            BuildingController.CreateNewBuilding(_buildingSettings, false);
         }
 
         private void DestroyPlaceHolder ()
