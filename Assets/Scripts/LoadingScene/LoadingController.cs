@@ -14,7 +14,6 @@ namespace LoadingScene
         
         public void StartLoad(string sceneName)
         {
-            SceneManager.LoadScene(sceneName);
             
             ScreenManager.Instance.OpenScreen(ScreenType.LoadingScreen);
             

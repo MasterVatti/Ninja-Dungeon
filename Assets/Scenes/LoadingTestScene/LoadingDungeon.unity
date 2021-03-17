@@ -497,10 +497,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7567be13e239c64f8f01756759d5d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settings:
-    _screenDescription: "\u041F\u043E\u0434\u043D\u044F\u0442\u044C\u0441\u044F \u0432
-      \u0433\u043E\u0440\u043E\u0434?"
-    _sceneName: LoadingSampleScene
 --- !u!65 &1067264147
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -586,56 +582,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1067264145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7200e6771a342174786dfc44f9da514a, type: 3}
+  m_Script: {fileID: 11500000, guid: 75d96a840feab6b43a314b2e39eda417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1640668616
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1640668618}
-  - component: {fileID: 1640668617}
-  m_Layer: 0
-  m_Name: ScreenManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1640668617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1640668616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5115a93300c4f3d86264c1048dfeb30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canvas: {fileID: 686462898}
-  _allScreens:
-  - {fileID: 1930917441066494165, guid: 32114c6b05a5e37449a7445a35c5e27e, type: 3}
-  - {fileID: 2150105575320372067, guid: cd5cca3eaea55a14c83066a0c4bb0a7e, type: 3}
---- !u!4 &1640668618
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1640668616}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9185265, y: 1.0983047, z: 0.26156282}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  _settings:
+    _screenDescription: "\u041F\u043E\u0434\u043D\u044F\u0442\u044C\u0441\u044F \u0432
+      \u0433\u043E\u0440\u043E\u0434?"
+    _sceneName: MeinDoorScene
 --- !u!1 &1686963527
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,47 +796,4 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2046155667
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2046155669}
-  - component: {fileID: 2046155668}
-  m_Layer: 0
-  m_Name: LoadingController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2046155668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046155667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f1f026f2626fa54b9ac291d7e5a0296, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &2046155669
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046155667}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0731466, y: 1.5147572, z: -0.6910572}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

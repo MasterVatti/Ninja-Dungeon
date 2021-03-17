@@ -3,14 +3,14 @@ using JetBrains.Annotations;
 using LoadingScene;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// Класс отвечает за окно портала(предложение спустится в инст и наоборот) и обработку кнопки Yes
 /// </summary>
 public class PortalScreen : BaseScreenWithContext<PortalContext>
 {
-    [SerializeField] private TMP_Text _descriptionField;
+    [SerializeField]
+    private TMP_Text _descriptionField;
     private string _sceneName;
     
     [UsedImplicitly]

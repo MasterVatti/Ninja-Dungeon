@@ -1,4 +1,3 @@
-using System;
 using Assets.Scripts.Managers.ScreensManager;
 using UnityEngine;
 using UnityEngine.UI;
