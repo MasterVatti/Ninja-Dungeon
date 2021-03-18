@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Projectile
   - Damageable
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -22,8 +23,8 @@ TagManager:
   - Damageable
   - Environment
   - ScreenFade
-  - 
-  - 
+  - Projectile
+  - Player
   - 
   - 
   - 
