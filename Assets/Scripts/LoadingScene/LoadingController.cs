@@ -3,7 +3,7 @@ using Assets.Scripts.Managers.ScreensManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace LoadingScene
+namespace LoadingScene 
 {
     /// <summary>
     /// Класс отвечает за  загрузку сцены.
@@ -11,7 +11,7 @@ namespace LoadingScene
     public class LoadingController : Singleton<LoadingController>
     {
         public float LoadingProgress { get; private set; }
-    
+        
         public void StartLoad(string sceneName)
         {
             
@@ -19,7 +19,7 @@ namespace LoadingScene
             
             StartCoroutine(LoadCoroutine(sceneName));
         }
-
+        
         private IEnumerator LoadCoroutine(string sceneName)
         {
             var operation = SceneManager.LoadSceneAsync(sceneName);
@@ -28,6 +28,7 @@ namespace LoadingScene
                 LoadingProgress = Mathf.Clamp01(operation.progress / 1f);
                 yield return null;
             }
+            
             ScreenManager.Instance.CloseTopScreen();
         }
     }
