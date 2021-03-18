@@ -1,4 +1,4 @@
-namespace Assets.Scripts.Managers.ScreensManager
+﻿namespace Assets.Scripts.Managers.ScreensManager
 {
     /// <summary>
     /// Контекст портала и дверей

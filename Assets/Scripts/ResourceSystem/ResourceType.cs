@@ -1,4 +1,4 @@
-namespace ResourceSystem
+﻿namespace ResourceSystem
 {
     public enum ResourceType
     {
