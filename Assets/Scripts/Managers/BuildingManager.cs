@@ -6,14 +6,13 @@ namespace Managers
     public class BuildingManager : MonoBehaviour
     {
         [SerializeField]
-        private List<BuildingSettings> _startBuildings = new List<BuildingSettings>();
+        private List<BuildingSettings> _startPlaceHolders = new List<BuildingSettings>();
 
         private void Start()
         {
-            foreach (var building in _startBuildings)
+            foreach (var placeHolder in _startPlaceHolders)
             {
-                var go = Instantiate(building.PlaceHolderPrefab, building.PlaceHolderPosition, Quaternion.identity);
-                go.GetComponent<BuildingController>().BuildingSettings = building;
+                BuildingController.CreateNewBuilding(placeHolder, true);
             }
         }
     }

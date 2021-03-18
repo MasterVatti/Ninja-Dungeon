@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using ResourceSystem;
@@ -13,10 +12,10 @@ namespace BuildingSystem
     /// </summary>
     public class BuildingController : MonoBehaviour
     {
-        public event Action OnBuildFinished;
         private const int PAY_PER_TICK = 1;
-
-        public BuildingSettings BuildingSettings { get; set; }
+        
+        private BuildingSettings BuildingSettings { get; set; }
+        
         private List<Resource> _requiredResource = new List<Resource>();
         private Dictionary<ResourceType, float> _requiredCooldown;
         private Dictionary<ResourceType, float> _currentCooldown;
@@ -84,14 +83,14 @@ namespace BuildingSystem
 
             if (IsConstructionFinished())
             {
-                OnBuildFinished?.Invoke();
+                new BuildFinisher(BuildingSettings, BuildingSettings.ConnectedPlaceHolders).FinishBuilding();
+                Destroy(gameObject);
             }
         }
 
         private bool IsConstructionFinished()
         {
             return _requiredResource.TrueForAll(IsResourceExpired);
-
         }
 
         private bool IsResourceExpired(Resource resource)
