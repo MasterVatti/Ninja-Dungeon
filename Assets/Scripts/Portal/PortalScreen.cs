@@ -1,12 +1,13 @@
+using Assets.Scripts.Managers.ScreensManager;
 using JetBrains.Annotations;
 using LoadingScene;
 using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// Класс отвечает за окно портала(предложение спустится в инст и наоборот)
+/// Класс отвечает за окно портала(предложение спустится в инст и наоборот) и обработку
 /// </summary>
-public class PortalScreen : MonoBehaviour
+public class PortalScreen : BaseScreenWithContext<PortalContext>
 {
     [SerializeField]
     private TMP_Text _descriptionField;
@@ -15,11 +16,23 @@ public class PortalScreen : MonoBehaviour
     [UsedImplicitly]
     public void TurnOffPanel()
     {
-        gameObject.SetActive(false);
+        ScreenManager.Instance.CloseTopScreen();
+    }
+    
+    public override void ApplyContext(PortalContext context)
+    {
+        _descriptionField.text = context.Description;
+        _sceneName = context.SceneName;
+    }
+    
+    public void OnClick()
+    {
+        ScreenManager.Instance.CloseTopScreen();
+        LoadingController.Instance.StartLoad(_sceneName);
     }
 
     public void Initialize(PortalSettings portalSettings)
     {
-        _descriptionField.text = portalSettings.ScreenDescription;
+        ScreenType = screenType;
     }
 }
