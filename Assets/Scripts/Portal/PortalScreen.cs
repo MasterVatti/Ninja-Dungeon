@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// Класс отвечает за окно портала(предложение спустится в инст и наоборот) и обработку
+/// Класс отвечает за окно портала(предложение спустится в инст и наоборот) и обработку кнопки Yes
 /// </summary>
 public class PortalScreen : BaseScreenWithContext<PortalContext>
 {
@@ -31,7 +31,7 @@ public class PortalScreen : BaseScreenWithContext<PortalContext>
         LoadingController.Instance.StartLoad(_sceneName);
     }
 
-    public void Initialize(PortalSettings portalSettings)
+    public override void Initialize(PortalSettings portalSettings)
     {
         ScreenType = screenType;
     }
