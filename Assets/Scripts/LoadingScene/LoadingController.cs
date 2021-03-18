@@ -1,4 +1,5 @@
 using System.Collections;
+using Assets.Scripts.Managers.ScreensManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,27 +12,23 @@ namespace LoadingScene
     {
         public float LoadingProgress { get; private set; }
     
-        [SerializeField]
-        private LoadingScreen _loadingScreen;
-        
         public void StartLoad(string sceneName)
         {
-            SceneManager.LoadScene(sceneName);
+            
+            ScreenManager.Instance.OpenScreen(ScreenType.LoadingScreen);
+            
             StartCoroutine(LoadCoroutine(sceneName));
         }
 
         private IEnumerator LoadCoroutine(string sceneName)
         {
             var operation = SceneManager.LoadSceneAsync(sceneName);
-            
-            _loadingScreen.gameObject.SetActive(true);
             while (!operation.isDone)
             {
                 LoadingProgress = Mathf.Clamp01(operation.progress / 1f);
                 yield return null;
             }
-            
-            _loadingScreen.gameObject.SetActive(false);
+            ScreenManager.Instance.CloseTopScreen();
         }
     }
 }
