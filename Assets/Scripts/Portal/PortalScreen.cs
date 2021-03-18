@@ -31,7 +31,7 @@ public class PortalScreen : BaseScreenWithContext<PortalContext>
         LoadingController.Instance.StartLoad(_sceneName);
     }
 
-    public override void Initialize(PortalSettings portalSettings)
+    public override void Initialize(ScreenType screenType)
     {
         ScreenType = screenType;
     }
