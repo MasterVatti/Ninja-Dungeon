@@ -9,7 +9,7 @@ public class PortalSettings
 {
     public string ScreenDescription => _screenDescription;
     public string SceneName => _sceneName;
-    
+
     [SerializeField]
     private string _screenDescription;
     [SerializeField]
