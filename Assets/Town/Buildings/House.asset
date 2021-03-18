@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273de372e6cb1c24e9aa6d4f71f9ccf1, type: 3}
   m_Name: House
   m_EditorClassIdentifier: 
+  _placeHolder: {x: 0, y: 0, z: 0}
   _connectedPlaceHolders:
-  - {fileID: 4248506280021078957, guid: 808781949a25abd49a45c4e45ae2c513, type: 3}
-  - {fileID: 4248506280021078957, guid: 251e5f0bd93675a47a7d575e82db3272, type: 3}
+  - {fileID: 11400000, guid: 1edaeba5cec2e9b42b01c4295a024e1e, type: 2}
+  - {fileID: 11400000, guid: b0c3778016f69b347a288c9acd935e56, type: 2}
   _requiredResources:
   - _type: 0
     _amount: 100
-  _prefab: {fileID: 403395984159377603, guid: 1adb4225f6dfa2d45a0065575a6e85e9, type: 3}
+  _buildingPrefab: {fileID: 403395984159377603, guid: 1adb4225f6dfa2d45a0065575a6e85e9,
+    type: 3}
+  _placeHolderPrefab: {fileID: 4248506280021078957, guid: 808781949a25abd49a45c4e45ae2c513,
+    type: 3}
   _timeToBuild: 5
