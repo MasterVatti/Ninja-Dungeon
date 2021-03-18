@@ -2,12 +2,12 @@ using Assets.Scripts.Managers.ScreensManager;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LoadingScene
+namespace LoadingScene 
 {
     /// <summary>
     /// Класс отвечает за окно загрузки меджу сценами.
     /// </summary>
-    public class LoadingScreen : MonoBehaviour
+    public class LoadingScreen : BaseScreen
     {
         [SerializeField]
         private Slider _loadingProgress;
