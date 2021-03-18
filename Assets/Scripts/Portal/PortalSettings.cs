@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+
 /// <summary>
 /// Класс отвечает за настройки портала(куда отправится и описание)
 /// </summary>
