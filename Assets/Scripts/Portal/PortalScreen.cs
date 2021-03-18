@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using LoadingScene;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class PortalScreen : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text _descriptionField;
+    private string _sceneName;
     
     [UsedImplicitly]
     public void TurnOffPanel()
