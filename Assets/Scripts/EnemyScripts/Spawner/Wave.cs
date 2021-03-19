@@ -11,13 +11,25 @@ namespace Assets.Scripts.EnemyScripts.Spawner
     /// </summary>
     public class Wave : MonoBehaviour
     {
-        public static Action OnWaveCleared;
+        public Action OnWaveCleared;
 
         [SerializeField]
         private List<EnemyWithSpawnPoint> _enemiesWithSpawnPoints;
         public List<EnemyWithSpawnPoint> EnemiesWithSpawnPoints =>
             _enemiesWithSpawnPoints;
 
+        public void Spawn()
+        {
+            foreach (var enemyWithSpawnPoint in EnemiesWithSpawnPoints)
+            {
+                var enemy = enemyWithSpawnPoint.Enemy;
+                var spawnPoint = enemyWithSpawnPoint.SpawnPoint;
+
+                Instantiate(enemy, spawnPoint.position,
+                    Quaternion.identity);
+            }
+        }
+        
         private void OnEnemyDie(Enemy enemy)
         {
             // TODO: Обработать смерть врага удалением его из списка

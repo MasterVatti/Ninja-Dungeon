@@ -10,7 +10,21 @@ namespace Assets.Scripts.EnemyScripts.Spawner
     [Serializable]
     public class EnemyWithSpawnPoint
     {
-        public Enemy Enemy;
-        public Transform SpawnPoint;
+        [SerializeField]
+        private Enemy _enemy;
+        [SerializeField]
+        private Transform _spawnpoint;
+
+        public Enemy Enemy
+        {
+            get => _enemy;
+            set => _enemy = value;
+        }
+
+        public Transform SpawnPoint
+        {
+            get => _spawnpoint;
+            set => _spawnpoint = value;
+        }
     }
 }

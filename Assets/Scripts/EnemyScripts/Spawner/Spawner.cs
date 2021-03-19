@@ -9,7 +9,7 @@ namespace Assets.Scripts.EnemyScripts.Spawner
     /// </summary>
     public class Spawner : MonoBehaviour
     {
-        public static Action AllWavesSpawned;
+        public Action AllWavesCleared;
 
         [SerializeField]
         private List<Wave> _waves;
@@ -23,10 +23,11 @@ namespace Assets.Scripts.EnemyScripts.Spawner
 
         private void Awake()
         {
-            Wave.OnWaveCleared += OnWaveCleared;
-
             _currentWave = _waves[0];
-            SpawnWave(_currentWave);
+            _currentWave.Spawn();
+            _nextWaveTime = Time.time + _waveCooldown;
+           
+            _currentWave.OnWaveCleared += OnWaveCleared;
         }
 
         private void Update()
@@ -39,6 +40,11 @@ namespace Assets.Scripts.EnemyScripts.Spawner
 
         private void OnWaveCleared()
         {
+            if (_waves[_waves.Count] == _currentWave)
+            {
+                AllWavesCleared?.Invoke();
+                return;
+            }
             SpawnNextWave();
         }
 
@@ -60,33 +66,19 @@ namespace Assets.Scripts.EnemyScripts.Spawner
 
             if (nextWaveIndex <= _waves.Count - 1)
             {
+                _currentWave.OnWaveCleared -= OnWaveCleared;
                 _currentWave = _waves[nextWaveIndex];
-                SpawnWave(_currentWave);
+                _currentWave.OnWaveCleared += OnWaveCleared;
+                
+                _currentWave.Spawn();
+                
+                _nextWaveTime = Time.time + _waveCooldown;
             }
-            else
-            {
-                AllWavesSpawned?.Invoke();
-                Destroy(gameObject);
-            }
-        }
-
-        private void SpawnWave(Wave wave)
-        {
-            foreach (var enemyWithSpawnPoint in wave.EnemiesWithSpawnPoints)
-            {
-                var enemy = enemyWithSpawnPoint.Enemy;
-                var spawnPoint = enemyWithSpawnPoint.SpawnPoint;
-
-                Instantiate(enemy, spawnPoint.position,
-                    Quaternion.identity);
-            }
-
-            _nextWaveTime = Time.time + _waveCooldown;
         }
 
         private void OnDestroy()
         {
-            Wave.OnWaveCleared -= OnWaveCleared;
+            _currentWave.OnWaveCleared -= OnWaveCleared;
         }
     }
 }
