@@ -8,9 +8,8 @@ namespace Managers
     /// <summary>
     /// Класс управляющий ресурсами игрока
     /// </summary>
-    public class ResourceManager : MonoBehaviour
+    public class ResourceManager : Singleton<ResourceManager>
     {
-        public static ResourceManager Instance { get; private set; }
         
         [SerializeField]
         private List<Resource> _resources;
@@ -25,14 +24,11 @@ namespace Managers
             GetResourceByType(type).Amount -= value;
         }
         
-        private void Awake()
-        {
-            Instance = this;
-        }
-        
         private Resource GetResourceByType(ResourceType type)
         {
-            return _resources.FirstOrDefault(resource => resource.Type == type);
+            var resource = _resources.FirstOrDefault(res => res.Type == type);
+            return resource ?? new Resource() {Amount = 0, Type = type};
+
         }
     }
 }

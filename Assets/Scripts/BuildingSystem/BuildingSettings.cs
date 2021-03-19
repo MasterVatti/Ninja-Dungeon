@@ -5,27 +5,34 @@ using UnityEngine;
 namespace BuildingSystem
 {
     /// <summary>
-    /// Настройки для зданий:
-    /// стоимость, префаб, связанные плейс-холдеры
+    /// Настройки для зданий
     /// </summary>
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Building", order = 1)]
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/BuildingSettings", order = 1)]
     public class BuildingSettings : ScriptableObject
     {
-        public List<GameObject> ConnectedPlaceHolders => _connectedPlaceHolders;
+        public List<BuildingSettings> ConnectedPlaceHolders => _connectedPlaceHolders;
 
-        public GameObject Prefab => _prefab;
+        public GameObject BuildingPrefab => _buildingPrefab;
+
+        public GameObject PlaceHolderPrefab => _placeHolderPrefab;
 
         public List<Resource> RequiredResources => _requiredResources;
 
         public float TimeToBuild => _timeToBuild;
-
+        
+        public Vector3 PlaceHolderPosition => _placeHolderPosition;
+        
         [SerializeField]
-        private List<GameObject> _connectedPlaceHolders = new List<GameObject>();
+        private List<BuildingSettings> _connectedPlaceHolders = new List<BuildingSettings>();
         [SerializeField]
         private List<Resource> _requiredResources;
         [SerializeField]
-        private GameObject _prefab;
+        private GameObject _buildingPrefab;
+        [SerializeField]
+        private GameObject _placeHolderPrefab;
         [SerializeField]
         private float _timeToBuild;
+        [SerializeField]
+        private Vector3 _placeHolderPosition;
     }
 }

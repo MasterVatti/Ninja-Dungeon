@@ -1,13 +1,15 @@
 using UnityEngine;
-
-/// <summary>
-/// Этот класс отвечает за передачу направления движения
-/// </summary>
-public class InputController : MonoBehaviour
+namespace PlayerScripts.Movement
 {
-    public static Vector3 GetDirection()
+    /// <summary>
+    /// Этот класс отвечает за передачу направления движения
+    /// </summary>
+    public class InputController : MonoBehaviour
     {
-        return new Vector3(JoystickController.InputDirection.x, 0,
-            JoystickController.InputDirection.y);
+        public static Vector3 GetDirection()
+        {
+            return new Vector3(JoystickController.InputDirection.x, 0,
+                JoystickController.InputDirection.y);
+        }
     }
 }
