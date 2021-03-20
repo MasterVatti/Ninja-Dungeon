@@ -6,10 +6,8 @@ namespace Enemies
     /// <summary>
     /// тут хранятся враги
     /// </summary>
-    public class EnemiesManager : MonoBehaviour
+    public class EnemiesManager : Singleton<EnemiesManager>
     {
-        public static EnemiesManager Singleton { get; private set; }
-
         public List<GameObject> Enemies => _enemies;
         
         [SerializeField] 
@@ -17,7 +15,6 @@ namespace Enemies
         
         private void Awake()
         {
-            Singleton = this;
             for (int i = 0; i < _enemies.Count; i++)
             {
                 _enemies[i].GetComponent<EnemyHealth>().EnemyDie 
@@ -37,6 +34,11 @@ namespace Enemies
             }
         }
 
+        public void AddEnemy(GameObject enemy)
+        {
+            Enemies.Add(enemy);
+        }
+        
         private void OnEnemyDie(GameObject enemy)
         {
             enemy.GetComponent<EnemyHealth>().EnemyDie -= OnEnemyDie;
