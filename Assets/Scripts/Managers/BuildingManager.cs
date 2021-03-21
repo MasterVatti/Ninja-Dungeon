@@ -6,11 +6,11 @@ namespace Managers
     public class BuildingManager : MonoBehaviour
     {
         [SerializeField]
-        private List<BuildingSettings> _startPlaceHolders = new List<BuildingSettings>();
+        private List<BuildingSettings> _startBuildings = new List<BuildingSettings>();
 
         private void Start()
         {
-            foreach (var placeHolder in _startPlaceHolders)
+            foreach (var placeHolder in _startBuildings)
             {
                 BuildingController.CreateNewBuilding(placeHolder, true);
             }

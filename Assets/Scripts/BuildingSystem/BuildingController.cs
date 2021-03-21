@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using ResourceSystem;
 using UnityEngine;
 using ResourceManager = Managers.ResourceManager;
@@ -22,8 +21,11 @@ namespace BuildingSystem
 
         private void Start()
         {
-            //создаём копию списка необходимых ресурсов, чтобы не менять настройки
-            _requiredResource = BuildingSettings.RequiredResources.ToList();
+            //копируем значения списка необходимых ресурсов, чтобы не менять настройки
+            foreach (var requiredResource in BuildingSettings.RequiredResources)    
+            {
+                _requiredResource.Add(new Resource(){Type = requiredResource.Type, Amount = requiredResource.Amount});
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -46,12 +48,14 @@ namespace BuildingSystem
             if (isPlaceHolder)
             {
                 var placeHolderPrefab = buildingSettings.PlaceHolderPrefab;
-                var go = Instantiate(placeHolderPrefab, placeHolderPosition, Quaternion.identity);
+                var placeHolderRotation = placeHolderPrefab.transform.rotation;
+                var go = Instantiate(placeHolderPrefab, placeHolderPosition, placeHolderRotation);
                 go.GetComponent<BuildingController>().BuildingSettings = buildingSettings;
             }
             else
             {
-                Instantiate(buildingSettings.BuildingPrefab, placeHolderPosition, Quaternion.identity);
+                var buildingPrefab = buildingSettings.BuildingPrefab;
+                Instantiate(buildingPrefab, placeHolderPosition, buildingPrefab.transform.rotation);
             }
         }
         

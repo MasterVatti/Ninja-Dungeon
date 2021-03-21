@@ -10,15 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 273de372e6cb1c24e9aa6d4f71f9ccf1, type: 3}
-  m_Name: House3
+  m_Name: PortalSettings
   m_EditorClassIdentifier: 
   _connectedPlaceHolders: []
-  _requiredResources:
-  - _type: 2
-    _amount: 0
-  _buildingPrefab: {fileID: 403395984159377603, guid: 283b3f4d8d4411d408ef9851eabe3f7c,
-    type: 3}
-  _placeHolderPrefab: {fileID: 4248506280021078957, guid: 808781949a25abd49a45c4e45ae2c513,
-    type: 3}
-  _timeToBuild: 5
-  _placeHolderPosition: {x: -20, y: 0, z: 0}
+  _requiredResources: []
+  _buildingPrefab: {fileID: 0}
+  _placeHolderPrefab: {fileID: 0}
+  _timeToBuild: 0
+  _placeHolderPosition: {x: 0, y: 0, z: 0}
