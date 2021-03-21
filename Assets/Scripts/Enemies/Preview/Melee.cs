@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.EnemyScripts.Examples
+﻿namespace Enemies
 {
     /// <summary>
     /// Представление врага-ближника

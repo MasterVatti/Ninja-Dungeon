@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 65710372030481762}
   - component: {fileID: 54079120956016590}
   - component: {fileID: -7617768688791774286}
+  - component: {fileID: -3025436793125769352}
   m_Layer: 9
   m_Name: Melee
   m_TagString: Enemy
@@ -268,14 +269,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a981dd02c782a44abc29aec06764c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHP: 150
-  MaxHp: 150
-  MoveSpeed: 30
-  AttackDamage: 20
-  AttackRate: 1
-  CanMove: 1
-  CanAttack: 1
-  Rigidbody: {fileID: 54079120956016590}
+  _currentHP: 150
+  _maxHp: 150
+  _moveSpeed: 50
+  _attackDamage: 0
+  _attackRate: 0
+  _canMove: 0
+  _canAttack: 0
+  _rigidbody: {fileID: 54079120956016590}
+  _healthSystem: {fileID: -3025436793125769352}
+--- !u!114 &-3025436793125769352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426315452375196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae2afb1c15bf644b9fcd3ff474c7675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1528248254975706
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Enemies;
 using UnityEngine;
 
 namespace Assets.Scripts.EnemyScripts.Spawner
@@ -24,7 +25,7 @@ namespace Assets.Scripts.EnemyScripts.Spawner
         private void Awake()
         {
             _currentWave = _waves[0];
-            _currentWave.Spawn();
+            SpawnWave(_currentWave);
             _nextWaveTime = Time.time + _waveCooldown;
            
             _currentWave.OnWaveCleared += OnWaveCleared;
@@ -70,9 +71,22 @@ namespace Assets.Scripts.EnemyScripts.Spawner
                 _currentWave = _waves[nextWaveIndex];
                 _currentWave.OnWaveCleared += OnWaveCleared;
                 
-                _currentWave.Spawn();
+                SpawnWave(_currentWave);
                 
                 _nextWaveTime = Time.time + _waveCooldown;
+            }
+        }
+        
+        private void SpawnWave(Wave wave)
+        {
+            foreach (var enemyWithSpawnPoint in wave.EnemiesWithSpawnPoints)
+            {
+                var enemy = enemyWithSpawnPoint.Enemy;
+                var spawnPoint = enemyWithSpawnPoint.SpawnPoint;
+
+                var enemyI = Instantiate(enemy, spawnPoint.position,
+                    Quaternion.identity);
+                EnemiesManager.Instance.AddEnemy(enemyI);
             }
         }
 

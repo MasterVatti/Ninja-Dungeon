@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.Scripts.EnemyScripts.Spawner
+namespace Enemies
 {
     /// <summary>
     /// Представляет из себя объект, который используется для удобной работы

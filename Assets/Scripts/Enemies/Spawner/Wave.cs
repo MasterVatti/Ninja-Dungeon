@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Enemies;
 using UnityEngine;
 
 namespace Assets.Scripts.EnemyScripts.Spawner
@@ -9,7 +10,8 @@ namespace Assets.Scripts.EnemyScripts.Spawner
     /// лист врагов с точками для их спавна, а также удаляет врага из
     /// этого списка при его смерти
     /// </summary>
-    public class Wave : MonoBehaviour
+    [Serializable]
+    public class Wave
     {
         public Action OnWaveCleared;
 
@@ -18,18 +20,6 @@ namespace Assets.Scripts.EnemyScripts.Spawner
         public List<EnemyWithSpawnPoint> EnemiesWithSpawnPoints =>
             _enemiesWithSpawnPoints;
 
-        public void Spawn()
-        {
-            foreach (var enemyWithSpawnPoint in EnemiesWithSpawnPoints)
-            {
-                var enemy = enemyWithSpawnPoint.Enemy;
-                var spawnPoint = enemyWithSpawnPoint.SpawnPoint;
-
-                Instantiate(enemy, spawnPoint.position,
-                    Quaternion.identity);
-            }
-        }
-        
         private void OnEnemyDie(Enemy enemy)
         {
             // TODO: Обработать смерть врага удалением его из списка
