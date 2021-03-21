@@ -109,10 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165be62b8b082e446a152b0aa6777396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 5
-  _enemyDetector: {fileID: 0}
+  _projectileSpeed: 1
   _damage: 35
-  _projectileLauncher: {fileID: 0}
 --- !u!54 &2660066435425416736
 Rigidbody:
   m_ObjectHideFlags: 0
