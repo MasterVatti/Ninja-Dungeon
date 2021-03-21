@@ -18,7 +18,7 @@ namespace Enemies
             var minIndex = 0;
             for (int i = 0; i < _enemiesManager.Enemies.Count; i++)
             {
-                var enemy = _enemiesManager.Enemies[i];
+                var enemy = _enemiesManager.Enemies[i].gameObject;
                 var playerPosition = _playerTransform.position;
                 var distanceToPlayer = Vector3.Distance(enemy.transform.position,
                     playerPosition);
@@ -29,7 +29,7 @@ namespace Enemies
                 }
             }
 
-            return _enemiesManager.Enemies[minIndex];
+            return _enemiesManager.Enemies[minIndex].gameObject;
         }
     }
 }
