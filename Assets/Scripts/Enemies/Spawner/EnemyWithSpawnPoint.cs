@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Scripts.Enemies.Spawner;
 using UnityEngine;
 
 namespace Enemies
@@ -15,16 +16,8 @@ namespace Enemies
         [SerializeField]
         private Transform _spawnPoint;
 
-        public Enemy Enemy
-        {
-            get => _enemy;
-            set => _enemy = value;
-        }
+        public Enemy Enemy => _enemy;
 
-        public Transform SpawnPoint
-        {
-            get => _spawnPoint;
-            set => _spawnPoint = value;
-        }
+        public Transform SpawnPoint => _spawnPoint;
     }
 }

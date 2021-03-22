@@ -10,7 +10,7 @@ namespace Assets.Scripts.Enemies.Spawner
     /// </summary>
     public class WaveController
     {
-        public Action OnWaveCleared;
+        public event Action OnWaveCleared;
 
         private readonly Wave _wave;
         private int _enemiesCount;

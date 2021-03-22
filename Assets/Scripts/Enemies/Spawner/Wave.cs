@@ -13,10 +13,11 @@ namespace Assets.Scripts.Enemies.Spawner
     [Serializable]
     public class Wave
     {
-        [SerializeField]
-        private List<EnemyWithSpawnPoint> _enemiesWithSpawnPoints;
         public List<EnemyWithSpawnPoint> EnemiesWithSpawnPoints =>
             _enemiesWithSpawnPoints;
+        
+        [SerializeField]
+        private List<EnemyWithSpawnPoint> _enemiesWithSpawnPoints;
 
         public WaveController Controller { get; set; }
 

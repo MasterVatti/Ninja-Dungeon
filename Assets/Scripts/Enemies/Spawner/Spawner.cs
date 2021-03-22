@@ -9,7 +9,7 @@ namespace Assets.Scripts.Enemies.Spawner
     /// </summary>
     public class Spawner : Singleton<Spawner>
     {
-        public Action AllWavesCleared;
+        public event Action AllWavesCleared;
 
         [SerializeField]
         private List<Wave> _waves;
