@@ -13,7 +13,7 @@ namespace Enemies
         [SerializeField]
         private Enemy _enemy;
         [SerializeField]
-        private Transform _spawnpoint;
+        private Transform _spawnPoint;
 
         public Enemy Enemy
         {
@@ -23,8 +23,8 @@ namespace Enemies
 
         public Transform SpawnPoint
         {
-            get => _spawnpoint;
-            set => _spawnpoint = value;
+            get => _spawnPoint;
+            set => _spawnPoint = value;
         }
     }
 }

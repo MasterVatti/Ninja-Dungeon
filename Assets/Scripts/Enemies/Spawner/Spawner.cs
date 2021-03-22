@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using Enemies;
 using UnityEngine;
 
-namespace Assets.Scripts.EnemyScripts.Spawner
+namespace Assets.Scripts.Enemies.Spawner
 {
     /// <summary>
     /// Спавнер врагов
     /// </summary>
-    public class Spawner : MonoBehaviour
+    public class Spawner : Singleton<Spawner>
     {
         public Action AllWavesCleared;
 
         [SerializeField]
         private List<Wave> _waves;
-        [SerializeField]
-        private List<Transform> _spawnPoints;
         [SerializeField]
         private float _waveCooldown;
 
@@ -24,11 +21,13 @@ namespace Assets.Scripts.EnemyScripts.Spawner
 
         private void Awake()
         {
-            _currentWave = _waves[0];
-            SpawnWave(_currentWave);
-            _nextWaveTime = Time.time + _waveCooldown;
-           
-            _currentWave.OnWaveCleared += OnWaveCleared;
+            foreach (var wave in _waves)
+            {
+                wave.Initialize();
+                wave.Controller.OnWaveCleared += OnWaveCleared;
+            }
+
+            SpawnNextWave();
         }
 
         private void Update()
@@ -37,16 +36,6 @@ namespace Assets.Scripts.EnemyScripts.Spawner
             {
                 SpawnNextWave();
             }
-        }
-
-        private void OnWaveCleared()
-        {
-            if (_waves[_waves.Count] == _currentWave)
-            {
-                AllWavesCleared?.Invoke();
-                return;
-            }
-            SpawnNextWave();
         }
 
         private bool ShouldSpawnNextWave()
@@ -61,38 +50,30 @@ namespace Assets.Scripts.EnemyScripts.Spawner
 
         private void SpawnNextWave()
         {
+            _currentWave ??= _waves[0];
+
             var currentWaveIndex =
                 _waves.FindIndex(wave => wave == _currentWave);
             var nextWaveIndex = currentWaveIndex + 1;
 
             if (nextWaveIndex <= _waves.Count - 1)
             {
-                _currentWave.OnWaveCleared -= OnWaveCleared;
                 _currentWave = _waves[nextWaveIndex];
-                _currentWave.OnWaveCleared += OnWaveCleared;
-                
-                SpawnWave(_currentWave);
+                _currentWave.Controller.Spawn();
                 
                 _nextWaveTime = Time.time + _waveCooldown;
             }
         }
-        
-        private void SpawnWave(Wave wave)
+
+        private void OnWaveCleared()
         {
-            foreach (var enemyWithSpawnPoint in wave.EnemiesWithSpawnPoints)
+            if (_waves[_waves.Count - 1] == _currentWave)
             {
-                var enemy = enemyWithSpawnPoint.Enemy;
-                var spawnPoint = enemyWithSpawnPoint.SpawnPoint;
-
-                var enemyI = Instantiate(enemy, spawnPoint.position,
-                    Quaternion.identity);
-                EnemiesManager.Instance.AddEnemy(enemyI);
+                AllWavesCleared?.Invoke();
+                return;
             }
-        }
 
-        private void OnDestroy()
-        {
-            _currentWave.OnWaveCleared -= OnWaveCleared;
+            SpawnNextWave();
         }
     }
 }

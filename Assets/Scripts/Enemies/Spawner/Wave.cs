@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Enemies;
 using UnityEngine;
 
-namespace Assets.Scripts.EnemyScripts.Spawner
+namespace Assets.Scripts.Enemies.Spawner
 {
     /// <summary>
     /// Класс представляет волну врагов, хранит соответственно в себе
@@ -13,21 +13,16 @@ namespace Assets.Scripts.EnemyScripts.Spawner
     [Serializable]
     public class Wave
     {
-        public Action OnWaveCleared;
-
         [SerializeField]
         private List<EnemyWithSpawnPoint> _enemiesWithSpawnPoints;
         public List<EnemyWithSpawnPoint> EnemiesWithSpawnPoints =>
             _enemiesWithSpawnPoints;
 
-        private void OnEnemyDie(Enemy enemy)
-        {
-            // TODO: Обработать смерть врага удалением его из списка
+        public WaveController Controller { get; set; }
 
-            if (_enemiesWithSpawnPoints.Count == 0)
-            {
-                OnWaveCleared?.Invoke();
-            }
+        public void Initialize()
+        {
+            Controller = new WaveController(this);
         }
     }
 }
