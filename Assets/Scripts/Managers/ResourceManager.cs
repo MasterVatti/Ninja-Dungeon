@@ -26,7 +26,9 @@ namespace Managers
         
         private Resource GetResourceByType(ResourceType type)
         {
-            return _resources.FirstOrDefault(resource => resource.Type == type);
+            var resource = _resources.FirstOrDefault(res => res.Type == type);
+            return resource ?? new Resource() {Amount = 0, Type = type};
+
         }
     }
 }
