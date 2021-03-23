@@ -4,21 +4,19 @@ namespace Nodes
 {
     public class GolemSpawnerNode : Node
     {
-        private GameObject _golemPrefab;
-        private Transform _origin;
+        private EnemyAi _enemyAi;
         private bool _isGolemCreate;
 
-        public GolemSpawnerNode(GameObject golemPrefab, Transform enemyTransform)
+        public GolemSpawnerNode( EnemyAi enemyAi)
         {
-            _golemPrefab = golemPrefab;
-            _origin = enemyTransform;
+            _enemyAi = enemyAi;
         }
 
         public override NodeState Evaluate()
         {
             if (!_isGolemCreate)
             {
-                Object.Instantiate(_golemPrefab, _origin.position, Quaternion.identity);
+                _enemyAi.GolemCreate();
                 _isGolemCreate = true;
             }
 
