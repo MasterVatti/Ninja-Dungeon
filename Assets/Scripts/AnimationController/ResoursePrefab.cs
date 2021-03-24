@@ -2,6 +2,10 @@ using ResourceSystem;
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Класс содержит информацию о ресурсе и соответствующий ему префаб
+/// </summary>
+
 [Serializable]
 public class ResoursePrefab
 {

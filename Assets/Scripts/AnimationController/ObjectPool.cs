@@ -9,12 +9,12 @@ using UnityEngine;
 
 public class ObjectPool
 {
-    private const int AMOUT = 5;
+    private const int AMOUNT = 5;
     private List<GameObject> _pooledObjects = new List<GameObject>();
 
     public ObjectPool(GameObject prefab)
     {
-        for (int i = 0; i < AMOUT; i++)
+        for (int i = 0; i < AMOUNT; i++)
         {
             CreateObject(prefab);
         }
