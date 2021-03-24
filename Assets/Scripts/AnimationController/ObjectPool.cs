@@ -2,17 +2,24 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Класс создаёт пулл объектов, которые нам понадобятся в любой момент
+/// вызовом методо Get
+/// </summary>
+
 public class ObjectPool
 {
+    private const int AMOUT = 5;
     private List<GameObject> _pooledObjects = new List<GameObject>();
 
-    public ObjectPool(GameObject prefab, int amount)
+    public ObjectPool(GameObject prefab)
     {
-        for (int i = 0; i < amount; i++)
+        for (int i = 0; i < AMOUT; i++)
         {
             CreateObject(prefab);
         }
     }
+    
     public GameObject Get()
     {
         for (int i = 0; i < _pooledObjects.Count; i++)
@@ -23,10 +30,12 @@ public class ObjectPool
                 return _pooledObjects[i];
             }
         }
+        
         var newObject = CreateObject(_pooledObjects.First());
         newObject.SetActive(true);
         return newObject;
     }
+    
     private GameObject CreateObject(GameObject gameObject)
     {
         var instantiate = Object.Instantiate(gameObject);
@@ -34,15 +43,5 @@ public class ObjectPool
         instantiate.SetActive(false);
         _pooledObjects.Add(instantiate);
         return instantiate;
-    }
-    public void Release(GameObject gameObject)
-    {
-        foreach (var variable in _pooledObjects)
-        {
-            if (gameObject == variable)
-            {
-                gameObject.SetActive(false);
-            }
-        }
     }
 }

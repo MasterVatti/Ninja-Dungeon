@@ -1,4 +1,9 @@
 using UnityEngine;
+
+/// <summary>
+/// Класс хранит в себе префаб и прогресс его перещения от начальной точки к конечной.
+/// </summary>
+
 public class AnimationInformation
 {
     public GameObject PrefabResource;

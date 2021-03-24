@@ -2,16 +2,19 @@ using System.Collections.Generic;
 using ResourceSystem;
 using UnityEngine;
 
+/// <summary>
+/// Класс отвечает за анимацию передачи ресурсов.
+/// </summary>
+
 public class AnimationController : Singleton<AnimationController>
 {
     [SerializeField]
-    private float _step;
+    private float _speed;
     [SerializeField]
-    private Vector3 _liftingVector;
+    private List<ResoursePrefab> _resourсePrefab;
     [SerializeField]
-    private List<ResoursePrefab> _resoursePrefab;
-    [SerializeField]
-    private AnimationCurve _animationCurve;
+    private AnimationCurve _yPositionCurve;
+    
     private List<AnimationInformation> _animationInformations;
     private Dictionary<ResourceType, ObjectPool> _resourcePool;
     
@@ -21,57 +24,45 @@ public class AnimationController : Singleton<AnimationController>
         _resourcePool = new Dictionary<ResourceType, ObjectPool>();
     }
     
-    public void ShowFlyingResource(ResourceType resourceType, Vector3 fromWhere, Vector3 where)
-    {
-        if (_resourcePool.TryGetValue(resourceType, out var objectPool))
-        {
-            var information = new AnimationInformation
-            {
-                PrefabResource = objectPool.Get(),
-                StartPoint = fromWhere,
-                EndPoint = where,
-                Progress = 0
-            };
-            _animationInformations.Add(information);
-        }
-        else
-        {
-            objectPool = new ObjectPool(GetResourcePrefab(resourceType), 5);
-            _resourcePool.Add(resourceType,objectPool);
-            
-            var information = new AnimationInformation
-            {
-                PrefabResource = objectPool.Get(),
-                StartPoint = fromWhere,
-                EndPoint = where,
-                Progress = 0
-            };
-            _animationInformations.Add(information);
-        }
-    }
-
     private void Update()
     {
         for (int i = 0; i < _animationInformations.Count; i++)
         {
-            _animationInformations[i].Progress += _step * Time.deltaTime;
-            var positionYcurve = _animationCurve.Evaluate(_animationInformations[i].Progress) *
-                                  _liftingVector;
+            var information = _animationInformations[i];
+            information.Progress += _speed * Time.deltaTime;
+            var positionYcurve = _yPositionCurve.Evaluate(information.Progress) * Vector3.up;
             
-            _animationInformations[i].PrefabResource.transform.position = Vector3.Lerp
-                (_animationInformations[i].StartPoint, _animationInformations[i].EndPoint,
-                _animationInformations[i].Progress) + positionYcurve;
+            information.PrefabResource.transform.position = Vector3.Lerp
+                (information.StartPoint, information.EndPoint, information.Progress) + positionYcurve;
             
-            if (_animationInformations[i].Progress >= 1)
+            if (information.Progress >= 1)
             {
-                _animationInformations[i].PrefabResource.SetActive(false);
+                information.PrefabResource.SetActive(false);
                 _animationInformations.RemoveAt(i);
             }
         }
     }
+    
+    public void ShowFlyingResource(ResourceType resourceType, Vector3 fromWhere, Vector3 where)
+    {
+        if (!_resourcePool.TryGetValue(resourceType, out var objectPool))
+        {
+            objectPool = new ObjectPool(GetResourcePrefab(resourceType));
+            _resourcePool.Add(resourceType,objectPool);
+        }
+        var information = new AnimationInformation
+        {
+            PrefabResource = objectPool.Get(),
+            StartPoint = fromWhere,
+            EndPoint = where,
+            Progress = 0
+        };
+        _animationInformations.Add(information);
+    }
+    
     private GameObject GetResourcePrefab(ResourceType resourceType)
     {
-        foreach (var resourcePrefab in _resoursePrefab)
+        foreach (var resourcePrefab in _resourсePrefab)
         {
             if (resourcePrefab.Type == resourceType)
             {
