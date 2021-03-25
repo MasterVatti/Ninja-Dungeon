@@ -6,7 +6,7 @@ using UnityEngine;
 /// Класс отвечает за анимацию передачи ресурсов.
 /// </summary>
 
-public class AnimationController : Singleton<AnimationController>
+public class AnimationManager : Singleton<AnimationManager>
 {
     [SerializeField]
     private float _speed;
