@@ -9,7 +9,7 @@ using UnityEngine;
 public class AnimationManager : Singleton<AnimationManager>
 {
     [SerializeField]
-    private float _speed;
+    private float _promotion;
     [SerializeField]
     private List<ResoursePrefab> _resourсePrefab;
     [SerializeField]
@@ -29,7 +29,7 @@ public class AnimationManager : Singleton<AnimationManager>
         for (int i = 0; i < _animationInformations.Count; i++)
         {
             var information = _animationInformations[i];
-            information.Progress += _speed * Time.deltaTime;
+            information.Progress += _promotion * Time.deltaTime;
             var positionYcurve = _yPositionCurve.Evaluate(information.Progress) * Vector3.up;
             
             information.PrefabResource.transform.position = Vector3.Lerp
@@ -43,7 +43,7 @@ public class AnimationManager : Singleton<AnimationManager>
         }
     }
     
-    public void ShowFlyingResource(ResourceType resourceType, Vector3 fromWhere, Vector3 where)
+    public void ShowFlyingResource(ResourceType resourceType, Vector3 source, Vector3 destination)
     {
         if (!_resourcePool.TryGetValue(resourceType, out var objectPool))
         {
@@ -53,8 +53,8 @@ public class AnimationManager : Singleton<AnimationManager>
         var information = new AnimationInformation
         {
             PrefabResource = objectPool.Get(),
-            StartPoint = fromWhere,
-            EndPoint = where,
+            StartPoint = source,
+            EndPoint = destination,
             Progress = 0
         };
         _animationInformations.Add(information);
