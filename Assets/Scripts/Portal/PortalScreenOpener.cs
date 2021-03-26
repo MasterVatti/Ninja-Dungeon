@@ -17,7 +17,7 @@ public class PortalScreenOpener : MonoBehaviour, IPortalScreenOpener
             SceneName = _settings.SceneName
         };
         
-        ScreenManager.Instance.OpenScreenWithContext(ScreenType.PortalScreen,
+        MainManager.ScreenManager.OpenScreenWithContext(ScreenType.PortalScreen,
             context);
     }
 }

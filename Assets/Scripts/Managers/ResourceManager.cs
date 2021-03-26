@@ -8,7 +8,7 @@ namespace Managers
     /// <summary>
     /// Класс управляющий ресурсами игрока
     /// </summary>
-    public class ResourceManager : Singleton<ResourceManager>
+    public class ResourceManager : MonoBehaviour
     {
         
         [SerializeField]

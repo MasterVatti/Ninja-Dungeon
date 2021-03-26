@@ -20,7 +20,7 @@ namespace Assets.Scripts.Managers.ScreensManager.Preview.RewardScreen
         }
         public void OnClick()
         {
-            ScreenManager.Instance.CloseTopScreen();
+            MainManager.ScreenManager.CloseTopScreen();
         }
         public override void ApplyContext(RewardContext context)
         {
