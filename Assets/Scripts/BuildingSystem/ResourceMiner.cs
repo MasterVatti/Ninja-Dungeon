@@ -1,73 +1,53 @@
+using System;
 using ResourceSystem;
 using UnityEngine;
 using ResourceManager = Managers.ResourceManager;
 
 /// <summary>
-/// Класс добавляется к зданию и добывает определенный ресурс.
-/// Выдает ресурс игроку, если подойти
+/// Класс возвращает количество ресурса, добытого к данному моменту
+/// через свойство CurrentResourceCount.
+/// Выдает ресурс игроку, если подойти.
 /// </summary>
 public class ResourceMiner : MonoBehaviour
 {
-    private const int MINING_PER_TICK=1;
+    //Свойства для UI
+    public ResourceType ExtractableResource => _extractableResource;
+    public float MaxStorage => _maxStorage;
+    public int CurrentResourceCount 
+    {
+        get
+        {
+            if (_currentResourceCount < _maxStorage)
+            {
+                int count = Mathf.FloorToInt((Time.time - _startMiningTime) / _miningPerSecond);
+                _currentResourceCount = Mathf.Clamp(count, 0, _maxStorage);
+            }
+
+            return _currentResourceCount;
+        }
+    }
+
+    private int _currentResourceCount;
+    private float _startMiningTime;
     
    [SerializeField] 
    private ResourceType _extractableResource;
    [SerializeField] 
-   private float _miningTime;
+   private float _miningPerSecond;
    [SerializeField] 
    private int _maxStorage;
-   
-   
-   private int _currentResource;
-   private float _currentCooldown;
 
-   //Свойства для UI
-   public ResourceType ExtractableResource => _extractableResource;
-   public float MAXStorage => _maxStorage;
-   public float CurrentResource => _currentResource;
-
-
-   private void Update()
+   public void Start()
    {
-     MiningResource();
+       _startMiningTime = Time.time;
    }
 
    private void OnTriggerStay(Collider other)
    {
-       if (_currentResource != 0)
+       if (_currentResourceCount != 0)
        {
-           ResourceManager.Instance.AddResource(_extractableResource, _currentResource);
-           _currentResource = 0;
+           ResourceManager.Instance.AddResource(_extractableResource, _currentResourceCount);
+          _startMiningTime = Time.time;
        }
    }
-
-   private void MiningResource()
-   {
-       if (IsMiningTime() && IsStorageAvailable())
-       {
-           _currentResource += MINING_PER_TICK;
-       }
-   }
-
-   private bool IsStorageAvailable()
-   {
-       if (_currentResource < _maxStorage)
-       {
-           return true;
-       }
-
-       return false;
-   }
-
-   private bool IsMiningTime()
-   {
-       if (Time.time > _currentCooldown)
-       {
-           _currentCooldown = Time.time + _miningTime;
-           return true;
-       }
-
-       return false;
-   }
-
 }
