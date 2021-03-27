@@ -19,7 +19,7 @@ public class ResourceMiner : MonoBehaviour
         {
             if (_currentResourceCount < _maxStorage)
             {
-                int count = Mathf.FloorToInt((Time.time - _startMiningTime) / _miningPerSecond);
+                var count = Mathf.FloorToInt((Time.time - _startMiningTime) / _miningPerSecond);
                 _currentResourceCount = Mathf.Clamp(count, 0, _maxStorage);
             }
 
@@ -27,15 +27,15 @@ public class ResourceMiner : MonoBehaviour
         }
     }
 
-    private int _currentResourceCount;
-    private float _startMiningTime;
-    
    [SerializeField] 
    private ResourceType _extractableResource;
    [SerializeField] 
    private float _miningPerSecond;
    [SerializeField] 
    private int _maxStorage;
+   
+   private int _currentResourceCount;
+   private float _startMiningTime;
 
    public void Start()
    {
@@ -46,8 +46,8 @@ public class ResourceMiner : MonoBehaviour
    {
        if (_currentResourceCount != 0)
        {
-           ResourceManager.Instance.AddResource(_extractableResource, _currentResourceCount);
-          _startMiningTime = Time.time;
+           ResourceManager.Instance.AddResource(_extractableResource, _currentResourceCount); 
+           _startMiningTime = Time.time;
        }
    }
 }
