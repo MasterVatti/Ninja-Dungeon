@@ -16,7 +16,7 @@ public class PortalScreen : BaseScreenWithContext<PortalContext>
     [UsedImplicitly]
     public void TurnOffPanel()
     {
-        ScreenManager.Instance.CloseTopScreen();
+         MainManager.ScreenManager.CloseTopScreen();
     }
     
     public override void ApplyContext(PortalContext context)
@@ -27,8 +27,8 @@ public class PortalScreen : BaseScreenWithContext<PortalContext>
     
     public void OnClick()
     {
-        ScreenManager.Instance.CloseTopScreen();
-        LoadingController.Instance.StartLoad(_sceneName);
+        MainManager.ScreenManager.CloseTopScreen();
+        MainManager.LoadingController.StartLoad(_sceneName);
     }
 
     public override void Initialize(ScreenType screenType)

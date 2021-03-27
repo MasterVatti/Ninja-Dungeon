@@ -78,9 +78,9 @@ namespace BuildingSystem
             {
                 if (requiredResource.Amount > 0 && 
                     IsPaymentTime(requiredResource) && 
-                    ResourceManager.Instance.HasEnough(requiredResource.Type, PAY_PER_TICK))
+                    MainManager.ResourceManager.HasEnough(requiredResource.Type, PAY_PER_TICK))
                 {
-                    ResourceManager.Instance.Pay(requiredResource.Type, PAY_PER_TICK);
+                    MainManager.ResourceManager.Pay(requiredResource.Type, PAY_PER_TICK);
                     requiredResource.Amount -= PAY_PER_TICK;
                 }
             }
