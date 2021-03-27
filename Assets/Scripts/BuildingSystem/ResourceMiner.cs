@@ -11,7 +11,7 @@ using ResourceManager = Managers.ResourceManager;
 public class ResourceMiner : MonoBehaviour
 {
     //Свойства для UI
-    public ResourceType ExtractableResource => _extractableResource;
+    public ResourceType ExtractableResource => _miningResource;
     public float MaxStorage => _maxStorage;
     public int CurrentResourceCount 
     {
@@ -28,7 +28,7 @@ public class ResourceMiner : MonoBehaviour
     }
 
    [SerializeField] 
-   private ResourceType _extractableResource;
+   private ResourceType _miningResource;
    [SerializeField] 
    private float _miningPerSecond;
    [SerializeField] 
@@ -46,7 +46,7 @@ public class ResourceMiner : MonoBehaviour
    {
        if (_currentResourceCount != 0)
        {
-           ResourceManager.Instance.AddResource(_extractableResource, _currentResourceCount); 
+           ResourceManager.Instance.AddResource(_miningResource, _currentResourceCount); 
            _startMiningTime = Time.time;
        }
    }
