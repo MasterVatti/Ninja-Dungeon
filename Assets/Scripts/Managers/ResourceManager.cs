@@ -23,7 +23,12 @@ namespace Managers
         {
             GetResourceByType(type).Amount -= value;
         }
-        
+
+        public void AddResource(ResourceType type, int value)
+        {
+            GetResourceByType(type).Amount += value;
+        }
+
         private Resource GetResourceByType(ResourceType type)
         {
             var resource = _resources.FirstOrDefault(res => res.Type == type);
