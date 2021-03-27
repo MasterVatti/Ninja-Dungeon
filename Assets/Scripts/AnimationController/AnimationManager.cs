@@ -32,10 +32,10 @@ public class AnimationManager : Singleton<AnimationManager>
             var positionYcurve = _yPositionCurve.Evaluate(information.Progress) * Vector3.up;
             information.Progress += Time.deltaTime /  _flightTime;
             
-            var resourceItem = information.PrefabResource.transform.position;
-            resourceItem = Vector3.Lerp(information.StartPoint, information.EndPoint, information.Progress)
-                           + positionYcurve;
-
+            
+            var resourceItem = Vector3.Lerp(information.StartPoint, information.EndPoint, information.Progress)
+                               + positionYcurve;
+            information.PrefabResource.transform.position = resourceItem;
             if (information.Progress >= 1)
             {
                 information.PrefabResource.SetActive(false);
