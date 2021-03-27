@@ -29,16 +29,18 @@ public class AnimationManager : Singleton<AnimationManager>
         for (int i = 0; i < _animationInformations.Count; i++)
         {
             var information = _animationInformations[i];
-            information.Progress += Time.deltaTime /  _flightTime;
             var positionYcurve = _yPositionCurve.Evaluate(information.Progress) * Vector3.up;
-
-            information.PrefabResource.transform.position = Vector3.Lerp
-                (information.StartPoint, information.EndPoint, information.Progress) + positionYcurve;
+            information.Progress += Time.deltaTime /  _flightTime;
+            
+            var resourceItem = information.PrefabResource.transform.position;
+            resourceItem = Vector3.Lerp(information.StartPoint, information.EndPoint, information.Progress)
+                           + positionYcurve;
 
             if (information.Progress >= 1)
             {
                 information.PrefabResource.SetActive(false);
                 _animationInformations.RemoveAt(i);
+                i--;
             }
         }
     }
@@ -47,9 +49,10 @@ public class AnimationManager : Singleton<AnimationManager>
     {
         if (!_resourcePool.TryGetValue(resourceType, out var objectPool))
         {
-            objectPool = new ObjectPool(GetResourcePrefab(resourceType),10);
+            objectPool = new ObjectPool(GetResourcePrefab(resourceType));
             _resourcePool.Add(resourceType,objectPool);
         }
+        
         var information = new AnimationInformation
         {
             PrefabResource = objectPool.Get(),
