@@ -7,7 +7,7 @@ namespace Assets.Scripts.Managers.ScreensManager
     /// Этот менеджер управляет окнами.
     /// То есть открывает окна, закрывает и т.д.
     /// </summary>
-    public class ScreenManager : Singleton<ScreenManager>
+    public class ScreenManager : MonoBehaviour
     {
         [SerializeField]
         private List<BaseScreen> _allScreens;

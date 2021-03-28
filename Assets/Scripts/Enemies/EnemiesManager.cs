@@ -8,20 +8,16 @@ namespace Enemies
     /// </summary>
     public class EnemiesManager : MonoBehaviour
     {
-        public static EnemiesManager Singleton { get; private set; }
-
-        public List<GameObject> Enemies => _enemies;
+        public List<Enemy> Enemies => _enemies;
         
         [SerializeField] 
-        private List<GameObject> _enemies;
+        private List<Enemy> _enemies;
         
         private void Awake()
         {
-            Singleton = this;
             for (int i = 0; i < _enemies.Count; i++)
             {
-                _enemies[i].GetComponent<EnemyHealth>().EnemyDie 
-                    += OnEnemyDie;
+                _enemies[i].HealthSystem.EnemyDie += OnEnemyDie;
             }
         }
 
@@ -31,15 +27,20 @@ namespace Enemies
             {
                 if (_enemies[i])
                 {
-                    _enemies[i].GetComponent<EnemyHealth>().EnemyDie 
-                        -= OnEnemyDie;
+                    _enemies[i].HealthSystem.EnemyDie -= OnEnemyDie;
                 }
             }
         }
 
-        private void OnEnemyDie(GameObject enemy)
+        public void AddEnemy(Enemy enemy)
         {
-            enemy.GetComponent<EnemyHealth>().EnemyDie -= OnEnemyDie;
+            Enemies.Add(enemy);
+            enemy.HealthSystem.EnemyDie += OnEnemyDie; 
+        }
+        
+        private void OnEnemyDie(Enemy enemy)
+        {
+            enemy.HealthSystem.EnemyDie -= OnEnemyDie;
             Enemies.Remove(enemy);
         }
     }

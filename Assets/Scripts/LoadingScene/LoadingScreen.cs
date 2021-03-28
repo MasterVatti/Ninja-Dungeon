@@ -14,7 +14,7 @@ namespace LoadingScene
         
         private void Update()
         {
-            _loadingProgress.value = LoadingController.Instance.LoadingProgress;
+            _loadingProgress.value =  MainManager.LoadingController.LoadingProgress;
         }
 
         public override void Initialize(ScreenType screenType)

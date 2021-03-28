@@ -1,4 +1,4 @@
-using UnityEngine;
+using System.Collections.Generic;
 
 namespace BuildingSystem
 {
@@ -7,48 +7,35 @@ namespace BuildingSystem
     /// разблокирует новые места для строительства
     /// разблокирует построенное здание
     /// </summary>
-    public class BuildFinisher : MonoBehaviour
+    public class BuildFinisher
     {
-        [SerializeField]
-        private BuildingController _buildingController;
-        [SerializeField]
-        private BuildingSettings _buildingSettings;
-
-        private void Start ()
+        private readonly BuildingSettings _buildingSettings;
+        private readonly List<BuildingSettings> _placeHolders;
+        public BuildFinisher(BuildingSettings settings, List<BuildingSettings> placeHolders)
         {
-            _buildingController.OnBuildFinished += CreatePlaceHolders;
-            _buildingController.OnBuildFinished += CreateBuilding;
-            _buildingController.OnBuildFinished += DestroyPlaceHolder;
+            _buildingSettings = settings;
+            _placeHolders = placeHolders;
+        }
+        public void FinishBuilding()
+        {
+            CreatePlaceHolders(_placeHolders);
+            CreateBuilding(_buildingSettings);
         }
 
-        private void CreatePlaceHolders ()
+        private void CreatePlaceHolders (List<BuildingSettings> placeHolders)
         {
-            var placeHolders = _buildingSettings.ConnectedPlaceHolders;
             if(placeHolders != null)
             {
                 foreach (var placeHolder in placeHolders)
                 {
-                    Instantiate(placeHolder, placeHolder.transform.position, Quaternion.identity);
+                    BuildingController.CreateNewBuilding(placeHolder, true);
                 }
             }
         }
 
-        private void CreateBuilding ()
+        private void CreateBuilding (BuildingSettings buildingSettings)
         {
-            var building = _buildingSettings.Prefab;
-            Instantiate(building, building.transform.position, Quaternion.identity);
-        }
-
-        private void DestroyPlaceHolder ()
-        {
-            Destroy(gameObject);
-        }
-
-        private void OnDestroy ()
-        {
-            _buildingController.OnBuildFinished -= CreatePlaceHolders;
-            _buildingController.OnBuildFinished -= CreateBuilding;
-            _buildingController.OnBuildFinished -= DestroyPlaceHolder;
+            BuildingController.CreateNewBuilding(buildingSettings, false);
         }
     }
 }

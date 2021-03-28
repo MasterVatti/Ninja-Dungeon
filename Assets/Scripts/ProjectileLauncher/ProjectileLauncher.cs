@@ -26,7 +26,7 @@ namespace ProjectileLauncher
             else
             {
                 _currentTime = 0;
-                if (EnemiesManager.Singleton.Enemies.Count > 0)
+                if (MainManager.EnemiesManager.Enemies.Count > 0)
                 {
                     CreateProjectile();
                 }

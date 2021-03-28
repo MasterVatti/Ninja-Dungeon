@@ -8,19 +8,21 @@ namespace Enemies
     /// </summary>
     public class EnemyHealth : MonoBehaviour
     {
-        [SerializeField] 
-        private int _health;
-        
-        public event Action<GameObject> EnemyDie;
+        public event Action<Enemy> EnemyDie;
         
         public void ApplyDamage(int damage)
         {
-            _health -= damage;
-            if (_health <= 0)
+            GetComponent<Enemy>().CurrentHp -= damage;
+            if (GetComponent<Enemy>().CurrentHp <= 0)
             {
-                EnemyDie?.Invoke(gameObject);
-                Destroy(gameObject);
+                Death();
             }
+        }
+        
+        private void Death()
+        {
+            EnemyDie?.Invoke(GetComponent<Enemy>());
+            Destroy(gameObject);
         }
     }
 }
