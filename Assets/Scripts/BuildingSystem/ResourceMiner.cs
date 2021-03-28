@@ -46,7 +46,7 @@ public class ResourceMiner : MonoBehaviour
    {
        if (_currentResourceCount != 0)
        {
-           ResourceManager.Instance.AddResource(_miningResource, _currentResourceCount); 
+           MainManager.ResourceManager.AddResource(_miningResource, _currentResourceCount); 
            _startMiningTime = Time.time;
        }
    }
