@@ -6,17 +6,17 @@ using UnityEngine;
 
 public class MainManager : Singleton<MainManager>
 {
-    public static LoadingController LoadingController => _loadingController;
-    public static ResourceManager ResourceManager => _resourceManager;
-    public static EnemiesManager EnemiesManager => _enemiesManager;
-    public static ScreenManager ScreenManager => _screenManager;
+    public static LoadingController LoadingController => Instance._loadingController;
+    public static ResourceManager ResourceManager => Instance._resourceManager;
+    public static EnemiesManager EnemiesManager => Instance._enemiesManager;
+    public static ScreenManager ScreenManager => Instance._screenManager;
     
     [SerializeField]
-    private static LoadingController _loadingController;
+    private LoadingController _loadingController;
     [SerializeField]
-    private static ResourceManager _resourceManager;
+    private ResourceManager _resourceManager;
     [SerializeField]
-    private static EnemiesManager _enemiesManager;
+    private EnemiesManager _enemiesManager;
     [SerializeField]
-    private static ScreenManager _screenManager;
+    private ScreenManager _screenManager;    
 }
