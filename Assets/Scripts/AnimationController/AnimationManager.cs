@@ -17,7 +17,8 @@ public class AnimationManager : MonoBehaviour
     
     private List<AnimationInformation> _animationInformations;
     private Dictionary<ResourceType, ObjectPool> _resourcePool;
-    
+    private bool _animationMode;
+
     private void Start()
     {
         _animationInformations = new List<AnimationInformation>();
@@ -28,8 +29,14 @@ public class AnimationManager : MonoBehaviour
     {
         for (int i = 0; i < _animationInformations.Count; i++)
         {
+            var positionYcurve = Vector3.zero;
             var information = _animationInformations[i];
-            var positionYcurve = _yPositionCurve.Evaluate(information.Progress) * Vector3.up;
+            
+            if (!_animationMode)
+            {
+                positionYcurve = _yPositionCurve.Evaluate(information.Progress) * Vector3.up;
+            }
+            
             information.Progress += Time.deltaTime /  _flightTime;
             
             var resourceItem = Vector3.Lerp(information.StartPoint, information.EndPoint, information.Progress)
@@ -45,8 +52,9 @@ public class AnimationManager : MonoBehaviour
         }
     }
     
-    public void ShowFlyingResource(ResourceType resourceType, Vector3 source, Vector3 destination)
+    public void ShowFlyingResource(bool straight,ResourceType resourceType, Vector3 source, Vector3 destination)
     {
+        _animationMode = straight;
         if (!_resourcePool.TryGetValue(resourceType, out var objectPool))
         {
             objectPool = new ObjectPool(GetResourcePrefab(resourceType));
@@ -62,7 +70,7 @@ public class AnimationManager : MonoBehaviour
         };
         _animationInformations.Add(information);
     }
-    
+
     private GameObject GetResourcePrefab(ResourceType resourceType)
     {
         foreach (var resourcePrefab in _resourсePrefab)
