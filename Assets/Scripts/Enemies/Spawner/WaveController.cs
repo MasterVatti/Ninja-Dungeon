@@ -10,7 +10,7 @@ namespace Assets.Scripts.Enemies.Spawner
     /// </summary>
     public class WaveController
     {
-        public event Action OnWaveCleared;
+        public event Action<Wave> OnWaveDied;
 
         private readonly Wave _wave;
         private int _enemiesCount;
@@ -18,12 +18,12 @@ namespace Assets.Scripts.Enemies.Spawner
         public WaveController(Wave wave)
         {
             _wave = wave;
-            _enemiesCount = _wave.EnemiesWithSpawnPoints.Count;
+            _enemiesCount = _wave.SpawnPointsData.Count;
         }
 
         public void Spawn()
         {
-            foreach (var enemyWithSpawnPoint in _wave.EnemiesWithSpawnPoints)
+            foreach (var enemyWithSpawnPoint in _wave.SpawnPointsData)
             {
                 var enemyPrefab = enemyWithSpawnPoint.Enemy;
                 var spawnPoint = enemyWithSpawnPoint.SpawnPoint;
@@ -32,19 +32,19 @@ namespace Assets.Scripts.Enemies.Spawner
                     spawnPoint.position,
                     Quaternion.identity);
 
-                enemy.HealthSystem.EnemyDie += OnEnemyDeath;
+                enemy.HealthSystem.EnemyDie += OnEnemyDied;
 
                 EnemiesManager.Instance.AddEnemy(enemy);
             }
         }
 
-        private void OnEnemyDeath(global::Enemies.Enemy enemy)
+        private void OnEnemyDied(global::Enemies.Enemy enemy)
         {
             _enemiesCount--;
 
             if (_enemiesCount == 0)
             {
-                OnWaveCleared?.Invoke();
+                OnWaveDied?.Invoke(_wave);
             }
         }
     }

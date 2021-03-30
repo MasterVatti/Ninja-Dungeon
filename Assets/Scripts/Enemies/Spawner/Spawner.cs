@@ -30,7 +30,7 @@ namespace Assets.Scripts.Enemies.Spawner
             foreach (var wave in _waves)
             {
                 wave.Initialize();
-                wave.Controller.OnWaveCleared += OnWaveCleared;
+                wave.Controller.OnWaveDied += OnWaveDied;
             }
 
             SpawnNextWave();
@@ -67,7 +67,7 @@ namespace Assets.Scripts.Enemies.Spawner
             _nextWaveTime = Time.time + _waveCooldown;
         }
 
-        private void OnWaveCleared(Wave diedWave)
+        private void OnWaveDied(Wave deadWave)
         {
             if (_waves[_waves.Count - 1] == _currentWave)
             {
@@ -75,11 +75,8 @@ namespace Assets.Scripts.Enemies.Spawner
                 return;
             }
 
-            if (diedWave == GetPreviousWave())
+            if (deadWave == GetPreviousWave())
             {
-                // Debug.Log(
-                //    $"Волна которая умерла: {diedWave.SpawnPointsData.Count}" +
-                //    $"Предыдущая волна: {_currentWave.SpawnPointsData.Count}");
                 SpawnNextWave();
             }
             
