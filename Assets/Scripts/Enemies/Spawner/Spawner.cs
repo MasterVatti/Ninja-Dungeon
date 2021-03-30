@@ -19,14 +19,12 @@ namespace Assets.Scripts.Enemies.Spawner
         private float _waveCooldown;
 
         private Wave _currentWave;
-        private int _currentWaveIndex;
+        private int _currentWaveIndex = -1;
 
         private float _nextWaveTime;
 
         private void Awake()
         {
-            _currentWaveIndex = -1;
-
             foreach (var wave in _waves)
             {
                 wave.Initialize();
@@ -74,29 +72,11 @@ namespace Assets.Scripts.Enemies.Spawner
                 AllWavesCleared?.Invoke();
                 return;
             }
-
-            if (deadWave == GetPreviousWave())
+            
+            if (deadWave == _currentWave)
             {
                 SpawnNextWave();
             }
-            
-            // SpawnNextWave();
-        }
-
-        private Wave GetPreviousWave()
-        {
-            Wave previousWave = _currentWave;
-            foreach (var wave in _waves)
-            {
-                if (wave == _currentWave)
-                {
-                    break;
-                }   
-                
-                previousWave  = wave;
-            }
-            Debug.Log($"Кол-во врагов в умершей волне {previousWave.SpawnPointsData.Count}");
-            return previousWave;
         }
     }
 }
