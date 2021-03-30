@@ -5,6 +5,7 @@ namespace Managers
 {
     public class BuildingManager : MonoBehaviour
     {
+        public List<GameObject> ConstructedBuldings = new List<GameObject>();
         [SerializeField]
         private List<BuildingSettings> _startBuildings = new List<BuildingSettings>();
 

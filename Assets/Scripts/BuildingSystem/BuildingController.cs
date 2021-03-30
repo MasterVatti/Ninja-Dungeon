@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using ResourceSystem;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace BuildingSystem
     public class BuildingController : MonoBehaviour
     {
         private const int PAY_PER_TICK = 1;
+        
+        public event Action OnBuildFinished;
         
         private BuildingSettings BuildingSettings { get; set; }
         
@@ -88,6 +91,8 @@ namespace BuildingSystem
             if (IsConstructionFinished())
             {
                 new BuildFinisher(BuildingSettings, BuildingSettings.ConnectedPlaceHolders).FinishBuilding();
+                MainManager.BuildingManager.ConstructedBuldings.Add(BuildingSettings.PlaceHolderPrefab);
+                OnBuildFinished?.Invoke();
                 Destroy(gameObject);
             }
         }
