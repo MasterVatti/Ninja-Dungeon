@@ -17,7 +17,7 @@ public class AnimationManager : MonoBehaviour
     
     private List<AnimationInformation> _animationInformations;
     private Dictionary<ResourceType, ObjectPool> _resourcePool;
-    private bool _animationMode;
+    private bool _flyStraight;
 
     private void Start()
     {
@@ -32,7 +32,7 @@ public class AnimationManager : MonoBehaviour
             var positionYcurve = Vector3.zero;
             var information = _animationInformations[i];
             
-            if (!_animationMode)
+            if (!_flyStraight)
             {
                 positionYcurve = _yPositionCurve.Evaluate(information.Progress) * Vector3.up;
             }
@@ -52,9 +52,9 @@ public class AnimationManager : MonoBehaviour
         }
     }
     
-    public void ShowFlyingResource(bool straight,ResourceType resourceType, Vector3 source, Vector3 destination)
+    public void ShowFlyingResource(ResourceType resourceType, Vector3 source, Vector3 destination,bool straight = false)
     {
-        _animationMode = straight;
+        _flyStraight = straight;
         if (!_resourcePool.TryGetValue(resourceType, out var objectPool))
         {
             objectPool = new ObjectPool(GetResourcePrefab(resourceType));
