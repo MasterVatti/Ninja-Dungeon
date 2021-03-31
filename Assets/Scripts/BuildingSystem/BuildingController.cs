@@ -14,7 +14,7 @@ namespace BuildingSystem
     {
         private const int PAY_PER_TICK = 1;
         
-        public event Action OnBuildFinished;
+        public event Action <GameObject> OnBuildFinished;
         
         private BuildingSettings BuildingSettings { get; set; }
         
@@ -91,8 +91,9 @@ namespace BuildingSystem
             if (IsConstructionFinished())
             {
                 new BuildFinisher(BuildingSettings, BuildingSettings.ConnectedPlaceHolders).FinishBuilding();
-                MainManager.BuildingManager.ConstructedBuldings.Add(BuildingSettings.PlaceHolderPrefab);
-                OnBuildFinished?.Invoke();
+                var placeHolderPrefab = BuildingSettings.PlaceHolderPrefab;
+                MainManager.BuildingManager.ConstructedBuldings.Add(placeHolderPrefab);
+                OnBuildFinished?.Invoke(placeHolderPrefab);
                 Destroy(gameObject);
             }
         }

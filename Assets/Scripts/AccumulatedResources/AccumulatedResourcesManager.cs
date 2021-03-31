@@ -27,14 +27,11 @@ public class AccumulatedResourcesManager : MonoBehaviour
         _buildingController.OnBuildFinished += NewBuiltBuilding;
     }
 
-    private void NewBuiltBuilding()
+    private void NewBuiltBuilding(GameObject building)
     {
-        var constructedBuildings = MainManager.BuildingManager.ConstructedBuldings;
-        var lastBuilding = constructedBuildings.Last();
-        
-        if (lastBuilding.GetComponent<ResourceMiner>())
+        if (building.GetComponent<ResourceMiner>())
         {
-            CreateUIAccumulatedResource(lastBuilding.GetComponent<ResourceMiner>(),FindTagObject(lastBuilding));
+            CreateUIAccumulatedResource(building.GetComponent<ResourceMiner>(),FindTagObject(building));
         }
     }
 
