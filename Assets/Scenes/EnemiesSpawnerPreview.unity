@@ -573,38 +573,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _waves:
-  - _enemiesWithSpawnPoints:
+  - _spawnPointsData:
     - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
         type: 3}
-      _spawnpoint: {fileID: 1889020659}
+      _spawnPoint: {fileID: 1889020659}
+  - _spawnPointsData:
     - _enemy: {fileID: -7617768688791774286, guid: 41401f314877af94587ece4aa0a01dfc,
         type: 3}
-      _spawnpoint: {fileID: 1604006635}
-  - _enemiesWithSpawnPoints:
+      _spawnPoint: {fileID: 480150044}
     - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
         type: 3}
-      _spawnpoint: {fileID: 480150044}
+      _spawnPoint: {fileID: 480150044}
+  - _spawnPointsData:
     - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
         type: 3}
-      _spawnpoint: {fileID: 1101031385}
-  - _enemiesWithSpawnPoints:
-    - _enemy: {fileID: -7617768688791774286, guid: 41401f314877af94587ece4aa0a01dfc,
-        type: 3}
-      _spawnpoint: {fileID: 1889020659}
+      _spawnPoint: {fileID: 1889020659}
     - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
         type: 3}
-      _spawnpoint: {fileID: 1101031385}
-    - _enemy: {fileID: -7617768688791774286, guid: 41401f314877af94587ece4aa0a01dfc,
-        type: 3}
-      _spawnpoint: {fileID: 480150044}
+      _spawnPoint: {fileID: 1101031385}
     - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
         type: 3}
-      _spawnpoint: {fileID: 1604006635}
-  _spawnPoints:
-  - {fileID: 1889020659}
-  - {fileID: 1101031385}
-  - {fileID: 480150044}
-  - {fileID: 1604006635}
+      _spawnPoint: {fileID: 480150044}
+  - _spawnPointsData:
+    - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
+        type: 3}
+      _spawnPoint: {fileID: 1889020659}
+    - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
+        type: 3}
+      _spawnPoint: {fileID: 1101031385}
+    - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
+        type: 3}
+      _spawnPoint: {fileID: 480150044}
+    - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
+        type: 3}
+      _spawnPoint: {fileID: 1604006635}
+  _hasCooldownTime: 1
   _waveCooldown: 5
 --- !u!4 &387421792
 Transform:

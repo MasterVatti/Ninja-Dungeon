@@ -1,29 +1,37 @@
 using System;
-using Enemies;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Task = System.Threading.Tasks.Task;
 
-namespace Assets.Scripts.Enemies.Spawner
+namespace Enemies.Spawner
 {
     /// <summary>
     /// Класс управляет волной
     /// </summary>
     public class WaveController
     {
-        public event Action<Wave> OnWaveDied;
+        public event Action OnWaveDied;
+        public bool AlreadySpawned;
+        public bool IsFinished;
 
-        private readonly Wave _wave;
+        private readonly WaveData _waveData;
         private int _enemiesCount;
 
-        public WaveController(Wave wave)
+        public WaveController(WaveData waveData)
         {
-            _wave = wave;
-            _enemiesCount = _wave.SpawnPointsData.Count;
+            _waveData = waveData;
+            _enemiesCount = _waveData.SpawnPointsData.Count;
         }
 
-        public void Spawn()
+        public async void Start(bool useDelay)
         {
-            foreach (var enemyWithSpawnPoint in _wave.SpawnPointsData)
+            if (useDelay)
+            {
+                var delayInMilliseconds = (int) (_waveData.CooldownTime * 1000);
+                await Task.Delay(delayInMilliseconds);
+            }
+
+            foreach (var enemyWithSpawnPoint in _waveData.SpawnPointsData)
             {
                 var enemyPrefab = enemyWithSpawnPoint.Enemy;
                 var spawnPoint = enemyWithSpawnPoint.SpawnPoint;
@@ -36,15 +44,18 @@ namespace Assets.Scripts.Enemies.Spawner
 
                 EnemiesManager.Instance.AddEnemy(enemy);
             }
+
+            AlreadySpawned = true;
         }
 
-        private void OnEnemyDied(global::Enemies.Enemy enemy)
+        private void OnEnemyDied(Enemy enemy)
         {
             _enemiesCount--;
 
             if (_enemiesCount == 0)
             {
-                OnWaveDied?.Invoke(_wave);
+                IsFinished = true;
+                OnWaveDied?.Invoke();
             }
         }
     }

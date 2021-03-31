@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Enemies.Spawner
+namespace Enemies.Spawner
 {
     /// <summary>
     /// Спавнер врагов
@@ -12,70 +12,62 @@ namespace Assets.Scripts.Enemies.Spawner
         public event Action AllWavesCleared;
 
         [SerializeField]
-        private List<Wave> _waves;
-        [SerializeField]
-        private bool _hasCooldownTime;
-        [SerializeField]
-        private float _waveCooldown;
+        private List<WaveData> _wavesData;
 
-        private Wave _currentWave;
-        private int _currentWaveIndex = -1;
-
-        private float _nextWaveTime;
+        private readonly Queue<WaveController> _waves =
+            new Queue<WaveController>();
+        private WaveController _activeWave;
+        private WaveController _nextWave;
 
         private void Awake()
         {
-            foreach (var wave in _waves)
+            foreach (var wave in _wavesData)
             {
-                wave.Initialize();
-                wave.Controller.OnWaveDied += OnWaveDied;
+                var waveController = new WaveController(wave);
+                waveController.OnWaveDied += OnWaveDied;
+
+                _waves.Enqueue(waveController);
             }
 
-            SpawnNextWave();
+            StartNextWave(false);
         }
 
         private void Update()
         {
-            if (ShouldSpawnNextWave() && HasNextWave())
+            if (_activeWave != null && _activeWave.IsFinished)
             {
-                SpawnNextWave();
+                StartNextWave(true);
             }
         }
 
-        private bool ShouldSpawnNextWave()
+        private void OnWaveDied()
         {
-            return Time.time >= _nextWaveTime && _hasCooldownTime;
+            StartNextWave(false);
         }
 
-        private bool HasNextWave()
+        private void StartNextWave(bool useDelay)
         {
-            var nextWaveIndex = _currentWaveIndex + 1;
+            if (_waves.Count > 1)
+            {
+                _activeWave = _waves.Dequeue();
 
-            return nextWaveIndex <= _waves.Count - 1;
-        }
+                if (!_activeWave.AlreadySpawned)
+                {
+                    _activeWave?.Start(useDelay);
+                }
+                else
+                {
+                    _activeWave = _waves.Dequeue();
+                    _activeWave?.Start(useDelay);
+                }
 
-        private void SpawnNextWave()
-        {
-            var nextWaveIndex = _currentWaveIndex + 1;
-
-            _currentWave = _waves[nextWaveIndex];
-            _currentWaveIndex = nextWaveIndex;
-            _currentWave.Controller.Spawn();
-
-            _nextWaveTime = Time.time + _waveCooldown;
-        }
-
-        private void OnWaveDied(Wave deadWave)
-        {
-            if (_waves[_waves.Count - 1] == _currentWave)
+                _nextWave = _waves.Dequeue();
+                _nextWave?.Start(true);
+            }
+            else
             {
                 AllWavesCleared?.Invoke();
-                return;
-            }
-            
-            if (deadWave == _currentWave)
-            {
-                SpawnNextWave();
+                Destroy(gameObject);
             }
         }
     }
