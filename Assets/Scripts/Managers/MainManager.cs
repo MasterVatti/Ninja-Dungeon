@@ -6,11 +6,14 @@ using UnityEngine;
 
 public class MainManager : Singleton<MainManager>
 {
+    public static BuildingManager BuildingManager => Instance._buildingManager;
     public static LoadingController LoadingController => Instance._loadingController;
     public static ResourceManager ResourceManager => Instance._resourceManager;
     public static EnemiesManager EnemiesManager => Instance._enemiesManager;
     public static ScreenManager ScreenManager => Instance._screenManager;
-    
+
+    [SerializeField]
+    private BuildingManager _buildingManager;
     [SerializeField]
     private LoadingController _loadingController;
     [SerializeField]
@@ -18,5 +21,5 @@ public class MainManager : Singleton<MainManager>
     [SerializeField]
     private EnemiesManager _enemiesManager;
     [SerializeField]
-    private ScreenManager _screenManager;    
+    private ScreenManager _screenManager;
 }

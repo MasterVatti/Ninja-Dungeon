@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using Assets.Scripts;
 using ResourceSystem;
 using UnityEngine;
-using ResourceManager = Managers.ResourceManager;
 
 namespace BuildingSystem
 {
@@ -12,58 +12,79 @@ namespace BuildingSystem
     public class BuildingController : MonoBehaviour
     {
         private const int PAY_PER_TICK = 1;
+
+        public BuildingSettings BuildingSettings
+        {
+            get => _buildingSettings;
+            private set => _buildingSettings = value;
+        }
+
+        public List<Resource> RequiredResource { get; set; } = new List<Resource>();
         
-        private BuildingSettings BuildingSettings { get; set; }
-        
-        private List<Resource> _requiredResource = new List<Resource>();
         private Dictionary<ResourceType, float> _requiredCooldown;
         private Dictionary<ResourceType, float> _currentCooldown;
+        [SerializeField] private BuildingSettings _buildingSettings;
 
         private void Start()
         {
             //копируем значения списка необходимых ресурсов, чтобы не менять настройки
-            foreach (var requiredResource in BuildingSettings.RequiredResources)    
+            if (RequiredResource.Count == 0)
             {
-                _requiredResource.Add(new Resource(){Type = requiredResource.Type, Amount = requiredResource.Amount});
+                foreach (var requiredResource in BuildingSettings.RequiredResources)
+                {
+                    RequiredResource.Add(new Resource
+                    {
+                        Type = requiredResource.Type,
+                        Amount = requiredResource.Amount
+                    });
+                }
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            SetRequiredCooldown();
-            Build();
-        }
-
-        private void OnTriggerStay(Collider other)
-        {
-            if (!IsConstructionFinished())
+            if (other.gameObject.CompareTag(GlobalConstants.PLAYER_TAG))
             {
+                SetRequiredCooldown();
                 Build();
             }
         }
 
-        public static void CreateNewBuilding(BuildingSettings buildingSettings, bool isPlaceHolder)
+        private void OnTriggerStay(Collider other)
+        {
+            if (!IsConstructionFinished() && other.gameObject.CompareTag(GlobalConstants.PLAYER_TAG))
+            {
+                Debug.Log("VAR");
+                Build();
+            }
+        }
+
+        public static GameObject CreateNewBuilding(BuildingSettings buildingSettings, bool isBuilding)
         {
             var placeHolderPosition = buildingSettings.PlaceHolderPosition;
-            if (isPlaceHolder)
-            {
-                var placeHolderPrefab = buildingSettings.PlaceHolderPrefab;
-                var placeHolderRotation = placeHolderPrefab.transform.rotation;
-                var go = Instantiate(placeHolderPrefab, placeHolderPosition, placeHolderRotation);
-                go.GetComponent<BuildingController>().BuildingSettings = buildingSettings;
-            }
-            else
+            if (isBuilding)
             {
                 var buildingPrefab = buildingSettings.BuildingPrefab;
-                Instantiate(buildingPrefab, placeHolderPosition, buildingPrefab.transform.rotation);
+                var building = Instantiate(buildingPrefab, placeHolderPosition, buildingPrefab.transform.rotation);
+                MainManager.BuildingManager.ActiveBuildings.Add(building);
+                
+                return building;
             }
+            var placeHolderPrefab = buildingSettings.PlaceHolderPrefab;
+            var placeHolderRotation = placeHolderPrefab.transform.rotation;
+                
+            var placeHolder = Instantiate(placeHolderPrefab, placeHolderPosition, placeHolderRotation);
+            placeHolder.GetComponent<BuildingController>().BuildingSettings = buildingSettings;
+            MainManager.BuildingManager.ActivePlaceHolders.Add(placeHolder);
+                
+            return placeHolder;
         }
         
         private void SetRequiredCooldown()
         {
             _requiredCooldown = new Dictionary<ResourceType, float>();
             _currentCooldown = new Dictionary<ResourceType, float>();
-            foreach (var requiredResource in _requiredResource)
+            foreach (var requiredResource in RequiredResource)
             {
                 _requiredCooldown.Add(requiredResource.Type, 
                     BuildingSettings.TimeToBuild / requiredResource.Amount);
@@ -74,7 +95,7 @@ namespace BuildingSystem
 
         private void Build()
         {
-            foreach (var requiredResource in _requiredResource)
+            foreach (var requiredResource in RequiredResource)
             {
                 if (requiredResource.Amount > 0 && 
                     IsPaymentTime(requiredResource) && 
@@ -94,7 +115,7 @@ namespace BuildingSystem
 
         private bool IsConstructionFinished()
         {
-            return _requiredResource.TrueForAll(IsResourceExpired);
+            return RequiredResource.TrueForAll(IsResourceExpired);
         }
 
         private bool IsResourceExpired(Resource resource)
@@ -111,6 +132,11 @@ namespace BuildingSystem
             }
 
             return false;
+        }
+
+        private void OnDestroy()
+        {
+            MainManager.BuildingManager.ActivePlaceHolders.Remove(gameObject);
         }
     }
 }
