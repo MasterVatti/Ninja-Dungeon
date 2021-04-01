@@ -75,7 +75,12 @@ namespace SaveSystem
                     var settings =  MainManager.BuildingManager.GetBuildingSettings(building.SettingsID);
                     var go = BuildingController.CreateNewBuilding(settings, building.IsBuilt);
                     
-                    if (!building.IsBuilt)
+                    if (building.IsBuilt)
+                    {
+                        var buildingType = go.GetComponent<IBuilding>();
+                        buildingType.Initialize(building.State);
+                    }
+                    else
                     {
                         var remainResources = new List<Resource>();
                         foreach (var resource in building.State)
@@ -89,10 +94,6 @@ namespace SaveSystem
                         go.GetComponent<BuildingController>().RequiredResource = remainResources;
                     }
                     
-                    if(go.TryGetComponent<IBuilding>(out var buildingType))
-                    {
-                        buildingType.Initialize(building.State);
-                    }
                 }
             }
 

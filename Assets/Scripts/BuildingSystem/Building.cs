@@ -15,10 +15,13 @@ namespace BuildingSystem
 
         public virtual BuildingData Save()
         {
-           return GetBuildingData();
+           return new BuildingData
+               {
+                   IsBuilt = state.IsBuilt,
+                   SettingsID = state.SettingsID,
+                   State = state.State
+               };
         }
-
-        protected abstract T GetBuildingData();
 
         private void OnDestroy()
         {

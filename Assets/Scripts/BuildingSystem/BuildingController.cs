@@ -13,17 +13,12 @@ namespace BuildingSystem
     {
         private const int PAY_PER_TICK = 1;
 
-        public BuildingSettings BuildingSettings
-        {
-            get => _buildingSettings;
-            private set => _buildingSettings = value;
-        }
+        public BuildingSettings BuildingSettings { get; private set; }
 
         public List<Resource> RequiredResource { get; set; } = new List<Resource>();
         
         private Dictionary<ResourceType, float> _requiredCooldown;
         private Dictionary<ResourceType, float> _currentCooldown;
-        [SerializeField] private BuildingSettings _buildingSettings;
 
         private void Start()
         {

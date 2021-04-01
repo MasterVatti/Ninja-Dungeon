@@ -61,7 +61,7 @@ namespace BuildingSystem
             _miningPerSecond = Convert.ToSingle(savedState["perSecond"]);
         }
 
-        protected override MinerBuildingData GetBuildingData()
+        public override BuildingData Save()
         {
             state = new MinerBuildingData
             {
@@ -73,7 +73,7 @@ namespace BuildingSystem
                 MiningPerSecond = _miningPerSecond,
                 ResourceCount = _currentResourceCount
             };
-            return state;
+            return base.Save();
         }
     }
 }

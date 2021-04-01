@@ -14,6 +14,6 @@ namespace SaveSystem
         public int SettingsID { get; set; }
 
         [JsonProperty("state")]
-        public Dictionary<object, object> State { get; protected set; } = new Dictionary<object, object>();
+        public Dictionary<object, object> State { get; set; } = new Dictionary<object, object>();
     }
 }
