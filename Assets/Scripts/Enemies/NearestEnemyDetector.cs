@@ -20,12 +20,16 @@ namespace Enemies
             {
                 var enemy = _enemiesManager.Enemies[i];
                 var playerPosition = _playerTransform.position;
-                var distanceToPlayer = Vector3.Distance(enemy.transform.position,
-                    playerPosition);
-                if (min > distanceToPlayer)
+                if (enemy != null) //я(Макс) вставил выпадают налы
+                                   //над подумать как решить. Налл выпадает на строке ниже.
                 {
-                    min = distanceToPlayer;
-                    minIndex = i;
+                    var distanceToPlayer = Vector3.Distance(enemy.transform.position,
+                        playerPosition);
+                    if (min > distanceToPlayer)
+                    {
+                        min = distanceToPlayer;
+                        minIndex = i;
+                    }
                 }
             }
 

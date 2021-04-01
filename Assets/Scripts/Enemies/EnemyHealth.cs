@@ -8,6 +8,8 @@ namespace Enemies
     /// </summary>
     public class EnemyHealth : MonoBehaviour
     {
+        public float CurrentHealth => _health;
+        
         [SerializeField] 
         private int _health;
         

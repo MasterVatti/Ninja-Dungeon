@@ -1,0 +1,27 @@
+tree("Root")
+    tree("TopNode")
+//Последовательность: бездействует если на 
+//растоянии 20 нет игрока, 
+//если есть приследует, останавливается на 7,
+//стреляет 3 раза отбегает назад стреляет 3 раза.
+//Если хп меньше 30 спавнит голема.
+tree("TopNode")
+     fallback
+                sequence
+                    IsHealthEnough
+                    GolemSpawn
+                sequence
+                    IsRequiredDistance(7.0)
+                    tree("Shot")
+                    GetRunBackPoint
+                    MoveTo_Destination
+                    tree("Shot")
+                sequence
+                    IsRequiredDistance(20.0)
+                    Chase(7.0)
+  	
+tree("Shot")
+    repeat(3)
+        sequence
+            Wait(0.5)
+            Shooting

@@ -31,6 +31,10 @@ namespace ProjectileLauncher
                 Destroy(gameObject);
                 DealDamage(collision);
             }
+            if (collision.gameObject.CompareTag("Wall"))
+            {
+                Destroy(gameObject);
+            }
         }
 
         public void ProjectileMoving(Vector3 pointToMove)
