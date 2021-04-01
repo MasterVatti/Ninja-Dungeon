@@ -36,7 +36,7 @@ public class ResourceMiner : Building
    [SerializeField] 
    private int _maxStorage;
    [SerializeField] 
-   private float _resourceDeliverySpeedPerSecond=1;
+   private float _resourceDeliverySpeedPerSecond;
    
    private int _currentResourceCount;
    private float _startMiningTime;
