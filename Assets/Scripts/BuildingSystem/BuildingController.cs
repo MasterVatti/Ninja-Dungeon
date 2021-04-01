@@ -54,7 +54,6 @@ namespace BuildingSystem
         {
             if (!IsConstructionFinished() && other.gameObject.CompareTag(GlobalConstants.PLAYER_TAG))
             {
-                Debug.Log("VAR");
                 Build();
             }
         }

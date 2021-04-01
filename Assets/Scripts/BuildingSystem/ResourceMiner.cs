@@ -56,6 +56,9 @@ namespace BuildingSystem
         public override void Initialize(Dictionary<object, object> savedState)
         {
             _startMiningTime = Convert.ToSingle(savedState["startTime"]);
+            _maxStorage = Convert.ToInt32(savedState["storage"]);
+            _currentResourceCount = Convert.ToInt32(savedState["resourceCount"]);
+            _miningPerSecond = Convert.ToSingle(savedState["perSecond"]);
         }
 
         protected override MinerBuildingData GetBuildingData()
@@ -65,7 +68,10 @@ namespace BuildingSystem
                 SettingsID = _miningResource == ResourceType.Gold ? 
                     (int)BuildingSettingsID.Miner : (int)BuildingSettingsID.Sawmill, 
                 IsBuilt = true,
-                StartTime = Time.time
+                StartTime = Time.time,
+                MaxStorage = _maxStorage,
+                MiningPerSecond = _miningPerSecond,
+                ResourceCount = _currentResourceCount
             };
             return state;
         }
