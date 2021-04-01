@@ -5,15 +5,21 @@ namespace Managers
 {
     public class BuildingManager : MonoBehaviour
     {
-        public List<GameObject> ConstructedBuldings = new List<GameObject>();
+        public List<GameObject> ConstructedBuldings
+        {
+            get => _constructedBuldings;
+        }
+        
         [SerializeField]
         private List<BuildingSettings> _startBuildings = new List<BuildingSettings>();
+        
+        private List<GameObject> _constructedBuldings = new List<GameObject>();
 
         private void Start()
         {
             foreach (var placeHolder in _startBuildings)
             {
-                BuildingController.CreateNewBuilding(placeHolder, true);
+               // BuildingController.CreateNewBuilding(placeHolder, true);
             }
         }
     }

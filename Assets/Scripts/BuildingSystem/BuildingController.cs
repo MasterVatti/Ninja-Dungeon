@@ -91,9 +91,9 @@ namespace BuildingSystem
             if (IsConstructionFinished())
             {
                 new BuildFinisher(BuildingSettings, BuildingSettings.ConnectedPlaceHolders).FinishBuilding();
-                var placeHolderPrefab = BuildingSettings.PlaceHolderPrefab;
-                MainManager.BuildingManager.ConstructedBuldings.Add(placeHolderPrefab);
-                OnBuildFinished?.Invoke(placeHolderPrefab);
+                var buildingPrefab = BuildingSettings.BuildingPrefab;
+                MainManager.BuildingManager.ConstructedBuldings.Add(buildingPrefab);
+                OnBuildFinished?.Invoke(buildingPrefab);
                 Destroy(gameObject);
             }
         }

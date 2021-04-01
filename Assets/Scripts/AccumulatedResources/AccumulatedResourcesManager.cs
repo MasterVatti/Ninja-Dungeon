@@ -9,18 +9,18 @@ using UnityEngine;
 public class AccumulatedResourcesManager : MonoBehaviour
 {
     [SerializeField]
-    private BuildingController _buildingController;
+    private Test _buildingController;
     [SerializeField]
     private UIAccumulatedResources _accumulatedResourcesUIPrefab;
 
     void Start()
     {
         var constructedBuildings = MainManager.BuildingManager.ConstructedBuldings;
-        foreach (var bulding in constructedBuildings)
+        foreach (var building in constructedBuildings)
         {
-            if (bulding.GetComponent<ResourceMiner>())
+            if (building.TryGetComponent(out ResourceMiner miner))
             {
-                CreateUIAccumulatedResource(bulding.GetComponent<ResourceMiner>(),FindTagObject(bulding));
+                CreateUIAccumulatedResource(miner,FindTagObject(building));
             }
         }
 
@@ -29,12 +29,12 @@ public class AccumulatedResourcesManager : MonoBehaviour
 
     private void NewBuiltBuilding(GameObject building)
     {
-        if (building.GetComponent<ResourceMiner>())
+        if (building.TryGetComponent(out ResourceMiner miner))
         {
-            CreateUIAccumulatedResource(building.GetComponent<ResourceMiner>(),FindTagObject(building));
+            CreateUIAccumulatedResource(miner,FindTagObject(building));
         }
     }
-
+    
     private Transform FindTagObject(GameObject gameObject)
     {
         foreach (Transform childObject in gameObject.transform)
