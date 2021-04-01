@@ -1,4 +1,3 @@
-using System.Linq;
 using BuildingSystem;
 using UnityEngine;
 
@@ -17,24 +16,21 @@ public class AccumulatedResourcesManager : MonoBehaviour
         var constructedBuildings = MainManager.BuildingManager.ConstructedBuldings;
         foreach (var building in constructedBuildings)
         {
-            if (building.TryGetComponent(out ResourceMiner miner))
-            {
-                CreateUIAccumulatedResource(miner,building.GetComponent<TemporaryClassBuilding>().PositionUI);
-            }
+            CheckObjectOnMiner(building);
         }
 
-        _buildingController.OnBuildFinished += NewBuiltBuilding;
+        _buildingController.OnBuildFinished += CheckObjectOnMiner;
     }
 
-    private void NewBuiltBuilding(GameObject building)
+    private void CheckObjectOnMiner(GameObject building)
     {
         if (building.TryGetComponent(out ResourceMiner miner))
         {
-            CreateUIAccumulatedResource(miner,building.GetComponent<TemporaryClassBuilding>().PositionUI);
+            CreateAccumulatedResourceUI(miner,miner.PositionUI);
         }
     }
     
-    private void CreateUIAccumulatedResource(ResourceMiner resourceMiner,Transform UIposition)
+    private void CreateAccumulatedResourceUI(ResourceMiner resourceMiner,Transform UIposition)
     {
         var accumulatedResource = Instantiate(_accumulatedResourcesUIPrefab,transform);
         accumulatedResource.Initilize(resourceMiner,UIposition);
@@ -42,6 +38,6 @@ public class AccumulatedResourcesManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        _buildingController.OnBuildFinished -= NewBuiltBuilding;
+        _buildingController.OnBuildFinished -= CheckObjectOnMiner;
     }
 }

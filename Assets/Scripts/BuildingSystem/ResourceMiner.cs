@@ -8,7 +8,7 @@ using ResourceManager = Managers.ResourceManager;
 /// через свойство CurrentResourceCount.
 /// Выдает ресурс игроку, если подойти.
 /// </summary>
-public class ResourceMiner : MonoBehaviour
+public class ResourceMiner : TemporaryClassBuilding
 {
     //Свойства для UI
     public ResourceType ExtractableResource => _miningResource;
