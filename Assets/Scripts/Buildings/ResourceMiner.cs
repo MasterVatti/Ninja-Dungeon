@@ -10,6 +10,8 @@ using ResourceManager = Managers.ResourceManager;
 /// </summary>
 public class ResourceMiner : Building
 {
+    private int DELIVER_RESOURCE_COUNT = 1;
+    
     //Свойства для UI
     public ResourceType ExtractableResource => _miningResource;
     public float MaxStorage => _maxStorage;
@@ -19,7 +21,7 @@ public class ResourceMiner : Building
         {
             if (_currentResourceCount < _maxStorage)
             {
-                var count = Mathf.FloorToInt((Time.time - _startMiningTime) / _miningPerSecond);
+                var count = Mathf.FloorToInt((Time.time - _startMiningTime) * _miningPerSecond);
                 _currentResourceCount = Mathf.Clamp(count, 0, _maxStorage);
             }
 
@@ -34,10 +36,11 @@ public class ResourceMiner : Building
    [SerializeField] 
    private int _maxStorage;
    [SerializeField] 
-   private float _resourceDeliverySpeedPerSecond=3;
+   private float _resourceDeliverySpeedPerSecond=1;
    
    private int _currentResourceCount;
    private float _startMiningTime;
+   private float _currenCooldown;
 
    public void Start()
    {
@@ -46,19 +49,21 @@ public class ResourceMiner : Building
 
    private void OnTriggerStay(Collider other)
    {
-       
-       //пытался реализовать метод, который с определенной скоростью
-       //будет доставлять ресурсы из майнера в ресурсы персонажа.
-       //Удалось сделать так, чтобы ресурсы у хринилища постепенно уменьшались.
-       //И все вроде бы хорошо, но если ресурсов в майнере станет 0, то он сходит с ума
-       //и начинает прибавлять ресурсы игроку очень-очень быстро
-       var s = CurrentResourceCount;
-       if (s != 0) 
-       { 
-           _startMiningTime = Mathf.Clamp(_startMiningTime + Time.deltaTime * _resourceDeliverySpeedPerSecond, 0, Time
-                 .time);
-
-           MainManager.ResourceManager.AddResource(_miningResource, s - CurrentResourceCount);
+       if (CurrentResourceCount != 0 && IsDeliveryTime())
+       {
+           _startMiningTime = _startMiningTime + DELIVER_RESOURCE_COUNT/_miningPerSecond;
+           MainManager.ResourceManager.AddResource(_miningResource, DELIVER_RESOURCE_COUNT);
        }
+   }
+
+   private bool IsDeliveryTime()
+   {
+       if (Time.time > _currenCooldown)
+       {
+           _currenCooldown = Time.time + DELIVER_RESOURCE_COUNT / _resourceDeliverySpeedPerSecond;
+           return true;
+       }
+
+       return false;    
    }
 }
