@@ -4,12 +4,11 @@ using UnityEngine;
 
 /// <summary>
 /// Класс распределяет зданиям с ResourceMiner UI для показа ресурсов текущие/максимум
-/// местоположение определяется у дочернего объекта с тэгом "UIPositionAccumulatedResources"
 /// </summary>
 public class AccumulatedResourcesManager : MonoBehaviour
 {
     [SerializeField]
-    private Test _buildingController;
+    private BuildingController _buildingController;
     [SerializeField]
     private UIAccumulatedResources _accumulatedResourcesUIPrefab;
 
@@ -20,7 +19,7 @@ public class AccumulatedResourcesManager : MonoBehaviour
         {
             if (building.TryGetComponent(out ResourceMiner miner))
             {
-                CreateUIAccumulatedResource(miner,FindTagObject(building));
+                CreateUIAccumulatedResource(miner,building.GetComponent<TemporaryClassBuilding>().PositionUI);
             }
         }
 
@@ -31,23 +30,10 @@ public class AccumulatedResourcesManager : MonoBehaviour
     {
         if (building.TryGetComponent(out ResourceMiner miner))
         {
-            CreateUIAccumulatedResource(miner,FindTagObject(building));
+            CreateUIAccumulatedResource(miner,building.GetComponent<TemporaryClassBuilding>().PositionUI);
         }
     }
     
-    private Transform FindTagObject(GameObject gameObject)
-    {
-        foreach (Transform childObject in gameObject.transform)
-        {
-            if (childObject.CompareTag("UIPositionAccumulatedResources"))
-            {
-                return childObject.transform;
-            }
-        }
-        
-        return null;
-    }
-
     private void CreateUIAccumulatedResource(ResourceMiner resourceMiner,Transform UIposition)
     {
         var accumulatedResource = Instantiate(_accumulatedResourcesUIPrefab,transform);

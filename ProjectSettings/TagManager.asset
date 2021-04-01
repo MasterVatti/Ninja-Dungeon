@@ -10,7 +10,6 @@ TagManager:
   - Projectile
   - Damageable
   - Bullet
-  - UIPositionAccumulatedResources
   layers:
   - Default
   - TransparentFX
