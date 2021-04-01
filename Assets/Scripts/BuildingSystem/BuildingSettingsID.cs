@@ -1,5 +1,8 @@
 ﻿namespace BuildingSystem
 {
+    /// <summary>
+    /// Перечисления типов BuildingSettings
+    /// </summary>
     public enum BuildingSettingsID
     {
         Miner = 0,

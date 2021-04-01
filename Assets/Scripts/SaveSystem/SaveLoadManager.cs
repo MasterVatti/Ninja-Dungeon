@@ -8,6 +8,9 @@ using UnityEngine;
 
 namespace SaveSystem
 {
+    /// <summary>
+    /// Менеджер для сохранения и загрузки данных игры
+    /// </summary>
     public class SaveLoadManager : MonoBehaviour
     {
         private void Awake()
@@ -74,7 +77,7 @@ namespace SaveSystem
                     
                     if (!building.IsBuilt)
                     {
-                        List<Resource> remainResources = new List<Resource>();
+                        var remainResources = new List<Resource>();
                         foreach (var resource in building.State)
                         {
                             remainResources.Add(new Resource()

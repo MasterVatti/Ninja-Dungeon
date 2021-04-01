@@ -28,6 +28,7 @@ namespace BuildingSystem
         private void Start()
         {
             //копируем значения списка необходимых ресурсов, чтобы не менять настройки
+            // но только в том случае, если из сохранения нам суюда прилетел пустой список
             if (RequiredResource.Count == 0)
             {
                 foreach (var requiredResource in BuildingSettings.RequiredResources)
@@ -101,7 +102,7 @@ namespace BuildingSystem
                     MainManager.ResourceManager.HasEnough(requiredResource.Type, PAY_PER_TICK))
                 {
                     MainManager.ResourceManager.Pay(requiredResource.Type, PAY_PER_TICK);
-                    requiredResource.Amount -= PAY_PER_TICK;
+                    requiredResource.Amount = PAY_PER_TICK;
                 }
             }
 

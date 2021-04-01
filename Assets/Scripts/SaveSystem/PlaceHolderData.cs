@@ -4,6 +4,9 @@ using ResourceSystem;
 
 namespace SaveSystem
 {
+    /// <summary>
+    /// Информация для сохранения PlaceHolder
+    /// </summary>
     public class PlaceHolderData : BuildingData
     {
         [JsonIgnore]

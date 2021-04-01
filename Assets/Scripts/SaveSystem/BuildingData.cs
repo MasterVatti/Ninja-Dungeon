@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace SaveSystem
 {
+    /// <summary>
+    /// Класс для сохранения зданий всех типов
+    /// </summary>
     public class BuildingData
     {
         [JsonProperty("built")]

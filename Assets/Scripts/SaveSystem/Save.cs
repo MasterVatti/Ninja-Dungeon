@@ -3,6 +3,9 @@ using ResourceSystem;
 
 namespace SaveSystem
 {
+    /// <summary>
+    /// Представление объекта сохранения
+    /// </summary>
     public class Save
     {
         [JsonProperty("resources")]

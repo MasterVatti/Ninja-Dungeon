@@ -2,6 +2,9 @@
 
 namespace SaveSystem
 {
+    /// <summary>
+    /// Информация для сохранения здания типа Miner
+    /// </summary>
     public class MinerBuildingData : BuildingData
     {
         [JsonIgnore]
