@@ -6,10 +6,14 @@
     /// </summary>
     public enum ScreenType
     {
+        None,
         HelloScreen,
         RewardScreen,
         PortalScreen,
         LoadingScreen,
-        DoorScreen
+        DoorScreen,
+        ShopScreen,
+        SawmillScreen,
+        MineScreen
     }
 }

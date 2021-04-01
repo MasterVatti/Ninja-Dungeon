@@ -8,7 +8,7 @@ using ResourceManager = Managers.ResourceManager;
 /// через свойство CurrentResourceCount.
 /// Выдает ресурс игроку, если подойти.
 /// </summary>
-public class ResourceMiner : MonoBehaviour
+public class ResourceMiner : Building
 {
     //Свойства для UI
     public ResourceType ExtractableResource => _miningResource;
@@ -33,6 +33,8 @@ public class ResourceMiner : MonoBehaviour
    private float _miningPerSecond;
    [SerializeField] 
    private int _maxStorage;
+   [SerializeField] 
+   private float _resourceDeliverySpeedPerSecond=3;
    
    private int _currentResourceCount;
    private float _startMiningTime;
@@ -44,10 +46,19 @@ public class ResourceMiner : MonoBehaviour
 
    private void OnTriggerStay(Collider other)
    {
-       if (_currentResourceCount != 0)
-       {
-           MainManager.ResourceManager.AddResource(_miningResource, _currentResourceCount); 
-           _startMiningTime = Time.time;
+       
+       //пытался реализовать метод, который с определенной скоростью
+       //будет доставлять ресурсы из майнера в ресурсы персонажа.
+       //Удалось сделать так, чтобы ресурсы у хринилища постепенно уменьшались.
+       //И все вроде бы хорошо, но если ресурсов в майнере станет 0, то он сходит с ума
+       //и начинает прибавлять ресурсы игроку очень-очень быстро
+       var s = CurrentResourceCount;
+       if (s != 0) 
+       { 
+           _startMiningTime = Mathf.Clamp(_startMiningTime + Time.deltaTime * _resourceDeliverySpeedPerSecond, 0, Time
+                 .time);
+
+           MainManager.ResourceManager.AddResource(_miningResource, s - CurrentResourceCount);
        }
    }
 }
