@@ -2,8 +2,11 @@
 using ResourceSystem;
 using UnityEngine;
 
-namespace Shop
+namespace Assets.Scripts.Shop
 {
+    /// <summary>
+    /// Представление курса
+    /// </summary>
     [Serializable]
     public class ExchangeRate
     {

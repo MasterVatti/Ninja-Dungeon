@@ -7,9 +7,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-namespace Shop
+namespace Assets.Scripts.Shop
 {
-    public class ShopUI : MonoBehaviour
+    /// <summary>
+    /// Отвечает за UI магазина, а также инициализацию контроллеров курсов обмена
+    /// </summary>
+    public class Shop : MonoBehaviour
     {
         [SerializeField]
         private GameObject ExchangeTemplate;
@@ -22,8 +25,6 @@ namespace Shop
         [SerializeField]
         private List<ExchangeRate> _rates;
 
-        private List<InputController> _inputControllers;
-
         private float _pickedCoefficient;
 
         private void Start()
@@ -35,26 +36,10 @@ namespace Shop
             {
                 var rateObject = CreateExchangeItem(rate);
 
-                var inputController = rateObject.transform.GetChild(7)
-                    .GetComponent<InputController>();
-                _inputControllers.Add(inputController);
-
-                inputController.SourceResourceAmountValueChanged +=
-                    InputControllerOnSourceResourceAmountValueChanged;
-                inputController.OnExchangeButtonClicked +=
-                    InputControllerOnOnExchangeButtonClicked;
+                var inputController =
+                    rateObject.GetComponent<ExchangeRateController>();
+                inputController.Initialize(rate, _pickedCoefficient);
             }
-        }
-
-        private void InputControllerOnOnExchangeButtonClicked()
-        {
-            // EXCHANGE LOGIC
-        }
-
-        private void InputControllerOnSourceResourceAmountValueChanged(
-            double newValue)
-        {
-            // CHANGE VALUE
         }
 
         private GameObject CreateExchangeItem(ExchangeRate rate)
@@ -91,17 +76,6 @@ namespace Shop
                 CultureInfo.InvariantCulture);
 
             return rateObject;
-        }
-
-        private void OnDestroy()
-        {
-            foreach (var inputController in _inputControllers)
-            {
-                inputController.SourceResourceAmountValueChanged -=
-                    InputControllerOnSourceResourceAmountValueChanged;
-                inputController.OnExchangeButtonClicked -=
-                    InputControllerOnOnExchangeButtonClicked;
-            }
         }
     }
 }
