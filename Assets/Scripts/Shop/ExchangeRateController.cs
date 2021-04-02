@@ -1,9 +1,11 @@
+using System;
 using System.Globalization;
+using Assets.Scripts.Shop;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Shop
+namespace Shop
 {
     /// <summary>
     /// Отвечает за логику строки в таблице всех курсов:
@@ -15,7 +17,7 @@ namespace Assets.Scripts.Shop
         private Button _exchangeButton;
         [SerializeField]
         private TMP_InputField _sourceAmountInput;
-        
+
         private ExchangeRate _rate;
         private float _rateCoefficient;
         private float _playerCoefficient;
@@ -23,10 +25,9 @@ namespace Assets.Scripts.Shop
         public void Initialize(ExchangeRate rate, float coefficient)
         {
             _playerCoefficient = coefficient;
-            _rateCoefficient = rate.ResultResource.Amount /
-                               rate.SourceResource.Amount;
+            _rateCoefficient = rate.ResultResource.Amount / rate.SourceResource.Amount;
             _rate = rate;
-            
+
             _exchangeButton.onClick.AddListener(ExchangeButtonClicked);
             _sourceAmountInput.onValueChanged.AddListener(ValueChangeCheck);
         }
@@ -36,29 +37,22 @@ namespace Assets.Scripts.Shop
             var resourceToPay = _rate.SourceResource.Type;
             var resourceToGet = _rate.ResultResource.Type;
 
-            MainManager.ResourceManager.Pay(resourceToPay, (int) (_rate
-                .SourceResource.Amount * _playerCoefficient));
-            MainManager.ResourceManager.AddResource(resourceToGet, (int) (_rate
-                .ResultResource.Amount * _playerCoefficient));
+            var sourceResourceAmountValue =
+                Convert.ToInt32(Math.Round(_rate.SourceResource.Amount * _playerCoefficient, 0));
+            var resultResourceAmountValue =
+                Convert.ToInt32(Math.Round(_rate.SourceResource.Amount * _playerCoefficient, 0));
+
+            MainManager.ResourceManager.Pay(resourceToPay, sourceResourceAmountValue);
+            MainManager.ResourceManager.AddResource(resourceToGet, resultResourceAmountValue);
         }
 
         private void ValueChangeCheck(string newValue)
         {
-            var resultAmountInputField = transform.GetChild(6)
-                .GetComponent<TMP_InputField>();
+            var resultAmount =
+                Convert.ToInt32(Math.Round(float.Parse(newValue) * _playerCoefficient * _rateCoefficient, 0));
 
-            if (!float.TryParse(newValue, out _))
-            {
-                resultAmountInputField.text = "0";
-                return;
-            }
-
-            var resultAmount = (int)(float.Parse(newValue) *
-                               _playerCoefficient *
-                               _rateCoefficient);
-            
-            resultAmountInputField.text =
-                resultAmount.ToString(CultureInfo.InvariantCulture);
+            var resultAmountInputField = GetComponent<ExchangeRateView>().ResultAmount;
+            resultAmountInputField.text = resultAmount.ToString(CultureInfo.InvariantCulture);
         }
     }
 }
