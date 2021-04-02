@@ -13,9 +13,6 @@ namespace BuildingSystem
     public class BuildingController : MonoBehaviour
     {
         private const int PAY_PER_TICK = 1;
-        
-        public event Action <GameObject> OnBuildFinished;
-        
         private BuildingSettings BuildingSettings { get; set; }
         
         private List<Resource> _requiredResource = new List<Resource>();
@@ -92,8 +89,7 @@ namespace BuildingSystem
             {
                 new BuildFinisher(BuildingSettings, BuildingSettings.ConnectedPlaceHolders).FinishBuilding();
                 var buildingPrefab = BuildingSettings.BuildingPrefab;
-                MainManager.BuildingManager.ConstructedBuldings.Add(buildingPrefab);
-                OnBuildFinished?.Invoke(buildingPrefab);
+                MainManager.BuildingManager.AddNewConstructedBuilding(buildingPrefab);
                 Destroy(gameObject);
             }
         }

@@ -1,28 +1,25 @@
-using BuildingSystem;
 using UnityEngine;
 
 /// <summary>
 /// Класс распределяет зданиям с ResourceMiner UI для показа ресурсов текущие/максимум
 /// </summary>
-public class AccumulatedResourcesManager : MonoBehaviour
+public class MinerViewsManager : MonoBehaviour
 {
     [SerializeField]
-    private BuildingController _buildingController;
-    [SerializeField]
-    private UIAccumulatedResources _accumulatedResourcesUIPrefab;
+    private MinerView _minerViewPrefab;
 
     void Start()
     {
         var constructedBuildings = MainManager.BuildingManager.ConstructedBuldings;
         foreach (var building in constructedBuildings)
         {
-            CheckObjectOnMiner(building);
+            AddUIToBuilding(building);
         }
 
-        _buildingController.OnBuildFinished += CheckObjectOnMiner;
+        MainManager.BuildingManager.OnBuildFinished += AddUIToBuilding;
     }
 
-    private void CheckObjectOnMiner(GameObject building)
+    private void AddUIToBuilding(GameObject building)
     {
         if (building.TryGetComponent(out ResourceMiner miner))
         {
@@ -32,12 +29,13 @@ public class AccumulatedResourcesManager : MonoBehaviour
     
     private void CreateAccumulatedResourceUI(ResourceMiner resourceMiner,Transform UIposition)
     {
-        var accumulatedResource = Instantiate(_accumulatedResourcesUIPrefab,transform);
+        var accumulatedResource = Instantiate(_minerViewPrefab,transform);
+        
         accumulatedResource.Initilize(resourceMiner,UIposition);
     }
 
     private void OnDestroy()
     {
-        _buildingController.OnBuildFinished -= CheckObjectOnMiner;
+        MainManager.BuildingManager.OnBuildFinished -= AddUIToBuilding;
     }
 }
