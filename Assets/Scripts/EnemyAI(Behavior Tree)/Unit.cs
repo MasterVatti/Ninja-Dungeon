@@ -8,6 +8,7 @@ using UnityEngine.AI;
 /// </summary>
 public class Unit : MonoBehaviour
 {
+    public GameObject Player => _player;
     [SerializeField]
     private EnemyHealth _enemyHealth;
     [SerializeField]
@@ -38,7 +39,7 @@ public class Unit : MonoBehaviour
     }
 
     [Task]
-    private void MoveTo_Destination()
+    private void MoveToDestination()
     {
         MoveTo(_movePoint);
         WaitArrival();
@@ -68,15 +69,15 @@ public class Unit : MonoBehaviour
     private void WaitArrival()
     {
         var task = Task.current;
-        float d = _agent.remainingDistance;
-        if (!task.isStarting && _agent.remainingDistance <= 1e-2)
+        float distance = _agent.remainingDistance;
+        if (!task.isStarting && _agent.remainingDistance <= 1f)
         {
             task.Succeed();
-            d = 0.0f;
+            distance = 0.0f;
         }
 
         if (Task.isInspected)
-            task.debugInfo = string.Format("d-{0:0.00}", d);
+            task.debugInfo = string.Format("distance-{0:0.00}", distance);
     }
     
     [Task]
@@ -107,15 +108,5 @@ public class Unit : MonoBehaviour
     {
         var playerDistance = Vector3.Distance(_player.transform.position, _agent.transform.position);
         return playerDistance <= distance;
-    }
-    
-    [Task]
-    private void GetRunBackPoint(float runBackDistance)
-    {
-        SetColor(Color.green);
-
-        _movePoint = gameObject.transform.TransformPoint(0, 0, 0 - runBackDistance);
-
-        Task.current.Succeed();
     }
 }

@@ -1,0 +1,13 @@
+tree("Root")
+    tree("TopNode")
+//Бежит на точку к игроку.
+//Если игрок на в радиусе атаки, атакует.
+//Станится на 1 сек и опять бежит на точку к игроку.
+
+tree("TopNode")
+        sequence
+            Wait(1.0)
+            GetRunBackPoint
+            MoveToDestination
+            IsRequiredDistance(2.0)
+            Attack

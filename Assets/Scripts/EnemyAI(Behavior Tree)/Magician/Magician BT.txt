@@ -14,7 +14,7 @@ tree("TopNode")
                     IsRequiredDistance(7.0)
                     tree("Shot")
                     GetRunBackPoint
-                    MoveTo_Destination
+                    MoveToDestination
                     tree("Shot")
                 sequence
                     IsRequiredDistance(20.0)
