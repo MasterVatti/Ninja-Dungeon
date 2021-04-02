@@ -6,7 +6,10 @@ using UnityEngine;
 public abstract class Building : MonoBehaviour
 {
    public string BuildingName => _buildingName;
-    
+   public Transform PositionUI => _positionUI;
+   
+   [SerializeField]
+   private Transform _positionUI;
    [SerializeField]
    private string _buildingName;
    [SerializeField]
