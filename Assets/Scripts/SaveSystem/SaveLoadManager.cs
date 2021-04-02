@@ -78,7 +78,8 @@ namespace SaveSystem
                     if (building.IsBuilt)
                     {
                         var buildingType = go.GetComponent<IBuilding>();
-                        buildingType.Initialize(building.State);
+                        var state = JsonConvert.SerializeObject(building);
+                        buildingType.Initialize(state);
                     }
                     else
                     {

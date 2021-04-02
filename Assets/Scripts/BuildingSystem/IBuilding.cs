@@ -8,7 +8,7 @@ namespace BuildingSystem
     /// </summary>
     public interface IBuilding
     {
-        void Initialize(Dictionary<object, object> savedState);
+        void Initialize(string savedData);
         BuildingData Save();
     }
 }

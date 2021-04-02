@@ -11,7 +11,8 @@ namespace BuildingSystem
     public abstract class Building<T> : MonoBehaviour, IBuilding where T : BuildingData
     {
         protected T state;
-        public abstract void Initialize(Dictionary<object, object> savedState);
+
+        public abstract void Initialize(string savedData);
 
         public virtual BuildingData Save()
         {
@@ -21,11 +22,6 @@ namespace BuildingSystem
                    SettingsID = state.SettingsID,
                    State = state.State
                };
-        }
-
-        private void OnDestroy()
-        {
-            MainManager.BuildingManager.ActiveBuildings.Remove(gameObject);
         }
     }
 }
