@@ -1,7 +1,5 @@
-using System;
 using ResourceSystem;
 using UnityEngine;
-using ResourceManager = Managers.ResourceManager;
 
 /// <summary>
 /// Класс возвращает количество ресурса, добытого к данному моменту
@@ -10,8 +8,6 @@ using ResourceManager = Managers.ResourceManager;
 /// </summary>
 public class ResourceMiner : Building
 {
-    private int DELIVER_RESOURCE_COUNT = 1;
-    
     //Свойства для UI
     public ResourceType ExtractableResource => _miningResource;
     public float MaxStorage => _maxStorage;
@@ -21,7 +17,7 @@ public class ResourceMiner : Building
         {
             if (_currentResourceCount < _maxStorage)
             {
-                var count = Mathf.FloorToInt((Time.time - _startMiningTime) * _miningPerSecond);
+                var count = Mathf.FloorToInt((Time.time - _startMiningTime) / _miningPerSecond);
                 _currentResourceCount = Mathf.Clamp(count, 0, _maxStorage);
             }
 
@@ -35,13 +31,10 @@ public class ResourceMiner : Building
    private float _miningPerSecond;
    [SerializeField] 
    private int _maxStorage;
-   [SerializeField] 
-   private float _resourceDeliverySpeedPerSecond;
-   
+
    private int _currentResourceCount;
    private float _startMiningTime;
-   private float _currenCooldown;
-
+   
    public void Start()
    {
        _startMiningTime = Time.time;
@@ -49,21 +42,10 @@ public class ResourceMiner : Building
 
    private void OnTriggerStay(Collider other)
    {
-       if (CurrentResourceCount != 0 && IsDeliveryTime())
+       if (CurrentResourceCount != 0)
        {
-           _startMiningTime = _startMiningTime + DELIVER_RESOURCE_COUNT/_miningPerSecond;
-           MainManager.ResourceManager.AddResource(_miningResource, DELIVER_RESOURCE_COUNT);
+           MainManager.ResourceManager.AddResource(_miningResource, _currentResourceCount);
+           _startMiningTime = Time.time;
        }
-   }
-
-   private bool IsDeliveryTime()
-   {
-       if (Time.time > _currenCooldown)
-       {
-           _currenCooldown = Time.time + DELIVER_RESOURCE_COUNT / _resourceDeliverySpeedPerSecond;
-           return true;
-       }
-
-       return false;    
    }
 }
