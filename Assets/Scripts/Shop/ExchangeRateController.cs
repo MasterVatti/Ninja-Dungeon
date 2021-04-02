@@ -29,7 +29,7 @@ namespace Shop
             _rate = rate;
 
             _exchangeButton.onClick.AddListener(ExchangeButtonClicked);
-            _sourceAmountInput.onValueChanged.AddListener(ValueChangeCheck);
+            _sourceAmountInput.onValueChanged.AddListener(UpdateResultAmount);
         }
 
         private void ExchangeButtonClicked()
@@ -40,13 +40,13 @@ namespace Shop
             var sourceResourceAmountValue =
                 Convert.ToInt32(Math.Round(_rate.SourceResource.Amount * _playerCoefficient, 0));
             var resultResourceAmountValue =
-                Convert.ToInt32(Math.Round(_rate.SourceResource.Amount * _playerCoefficient, 0));
+                Convert.ToInt32(Math.Round(_rate.ResultResource.Amount * _playerCoefficient, 0));
 
             MainManager.ResourceManager.Pay(resourceToPay, sourceResourceAmountValue);
             MainManager.ResourceManager.AddResource(resourceToGet, resultResourceAmountValue);
         }
 
-        private void ValueChangeCheck(string newValue)
+        private void UpdateResultAmount(string newValue)
         {
             var resultAmount =
                 Convert.ToInt32(Math.Round(float.Parse(newValue) * _playerCoefficient * _rateCoefficient, 0));

@@ -29,18 +29,15 @@ namespace Shop
 
             foreach (var rate in _rates)
             {
-                var rateObject = CreateExchangeItem(rate);
-
-                var inputController = rateObject.GetComponent<ExchangeRateController>();
-                inputController.Initialize(rate, _pickedCoefficient);
+                CreateAndInitializeExchangeItem(rate);
             }
         }
 
-        private GameObject CreateExchangeItem(ExchangeRate rate)
+        private void CreateAndInitializeExchangeItem(ExchangeRate rate)
         {
             var rateObject = Instantiate(_exchangeTemplate, transform);
             rateObject.GetComponent<ExchangeRateView>().Initialize(rate, _pickedCoefficient);
-            return rateObject;
+            rateObject.GetComponent<ExchangeRateController>().Initialize(rate, _pickedCoefficient);
         }
     }
 }
