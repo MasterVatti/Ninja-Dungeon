@@ -21,29 +21,22 @@ namespace SaveSystem
         private static Resource[] SaveResources() => MainManager.ResourceManager.GetResources().ToArray();
 
 
-        private static IEnumerable<BuildingData> SaveBuildings()
+        private static IEnumerable<BuildingData> SaveConstructions()
         {
             var buildings = MainManager.BuildingManager.ActiveBuildings;
-            var savedBuildings = new BuildingData[buildings.Count];
+            var placeHolders = MainManager.BuildingManager.ActivePlaceHolders;
+            var savedConstructions = new BuildingData[buildings.Count];
             
             for(var i = 0; i < buildings.Count; i++)
             {
                 var buildingData = buildings[i].GetComponent<IBuilding>().Save();
-                savedBuildings[i] = buildingData;
+                savedConstructions[i] = buildingData;
             }
-
-            return savedBuildings;
-        }
-
-        private static IEnumerable<BuildingData> SavePlaceHolders()
-        {
-            var placeHolders = MainManager.BuildingManager.ActivePlaceHolders;
-            var savedPlaceHolders = new BuildingData[placeHolders.Count];
             
             for(var i = 0; i < placeHolders.Count; i++)
             {
                 var buildingController = placeHolders[i].GetComponent<BuildingController>();
-                savedPlaceHolders[i] = new PlaceHolderData
+                savedConstructions[i] = new PlaceHolderData
                 {
                     IsBuilt = false,
                     SettingsID = buildingController.BuildingSettings.ID,
@@ -51,7 +44,7 @@ namespace SaveSystem
                 };
             }
 
-            return savedPlaceHolders;
+            return savedConstructions;
         }
         
         private void Load()
@@ -106,11 +99,10 @@ namespace SaveSystem
 
         private void Save()
         {
-            var saveBuildings = SaveBuildings().Concat(SavePlaceHolders());
             var save = new Save
             {
                 Resources = SaveResources(), 
-                Buildings = saveBuildings.ToArray()
+                Buildings = SaveConstructions().ToArray()
             };
             var json = JsonConvert.SerializeObject(save, Formatting.Indented);
             PlayerPrefs.SetString("save", json);

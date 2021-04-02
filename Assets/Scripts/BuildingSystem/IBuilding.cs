@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using SaveSystem;
+﻿using SaveSystem;
 
 namespace BuildingSystem
 {

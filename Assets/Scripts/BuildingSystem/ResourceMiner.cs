@@ -1,4 +1,3 @@
-using Newtonsoft.Json;
 using ResourceSystem;
 using SaveSystem;
 using UnityEngine;
@@ -54,13 +53,13 @@ namespace BuildingSystem
    
         public override void Initialize(string savedData)
         {
-            var minerData = JsonConvert.DeserializeObject<MinerBuildingData>(savedData);
-            if (minerData != null)
+            base.Initialize(savedData);
+            if (state != null)
             {
-                _startMiningTime = minerData.StartTime;
-                _maxStorage = minerData.MaxStorage;
-                _currentResourceCount = minerData.ResourceCount;
-                _miningPerSecond = minerData.MiningPerSecond;
+                _startMiningTime = state.StartTime;
+                _maxStorage = state.MaxStorage;
+                _currentResourceCount = state.ResourceCount;
+                _miningPerSecond = state.MiningPerSecond;
             }
         }
 

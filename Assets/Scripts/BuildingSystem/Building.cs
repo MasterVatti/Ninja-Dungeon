@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 using SaveSystem;
 using UnityEngine;
 
@@ -12,7 +12,10 @@ namespace BuildingSystem
     {
         protected T state;
 
-        public abstract void Initialize(string savedData);
+        public virtual void Initialize(string savedData)
+        {
+            state = JsonConvert.DeserializeObject<T>(savedData);
+        }
 
         public virtual BuildingData Save()
         {
