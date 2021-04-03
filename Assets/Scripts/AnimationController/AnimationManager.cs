@@ -51,7 +51,7 @@ public class AnimationManager : MonoBehaviour
             }
         }
     }
-    
+     
     public void ShowFlyingResource(ResourceType resourceType, Vector3 source, Vector3 destination,bool straight = false)
     {
         _flyStraight = straight;
