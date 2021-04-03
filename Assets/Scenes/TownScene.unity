@@ -2016,11 +2016,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a402f5a04c5acb14bb9748d3ec4abc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buildings: []
-  _startBuildings: []
-  _activeBuildings:
-  - {fileID: 3228005045040613776}
-  - {fileID: 5457801769880036524}
+  _buildings:
+  - {fileID: 11400000, guid: 81c0af36b2315e84bb1664e2289ba69c, type: 2}
+  - {fileID: 11400000, guid: 255ec3c7721d0d241afcb5d4de7b3701, type: 2}
 --- !u!114 &632376148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2033,6 +2031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973d4aeba44250b499bd5bbc64a1bb2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buildingManager: {fileID: 632376147}
   _loadingController: {fileID: 0}
   _resourceManager: {fileID: 632376142}
   _enemiesManager: {fileID: 0}

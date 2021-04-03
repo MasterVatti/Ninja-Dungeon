@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace SaveSystem
 {
@@ -14,6 +13,6 @@ namespace SaveSystem
         public int SettingsID { get; set; }
 
         [JsonProperty("state")]
-        public Dictionary<object, object> State { get; set; } = new Dictionary<object, object>();
+        public string State { get; set; }
     }
 }

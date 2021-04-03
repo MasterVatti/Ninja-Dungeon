@@ -7,17 +7,9 @@ namespace SaveSystem
     /// <summary>
     /// Информация для сохранения PlaceHolder
     /// </summary>
-    public class PlaceHolderData : BuildingData
+    public class PlaceHolderData : BaseBuildingState
     {
-        [JsonIgnore]
-        public List<Resource> RemainResources
-        {
-            set
-            {
-                foreach (var resource in value)
-                {
-                    State.Add((int)resource.Type, resource.Amount);
-                }
-            } }
+        [JsonProperty("remainResource")]
+        public List<Resource> RemainResources { get; set; }
     }
 }

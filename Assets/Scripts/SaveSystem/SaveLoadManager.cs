@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using BuildingSystem;
 using Newtonsoft.Json;
@@ -25,7 +24,7 @@ namespace SaveSystem
         {
             var buildings = MainManager.BuildingManager.ActiveBuildings;
             var placeHolders = MainManager.BuildingManager.ActivePlaceHolders;
-            var savedConstructions = new BuildingData[buildings.Count];
+            var savedConstructions = new BuildingData[buildings.Count + placeHolders.Count];
             
             for(var i = 0; i < buildings.Count; i++)
             {
@@ -36,11 +35,15 @@ namespace SaveSystem
             for(var i = 0; i < placeHolders.Count; i++)
             {
                 var buildingController = placeHolders[i].GetComponent<BuildingController>();
-                savedConstructions[i] = new PlaceHolderData
+                var placeHolderData = new PlaceHolderData
+                {
+                    RemainResources = buildingController.RequiredResource
+                };
+                savedConstructions[i] = new BuildingData
                 {
                     IsBuilt = false,
                     SettingsID = buildingController.BuildingSettings.ID,
-                    RemainResources = buildingController.RequiredResource
+                    State = JsonConvert.SerializeObject(placeHolderData)
                 };
             }
 
@@ -71,20 +74,11 @@ namespace SaveSystem
                     if (building.IsBuilt)
                     {
                         var buildingType = go.GetComponent<IBuilding>();
-                        var state = JsonConvert.SerializeObject(building);
-                        buildingType.Initialize(state);
+                        buildingType.Initialize(building.State);
                     }
                     else
                     {
-                        var remainResources = new List<Resource>();
-                        foreach (var resource in building.State)
-                        {
-                            remainResources.Add(new Resource()
-                            {
-                                Type = (ResourceType)Convert.ToInt32(resource.Key),
-                                Amount = Convert.ToSingle(resource.Value)
-                            });
-                        }
+                        var remainResources = JsonConvert.DeserializeObject<List<Resource>>(building.State);
                         go.GetComponent<BuildingController>().RequiredResource = remainResources;
                     }
                     

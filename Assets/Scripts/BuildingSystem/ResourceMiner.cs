@@ -51,29 +51,27 @@ namespace BuildingSystem
             }
         }
    
-        public override void Initialize(string savedData)
+        protected override void Initialize(MinerBuildingData data)
         {
-            base.Initialize(savedData);
-            if (state != null)
+            if (data != null)
             {
-                _startMiningTime = state.StartTime;
-                _maxStorage = state.MaxStorage;
-                _currentResourceCount = state.ResourceCount;
-                _miningPerSecond = state.MiningPerSecond;
+                _startMiningTime = data.StartTime;
+                _maxStorage = data.MaxStorage;
+                _currentResourceCount = data.ResourceCount;
+                _miningPerSecond = data.MiningPerSecond;
+                _miningResource = data.Resource;
             }
         }
 
         public override BuildingData Save()
         {
-            state = new MinerBuildingData
+            _state = new MinerBuildingData
             {
-                SettingsID = _miningResource == ResourceType.Gold ? 
-                    (int)BuildingSettingsID.Miner : (int)BuildingSettingsID.Sawmill, 
-                IsBuilt = true,
                 StartTime = Time.time,
                 MaxStorage = _maxStorage,
                 MiningPerSecond = _miningPerSecond,
-                ResourceCount = _currentResourceCount
+                ResourceCount = _currentResourceCount,
+                Resource = _miningResource
             };
             return base.Save();
         }

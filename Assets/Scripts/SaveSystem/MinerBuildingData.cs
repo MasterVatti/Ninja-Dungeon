@@ -1,37 +1,21 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace SaveSystem
 {
     /// <summary>
     /// Информация для сохранения здания типа Miner
     /// </summary>
-    public class MinerBuildingData : BuildingData
+    public class MinerBuildingData : BaseBuildingState
     {
-        [JsonIgnore]
-        public float StartTime
-        {
-            get => Convert.ToSingle(State["startTime"]);
-            set => State.Add("startTime", value);
-        }
-        [JsonIgnore]
-        public int ResourceCount
-        {
-            get => Convert.ToInt32(State["resourceCount"]);
-            set => State.Add("resourceCount", value);
-        }
-        [JsonIgnore]
-        public float MiningPerSecond
-        {
-            get => Convert.ToSingle(State["perSecond"]);
-            set => State.Add("perSecond", value);
-        }
-        [JsonIgnore]
-        public int MaxStorage
-        {
-            get => Convert.ToInt32(State["storage"]);
-            set => State.Add("storage", value);
-        }
-        
+        [JsonProperty("startTime")]
+        public float StartTime { get; set; }
+        [JsonProperty("miningPerSecond")]
+        public float MiningPerSecond { get; set; }
+        [JsonProperty("resourceCount")]
+        public int ResourceCount { get; set; }
+        [JsonProperty("maxStorage")]
+        public int MaxStorage { get; set; }
+        [JsonProperty("resourceType")]
+        public ResourceSystem.ResourceType Resource { get; set; }
     }
 }

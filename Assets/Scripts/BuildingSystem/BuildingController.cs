@@ -14,7 +14,6 @@ namespace BuildingSystem
         private const int PAY_PER_TICK = 1;
 
         public BuildingSettings BuildingSettings { get; private set; }
-
         public List<Resource> RequiredResource { get; set; } = new List<Resource>();
         
         private Dictionary<ResourceType, float> _requiredCooldown;
@@ -62,6 +61,8 @@ namespace BuildingSystem
                 var buildingPrefab = buildingSettings.BuildingPrefab;
                 var building = Instantiate(buildingPrefab, placeHolderPosition, buildingPrefab.transform.rotation);
                 MainManager.BuildingManager.ActiveBuildings.Add(building);
+
+                building.GetComponent<IBuilding>().BuildingSettingsID = buildingSettings.ID;
                 
                 return building;
             }
@@ -97,7 +98,7 @@ namespace BuildingSystem
                     MainManager.ResourceManager.HasEnough(requiredResource.Type, PAY_PER_TICK))
                 {
                     MainManager.ResourceManager.Pay(requiredResource.Type, PAY_PER_TICK);
-                    requiredResource.Amount = PAY_PER_TICK;
+                    requiredResource.Amount -= PAY_PER_TICK;
                 }
             }
 
@@ -127,11 +128,6 @@ namespace BuildingSystem
             }
 
             return false;
-        }
-
-        private void OnDestroy()
-        {
-            MainManager.BuildingManager.ActivePlaceHolders.Remove(gameObject);
         }
     }
 }
