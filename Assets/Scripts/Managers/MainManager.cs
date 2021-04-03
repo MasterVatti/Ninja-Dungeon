@@ -2,6 +2,7 @@ using Assets.Scripts.Managers.ScreensManager;
 using Enemies;
 using LoadingScene;
 using Managers;
+using PlayerScripts.Movement;
 using UnityEngine;
 
 public class MainManager : Singleton<MainManager>
@@ -12,6 +13,7 @@ public class MainManager : Singleton<MainManager>
     public static ScreenManager ScreenManager => Instance._screenManager;
     public static AnimationManager AnimationManager => Instance._animationManager;
     public static BuildingManager BuildingManager => Instance._buildingManager;
+    public static PlayerMovementController PlayerMovementController => Instance._playerMovementController;
     
     [SerializeField]
     private LoadingController _loadingController;
@@ -24,5 +26,7 @@ public class MainManager : Singleton<MainManager>
     [SerializeField]
     private AnimationManager _animationManager;    
     [SerializeField]
-    private BuildingManager _buildingManager;
+    private BuildingManager _buildingManager; 
+    [SerializeField]
+    private PlayerMovementController _playerMovementController;
 }

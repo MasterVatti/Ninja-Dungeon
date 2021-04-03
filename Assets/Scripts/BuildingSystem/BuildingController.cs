@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using PlayerScripts.Movement;
 using ResourceSystem;
 using UnityEngine;
 using ResourceManager = Managers.ResourceManager;
@@ -13,8 +14,10 @@ namespace BuildingSystem
     public class BuildingController : MonoBehaviour
     {
         private const int PAY_PER_TICK = 1;
-        private BuildingSettings BuildingSettings { get; set; }
-        
+
+        [SerializeField]
+        private BuildingSettings BuildingSettings;
+
         private List<Resource> _requiredResource = new List<Resource>();
         private Dictionary<ResourceType, float> _requiredCooldown;
         private Dictionary<ResourceType, float> _currentCooldown;
@@ -24,7 +27,7 @@ namespace BuildingSystem
             //копируем значения списка необходимых ресурсов, чтобы не менять настройки
             foreach (var requiredResource in BuildingSettings.RequiredResources)    
             {
-                _requiredResource.Add(new Resource(){Type = requiredResource.Type, Amount = requiredResource.Amount});
+                 _requiredResource.Add(new Resource(){Type = requiredResource.Type, Amount = requiredResource.Amount});
             }
         }
 
@@ -82,6 +85,9 @@ namespace BuildingSystem
                 {
                     MainManager.ResourceManager.Pay(requiredResource.Type, PAY_PER_TICK);
                     requiredResource.Amount -= PAY_PER_TICK;
+                    
+                    MainManager.AnimationManager.ShowFlyingResource
+                        (requiredResource.Type,MainManager.PlayerMovementController.transform.position,transform.position);
                 }
             }
 
