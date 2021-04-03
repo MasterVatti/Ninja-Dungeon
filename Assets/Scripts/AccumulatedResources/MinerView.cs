@@ -12,6 +12,7 @@ public class MinerView : MonoBehaviour
    private TextMeshProUGUI _maxResource;
    
    private ResourceMiner _resourceMiner;
+   private Transform test;
    
    private void Update()
    {
@@ -19,11 +20,11 @@ public class MinerView : MonoBehaviour
       _maxResource.text = _resourceMiner.MaxStorage.ToString();
    }
 
-   public void Initilize(ResourceMiner resourceMiner, Transform positionUI)
+   public void Initilize(ResourceMiner resourceMiner, Vector3 positionUI)
    {
       _resourceMiner = resourceMiner;
-      
-      transform.position = positionUI.position;
+
+      transform.position = positionUI;
       transform.rotation = Quaternion.identity;
    }
 }

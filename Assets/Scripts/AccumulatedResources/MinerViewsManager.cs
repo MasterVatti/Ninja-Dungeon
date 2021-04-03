@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -31,11 +32,14 @@ public class MinerViewsManager : MonoBehaviour
     {
         var accumulatedResource = Instantiate(_minerViewPrefab,transform);
         
-        accumulatedResource.Initilize(resourceMiner,UIposition);
+        accumulatedResource.Initilize(resourceMiner,UIposition.position);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        MainManager.BuildingManager.OnBuildFinished -= AddUIToBuilding;
+        if (MainManager.BuildingManager != null)
+        {
+            MainManager.BuildingManager.OnBuildFinished -= AddUIToBuilding;
+        }
     }
 }

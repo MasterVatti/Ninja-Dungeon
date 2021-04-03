@@ -58,7 +58,8 @@ namespace BuildingSystem
             else
             {
                 var buildingPrefab = buildingSettings.BuildingPrefab;
-                Instantiate(buildingPrefab, placeHolderPosition, buildingPrefab.transform.rotation);
+                var building = Instantiate(buildingPrefab, placeHolderPosition, buildingPrefab.transform.rotation);
+                MainManager.BuildingManager.AddNewConstructedBuilding(building);
             }
         }
         
@@ -94,8 +95,6 @@ namespace BuildingSystem
             if (IsConstructionFinished())
             {
                 new BuildFinisher(BuildingSettings, BuildingSettings.ConnectedPlaceHolders).FinishBuilding();
-                var buildingPrefab = BuildingSettings.BuildingPrefab;
-                MainManager.BuildingManager.AddNewConstructedBuilding(buildingPrefab);
                 Destroy(gameObject);
             }
         }
