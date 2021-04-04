@@ -10,12 +10,18 @@ namespace ProjectileLauncher
     {
         [SerializeField] 
         private float _projectileSpeed;
+        
         [SerializeField] 
         private int _damage;
+        
+        [SerializeField]
+        private float _timeToRemove = 5f;
+        
         private Rigidbody _rigidbody;
         
         private void Awake()
         {
+            Destroy(gameObject, _timeToRemove);
             _rigidbody = GetComponent<Rigidbody>();
         }
 

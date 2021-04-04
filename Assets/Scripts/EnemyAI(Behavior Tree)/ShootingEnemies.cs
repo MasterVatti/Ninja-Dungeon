@@ -10,10 +10,13 @@ public class ShootingEnemies : MonoBehaviour
 {
     [SerializeField]
     private GameObject _bulletPrefab;
+    
     [SerializeField]
     private float _bulletSpeed;
+    
     [SerializeField]
     private float _shotCooldownTime;
+    
     [SerializeField]
     private Unit _unit;
 
@@ -29,7 +32,6 @@ public class ShootingEnemies : MonoBehaviour
 
     private void Shot()
     {
-        
         if (Time.time > _nextShotTime)
         {
             _nextShotTime = Time.time + _shotCooldownTime;
@@ -37,6 +39,8 @@ public class ShootingEnemies : MonoBehaviour
             gameObject.transform.LookAt(_player.transform.position);
 
             //Если будет оружие сдееллать инстантейтить от него
+            _agent.isStopped = true;
+            _unit.SetColor(Color.blue);
             var newBullet = Instantiate(_bulletPrefab, gameObject.transform.position,
                 gameObject.transform.rotation);
             newBullet.GetComponent<Rigidbody>().velocity = gameObject.transform.forward * _bulletSpeed;
@@ -48,9 +52,14 @@ public class ShootingEnemies : MonoBehaviour
     [Task]
     private void Shooting()
     {
-        _agent.isStopped = true;
-        _unit.SetColor(Color.blue);
-        
-        Shot();
+        var directionToPlayer = _player.transform.position - transform.position;
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, directionToPlayer.normalized, out hit))
+        {
+            if (hit.collider.CompareTag("Player"))
+            {
+                Shot();
+            }
+        }
     }
 }
