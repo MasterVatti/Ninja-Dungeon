@@ -8,13 +8,15 @@ namespace ProjectileLauncher
     /// </summary>
     public class ProjectileLauncher : MonoBehaviour
     {
-        
         [SerializeField] 
         private Projectile _projectilePrefab;
+        
         [SerializeField] 
         private float _projectileSpawnCooldown;
+        
         [SerializeField] 
         private NearestEnemyDetector _enemyDetector;
+        
         private float _currentTime;
         
         private void Update()
@@ -25,10 +27,13 @@ namespace ProjectileLauncher
             }
             else
             {
-                _currentTime = 0;
-                if (EnemiesManager.Singleton.Enemies.Count > 0)
+                foreach (var enemy in EnemiesManager.Singleton.Enemies)
                 {
-                    CreateProjectile();
+                    _currentTime = 0;
+                    if (EnemiesManager.Singleton.Enemies.Count > 0 && enemy != null)
+                    {
+                        CreateProjectile();
+                    }
                 }
             }
         }

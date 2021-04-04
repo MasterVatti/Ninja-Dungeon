@@ -9,6 +9,7 @@ namespace Enemies
     {
         [SerializeField] 
         private EnemiesManager _enemiesManager;
+        
         [SerializeField] 
         private Transform _playerTransform;
 
@@ -20,8 +21,7 @@ namespace Enemies
             {
                 var enemy = _enemiesManager.Enemies[i];
                 var playerPosition = _playerTransform.position;
-                if (enemy != null) //я(Макс) вставил выпадают налы
-                                   //над подумать как решить. Налл выпадает на строке ниже.
+                if (enemy != null) 
                 {
                     var distanceToPlayer = Vector3.Distance(enemy.transform.position,
                         playerPosition);
@@ -32,7 +32,6 @@ namespace Enemies
                     }
                 }
             }
-
             return _enemiesManager.Enemies[minIndex];
         }
     }
