@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273de372e6cb1c24e9aa6d4f71f9ccf1, type: 3}
   m_Name: PortalSetting
   m_EditorClassIdentifier: 
+  _id: 0
   _connectedPlaceHolders:
   - {fileID: 11400000, guid: a13cd1a59069aab4eb965d0b3c5466f4, type: 2}
   _requiredResources:

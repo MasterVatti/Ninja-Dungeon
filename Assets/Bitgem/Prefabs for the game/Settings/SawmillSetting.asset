@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273de372e6cb1c24e9aa6d4f71f9ccf1, type: 3}
   m_Name: SawmillSetting
   m_EditorClassIdentifier: 
+  _id: 1
   _connectedPlaceHolders:
   - {fileID: 11400000, guid: 924d24cd3e08e8a43999d89dd5de98c9, type: 2}
   - {fileID: 11400000, guid: 600f404c0c98baf4eb2eb843e8f400e4, type: 2}

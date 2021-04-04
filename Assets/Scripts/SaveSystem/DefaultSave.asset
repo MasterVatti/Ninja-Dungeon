@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7445251bcc1d4bdea2abc4f9941a03c3, type: 3}
   m_Name: DefaultSave
   m_EditorClassIdentifier: 
-  _startResources: []
-  _startBuildings: []
-  _startPlaceHolders: []
+  _startResources:
+  - _type: 0
+    _amount: 1000
+  - _type: 1
+    _amount: 1000
+  - _type: 2
+    _amount: 1000
+  _startConstructions:
+  - _isBuilt: 0
+    _settingsID: 0
