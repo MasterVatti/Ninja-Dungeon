@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using ResourceSystem;
 using UnityEngine;
 
@@ -9,13 +9,38 @@ namespace SaveSystem
     {
         public Save DefaultSave => new Save
         {
-            Buildings = new List<BuildingData>(_startConstructions).ToArray(),
-            Resources = new List<Resource>(_startResources).ToArray()
+            Buildings = StartConstructions,
+            Resources = StartResources
         };
 
+        private Resource[] StartResources
+        {
+            get
+            {
+                return _startResources.Select(resource => new Resource
+                {
+                    Type = resource.Type,
+                    Amount = resource.Amount
+                }).ToArray();
+            }
+        }
+
+        private BuildingData[] StartConstructions
+        {
+            get
+            {
+                return _startConstructions.Select(construction => new BuildingData
+                {
+                    IsBuilt = construction.IsBuilt,
+                    SettingsID = construction.SettingsID,
+                    State = ""
+                }).ToArray();
+            }
+        }
+
         [SerializeField]
-        private List<Resource> _startResources;
+        private Resource[] _startResources;
         [SerializeField]
-        private List<BuildingData> _startConstructions;
+        private BuildingData[] _startConstructions;
     }
 }

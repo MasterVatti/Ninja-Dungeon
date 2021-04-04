@@ -13,7 +13,7 @@ namespace BuildingSystem
     {
         private const int PAY_PER_TICK = 1;
 
-        public List<Resource> RequiredResource { get; set; }
+        public List<Resource> RequiredResource { get; set; } = new List<Resource>();
 
 
         public BuildingSettings BuildingSettings { get; private set; }
@@ -63,8 +63,11 @@ namespace BuildingSystem
                 var buildingPrefab = buildingSettings.BuildingPrefab;
                 var building = Instantiate(buildingPrefab, placeHolderPosition, buildingPrefab.transform.rotation);
                 MainManager.BuildingManager.AddNewConstructedBuilding(building);
-                building.GetComponent<IBuilding>().BuildingSettingsID = buildingSettings.ID;
-                
+                if (building.TryGetComponent<IBuilding>(out var buildingData))
+                {
+                    buildingData.BuildingSettingsID = buildingSettings.ID;
+                }
+
                 return building;
             }
             var placeHolderPrefab = buildingSettings.PlaceHolderPrefab;
