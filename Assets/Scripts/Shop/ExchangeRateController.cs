@@ -37,10 +37,12 @@ namespace Shop
             var resourceToPay = _rate.SourceResource.Type;
             var resourceToGet = _rate.ResultResource.Type;
 
-            var sourceResourceAmountValue =
-                Convert.ToInt32(Math.Round(_rate.SourceResource.Amount * _playerCoefficient, 0));
+            var view = GetComponent<ExchangeRateView>();
+            var sourceResourceAmount = Math.Round(float.Parse(view.SourceAmount.text), 0);
+
+            var sourceResourceAmountValue = Convert.ToInt32(Math.Round(sourceResourceAmount, 0));
             var resultResourceAmountValue =
-                Convert.ToInt32(Math.Round(_rate.ResultResource.Amount * _playerCoefficient, 0));
+                Convert.ToInt32(Math.Round(sourceResourceAmount * _playerCoefficient * _rateCoefficient, 0));
 
             MainManager.ResourceManager.Pay(resourceToPay, sourceResourceAmountValue);
             MainManager.ResourceManager.AddResource(resourceToGet, resultResourceAmountValue);

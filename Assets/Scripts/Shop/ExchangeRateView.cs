@@ -13,6 +13,7 @@ namespace Shop
     /// </summary>
     public class ExchangeRateView : MonoBehaviour
     {
+        public TMP_InputField SourceAmount => _sourceAmount;
         public TMP_InputField ResultAmount => _resultAmount;
         
         [SerializeField]
