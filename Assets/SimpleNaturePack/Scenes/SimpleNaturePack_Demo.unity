@@ -2010,6 +2010,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ca0e498b28a8142997017e39654402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _resourceImages:
+  - _type: 0
+    _resourseSprite: {fileID: 21300000, guid: 3b839497b0c76b344944ed9c09fc0c39, type: 3}
+  - _type: 1
+    _resourseSprite: {fileID: 21300000, guid: 3dcb9d68d9f65f84186d54fb25b98e64, type: 3}
+  - _type: 2
+    _resourseSprite: {fileID: 21300000, guid: 0a8eaa09f76e9514fb2756cf71caa966, type: 3}
   _minerViewPrefab: {fileID: 3654191358967922677, guid: 14463b3fb13ca184089be8199baceeea,
     type: 3}
 --- !u!1001 &1258554360

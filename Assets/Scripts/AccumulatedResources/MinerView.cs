@@ -1,6 +1,7 @@
 using BuildingSystem;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Класс выводит в UI максимальное значение и текущее
@@ -11,6 +12,8 @@ public class MinerView : MonoBehaviour
    private TextMeshProUGUI _currentResource;
    [SerializeField]
    private TextMeshProUGUI _maxResource;
+   [SerializeField]
+   private Image _image;
    
    private ResourceMiner _resourceMiner;
    private Transform test;
@@ -21,10 +24,11 @@ public class MinerView : MonoBehaviour
       _maxResource.text = _resourceMiner.MaxStorage.ToString();
    }
 
-   public void Initilize(ResourceMiner resourceMiner, Vector3 positionUI)
+   public void Initilize(ResourceMiner resourceMiner, Vector3 positionUI, Sprite sprite)
    {
       _resourceMiner = resourceMiner;
 
+      _image.sprite = sprite;
       transform.position = positionUI;
       transform.rotation = Quaternion.identity;
    }

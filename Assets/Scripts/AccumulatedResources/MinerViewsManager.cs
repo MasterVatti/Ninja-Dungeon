@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using BuildingSystem;
 
@@ -7,7 +8,10 @@ using BuildingSystem;
 public class MinerViewsManager : MonoBehaviour
 {
     [SerializeField]
+    private List<ResourceImage> _resourceImages = new List<ResourceImage>();
+    [SerializeField]
     private MinerView _minerViewPrefab;
+    
 
     void Start()
     {
@@ -32,7 +36,20 @@ public class MinerViewsManager : MonoBehaviour
     {
         var accumulatedResource = Instantiate(_minerViewPrefab,transform);
         
-        accumulatedResource.Initilize(resourceMiner,UIposition.position);
+        accumulatedResource.Initilize(resourceMiner,UIposition.position,GetResourceSprite(resourceMiner));
+    }
+
+    private Sprite GetResourceSprite(ResourceMiner resourceMiner)
+    {
+        foreach (var resource in _resourceImages)
+        {
+            if (resource.Type == resourceMiner.ExtractableResource)
+            {
+                return resource.Sprite;
+            }
+        }
+
+        return null;
     }
 
     private void OnDisable()
