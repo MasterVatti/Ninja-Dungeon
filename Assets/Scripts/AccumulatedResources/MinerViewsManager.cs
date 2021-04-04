@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using BuildingSystem;
 
 /// <summary>
 /// Класс распределяет зданиям с ResourceMiner UI для показа ресурсов текущие/максимум

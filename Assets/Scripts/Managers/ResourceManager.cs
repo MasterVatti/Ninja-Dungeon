@@ -10,7 +10,6 @@ namespace Managers
     /// </summary>
     public class ResourceManager : MonoBehaviour
     {
-        
         [SerializeField]
         private List<Resource> _resources;
 
@@ -29,11 +28,20 @@ namespace Managers
             GetResourceByType(type).Amount += value;
         }
 
+        public List<Resource> GetResources()
+        {
+            return _resources;
+        }
+
+        public void SetResources(IEnumerable<Resource> resources)
+        {
+            _resources = new List<Resource>(resources.ToList());
+        }
+
         private Resource GetResourceByType(ResourceType type)
         {
             var resource = _resources.FirstOrDefault(res => res.Type == type);
-            return resource ?? new Resource() {Amount = 0, Type = type};
-
+            return resource ?? new Resource {Amount = 0, Type = type};
         }
     }
 }
