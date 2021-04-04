@@ -3,9 +3,10 @@ using System.Linq;
 using BuildingSystem;
 using Newtonsoft.Json;
 using ResourceSystem;
+using SaveSystem;
 using UnityEngine;
 
-namespace SaveSystem
+namespace Managers
 {
     /// <summary>
     /// Менеджер для сохранения и загрузки данных игры

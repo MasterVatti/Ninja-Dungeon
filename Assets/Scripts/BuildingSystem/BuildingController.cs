@@ -110,6 +110,7 @@ namespace BuildingSystem
             if (IsConstructionFinished())
             {
                 new BuildFinisher(BuildingSettings, BuildingSettings.ConnectedPlaceHolders).FinishBuilding();
+                MainManager.BuildingManager.ActivePlaceHolders.Remove(gameObject);
                 Destroy(gameObject);
             }
         }

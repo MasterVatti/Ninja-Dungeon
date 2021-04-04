@@ -14,6 +14,7 @@ public class MainManager : Singleton<MainManager>
     public static AnimationManager AnimationManager => Instance._animationManager;
     public static BuildingManager BuildingManager => Instance._buildingManager;
     public static PlayerMovementController PlayerMovementController => Instance._playerMovementController;
+    public static SaveLoadManager SaveLoadManager => Instance._saveLoadManager;
     
     [SerializeField]
     private LoadingController _loadingController;
@@ -29,4 +30,7 @@ public class MainManager : Singleton<MainManager>
     private BuildingManager _buildingManager; 
     [SerializeField]
     private PlayerMovementController _playerMovementController;
+    [SerializeField]
+    private SaveLoadManager _saveLoadManager;
+    
 }
