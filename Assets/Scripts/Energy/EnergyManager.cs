@@ -14,6 +14,5 @@ public class EnergyManager : MonoBehaviour
         {
             _energyCount = 0;
         }
-        Debug.Log(_energyCount);
     }
 }

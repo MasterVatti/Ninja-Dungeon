@@ -6,13 +6,15 @@ public class SettingsIconClick : MonoBehaviour
     // Start is called before the first frame update
     private void OpenSettingsScreen()
     {
-        var context = new SettingsContext
+        var context = new PortalContext()
         {
-            firstSetting = "Настройки"
+            Description = "_settings.ScreenDescription, ",
+            SceneName = "Settings"
         };
         ScreenManager.Instance.OpenScreenWithContext(ScreenType
-            .PortalScreen, context);
+            .DoorScreen, context);
     }
+    
     public void OnClick()
     {
         OpenSettingsScreen();
