@@ -7,21 +7,13 @@ namespace Managers
 {
     public class BuildingManager : MonoBehaviour
     {
-        public List<GameObject> ActiveBuildings => _activeBuildings;
-
-        public List<GameObject> ActivePlaceHolders => _activePlaceHolders;
+        public event Action <GameObject> OnBuildFinished;
+        
+        public List<GameObject> ActiveBuildings { get; } = new List<GameObject>();
+        public List<GameObject> ActivePlaceHolders { get; } = new List<GameObject>();
 
         [SerializeField]
         private List<BuildingSettings> _buildings = new List<BuildingSettings>();
-        [SerializeField]
-        private List<GameObject> _activePlaceHolders = new List<GameObject>();
-        [SerializeField]
-        private List<GameObject> _activeBuildings = new List<GameObject>();
-        public event Action <GameObject> OnBuildFinished;
-        public List<GameObject> ConstructedBuldings => _constructedBuldings;
-        
-        private List<BuildingSettings> _startBuildings = new List<BuildingSettings>();
-        private List<GameObject> _constructedBuldings = new List<GameObject>();
 
         public BuildingSettings GetBuildingSettings(int buildingID)
         {
@@ -30,7 +22,7 @@ namespace Managers
 
         public void AddNewConstructedBuilding(GameObject building)
         {
-            ConstructedBuldings.Add(building);
+            ActiveBuildings.Add(building);
             OnBuildFinished?.Invoke(building);
         }
     }

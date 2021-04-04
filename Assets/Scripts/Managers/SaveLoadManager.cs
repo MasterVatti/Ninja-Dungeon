@@ -13,15 +13,17 @@ namespace Managers
     /// </summary>
     public class SaveLoadManager : MonoBehaviour
     {
+        [SerializeField]
+        private DefaultSaveConfig _saveConfig;
         private void Awake()
         {
             Load();
         }
         
-        private static Resource[] SaveResources() => MainManager.ResourceManager.GetResources().ToArray();
+        private Resource[] SaveResources() => MainManager.ResourceManager.GetResources().ToArray();
 
 
-        private static IEnumerable<BuildingData> SaveConstructions()
+        public IEnumerable<BuildingData> SaveConstructions()
         {
             var buildings = MainManager.BuildingManager.ActiveBuildings;
             var placeHolders = MainManager.BuildingManager.ActivePlaceHolders;
@@ -29,8 +31,10 @@ namespace Managers
             
             for(var i = 0; i < buildings.Count; i++)
             {
-                var buildingData = buildings[i].GetComponent<IBuilding>().Save();
-                savedConstructions[i] = buildingData;
+                if (buildings[i].TryGetComponent<IBuilding>(out var buildingData))
+                {
+                    savedConstructions[i] = buildingData.Save();
+                }
             }
             
             for(var i = 0; i < placeHolders.Count; i++)
@@ -56,14 +60,13 @@ namespace Managers
             var json = PlayerPrefs.GetString("save");
             var save = JsonConvert.DeserializeObject<Save>(json);
             
-            BuildingData[] buildings = {};
-            Resource[] resources = {};
-            
-            if (save != null)
+            if (save == null)
             {
-                buildings = save.Buildings;
-                resources = save.Resources;
+                save = _saveConfig.DefaultSave;
             }
+            
+            var buildings = save.Buildings;
+            var resources = save.Resources;
 
             if (buildings != null)
             {
@@ -74,13 +77,18 @@ namespace Managers
                     
                     if (building.IsBuilt)
                     {
-                        var buildingType = go.GetComponent<IBuilding>();
-                        buildingType.Initialize(building.State);
+                        if (go.TryGetComponent<IBuilding>(out var buildingData))
+                        {
+                            buildingData.Initialize(building.State);
+                        }
                     }
                     else
                     {
-                        var remainResources = JsonConvert.DeserializeObject<List<Resource>>(building.State);
-                        go.GetComponent<BuildingController>().RequiredResource = remainResources;
+                        var placeHolderData = JsonConvert.DeserializeObject<PlaceHolderData>(building.State);
+                        if (placeHolderData != null)
+                        {
+                            go.GetComponent<BuildingController>().RequiredResource = placeHolderData.RemainResources;
+                        }
                     }
                     
                 }

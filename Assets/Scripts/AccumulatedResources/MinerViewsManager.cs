@@ -1,62 +1,65 @@
 using System.Collections.Generic;
-using UnityEngine;
 using BuildingSystem;
+using UnityEngine;
 
-/// <summary>
-/// Класс распределяет зданиям с ResourceMiner UI для показа ресурсов текущие/максимум
-/// </summary>
-public class MinerViewsManager : MonoBehaviour
+namespace AccumulatedResources
 {
-    [SerializeField]
-    private List<ResourceImage> _resourceImages = new List<ResourceImage>();
-    [SerializeField]
-    private MinerView _minerViewPrefab;
+    /// <summary>
+    /// Класс распределяет зданиям с ResourceMiner UI для показа ресурсов текущие/максимум
+    /// </summary>
+    public class MinerViewsManager : MonoBehaviour
+    {
+        [SerializeField]
+        private List<ResourceImage> _resourceImages = new List<ResourceImage>();
+        [SerializeField]
+        private MinerView _minerViewPrefab;
     
 
-    void Start()
-    {
-        var constructedBuildings = MainManager.BuildingManager.ConstructedBuldings;
-        foreach (var building in constructedBuildings)
+        void Start()
         {
-            AddUIToBuilding(building);
-        }
-
-        MainManager.BuildingManager.OnBuildFinished += AddUIToBuilding;
-    }
-
-    private void AddUIToBuilding(GameObject building)
-    {
-        if (building.TryGetComponent(out ResourceMiner miner))
-        {
-            CreateAccumulatedResourceUI(miner,miner.PositionUI);
-        }
-    }
-    
-    private void CreateAccumulatedResourceUI(ResourceMiner resourceMiner,Transform UIposition)
-    {
-        var accumulatedResource = Instantiate(_minerViewPrefab,transform);
-        
-        accumulatedResource.Initilize(resourceMiner,UIposition.position,GetResourceSprite(resourceMiner));
-    }
-
-    private Sprite GetResourceSprite(ResourceMiner resourceMiner)
-    {
-        foreach (var resource in _resourceImages)
-        {
-            if (resource.Type == resourceMiner.ExtractableResource)
+            var constructedBuildings = MainManager.BuildingManager.ActiveBuildings;
+            foreach (var building in constructedBuildings)
             {
-                return resource.Sprite;
+                AddUIToBuilding(building);
+            }
+
+            MainManager.BuildingManager.OnBuildFinished += AddUIToBuilding;
+        }
+
+        private void AddUIToBuilding(GameObject building)
+        {
+            if (building.TryGetComponent(out ResourceMiner miner))
+            {
+                CreateAccumulatedResourceUI(miner,miner.PositionUI);
             }
         }
-
-        return null;
-    }
-
-    private void OnDisable()
-    {
-        if (MainManager.BuildingManager != null)
+    
+        private void CreateAccumulatedResourceUI(ResourceMiner resourceMiner,Transform UIposition)
         {
-            MainManager.BuildingManager.OnBuildFinished -= AddUIToBuilding;
+            var accumulatedResource = Instantiate(_minerViewPrefab,transform);
+        
+            accumulatedResource.Initilize(resourceMiner,UIposition.position,GetResourceSprite(resourceMiner));
+        }
+
+        private Sprite GetResourceSprite(ResourceMiner resourceMiner)
+        {
+            foreach (var resource in _resourceImages)
+            {
+                if (resource.Type == resourceMiner.ExtractableResource)
+                {
+                    return resource.Sprite;
+                }
+            }
+
+            return null;
+        }
+
+        private void OnDisable()
+        {
+            if (MainManager.BuildingManager != null)
+            {
+                MainManager.BuildingManager.OnBuildFinished -= AddUIToBuilding;
+            }
         }
     }
 }

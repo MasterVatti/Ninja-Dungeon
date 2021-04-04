@@ -12,11 +12,11 @@ namespace BuildingSystem
     public class BuildingController : MonoBehaviour
     {
         private const int PAY_PER_TICK = 1;
-        
-        public List<Resource> RequiredResource { get; set; } = new List<Resource>();
 
-        
-        public BuildingSettings BuildingSettings;
+        public List<Resource> RequiredResource { get; set; }
+
+
+        public BuildingSettings BuildingSettings { get; private set; }
         
         private Dictionary<ResourceType, float> _requiredCooldown;
         private Dictionary<ResourceType, float> _currentCooldown;
@@ -62,7 +62,6 @@ namespace BuildingSystem
             {
                 var buildingPrefab = buildingSettings.BuildingPrefab;
                 var building = Instantiate(buildingPrefab, placeHolderPosition, buildingPrefab.transform.rotation);
-                MainManager.BuildingManager.ActiveBuildings.Add(building);
                 MainManager.BuildingManager.AddNewConstructedBuilding(building);
 
                 //building.GetComponent<IBuilding>().BuildingSettingsID = buildingSettings.ID;
