@@ -14,7 +14,7 @@ namespace BuildingSystem
         private const int PAY_PER_TICK = 1;
         
         public List<Resource> RequiredResource { get; set; } = new List<Resource>();
-        private BuildingSettings BuildingSettings { get; set; }
+        public BuildingSettings BuildingSettings { get; set; }
         
         private Dictionary<ResourceType, float> _requiredCooldown;
         private Dictionary<ResourceType, float> _currentCooldown;

@@ -11,46 +11,52 @@ namespace BuildingSystem
     /// </summary>
     public class ResourceMiner : Building<MinerBuildingData>
     {
-    //Свойства для UI
-    public ResourceType ExtractableResource => _miningResource;
-    public float MaxStorage => _maxStorage;
-    public int CurrentResourceCount 
-    {
-        get
+        //Свойства для UI
+        public ResourceType ExtractableResource => _miningResource;
+        public float MaxStorage => _maxStorage;
+
+        public int CurrentResourceCount
         {
-            if (_currentResourceCount < _maxStorage)
+            get
             {
-                var count = Mathf.FloorToInt((Time.time - _startMiningTime) / _miningPerSecond);
-                _currentResourceCount = Mathf.Clamp(count, 0, _maxStorage);
+                if (_currentResourceCount < _maxStorage)
+                {
+                    var count = Mathf.FloorToInt((Time.time - _startMiningTime) / _miningPerSecond);
+                    _currentResourceCount = Mathf.Clamp(count, 0, _maxStorage);
+                }
+
+                return _currentResourceCount;
             }
-
-            return _currentResourceCount;
         }
-    }
 
-   [SerializeField] 
-   private ResourceType _miningResource;
-   [SerializeField] 
-   private float _miningPerSecond;
-   [SerializeField] 
-   private int _maxStorage;
+        public Transform PositionUI => _positionUI;
 
-   private int _currentResourceCount;
-   private float _startMiningTime;
-   
-   public void Start()
-   {
-       _startMiningTime = Time.time;
-   }
-   private void OnTriggerStay(Collider other)
-   {
-       if (_currentResourceCount != 0)
-       {
-                MainManager.ResourceManager.AddResource(_miningResource, _currentResourceCount); 
+        [SerializeField]
+        private ResourceType _miningResource;
+        [SerializeField]
+        private float _miningPerSecond;
+        [SerializeField]
+        private int _maxStorage;
+        [SerializeField]
+        private Transform _positionUI;
+
+        private int _currentResourceCount;
+        private float _startMiningTime;
+
+        public void Start()
+        {
+            _startMiningTime = Time.time;
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (_currentResourceCount != 0)
+            {
+                MainManager.ResourceManager.AddResource(_miningResource, _currentResourceCount);
                 _startMiningTime = Time.time;
-       }
-   }
-   
+            }
+        }
+
         protected override void Initialize(MinerBuildingData data)
         {
             if (data != null)
