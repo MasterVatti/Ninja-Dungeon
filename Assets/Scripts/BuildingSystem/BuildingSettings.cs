@@ -34,5 +34,6 @@ namespace BuildingSystem
         private float _timeToBuild;
         [SerializeField]
         private Vector3 _placeHolderPosition;
+        
     }
 }

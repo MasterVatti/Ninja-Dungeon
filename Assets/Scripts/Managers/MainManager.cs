@@ -10,6 +10,8 @@ public class MainManager : Singleton<MainManager>
     public static ResourceManager ResourceManager => Instance._resourceManager;
     public static EnemiesManager EnemiesManager => Instance._enemiesManager;
     public static ScreenManager ScreenManager => Instance._screenManager;
+    public static AnimationManager AnimationManager => Instance._animationManager;
+    public static BuildingManager BuildingManager => Instance._buildingManager;
     
     [SerializeField]
     private LoadingController _loadingController;
@@ -18,5 +20,9 @@ public class MainManager : Singleton<MainManager>
     [SerializeField]
     private EnemiesManager _enemiesManager;
     [SerializeField]
-    private ScreenManager _screenManager;    
+    private ScreenManager _screenManager;   
+    [SerializeField]
+    private AnimationManager _animationManager;    
+    [SerializeField]
+    private BuildingManager _buildingManager;
 }
