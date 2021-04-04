@@ -10,6 +10,7 @@ namespace BuildingSystem
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/BuildingSettings", order = 1)]
     public class BuildingSettings : ScriptableObject
     {
+        public int ID => _id;
         public List<BuildingSettings> ConnectedPlaceHolders => _connectedPlaceHolders;
 
         public GameObject BuildingPrefab => _buildingPrefab;
@@ -22,6 +23,8 @@ namespace BuildingSystem
         
         public Vector3 PlaceHolderPosition => _placeHolderPosition;
         
+        [SerializeField]
+        private int _id;
         [SerializeField]
         private List<BuildingSettings> _connectedPlaceHolders = new List<BuildingSettings>();
         [SerializeField]
