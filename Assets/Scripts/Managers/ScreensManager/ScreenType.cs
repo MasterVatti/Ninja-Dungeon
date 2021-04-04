@@ -10,6 +10,7 @@
         RewardScreen,
         PortalScreen,
         LoadingScreen,
-        DoorScreen
+        DoorScreen,
+        SettingsScreen
     }
 }

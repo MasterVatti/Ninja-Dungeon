@@ -15,6 +15,11 @@ namespace Door
         private TMP_Text _descriptionField;
         [SerializeField]
         private TMP_Text _difficultyLevelField;
+        [SerializeField] 
+        private EnergyManager _energyManager;
+
+        [SerializeField]
+        private int _energyDecreaseCount = 35;
         private string _sceneName;
 
         [UsedImplicitly]
@@ -32,8 +37,12 @@ namespace Door
 
         public void OnClick()
         {
-            ScreenManager.Instance.CloseTopScreen();
-            LoadingController.Instance.StartLoad(_sceneName);
+            if (_energyManager.Energy > 0)
+            {
+                _energyManager.EnergyDecrease(_energyDecreaseCount);
+                ScreenManager.Instance.CloseTopScreen();
+                LoadingController.Instance.StartLoad(_sceneName);
+            }
         }
 
         public override void Initialize(ScreenType screenType)

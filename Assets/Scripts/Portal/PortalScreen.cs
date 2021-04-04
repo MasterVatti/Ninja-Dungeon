@@ -11,6 +11,8 @@ public class PortalScreen : BaseScreenWithContext<PortalContext>
 {
     [SerializeField]
     private TMP_Text _descriptionField;
+
+    
     private string _sceneName;
     
     [UsedImplicitly]
@@ -24,15 +26,15 @@ public class PortalScreen : BaseScreenWithContext<PortalContext>
         _descriptionField.text = context.Description;
         _sceneName = context.SceneName;
     }
-    
-    public void OnClick()
-    {
-        ScreenManager.Instance.CloseTopScreen();
-        LoadingController.Instance.StartLoad(_sceneName);
-    }
 
     public override void Initialize(ScreenType screenType)
     {
         ScreenType = screenType;
+    }
+    
+    private void OnClick()
+    {
+        ScreenManager.Instance.CloseTopScreen();
+        LoadingController.Instance.StartLoad(_sceneName);
     }
 }
