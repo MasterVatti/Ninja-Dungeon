@@ -1,9 +1,7 @@
-<<<<<<< Updated upstream
-﻿using System.Collections.Generic;
-=======
-﻿using System.Linq;
+
+using System.Collections.Generic;
+using System.Linq;
 using BuildingSystem;
->>>>>>> Stashed changes
 using ResourceSystem;
 using UnityEngine;
 
@@ -14,13 +12,9 @@ namespace SaveSystem
     {
         public Save DefaultSave => new Save
         {
-            Buildings = new List<BuildingData>(_startConstructions).ToArray(),
+            Buildings = StartConstructions,
             Resources = new List<Resource>(_startResources).ToArray()
         };
-
-<<<<<<< Updated upstream
-=======
-        private Resource[] StartResources => _startResources;
 
         private BuildingData[] StartConstructions
         {
@@ -43,16 +37,11 @@ namespace SaveSystem
             }
         }
 
->>>>>>> Stashed changes
         [SerializeField]
         private List<Resource> _startResources;
         [SerializeField]
-<<<<<<< Updated upstream
-        private List<BuildingData> _startConstructions;
-=======
         private BuildingSettings[] _startBuildings;
         [SerializeField]
         private BuildingSettings[] _startPlaceHolders;
->>>>>>> Stashed changes
     }
 }
