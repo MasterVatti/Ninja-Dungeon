@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8969086174256435460}
   - component: {fileID: 6068606362443722521}
   - component: {fileID: 7229207229831426250}
+  - component: {fileID: 5263061879233260452}
   m_Layer: 0
   m_Name: ShopBase
   m_TagString: Untagged
@@ -44,8 +45,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 15, y: 8, z: 12}
-  m_Center: {x: 0, y: 4, z: 0}
+  m_Size: {x: 17.314507, y: 8, z: 15.906612}
+  m_Center: {x: 0.43426847, y: 4, z: 0.1995821}
 --- !u!114 &7229207229831426250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,7 +59,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5290533781751d14db8666aef6aaed4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingSettings: {fileID: 11400000, guid: 924d24cd3e08e8a43999d89dd5de98c9, type: 2}
+--- !u!65 &5263061879233260452
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3984928345223576583}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12.410065, y: 7.158059, z: 9.980265}
+  m_Center: {x: 0.16603565, y: 3.0790296, z: -1.1874475}
 --- !u!1001 &1535188668217484692
 PrefabInstance:
   m_ObjectHideFlags: 0

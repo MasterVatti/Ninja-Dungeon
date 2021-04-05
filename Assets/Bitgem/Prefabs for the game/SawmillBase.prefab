@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8476027229824540135}
   - component: {fileID: 6814886478504693501}
   - component: {fileID: 8824470949056874646}
+  - component: {fileID: 82964135256487442}
   m_Layer: 0
   m_Name: SawmillBase
   m_TagString: Untagged
@@ -51,8 +52,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 13, y: 8, z: 13}
-  m_Center: {x: 0, y: 4, z: 0}
+  m_Size: {x: 15.204576, y: 8, z: 14.105768}
+  m_Center: {x: 0.726666, y: 4, z: 1.8540432}
 --- !u!114 &8824470949056874646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +66,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5290533781751d14db8666aef6aaed4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingSettings: {fileID: 11400000, guid: a13cd1a59069aab4eb965d0b3c5466f4, type: 2}
+--- !u!65 &82964135256487442
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7724395076348898431}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12.557732, y: 5.426152, z: 8.1594715}
+  m_Center: {x: 0.06619549, y: 2.2130756, z: 0.98783016}
 --- !u!1001 &1171690933415965116
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -55,12 +55,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e70b5b87f25573f45af1116fdfdd135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _positionUI: {fileID: 7866709397159217824}
-  _buildingName: 
-  _screenType: 0
   _miningResource: 0
   _miningPerSecond: 10
   _maxStorage: 100
+  _positionUI: {fileID: 7866709397159217824}
+--- !u!65 &1255194345575603024
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5284114885193351311}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.354757, y: 1, z: 10.810579}
+  m_Center: {x: 0.5026436, y: 0, z: 0.87127495}
 --- !u!1001 &5283205951969120863
 PrefabInstance:
   m_ObjectHideFlags: 0

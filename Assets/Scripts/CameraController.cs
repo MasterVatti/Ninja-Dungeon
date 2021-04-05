@@ -9,13 +9,8 @@ public class CameraController : MonoBehaviour
     private Transform _targetToFollow;
     [SerializeField]
     private Vector3 _offset;
-    [SerializeField]
-    private float _speed;
-    
-    private void Update()
+    void Update()
     {
-        transform.position =
-            Vector3.Lerp(transform.position,
-                _targetToFollow.position + _offset, Time.deltaTime * _speed);
+        transform.position = _targetToFollow.position + _offset;
     }
 }
