@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273de372e6cb1c24e9aa6d4f71f9ccf1, type: 3}
   m_Name: MineSetting
   m_EditorClassIdentifier: 
-  _id: 3
+  _id: 1
   _connectedPlaceHolders: []
   _requiredResources:
-  - _type: 0
+  - _type: 1
     _amount: 100
   _buildingPrefab: {fileID: 5284114885193351311, guid: df511b266d69cb149a1fe6726790908b,
     type: 3}
   _placeHolderPrefab: {fileID: 1796408563735853696, guid: df1732c3adc0ba248b05da99c743c527,
     type: 3}
   _timeToBuild: 5
-  _placeHolderPosition: {x: -51.28504, y: 0.3740644, z: 29.21058}
+  _placeHolderPosition: {x: -60, y: 0, z: 20}
