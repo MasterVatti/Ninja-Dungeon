@@ -1,15 +1,16 @@
+using BuildingSystem;
 using ResourceSystem;
 using SaveSystem;
 using UnityEngine;
 
-namespace BuildingSystem
+namespace Buildings
 {
     /// <summary>
     /// Класс возвращает количество ресурса, добытого к данному моменту
     /// через свойство CurrentResourceCount.
     /// Выдает ресурс игроку, если подойти.
     /// </summary>
-    public class ResourceMiner : Building<MinerBuildingData>
+    public class ResourceMiner : Building<MinerBuildingData>, IUpgradable
     {
         //Свойства для UI
         public ResourceType ExtractableResource => _miningResource;
@@ -29,6 +30,9 @@ namespace BuildingSystem
             }
         }
 
+        public int CurrentBuildingLevel { get; set; }
+        public BuildingUpgrader Upgrader { get; set; } = new BuildingUpgrader();
+
         public Transform PositionUI => _positionUI;
 
         [SerializeField]
@@ -39,11 +43,11 @@ namespace BuildingSystem
         private int _maxStorage;
         [SerializeField]
         private Transform _positionUI;
-
+        
         private int _currentResourceCount;
         private float _startMiningTime;
 
-        public void Start()
+        private void Start()
         {
             _startMiningTime = Time.time;
         }
@@ -57,15 +61,13 @@ namespace BuildingSystem
             }
         }
 
-        protected override void Initialize(MinerBuildingData data)
+        public void Upgrade()
         {
-            if (data != null)
+            var buildingSettings = MainManager.BuildingManager.GetBuildingSettings(BuildingSettingsID);
+            if (Upgrader.Upgrade(buildingSettings, CurrentBuildingLevel + 1))
             {
-                _startMiningTime = data.StartTime;
-                _maxStorage = data.MaxStorage;
-                _currentResourceCount = data.ResourceCount;
-                _miningPerSecond = data.MiningPerSecond;
-                _miningResource = data.Resource;
+                MainManager.BuildingManager.ActiveBuildings.Remove(gameObject);
+                Destroy(gameObject);
             }
         }
 
@@ -80,6 +82,18 @@ namespace BuildingSystem
                 Resource = _miningResource
             };
             return base.Save();
+        }
+
+        protected override void Initialize(MinerBuildingData data)
+        {
+            if (data != null)
+            {
+                _startMiningTime = data.StartTime;
+                _maxStorage = data.MaxStorage;
+                _currentResourceCount = data.ResourceCount;
+                _miningPerSecond = data.MiningPerSecond;
+                _miningResource = data.Resource;
+            }
         }
     }
 }

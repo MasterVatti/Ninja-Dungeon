@@ -55,12 +55,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e70b5b87f25573f45af1116fdfdd135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _positionUI: {fileID: 7866709397159217824}
-  _buildingName: 
-  _screenType: 0
   _miningResource: 0
   _miningPerSecond: 10
   _maxStorage: 100
+  _positionUI: {fileID: 7866709397159217824}
+  _currentBuildingLevel: 0
 --- !u!1001 &5283205951969120863
 PrefabInstance:
   m_ObjectHideFlags: 0

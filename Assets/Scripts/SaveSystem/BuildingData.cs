@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace SaveSystem
 {
@@ -11,27 +10,15 @@ namespace SaveSystem
     public class BuildingData
     {
         [JsonProperty("built")]
-        public bool IsBuilt
-        {
-            get => _isBuilt;
-            set => _isBuilt = value;
-        }
+        public bool IsBuilt { get; set; }
 
         [JsonProperty("settingsID")]
-        public int SettingsID
-        {
-            get => _settingsID;
-            set => _settingsID = value;
-        }
+        public int SettingsID { get; set; }
+        
+        [JsonProperty("buildingLvl")]
+        public int BuildingLevel { get; set; }
 
         [JsonProperty("state")]
         public string State { get; set; }
-        
-        [JsonIgnore]
-        [SerializeField]
-        private bool _isBuilt;
-        [JsonIgnore]
-        [SerializeField]
-        private int _settingsID;
     }
 }

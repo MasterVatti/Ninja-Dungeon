@@ -42,12 +42,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e70b5b87f25573f45af1116fdfdd135e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _positionUI: {fileID: 2337632094152252679}
-  _buildingName: 
-  _screenType: 0
   _miningResource: 1
-  _miningPerSecond: 1
-  _maxStorage: 100000
+  _miningPerSecond: 15
+  _maxStorage: 150
+  _positionUI: {fileID: 2337632094152252679}
+--- !u!65 &7924167846528861984
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496318909535179114}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12.015999, y: 1, z: 8.747191}
+  m_Center: {x: -0.35468125, y: 0, z: 0.6523471}
 --- !u!1001 &495553099722535926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57,7 +68,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1065976630698652, guid: f918b0b07c3d61d489eb5e56a32f75d8, type: 3}
       propertyPath: m_Name
-      value: wood_cutter_Lv1 (1) Variant
+      value: SawmillTier2
       objectReference: {fileID: 0}
     - target: {fileID: 1065976630698652, guid: f918b0b07c3d61d489eb5e56a32f75d8, type: 3}
       propertyPath: m_IsActive

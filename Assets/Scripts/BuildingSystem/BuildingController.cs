@@ -13,11 +13,18 @@ namespace BuildingSystem
     {
         private const int PAY_PER_TICK = 1;
 
-        public List<Resource> RequiredResource { get; set; }
+        public List<Resource> RequiredResource { get; set; } = new List<Resource>();
 
-        public BuildingSettings BuildingSettings { get; private set; }
+        public BuildingSettings BuildingSettings
+        {
+            get => _buildingSettings;
+            private set => _buildingSettings = value;
+        }
+
         private Dictionary<ResourceType, float> _requiredCooldown;
         private Dictionary<ResourceType, float> _currentCooldown;
+        [SerializeField]
+        private BuildingSettings _buildingSettings;
 
         private void Start()
         {
@@ -25,7 +32,7 @@ namespace BuildingSystem
             // но только в том случае, если из сохранения нам суюда прилетел пустой список
             if (RequiredResource.Count == 0)
             {
-                RequiredResource = new List<Resource>(BuildingSettings.BuildingUpgrades[0].UpgradeCost);
+                RequiredResource = new List<Resource>(BuildingSettings.UpgradeList[0].UpgradeCost);
             }
         }
 
@@ -46,12 +53,12 @@ namespace BuildingSystem
             }
         }
 
-        public static GameObject CreateNewBuilding(BuildingSettings buildingSettings, bool isBuilding, int buildingLevel = 0)
+        public static GameObject CreateNewConstruction(BuildingSettings buildingSettings, bool isBuilding, int buildingLevel = 0)
         {
             var placeHolderPosition = buildingSettings.Position;
             if (isBuilding)
             {
-                var buildingUpgrade = buildingSettings.BuildingUpgrades[buildingLevel];
+                var buildingUpgrade = buildingSettings.UpgradeList[buildingLevel];
                 var buildingPrefab = buildingUpgrade.UpgradePrefab;
                 var building = Instantiate(buildingPrefab, placeHolderPosition, buildingPrefab.transform.rotation);
                 MainManager.BuildingManager.AddNewConstructedBuilding(building);

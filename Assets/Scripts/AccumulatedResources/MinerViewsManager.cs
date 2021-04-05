@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Buildings;
 using BuildingSystem;
 using UnityEngine;
 
@@ -38,7 +39,7 @@ namespace AccumulatedResources
         {
             var accumulatedResource = Instantiate(_minerViewPrefab,transform);
         
-            accumulatedResource.Initilize(resourceMiner,UIposition.position,GetResourceSprite(resourceMiner));
+            accumulatedResource.Initialize(resourceMiner,UIposition.position,GetResourceSprite(resourceMiner));
         }
 
         private Sprite GetResourceSprite(ResourceMiner resourceMiner)

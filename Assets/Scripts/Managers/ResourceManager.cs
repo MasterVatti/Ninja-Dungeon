@@ -13,12 +13,12 @@ namespace Managers
         [SerializeField]
         private List<Resource> _resources;
 
-        public bool HasEnough(ResourceType type, int value)
+        public bool HasEnough(ResourceType type, float value)
         {
             return _resources[GetResourceIndexByType(type)].Amount >= value;
         }
 
-        public void Pay(ResourceType type, int value)
+        public void Pay(ResourceType type, float value)
         {
             var index = GetResourceIndexByType(type);
             var resource = _resources[index];

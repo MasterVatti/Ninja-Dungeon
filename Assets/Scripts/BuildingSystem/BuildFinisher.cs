@@ -24,7 +24,7 @@ namespace BuildingSystem
         
         private void CreateBuilding (BuildingSettings buildingSettings)
         {
-            BuildingController.CreateNewBuilding(buildingSettings, true);
+            BuildingController.CreateNewConstruction(buildingSettings, true);
         }
 
         private void CreatePlaceHolders (List<BuildingSettings> placeHolders)
@@ -33,7 +33,7 @@ namespace BuildingSystem
             {
                 foreach (var placeHolder in placeHolders)
                 {
-                    BuildingController.CreateNewBuilding(placeHolder, false);
+                    BuildingController.CreateNewConstruction(placeHolder, false);
                 }
             }
         }
