@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.Managers.ScreensManager;
 using UnityEngine;
 
-namespace Assets.Scripts.Managers.ScreensManager
+namespace Managers.ScreensManager
 {
     /// <summary>
     /// Этот менеджер управляет окнами.
@@ -9,6 +10,10 @@ namespace Assets.Scripts.Managers.ScreensManager
     /// </summary>
     public class ScreenManager : MonoBehaviour
     {
+        public Canvas MainCanvas => _mainCanvas;
+        [SerializeField]
+        private Canvas _mainCanvas;
+        
         [SerializeField]
         private List<BaseScreen> _allScreens;
 
@@ -50,10 +55,8 @@ namespace Assets.Scripts.Managers.ScreensManager
 
         public void CloseTopScreen()
         {
-            var upperScreen = _screenStack.Peek();
+            var upperScreen = _screenStack.Pop();
             Destroy(upperScreen.gameObject);
-
-            _screenStack.Pop();
         }
 
         public void CloseAllScreens()
