@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 56860500}
   - component: {fileID: 56860499}
   - component: {fileID: 56860498}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -572,43 +572,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e28ed0eb3dc624b8de02d665cb278d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waves:
-  - _spawnPointsData:
+  _wavesData:
+  - _cooldown: 5
+    _spawnPointsData:
     - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
         type: 3}
       _spawnPoint: {fileID: 1889020659}
-  - _spawnPointsData:
-    - _enemy: {fileID: -7617768688791774286, guid: 41401f314877af94587ece4aa0a01dfc,
-        type: 3}
-      _spawnPoint: {fileID: 480150044}
-    - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
-        type: 3}
-      _spawnPoint: {fileID: 480150044}
-  - _spawnPointsData:
-    - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
-        type: 3}
-      _spawnPoint: {fileID: 1889020659}
+  - _cooldown: 5
+    _spawnPointsData:
     - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
         type: 3}
       _spawnPoint: {fileID: 1101031385}
     - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
         type: 3}
       _spawnPoint: {fileID: 480150044}
-  - _spawnPointsData:
-    - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
-        type: 3}
-      _spawnPoint: {fileID: 1889020659}
-    - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
-        type: 3}
-      _spawnPoint: {fileID: 1101031385}
-    - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
-        type: 3}
-      _spawnPoint: {fileID: 480150044}
-    - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
-        type: 3}
-      _spawnPoint: {fileID: 1604006635}
-  _hasCooldownTime: 1
-  _waveCooldown: 5
 --- !u!4 &387421792
 Transform:
   m_ObjectHideFlags: 0
@@ -967,7 +944,7 @@ GameObject:
   m_Component:
   - component: {fileID: 913475476}
   - component: {fileID: 913475477}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,64 +10,45 @@ namespace Enemies.Spawner
     public class Spawner : Singleton<Spawner>
     {
         public event Action AllWavesCleared;
-
+ 
         [SerializeField]
         private List<WaveData> _wavesData;
-
-        private readonly Queue<WaveController> _waves =
-            new Queue<WaveController>();
+ 
+        private Queue<WaveController> _waves = new Queue<WaveController>();
         private WaveController _activeWave;
-        private WaveController _nextWave;
-
+ 
         private void Awake()
         {
-            foreach (var wave in _wavesData)
+            foreach (WaveData wave in _wavesData)
             {
                 var waveController = new WaveController(wave);
-                waveController.OnWaveDied += OnWaveDied;
-
                 _waves.Enqueue(waveController);
             }
-
-            StartNextWave(false);
+ 
+            StartNextWave();
         }
-
+ 
         private void Update()
         {
             if (_activeWave != null && _activeWave.IsFinished)
             {
-                StartNextWave(true);
+                StartNextWave();
             }
         }
-
-        private void OnWaveDied()
+ 
+        private void StartNextWave()
         {
-            StartNextWave(false);
-        }
-
-        private void StartNextWave(bool useDelay)
-        {
-            if (_waves.Count > 1)
+            if (_waves.Count > 0)
             {
                 _activeWave = _waves.Dequeue();
-
-                if (!_activeWave.AlreadySpawned)
+            
+                if (_activeWave == null)
                 {
-                    _activeWave?.Start(useDelay);
+                    AllWavesCleared?.Invoke();
+                    return;
                 }
-                else
-                {
-                    _activeWave = _waves.Dequeue();
-                    _activeWave?.Start(useDelay);
-                }
-
-                _nextWave = _waves.Dequeue();
-                _nextWave?.Start(true);
-            }
-            else
-            {
-                AllWavesCleared?.Invoke();
-                Destroy(gameObject);
+            
+                _activeWave?.Start();
             }
         }
     }
