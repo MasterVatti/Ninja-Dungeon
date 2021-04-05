@@ -23,7 +23,7 @@ namespace Managers
         private Resource[] SaveResources() => MainManager.ResourceManager.GetResources().ToArray();
 
 
-        public IEnumerable<BuildingData> SaveConstructions()
+        private IEnumerable<BuildingData> SaveConstructions()
         {
             var buildings = MainManager.BuildingManager.ActiveBuildings;
             var placeHolders = MainManager.BuildingManager.ActivePlaceHolders;

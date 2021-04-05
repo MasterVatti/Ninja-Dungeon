@@ -15,17 +15,23 @@ namespace Managers
 
         public bool HasEnough(ResourceType type, int value)
         {
-            return GetResourceByType(type).Amount >= value;
+            return _resources[GetResourceIndexByType(type)].Amount >= value;
         }
 
         public void Pay(ResourceType type, int value)
         {
-            GetResourceByType(type).Amount -= value;
+            var index = GetResourceIndexByType(type);
+            var resource = _resources[index];
+            resource.Amount -= value;
+            _resources[index] = resource;
         }
 
         public void AddResource(ResourceType type, int value)
         {
-            GetResourceByType(type).Amount += value;
+            var index = GetResourceIndexByType(type);
+            var resource = _resources[index];
+            resource.Amount += value;
+            _resources[index] = resource;
         }
 
         public List<Resource> GetResources()
@@ -38,10 +44,10 @@ namespace Managers
             _resources = new List<Resource>(resources.ToList());
         }
 
-        private Resource GetResourceByType(ResourceType type)
+        private int GetResourceIndexByType(ResourceType type)
         {
-            var resource = _resources.FirstOrDefault(res => res.Type == type);
-            return resource ?? new Resource {Amount = 0, Type = type};
+            var index = _resources.FindIndex(resource => resource.Type == type);
+            return index;
         }
     }
 }

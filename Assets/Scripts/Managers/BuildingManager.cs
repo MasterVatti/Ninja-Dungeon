@@ -15,6 +15,14 @@ namespace Managers
         [SerializeField]
         private List<BuildingSettings> _buildings = new List<BuildingSettings>();
 
+        private void Start()
+        {
+            for(var i = 0; i < _buildings.Count; i++)
+            {
+                _buildings[i].ID = i;
+            }
+        }
+
         public BuildingSettings GetBuildingSettings(int buildingID)
         {
             return _buildings.FirstOrDefault(building => building.ID == buildingID);

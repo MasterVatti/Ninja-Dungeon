@@ -15,9 +15,7 @@ namespace BuildingSystem
 
         public List<Resource> RequiredResource { get; set; }
 
-
         public BuildingSettings BuildingSettings { get; private set; }
-        
         private Dictionary<ResourceType, float> _requiredCooldown;
         private Dictionary<ResourceType, float> _currentCooldown;
 
@@ -27,14 +25,7 @@ namespace BuildingSystem
             // но только в том случае, если из сохранения нам суюда прилетел пустой список
             if (RequiredResource.Count == 0)
             {
-                foreach (var requiredResource in BuildingSettings.RequiredResources)
-                {
-                    RequiredResource.Add(new Resource
-                    {
-                        Type = requiredResource.Type,
-                        Amount = requiredResource.Amount
-                    });
-                }
+                RequiredResource = new List<Resource>(BuildingSettings.BuildingUpgrades[0].UpgradeCost);
             }
         }
 
@@ -55,12 +46,13 @@ namespace BuildingSystem
             }
         }
 
-        public static GameObject CreateNewBuilding(BuildingSettings buildingSettings, bool isBuilding)
+        public static GameObject CreateNewBuilding(BuildingSettings buildingSettings, bool isBuilding, int buildingLevel = 0)
         {
-            var placeHolderPosition = buildingSettings.PlaceHolderPosition;
+            var placeHolderPosition = buildingSettings.Position;
             if (isBuilding)
             {
-                var buildingPrefab = buildingSettings.BuildingPrefab;
+                var buildingUpgrade = buildingSettings.BuildingUpgrades[buildingLevel];
+                var buildingPrefab = buildingUpgrade.UpgradePrefab;
                 var building = Instantiate(buildingPrefab, placeHolderPosition, buildingPrefab.transform.rotation);
                 MainManager.BuildingManager.AddNewConstructedBuilding(building);
                 building.GetComponent<IBuilding>().BuildingSettingsID = buildingSettings.ID;
@@ -92,22 +84,26 @@ namespace BuildingSystem
 
         private void Build()
         {
-            foreach (var requiredResource in RequiredResource)
+            for(var i = 0; i < RequiredResource.Count; i++)
             {
-                if (requiredResource.Amount > 0 && 
-                    IsPaymentTime(requiredResource) && 
-                    MainManager.ResourceManager.HasEnough(requiredResource.Type, PAY_PER_TICK))
+                if (RequiredResource[i].Amount > 0 &&
+                    IsPaymentTime(RequiredResource[i]) &&
+                    MainManager.ResourceManager.HasEnough(RequiredResource[i].Type, PAY_PER_TICK))
                 {
-                    MainManager.ResourceManager.Pay(requiredResource.Type, PAY_PER_TICK);
-                    requiredResource.Amount -= PAY_PER_TICK;
+                    MainManager.ResourceManager.Pay(RequiredResource[i].Type, PAY_PER_TICK);
+                    
+                    var resource = RequiredResource[i];
+                    resource.Amount -= PAY_PER_TICK;
+                    RequiredResource[i] = resource;
+                    
                     MainManager.AnimationManager.ShowFlyingResource
-                        (requiredResource.Type,MainManager.PlayerMovementController.transform.position,transform.position);
+                        (RequiredResource[i].Type, MainManager.PlayerMovementController.transform.position, transform.position);
                 }
             }
 
             if (IsConstructionFinished())
             {
-                new BuildFinisher(BuildingSettings, BuildingSettings.ConnectedPlaceHolders).FinishBuilding();
+                new BuildFinisher(BuildingSettings, BuildingSettings.ConnectedBuildings).FinishBuilding();
                 MainManager.BuildingManager.ActivePlaceHolders.Remove(gameObject);
                 Destroy(gameObject);
             }
