@@ -10,8 +10,10 @@ namespace Magician
     {
         [SerializeField]
         private GameObject _golemPrefab;
+        
         [SerializeField]
         private Unit _unit;
+        
         [SerializeField]
         private float _runBackDistance;
     

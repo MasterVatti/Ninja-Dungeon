@@ -35,17 +35,14 @@ public class ShootingEnemies : MonoBehaviour
         if (Time.time > _nextShotTime)
         {
             _nextShotTime = Time.time + _shotCooldownTime;
-            // Додумать более правильную механику стрельбы
             gameObject.transform.LookAt(_player.transform.position);
-
-            //Если будет оружие сдееллать инстантейтить от него
             _agent.isStopped = true;
             _unit.SetColor(Color.blue);
+            
             var newBullet = Instantiate(_bulletPrefab, gameObject.transform.position,
                 gameObject.transform.rotation);
             newBullet.GetComponent<Rigidbody>().velocity = gameObject.transform.forward * _bulletSpeed;
         }
-
         Task.current.Succeed();
     }
 

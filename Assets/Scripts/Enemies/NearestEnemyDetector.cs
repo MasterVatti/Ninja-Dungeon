@@ -21,7 +21,7 @@ namespace Enemies
             {
                 var enemy = _enemiesManager.Enemies[i];
                 var playerPosition = _playerTransform.position;
-                if (_enemiesManager.Enemies != null)
+                if (enemy != null)
                 {
                     var distanceToPlayer = Vector3.Distance(enemy.transform.position,
                         playerPosition);

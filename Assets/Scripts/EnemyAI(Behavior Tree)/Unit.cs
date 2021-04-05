@@ -9,8 +9,10 @@ using UnityEngine.AI;
 public class Unit : MonoBehaviour
 {
     public GameObject Player => _player;
+    
     [SerializeField]
     private EnemyHealth _enemyHealth;
+    
     [SerializeField]
     private float _lowHealthThreshold;
     
