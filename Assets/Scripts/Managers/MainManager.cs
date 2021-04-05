@@ -2,6 +2,7 @@ using Assets.Scripts.Managers.ScreensManager;
 using Enemies;
 using LoadingScene;
 using Managers;
+using Managers.ScreensManager;
 using PlayerScripts.Movement;
 using UnityEngine;
 
