@@ -31,7 +31,7 @@ namespace Managers
             
             for(var i = 0; i < buildings.Count; i++)
             {
-                if (buildings[i].TryGetComponent<IBuilding>(out var buildingData))
+                if (buildings[i].TryGetComponent<IBuildingSaver>(out var buildingData))
                 {
                     savedConstructions[i] = buildingData.Save();
                     if (buildings[i].TryGetComponent<IUpgradable>(out var buildingUpgrade))
@@ -81,7 +81,7 @@ namespace Managers
                     
                     if (building.IsBuilt)
                     {
-                        if (go.TryGetComponent<IBuilding>(out var buildingData))
+                        if (go.TryGetComponent<IBuildingSaver>(out var buildingData))
                         {
                             buildingData.Initialize(building.State);
                         }

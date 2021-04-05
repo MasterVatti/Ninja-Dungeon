@@ -8,7 +8,7 @@ namespace BuildingSystem
     /// Базовый класс для всех зданий, у которых есть какой-то функционал
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class Building<T> : MonoBehaviour, IBuilding where T : BaseBuildingState
+    public abstract class Building<T> : MonoBehaviour, IBuildingSaver where T : BaseBuildingState
     {
         public int BuildingSettingsID { get; set; }
         

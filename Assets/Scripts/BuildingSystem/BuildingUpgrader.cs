@@ -2,7 +2,7 @@
 {
     public class BuildingUpgrader
     {
-        public bool Upgrade(BuildingSettings buildingSettings, int upgradeLevel)
+        public bool UpgradeBuilding(BuildingSettings buildingSettings, int upgradeLevel)
         {
             if (buildingSettings.UpgradeList.Count > upgradeLevel)
             {
