@@ -12,7 +12,7 @@ namespace AccumulatedResources
         [SerializeField]
         private List<ResourceImage> _resourceImages = new List<ResourceImage>();
         [SerializeField]
-        private MinerView _minerViewPrefab;
+        private MinerInfoView _minerViewPrefab;
     
 
         void Start()
@@ -20,25 +20,25 @@ namespace AccumulatedResources
             var constructedBuildings = MainManager.BuildingManager.ActiveBuildings;
             foreach (var building in constructedBuildings)
             {
-                AddUIToBuilding(building);
+                var settings = MainManager.BuildingManager.GetBuildingSettings(building.GetComponent<IBuilding>().BuildingSettingsID);
+                
+                AddUIToBuilding(building,settings);
             }
 
             MainManager.BuildingManager.OnBuildFinished += AddUIToBuilding;
         }
 
-        private void AddUIToBuilding(GameObject building)
+        private void AddUIToBuilding(GameObject buildingView, BuildingSettings buildingSettings)
         {
-            if (building.TryGetComponent(out ResourceMiner miner))
-            {
-                CreateAccumulatedResourceUI(miner,miner.PositionUI);
-            }
+            
+            //CreateAccumulatedResourceUI(buildingView,miner.PositionUI);
         }
     
         private void CreateAccumulatedResourceUI(ResourceMiner resourceMiner,Transform UIposition)
         {
             var accumulatedResource = Instantiate(_minerViewPrefab,transform);
         
-            accumulatedResource.Initilize(resourceMiner,UIposition.position,GetResourceSprite(resourceMiner));
+            accumulatedResource.Initialize(resourceMiner,UIposition.position,GetResourceSprite(resourceMiner),"123");
         }
 
         private Sprite GetResourceSprite(ResourceMiner resourceMiner)

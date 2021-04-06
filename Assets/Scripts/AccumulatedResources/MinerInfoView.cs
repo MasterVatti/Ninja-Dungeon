@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Класс выводит в UI максимальное значение и текущее
 /// </summary>
-public class MinerView : MonoBehaviour
+public class MinerInfoView  : BuildingInfoView
 {
    [SerializeField]
    private TextMeshProUGUI _currentResource;
@@ -24,12 +24,14 @@ public class MinerView : MonoBehaviour
       _maxResource.text = _resourceMiner.MaxStorage.ToString();
    }
 
-   public void Initilize(ResourceMiner resourceMiner, Vector3 positionUI, Sprite sprite)
+   public void Initialize(ResourceMiner resourceMiner, Vector3 positionUI, Sprite sprite, string name)
    {
       _resourceMiner = resourceMiner;
 
       _image.sprite = sprite;
       transform.position = positionUI;
       transform.rotation = Quaternion.identity;
+      
+      ShowNameBuilding(name);
    }
 }
