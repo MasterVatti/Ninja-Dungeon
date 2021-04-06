@@ -27,29 +27,35 @@ namespace Managers
         {
             var buildings = MainManager.BuildingManager.ActiveBuildings;
             var placeHolders = MainManager.BuildingManager.ActivePlaceHolders;
-            var savedConstructions = new BuildingData[buildings.Count + placeHolders.Count];
+            var savedConstructions = new List<BuildingData>();
             
-            for(var i = 0; i < buildings.Count; i++)
+            foreach (var building in buildings)
             {
-                if (buildings[i].TryGetComponent<IBuilding>(out var buildingData))
+                if (building.TryGetComponent<IBuilding>(out var buildingData))
                 {
-                    savedConstructions[i] = buildingData.Save();
+                    var save = buildingData.Save();
+                    if (save == null)
+                    {
+                        continue;
+                    }
+
+                    savedConstructions.Add(save);
                 }
             }
             
-            for(var i = 0; i < placeHolders.Count; i++)
+            foreach (var placeHolder in placeHolders)
             {
-                var buildingController = placeHolders[i].GetComponent<BuildingController>();
+                var buildingController = placeHolder.GetComponent<BuildingController>();
                 var placeHolderData = new PlaceHolderData
                 {
                     RemainResources = buildingController.RequiredResource
                 };
-                savedConstructions[i] = new BuildingData
+                savedConstructions.Add(new BuildingData
                 {
                     IsBuilt = false,
                     SettingsID = buildingController.BuildingSettings.ID,
                     State = JsonConvert.SerializeObject(placeHolderData)
-                };
+                });
             }
 
             return savedConstructions;
@@ -69,6 +75,7 @@ namespace Managers
             var resources = save.Resources;
             foreach (var building in buildings)
             {
+                
                 var settings = MainManager.BuildingManager.GetBuildingSettings(building.SettingsID);
                 var go = BuildingController.CreateNewBuilding(settings, building.IsBuilt);
 
