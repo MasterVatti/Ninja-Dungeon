@@ -8,30 +8,31 @@ using UnityEngine.UI;
 /// </summary>
 public class MinerInfoView  : BuildingInfoView
 {
-   [SerializeField]
-   private TextMeshProUGUI _currentResource;
-   [SerializeField]
-   private TextMeshProUGUI _maxResource;
-   [SerializeField]
-   private Image _image;
+    [SerializeField]
+    private TextMeshProUGUI _currentResource;
+    [SerializeField]
+    private TextMeshProUGUI _maxResource;
+    [SerializeField]
+    private Image _image;
    
-   private ResourceMiner _resourceMiner;
-   private Transform test;
+    private ResourceMiner _resourceMiner;
+    private Transform test;
    
-   private void Update()
-   {
-      _currentResource.text = _resourceMiner.CurrentResourceCount.ToString();
-      _maxResource.text = _resourceMiner.MaxStorage.ToString();
-   }
+    private void Update()
+    {
+        _currentResource.text = _resourceMiner.CurrentResourceCount.ToString();
+        _maxResource.text = _resourceMiner.MaxStorage.ToString();
+    }
 
-   public void Initialize(ResourceMiner resourceMiner, Vector3 positionUI, Sprite sprite, string name)
-   {
-      _resourceMiner = resourceMiner;
+    public void Initialize(ResourceMiner resourceMiner, Vector3 positionUI, Sprite sprite, string nameBuilding)
+    {
+        _resourceMiner = resourceMiner;
 
-      _image.sprite = sprite;
-      transform.position = positionUI;
-      transform.rotation = Quaternion.identity;
+        _image.sprite = sprite;
       
-      ShowNameBuilding(name);
-   }
+        transform.position = positionUI;
+        transform.rotation = Quaternion.identity;
+      
+        ShowNameBuilding(nameBuilding);
+    }
 }

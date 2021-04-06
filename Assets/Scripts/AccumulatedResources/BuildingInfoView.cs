@@ -1,21 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BuildingInfoView : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI _nameBuilding;
-    
-    protected void ShowNameBuilding(string name)
+
+    protected void ShowNameBuilding(string nameBuilding)
     {
-        _nameBuilding.text = name;
+        _nameBuilding.text = nameBuilding;
     }
     
-    public void Initialize(Vector3 positionUI, string name)
+    public void Initialize(Vector3 positionUI, string nameBuilding)
     {
-         
+        transform.position = positionUI;
+        transform.rotation = Quaternion.identity;
+        
+        ShowNameBuilding(nameBuilding);
     }
 }

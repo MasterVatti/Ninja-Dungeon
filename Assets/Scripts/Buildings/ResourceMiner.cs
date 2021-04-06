@@ -29,7 +29,7 @@ namespace BuildingSystem
             }
         }
 
-        public Transform PositionUI => _positionUI;
+        //public Transform PositionUI => _positionUI;
 
         [SerializeField]
         private ResourceType _miningResource;
@@ -37,8 +37,7 @@ namespace BuildingSystem
         private float _miningPerSecond;
         [SerializeField]
         private int _maxStorage;
-        [SerializeField]
-        private Transform _positionUI;
+        
 
         private int _currentResourceCount;
         private float _startMiningTime;
