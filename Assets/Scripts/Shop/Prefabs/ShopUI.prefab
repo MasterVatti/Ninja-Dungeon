@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScreenType: 6
-  _shopViewInPrefab: {fileID: 6094682607736121415}
+  _shopView: {fileID: 6094682607736121415}
   _exchangeTemplate: {fileID: 2353654620567759445, guid: acf4cd2096c2bce448b52c5c69c71e54,
     type: 3}
   _minimumCoefficient: 0.9

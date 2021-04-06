@@ -13,7 +13,7 @@ namespace Shop
     public class Shop : BaseScreen
     {
         [SerializeField]
-        private ShopView _shopViewInPrefab;
+        private ShopView _shopView;
         [SerializeField]
         private GameObject _exchangeTemplate;
         [SerializeField]
@@ -23,16 +23,10 @@ namespace Shop
         [SerializeField]
         private List<ExchangeRate> _rates;
 
-        private ShopView _currentShopView;
         private float _pickedCoefficient;
         
         public override void Initialize(ScreenType screenType)
         {
-            var canvasTransform = MainManager.ScreenManager.MainCanvas.transform;
-            
-            var shopUI = Instantiate(_shopViewInPrefab.ShopUI, canvasTransform);
-            _currentShopView = shopUI.GetComponent<ShopView>();
-            
             _pickedCoefficient = Random.Range(_minimumCoefficient, _maximumCoefficient);
             foreach (var rate in _rates)
             {
@@ -42,7 +36,7 @@ namespace Shop
         
         private void CreateAndInitializeExchangeItem(ExchangeRate rate)
         {
-            var rateObject = Instantiate(_exchangeTemplate, _currentShopView.Content.transform);
+            var rateObject = Instantiate(_exchangeTemplate, _shopView.Content.transform);
             rateObject.GetComponent<ExchangeRateView>().Initialize(rate, _pickedCoefficient);
             rateObject.GetComponent<ExchangeRateController>().Initialize(rate, _pickedCoefficient);
         }
@@ -50,7 +44,7 @@ namespace Shop
         [UsedImplicitly]
         private void CloseShop()
         {
-            Destroy(gameObject);
+            MainManager.ScreenManager.CloseTopScreen();
         }
     }
 }
