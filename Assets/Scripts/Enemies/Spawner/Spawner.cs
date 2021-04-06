@@ -41,14 +41,12 @@ namespace Enemies.Spawner
             if (_waves.Count > 0)
             {
                 _activeWave = _waves.Dequeue();
-            
-                if (_activeWave == null)
-                {
-                    AllWavesCleared?.Invoke();
-                    return;
-                }
-            
                 _activeWave?.Start();
+            }
+            else
+            {
+                AllWavesCleared?.Invoke();
+                return;
             }
         }
     }
