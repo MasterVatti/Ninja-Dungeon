@@ -172,9 +172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScreenType: 2
   _descriptionField: {fileID: 942751829490772389}
-  _energyManager: {fileID: 672762962956401019, guid: 7065061d8425c5944860b77e7d497d11,
-    type: 3}
-  _energyDecreaseCount: 35
 --- !u!1 &1930917441170262954
 GameObject:
   m_ObjectHideFlags: 0
