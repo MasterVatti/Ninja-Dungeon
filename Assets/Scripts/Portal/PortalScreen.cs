@@ -1,7 +1,5 @@
 using Assets.Scripts.Managers.ScreensManager;
 using JetBrains.Annotations;
-using LoadingScene;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +11,7 @@ public class PortalScreen : BaseScreenWithContext<PortalContext>
     [SerializeField]
     private Text _descriptionField;
     private string _sceneName;
+    private Vector3 _teleportPosition;
     
     [UsedImplicitly]
     public void TurnOffPanel()
@@ -24,10 +23,12 @@ public class PortalScreen : BaseScreenWithContext<PortalContext>
     {
         _descriptionField.text = context.Description;
         _sceneName = context.SceneName;
+        _teleportPosition = context.TeleportPosition;
     }
     
     public void OnClick()
     {
+        MainManager.Player.transform.position = _teleportPosition;
         MainManager.ScreenManager.CloseTopScreen();
         MainManager.LoadingController.StartLoad(_sceneName);
     }
