@@ -27,7 +27,7 @@ namespace Managers.ScreensManager
         {
             var screenPrefab = FindScreenByType<BaseScreen>(screenType);
             
-            var screen = Instantiate(screenPrefab, gameObject.transform, false);
+            var screen = Instantiate(screenPrefab, _mainCanvas.transform, false);
             
             InitializeScreen(screenPrefab, screenType);
             
@@ -43,7 +43,7 @@ namespace Managers.ScreensManager
             var screenPrefab =
                 FindScreenByType<BaseScreenWithContext<TContext>>(screenType);
             
-            var screen = Instantiate(screenPrefab, gameObject.transform, false);
+            var screen = Instantiate(screenPrefab, _mainCanvas.transform, false);
             
             InitializeScreen(screenPrefab, screenType);
             
