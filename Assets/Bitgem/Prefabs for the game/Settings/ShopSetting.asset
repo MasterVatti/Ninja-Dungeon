@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 3
   _buildingNamme: Shop
-  _buildingInfoView: {fileID: 0}
+  _buildingInfoView: {fileID: 1117067079954795322, guid: 57fd1dde7650bc444b529ac2b8b691c6,
+    type: 3}
   _connectedPlaceHolders: []
   _requiredResources:
   - _type: 1

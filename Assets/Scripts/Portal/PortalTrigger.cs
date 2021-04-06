@@ -1,10 +1,12 @@
 using Assets.Scripts;
+using BuildingSystem;
+using SaveSystem;
 using UnityEngine;
 
 /// <summary>
 /// Класс отвечает за тригер портала(вызов панели портала) 
 /// </summary>
-public class PortalTrigger : MonoBehaviour
+public class PortalTrigger : Building<PortalData>
 {
     private void OnTriggerEnter(Collider other)
     {
@@ -12,5 +14,9 @@ public class PortalTrigger : MonoBehaviour
         {
             GetComponent<IPortalScreenOpener>().ShowPortalScreen();
         }
+    }
+    
+    protected override void Initialize(PortalData data)
+    {
     }
 }

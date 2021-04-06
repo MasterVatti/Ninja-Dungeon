@@ -28,9 +28,7 @@ namespace BuildingSystem
                 return _currentResourceCount;
             }
         }
-
-        //public Transform PositionUI => _positionUI;
-
+        
         [SerializeField]
         private ResourceType _miningResource;
         [SerializeField]
@@ -38,7 +36,6 @@ namespace BuildingSystem
         [SerializeField]
         private int _maxStorage;
         
-
         private int _currentResourceCount;
         private float _startMiningTime;
 
