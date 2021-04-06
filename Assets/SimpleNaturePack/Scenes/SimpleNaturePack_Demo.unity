@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44664758, g: 0.49649328, b: 0.57486105, a: 1}
+  m_IndirectSpecularColor: {r: 0.44664782, g: 0.49649352, b: 0.57486135, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2174,6 +2174,7 @@ MonoBehaviour:
   _buildingManager: {fileID: 1717845924}
   _playerMovementController: {fileID: 212603097}
   _saveLoadManager: {fileID: 796636597}
+  _player: {fileID: 212603095}
 --- !u!4 &1332029420
 Transform:
   m_ObjectHideFlags: 0
@@ -2771,7 +2772,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetToFollow: {fileID: 212603096}
   _offset: {x: 0, y: 9, z: -7}
-  _speed: 5
 --- !u!81 &1781112973
 AudioListener:
   m_ObjectHideFlags: 0
