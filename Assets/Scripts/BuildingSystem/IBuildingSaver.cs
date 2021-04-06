@@ -9,6 +9,7 @@ namespace BuildingSystem
     {
         int BuildingSettingsID { set; }
         void Initialize(string savedData);
+        void Initialize(int buildingSettingsID);
         BuildingData Save();
     }
 }

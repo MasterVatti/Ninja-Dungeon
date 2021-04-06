@@ -10,10 +10,6 @@
         /// </summary>
         int CurrentBuildingLevel { get; set; }
         /// <summary>
-        /// Класс, содрежащий метод базовую логику улучшения
-        /// </summary>
-        BuildingUpgrader Upgrader { get; set; }
-        /// <summary>
         /// Метод использующий и расширяющий базовую логику улучшения здания
         /// </summary>
         void Upgrade();

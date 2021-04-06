@@ -30,7 +30,6 @@ namespace Buildings
         }
 
         public int CurrentBuildingLevel { get; set; }
-        public BuildingUpgrader Upgrader { get; set; } = new BuildingUpgrader();
         public Transform PositionUI => _positionUI;
 
         [SerializeField]
@@ -62,7 +61,7 @@ namespace Buildings
         public void Upgrade()
         {
             var buildingSettings = MainManager.BuildingManager.GetBuildingSettings(BuildingSettingsID);
-            if (Upgrader.UpgradeBuilding(buildingSettings, CurrentBuildingLevel + 1))
+            if (BuildingUtils.UpgradeBuilding(buildingSettings, CurrentBuildingLevel + 1))
             {
                 MainManager.BuildingManager.ActiveBuildings.Remove(gameObject);
                 Destroy(gameObject);

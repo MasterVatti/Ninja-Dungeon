@@ -14,17 +14,10 @@ namespace BuildingSystem
         private const int PAY_PER_TICK = 1;
 
         public List<Resource> RequiredResource { get; set; } = new List<Resource>();
-
-        public BuildingSettings BuildingSettings
-        {
-            get => _buildingSettings;
-            private set => _buildingSettings = value;
-        }
+        public BuildingSettings BuildingSettings { get; private set; }
 
         private Dictionary<ResourceType, float> _requiredCooldown;
         private Dictionary<ResourceType, float> _currentCooldown;
-        [SerializeField]
-        private BuildingSettings _buildingSettings;
 
         private void Start()
         {
@@ -53,29 +46,11 @@ namespace BuildingSystem
             }
         }
 
-        public static GameObject CreateNewConstruction(BuildingSettings buildingSettings, bool isBuilding, int buildingLevel = 0)
+        public void Initialize(BuildingSettings buildingSettings)
         {
-            var placeHolderPosition = buildingSettings.Position;
-            if (isBuilding)
-            {
-                var buildingUpgrade = buildingSettings.UpgradeList[buildingLevel];
-                var buildingPrefab = buildingUpgrade.UpgradePrefab;
-                var building = Instantiate(buildingPrefab, placeHolderPosition, buildingPrefab.transform.rotation);
-                MainManager.BuildingManager.AddNewConstructedBuilding(building);
-                building.GetComponent<IBuildingSaver>().BuildingSettingsID = buildingSettings.ID;
-                
-                return building;
-            }
-            var placeHolderPrefab = buildingSettings.PlaceHolderPrefab;
-            var placeHolderRotation = placeHolderPrefab.transform.rotation;
-                
-            var placeHolder = Instantiate(placeHolderPrefab, placeHolderPosition, placeHolderRotation);
-            placeHolder.GetComponent<BuildingController>().BuildingSettings = buildingSettings;
-            MainManager.BuildingManager.ActivePlaceHolders.Add(placeHolder);
-                
-            return placeHolder;
+            BuildingSettings = buildingSettings;
         }
-        
+
         private void SetRequiredCooldown()
         {
             _requiredCooldown = new Dictionary<ResourceType, float>();
@@ -110,7 +85,7 @@ namespace BuildingSystem
 
             if (IsConstructionFinished())
             {
-                new BuildFinisher(BuildingSettings, BuildingSettings.ConnectedBuildings).FinishBuilding();
+                FinishConstruction();
                 MainManager.BuildingManager.ActivePlaceHolders.Remove(gameObject);
                 Destroy(gameObject);
             }
@@ -135,6 +110,15 @@ namespace BuildingSystem
             }
 
             return false;
+        }
+
+        private void FinishConstruction()
+        {
+            BuildingUtils.CreateNewConstruction(BuildingSettings, true);
+            foreach (var placeHolder in BuildingSettings.ConnectedBuildings)
+            {
+                BuildingUtils.CreateNewConstruction(placeHolder, false);
+            }
         }
     }
 }

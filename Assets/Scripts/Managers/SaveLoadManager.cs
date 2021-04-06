@@ -77,7 +77,7 @@ namespace Managers
                 foreach (var building in buildings)
                 {
                     var settings =  MainManager.BuildingManager.GetBuildingSettings(building.SettingsID);
-                    var go = BuildingController.CreateNewConstruction(settings, building.IsBuilt, building.BuildingLevel);
+                    var go = BuildingUtils.CreateNewConstruction(settings, building.IsBuilt, building.BuildingLevel);
                     
                     if (building.IsBuilt)
                     {

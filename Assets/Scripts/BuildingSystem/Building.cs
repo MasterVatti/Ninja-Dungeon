@@ -19,7 +19,12 @@ namespace BuildingSystem
             _state = JsonConvert.DeserializeObject<T>(savedData);
             Initialize(_state);
         }
-        
+
+        public void Initialize(int buildingSettingsID)
+        {
+            BuildingSettingsID = buildingSettingsID;
+        }
+
         public virtual BuildingData Save()
         {
             return new BuildingData
