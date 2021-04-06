@@ -67,37 +67,29 @@ namespace Managers
             
             var buildings = save.Buildings;
             var resources = save.Resources;
-
-            if (buildings != null)
+            foreach (var building in buildings)
             {
-                foreach (var building in buildings)
+                var settings = MainManager.BuildingManager.GetBuildingSettings(building.SettingsID);
+                var go = BuildingController.CreateNewBuilding(settings, building.IsBuilt);
+
+                if (building.IsBuilt)
                 {
-                    var settings =  MainManager.BuildingManager.GetBuildingSettings(building.SettingsID);
-                    var go = BuildingController.CreateNewBuilding(settings, building.IsBuilt);
-                    
-                    if (building.IsBuilt)
+                    if (go.TryGetComponent<IBuilding>(out var buildingData))
                     {
-                        if (go.TryGetComponent<IBuilding>(out var buildingData))
-                        {
-                            buildingData.Initialize(building.State);
-                        }
+                        buildingData.Initialize(building.State);
                     }
-                    else
+                }
+                else
+                {
+                    var placeHolderData = JsonConvert.DeserializeObject<PlaceHolderData>(building.State);
+                    if (placeHolderData != null)
                     {
-                        var placeHolderData = JsonConvert.DeserializeObject<PlaceHolderData>(building.State);
-                        if (placeHolderData != null)
-                        {
-                            go.GetComponent<BuildingController>().RequiredResource = placeHolderData.RemainResources;
-                        }
+                        go.GetComponent<BuildingController>().RequiredResource = placeHolderData.RemainResources;
                     }
-                    
                 }
             }
 
-            if (resources != null)
-            {
-                MainManager.ResourceManager.SetResources(resources);
-            }
+            MainManager.ResourceManager.SetResources(resources);
         }
 
         private void Save()

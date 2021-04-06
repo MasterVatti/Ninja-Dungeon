@@ -18,7 +18,7 @@ namespace PlayerScripts.Movement
             var direction = _player.velocity;
             if (!direction.Equals(Vector3.zero))
             {
-                transform.rotation = Quaternion.LookRotation(_player.velocity);
+                transform.rotation = Quaternion.LookRotation(direction);
             }
         }
     }
