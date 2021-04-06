@@ -170,9 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0411855bcf53d343a4989a1ccc654b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScreenType: 2
+  ScreenType: 3
   _descriptionField: {fileID: 942751829490772389}
-  _okButton: {fileID: 1930917441170262956}
 --- !u!1 &1930917441170262954
 GameObject:
   m_ObjectHideFlags: 0
