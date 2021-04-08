@@ -28,7 +28,7 @@ namespace Enemies
         [SerializeField]
         private Rigidbody _rigidbody;
         [SerializeField]
-        private EnemyHealth _healthSystem;
+        private HealthBehavior _healthSystem;
         
         public int CurrentHp
         {
@@ -74,7 +74,7 @@ namespace Enemies
             set => _rigidbody = value;
         }
 
-        public EnemyHealth HealthSystem
+        public HealthBehavior HealthSystem
         {
             get => _healthSystem;
             set => _healthSystem = value;

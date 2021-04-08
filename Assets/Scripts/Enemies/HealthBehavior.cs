@@ -1,4 +1,5 @@
 using System;
+using HealthBars;
 using UnityEngine;
 
 namespace Enemies
@@ -21,6 +22,7 @@ namespace Enemies
         {
             _healthBar = _healthBarsManager.CreateHealthBar();
             _healthBar.SetMaximalHealth(_health);
+            _healthBar.NormalizePosition(transform.position);
         }
 
         public void ApplyDamage(int damage)
