@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Assets.Scripts;
 using ResourceSystem;
@@ -12,14 +13,14 @@ namespace BuildingSystem
     public class BuildingController : MonoBehaviour
     {
         private const int PAY_PER_TICK = 1;
-
+        public event Action OnPayForBuilding;
         public List<Resource> RequiredResource { get; set; } = new List<Resource>();
-
-
         public BuildingSettings BuildingSettings { get; private set; }
+        
         
         private Dictionary<ResourceType, float> _requiredCooldown;
         private Dictionary<ResourceType, float> _currentCooldown;
+        
 
         private void Start()
         {
@@ -75,7 +76,7 @@ namespace BuildingSystem
                 
             var placeHolder = Instantiate(placeHolderPrefab, placeHolderPosition, placeHolderRotation);
             placeHolder.GetComponent<BuildingController>().BuildingSettings = buildingSettings;
-            MainManager.BuildingManager.ActivePlaceHolders.Add(placeHolder);
+            MainManager.BuildingManager.AddNewPlaceholder(placeHolder);
                 
             return placeHolder;
         }
@@ -103,6 +104,7 @@ namespace BuildingSystem
                 {
                     MainManager.ResourceManager.Pay(requiredResource.Type, PAY_PER_TICK);
                     requiredResource.Amount -= PAY_PER_TICK;
+                    OnPayForBuilding?.Invoke();
                     MainManager.AnimationManager.ShowFlyingResource
                         (requiredResource.Type,MainManager.PlayerMovementController.transform.position,transform.position);
                 }
@@ -112,6 +114,7 @@ namespace BuildingSystem
             {
                 new BuildFinisher(BuildingSettings, BuildingSettings.ConnectedPlaceHolders).FinishBuilding();
                 MainManager.BuildingManager.ActivePlaceHolders.Remove(gameObject);
+                MainManager.BuildingManager.DestroyPlaceholder(gameObject);
                 Destroy(gameObject);
             }
         }

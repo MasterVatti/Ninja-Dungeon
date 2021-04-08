@@ -8,6 +8,8 @@ namespace Managers
     public class BuildingManager : MonoBehaviour
     {
         public event Action <GameObject> OnBuildFinished;
+        public event Action<GameObject> OnPlaceholderDestroy;
+        public event Action<GameObject> OnPlaceholderCreated; 
         
         public List<GameObject> ActiveBuildings { get; } = new List<GameObject>();
         public List<GameObject> ActivePlaceHolders { get; } = new List<GameObject>();
@@ -20,6 +22,19 @@ namespace Managers
             return _buildings.FirstOrDefault(building => building.ID == buildingID);
         }
 
+        public void DestroyPlaceholder(GameObject placeholder)
+        {
+            ActivePlaceHolders.Remove(placeholder);
+            OnPlaceholderDestroy?.Invoke(placeholder);
+        }
+
+        public void AddNewPlaceholder(GameObject placeholder)
+        {
+            Debug.Log("Плэйсхолдер создан"+placeholder);
+            ActivePlaceHolders.Add(placeholder);
+            OnPlaceholderCreated?.Invoke(placeholder);
+        }
+        
         public void AddNewConstructedBuilding(GameObject building)
         {
             ActiveBuildings.Add(building);
