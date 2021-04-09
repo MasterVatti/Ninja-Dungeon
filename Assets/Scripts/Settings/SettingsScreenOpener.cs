@@ -14,11 +14,10 @@ namespace Settings
         {
             var context = new SettingsContext
             {
-                FirstSettingText = "_settings.ScreenDescription, ",
-                //SceneName = "Settings"
+                FirstSettingText = "_settings.ScreenDescription, "
             };
-            ScreenManager.Instance.OpenScreen/*WithContext*/(ScreenType
-                .SettingsScreen/*, context*/);
+            ScreenManager.Instance.OpenScreenWithContext(ScreenType
+                .SettingsScreen, context);
         }
     }
 }
