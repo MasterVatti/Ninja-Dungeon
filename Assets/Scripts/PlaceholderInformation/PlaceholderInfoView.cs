@@ -14,29 +14,30 @@ public class PlaceholderInfoView : MonoBehaviour
     [SerializeField] 
     private List<ResourceImage> _resourceImages = new List<ResourceImage>();
 
-    private List<Resource> _resourceList;
-  //  private List<PieceOfPlaceholderInfoView> _piecesOfPlaceholderInfoView=new List<PieceOfPlaceholderInfoView>();
-    private Dictionary<Resource, PieceOfPlaceholderInfoView> _blabla;
-  
-
+    private List<Resource> _requiredResourceList;
+    private List<Resource> _currentResourceList;
+    private Dictionary<ResourceType, PieceOfPlaceholderInfoView> _resourceForPiece;
 
     public void Initialize(BuildingController placeholder)
     {
-        _blabla = new Dictionary<Resource, PieceOfPlaceholderInfoView>();
-        placeholder.OnPayForBuilding += lalal;
-        Debug.Log("инициализация UI в инфоВью");
-        _resourceList = placeholder.RequiredResource;//запоминаем список ресурсов. 
         Vector3 uiPosition = placeholder.GetComponent<Transform>().position;
-        //К каждому ресурсу в списке создадим по префабу Вьюшки.
-        foreach (var resource in _resourceList)
+        transform.position += uiPosition;
+        
+        _resourceForPiece = new Dictionary<ResourceType, PieceOfPlaceholderInfoView>();
+        placeholder.OnPayForBuilding += ResourceAdded;
+        _currentResourceList = placeholder.RequiredResource;
+        _requiredResourceList = placeholder.BuildingSettings.RequiredResources;
+        AddPieceToView(uiPosition);
+    }
+
+    private void AddPieceToView(Vector3 uiPosition)
+    {
+        foreach (var resource in _requiredResourceList)
         {
             var pieceOfPlaceholderInfoView=Instantiate(_pieceOfPlaceholderInfoViewPrefab,uiPosition, Quaternion.identity, transform);
-           // _piecesOfPlaceholderInfoView.Add(pieceOfPlaceholderInfoView);
-            _blabla.Add(resource,pieceOfPlaceholderInfoView);
+            _resourceForPiece.Add(resource.Type,pieceOfPlaceholderInfoView);
             pieceOfPlaceholderInfoView.Initialize(resource,GetResourceSprite(resource));
-            Debug.Log("добавление "+resource);
         }
-        
     }
 
     private Sprite GetResourceSprite(Resource resource)
@@ -52,19 +53,11 @@ public class PlaceholderInfoView : MonoBehaviour
         return null;
     }
 
-    private void lalal()
+    private void ResourceAdded()
     {
-        Debug.Log("Ресурс добавлен");
-        foreach (var VARIABLE in _resourceList)
+        foreach (var resource in _currentResourceList)
         {
-            Debug.Log(VARIABLE + "/"+VARIABLE.Type+":"+VARIABLE.Amount);
-            _blabla[VARIABLE].ShowPlaceholderInformation(VARIABLE);
+            _resourceForPiece[resource.Type].ShowPlaceholderInformation(resource);
         }
-
-       
-      //  foreach (var piece in _piecesOfPlaceholderInfoView)
-      //  {
-      //      //piece.ShowPlaceholderInformation(resource);
-      //  }
     }
 }

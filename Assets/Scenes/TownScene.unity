@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44664752, g: 0.4964931, b: 0.57486045, a: 1}
+  m_IndirectSpecularColor: {r: 0.44664723, g: 0.49649268, b: 0.57486016, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2109,6 +2109,7 @@ GameObject:
   - component: {fileID: 1252088659}
   - component: {fileID: 1252088658}
   - component: {fileID: 1252088662}
+  - component: {fileID: 1252088663}
   m_Layer: 5
   m_Name: WorldCanvas
   m_TagString: Untagged
@@ -2173,7 +2174,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -2216,6 +2217,20 @@ MonoBehaviour:
   - _type: 2
     _resourseSprite: {fileID: 21300000, guid: 0a8eaa09f76e9514fb2756cf71caa966, type: 3}
   _minerViewPrefab: {fileID: 3654191358967922677, guid: 14463b3fb13ca184089be8199baceeea,
+    type: 3}
+--- !u!114 &1252088663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252088657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802096ad065740e459e1bca8bcf6d538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _placeholderViewPrefab: {fileID: 8572590426009315497, guid: 59099b9e6f4ec614da43428a9599b17e,
     type: 3}
 --- !u!1001 &1258554360
 PrefabInstance:

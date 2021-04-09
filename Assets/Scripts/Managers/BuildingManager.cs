@@ -30,7 +30,6 @@ namespace Managers
 
         public void AddNewPlaceholder(GameObject placeholder)
         {
-            Debug.Log("Плэйсхолдер создан"+placeholder);
             ActivePlaceHolders.Add(placeholder);
             OnPlaceholderCreated?.Invoke(placeholder);
         }

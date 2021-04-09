@@ -18,6 +18,8 @@ MonoBehaviour:
   _requiredResources:
   - _type: 0
     _amount: 100
+  - _type: 2
+    _amount: 50
   _buildingPrefab: {fileID: 283214289208915664, guid: 0b5b6be3bf3f8b043b2b024442c690a1,
     type: 3}
   _placeHolderPrefab: {fileID: 3573013288105948190, guid: 6cba8c95b0150d2418abbc679a95e60e,
