@@ -7,6 +7,7 @@ using UnityEngine;
 /// <summary>
 /// Класс отвечает за окно портала(предложение спустится в инст и наоборот) и обработку кнопки Yes
 /// </summary>
+/// 
 public class PortalScreen : BaseScreenWithContext<PortalContext>
 {
     [SerializeField]
