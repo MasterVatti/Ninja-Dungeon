@@ -7,10 +7,16 @@ using UnityEngine;
 /// <summary>
 /// Класс отвечает за анимацию передачи ресурсов в указанную точку на Canvas.
 /// </summary>
-public class NewBehaviourScript : MonoBehaviour
+public class AmimationToGUI : MonoBehaviour
 {
     [SerializeField]
     private Transform _target;
+    
+    [SerializeField]
+    private int _countFlyingResourses = 5;
+
+    [SerializeField] 
+    private float _delayFlyingResourses = 0.2f;
     
     private float _time = 1;
 
@@ -18,17 +24,17 @@ public class NewBehaviourScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(moveResource());
+            StartCoroutine(MoveResource());
         }
     }
     
-    private IEnumerator moveResource()
+    private IEnumerator MoveResource()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < _countFlyingResourses; i++)
         {
             MainManager.AnimationManager.ShowFlyingResource(ResourceType.Gold, transform.position, _target.position,
                 true);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(_delayFlyingResourses);
         }
         
     }
