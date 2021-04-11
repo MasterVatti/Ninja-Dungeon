@@ -33,7 +33,7 @@ namespace AccumulatedResources
                 CreateMinerView(miner,setting.BuildingInfoView,miner.PositionUI,setting.BuildingName);
             } 
             
-            else if (building.TryGetComponent(out IBuildingUI buildingUI))
+            else if (building.TryGetComponent(out IBuildingUIPositionHolder buildingUI))
             {
                 CreateBuildingInfoView(setting.BuildingInfoView,buildingUI.PositionUI,setting.BuildingName);
             }

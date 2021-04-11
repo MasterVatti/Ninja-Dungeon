@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4211989715612519387}
   - component: {fileID: 7603747272438297866}
   - component: {fileID: 1824388498338098427}
+  - component: {fileID: 821233814808746517}
   m_Layer: 0
   m_Name: PortalPrefab
   m_TagString: Untagged
@@ -90,6 +91,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7567be13e239c64f8f01756759d5d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &821233814808746517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283214289208915664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce2630ce178ac54582aa52b40178d2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _positionUI: {fileID: 6120231944466007368}
 --- !u!1 &8198413898611382478
 GameObject:
@@ -114,13 +127,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8198413898611382478}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6, y: 7.21, z: 0.74}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
+  m_LocalPosition: {x: -0.6, y: 6.82, z: 1.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3659362793229029192}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!1001 &6799222764223555277
 PrefabInstance:
   m_ObjectHideFlags: 0

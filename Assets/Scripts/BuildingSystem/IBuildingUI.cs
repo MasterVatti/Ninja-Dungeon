@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace BuildingSystem
 {
-    public interface IBuildingUI
+    public interface IBuildingUIPositionHolder 
     {
         Transform PositionUI { get; }
     }

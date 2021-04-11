@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// Класс отвечает за тригер портала(вызов панели портала) 
 /// </summary>
-public class PortalTrigger : Building<PortalData>
+public class PortalTrigger : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
@@ -14,9 +14,5 @@ public class PortalTrigger : Building<PortalData>
         {
             GetComponent<IPortalScreenOpener>().ShowPortalScreen();
         }
-    }
-    
-    protected override void Initialize(PortalData data)
-    {
     }
 }
