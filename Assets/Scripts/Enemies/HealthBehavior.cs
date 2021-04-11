@@ -25,6 +25,11 @@ namespace Enemies
             _healthBar.NormalizePosition(transform.position);
         }
 
+        private void Update()
+        {
+            _healthBar.NormalizePosition(transform.position);
+        }
+
         public void ApplyDamage(int damage)
         {
             _health -= damage;
