@@ -16,8 +16,7 @@ public class MinerInfoView  : BuildingInfoView
     private Image _image;
    
     private ResourceMiner _resourceMiner;
-    private Transform test;
-   
+
     private void Update()
     {
         _currentResource.text = _resourceMiner.CurrentResourceCount.ToString();
