@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Assets.Scripts.Managers.ScreensManager;
+using ResourceSystem;
 using UnityEngine;
 
 namespace Managers.ScreensManager
@@ -14,6 +15,9 @@ namespace Managers.ScreensManager
         [SerializeField]
         private Canvas _canvas;
 
+        [SerializeField]
+        private List<ResourceImage> _resourceImages = new List<ResourceImage>();
+        
         [SerializeField]
         private List<BaseScreen> _allScreens;
 
@@ -81,6 +85,19 @@ namespace Managers.ScreensManager
             }
 
             _screenStack.Clear();
+        }
+        
+        public Sprite GetResourceSprite(ResourceType resourceType)
+        {
+            foreach (var resource in _resourceImages)
+            {
+                if (resource.Type == resourceType)
+                {
+                    return resource.Sprite;
+                }
+            }
+
+            return null;
         }
 
         private bool IsScreenOpened(ScreenType screenType)

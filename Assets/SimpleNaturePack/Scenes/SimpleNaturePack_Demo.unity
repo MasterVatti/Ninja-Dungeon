@@ -8907,7 +8907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetToFollow: {fileID: 212603096}
-  _offset: {x: 0, y: 9, z: -7}
+  _offset: {x: 0, y: 15, z: 16}
 --- !u!81 &1781112973
 AudioListener:
   m_ObjectHideFlags: 0
@@ -8966,13 +8966,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781112971}
-  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
+  m_LocalRotation: {x: 0, y: 0.953717, z: -0.30070576, w: 0}
   m_LocalPosition: {x: -10.38631, y: 3.2643435, z: 44.731735}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 35, y: 180, z: 0}
 --- !u!1001 &1812817119
 PrefabInstance:
   m_ObjectHideFlags: 0

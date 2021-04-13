@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Класс выводит в UI максимальное значение и текущее
+/// Класс для показа информации о добытых ресурсах майнера
 /// </summary>
+
 public class MinerInfoView  : BuildingInfoView
 {
     [SerializeField]
@@ -23,15 +24,12 @@ public class MinerInfoView  : BuildingInfoView
         _maxResource.text = _resourceMiner.MaxStorage.ToString();
     }
 
-    public void Initialize(ResourceMiner resourceMiner, Vector3 positionUI, Sprite sprite, string nameBuilding)
+    public override void Initialize(GameObject building, Transform positionUI, string nameBuilding)
     {
-        _resourceMiner = resourceMiner;
-
-        _image.sprite = sprite;
-      
-        transform.position = positionUI;
-        transform.rotation = Quaternion.identity;
-      
-        ShowNameBuilding(nameBuilding);
+        _resourceMiner = building.GetComponent<ResourceMiner>();
+        
+        _image.sprite = MainManager.ScreenManager.GetResourceSprite(_resourceMiner.ExtractableResource);
+        
+        base.Initialize(building, positionUI, nameBuilding);
     }
 }
