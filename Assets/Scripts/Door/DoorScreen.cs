@@ -1,3 +1,4 @@
+using System;
 using Assets.Scripts.Managers.ScreensManager;
 using JetBrains.Annotations;
 using LoadingScene;
@@ -37,7 +38,7 @@ namespace Door
 
         public void OnClick()
         {
-            if (_energyManager.Energy > 0)
+            if (_energyManager.Energy >= _energyDecreaseCount)
             {
                 _energyManager.EnergyDecrease(_energyDecreaseCount);
                 ScreenManager.Instance.CloseTopScreen();

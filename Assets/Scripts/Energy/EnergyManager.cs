@@ -14,7 +14,12 @@ public class EnergyManager : MonoBehaviour
     {
         SetCurrentEnergyToMaximal();
     }
-
+    
+    private void OnDestroy()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+    
     public void EnergyDecrease(int decreaseNumber)
     {
         _energyCount -= decreaseNumber;
