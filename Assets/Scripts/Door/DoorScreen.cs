@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using LoadingScene;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Door
 {
@@ -12,9 +13,9 @@ namespace Door
     public class DoorScreen : BaseScreenWithContext<PortalContext>
     {
         [SerializeField]
-        private TMP_Text _descriptionField;
+        private Text _descriptionField;
         [SerializeField]
-        private TMP_Text _difficultyLevelField;
+        private Text _difficultyLevelField;
         private string _sceneName;
 
         [UsedImplicitly]
