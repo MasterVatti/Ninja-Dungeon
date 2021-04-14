@@ -6,7 +6,7 @@ namespace Enemies
     /// <summary>
     /// тут хранятся враги
     /// </summary>
-    public class EnemiesManager : Singleton<EnemiesManager>
+    public class EnemiesManager : MonoBehaviour
     {
         public List<Enemy> Enemies => _enemies;
         

@@ -1,14 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Assets.Scripts.Managers.ScreensManager;
 using UnityEngine;
 
-namespace Assets.Scripts.Managers.ScreensManager
+namespace Managers.ScreensManager
 {
     /// <summary>
     /// Этот менеджер управляет окнами.
     /// То есть открывает окна, закрывает и т.д.
     /// </summary>
-    public class ScreenManager : Singleton<ScreenManager>
+    public class ScreenManager : MonoBehaviour
     {
+        [SerializeField]
+        private Canvas _canvas;
+
         [SerializeField]
         private List<BaseScreen> _allScreens;
 
@@ -20,12 +25,17 @@ namespace Assets.Scripts.Managers.ScreensManager
         /// </summary>
         public void OpenScreen(ScreenType screenType)
         {
+            if (IsScreenOpened(screenType))
+            {
+                return;
+            }
+            
             var screenPrefab = FindScreenByType<BaseScreen>(screenType);
-            
-            var screen = Instantiate(screenPrefab, gameObject.transform, false);
-            
-            InitializeScreen(screenPrefab, screenType);
-            
+
+            var screen = Instantiate(screenPrefab, _canvas.transform, false);
+
+            InitializeScreen(screen, screenType);
+
             _screenStack.Push(screen);
         }
 
@@ -33,27 +43,34 @@ namespace Assets.Scripts.Managers.ScreensManager
         /// Открывает окно с заданным контекстом
         /// </summary>
         public void OpenScreenWithContext<TContext>(ScreenType screenType,
-            TContext context) where TContext: BaseContext
+            TContext context) where TContext : BaseContext
         {
+            if (IsScreenOpened(screenType))
+            {
+                return;
+            }
+            
             var screenPrefab =
                 FindScreenByType<BaseScreenWithContext<TContext>>(screenType);
-            
-            var screen = Instantiate(screenPrefab, gameObject.transform, false);
-            
-            InitializeScreen(screenPrefab, screenType);
-            
+
+            var screen = Instantiate(screenPrefab, _canvas.transform, false);
+
+            InitializeScreen(screen, screenType);
+
             screen.ApplyContext(context);
-            
+
             _screenStack.Push(screen);
-            
         }
 
         public void CloseTopScreen()
         {
-            var upperScreen = _screenStack.Peek();
+            if (_screenStack.Count == 0)
+            {
+                return;
+            }
+            
+            var upperScreen = _screenStack.Pop();
             Destroy(upperScreen.gameObject);
-
-            _screenStack.Pop();
         }
 
         public void CloseAllScreens()
@@ -66,7 +83,7 @@ namespace Assets.Scripts.Managers.ScreensManager
             _screenStack.Clear();
         }
 
-        public bool IsScreenOpened(ScreenType screenType)
+        private bool IsScreenOpened(ScreenType screenType)
         {
             foreach (var screen in _screenStack)
             {
@@ -84,9 +101,8 @@ namespace Assets.Scripts.Managers.ScreensManager
         {
             if (screen == null)
             {
-                Debug.Log($"You have not added {screenType} " +
+                throw new NotImplementedException($"You have not added {screenType} " +
                           "screen to screen list");
-                return;
             }
 
             screen.Initialize(screenType);

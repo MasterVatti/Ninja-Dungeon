@@ -20,7 +20,7 @@ namespace Door
                 DifficultyLevel = _settings.DifficultyLevel
             };
             
-            ScreenManager.Instance.OpenScreenWithContext(ScreenType.DoorScreen,
+            MainManager.ScreenManager.OpenScreenWithContext(ScreenType.DoorScreen,
                 context);
         }
     }
