@@ -4319,6 +4319,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 190864822}
+  _resourceImages:
+  - _type: 0
+    _resourseSprite: {fileID: 21300000, guid: 3b839497b0c76b344944ed9c09fc0c39, type: 3}
+  - _type: 1
+    _resourseSprite: {fileID: 21300000, guid: 3dcb9d68d9f65f84186d54fb25b98e64, type: 3}
+  - _type: 2
+    _resourseSprite: {fileID: 21300000, guid: 0a8eaa09f76e9514fb2756cf71caa966, type: 3}
   _allScreens:
   - {fileID: 6497616817769258762, guid: 4be64c8f9cf8e2a40a424ca2fc046fe9, type: 3}
   - {fileID: 1930917441066494165, guid: 32114c6b05a5e37449a7445a35c5e27e, type: 3}
@@ -5985,13 +5992,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ca0e498b28a8142997017e39654402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resourceImages:
-  - _type: 0
-    _resourseSprite: {fileID: 21300000, guid: 3b839497b0c76b344944ed9c09fc0c39, type: 3}
-  - _type: 1
-    _resourseSprite: {fileID: 21300000, guid: 3dcb9d68d9f65f84186d54fb25b98e64, type: 3}
-  - _type: 2
-    _resourseSprite: {fileID: 21300000, guid: 0a8eaa09f76e9514fb2756cf71caa966, type: 3}
 --- !u!1001 &1252804307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9564,7 +9564,7 @@ PrefabInstance:
     - target: {fileID: 5332810461780847234, guid: 023c32ed79838cb40ab63e3542a568da,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.94
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 5332810461780847234, guid: 023c32ed79838cb40ab63e3542a568da,
         type: 3}
@@ -9574,7 +9574,7 @@ PrefabInstance:
     - target: {fileID: 5332810461780847234, guid: 023c32ed79838cb40ab63e3542a568da,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 77.31
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5332810461780847234, guid: 023c32ed79838cb40ab63e3542a568da,
         type: 3}

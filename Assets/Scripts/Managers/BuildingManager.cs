@@ -23,7 +23,7 @@ namespace Managers
         public void AddNewConstructedBuilding(GameObject building, BuildingSettings buildingSettings)
         {
             ActiveBuildings.Add(building);
-            OnBuildFinished?.Invoke(building,buildingSettings);
+            OnBuildFinished?.Invoke(building, buildingSettings);
         }
     }
 }

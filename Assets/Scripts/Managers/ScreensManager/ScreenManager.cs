@@ -16,9 +16,6 @@ namespace Managers.ScreensManager
         private Canvas _canvas;
 
         [SerializeField]
-        private List<ResourceImage> _resourceImages = new List<ResourceImage>();
-        
-        [SerializeField]
         private List<BaseScreen> _allScreens;
 
         private readonly Stack<BaseScreen> _screenStack =
@@ -87,19 +84,6 @@ namespace Managers.ScreensManager
             _screenStack.Clear();
         }
         
-        public Sprite GetResourceSprite(ResourceType resourceType)
-        {
-            foreach (var resource in _resourceImages)
-            {
-                if (resource.Type == resourceType)
-                {
-                    return resource.Sprite;
-                }
-            }
-
-            return null;
-        }
-
         private bool IsScreenOpened(ScreenType screenType)
         {
             foreach (var screen in _screenStack)

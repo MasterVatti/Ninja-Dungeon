@@ -6,7 +6,6 @@ using UnityEngine.UI;
 /// <summary>
 /// Класс для показа информации о добытых ресурсах майнера
 /// </summary>
-
 public class MinerInfoView  : BuildingInfoView
 {
     [SerializeField]
@@ -24,12 +23,12 @@ public class MinerInfoView  : BuildingInfoView
         _maxResource.text = _resourceMiner.MaxStorage.ToString();
     }
 
-    public override void Initialize(GameObject building, Transform positionUI, string nameBuilding)
+    public override void Initialize(GameObject building, Transform uiAttachPoint, string nameBuilding)
     {
         _resourceMiner = building.GetComponent<ResourceMiner>();
         
-        _image.sprite = MainManager.ScreenManager.GetResourceSprite(_resourceMiner.ExtractableResource);
+        _image.sprite = MainManager.IconsProvider.GetResourceSprite(_resourceMiner.ExtractableResource);
         
-        base.Initialize(building, positionUI, nameBuilding);
+        base.Initialize(building, uiAttachPoint, nameBuilding);
     }
 }

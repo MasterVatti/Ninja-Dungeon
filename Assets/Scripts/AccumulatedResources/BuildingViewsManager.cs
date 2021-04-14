@@ -9,14 +9,15 @@ namespace AccumulatedResources
     /// </summary>
     public class BuildingViewsManager : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             var constructedBuildings = MainManager.BuildingManager.ActiveBuildings;
             
             foreach (var building in constructedBuildings)
             {
-                var settings = MainManager.BuildingManager.GetBuildingSettings
-                    (building.GetComponent<IBuilding>().BuildingSettingsID);
+                var buildingID = building.GetComponent<IBuilding>().BuildingSettingsID;
+                
+                var settings = MainManager.BuildingManager.GetBuildingSettings(buildingID);
                 
                 AddUIToBuilding(building,settings);
             }
@@ -32,20 +33,17 @@ namespace AccumulatedResources
             }
         }   
         
-        private void CreateBuildingInfoView
-            (GameObject building, BuildingInfoView buildingInfoView, Transform positionUI, string nameBuilding)
+        private void CreateBuildingInfoView(GameObject building, BuildingInfoView buildingInfoView,
+         Transform uiAttachPoint, string nameBuilding)
         {
             var buildingView = Instantiate(buildingInfoView, transform);
             
-            buildingView.Initialize(building, positionUI, nameBuilding);
+            buildingView.Initialize(building, uiAttachPoint, nameBuilding);
         }
         
-        private void OnDisable()
+        private void OnDestroy()
         {
-            if (MainManager.BuildingManager != null)
-            {
-                MainManager.BuildingManager.OnBuildFinished -= AddUIToBuilding;
-            }
+            MainManager.BuildingManager.OnBuildFinished -= AddUIToBuilding;
         }
     }
 }

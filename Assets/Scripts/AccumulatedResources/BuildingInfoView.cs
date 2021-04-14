@@ -15,9 +15,9 @@ public class BuildingInfoView : MonoBehaviour
         _nameBuilding.text = nameBuilding;
     }
     
-    public virtual void Initialize(GameObject building, Transform positionUI, string nameBuilding)
+    public virtual void Initialize(GameObject building, Transform uiAttachPoint, string nameBuilding)
     {
-        transform.position = positionUI.position;
+        transform.position = uiAttachPoint.position;
         transform.rotation = Quaternion.identity;
         
         ShowNameBuilding(nameBuilding);
