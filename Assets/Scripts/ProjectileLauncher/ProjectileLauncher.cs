@@ -8,7 +8,6 @@ namespace ProjectileLauncher
     /// </summary>
     public class ProjectileLauncher : MonoBehaviour
     {
-        
         [SerializeField] 
         private Projectile _projectilePrefab;
         [SerializeField] 
@@ -33,13 +32,14 @@ namespace ProjectileLauncher
             }
         }
 
-        protected virtual void CreateProjectile()
+        private void CreateProjectile()
         {
                 var nearestEnemyPosition = _enemyDetector.GetNearestEnemy().transform.position;
                 var nearestEnemyDirection = (nearestEnemyPosition - transform.position).normalized;
                 var projectilePosition = transform.position;
                 var spawningBulletPoint = new Vector3(projectilePosition.x, projectilePosition.y, 
                     projectilePosition.z);
+                transform.LookAt(nearestEnemyPosition);
                 var projectile = Instantiate(_projectilePrefab, spawningBulletPoint, transform.rotation);
                 projectile.Initialize(nearestEnemyDirection);
         }
