@@ -36,7 +36,7 @@ namespace Enemies.Spawner
 
                 enemy.HealthSystem.EnemyDie += OnEnemyDied;
 
-                EnemiesManager.Instance.AddEnemy(enemy);
+                MainManager.EnemiesManager.AddEnemy(enemy);
             }
         }
         
