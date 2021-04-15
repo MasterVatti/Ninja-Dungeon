@@ -74,7 +74,7 @@ namespace Buildings
         public void Upgrade()
         {
             StateInitialize();
-            var upgrader = new MinerUpgrader();
+            var upgrader = new MinerUpgrader(State);
             new BuildingUpgrader(upgrader).Upgrade(this);
         }
 

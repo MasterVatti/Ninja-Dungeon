@@ -5,7 +5,7 @@ namespace BuildingSystem.BuildingUpgradeSystem
 {
     public class BuildingUpgrader
     {
-        private IUpgrader _upgrader;
+        private readonly IUpgrader _upgrader;
 
         public BuildingUpgrader(IUpgrader upgrader)
         {
@@ -19,7 +19,7 @@ namespace BuildingSystem.BuildingUpgradeSystem
             var buildingLevel = building.GetComponent<IUpgradable>().CurrentBuildingLevel + 1;
             if (settings.UpgradeList.Count > buildingLevel)
             {
-                var go = _upgrader.Upgrade(building.State, settings, buildingLevel);
+                var go = _upgrader.Upgrade(settings, buildingLevel);
                 if (go == null)
                 {
                     return;
