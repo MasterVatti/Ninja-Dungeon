@@ -22,7 +22,7 @@ namespace BuildingSystem
         private void Start()
         {
             //копируем значения списка необходимых ресурсов, чтобы не менять настройки
-            // но только в том случае, если из сохранения нам суюда прилетел пустой список
+            // но только в том случае, если из сохранения нам сюда прилетел пустой список
             if (RequiredResource.Count == 0)
             {
                 RequiredResource = new List<Resource>(BuildingSettings.UpgradeList[0].UpgradeCost);
@@ -59,8 +59,7 @@ namespace BuildingSystem
             {
                 _requiredCooldown.Add(requiredResource.Type, 
                     BuildingSettings.TimeToBuild / requiredResource.Amount);
-                _currentCooldown.Add(requiredResource.Type,
-                    float.MinValue);
+                _currentCooldown.Add(requiredResource.Type, float.MinValue);
             }
         }
 
@@ -77,9 +76,10 @@ namespace BuildingSystem
                     var resource = RequiredResource[i];
                     resource.Amount -= PAY_PER_TICK;
                     RequiredResource[i] = resource;
-                    
-                    MainManager.AnimationManager.ShowFlyingResource
-                        (RequiredResource[i].Type, MainManager.PlayerMovementController.transform.position, transform.position);
+
+                    var playerPosition = MainManager.PlayerMovementController.transform.position;
+                    MainManager.AnimationManager.ShowFlyingResource(RequiredResource[i].Type,
+                    playerPosition, transform.position);
                 }
             }
 
@@ -114,10 +114,10 @@ namespace BuildingSystem
 
         private void FinishConstruction()
         {
-            BuildingUtils.CreateNewConstruction(BuildingSettings, true);
+            BuildingUtils.CreateNewBuilding(BuildingSettings);
             foreach (var placeHolder in BuildingSettings.ConnectedBuildings)
             {
-                BuildingUtils.CreateNewConstruction(placeHolder, false);
+                BuildingUtils.CreateNewPlaceHolder(placeHolder);
             }
         }
     }

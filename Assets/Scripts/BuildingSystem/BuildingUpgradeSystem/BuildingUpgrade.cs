@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ResourceSystem;
 using UnityEngine;
 
-namespace BuildingSystem
+namespace BuildingSystem.BuildingUpgradeSystem
 {
     [Serializable]
     public class BuildingUpgrade

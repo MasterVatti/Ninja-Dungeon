@@ -1,56 +1,67 @@
-﻿using UnityEngine;
+﻿using BuildingSystem.BuildingUpgradeSystem;
+using UnityEngine;
 
 namespace BuildingSystem
 {
+    /// <summary>
+    /// Класс с утилитарными методами для зданий
+    /// </summary>
     public static class BuildingUtils
     {
-        public static GameObject CreateNewConstruction(BuildingSettings buildingSettings, bool isBuilding,
-        int buildingLevel = 0)
+        public static GameObject CreateNewBuilding(BuildingSettings settings, int buildingLevel = 0)
         {
-            var placeHolderPosition = buildingSettings.Position;
-            if (isBuilding)
+            var position = settings.Position;
+            var buildingUpgrade = settings.UpgradeList[buildingLevel];
+            var buildingPrefab = buildingUpgrade.UpgradePrefab;
+            var rotation = buildingPrefab.transform.rotation;
+            
+            var building = Object.Instantiate(buildingPrefab, position, rotation);
+
+            MainManager.BuildingManager.AddNewConstructedBuilding(building);
+            if (building.TryGetComponent<IBuildingSaver>(out var buildingData))
             {
-                var buildingUpgrade = buildingSettings.UpgradeList[buildingLevel];
-                var buildingPrefab = buildingUpgrade.UpgradePrefab;
-                var building = Object.Instantiate(buildingPrefab, placeHolderPosition,
-                buildingPrefab.transform.rotation);
-
-                MainManager.BuildingManager.AddNewConstructedBuilding(building);
-                building.GetComponent<IBuildingSaver>().Initialize(buildingSettings.ID);
-
-                return building;
+                buildingData.Initialize(settings.ID);
             }
 
-            var placeHolderPrefab = buildingSettings.PlaceHolderPrefab;
+            if (building.TryGetComponent<IUpgradable>(out var buildingUpgradable))
+            {
+                buildingUpgradable.CurrentBuildingLevel = buildingLevel;
+            }
+
+            return building;
+        }
+
+        public static GameObject CreateNewPlaceHolder(BuildingSettings settings)
+        {
+            var position = settings.Position;
+            var placeHolderPrefab = settings.PlaceHolderPrefab;
             var placeHolderRotation = placeHolderPrefab.transform.rotation;
 
-            var placeHolder = Object.Instantiate(placeHolderPrefab, placeHolderPosition, placeHolderRotation);
-            placeHolder.GetComponent<BuildingController>().Initialize(buildingSettings);
+            var placeHolder = Object.Instantiate(placeHolderPrefab, position, placeHolderRotation);
+            
+            placeHolder.GetComponent<BuildingController>().Initialize(settings);
             MainManager.BuildingManager.ActivePlaceHolders.Add(placeHolder);
 
             return placeHolder;
         }
 
-        public static bool UpgradeBuilding(BuildingSettings buildingSettings, int upgradeLevel)
+        public static bool UpgradeBuilding(BuildingSettings settings, int buildingLevel, out GameObject newBuilding)
         {
-            if (buildingSettings.UpgradeList.Count > upgradeLevel)
+            var upgrade = settings.UpgradeList[buildingLevel];
+            var upgradeCost = upgrade.UpgradeCost;
+
+            if (upgradeCost.TrueForAll(resource =>
+            MainManager.ResourceManager.HasEnough(resource.Type, resource.Amount)))
             {
-                var upgrade = buildingSettings.UpgradeList[upgradeLevel];
-                var upgradeCost = upgrade.UpgradeCost;
+                upgradeCost.ForEach(resource =>
+                MainManager.ResourceManager.Pay(resource.Type, resource.Amount));
 
-                if (upgradeCost.TrueForAll(resource =>
-                MainManager.ResourceManager.HasEnough(resource.Type, resource.Amount)))
-                {
-                    upgradeCost.ForEach(resource =>
-                    MainManager.ResourceManager.Pay(resource.Type, resource.Amount));
-
-                    var go = CreateNewConstruction(buildingSettings, true, upgradeLevel);
-                    go.GetComponent<IUpgradable>().CurrentBuildingLevel = upgradeLevel;
-
-                    return true;
-                }
+                newBuilding = CreateNewBuilding(settings, buildingLevel);
+                
+                return true;
             }
 
+            newBuilding = null;
             return false;
         }
     }

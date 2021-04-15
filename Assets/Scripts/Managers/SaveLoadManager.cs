@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BuildingSystem;
+﻿using System.Linq;
 using Newtonsoft.Json;
-using ResourceSystem;
 using SaveSystem;
 using UnityEngine;
 
@@ -20,87 +17,22 @@ namespace Managers
             Load();
         }
         
-        private Resource[] SaveResources() => MainManager.ResourceManager.GetResources().ToArray();
-
-
-        private IEnumerable<BuildingData> SaveConstructions()
-        {
-            var buildings = MainManager.BuildingManager.ActiveBuildings;
-            var placeHolders = MainManager.BuildingManager.ActivePlaceHolders;
-            var savedConstructions = new BuildingData[buildings.Count + placeHolders.Count];
-            
-            for(var i = 0; i < buildings.Count; i++)
-            {
-                if (buildings[i].TryGetComponent<IBuildingSaver>(out var buildingData))
-                {
-                    savedConstructions[i] = buildingData.Save();
-                    if (buildings[i].TryGetComponent<IUpgradable>(out var buildingUpgrade))
-                    {
-                        savedConstructions[i].BuildingLevel = buildingUpgrade.CurrentBuildingLevel;
-                    }
-                }
-            }
-            
-            for(var i = 0; i < placeHolders.Count; i++)
-            {
-                var buildingController = placeHolders[i].GetComponent<BuildingController>();
-                var placeHolderData = new PlaceHolderData
-                {
-                    RemainResources = buildingController.RequiredResource
-                };
-                savedConstructions[i] = new BuildingData
-                {
-                    IsBuilt = false,
-                    SettingsID = buildingController.BuildingSettings.ID,
-                    State = JsonConvert.SerializeObject(placeHolderData)
-                };
-            }
-
-            return savedConstructions;
-        }
-        
         private void Load()
         {
             var json = PlayerPrefs.GetString("save");
-            var save = JsonConvert.DeserializeObject<Save>(json);
-            
-            if (save == null)
-            {
-                save = _saveConfig.DefaultSave;
-            }
-            
+            var save = JsonConvert.DeserializeObject<Save>(json) ?? _saveConfig.DefaultSave;
+
             var buildings = save.Buildings;
             var resources = save.Resources;
 
             if (buildings != null)
             {
-                foreach (var building in buildings)
-                {
-                    var settings =  MainManager.BuildingManager.GetBuildingSettings(building.SettingsID);
-                    var go = BuildingUtils.CreateNewConstruction(settings, building.IsBuilt, building.BuildingLevel);
-                    
-                    if (building.IsBuilt)
-                    {
-                        if (go.TryGetComponent<IBuildingSaver>(out var buildingData))
-                        {
-                            buildingData.Initialize(building.State);
-                        }
-                    }
-                    else
-                    {
-                        var placeHolderData = JsonConvert.DeserializeObject<PlaceHolderData>(building.State);
-                        if (placeHolderData != null)
-                        {
-                            go.GetComponent<BuildingController>().RequiredResource = placeHolderData.RemainResources;
-                        }
-                    }
-                    
-                }
+                SaveInitializer.InitializeBuildings(buildings.ToList());
             }
 
             if (resources != null)
             {
-                MainManager.ResourceManager.SetResources(resources);
+                SaveInitializer.InitializeResources(resources.ToList());
             }
         }
 
@@ -108,8 +40,8 @@ namespace Managers
         {
             var save = new Save
             {
-                Resources = SaveResources(), 
-                Buildings = SaveConstructions().ToArray()
+                Resources = SaveCreator.SaveResources().ToArray(), 
+                Buildings = SaveCreator.SaveConstructions().ToArray()
             };
             var json = JsonConvert.SerializeObject(save, Formatting.Indented);
             PlayerPrefs.SetString("save", json);

@@ -10,14 +10,14 @@ namespace BuildingSystem
     /// <typeparam name="T"></typeparam>
     public abstract class Building<T> : MonoBehaviour, IBuildingSaver where T : BaseBuildingState
     {
+        public T State { get; protected set; }
+
         public int BuildingSettingsID { get; set; }
-        
-        protected T _state;
 
         public void Initialize(string savedData)
         {
-            _state = JsonConvert.DeserializeObject<T>(savedData);
-            Initialize(_state);
+            State = JsonConvert.DeserializeObject<T>(savedData);
+            Initialize(State);
         }
 
         public void Initialize(int buildingSettingsID)
@@ -25,13 +25,15 @@ namespace BuildingSystem
             BuildingSettingsID = buildingSettingsID;
         }
 
-        public virtual BuildingData Save()
+        protected abstract void StateInitialize();
+
+        public BuildingData Save()
         {
+            StateInitialize();
             return new BuildingData
             {
-                IsBuilt = true,
                 SettingsID = BuildingSettingsID,
-                State = JsonConvert.SerializeObject(_state)
+                State = JsonConvert.SerializeObject(State)
             };
         }
 

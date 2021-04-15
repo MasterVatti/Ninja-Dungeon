@@ -1,7 +1,7 @@
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using BuildingSystem;
+using Newtonsoft.Json;
 using ResourceSystem;
 using UnityEngine;
 
@@ -22,15 +22,16 @@ namespace SaveSystem
             {
                 var constructions = _startBuildings.Select(building => new BuildingData
                 {
-                    IsBuilt = true,
                     SettingsID = building.ID,
                     State = ""
                 }).ToList();
                 constructions.AddRange(_startPlaceHolders.Select(placeHolder => new BuildingData
                 {
-                    IsBuilt = false,
-                    SettingsID = placeHolder.ID,
-                    State = ""
+                    SettingsID = placeHolder.ID, 
+                    State = JsonConvert.SerializeObject(new PlaceHolderData
+                    {
+                        RemainResources = placeHolder.UpgradeList[0].UpgradeCost
+                    })
                 }));
 
                 return constructions.ToArray();

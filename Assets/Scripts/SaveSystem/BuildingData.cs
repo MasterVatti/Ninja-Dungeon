@@ -9,9 +9,6 @@ namespace SaveSystem
     [Serializable]
     public class BuildingData
     {
-        [JsonProperty("built")]
-        public bool IsBuilt { get; set; }
-
         [JsonProperty("settingsID")]
         public int SettingsID { get; set; }
         

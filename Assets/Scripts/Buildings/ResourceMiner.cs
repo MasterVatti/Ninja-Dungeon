@@ -1,4 +1,5 @@
 using BuildingSystem;
+using BuildingSystem.BuildingUpgradeSystem;
 using ResourceSystem;
 using SaveSystem;
 using UnityEngine;
@@ -21,13 +22,15 @@ namespace Buildings
             {
                 if (_currentResourceCount < _maxStorage)
                 {
-                    var count = Mathf.FloorToInt((Time.time - _startMiningTime) / _miningPerSecond);
+                    var count = Mathf.FloorToInt((Time.time - MiningStartTime) * _miningPerSecond);
                     _currentResourceCount = Mathf.Clamp(count, 0, _maxStorage);
                 }
 
                 return _currentResourceCount;
             }
         }
+        
+        public float MiningStartTime { get; set; }
 
         public int CurrentBuildingLevel { get; set; }
         public Transform PositionUI => _positionUI;
@@ -42,11 +45,21 @@ namespace Buildings
         private Transform _positionUI;
         
         private int _currentResourceCount;
-        private float _startMiningTime;
 
         private void Start()
         {
-            _startMiningTime = Time.time;
+            if (MiningStartTime == 0f)
+            {
+                MiningStartTime = Time.time;
+            }
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Upgrade();
+            }
         }
 
         private void OnTriggerStay(Collider other)
@@ -54,40 +67,34 @@ namespace Buildings
             if (_currentResourceCount != 0)
             {
                 MainManager.ResourceManager.AddResource(_miningResource, _currentResourceCount);
-                _startMiningTime = Time.time;
+                MiningStartTime = Time.time;
             }
         }
 
         public void Upgrade()
         {
-            var buildingSettings = MainManager.BuildingManager.GetBuildingSettings(BuildingSettingsID);
-            if (BuildingUtils.UpgradeBuilding(buildingSettings, CurrentBuildingLevel + 1))
-            {
-                MainManager.BuildingManager.ActiveBuildings.Remove(gameObject);
-                Destroy(gameObject);
-            }
+            StateInitialize();
+            var upgrader = new MinerUpgrader();
+            new BuildingUpgrader(upgrader).Upgrade(this);
         }
 
-        public override BuildingData Save()
+        protected override void StateInitialize()
         {
-            _state = new MinerBuildingData
+            State = new MinerBuildingData
             {
-                StartTime = Time.time,
                 MaxStorage = _maxStorage,
                 MiningPerSecond = _miningPerSecond,
-                ResourceCount = _currentResourceCount,
-                Resource = _miningResource
+                Resource = _miningResource,
+                StartTime = Time.time
             };
-            return base.Save();
         }
 
         protected override void Initialize(MinerBuildingData data)
         {
             if (data != null)
             {
-                _startMiningTime = data.StartTime;
+                MiningStartTime = data.StartTime;
                 _maxStorage = data.MaxStorage;
-                _currentResourceCount = data.ResourceCount;
                 _miningPerSecond = data.MiningPerSecond;
                 _miningResource = data.Resource;
             }

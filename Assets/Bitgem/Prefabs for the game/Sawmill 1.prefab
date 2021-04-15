@@ -56,8 +56,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _miningResource: 1
-  _miningPerSecond: 10
-  _maxStorage: 200
+  _miningPerSecond: 20
+  _maxStorage: 400
   _positionUI: {fileID: 2337632094152252679}
 --- !u!1001 &495553099722535926
 PrefabInstance:
@@ -68,7 +68,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1065976630698652, guid: f918b0b07c3d61d489eb5e56a32f75d8, type: 3}
       propertyPath: m_Name
-      value: Sawmill
+      value: Sawmill 1
       objectReference: {fileID: 0}
     - target: {fileID: 1065976630698652, guid: f918b0b07c3d61d489eb5e56a32f75d8, type: 3}
       propertyPath: m_IsActive
