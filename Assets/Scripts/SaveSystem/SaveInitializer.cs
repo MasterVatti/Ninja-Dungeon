@@ -26,7 +26,7 @@ namespace SaveSystem
                 else
                 {
                     var newBuilding = BuildingUtils.CreateNewBuilding(settings, building.BuildingLevel);
-                    if (newBuilding.TryGetComponent<IBuildingSaver>(out var buildingData))
+                    if (newBuilding.TryGetComponent<IBuilding>(out var buildingData))
                     {
                         buildingData.Initialize(building.State);
                     }

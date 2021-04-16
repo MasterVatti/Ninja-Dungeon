@@ -18,12 +18,25 @@ namespace Managers
             return _resources[GetResourceIndexByType(type)].Amount >= value;
         }
 
+        public bool HasEnough(List<Resource> resources)
+        {
+            return resources.TrueForAll(resource => HasEnough(resource.Type, resource.Amount));
+        }
+
         public void Pay(ResourceType type, float value)
         {
             var index = GetResourceIndexByType(type);
             var resource = _resources[index];
             resource.Amount -= value;
             _resources[index] = resource;
+        }
+
+        public void Pay(IEnumerable<Resource> resources)
+        {
+            foreach (var resource in resources) 
+            {
+                Pay(resource.Type, resource.Amount);
+            }
         }
 
         public void AddResource(ResourceType type, int value)

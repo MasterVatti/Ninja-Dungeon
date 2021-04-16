@@ -1,35 +1,45 @@
-﻿using SaveSystem;
+﻿using System.Collections.Generic;
+using ResourceSystem;
 using UnityEngine;
 
 namespace BuildingSystem.BuildingUpgradeSystem
 {
-    public class BuildingUpgrader
+    public abstract class BuildingUpgrader
     {
-        private readonly IUpgrader _upgrader;
+        public abstract void Upgrade();
+        protected abstract void InitializeBuilding(GameObject building);
 
-        public BuildingUpgrader(IUpgrader upgrader)
+        protected bool UpgradeBuildingSucceed(BuildingSettings settings, int buildingLevel, out GameObject newBuilding)
         {
-            _upgrader = upgrader;
+            var upgrade = settings.UpgradeList[buildingLevel];
+            var upgradeCost = upgrade.UpgradeCost;
+
+            if (HadPayedForUpgrade(upgradeCost))
+            {
+                newBuilding = BuildingUtils.CreateNewBuilding(settings, buildingLevel);
+                InitializeBuilding(newBuilding);
+                return true;
+            }
+
+            newBuilding = null;
+            return false;
         }
 
-        public void Upgrade<T>(Building<T> building) where T : BaseBuildingState
+        protected static void DestroyOldBuilding(GameObject oldBuilding)
         {
-            var settingsID = building.BuildingSettingsID;
-            var settings = MainManager.BuildingManager.GetBuildingSettings(settingsID);
-            var buildingLevel = building.GetComponent<IUpgradable>().CurrentBuildingLevel + 1;
-            if (settings.UpgradeList.Count > buildingLevel)
-            {
-                var go = _upgrader.Upgrade(settings, buildingLevel);
-                if (go == null)
-                {
-                    return;
-                }
-                
-                var oldBuilding = building.gameObject;
+            MainManager.BuildingManager.ActiveBuildings.Remove(oldBuilding);
+            Object.Destroy(oldBuilding);
+        }
 
-                MainManager.BuildingManager.ActiveBuildings.Remove(oldBuilding);
-                Object.Destroy(oldBuilding);
+        private static bool HadPayedForUpgrade(List<Resource> upgradeCost)
+        {
+            if (MainManager.ResourceManager.HasEnough(upgradeCost))
+            {
+                MainManager.ResourceManager.Pay(upgradeCost);
+                return true;
             }
+
+            return false;
         }
     }
 }

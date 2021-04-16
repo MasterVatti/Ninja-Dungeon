@@ -11,7 +11,7 @@ namespace Buildings
     /// через свойство CurrentResourceCount.
     /// Выдает ресурс игроку, если подойти.
     /// </summary>
-    public class ResourceMiner : Building<MinerBuildingData>, IUpgradable
+    public class ResourceMiner : Building<MinerBuildingData>
     {
         //Свойства для UI
         public ResourceType ExtractableResource => _miningResource;
@@ -31,8 +31,6 @@ namespace Buildings
         }
         
         public float MiningStartTime { get; set; }
-
-        public int CurrentBuildingLevel { get; set; }
         public Transform PositionUI => _positionUI;
 
         [SerializeField]
@@ -71,11 +69,9 @@ namespace Buildings
             }
         }
 
-        public void Upgrade()
+        private void Upgrade()
         {
-            StateInitialize();
-            var upgrader = new MinerUpgrader(State);
-            new BuildingUpgrader(upgrader).Upgrade(this);
+            new MinerUpgrader(this).Upgrade();
         }
 
         protected override void StateInitialize()

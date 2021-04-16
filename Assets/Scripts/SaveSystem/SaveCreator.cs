@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using BuildingSystem;
-using BuildingSystem.BuildingUpgradeSystem;
 using Newtonsoft.Json;
 using ResourceSystem;
 
@@ -19,13 +18,10 @@ namespace SaveSystem
             
             for(var i = 0; i < buildings.Count; i++)
             {
-                if (buildings[i].TryGetComponent<IBuildingSaver>(out var buildingData))
+                if (buildings[i].TryGetComponent<IBuilding>(out var buildingData))
                 {
                     savedConstructions[i] = buildingData.Save();
-                    if (buildings[i].TryGetComponent<IUpgradable>(out var upgradeData))
-                    {
-                        savedConstructions[i].BuildingLevel = upgradeData.CurrentBuildingLevel;
-                    }
+                    savedConstructions[i].BuildingLevel = buildingData.CurrentBuildingLevel;
                 }
             }
             

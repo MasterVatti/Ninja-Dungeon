@@ -4,23 +4,35 @@ using UnityEngine;
 
 namespace BuildingSystem.BuildingUpgradeSystem
 {
-    public class MinerUpgrader : IUpgrader
+    public class MinerUpgrader : BuildingUpgrader
     {
-        private readonly MinerBuildingData _state;
-        public MinerUpgrader(MinerBuildingData state)
+        private readonly Building<MinerBuildingData> _building;
+        public MinerUpgrader(Building<MinerBuildingData> building)
         {
-            _state = state;
+            _building = building;
         }
         
-        public GameObject Upgrade(BuildingSettings settings, int buildingLevel)
+        public override void Upgrade()
         {
-            if (BuildingUtils.UpgradeBuilding(settings, buildingLevel, out var newBuilding))
-            {
-                var resourceMiner = newBuilding.GetComponent<ResourceMiner>();
-                resourceMiner.MiningStartTime = _state.StartTime;
-            }
+            var settingsID = _building.BuildingSettingsID;
+            var settings = MainManager.BuildingManager.GetBuildingSettings(settingsID);
+            var buildingLevel = _building.CurrentBuildingLevel + 1;
             
-            return newBuilding;
+            if (settings.UpgradeList.Count <= buildingLevel)
+            {
+                return;
+            }
+
+            if (UpgradeBuildingSucceed(settings, buildingLevel, out var newBuilding) && newBuilding != null)
+            {
+                DestroyOldBuilding(_building.gameObject);
+            }
+        }
+
+        protected override void InitializeBuilding(GameObject building)
+        {
+            var resourceMiner = building.GetComponent<ResourceMiner>();
+            resourceMiner.MiningStartTime = _building.State.StartTime;
         }
     }
 }

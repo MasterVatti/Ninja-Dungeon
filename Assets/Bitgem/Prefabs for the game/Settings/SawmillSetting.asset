@@ -22,10 +22,14 @@ MonoBehaviour:
   - _upgradeCost:
     - _type: 0
       _amount: 250
-    _upgradePrefab: {fileID: 5284114885193351311, guid: df511b266d69cb149a1fe6726790908b,
+    _upgradePrefab: {fileID: 496318909535179114, guid: 6dc6c58d401b6b14ba3ed6b73f1070eb,
+      type: 3}
+  - _upgradeCost:
+    - _type: 0
+      _amount: 250
+    _upgradePrefab: {fileID: 496318909535179114, guid: 69ee1bcc09031d5449fc70c65daa6d08,
       type: 3}
   _placeHolderPrefab: {fileID: 7724395076348898431, guid: c979f707646aa634593061efb40ed5ca,
     type: 3}
   _timeToBuild: 5
-  _position: {x: 0, y: 0, z: 0}
-  _id: 0
+  _position: {x: 0, y: 0, z: 20}

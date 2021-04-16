@@ -1,5 +1,4 @@
-﻿using BuildingSystem.BuildingUpgradeSystem;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BuildingSystem
 {
@@ -18,14 +17,10 @@ namespace BuildingSystem
             var building = Object.Instantiate(buildingPrefab, position, rotation);
 
             MainManager.BuildingManager.AddNewConstructedBuilding(building);
-            if (building.TryGetComponent<IBuildingSaver>(out var buildingData))
+            if (building.TryGetComponent<IBuilding>(out var buildingData))
             {
                 buildingData.Initialize(settings.ID);
-            }
-
-            if (building.TryGetComponent<IUpgradable>(out var buildingUpgradable))
-            {
-                buildingUpgradable.CurrentBuildingLevel = buildingLevel;
+                buildingData.CurrentBuildingLevel = buildingLevel;
             }
 
             return building;
@@ -43,26 +38,6 @@ namespace BuildingSystem
             MainManager.BuildingManager.ActivePlaceHolders.Add(placeHolder);
 
             return placeHolder;
-        }
-
-        public static bool UpgradeBuilding(BuildingSettings settings, int buildingLevel, out GameObject newBuilding)
-        {
-            var upgrade = settings.UpgradeList[buildingLevel];
-            var upgradeCost = upgrade.UpgradeCost;
-
-            if (upgradeCost.TrueForAll(resource =>
-            MainManager.ResourceManager.HasEnough(resource.Type, resource.Amount)))
-            {
-                upgradeCost.ForEach(resource =>
-                MainManager.ResourceManager.Pay(resource.Type, resource.Amount));
-
-                newBuilding = CreateNewBuilding(settings, buildingLevel);
-                
-                return true;
-            }
-
-            newBuilding = null;
-            return false;
         }
     }
 }

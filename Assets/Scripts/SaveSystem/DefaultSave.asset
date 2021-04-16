@@ -19,4 +19,4 @@ MonoBehaviour:
     _amount: 1000
   _startBuildings: []
   _startPlaceHolders:
-  - {fileID: 11400000, guid: cd1e6a9f37a024a46b8b7918b3a680f9, type: 2}
+  - {fileID: 11400000, guid: a13cd1a59069aab4eb965d0b3c5466f4, type: 2}
