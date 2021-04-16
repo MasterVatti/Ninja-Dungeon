@@ -8,45 +8,48 @@ namespace ProjectileLauncher
     /// </summary>
     public class ProjectileLauncher : MonoBehaviour
     {
-        [SerializeField] 
+        [SerializeField]
         private Projectile _projectilePrefab;
-        
-        [SerializeField] 
+
+        [SerializeField]
         private float _projectileSpawnCooldown;
-        
-        [SerializeField] 
+
+        [SerializeField]
         private NearestEnemyDetector _enemyDetector;
+
+        [SerializeField]
+        private GameObject _player;
         
-        private float _currentTime;
-        
+        //private Transform projectileSpawnPoint;
+        private float _currentTime; //0
+
         private void Update()
         {
+            var enemy = _enemyDetector.GetNearestEnemy();
             if (_currentTime < _projectileSpawnCooldown)
             {
                 _currentTime += Time.deltaTime;
             }
             else
             {
-                foreach (var enemy in EnemiesManager.Singleton.Enemies)
+                if (enemy != null)
                 {
-                    _currentTime = 0;
-                    if (EnemiesManager.Singleton.Enemies.Count > 0 && enemy != null)
-                    {
-                        CreateProjectile();
-                    }
+                    CreateProjectile(enemy);
                 }
             }
         }
 
-        protected virtual void CreateProjectile()
+        protected virtual void CreateProjectile(GameObject enemy)
         {
-                var nearestEnemyPosition = _enemyDetector.GetNearestEnemy().transform.position;
-                var nearestEnemyDirection = (nearestEnemyPosition - transform.position).normalized;
-                var projectilePosition = transform.position;
-                var spawningBulletPoint = new Vector3(projectilePosition.x, projectilePosition.y, 
-                    projectilePosition.z);
-                var projectile = Instantiate(_projectilePrefab, spawningBulletPoint, transform.rotation);
-                projectile.Initialize(nearestEnemyDirection);
+            _currentTime = 0;
+            
+            var enemyPosition = enemy.transform.position;
+            var nearestEnemyDirection = (enemyPosition - transform.position).normalized;
+            var projectile = Instantiate(_projectilePrefab, transform.position, transform.rotation);
+            
+            _player.transform.LookAt(enemy.transform);
+            
+            projectile.Initialize(nearestEnemyDirection);
         }
     }
 }

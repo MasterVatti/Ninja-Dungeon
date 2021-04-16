@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Enemies
@@ -36,3 +37,19 @@ namespace Enemies
         }
     }
 }
+             // float distance = Mathf.Infinity;
+             // Vector3 position = transform.position;
+             // foreach (GameObject enemy in _enemiesManager.Enemies)
+             // { 
+             //     if (enemy != null)
+             //     {
+             //        Vector3 diff = enemy.transform.position - position;
+             //        float curDistance = diff.sqrMagnitude;
+             //        if(curDistance< distance)
+             //        {
+             //            closest = enemy;
+             //            distance = curDistance; 
+             //        }
+             //     }
+             // }
+             // return closest;

@@ -39,9 +39,10 @@ public class ShootingEnemies : MonoBehaviour
             _agent.isStopped = true;
             _unit.SetColor(Color.blue);
             
-            var newBullet = Instantiate(_bulletPrefab, gameObject.transform.position,
-                gameObject.transform.rotation);
-            newBullet.GetComponent<Rigidbody>().velocity = gameObject.transform.forward * _bulletSpeed;
+            var newBullet = Instantiate(_bulletPrefab, transform.position,
+                transform.rotation);
+            
+            newBullet.GetComponent<Rigidbody>().velocity = transform.forward * _bulletSpeed;
         }
         Task.current.Succeed();
     }
