@@ -4,7 +4,10 @@ using UnityEngine;
 
 namespace BuildingSystem.BuildingUpgradeSystem
 {
-    public class MinerUpgrader : BuildingUpgrader
+    /// <summary>
+    /// Класс-апгрейдер для ResourceMiner
+    /// </summary>
+    public class MinerUpgrader : BuildingUpgraderBase
     {
         private readonly Building<MinerBuildingData> _building;
         public MinerUpgrader(Building<MinerBuildingData> building)

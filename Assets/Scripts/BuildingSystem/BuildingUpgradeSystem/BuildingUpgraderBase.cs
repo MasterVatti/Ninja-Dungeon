@@ -4,7 +4,10 @@ using UnityEngine;
 
 namespace BuildingSystem.BuildingUpgradeSystem
 {
-    public abstract class BuildingUpgrader
+    /// <summary>
+    /// Базовый класс для апгрейдеров
+    /// </summary>
+    public abstract class BuildingUpgraderBase
     {
         public abstract void Upgrade();
         protected abstract void InitializeBuilding(GameObject building);
