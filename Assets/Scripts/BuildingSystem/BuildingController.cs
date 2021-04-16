@@ -62,7 +62,9 @@ namespace BuildingSystem
             {
                 var buildingPrefab = buildingSettings.BuildingPrefab;
                 var building = Instantiate(buildingPrefab, placeHolderPosition, buildingPrefab.transform.rotation);
-                MainManager.BuildingManager.AddNewConstructedBuilding(building);
+                
+                MainManager.BuildingManager.AddNewConstructedBuilding(building, buildingSettings);
+                
                 if (building.TryGetComponent<IBuilding>(out var buildingData))
                 {
                     buildingData.BuildingSettingsID = buildingSettings.ID;

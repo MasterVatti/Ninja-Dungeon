@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: MineSetting
   m_EditorClassIdentifier: 
   _id: 1
+  _buildingNamme: Mine
+  _buildingInfoView: {fileID: 3654191358967922677, guid: 14463b3fb13ca184089be8199baceeea,
+    type: 3}
   _connectedPlaceHolders: []
   _requiredResources:
   - _type: 1
@@ -22,4 +25,4 @@ MonoBehaviour:
   _placeHolderPrefab: {fileID: 1796408563735853696, guid: df1732c3adc0ba248b05da99c743c527,
     type: 3}
   _timeToBuild: 1
-  _placeHolderPosition: {x: 16.8, y: 1.131042, z: 15}
+  _placeHolderPosition: {x: 25.96, y: 0.9400129, z: 92.76}

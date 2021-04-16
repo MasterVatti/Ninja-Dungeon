@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Assets.Scripts.Managers.ScreensManager;
+using ResourceSystem;
 using UnityEngine;
 
 namespace Managers.ScreensManager
@@ -82,7 +83,7 @@ namespace Managers.ScreensManager
 
             _screenStack.Clear();
         }
-
+        
         private bool IsScreenOpened(ScreenType screenType)
         {
             foreach (var screen in _screenStack)
