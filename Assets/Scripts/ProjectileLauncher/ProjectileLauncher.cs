@@ -10,17 +10,13 @@ namespace ProjectileLauncher
     {
         [SerializeField]
         private Projectile _projectilePrefab;
-
         [SerializeField]
         private float _projectileSpawnCooldown;
-
         [SerializeField]
         private NearestEnemyDetector _enemyDetector;
-
         [SerializeField]
         private GameObject _player;
         
-        //private Transform projectileSpawnPoint;
         private float _currentTime; //0
 
         private void Update()

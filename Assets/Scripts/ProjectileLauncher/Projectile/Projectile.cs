@@ -10,10 +10,8 @@ namespace ProjectileLauncher
     {
         [SerializeField] 
         private float _projectileSpeed;
-        
         [SerializeField] 
         private int _damage;
-        
         [SerializeField]
         private float _timeToRemove = 5f;
         
