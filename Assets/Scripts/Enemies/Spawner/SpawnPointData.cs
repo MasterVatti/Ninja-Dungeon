@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Enemies
+namespace Enemies.Spawner
 {
     /// <summary>
     /// Представляет из себя объект, который используется для удобной работы

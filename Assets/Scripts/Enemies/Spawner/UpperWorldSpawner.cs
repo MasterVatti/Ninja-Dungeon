@@ -24,6 +24,7 @@ namespace Enemies.Spawner
         [SerializeField]
         private List<Enemy> _possibleEnemies;
 
+        private float _nextWaveSpawnTime;
         private WaveController _currentWave;
         
         private void Awake()
@@ -33,12 +34,12 @@ namespace Enemies.Spawner
 
         private void Update()
         {
-            if (_currentWave != null && _currentWave.IsFinished)
+            if (Time.time >= _nextWaveSpawnTime)
             {
                 StartNextWave();
             }
         }
-
+        
         private void StartNextWave()
         {
             _currentWave = new WaveController(GetRandomWave());
@@ -47,7 +48,7 @@ namespace Enemies.Spawner
 
         private WaveData GetRandomWave()
         {
-            var cooldown = Time.time + Random.Range(_minCooldown, _maxCooldown);
+            var cooldownTime = Random.Range(_minCooldown, _maxCooldown);
             var enemiesCount = Random.Range(_minEnemiesCount, _maxEnemiesCount);
 
             var waveData = new List<SpawnPointData>();
@@ -56,8 +57,9 @@ namespace Enemies.Spawner
                 var enemy = _possibleEnemies[Random.Range(0, _possibleEnemies.Count)];
                 waveData.Add(new SpawnPointData(enemy, transform));
             }
-            
-            return new WaveData(cooldown, waveData);
+
+            _nextWaveSpawnTime = Time.time + cooldownTime;
+            return new WaveData(cooldownTime, waveData);
         }
     }
 }
