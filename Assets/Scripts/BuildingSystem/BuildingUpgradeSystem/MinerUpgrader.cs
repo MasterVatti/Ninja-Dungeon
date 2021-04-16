@@ -16,21 +16,9 @@ namespace BuildingSystem.BuildingUpgradeSystem
             _building.StateInitialize();
         }
         
-        public override void Upgrade()
+        public void Upgrade()
         {
-            var settingsID = _building.BuildingSettingsID;
-            var settings = MainManager.BuildingManager.GetBuildingSettings(settingsID);
-            var buildingLevel = _building.CurrentBuildingLevel + 1;
-            
-            if (settings.UpgradeList.Count <= buildingLevel)
-            {
-                return;
-            }
-
-            if (UpgradeBuildingSucceed(settings, buildingLevel, out var newBuilding) && newBuilding != null)
-            {
-                DestroyOldBuilding(_building.gameObject);
-            }
+            base.Upgrade(_building);
         }
 
         protected override void InitializeBuilding(GameObject building)
