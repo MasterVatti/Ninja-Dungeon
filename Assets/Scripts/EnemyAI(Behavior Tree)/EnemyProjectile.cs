@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using UnityEngine;
 /// <summary>
 /// Пуля врагов 
@@ -19,11 +20,11 @@ public class EnemyProjectile : MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag(GlobalConstants.WALL_TAG))
         {
             Destroy(gameObject);
         }
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag(GlobalConstants.PLAYER_TAG))
         {
             Destroy(gameObject);
         }

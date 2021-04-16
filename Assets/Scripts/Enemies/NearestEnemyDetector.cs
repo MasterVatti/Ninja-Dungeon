@@ -14,19 +14,21 @@ namespace Enemies
 
         public GameObject GetNearestEnemy()
         {
-            var minDistance = float.MaxValue;
+            var playerPosition = _playerTransform.position;
+            var min = float.MaxValue;
             var minIndex = 0;
+            
             for (int i = 0; i < _enemiesManager.Enemies.Count; i++)
             {
                 var enemy = _enemiesManager.Enemies[i];
-                var playerPosition = _playerTransform.position;
+                
                 if (enemy != null)
                 {
                     var distanceToPlayer = Vector3.Distance(enemy.transform.position,
                         playerPosition);
-                    if (minDistance > distanceToPlayer)
+                    if (min > distanceToPlayer)
                     {
-                        minDistance = distanceToPlayer;
+                        min = distanceToPlayer;
                         minIndex = i;
                     }
                 }
