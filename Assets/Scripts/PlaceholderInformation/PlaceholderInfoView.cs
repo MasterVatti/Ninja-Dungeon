@@ -1,30 +1,29 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using BuildingSystem;
-using Managers;
 using ResourceSystem;
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 public class PlaceholderInfoView : MonoBehaviour
 {
     [SerializeField] 
-    private PieceOfPlaceholderInfoView _pieceOfPlaceholderInfoViewPrefab;
+    private RequiredResourcesView requiredResourcesViewPrefab;
     [SerializeField] 
-    private List<ResourceImage> _resourceImages = new List<ResourceImage>();
+    private List<ResourceImage> _resourceImages = new List<ResourceImage>();// TODO: удалить после того как появится IconsProvider
 
     private List<Resource> _requiredResourceList;
     private List<Resource> _currentResourceList;
-    private Dictionary<ResourceType, PieceOfPlaceholderInfoView> _resourceForPiece;
+    private Dictionary<ResourceType, RequiredResourcesView> _requiredResourceViews;
+    private BuildingController _usingPlaceholder;
 
     public void Initialize(BuildingController placeholder)
     {
+        _usingPlaceholder = placeholder;
         Vector3 uiPosition = placeholder.GetComponent<Transform>().position;
         transform.position += uiPosition;
         
-        _resourceForPiece = new Dictionary<ResourceType, PieceOfPlaceholderInfoView>();
-        placeholder.OnPayForBuilding += ResourceAdded;
+        _requiredResourceViews = new Dictionary<ResourceType, RequiredResourcesView>();
+        placeholder.OnPayForBuilding += OnPayForBuilding;
         _currentResourceList = placeholder.RequiredResource;
         _requiredResourceList = placeholder.BuildingSettings.RequiredResources;
         AddPieceToView(uiPosition);
@@ -34,9 +33,9 @@ public class PlaceholderInfoView : MonoBehaviour
     {
         foreach (var resource in _requiredResourceList)
         {
-            var pieceOfPlaceholderInfoView=Instantiate(_pieceOfPlaceholderInfoViewPrefab,uiPosition, Quaternion.identity, transform);
-            _resourceForPiece.Add(resource.Type,pieceOfPlaceholderInfoView);
-            pieceOfPlaceholderInfoView.Initialize(resource,GetResourceSprite(resource));
+            var placeholderInfoView=Instantiate(requiredResourcesViewPrefab,uiPosition, Quaternion.identity, transform);
+            _requiredResourceViews.Add(resource.Type,placeholderInfoView);
+            placeholderInfoView.Initialize(resource,GetResourceSprite(resource));
         }
     }
 
@@ -53,11 +52,16 @@ public class PlaceholderInfoView : MonoBehaviour
         return null;
     }
 
-    private void ResourceAdded()
+    private void OnPayForBuilding()
     {
         foreach (var resource in _currentResourceList)
         {
-            _resourceForPiece[resource.Type].ShowPlaceholderInformation(resource);
+            _requiredResourceViews[resource.Type].ShowPlaceholderInformation(resource);
         }
+    }
+
+    private void OnDestroy()
+    {
+       _usingPlaceholder.OnPayForBuilding -= OnPayForBuilding;
     }
 }

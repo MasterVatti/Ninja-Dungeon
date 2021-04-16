@@ -5,7 +5,7 @@ using BuildingSystem;
 using Managers;
 using UnityEngine;
 
-public class PlaceholderViewManger : MonoBehaviour
+public class PlaceholderViewManager : MonoBehaviour
 {
     [SerializeField] 
     private PlaceholderInfoView _placeholderViewPrefab;
@@ -28,14 +28,21 @@ public class PlaceholderViewManger : MonoBehaviour
     private void AddUIToPlaceholder(GameObject placeholder)
     {
         var placeholderView = Instantiate(_placeholderViewPrefab, transform);
-        _placeholderInfoViews.Add(placeholder, placeholderView);
         var placeholderBuildingController = placeholder.GetComponent<BuildingController>();
         placeholderView.Initialize(placeholderBuildingController);
+        
+        _placeholderInfoViews.Add(placeholder, placeholderView);
     }
 
     private void DeleteUIToPlaceholder(GameObject placeholder)
     {
         Destroy(_placeholderInfoViews[placeholder].gameObject);
         _placeholderInfoViews.Remove(placeholder);
+    }
+
+    private void OnDestroy()
+    {
+        MainManager.BuildingManager.OnPlaceholderDestroy -= DeleteUIToPlaceholder;
+        MainManager.BuildingManager.OnPlaceholderCreated -= AddUIToPlaceholder;
     }
 }
