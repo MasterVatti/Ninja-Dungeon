@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: ShopSetting
   m_EditorClassIdentifier: 
   _id: 3
+  _buildingNamme: Shop
+  _buildingInfoView: {fileID: 1117067079954795322, guid: 57fd1dde7650bc444b529ac2b8b691c6,
+    type: 3}
   _connectedPlaceHolders: []
   _requiredResources:
   - _type: 1
@@ -21,5 +24,5 @@ MonoBehaviour:
     type: 3}
   _placeHolderPrefab: {fileID: 3984928345223576583, guid: ca77af298736c204bb8160a033919cc2,
     type: 3}
-  _timeToBuild: 5
-  _placeHolderPosition: {x: -40, y: 0, z: 20}
+  _timeToBuild: 1
+  _placeHolderPosition: {x: -14.75007, y: 0.74, z: 82.13145}

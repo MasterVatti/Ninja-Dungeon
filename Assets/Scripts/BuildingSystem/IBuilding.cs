@@ -7,7 +7,7 @@ namespace BuildingSystem
     /// </summary>
     public interface IBuilding
     {
-        int BuildingSettingsID { set; }
+        int BuildingSettingsID { set; get; }
         void Initialize(string savedData);
         BuildingData Save();
     }
