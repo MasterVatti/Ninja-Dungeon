@@ -7,7 +7,7 @@ tree("Root")
 tree("TopNode")
         sequence
             Wait(1.0)
-            GetRunBackPoint
+            GetPlayerPoint
             MoveToDestination
             IsRequiredDistance(2.0)
             Attack

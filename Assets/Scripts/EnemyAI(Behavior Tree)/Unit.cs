@@ -4,15 +4,13 @@ using Panda;
 using UnityEngine;
 using UnityEngine.AI;
 /// <summary>
-/// Отвечает за базовые навыки(Таски) Врага передвежение и хп. Должен висеть на всех енеми.
+/// Отвечает за базовые навыки(Таски) Врага
+/// передвежение и хп. Должен висеть на всех енеми.
 /// </summary>
 public class Unit : MonoBehaviour
 {
-    public GameObject Player => _player;
-    
     [SerializeField]
     private EnemyHealth _enemyHealth;
-    
     [SerializeField]
     private float _lowHealthThreshold;
     

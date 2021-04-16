@@ -10,13 +10,10 @@ public class ShootingEnemies : MonoBehaviour
 {
     [SerializeField]
     private GameObject _bulletPrefab;
-    
     [SerializeField]
     private float _bulletSpeed;
-    
     [SerializeField]
     private float _shotCooldownTime;
-    
     [SerializeField]
     private Unit _unit;
 

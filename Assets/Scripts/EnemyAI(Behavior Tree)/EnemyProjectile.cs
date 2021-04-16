@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Пуля врагов 
+/// </summary>
 public class EnemyProjectile : MonoBehaviour
 {
     [SerializeField] 
     private int _damage;
-        
     [SerializeField]
     private float _timeToRemove = 5f;
         
