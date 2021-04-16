@@ -8,10 +8,10 @@ using UnityEngine.UI;
 
 public class ResourcesView : MonoBehaviour
 {
-
-    private List<Resource> _resources;
     [SerializeField]
     private List<ResourceLabel> _resourceLabels;
+    
+    private List<Resource> _resources;
 
 
     void Start()
@@ -21,19 +21,19 @@ public class ResourcesView : MonoBehaviour
 
     void Update()
     {
-        ResourceMapping();
-
+        UpdateResourcesAmount();
     }
 
-    private void ResourceMapping()
+    private void UpdateResourcesAmount()
     {
-        for (int i = 0; i < _resources.Count; i++)
+        for (int i = 0; i < _resourceLabels.Count; i++)
         {
             for (int j = 0; j < _resources.Count; j++)
             {
-                if (_resources[i].Type == _resourceLabels[j].Type)
+                if (_resourceLabels[i].Type == _resources[j].Type )
                 {
-                    _resourceLabels[j].Label.text = _resources[i].Amount.ToString();
+                    _resourceLabels[i].Label.text = _resources[j].Amount.ToString();
+                    break;
                 }
             }
         }

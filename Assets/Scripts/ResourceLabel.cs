@@ -8,7 +8,6 @@ using UnityEngine.UI;
 [Serializable]
 public class ResourceLabel 
 {
-    
     public ResourceType Type
     {
         get => _type;
