@@ -26,7 +26,7 @@ namespace BuildingSystem
             BuildingSettingsID = buildingSettingsID;
         }
 
-        protected abstract void StateInitialize();
+        public abstract void StateInitialize();
 
         public BuildingData Save()
         {

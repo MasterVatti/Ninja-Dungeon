@@ -74,14 +74,14 @@ namespace Buildings
             new MinerUpgrader(this).Upgrade();
         }
 
-        protected override void StateInitialize()
+        public override void StateInitialize()
         {
             State = new MinerBuildingData
             {
                 MaxStorage = _maxStorage,
                 MiningPerSecond = _miningPerSecond,
                 Resource = _miningResource,
-                StartTime = Time.time
+                StartTime = MiningStartTime
             };
         }
 

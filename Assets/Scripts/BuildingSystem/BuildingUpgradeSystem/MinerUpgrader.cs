@@ -10,6 +10,7 @@ namespace BuildingSystem.BuildingUpgradeSystem
         public MinerUpgrader(Building<MinerBuildingData> building)
         {
             _building = building;
+            _building.StateInitialize();
         }
         
         public override void Upgrade()
