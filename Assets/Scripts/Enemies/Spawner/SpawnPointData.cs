@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Enemies
+namespace Enemies.Spawner
 {
     /// <summary>
     /// Представляет из себя объект, который используется для удобной работы
@@ -18,5 +18,11 @@ namespace Enemies
         public Enemy Enemy => _enemy;
 
         public Transform SpawnPoint => _spawnPoint;
+
+        public SpawnPointData(Enemy enemy, Transform spawnPoint)
+        {
+            _enemy = enemy;
+            _spawnPoint = spawnPoint;
+        }
     }
 }

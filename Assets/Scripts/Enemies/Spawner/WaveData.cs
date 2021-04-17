@@ -20,5 +20,11 @@ namespace Enemies.Spawner
         private float _cooldown;
         [SerializeField]
         private List<SpawnPointData> _spawnPointsData;
+
+        public WaveData(float cooldown, List<SpawnPointData> data)
+        {
+            _cooldown = cooldown;
+            _spawnPointsData = data;
+        }
     }
 }
