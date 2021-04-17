@@ -42,13 +42,14 @@ namespace Enemies.Spawner
         
         private void StartNextWave()
         {
-            _currentWave = new WaveController(GetRandomWave());
+            var cooldownTime = Random.Range(_minCooldown, _maxCooldown);
+            _currentWave = new WaveController(GetRandomWave(cooldownTime));
             _currentWave.Start(_delayBetweenSpawns);
+            _nextWaveSpawnTime = Time.time + cooldownTime;
         }
 
-        private WaveData GetRandomWave()
+        private WaveData GetRandomWave(float cooldownTime)
         {
-            var cooldownTime = Random.Range(_minCooldown, _maxCooldown);
             var enemiesCount = Random.Range(_minEnemiesCount, _maxEnemiesCount);
 
             var waveData = new List<SpawnPointData>();
@@ -58,7 +59,6 @@ namespace Enemies.Spawner
                 waveData.Add(new SpawnPointData(enemy, transform));
             }
 
-            _nextWaveSpawnTime = Time.time + cooldownTime;
             return new WaveData(cooldownTime, waveData);
         }
     }
