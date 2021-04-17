@@ -1,3 +1,4 @@
+using Enemies;
 using Panda;
 using UnityEngine;
 
@@ -14,16 +15,20 @@ namespace Magician
         private Unit _unit;
         [SerializeField]
         private float _runBackDistance;
+        [SerializeField]
+        private EnemyHealth _enemyHealth;
+        [SerializeField]
+        private float _lowHealthThreshold;
     
-        private bool _isGolemCreate;
+        private bool _isGolemCreated;
     
         [Task]
         private bool GolemSpawn()
         {
-            if (!_isGolemCreate)
+            if (!_isGolemCreated)
             {
                 var golem = Instantiate(_golemPrefab, gameObject.transform.position, Quaternion.identity);
-                _isGolemCreate = true;
+                _isGolemCreated = true;
             }
 
             return false;
@@ -32,11 +37,14 @@ namespace Magician
         [Task]
         private void GetRunBackPoint()
         {
-            _unit.SetColor(Color.green);
-
             _unit.ChangePointMovement(gameObject.transform.TransformPoint(0, 0, 0 - _runBackDistance));
-
             Task.current.Succeed();
+        }
+        
+        [Task]
+        private bool IsHealthEnoughToSpawnGolem()
+        {
+            return _enemyHealth.CurrentHealth <= _lowHealthThreshold;
         }
     }
 }

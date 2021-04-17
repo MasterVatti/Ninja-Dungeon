@@ -3,6 +3,7 @@ using Enemies;
 using Panda;
 using UnityEngine;
 using UnityEngine.AI;
+
 /// <summary>
 /// Отвечает за базовые навыки(Таски) Врага
 /// передвежение и хп. Должен висеть на всех енеми.
@@ -10,20 +11,13 @@ using UnityEngine.AI;
 public class Unit : MonoBehaviour
 {
     [SerializeField]
-    private EnemyHealth _enemyHealth;
-    [SerializeField]
-    private float _lowHealthThreshold;
-    
     private NavMeshAgent _agent;
+    
     private GameObject _player;
-
-    private Material material;
     private Vector3 _movePoint;
 
     private void Start()
     {
-        material = GetComponentInChildren<MeshRenderer>().material;
-        _agent = GetComponent<NavMeshAgent>();
         _player = GameObject.FindGameObjectWithTag(GlobalConstants.PLAYER_TAG);
         EnemiesManager.Singleton.Enemies.Add(gameObject);
     }
@@ -33,11 +27,6 @@ public class Unit : MonoBehaviour
         _movePoint = movePoint;
     }
     
-    public void SetColor(Color color) // Метод чисто для отладки.
-    {
-        material.color = color;
-    }
-
     [Task]
     private void MoveToDestination()
     {
@@ -46,9 +35,9 @@ public class Unit : MonoBehaviour
     }
 
     [Task]
-    private bool SetDestination(Vector3 p)
+    private bool SetDestination(Vector3 movePoint)
     {
-        _movePoint = p;
+        _movePoint = movePoint;
         _agent.destination = _movePoint;
 
         if (Task.isInspected)
@@ -57,9 +46,9 @@ public class Unit : MonoBehaviour
     }
 
     [Task]
-    private void MoveTo(Vector3 dst)
+    private void MoveTo(Vector3 movePoint)
     {
-        SetDestination(dst);
+        SetDestination(movePoint);
         if (Task.current.isStarting)
             _agent.isStopped = false;
         WaitArrival();
@@ -68,16 +57,15 @@ public class Unit : MonoBehaviour
     [Task]
     private void WaitArrival()
     {
-        var task = Task.current;
+        var currentTask = Task.current;
         float distance = _agent.remainingDistance;
-        if (!task.isStarting && _agent.remainingDistance <= 1f)
+        if (!currentTask.isStarting && _agent.remainingDistance <= 0.5f)
         {
-            task.Succeed();
-            distance = 0.0f;
+            currentTask.Succeed();
         }
 
         if (Task.isInspected)
-            task.debugInfo = string.Format("distance-{0:0.00}", distance);
+            currentTask.debugInfo = string.Format("distance-{0:0.00}", distance);
     }
     
     [Task]
@@ -87,7 +75,6 @@ public class Unit : MonoBehaviour
 
         if (distance >= stopDistance)
         {
-            SetColor(Color.yellow);
             _agent.isStopped = false;
             _agent.SetDestination(_player.transform.position);
         }
@@ -96,13 +83,7 @@ public class Unit : MonoBehaviour
             Task.current.Succeed();
         }
     }
-
-    [Task]
-    private bool IsHealthEnough()
-    {
-        return _enemyHealth.CurrentHealth <= _lowHealthThreshold;
-    }
-
+    
     [Task]
     private bool IsRequiredDistance(float distance)
     {

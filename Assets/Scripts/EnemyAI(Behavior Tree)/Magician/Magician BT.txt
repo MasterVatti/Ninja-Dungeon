@@ -8,7 +8,7 @@ tree("Root")
 tree("TopNode")
      fallback
                 sequence
-                    IsHealthEnough
+                    IsHealthEnoughToSpawnGolem
                     GolemSpawn
                 sequence
                     IsRequiredDistance(7.0)

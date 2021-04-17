@@ -20,22 +20,19 @@ namespace Magician.Golem
         }
         
         [Task]
-        private void GetPlayerPoint()
+        private void SetDestinationPoint()
         {
-            _unit.SetColor(Color.green);
-
             _unit.ChangePointMovement(_player.transform.position);
-
             Task.current.Succeed();
         }
         
         [Task]
         private void Attack()
         {
+            //TODO:
             // Пока так, не реализованно хп игрока. Тут доработаю ( сиквенс до ээтого таска идет проверка
             // растояния 2f, если игрок в этом растоянии происходит атака, тут сделаем смотреть в сторону
             // игрока и анимация атаки. Получение урона игроком.)
-            _unit.SetColor(Color.red);
             Task.current.Succeed();
         }
     }
