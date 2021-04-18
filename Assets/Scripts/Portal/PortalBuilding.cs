@@ -13,7 +13,7 @@ public class PortalBuilding : Building<PortalData>
         return new PortalData();
     }
 
-    protected override void Initialize(PortalData data)
+    protected override void OnStateLoaded(PortalData data)
     {
     }
 }
