@@ -45,12 +45,12 @@ public class AmimationToGUI : MonoBehaviour
             {
                 var worldPostion = transform.position;
                 var screenPoint = Camera.main.WorldToScreenPoint(worldPostion);
-                var accumulatedResourcesParent = transform.parent as RectTransform;
+                var accumulatedResourcesParent = positionLabel.Label.transform as RectTransform;
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(accumulatedResourcesParent, 
                     screenPoint, null, out var localPoint);
-                var _rectTransform = positionLabel.Label.transform as RectTransform;
-                
-                return _rectTransform.anchoredPosition = new Vector2(localPoint.x, localPoint.y);
+                var _rectTransform = localPoint;
+
+                return _rectTransform;
             }
         }
         return Vector3.zero;
