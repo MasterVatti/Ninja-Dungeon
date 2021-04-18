@@ -1,15 +1,8 @@
 ﻿using SaveSystem;
 
 namespace BuildingSystem
-{
-    public interface IStatefulBuilding<T> : IBuilding where T : BaseBuildingState
-    {
-        public abstract void OnUpgrade(T oldBuildingState);
-        public abstract T GetState();
-    }
-    
-    /// <summary>
-    /// Интерфейс для инициализации сохраненных данных и сохранения данных
+{ /// <summary>
+    /// Интерфейс для реализации зданий
     /// </summary>
     public interface IBuilding
     {
