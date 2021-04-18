@@ -28,7 +28,7 @@ namespace SaveSystem
                     var newBuilding = BuildingUtils.CreateNewBuilding(settings, building.BuildingLevel);
                     if (newBuilding.TryGetComponent<IBuilding>(out var buildingData))
                     {
-                        buildingData.Initialize(building.State);
+                        buildingData.LoadState(building.State);
                     }
                 }
             }

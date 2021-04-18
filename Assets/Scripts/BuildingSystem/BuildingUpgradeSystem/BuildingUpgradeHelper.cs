@@ -6,13 +6,12 @@ using UnityEngine;
 namespace BuildingSystem.BuildingUpgradeSystem
 {
     /// <summary>
-    /// Базовый класс для апгрейдеров
+    /// Класс для апгрейдов
     /// </summary>
-    public abstract class BuildingUpgraderBase
+    public static class BuildingUpgradeHelper
     {
-        protected abstract void InitializeBuilding(GameObject building);
-        
-        protected void Upgrade<T>(Building<T> building) where T : BaseBuildingState
+        public static Building<T> Upgrade<T>(Building<T> building)
+            where T : BaseBuildingState
         {
             var settingsID = building.BuildingSettingsID;
             var settings = MainManager.BuildingManager.GetBuildingSettings(settingsID);
@@ -20,29 +19,29 @@ namespace BuildingSystem.BuildingUpgradeSystem
             
             if (settings.UpgradeList.Count <= buildingLevel)
             {
-                return;
+                return building;
             }
 
-            var newBuilding = Upgrade(settings, buildingLevel);
-            if (newBuilding != null)
-            {
-                DestroyOldBuilding(building.gameObject);
-            }
+            return Upgrade(building, settings, buildingLevel);
         }
 
-        private GameObject Upgrade(BuildingSettings settings, int buildingLevel)
+        private static Building<T> Upgrade<T>(Building<T> oldBuilding, BuildingSettings settings, int buildingLevel)
+            where T : BaseBuildingState
         {
             var upgrade = settings.UpgradeList[buildingLevel];
             var upgradeCost = upgrade.UpgradeCost;
 
-            if (HadPayedForUpgrade(upgradeCost))
+            if (TryPayForUpgrade(upgradeCost))
             {
-                var newBuilding = BuildingUtils.CreateNewBuilding(settings, buildingLevel);
-                InitializeBuilding(newBuilding);
+                var newBuildingGameObject = BuildingUtils.CreateNewBuilding(settings, buildingLevel);
+                var newBuilding = newBuildingGameObject.GetComponent<Building<T>>();
+                newBuilding.OnUpgrade(oldBuilding.GetState());
+                
+                DestroyOldBuilding(oldBuilding.gameObject);
                 return newBuilding;
             }
-            
-            return null;
+
+            return oldBuilding;
         }
 
         private static void DestroyOldBuilding(GameObject oldBuilding)
@@ -51,7 +50,7 @@ namespace BuildingSystem.BuildingUpgradeSystem
             Object.Destroy(oldBuilding);
         }
 
-        private static bool HadPayedForUpgrade(List<Resource> upgradeCost)
+        private static bool TryPayForUpgrade(List<Resource> upgradeCost)
         {
             if (MainManager.ResourceManager.HasEnough(upgradeCost))
             {

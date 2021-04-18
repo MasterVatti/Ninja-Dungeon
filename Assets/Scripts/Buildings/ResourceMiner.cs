@@ -68,15 +68,15 @@ namespace Buildings
                 MiningStartTime = Time.time;
             }
         }
-
-        private void Upgrade()
+        
+        public override void OnUpgrade(MinerBuildingData oldBuildingState)
         {
-            new MinerUpgrader(this).Upgrade();
+            MiningStartTime = oldBuildingState.StartTime;
         }
 
-        public override void StateInitialize()
+        public override MinerBuildingData GetState()
         {
-            State = new MinerBuildingData
+            return new MinerBuildingData
             {
                 MaxStorage = _maxStorage,
                 MiningPerSecond = _miningPerSecond,
