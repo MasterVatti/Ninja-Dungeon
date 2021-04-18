@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace HealthBars
 {
     /// <summary>
-    /// отвечает за конкретный хелсбар
+    /// отвечает за хелсбар
     /// </summary>
     public class HealthBar : MonoBehaviour
     {
@@ -17,7 +17,7 @@ namespace HealthBars
         {
             _slider = GetComponent<Slider>();
         }
-
+        
         public void SetMaximalHealth(int health)
         {
             _slider.maxValue = health;

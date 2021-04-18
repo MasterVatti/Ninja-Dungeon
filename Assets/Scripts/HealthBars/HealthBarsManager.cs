@@ -8,13 +8,13 @@ namespace HealthBars
     /// </summary>
     public class HealthBarsManager : MonoBehaviour
     {
-        [SerializeField] 
+        [SerializeField]
         private HealthBar _healthBarPrefab;
         [SerializeField] 
         private Canvas _canvas;
     
         private List<HealthBar> _healthBars = new List<HealthBar>();
-
+        
         public HealthBar CreateHealthBar()
         {
             var healthBar = Instantiate(_healthBarPrefab, transform.position, transform.rotation,

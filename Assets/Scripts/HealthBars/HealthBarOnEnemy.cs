@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace HealthBars
 {
+    /// <summary>
+    /// отвечает за хелсбар, который висит на 
+    /// </summary>
     public class HealthBarOnEnemy : MonoBehaviour
     {
         [SerializeField]
