@@ -11,8 +11,6 @@ namespace SaveSystem
         public float StartTime { get; set; }
         [JsonProperty("miningPerSecond")]
         public float MiningPerSecond { get; set; }
-        [JsonProperty("resourceCount")]
-        public int ResourceCount { get; set; }
         [JsonProperty("maxStorage")]
         public int MaxStorage { get; set; }
         [JsonProperty("resourceType")]
