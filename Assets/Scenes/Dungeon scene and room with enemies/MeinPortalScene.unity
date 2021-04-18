@@ -342,8 +342,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7567be13e239c64f8f01756759d5d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _energyManager: {fileID: 0}
-  _energyDecreaseCount: 35
 --- !u!114 &685527544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -907,7 +905,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851597b96b2b584ba6b06a0af0832f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _energyCount: 100
+  _energyCount: 30
+  _maximalEnergy: 30
 --- !u!4 &1674999751
 Transform:
   m_ObjectHideFlags: 0
