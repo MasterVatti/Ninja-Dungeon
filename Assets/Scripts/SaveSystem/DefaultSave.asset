@@ -17,8 +17,6 @@ MonoBehaviour:
     _amount: 1000
   - _type: 1
     _amount: 1000
-  - _type: 2
-    _amount: 1000
-  _startConstructions:
-  - _isBuilt: 0
-    _settingsID: 0
+  _startBuildings: []
+  _startPlaceHolders:
+  - {fileID: 11400000, guid: a13cd1a59069aab4eb965d0b3c5466f4, type: 2}

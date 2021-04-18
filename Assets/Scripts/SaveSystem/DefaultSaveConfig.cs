@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BuildingSystem;
+using Newtonsoft.Json;
 using ResourceSystem;
 using UnityEngine;
 
@@ -10,37 +13,36 @@ namespace SaveSystem
         public Save DefaultSave => new Save
         {
             Buildings = StartConstructions,
-            Resources = StartResources
+            Resources = new List<Resource>(_startResources).ToArray()
         };
-
-        private Resource[] StartResources
-        {
-            get
-            {
-                return _startResources.Select(resource => new Resource
-                {
-                    Type = resource.Type,
-                    Amount = resource.Amount
-                }).ToArray();
-            }
-        }
 
         private BuildingData[] StartConstructions
         {
             get
             {
-                return _startConstructions.Select(construction => new BuildingData
+                var constructions = _startBuildings.Select(building => new BuildingData
                 {
-                    IsBuilt = construction.IsBuilt,
-                    SettingsID = construction.SettingsID,
+                    SettingsID = building.ID,
                     State = ""
-                }).ToArray();
+                }).ToList();
+                constructions.AddRange(_startPlaceHolders.Select(placeHolder => new BuildingData
+                {
+                    SettingsID = placeHolder.ID, 
+                    State = JsonConvert.SerializeObject(new PlaceHolderData
+                    {
+                        RemainResources = placeHolder.UpgradeList[0].UpgradeCost
+                    })
+                }));
+
+                return constructions.ToArray();
             }
         }
 
         [SerializeField]
-        private Resource[] _startResources;
+        private List<Resource> _startResources;
         [SerializeField]
-        private BuildingData[] _startConstructions;
+        private BuildingSettings[] _startBuildings;
+        [SerializeField]
+        private BuildingSettings[] _startPlaceHolders;
     }
 }

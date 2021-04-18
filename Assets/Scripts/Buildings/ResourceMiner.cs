@@ -1,8 +1,9 @@
+using BuildingSystem;
 using ResourceSystem;
 using SaveSystem;
 using UnityEngine;
 
-namespace BuildingSystem
+namespace Buildings
 {
     /// <summary>
     /// Класс возвращает количество ресурса, добытого к данному моменту
@@ -14,14 +15,13 @@ namespace BuildingSystem
         //Свойства для UI
         public ResourceType ExtractableResource => _miningResource;
         public float MaxStorage => _maxStorage;
-
         public int CurrentResourceCount
         {
             get
             {
                 if (_currentResourceCount < _maxStorage)
                 {
-                    var count = Mathf.FloorToInt((Time.time - _startMiningTime) / _miningPerSecond);
+                    var count = Mathf.FloorToInt((Time.time - MiningStartTime) * _miningPerSecond);
                     _currentResourceCount = Mathf.Clamp(count, 0, _maxStorage);
                 }
 
@@ -29,19 +29,34 @@ namespace BuildingSystem
             }
         }
         
+        public float MiningStartTime { get; set; }
+        public Transform PositionUI => _positionUI;
+
         [SerializeField]
         private ResourceType _miningResource;
         [SerializeField]
         private float _miningPerSecond;
         [SerializeField]
         private int _maxStorage;
+        [SerializeField]
+        private Transform _positionUI;
         
         private int _currentResourceCount;
-        private float _startMiningTime;
 
-        public void Start()
+        private void Start()
         {
-            _startMiningTime = Time.time;
+            if (MiningStartTime == 0f)
+            {
+                MiningStartTime = Time.time;
+            }
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Upgrade();
+            }
         }
 
         private void OnTriggerStay(Collider other)
@@ -49,33 +64,35 @@ namespace BuildingSystem
             if (_currentResourceCount != 0)
             {
                 MainManager.ResourceManager.AddResource(_miningResource, _currentResourceCount);
-                _startMiningTime = Time.time;
+                MiningStartTime = Time.time;
             }
+        }
+        
+        public override void OnUpgrade(MinerBuildingData oldBuildingState)
+        {
+            MiningStartTime = oldBuildingState.StartTime;
+        }
+
+        public override MinerBuildingData GetState()
+        {
+            return new MinerBuildingData
+            {
+                MaxStorage = _maxStorage,
+                MiningPerSecond = _miningPerSecond,
+                Resource = _miningResource,
+                StartTime = MiningStartTime
+            };
         }
 
         protected override void Initialize(MinerBuildingData data)
         {
             if (data != null)
             {
-                _startMiningTime = data.StartTime;
+                MiningStartTime = data.StartTime;
                 _maxStorage = data.MaxStorage;
-                _currentResourceCount = data.ResourceCount;
                 _miningPerSecond = data.MiningPerSecond;
                 _miningResource = data.Resource;
             }
-        }
-
-        public override BuildingData Save()
-        {
-            _state = new MinerBuildingData
-            {
-                StartTime = Time.time,
-                MaxStorage = _maxStorage,
-                MiningPerSecond = _miningPerSecond,
-                ResourceCount = _currentResourceCount,
-                Resource = _miningResource
-            };
-            return base.Save();
         }
     }
 }
