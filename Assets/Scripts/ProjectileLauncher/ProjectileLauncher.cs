@@ -30,7 +30,7 @@ namespace ProjectileLauncher
             {
                 if (enemy != null)
                 {
-                    CreateProjectile(enemy);
+                    CreateProjectile(enemy.gameObject);
                 }
             }
         }

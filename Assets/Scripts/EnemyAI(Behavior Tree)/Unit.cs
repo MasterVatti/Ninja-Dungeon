@@ -1,8 +1,7 @@
-using Assets.Scripts;
-using Enemies;
 using Panda;
 using UnityEngine;
 using UnityEngine.AI;
+using Enemies;
 
 /// <summary>
 /// Отвечает за базовые навыки(Таски) Врага
@@ -12,14 +11,16 @@ public class Unit : MonoBehaviour
 {
     [SerializeField]
     private NavMeshAgent _agent;
-    
+    [SerializeField]
+    private float _stopChaseDistance;
+
     private GameObject _player;
     private Vector3 _movePoint;
 
     private void Start()
     {
-        _player = GameObject.FindGameObjectWithTag(GlobalConstants.PLAYER_TAG);
-        EnemiesManager.Singleton.Enemies.Add(gameObject);
+        _player = MainManager.Player;
+        MainManager.EnemiesManager.Enemies.Add(GetComponent<Enemy>());
     }
 
     public void ChangePointMovement(Vector3 movePoint)
@@ -69,11 +70,11 @@ public class Unit : MonoBehaviour
     }
     
     [Task]
-    private void Chase(float stopDistance)
+    private void Chase()
     {
         var distance = Vector3.Distance(_player.transform.position, _agent.transform.position);
 
-        if (distance >= stopDistance)
+        if (distance >= _stopChaseDistance)
         {
             _agent.isStopped = false;
             _agent.SetDestination(_player.transform.position);

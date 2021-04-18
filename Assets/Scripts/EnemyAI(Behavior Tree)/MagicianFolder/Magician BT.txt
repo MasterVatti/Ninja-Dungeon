@@ -18,7 +18,7 @@ tree("TopNode")
                     tree("Shot")
                 sequence
                     IsRequiredDistance(20.0)
-                    Chase(7.0)
+                    Chase
   	
 tree("Shot")
     repeat(3)

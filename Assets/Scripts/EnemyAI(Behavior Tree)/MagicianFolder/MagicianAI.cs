@@ -1,8 +1,7 @@
-using Enemies;
 using Panda;
 using UnityEngine;
 
-namespace Magician
+namespace MagicianFolder
 {
     /// <summary>
     /// Отвечает за базовые навыки(Таски) мага (пока спавн голема и отбегание).
@@ -16,7 +15,7 @@ namespace Magician
         [SerializeField]
         private float _runBackDistance;
         [SerializeField]
-        private EnemyHealth _enemyHealth;
+        private Magician _magician;
         [SerializeField]
         private float _lowHealthThreshold;
     
@@ -44,7 +43,7 @@ namespace Magician
         [Task]
         private bool IsHealthEnoughToSpawnGolem()
         {
-            return _enemyHealth.CurrentHealth <= _lowHealthThreshold;
+            return _magician.CurrentHp <= _lowHealthThreshold;
         }
-    }
+    } 
 }

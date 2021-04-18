@@ -22,7 +22,7 @@ public class ShootingEnemies : MonoBehaviour
 
     private void Start()
     {
-        _player = GameObject.FindGameObjectWithTag(GlobalConstants.PLAYER_TAG);
+        _player = MainManager.Player;
     }
 
     private void Shot()

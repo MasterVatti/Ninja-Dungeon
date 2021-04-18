@@ -1,8 +1,7 @@
-using Assets.Scripts;
 using Panda;
 using UnityEngine;
 
-namespace Magician.Golem
+namespace MagicianFolder.GolemFolder
 {
     /// <summary>
     /// Отвечает за базовые навыки(Таски) голема (пока спавн голема и отбегание).
@@ -16,7 +15,7 @@ namespace Magician.Golem
         
         private void Start()
         {
-            _player = GameObject.FindGameObjectWithTag(GlobalConstants.PLAYER_TAG);
+            _player = MainManager.Player;
         }
         
         [Task]

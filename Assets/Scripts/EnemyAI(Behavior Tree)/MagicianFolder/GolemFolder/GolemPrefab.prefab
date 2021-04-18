@@ -18,8 +18,9 @@ GameObject:
   - component: {fileID: 7309898420038427012}
   - component: {fileID: -4561220251182727926}
   - component: {fileID: 4259961474249692756}
+  - component: {fileID: 8935440672372812310}
   m_Layer: 0
-  m_Name: Golem
+  m_Name: GolemPrefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,8 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ece3497b0dce848bcf23723c55aa05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyHealth: {fileID: -4561220251182727926}
-  _lowHealthThreshold: 0
+  _agent: {fileID: 7309898420038427012}
 --- !u!114 &-616721245232159211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae2afb1c15bf644b9fcd3ff474c7675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 40
 --- !u!54 &4259961474249692756
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -201,3 +200,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8935440672372812310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940516286941385097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7775d5d223d95f4a9150bfec120654c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHP: 0
+  _maxHp: 100
+  _moveSpeed: 0
+  _attackDamage: 0
+  _attackRate: 0
+  _canMove: 0
+  _canAttack: 0
+  _rigidbody: {fileID: 4259961474249692756}
+  _healthSystem: {fileID: -4561220251182727926}

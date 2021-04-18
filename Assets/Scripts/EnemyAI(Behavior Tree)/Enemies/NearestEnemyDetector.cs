@@ -12,15 +12,15 @@ namespace Enemies
         [SerializeField] 
         private Transform _playerTransform;
 
-        public GameObject GetNearestEnemy()
+        public Enemy GetNearestEnemy()
         {
             var playerPosition = _playerTransform.position;
             var min = float.MaxValue;
             var minIndex = 0;
             
-            for (int i = 0; i < _enemiesManager.Enemies.Count; i++)
+            for (int i = 0; i < MainManager.EnemiesManager.Enemies.Count; i++)
             {
-                var enemy = _enemiesManager.Enemies[i];
+                var enemy = MainManager.EnemiesManager.Enemies[i];
                 
                 if (enemy != null)
                 {
@@ -33,7 +33,7 @@ namespace Enemies
                     }
                 }
             }
-            return _enemiesManager.Enemies[minIndex];
+            return MainManager.EnemiesManager.Enemies[minIndex];
         }
     }
 }
