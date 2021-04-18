@@ -15,19 +15,6 @@ public class EnergyManager : MonoBehaviour
         SetCurrentEnergyToMaximal();
     }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            EnergyDecrease(24);
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            EnergyIncrease(15);
-        }
-    }
-
     private void OnDestroy()
     {
         DontDestroyOnLoad(gameObject);
