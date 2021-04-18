@@ -66,6 +66,7 @@ namespace Buildings
             {
                 MainManager.ResourceManager.AddResource(_miningResource, _currentResourceCount);
                 MiningStartTime = DateTime.UtcNow;
+                StartAmount = 0;
                 _currentResourceCount = 0;
             }
         }

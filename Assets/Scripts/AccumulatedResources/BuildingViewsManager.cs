@@ -15,7 +15,6 @@ namespace AccumulatedResources
             foreach (var building in constructedBuildings)
             {
                 var buildingID = building.GetComponent<IBuilding>().BuildingSettingsID;
-                
                 var settings = MainManager.BuildingManager.GetBuildingSettings(buildingID);
                 
                 AddUIToBuilding(building,settings);

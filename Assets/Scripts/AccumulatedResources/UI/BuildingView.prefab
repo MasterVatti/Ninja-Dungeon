@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 1823891934040667270}
   - component: {fileID: 1823891934040667264}
   - component: {fileID: 1117067079954795322}
+  - component: {fileID: 8611211625886837154}
   m_Layer: 5
   m_Name: BuildingView
   m_TagString: Untagged
@@ -102,7 +103,7 @@ RectTransform:
   m_GameObject: {fileID: 1823891934040667269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2791212596659824273}
   - {fileID: 2553201487475529362}
@@ -136,6 +137,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nameBuilding: {fileID: 6495525323673949691}
+--- !u!114 &8611211625886837154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823891934040667269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced2a7011b284700b32240c08a39035c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3122153982215645208
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,8 +216,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8d34560b6d49c4469b2174ccd34ae34b, type: 2}
-  m_sharedMaterial: {fileID: 8690591861142563998, guid: 8d34560b6d49c4469b2174ccd34ae34b,
+  m_fontAsset: {fileID: 11400000, guid: 8ecd17aeceaba4c10b42ac497ccbfcff, type: 2}
+  m_sharedMaterial: {fileID: 2830636965969884548, guid: 8ecd17aeceaba4c10b42ac497ccbfcff,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
