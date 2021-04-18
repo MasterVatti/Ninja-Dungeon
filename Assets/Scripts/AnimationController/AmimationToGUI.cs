@@ -35,13 +35,30 @@ public class AmimationToGUI : MonoBehaviour
         StartCoroutine(MoveResource(resourceType));
         
     }
+
+    private Transform GetPositionViewResource(ResourceType resourceType)
+    {
+        var resourceView = MainManager.ViewManager.ResourcesView.ResourceLabels;
+        
+        foreach (var positionLabel in resourceView)
+        {
+            if (positionLabel.Type == resourceType)
+            {
+                return positionLabel.Label.transform;
+            }
+        }
+        
+        return null;
+    }
     
     private IEnumerator MoveResource(ResourceType resourceType)
     {
+        var positionView = GetPositionViewResource(resourceType);
+        
         for (int i = 0; i < _countFlyingResourses; i++)
         {
-            MainManager.AnimationManager.ShowFlyingResource(resourceType, transform.position, _target.position,
-                true);
+            MainManager.AnimationManager.ShowFlyingResource(resourceType, transform.position, 
+                positionView.position, true);
             yield return new WaitForSeconds(_delayFlyingResourses);
         }
         

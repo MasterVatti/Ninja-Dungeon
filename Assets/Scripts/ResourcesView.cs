@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class ResourcesView : MonoBehaviour
 {
+    public List<ResourceLabel> ResourceLabels => _resourceLabels;
+    
     [SerializeField]
     private List<ResourceLabel> _resourceLabels;
     

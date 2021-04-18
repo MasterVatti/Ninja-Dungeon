@@ -17,7 +17,7 @@ public class MainManager : Singleton<MainManager>
     public static SaveLoadManager SaveLoadManager => Instance._saveLoadManager;
     public static GameObject Player => Instance._player;
     public static IconsProvider IconsProvider => Instance._iconsProvider;
-    
+    public static ViewManager ViewManager => Instance._viewManager;
     
     [SerializeField]
     private LoadingController _loadingController;
@@ -39,5 +39,7 @@ public class MainManager : Singleton<MainManager>
     private GameObject _player; 
     [SerializeField]
     private IconsProvider _iconsProvider;
+    [SerializeField] 
+    private ViewManager _viewManager;
 
 }
