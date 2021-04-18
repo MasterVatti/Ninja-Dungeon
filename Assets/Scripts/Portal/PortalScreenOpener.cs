@@ -11,13 +11,14 @@ public class PortalScreenOpener : MonoBehaviour, IPortalScreenOpener
     
     public void ShowPortalScreen()
     {
-        var context = new PortalContext() 
+        var context = new PortalContext()
         {
-            Description = _settings.ScreenDescription, 
-            SceneName = _settings.SceneName
+            Description = _settings.ScreenDescription,
+            SceneName = _settings.SceneName,
+            TeleportPosition = _settings.TeleportPosition
         };
         
-        ScreenManager.Instance.OpenScreenWithContext(ScreenType.PortalScreen,
+        MainManager.ScreenManager.OpenScreenWithContext(ScreenType.PortalScreen,
             context);
     }
 }

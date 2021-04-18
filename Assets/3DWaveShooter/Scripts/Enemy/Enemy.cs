@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("Stats")]
-    public int curHp; //Enemy's current health.
+    public int curHp;
     public int maxHp; //Enemy's maximum health.
     public float moveSpeed; //Enemy's movement speed in units per second.
     public EnemyState state; //Current enemy state.

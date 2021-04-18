@@ -7,9 +7,9 @@ namespace Enemies
     /// </summary>
     public class NearestEnemyDetector : MonoBehaviour
     {
-        [SerializeField]
+        [SerializeField] 
         private EnemiesManager _enemiesManager;
-        [SerializeField]
+        [SerializeField] 
         private Transform _playerTransform;
 
         public GameObject GetNearestEnemy()

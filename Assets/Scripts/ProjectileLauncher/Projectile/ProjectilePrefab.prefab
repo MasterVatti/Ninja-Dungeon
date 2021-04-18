@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2660066435425416741}
   - component: {fileID: 2660066435425416738}
   - component: {fileID: 2660066435425416736}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ProjectilePrefab
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165be62b8b082e446a152b0aa6777396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectileSpeed: 15
+  _projectileSpeed: 10
   _damage: 5
   _timeToRemove: 5
 --- !u!54 &2660066435425416736

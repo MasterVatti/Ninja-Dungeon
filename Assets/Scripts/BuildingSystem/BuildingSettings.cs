@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using AccumulatedResources;
 using ResourceSystem;
 using UnityEngine;
 
@@ -10,6 +11,12 @@ namespace BuildingSystem
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/BuildingSettings", order = 1)]
     public class BuildingSettings : ScriptableObject
     {
+        public int ID => _id;
+        
+        public string BuildingName => _buildingNamme;
+
+        public BuildingInfoView BuildingInfoView => _buildingInfoView;
+        
         public List<BuildingSettings> ConnectedPlaceHolders => _connectedPlaceHolders;
 
         public GameObject BuildingPrefab => _buildingPrefab;
@@ -23,6 +30,12 @@ namespace BuildingSystem
         public Vector3 PlaceHolderPosition => _placeHolderPosition;
         
         [SerializeField]
+        private int _id;
+        [SerializeField]
+        private string _buildingNamme;
+        [SerializeField]
+        private BuildingInfoView _buildingInfoView;
+        [SerializeField]
         private List<BuildingSettings> _connectedPlaceHolders = new List<BuildingSettings>();
         [SerializeField]
         private List<Resource> _requiredResources;
@@ -34,5 +47,6 @@ namespace BuildingSystem
         private float _timeToBuild;
         [SerializeField]
         private Vector3 _placeHolderPosition;
+        
     }
 }

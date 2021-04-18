@@ -12,13 +12,13 @@ namespace Assets.Scripts.Managers.ScreensManager.Preview
     {
         private void Start()
         {
-            ScreenManager.Instance.OpenScreen(ScreenType.HelloScreen);
+            MainManager.ScreenManager.OpenScreen(ScreenType.HelloScreen);
         }
 
         private void OnCollisionEnter(Collision other)
         {
             var context = new RewardContext {Gold = 300};
-            ScreenManager.Instance.OpenScreenWithContext(ScreenType.RewardScreen,
+            MainManager.ScreenManager.OpenScreenWithContext(ScreenType.RewardScreen,
                 context);
         }
     }

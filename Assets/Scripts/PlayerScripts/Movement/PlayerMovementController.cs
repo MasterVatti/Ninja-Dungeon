@@ -11,9 +11,20 @@ namespace PlayerScripts.Movement
         [SerializeField]
         private Rigidbody _player;
 
+        private void Start()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
         private void Update()
         {
             _player.velocity = InputController.GetDirection() * _speed;
+
+            var direction = _player.velocity;
+            if (!direction.Equals(Vector3.zero))
+            {
+                transform.rotation = Quaternion.LookRotation(direction);
+            }
         }
     }
 }

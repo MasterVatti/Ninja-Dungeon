@@ -41,7 +41,7 @@ namespace ProjectileLauncher
             }
         }
 
-        public void ProjectileMoving(Vector3 pointToMove)
+        private void ProjectileMoving(Vector3 pointToMove)
         {
             _rigidbody.velocity = pointToMove * _projectileSpeed;
         }

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273de372e6cb1c24e9aa6d4f71f9ccf1, type: 3}
+  m_Name: ShopSetting
+  m_EditorClassIdentifier: 
+  _id: 3
+  _buildingNamme: Shop
+  _buildingInfoView: {fileID: 1117067079954795322, guid: 57fd1dde7650bc444b529ac2b8b691c6,
+    type: 3}
+  _connectedPlaceHolders: []
+  _requiredResources:
+  - _type: 1
+    _amount: 100
+  _buildingPrefab: {fileID: 7155359915757896012, guid: a06446946accaad45832fa5a61324cb8,
+    type: 3}
+  _placeHolderPrefab: {fileID: 3984928345223576583, guid: ca77af298736c204bb8160a033919cc2,
+    type: 3}
+  _timeToBuild: 1
+  _placeHolderPosition: {x: -14.75007, y: 0.74, z: 82.13145}
