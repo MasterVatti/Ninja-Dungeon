@@ -13,12 +13,7 @@ namespace HealthBars
         [SerializeField] 
         private Canvas _canvas;
     
-        private List<HealthBar> _healthBars;
-
-        private void Awake()
-        {
-            _healthBars = new List<HealthBar>();
-        }
+        private List<HealthBar> _healthBars = new List<HealthBar>();
 
         public HealthBar CreateHealthBar()
         {
