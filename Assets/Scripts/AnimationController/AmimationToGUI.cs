@@ -11,9 +11,6 @@ using UnityEngine;
 public class AmimationToGUI : MonoBehaviour
 {
     [SerializeField]
-    private Transform _target;
-    
-    [SerializeField]
     private int _countFlyingResourses = 5;
 
     [SerializeField] 
@@ -23,9 +20,11 @@ public class AmimationToGUI : MonoBehaviour
     private ResourceMiner _resourceMiner;
     
     private float _time = 1;
+    //private RectTransform _rectTransform;
 
     private void Start()
     {
+        //_rectTransform = transform as RectTransform;
         _resourceMiner.OnTakeResources += TakeResourcesFromBuilding;
     }
 
@@ -36,7 +35,7 @@ public class AmimationToGUI : MonoBehaviour
         
     }
 
-    private Transform GetPositionViewResource(ResourceType resourceType)
+    private Vector3 GetPositionViewResource(ResourceType resourceType)
     {
         var resourceView = MainManager.ViewManager.ResourcesView.ResourceLabels;
         
@@ -44,11 +43,17 @@ public class AmimationToGUI : MonoBehaviour
         {
             if (positionLabel.Type == resourceType)
             {
-                return positionLabel.Label.transform;
+                var worldPostion = transform.position;
+                var screenPoint = Camera.main.WorldToScreenPoint(worldPostion);
+                var accumulatedResourcesParent = transform.parent as RectTransform;
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(accumulatedResourcesParent, 
+                    screenPoint, null, out var localPoint);
+                var _rectTransform = positionLabel.Label.transform as RectTransform;
+                
+                return _rectTransform.anchoredPosition = new Vector2(localPoint.x, localPoint.y);
             }
         }
-        
-        return null;
+        return Vector3.zero;
     }
     
     private IEnumerator MoveResource(ResourceType resourceType)
@@ -58,7 +63,7 @@ public class AmimationToGUI : MonoBehaviour
         for (int i = 0; i < _countFlyingResourses; i++)
         {
             MainManager.AnimationManager.ShowFlyingResource(resourceType, transform.position, 
-                positionView.position, true);
+                positionView, true);
             yield return new WaitForSeconds(_delayFlyingResourses);
         }
         
