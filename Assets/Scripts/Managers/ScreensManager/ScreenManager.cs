@@ -18,7 +18,7 @@ namespace Managers.ScreensManager
         [SerializeField]
         private List<BaseScreen> _allScreens;
 
-        private readonly Stack<BaseScreen> _screenStack =
+        public readonly Stack<BaseScreen> _screenStack =
             new Stack<BaseScreen>();
 
         /// <summary>
