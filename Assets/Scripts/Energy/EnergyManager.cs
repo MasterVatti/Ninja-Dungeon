@@ -14,7 +14,20 @@ public class EnergyManager : MonoBehaviour
     {
         SetCurrentEnergyToMaximal();
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            EnergyDecrease(24);
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            EnergyIncrease(15);
+        }
+    }
+
     private void OnDestroy()
     {
         DontDestroyOnLoad(gameObject);
@@ -22,7 +35,10 @@ public class EnergyManager : MonoBehaviour
     
     public void EnergyDecrease(int decreaseNumber)
     {
-        _energyCount -= decreaseNumber;
+        if (_energyCount >= decreaseNumber)
+        {
+            _energyCount -= decreaseNumber;
+        }
         if (_energyCount < 0)
         {
             _energyCount = 0;
