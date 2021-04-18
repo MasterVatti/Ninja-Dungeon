@@ -8,12 +8,15 @@ namespace Managers
     public class BuildingManager : MonoBehaviour
     {
         public event Action <GameObject, BuildingSettings> OnBuildFinished;
-        
-        public List<GameObject> ActiveBuildings { get; } = new List<GameObject>();
-        public List<GameObject> ActivePlaceHolders { get; } = new List<GameObject>();
+
+        public List<GameObject> ActiveBuildings => _activeBuildings;
+
+        public List<GameObject> ActivePlaceHolders => _activePlaceHolders;
 
         [SerializeField]
         private List<BuildingSettings> _buildings = new List<BuildingSettings>();
+        [SerializeField] private List<GameObject> _activePlaceHolders = new List<GameObject>();
+        [SerializeField] private List<GameObject> _activeBuildings = new List<GameObject>();
 
         private void Start()
         {

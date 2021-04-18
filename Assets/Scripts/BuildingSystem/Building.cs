@@ -41,10 +41,11 @@ namespace BuildingSystem
 
         public BuildingData Save()
         {
-            var state = GetState();
+            var state = GetState() ;
             return new BuildingData
             {
                 SettingsID = BuildingSettingsID,
+                BuildingLevel = CurrentBuildingLevel,
                 State = JsonConvert.SerializeObject(state)
             };
         }

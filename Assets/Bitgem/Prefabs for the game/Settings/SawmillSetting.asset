@@ -15,7 +15,9 @@ MonoBehaviour:
   _buildingName: Sawmill
   _buildingInfoView: {fileID: 3654191358967922677, guid: 14463b3fb13ca184089be8199baceeea,
     type: 3}
-  _connectedBuildings: []
+  _connectedBuildings:
+  - {fileID: 11400000, guid: 600f404c0c98baf4eb2eb843e8f400e4, type: 2}
+  - {fileID: 11400000, guid: 924d24cd3e08e8a43999d89dd5de98c9, type: 2}
   _upgradeList:
   - _upgradeCost:
     - _type: 0
@@ -34,5 +36,5 @@ MonoBehaviour:
       type: 3}
   _placeHolderPrefab: {fileID: 7724395076348898431, guid: c979f707646aa634593061efb40ed5ca,
     type: 3}
-  _timeToBuild: 5
-  _position: {x: 0, y: 0, z: 20}
+  _timeToBuild: 1
+  _position: {x: 15, y: 1, z: 65}
