@@ -9,10 +9,11 @@ namespace BuildingSystem
     /// Базовый класс для всех зданий, у которых есть какой-то функционал
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class Building<T> : MonoBehaviour, IBuilding, IStatefulBuilding<T>, IBuildingUIPositionHolder where T : BaseBuildingState
+    public abstract class Building<T> : MonoBehaviour, IStatefulBuilding<T>, IBuildingUIPositionHolder where T : BaseBuildingState
     {
         public int BuildingSettingsID { get; private set; }
         public int CurrentBuildingLevel { get; private set; }
+        public Transform PositionUI { get; }
 
         public void Initialize(int buildingSettingsID, int level)
         {

@@ -11,7 +11,7 @@ namespace BuildingSystem
     public class BuildingSettings : ScriptableObject
     {
         
-        public string BuildingName => _buildingNamme;
+        public string BuildingName => _buildingName;
 
         public BuildingInfoView BuildingInfoView => _buildingInfoView;
 
@@ -21,11 +21,9 @@ namespace BuildingSystem
         public GameObject PlaceHolderPrefab => _placeHolderPrefab;
         public float TimeToBuild => _timeToBuild;
         public Vector3 Position => _position;
-
+        
         [SerializeField]
-        private int _id;
-        [SerializeField]
-        private string _buildingNamme;
+        private string _buildingName;
         [SerializeField]
         private BuildingInfoView _buildingInfoView;
         [SerializeField]

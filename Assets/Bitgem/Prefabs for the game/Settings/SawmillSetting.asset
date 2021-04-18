@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273de372e6cb1c24e9aa6d4f71f9ccf1, type: 3}
   m_Name: SawmillSetting
   m_EditorClassIdentifier: 
+  _buildingName: Sawmill
+  _buildingInfoView: {fileID: 0}
   _connectedBuildings: []
   _upgradeList:
   - _upgradeCost:

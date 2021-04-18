@@ -1,4 +1,3 @@
-
 using System;
 using ResourceSystem;
 using UnityEngine;
@@ -14,13 +13,13 @@ public class ResourceImage
 
     public Sprite Sprite
     {
-        get => _resourseSprite;
-        set => _resourseSprite = value;
+        get => _resourceSprite;
+        set => _resourceSprite = value;
     }
 
     [SerializeField]
     private ResourceType _type;
 
     [SerializeField]
-    private Sprite _resourseSprite;
+    private Sprite _resourceSprite;
 }

@@ -28,8 +28,8 @@ namespace Buildings
                 return _currentResourceCount;
             }
         }
-        
-        public float MiningStartTime { get; set; }
+
+        private float MiningStartTime { get; set; }
         public Transform PositionUI => _positionUI;
 
         [SerializeField]

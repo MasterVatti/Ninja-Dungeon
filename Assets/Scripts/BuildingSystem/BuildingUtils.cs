@@ -16,7 +16,7 @@ namespace BuildingSystem
             
             var building = Object.Instantiate(buildingPrefab, position, rotation);
 
-            MainManager.BuildingManager.AddNewConstructedBuilding(building);
+            MainManager.BuildingManager.AddNewConstructedBuilding(building, settings);
             if (building.TryGetComponent<IBuilding>(out var buildingData))
             {
                 buildingData.Initialize(settings.ID, buildingLevel);
