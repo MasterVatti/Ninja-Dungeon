@@ -30,16 +30,13 @@ namespace Buildings
         }
 
         private float MiningStartTime { get; set; }
-        public Transform PositionUI => _positionUI;
-
+        
         [SerializeField]
         private ResourceType _miningResource;
         [SerializeField]
         private float _miningPerSecond;
         [SerializeField]
         private int _maxStorage;
-        [SerializeField]
-        private Transform _positionUI;
         
         private int _currentResourceCount;
 

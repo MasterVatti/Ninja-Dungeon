@@ -43,7 +43,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 15, y: 10, z: 15}
   m_Center: {x: 0, y: 3.19, z: 0}
---- !u!114 &2963323596756667793
+--- !u!114 &8110206514195189642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,14 +52,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5284114885193351311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e70b5b87f25573f45af1116fdfdd135e, type: 3}
+  m_Script: {fileID: 11500000, guid: f131b70398a55c043be90dd4b0fc5a48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _miningResource: 0
-  _miningPerSecond: 10
-  _maxStorage: 100
   _positionUI: {fileID: 7866709397159217824}
-  _currentBuildingLevel: 0
+  _miningResource: 0
+  _miningPerSecond: 1
+  _maxStorage: 10000
 --- !u!1001 &5283205951969120863
 PrefabInstance:
   m_ObjectHideFlags: 0

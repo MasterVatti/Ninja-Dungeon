@@ -13,7 +13,10 @@ namespace BuildingSystem
     {
         public int BuildingSettingsID { get; private set; }
         public int CurrentBuildingLevel { get; private set; }
-        public Transform PositionUI { get; }
+        public Transform PositionUI => _positionUI;
+
+        [SerializeField]
+        private Transform _positionUI;
 
         public void Initialize(int buildingSettingsID, int level)
         {

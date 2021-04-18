@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273de372e6cb1c24e9aa6d4f71f9ccf1, type: 3}
   m_Name: MineSetting
   m_EditorClassIdentifier: 
+  _buildingName: Mine
+  _buildingInfoView: {fileID: 3654191358967922677, guid: 14463b3fb13ca184089be8199baceeea,
+    type: 3}
   _connectedBuildings: []
   _upgradeList: []
   _placeHolderPrefab: {fileID: 1796408563735853696, guid: df1732c3adc0ba248b05da99c743c527,
