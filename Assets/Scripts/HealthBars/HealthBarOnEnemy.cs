@@ -4,7 +4,7 @@ using UnityEngine;
 namespace HealthBars
 {
     /// <summary>
-    /// отвечает за хелсбар, который висит на 
+    /// отвечает за хелсбар, который висит на сущности
     /// </summary>
     public class HealthBarOnEnemy : MonoBehaviour
     {
