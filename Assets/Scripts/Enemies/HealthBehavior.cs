@@ -9,35 +9,24 @@ namespace Enemies
     /// </summary>
     public class HealthBehavior : MonoBehaviour
     {
+        public int Health => _health;
+
         [SerializeField]
         private int _health;
-        [SerializeField]
-        private HealthBarsManager _healthBarsManager;
         
         public event Action<Enemy> EnemyDie;
-
-        private HealthBar _healthBar;
-        
-        private void Awake()
-        {
-            _healthBar = _healthBarsManager.CreateHealthBar();
-            _healthBar.SetMaximalHealth(_health);
-            _healthBar.NormalizePosition(transform.position);
-        }
-
-        private void Update()
-        {
-            _healthBar.NormalizePosition(transform.position);
-        }
+        public event Action<int> HealthBarValueDecrease;
 
         public void ApplyDamage(int damage)
         {
             _health -= damage;
-            _healthBar.SetHealthBarValue(_health);
+            if (GetComponent<HealthBarOnEnemy>())
+            {
+                HealthBarValueDecrease?.Invoke(_health);
+            }
             if (_health <= 0)
             {
                 Death();
-                _healthBar.Destroy();
             }
         }
         

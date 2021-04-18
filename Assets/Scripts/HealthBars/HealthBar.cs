@@ -3,13 +3,16 @@ using UnityEngine.UI;
 
 namespace HealthBars
 {
+    /// <summary>
+    /// отвечает за конкретный хелсбар
+    /// </summary>
     public class HealthBar : MonoBehaviour
     {
         [SerializeField] 
-        private Vector3 _noramlizePosition;
+        private Vector3 _stabilizatePosition;
         
         private Slider _slider;
-        
+
         private void Awake()
         {
             _slider = GetComponent<Slider>();
@@ -26,9 +29,9 @@ namespace HealthBars
             _slider.value = health;
         }
 
-        public void NormalizePosition(Vector3 entityToAttach)
+        public void StabilizatePosition(Vector3 entityPositionToAttach)
         {
-            transform.position = entityToAttach + _noramlizePosition;
+            transform.position = entityPositionToAttach + _stabilizatePosition;
         }
         
         public void Destroy()
