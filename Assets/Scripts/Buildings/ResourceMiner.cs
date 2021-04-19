@@ -25,7 +25,7 @@ namespace Buildings
                     var minedResourceCount = GetMinedResourceCount(MiningStartTime, _miningPerSecond);
                     var count = StartAmount + minedResourceCount;
                     
-                    _currentResourceCount = Mathf.Clamp(count, 0, _maxStorage);
+                    _currentResourceCount = ClampToMaxStorage(count);
                 }
 
                 return _currentResourceCount;
@@ -70,12 +70,6 @@ namespace Buildings
                 _currentResourceCount = 0;
             }
         }
-
-        private int GetMinedResourceCount(DateTime startTime, float miningPerSecond)
-        {
-            var minedSeconds = (float)DateTime.UtcNow.Subtract(startTime).TotalSeconds;
-            return Mathf.FloorToInt(minedSeconds * miningPerSecond);
-        }
         
         public override void OnUpgrade(MinerBuildingData oldBuildingState)
         {
@@ -91,11 +85,9 @@ namespace Buildings
                 var minedResourceWhileWasOffline = GetMinedResourceCount(data.StartTime, data.MiningPerSecond);
                 StartAmount = data.StartAmount + minedResourceWhileWasOffline;
                 MiningStartTime = DateTime.UtcNow;
-
-                // TODO : take it from config
+                
                 _maxStorage = data.MaxStorage;
                 _miningPerSecond = data.MiningPerSecond;
-                _miningResource = data.Resource;
             }
         }
 
@@ -103,11 +95,23 @@ namespace Buildings
         {
             return new MinerBuildingData
             {
+                StartTime = MiningStartTime,
+                StartAmount = _currentResourceCount,
                 MaxStorage = _maxStorage,
-                MiningPerSecond = _miningPerSecond,
-                Resource = _miningResource,
-                StartTime = MiningStartTime
+                MiningPerSecond = _miningPerSecond
             };
+        }
+        
+        private int GetMinedResourceCount(DateTime startTime, float miningPerSecond)
+        {
+            var minedSeconds = (float)DateTime.UtcNow.Subtract(startTime).TotalSeconds;
+            var minedResourceCount = Mathf.FloorToInt(minedSeconds * miningPerSecond);
+            return ClampToMaxStorage(minedResourceCount);
+        }
+
+        private int ClampToMaxStorage(int value)
+        {
+            return Mathf.Clamp(value, 0, _maxStorage);
         }
     }
 }

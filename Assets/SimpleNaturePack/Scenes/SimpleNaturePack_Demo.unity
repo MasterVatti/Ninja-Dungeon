@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44664752, g: 0.4964931, b: 0.57486045, a: 1}
+  m_IndirectSpecularColor: {r: 0.44664782, g: 0.49649352, b: 0.57486135, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4748,6 +4748,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 914714163}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &926403117 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1631761048483438222, guid: 1d436f2929f844c49b94164af2b0e5eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1711541414}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &998143318
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9603,18 +9615,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1711541414}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1711541417 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1631761049484189673, guid: 1d436f2929f844c49b94164af2b0e5eb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1711541414}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1711541418 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1631761048848671457, guid: 1d436f2929f844c49b94164af2b0e5eb,
@@ -9649,7 +9649,7 @@ MonoBehaviour:
   - _type: 0
     _label: {fileID: 1711541418}
   - _type: 1
-    _label: {fileID: 1711541417}
+    _label: {fileID: 926403117}
 --- !u!1 &1711541422 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1631761048946135472, guid: 1d436f2929f844c49b94164af2b0e5eb,
@@ -10708,7 +10708,7 @@ PrefabInstance:
     - target: {fileID: 5332810461780847234, guid: 023c32ed79838cb40ab63e3542a568da,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5332810461780847234, guid: 023c32ed79838cb40ab63e3542a568da,
         type: 3}

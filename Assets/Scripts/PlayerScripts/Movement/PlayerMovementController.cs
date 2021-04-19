@@ -26,7 +26,10 @@ namespace PlayerScripts.Movement
 
         private void OnDestroy()
         {
-            MainManager.JoystickController.OnJoystickDown -= JoystickDownHandler;
+            if (MainManager.JoystickController)
+            {
+                MainManager.JoystickController.OnJoystickDown -= JoystickDownHandler;
+            }
         }
 
         private Vector3 GetGlobalMoveDirection()
