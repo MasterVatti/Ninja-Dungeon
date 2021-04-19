@@ -263,7 +263,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &55687296
 PrefabInstance:
@@ -280,7 +280,7 @@ PrefabInstance:
     - target: {fileID: 1686021177305034388, guid: ebee340de387f334f9ac44e044abd8fb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1686021177305034388, guid: ebee340de387f334f9ac44e044abd8fb,
         type: 3}
@@ -1515,7 +1515,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 49.800003, y: -92.44401, z: 0}
 --- !u!1001 &330728128
 PrefabInstance:
@@ -1583,6 +1583,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_TorchStick_01 Variant (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8861657
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.30709326
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ad16ba3eaef2741a968a2294143f7d, type: 3}
@@ -1667,7 +1687,7 @@ Transform:
   - {fileID: 81618621}
   - {fileID: 1694283837}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &361894256
 PrefabInstance:
@@ -1776,7 +1796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 373949043}
-  _offset: {x: 0, y: -25, z: 20}
+  _offset: {x: 0, y: -20, z: 15}
   _target: {fileID: 212603095}
   _speed: 5
 --- !u!81 &373949042
@@ -1842,7 +1862,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!1001 &380565589
 PrefabInstance:
@@ -2032,7 +2052,7 @@ Transform:
   - {fileID: 1637883669}
   - {fileID: 361894257}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &408445214
 PrefabInstance:
@@ -2265,6 +2285,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_TorchStick_01 Variant (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8861657
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.30709326
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ad16ba3eaef2741a968a2294143f7d, type: 3}
@@ -3736,7 +3776,7 @@ Transform:
   - {fileID: 1562523216}
   - {fileID: 596793410}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &701454732
 PrefabInstance:
@@ -5218,6 +5258,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1124311591}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1124431701 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3702441021225397339, guid: 37ad16ba3eaef2741a968a2294143f7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1346642758}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1149967797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6231,6 +6277,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_TorchStick_01 Variant (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8861657
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.30709326
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ad16ba3eaef2741a968a2294143f7d, type: 3}
 --- !u!4 &1291089043 stripped
@@ -6299,7 +6365,7 @@ Transform:
   - {fileID: 796636598}
   - {fileID: 450222910}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1337190332
 PrefabInstance:
@@ -6476,27 +6542,27 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1727675199}
     m_Modifications:
     - target: {fileID: 3702441021225397339, guid: 37ad16ba3eaef2741a968a2294143f7d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3702441021225397339, guid: 37ad16ba3eaef2741a968a2294143f7d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.48
+      value: -8.154597
       objectReference: {fileID: 0}
     - target: {fileID: 3702441021225397339, guid: 37ad16ba3eaef2741a968a2294143f7d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.21
+      value: 11.173576
       objectReference: {fileID: 0}
     - target: {fileID: 3702441021225397339, guid: 37ad16ba3eaef2741a968a2294143f7d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 98.64
+      value: 1.7262268
       objectReference: {fileID: 0}
     - target: {fileID: 3702441021225397339, guid: 37ad16ba3eaef2741a968a2294143f7d,
         type: 3}
@@ -6506,17 +6572,17 @@ PrefabInstance:
     - target: {fileID: 3702441021225397339, guid: 37ad16ba3eaef2741a968a2294143f7d,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3702441021225397339, guid: 37ad16ba3eaef2741a968a2294143f7d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3702441021225397339, guid: 37ad16ba3eaef2741a968a2294143f7d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3702441021225397339, guid: 37ad16ba3eaef2741a968a2294143f7d,
         type: 3}
@@ -6537,6 +6603,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_TorchStick_01 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8861657
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.30709326
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ad16ba3eaef2741a968a2294143f7d, type: 3}
@@ -8425,6 +8511,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_TorchStick_01 Variant (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8861657
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.30709326
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ad16ba3eaef2741a968a2294143f7d, type: 3}
 --- !u!4 &1703971024 stripped
@@ -9654,8 +9760,9 @@ Transform:
   - {fileID: 416419081}
   - {fileID: 330728129}
   - {fileID: 1291089043}
+  - {fileID: 1124431701}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1728264238
 PrefabInstance:
@@ -9787,6 +9894,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_TorchStick_01 Variant (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8861657
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.30709326
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ad16ba3eaef2741a968a2294143f7d, type: 3}
 --- !u!4 &1772150827 stripped
@@ -9902,7 +10029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 1781112974}
-  _offset: {x: 0, y: -25, z: 20}
+  _offset: {x: 0, y: -20, z: 15}
   _target: {fileID: 212603095}
   _speed: 5
 --- !u!81 &1781112973
@@ -11288,6 +11415,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_TorchStick_01 Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8861657
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.30709326
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ad16ba3eaef2741a968a2294143f7d, type: 3}
 --- !u!4 &1984433034 stripped
@@ -11537,6 +11689,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_TorchStick_01 Variant (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8861657
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.30709326
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ad16ba3eaef2741a968a2294143f7d, type: 3}
