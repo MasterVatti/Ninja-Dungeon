@@ -19,7 +19,7 @@ namespace BuildingSystem
             MainManager.BuildingManager.AddNewConstructedBuilding(building, settings);
             if (building.TryGetComponent<IBuilding>(out var buildingData))
             {
-                buildingData.Initialize(settings.ID, buildingLevel);
+                buildingData.OnStateLoaded(settings.ID, buildingLevel);
             }
 
             return building;
