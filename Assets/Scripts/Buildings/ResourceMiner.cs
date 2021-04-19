@@ -1,8 +1,10 @@
+using System;
+using BuildingSystem;
 using ResourceSystem;
 using SaveSystem;
 using UnityEngine;
 
-namespace BuildingSystem
+namespace Buildings
 {
     /// <summary>
     /// Класс возвращает количество ресурса, добытого к данному моменту
@@ -14,38 +16,48 @@ namespace BuildingSystem
         //Свойства для UI
         public ResourceType ExtractableResource => _miningResource;
         public float MaxStorage => _maxStorage;
-
         public int CurrentResourceCount
         {
             get
             {
                 if (_currentResourceCount < _maxStorage)
                 {
-                    var count = Mathf.FloorToInt((Time.time - _startMiningTime) / _miningPerSecond);
+                    var minedResourceCount = GetMinedResourceCount(MiningStartTime, _miningPerSecond);
+                    var count = StartAmount + minedResourceCount;
+                    
                     _currentResourceCount = Mathf.Clamp(count, 0, _maxStorage);
                 }
 
                 return _currentResourceCount;
             }
         }
-
-        public Transform PositionUI => _positionUI;
-
+        
+        private DateTime MiningStartTime { get; set; }
+        private int StartAmount { get; set; }
+        
         [SerializeField]
         private ResourceType _miningResource;
         [SerializeField]
         private float _miningPerSecond;
         [SerializeField]
         private int _maxStorage;
-        [SerializeField]
-        private Transform _positionUI;
-
+        
         private int _currentResourceCount;
-        private float _startMiningTime;
 
-        public void Start()
+        private void Awake()
         {
-            _startMiningTime = Time.time;
+            if (!_stateWasLoaded)
+            {
+                MiningStartTime = DateTime.UtcNow;
+            }
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Upgrade();
+            }
         }
 
         private void OnTriggerStay(Collider other)
@@ -53,33 +65,49 @@ namespace BuildingSystem
             if (_currentResourceCount != 0)
             {
                 MainManager.ResourceManager.AddResource(_miningResource, _currentResourceCount);
-                _startMiningTime = Time.time;
+                MiningStartTime = DateTime.UtcNow;
+                StartAmount = 0;
+                _currentResourceCount = 0;
             }
         }
 
-        protected override void Initialize(MinerBuildingData data)
+        private int GetMinedResourceCount(DateTime startTime, float miningPerSecond)
+        {
+            var minedSeconds = (float)DateTime.UtcNow.Subtract(startTime).TotalSeconds;
+            return Mathf.FloorToInt(minedSeconds * miningPerSecond);
+        }
+        
+        public override void OnUpgrade(MinerBuildingData oldBuildingState)
+        {
+            var minedResourceCount = GetMinedResourceCount(oldBuildingState.StartTime, oldBuildingState.MiningPerSecond);
+            StartAmount = oldBuildingState.StartAmount + minedResourceCount;
+            MiningStartTime = DateTime.UtcNow;
+        }
+
+        protected override void OnStateLoaded(MinerBuildingData data)
         {
             if (data != null)
             {
-                _startMiningTime = data.StartTime;
+                var minedResourceWhileWasOffline = GetMinedResourceCount(data.StartTime, data.MiningPerSecond);
+                StartAmount = data.StartAmount + minedResourceWhileWasOffline;
+                MiningStartTime = DateTime.UtcNow;
+
+                // TODO : take it from config
                 _maxStorage = data.MaxStorage;
-                _currentResourceCount = data.ResourceCount;
                 _miningPerSecond = data.MiningPerSecond;
                 _miningResource = data.Resource;
             }
         }
 
-        public override BuildingData Save()
+        public override MinerBuildingData GetState()
         {
-            _state = new MinerBuildingData
+            return new MinerBuildingData
             {
-                StartTime = Time.time,
                 MaxStorage = _maxStorage,
                 MiningPerSecond = _miningPerSecond,
-                ResourceCount = _currentResourceCount,
-                Resource = _miningResource
+                Resource = _miningResource,
+                StartTime = MiningStartTime
             };
-            return base.Save();
         }
     }
 }

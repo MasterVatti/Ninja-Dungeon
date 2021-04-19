@@ -14,27 +14,18 @@ namespace BuildingSystem
         private const int PAY_PER_TICK = 1;
 
         public List<Resource> RequiredResource { get; set; } = new List<Resource>();
-
-
         public BuildingSettings BuildingSettings { get; private set; }
-        
+
         private Dictionary<ResourceType, float> _requiredCooldown;
         private Dictionary<ResourceType, float> _currentCooldown;
 
         private void Start()
         {
             //копируем значения списка необходимых ресурсов, чтобы не менять настройки
-            // но только в том случае, если из сохранения нам суюда прилетел пустой список
+            // но только в том случае, если из сохранения нам сюда прилетел пустой список
             if (RequiredResource.Count == 0)
             {
-                foreach (var requiredResource in BuildingSettings.RequiredResources)
-                {
-                    RequiredResource.Add(new Resource
-                    {
-                        Type = requiredResource.Type,
-                        Amount = requiredResource.Amount
-                    });
-                }
+                RequiredResource = new List<Resource>(BuildingSettings.UpgradeList[0].UpgradeCost);
             }
         }
 
@@ -55,31 +46,11 @@ namespace BuildingSystem
             }
         }
 
-        public static GameObject CreateNewBuilding(BuildingSettings buildingSettings, bool isBuilding)
+        public void Initialize(BuildingSettings buildingSettings)
         {
-            var placeHolderPosition = buildingSettings.PlaceHolderPosition;
-            if (isBuilding)
-            {
-                var buildingPrefab = buildingSettings.BuildingPrefab;
-                var building = Instantiate(buildingPrefab, placeHolderPosition, buildingPrefab.transform.rotation);
-                MainManager.BuildingManager.AddNewConstructedBuilding(building);
-                if (building.TryGetComponent<IBuilding>(out var buildingData))
-                {
-                    buildingData.BuildingSettingsID = buildingSettings.ID;
-                }
-
-                return building;
-            }
-            var placeHolderPrefab = buildingSettings.PlaceHolderPrefab;
-            var placeHolderRotation = placeHolderPrefab.transform.rotation;
-                
-            var placeHolder = Instantiate(placeHolderPrefab, placeHolderPosition, placeHolderRotation);
-            placeHolder.GetComponent<BuildingController>().BuildingSettings = buildingSettings;
-            MainManager.BuildingManager.ActivePlaceHolders.Add(placeHolder);
-                
-            return placeHolder;
+            BuildingSettings = buildingSettings;
         }
-        
+
         private void SetRequiredCooldown()
         {
             _requiredCooldown = new Dictionary<ResourceType, float>();
@@ -88,29 +59,33 @@ namespace BuildingSystem
             {
                 _requiredCooldown.Add(requiredResource.Type, 
                     BuildingSettings.TimeToBuild / requiredResource.Amount);
-                _currentCooldown.Add(requiredResource.Type,
-                    float.MinValue);
+                _currentCooldown.Add(requiredResource.Type, float.MinValue);
             }
         }
 
         private void Build()
         {
-            foreach (var requiredResource in RequiredResource)
+            for(var i = 0; i < RequiredResource.Count; i++)
             {
-                if (requiredResource.Amount > 0 && 
-                    IsPaymentTime(requiredResource) && 
-                    MainManager.ResourceManager.HasEnough(requiredResource.Type, PAY_PER_TICK))
+                if (RequiredResource[i].Amount > 0 &&
+                    IsPaymentTime(RequiredResource[i]) &&
+                    MainManager.ResourceManager.HasEnough(RequiredResource[i].Type, PAY_PER_TICK))
                 {
-                    MainManager.ResourceManager.Pay(requiredResource.Type, PAY_PER_TICK);
-                    requiredResource.Amount -= PAY_PER_TICK;
-                    MainManager.AnimationManager.ShowFlyingResource
-                        (requiredResource.Type,MainManager.PlayerMovementController.transform.position,transform.position);
+                    MainManager.ResourceManager.Pay(RequiredResource[i].Type, PAY_PER_TICK);
+                    
+                    var resource = RequiredResource[i];
+                    resource.Amount -= PAY_PER_TICK;
+                    RequiredResource[i] = resource;
+
+                    var playerPosition = MainManager.PlayerMovementController.transform.position;
+                    MainManager.AnimationManager.ShowFlyingResource(RequiredResource[i].Type,
+                    playerPosition, transform.position);
                 }
             }
 
             if (IsConstructionFinished())
             {
-                new BuildFinisher(BuildingSettings, BuildingSettings.ConnectedPlaceHolders).FinishBuilding();
+                FinishConstruction();
                 MainManager.BuildingManager.ActivePlaceHolders.Remove(gameObject);
                 Destroy(gameObject);
             }
@@ -135,6 +110,15 @@ namespace BuildingSystem
             }
 
             return false;
+        }
+
+        private void FinishConstruction()
+        {
+            BuildingUtils.CreateNewBuilding(BuildingSettings);
+            foreach (var placeHolder in BuildingSettings.ConnectedBuildings)
+            {
+                BuildingUtils.CreateNewPlaceHolder(placeHolder);
+            }
         }
     }
 }

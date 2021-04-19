@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace SaveSystem
 {
@@ -7,12 +8,13 @@ namespace SaveSystem
     /// </summary>
     public class MinerBuildingData : BaseBuildingState
     {
+        // todo: check json, can he save DateTime?
         [JsonProperty("startTime")]
-        public float StartTime { get; set; }
+        public DateTime StartTime { get; set; }
+        [JsonProperty("startAmount")]
+        public int StartAmount { get; set; }
         [JsonProperty("miningPerSecond")]
         public float MiningPerSecond { get; set; }
-        [JsonProperty("resourceCount")]
-        public int ResourceCount { get; set; }
         [JsonProperty("maxStorage")]
         public int MaxStorage { get; set; }
         [JsonProperty("resourceType")]

@@ -8,8 +8,8 @@ namespace PlayerScripts.Movement
     {
         public static Vector3 GetDirection()
         {
-            return new Vector3(JoystickController.InputDirection.x, 0,
-                JoystickController.InputDirection.y);
+            var inputDirection = MainManager.JoystickController.InputDirection;
+            return new Vector3(inputDirection.x, 0, inputDirection.y);
         }
     }
 }
