@@ -1,22 +1,38 @@
-using System.Collections.Generic;
 using Assets.Scripts.Managers.ScreensManager;
+using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 namespace Barracks_and_allied_behavior
 {
     public class BarracksScreen : BaseScreen
     {
         [SerializeField]
-        private List<Button> _buttons;
+        private Barrack _barrack;
         [SerializeField]
-        private List<Text> _descriptions;
+        private GameObject _barracksContent;
         [SerializeField]
-        private List<Text> _prices;
+        private GameObject _allyItem;
+        
+        private void CreateAndInitializeAllyItem(Ally ally)
+        {
+            var rateObject = Instantiate(_allyItem, _barracksContent.transform);
+            rateObject.GetComponent<AllyItemView>().Initialize(ally);
+        }
         
         public override void Initialize(ScreenType screenType)
         {
             ScreenType = screenType;
+            foreach (var ally in _barrack.Allies)
+            {
+                CreateAndInitializeAllyItem(ally);
+            }
+        }
+
+        [UsedImplicitly]
+        private void CloseScreen()
+        {
+            MainManager.ScreenManager.CloseTopScreen();
         }
     }
 }

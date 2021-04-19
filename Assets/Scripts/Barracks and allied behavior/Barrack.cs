@@ -5,9 +5,9 @@ namespace Barracks_and_allied_behavior
 {
     public class Barrack : MonoBehaviour
     {
-        public List<GameObject> Allies => _allies;
+        public List<Ally> Allies => _allies;
         
         [SerializeField]
-        private List<GameObject> _allies;
+        private List<Ally> _allies;
     }
 }

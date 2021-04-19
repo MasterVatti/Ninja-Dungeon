@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Barracks_and_allied_behavior
 {
-    public class KnightAlly : MonoBehaviour
+    public class KnightAlly : Ally
     {
         // Start is called before the first frame update
         void Start()
