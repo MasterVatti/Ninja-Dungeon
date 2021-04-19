@@ -13,7 +13,7 @@ public class ShopBuilding : Building<DataShop>
         return new DataShop();
     }
 
-    protected override void Initialize(DataShop data)
+    protected override void OnStateLoaded(DataShop data)
     {
        
     }

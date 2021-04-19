@@ -4,7 +4,6 @@ using UnityEngine;
 /// <summary>
 /// Класс для базовых виджетов
 /// </summary>
-
 public class BuildingInfoView : MonoBehaviour
 {
     [SerializeField]

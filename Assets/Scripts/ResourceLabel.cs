@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using ResourceSystem;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ public class ResourceLabel
         set => _type = value;
     }
 
-    public Text Label
+    public TextMeshProUGUI Label
     {
         get => _label;
         set => _label = value;
@@ -23,5 +24,5 @@ public class ResourceLabel
     [SerializeField]
     private ResourceType _type;
     [SerializeField]
-    private Text _label;
+    private TextMeshProUGUI _label;
 }
