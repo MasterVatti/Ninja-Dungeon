@@ -9195,6 +9195,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1631761049027181681, guid: 1d436f2929f844c49b94164af2b0e5eb,
+        type: 3}
+      propertyPath: m_Name
+      value: Stats_Lumber
+      objectReference: {fileID: 0}
     - target: {fileID: 1631761049027181683, guid: 1d436f2929f844c49b94164af2b0e5eb,
         type: 3}
       propertyPath: m_Enabled
