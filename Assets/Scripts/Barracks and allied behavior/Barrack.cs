@@ -3,11 +3,15 @@ using UnityEngine;
 
 namespace Barracks_and_allied_behavior
 {
+    /// <summary>
+    /// Отвечает за бараки.(пока только сохраняет лист союзников)
+    /// </summary>
+    
     public class Barrack : MonoBehaviour
     {
-        public List<Ally> Allies => _allies;
+        public List<AlliesListSetting> Allies => _allies;
         
         [SerializeField]
-        private List<Ally> _allies;
+        private List<AlliesListSetting> _allies;
     }
 }

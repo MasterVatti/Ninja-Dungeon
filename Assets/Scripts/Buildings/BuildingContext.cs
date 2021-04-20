@@ -1,3 +1,5 @@
+using Barracks_and_allied_behavior;
+
 namespace Assets.Scripts.Managers.ScreensManager
 {
     /// <summary>
@@ -6,5 +8,6 @@ namespace Assets.Scripts.Managers.ScreensManager
     public class BuildingContext : BaseContext
     {
         public string BuildingName { get; set; }
+        public Barrack Barrack { get; set; }
     }
 }

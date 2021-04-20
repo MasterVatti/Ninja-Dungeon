@@ -2,35 +2,44 @@ using Assets.Scripts.Managers.ScreensManager;
 using JetBrains.Annotations;
 using UnityEngine;
 
-
 namespace Barracks_and_allied_behavior
 {
-    public class BarracksScreen : BaseScreen
+    /// <summary>
+    /// Отвечает за открытие скрина Барраков и инициализацю каждого конкретного поля союзника.
+    /// </summary>
+    public class BarracksScreen : BaseScreenWithContext<BuildingContext>
     {
-        [SerializeField]
+        [SerializeField] private GameObject _barracksContent;
+        [SerializeField] private GameObject _allyItem;
+
         private Barrack _barrack;
-        [SerializeField]
-        private GameObject _barracksContent;
-        [SerializeField]
-        private GameObject _allyItem;
-        
-        private void CreateAndInitializeAllyItem(Ally ally)
+
+        private void Start()
         {
-            var rateObject = Instantiate(_allyItem, _barracksContent.transform);
-            rateObject.GetComponent<AllyItemView>().Initialize(ally);
-        }
-        
-        public override void Initialize(ScreenType screenType)
-        {
-            ScreenType = screenType;
             foreach (var ally in _barrack.Allies)
             {
                 CreateAndInitializeAllyItem(ally);
             }
         }
 
+        public override void ApplyContext(BuildingContext context)
+        {
+            _barrack = context.Barrack;
+        }
+
+        public override void Initialize(ScreenType screenType)
+        {
+            ScreenType = screenType;
+        }
+
+        private void CreateAndInitializeAllyItem(AlliesListSetting ally)
+        {
+            var rateObject = Instantiate(_allyItem, _barracksContent.transform);
+            rateObject.GetComponent<AllyItemView>().Initialize(ally);
+        }
+
         [UsedImplicitly]
-        private void CloseScreen()
+        public void CloseScreen()
         {
             MainManager.ScreenManager.CloseTopScreen();
         }

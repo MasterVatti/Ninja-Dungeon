@@ -6,12 +6,12 @@ namespace Door
     /// <summary>
     /// Класс отвечает за открытие окна дверей
     /// </summary>
-    public class DoorScreenOpener : MonoBehaviour, IPortalScreenOpener
+    public class DoorScreenOpener : MonoBehaviour, IScreenOpenerWithContext
     {
         [SerializeField]
         private DoorSettings _settings;
     
-        public void ShowPortalScreen()
+        public void ShowScreenWithContext()
         {
             var context = new PortalContext()
             {

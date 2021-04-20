@@ -1,19 +1,10 @@
-using UnityEngine;
 
 namespace Barracks_and_allied_behavior
 {
+    /// <summary>
+    /// Отвечает  конкретного союзника Лучник и его специальное поведение.
+    /// </summary>
     public class ArcherAlly : Ally
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
     }
 }

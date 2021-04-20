@@ -2,18 +2,12 @@ using UnityEngine;
 
 namespace Barracks_and_allied_behavior
 {
+    /// <summary>
+    /// Отвечает за базовое поведение союзников. Передвижение, патрулирование, определение цели.
+    /// </summary>
+    
     public class AllyBehavior : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
         
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
     }
 }

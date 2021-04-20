@@ -4,12 +4,12 @@ using UnityEngine;
 /// <summary>
 /// Класс отвечает за открытие окна портала
 /// </summary>
-public class PortalScreenOpener : MonoBehaviour, IPortalScreenOpener
+public class PortalScreenOpener : MonoBehaviour, IScreenOpenerWithContext
 {
     [SerializeField]
     private PortalSettings _settings;
     
-    public void ShowPortalScreen()
+    public void ShowScreenWithContext()
     {
         var context = new PortalContext()
         {
