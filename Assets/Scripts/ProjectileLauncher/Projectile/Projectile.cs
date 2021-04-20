@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using Enemies;
 using UnityEngine;
 
@@ -12,11 +13,14 @@ namespace ProjectileLauncher
         private float _projectileSpeed;
         [SerializeField] 
         private int _damage;
+        [SerializeField]
+        private float _timeToRemove = 5f;
+        [SerializeField]
         private Rigidbody _rigidbody;
         
         private void Awake()
         {
-            _rigidbody = GetComponent<Rigidbody>();
+            Destroy(gameObject, _timeToRemove);
         }
 
         public void Initialize(Vector3 direction)
@@ -26,10 +30,14 @@ namespace ProjectileLauncher
         
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Enemy"))
+            if (collision.gameObject.CompareTag(GlobalConstants.ENEMY_TAG))
             {
                 Destroy(gameObject);
                 DealDamage(collision);
+            }
+            if (collision.gameObject.CompareTag(GlobalConstants.WALL_TAG))
+            {
+                Destroy(gameObject);
             }
         }
 

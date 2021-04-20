@@ -255,7 +255,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (hit.collider.tag == "Enemy")
             {
-                hit.collider.GetComponent<Enemy>()
+                hit.collider.GetComponent<Enemy3DShooter>()
                     .TakeDamage(weapon.projectile.damage, hit.point,
                         hit.normal);
                 hit.collider.GetComponent<Rigidbody>().AddForce(
