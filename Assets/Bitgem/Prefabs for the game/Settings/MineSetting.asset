@@ -24,5 +24,5 @@ MonoBehaviour:
       type: 3}
   _placeHolderPrefab: {fileID: 1796408563735853696, guid: df1732c3adc0ba248b05da99c743c527,
     type: 3}
-  _timeToBuild: 5
+  _timeToBuild: 2
   _position: {x: -14, y: 1, z: 77}
