@@ -86,7 +86,7 @@ public class Unit : MonoBehaviour
     }
     
     [Task]
-    private bool IsRequiredDistance(float distance)
+    private bool IsAtRequiredDistance(float distance)
     {
         var playerDistance = Vector3.Distance(_player.transform.position, _agent.transform.position);
         return playerDistance <= distance;
