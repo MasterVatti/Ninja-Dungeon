@@ -1,0 +1,19 @@
+tree("Root")
+    tree("TopNode")
+    
+tree("TopNode")
+     fallback
+        tree("Attack")
+        tree("Patrol")
+
+tree("Patrol")
+	while
+		sequence
+			not EnemyInSight
+
+		repeat
+			sequence
+				Wait(3)
+				SetRandomPatrolPoint
+				MoveToDestination
+				Wait(3)

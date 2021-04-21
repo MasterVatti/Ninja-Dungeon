@@ -9,5 +9,5 @@ tree("TopNode")
             Wait(1.0)
             SetDestinationPoint
             MoveToDestination
-            IsRequiredDistance(2.0)
+            IsAtRequiredDistance(2.0)
             Attack

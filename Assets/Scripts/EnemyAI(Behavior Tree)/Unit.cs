@@ -59,7 +59,7 @@ public class Unit : MonoBehaviour
     private void WaitArrival()
     {
         var currentTask = Task.current;
-        float distance = _agent.remainingDistance;
+        var distance = _agent.remainingDistance;
         if (!currentTask.isStarting && _agent.remainingDistance <= 0.5f)
         {
             currentTask.Succeed();

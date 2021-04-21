@@ -17,7 +17,7 @@ tree("TopNode")
                     MoveToDestination
                     tree("Shot")
                 sequence
-                    IsAtRequiredDistance(20.0)
+                    IsRequiredDistance(20.0)
                     Chase
   	
 tree("Shot")

@@ -68,7 +68,9 @@ namespace Barracks_and_allied_behavior
 
         private void CreateAlly()
         {
-            Instantiate(_ally.AllyPrefab, _ally.SpawnPoint.position, Quaternion.identity);
+            var ally = Instantiate(_ally.AllyPrefab, _ally.SpawnPoint.position, Quaternion.identity);
+            ally.GetComponent<AlliesAI>()._patrolPoints = _ally.PatrolPoints;
+            
             MainManager.ScreenManager.CloseTopScreen(); 
         }
     }
