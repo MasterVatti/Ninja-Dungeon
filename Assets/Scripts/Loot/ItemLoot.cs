@@ -1,42 +1,20 @@
-using System.Collections;
-using Assets.Scripts;
+using System;
 using UnityEngine;
 
 namespace Loot
 {
     /// <summary>
-    /// Класс отвечает за получение подобронного предмета (предметов пока нету)
+    /// Базовый класс для заполнения информации о предмете
     /// </summary>
-    public class ItemLoot : MonoBehaviour
+    [Serializable]
+    public class ItemLoot 
     {
+        public float DropChance => _dropChance;
+        public GameObject Item => _item;
+        
         [SerializeField]
-        private float _arrivaTime;
-        
-        protected void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag(GlobalConstants.PLAYER_TAG))
-            {
-                GetComponent<Collider>().enabled = false;
-                
-                StartCoroutine(MoveToPosition());
-            }
-        }
-        
-        private IEnumerator MoveToPosition()
-        {
-            var currentTime = 0f;
-            var startPosition = transform.position;
-            
-            while (currentTime < _arrivaTime)
-            {
-                var destination = MainManager.PlayerMovementController.transform.position;
-                
-                transform.position = Vector3.Lerp(startPosition, destination, currentTime / _arrivaTime);
-                currentTime += Time.deltaTime;
-                yield return null;
-            }
-            
-            Destroy(gameObject);
-        }
+        private float _dropChance;
+        [SerializeField]
+        private GameObject _item;
     }
 }

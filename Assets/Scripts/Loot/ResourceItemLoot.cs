@@ -1,19 +1,28 @@
+using System;
 using ResourceSystem;
-using UnityEngine;
 
 namespace Loot
 {
     /// <summary>
     /// Класс отвечает за получение подобранного ресурса
     /// </summary>
-    public class ResourceItemLoot : ItemLoot
+    public class ResourceItemLoot : EquipmentItemLoot
     {
-        [SerializeField]
-        private Resource _resource;
-        
+        private ResourceType _resourceType;
+        private float _amount;
+
+        public override void Initialize(ItemLoot itemLoot)
+        {
+            if (itemLoot is ResourceItem resourceItem)
+            {
+                _resourceType = resourceItem.Resource.Type;
+                _amount = resourceItem.Resource.Amount;
+            }
+        }
+
         private void OnDestroy()
         {
-            MainManager.ResourceManager.AddResource(_resource.Type, (int)_resource.Amount);
+            MainManager.ResourceManager.AddResource(_resourceType, (int) _amount);
         }
     }
 }

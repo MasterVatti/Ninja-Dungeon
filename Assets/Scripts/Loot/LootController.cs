@@ -1,13 +1,13 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using Enemies;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Loot
 {
+    /// <summary>
+    /// Класс создаёт предметы заданные в объекте с неким шансом
+    /// </summary>
     public class LootController : MonoBehaviour
     {
         [SerializeField]
@@ -15,7 +15,9 @@ namespace Loot
         [SerializeField]
         private float _recliningForce = 5f;
         [SerializeField]
-        private List<ItemInformation> _itemInformations = new List<ItemInformation>();
+        private List<EquipmentItem> _equipmentItems = new List<EquipmentItem>(); 
+        [SerializeField]
+        private List<ResourceItem> _resourceItems = new List<ResourceItem>();
 
         private EnemyHealth _enemyHealth;
        
@@ -28,12 +30,20 @@ namespace Loot
         
         private void StartItemCreation(Enemies.Enemy enemy)
         {
-            foreach (var item in _itemInformations)
+            CreateItem(_equipmentItems, enemy.transform);
+            CreateItem(_resourceItems, enemy.transform);
+        }
+
+        private void CreateItem<T>(List<T> listItem, Transform transform)
+        {
+            foreach (var item in listItem)
             {
-                if (RandomChance() <= item.DropChance)
+                if (item is ItemLoot itemLoot && RandomChance() <= itemLoot.DropChance)
                 {
-                    var buildingView = Instantiate(item.Item, enemy.transform.position, Quaternion.identity);
-                    ScatterObjects(buildingView);
+                    var itemObject = Instantiate(itemLoot.Item, transform.position, Quaternion.identity);
+                    
+                    InitializeItem(itemObject, itemLoot);
+                    ScatterObjects(itemObject);
                 }
             }
         }
@@ -45,6 +55,14 @@ namespace Loot
             var rigidBody = item.GetComponent<Rigidbody>();
             
             rigidBody.AddForce((Vector3.up * _throwUpForce) + (pushDirection * _recliningForce), ForceMode.Impulse);
+        }
+
+        private void InitializeItem(GameObject gameObject, ItemLoot itemLoot)
+        {
+            if (gameObject.TryGetComponent(out EquipmentItemLoot item))
+            {
+               item.Initialize(itemLoot);
+            }
         }
 
         private float RandomChance()
