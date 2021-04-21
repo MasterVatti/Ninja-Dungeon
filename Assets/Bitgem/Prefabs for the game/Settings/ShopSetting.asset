@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShopSetting
   m_EditorClassIdentifier: 
   _buildingName: Shop
-  _buildingInfoView: {fileID: 1117067079954795322, guid: 57fd1dde7650bc444b529ac2b8b691c6,
+  _buildingInfoView: {fileID: 2838927722039180749, guid: fcd7258a2e5b64cb0b3c565ae4c0f86d,
     type: 3}
   _connectedBuildings: []
   _upgradeList:
