@@ -12,6 +12,7 @@ public class BuildingInfoView : MonoBehaviour
     private Transform _attachPoint;
     private RectTransform _parent;
     private RectTransform _currentTransform;
+    private bool _isInitialized;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class BuildingInfoView : MonoBehaviour
     {
         _attachPoint = uiAttachPoint;
         ShowNameBuilding(nameBuilding);
+        _isInitialized = true;
         UpdateViewPosition(_attachPoint);
     }
 
@@ -36,6 +38,10 @@ public class BuildingInfoView : MonoBehaviour
         if (_attachPoint != null)
         {
             UpdateViewPosition(_attachPoint);
+        }
+        else if (_isInitialized)
+        {
+            Destroy(gameObject);
         }
     }
 
