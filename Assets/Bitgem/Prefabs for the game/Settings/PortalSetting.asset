@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PortalSetting
   m_EditorClassIdentifier: 
   _buildingName: Portal
-  _buildingInfoView: {fileID: 1117067079954795322, guid: 57fd1dde7650bc444b529ac2b8b691c6,
+  _buildingInfoView: {fileID: 2838927722039180749, guid: fcd7258a2e5b64cb0b3c565ae4c0f86d,
     type: 3}
   _connectedBuildings:
   - {fileID: 11400000, guid: a13cd1a59069aab4eb965d0b3c5466f4, type: 2}
@@ -25,5 +25,5 @@ MonoBehaviour:
       type: 3}
   _placeHolderPrefab: {fileID: 3573013288105948190, guid: 6cba8c95b0150d2418abbc679a95e60e,
     type: 3}
-  _timeToBuild: 5
+  _timeToBuild: 2
   _position: {x: 4, y: 1, z: 150}
