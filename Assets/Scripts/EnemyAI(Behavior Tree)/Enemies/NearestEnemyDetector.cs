@@ -3,36 +3,37 @@ using UnityEngine;
 namespace Enemies
 {
     /// <summary>
-    /// ищет ближайшего врага по отношению к игроку
+    /// Ищет ближайшего врага по отношению к игроку
     /// </summary>
     public class NearestEnemyDetector : MonoBehaviour
     {
-        [SerializeField] 
-        private EnemiesManager _enemiesManager;
-        [SerializeField] 
+        [SerializeField]
         private Transform _playerTransform;
 
         public Enemy GetNearestEnemy()
         {
             var playerPosition = _playerTransform.position;
-            var min = float.MaxValue;
+            var minDistance = float.MaxValue;
             var minIndex = 0;
-            
-            for (int i = 0; i < MainManager.EnemiesManager.Enemies.Count; i++)
+            var currentIteration = 0;
+
+            foreach (var enemy in MainManager.EnemiesManager.Enemies)
             {
-                var enemy = MainManager.EnemiesManager.Enemies[i];
-                
                 if (enemy != null)
                 {
                     var distanceToPlayer = Vector3.Distance(enemy.transform.position,
                         playerPosition);
-                    if (min > distanceToPlayer)
+                    
+                    if (minDistance > distanceToPlayer)
                     {
-                        min = distanceToPlayer;
-                        minIndex = i;
+                        minDistance = distanceToPlayer;
+                        minIndex = currentIteration;
                     }
                 }
+                
+                currentIteration++;
             }
+
             return MainManager.EnemiesManager.Enemies[minIndex];
         }
     }

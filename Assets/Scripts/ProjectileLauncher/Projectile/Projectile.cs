@@ -25,7 +25,7 @@ namespace ProjectileLauncher
 
         public void Initialize(Vector3 direction)
         {
-            ProjectileMoving(direction);
+            SetProjectileDirection(direction);
         }
         
         private void OnCollisionEnter(Collision collision)
@@ -41,9 +41,9 @@ namespace ProjectileLauncher
             }
         }
 
-        private void ProjectileMoving(Vector3 pointToMove)
+        private void SetProjectileDirection(Vector3 direction)
         {
-            _rigidbody.velocity = pointToMove * _projectileSpeed;
+            _rigidbody.velocity = direction * _projectileSpeed;
         }
         
         public virtual void DealDamage(Collision collision)

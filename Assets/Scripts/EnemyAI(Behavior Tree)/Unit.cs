@@ -7,12 +7,16 @@ using Enemies;
 /// Отвечает за базовые навыки(Таски) Врага
 /// передвежение и хп. Должен висеть на всех енеми.
 /// </summary>
+[RequireComponent(typeof(Enemy))]
 public class Unit : MonoBehaviour
 {
     [SerializeField]
     private NavMeshAgent _agent;
     [SerializeField]
     private float _stopChaseDistance;
+    [SerializeField]
+    private float _pointDistanceError = 0.5f;
+    
 
     private GameObject _player;
     private Vector3 _movePoint;
@@ -27,7 +31,7 @@ public class Unit : MonoBehaviour
     {
         _movePoint = movePoint;
     }
-    
+
     [Task]
     private void MoveToDestination()
     {
@@ -42,7 +46,10 @@ public class Unit : MonoBehaviour
         _agent.destination = _movePoint;
 
         if (Task.isInspected)
+        {
             Task.current.debugInfo = string.Format("({0}, {1})", _movePoint.x, _movePoint.y);
+        }
+
         return true;
     }
 
@@ -51,7 +58,10 @@ public class Unit : MonoBehaviour
     {
         SetDestination(movePoint);
         if (Task.current.isStarting)
+        {
             _agent.isStopped = false;
+        }
+
         WaitArrival();
     }
 
@@ -59,16 +69,18 @@ public class Unit : MonoBehaviour
     private void WaitArrival()
     {
         var currentTask = Task.current;
-        float distance = _agent.remainingDistance;
-        if (!currentTask.isStarting && _agent.remainingDistance <= 0.5f)
+        var distance = _agent.remainingDistance;
+        if (!currentTask.isStarting && _agent.remainingDistance <= _pointDistanceError)
         {
             currentTask.Succeed();
         }
-
+        
         if (Task.isInspected)
-            currentTask.debugInfo = string.Format("distance-{0:0.00}", distance);
+        {
+            currentTask.debugInfo = string.Format("distance-{0:0.00}", distance); 
+        }
     }
-    
+
     [Task]
     private void Chase()
     {
@@ -84,7 +96,7 @@ public class Unit : MonoBehaviour
             Task.current.Succeed();
         }
     }
-    
+
     [Task]
     private bool IsAtRequiredDistance(float distance)
     {

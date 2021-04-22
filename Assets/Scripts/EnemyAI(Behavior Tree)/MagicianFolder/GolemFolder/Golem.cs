@@ -3,7 +3,7 @@ using Enemies;
 namespace MagicianFolder.GolemFolder
 {
     /// <summary>
-    /// Класс Голем, наследуемый от енеми.
+    ///Отвечает за базовые характеристики Голема.
     /// </summary>
     public class Golem : Enemy
     {

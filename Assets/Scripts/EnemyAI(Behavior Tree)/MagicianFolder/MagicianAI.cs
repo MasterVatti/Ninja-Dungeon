@@ -22,26 +22,27 @@ namespace MagicianFolder
         private bool _isGolemCreated;
     
         [Task]
-        private bool GolemSpawn()
+        private void GolemSpawn()
         {
             if (!_isGolemCreated)
             {
                 var golem = Instantiate(_golemPrefab, gameObject.transform.position, Quaternion.identity);
-                _isGolemCreated = true;
+                 _isGolemCreated = true;
+                 Task.current.Succeed();
             }
-
-            return false;
+            
+            Task.current.Fail();
         }
     
         [Task]
-        private void GetRunBackPoint()
+        private void SetRunBackPoint()
         {
             _unit.ChangePointMovement(gameObject.transform.TransformPoint(0, 0, 0 - _runBackDistance));
             Task.current.Succeed();
         }
         
         [Task]
-        private bool IsHealthEnoughToSpawnGolem()
+        private bool IsTimeToSpawnGolem()
         {
             return _magician.CurrentHp <= _lowHealthThreshold;
         }

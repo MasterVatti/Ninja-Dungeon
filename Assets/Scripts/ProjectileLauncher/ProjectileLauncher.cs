@@ -17,7 +17,7 @@ namespace ProjectileLauncher
         [SerializeField]
         private GameObject _player;
         
-        private float _currentTime; //0
+        private float _currentTime;
 
         private void Update()
         {
@@ -35,7 +35,7 @@ namespace ProjectileLauncher
             }
         }
 
-        protected virtual void CreateProjectile(GameObject enemy)
+        private void CreateProjectile(GameObject enemy)
         {
             _currentTime = 0;
             
