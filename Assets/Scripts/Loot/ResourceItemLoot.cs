@@ -1,4 +1,3 @@
-using System;
 using ResourceSystem;
 
 namespace Loot
@@ -20,7 +19,7 @@ namespace Loot
             }
         }
 
-        private void OnDestroy()
+        protected override void OnItemPickup()
         {
             MainManager.ResourceManager.AddResource(_resourceType, (int) _amount);
         }

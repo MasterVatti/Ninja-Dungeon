@@ -8,9 +8,9 @@ namespace Loot
     /// Базовый класс для получения предмета
     /// </summary>
     public class EquipmentItemLoot : MonoBehaviour
-    {
+    {   
         [SerializeField]
-        private float _arrivaTime = 0.2f;
+        private float _arrivalTime = 0.2f;
         
         private void OnTriggerEnter(Collider other)
         {
@@ -22,25 +22,30 @@ namespace Loot
             }
         }
         
+        protected virtual void OnItemPickup()
+        {
+        }
+        
+        public virtual void Initialize(ItemLoot itemLoot)
+        {
+        }
+        
         private IEnumerator MoveToPosition()
         {
             var currentTime = 0f;
             var startPosition = transform.position;
             
-            while (currentTime < _arrivaTime)
+            while (currentTime < _arrivalTime)
             {
                 var destination = MainManager.PlayerMovementController.transform.position;
                 
-                transform.position = Vector3.Lerp(startPosition, destination, currentTime / _arrivaTime);
+                transform.position = Vector3.Lerp(startPosition, destination, currentTime / _arrivalTime);
                 currentTime += Time.deltaTime;
                 yield return null;
             }
             
+            OnItemPickup();
             Destroy(gameObject);
-        }
-        
-        public virtual void Initialize(ItemLoot itemLoot)
-        {
         }
     }
 }

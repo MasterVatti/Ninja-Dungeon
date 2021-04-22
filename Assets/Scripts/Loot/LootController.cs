@@ -34,15 +34,15 @@ namespace Loot
             CreateItem(_resourceItems, enemy.transform);
         }
 
-        private void CreateItem<T>(List<T> listItem, Transform transform)
+        private void CreateItem<T>(List<T> listItem, Transform transform) where T : ItemLoot
         {
             foreach (var item in listItem)
             {
-                if (item is ItemLoot itemLoot && RandomChance() <= itemLoot.DropChance)
+                if (GetRandomChance() <= item.DropChance)
                 {
-                    var itemObject = Instantiate(itemLoot.Item, transform.position, Quaternion.identity);
+                    var itemObject = Instantiate(item.Item, transform.position, Quaternion.identity);
                     
-                    InitializeItem(itemObject, itemLoot);
+                    InitializeItem(itemObject, item);
                     ScatterObjects(itemObject);
                 }
             }
@@ -50,7 +50,7 @@ namespace Loot
         
         private void ScatterObjects(GameObject item)
         {
-            var pushDirection = new Vector3(RandomCoordinate(), 0, RandomCoordinate());
+            var pushDirection = new Vector3(GetRandomCoordinate(), 0, GetRandomCoordinate());
             
             var rigidBody = item.GetComponent<Rigidbody>();
             
@@ -65,12 +65,12 @@ namespace Loot
             }
         }
 
-        private float RandomChance()
+        private float GetRandomChance()
         {
             return Random.Range(0f, 100f);
         }
 
-        private float RandomCoordinate()
+        private float GetRandomCoordinate()
         {
             return Random.Range(-1f, 1f);
         }
