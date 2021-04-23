@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PortalSetting
   m_EditorClassIdentifier: 
   _buildingName: Portal
-  _buildingInfoView: {fileID: 2838927722039180749, guid: fcd7258a2e5b64cb0b3c565ae4c0f86d,
+  _buildingInfoView: {fileID: 9089490048287089754, guid: a8aabe11a6e7fea4d9149e50685d4676,
     type: 3}
   _connectedBuildings:
   - {fileID: 11400000, guid: a13cd1a59069aab4eb965d0b3c5466f4, type: 2}
