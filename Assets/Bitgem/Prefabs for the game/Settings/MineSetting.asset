@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MineSetting
   m_EditorClassIdentifier: 
   _buildingName: Mine
-  _buildingInfoView: {fileID: 3654191358967922677, guid: 14463b3fb13ca184089be8199baceeea,
+  _buildingInfoView: {fileID: 8190536544479169298, guid: 12cbec2cd7cd94f28885de5aeff15ea2,
     type: 3}
   _connectedBuildings: []
   _upgradeList:
@@ -24,5 +24,5 @@ MonoBehaviour:
       type: 3}
   _placeHolderPrefab: {fileID: 1796408563735853696, guid: df1732c3adc0ba248b05da99c743c527,
     type: 3}
-  _timeToBuild: 5
+  _timeToBuild: 2
   _position: {x: -14, y: 1, z: 77}
