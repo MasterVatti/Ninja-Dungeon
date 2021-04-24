@@ -22,10 +22,16 @@ public class AmimationToGUI : MonoBehaviour
 
     [SerializeField]
     private float _timeOfAnimatedToHUD = 1;
+    
+
+    private void Awake()
+    {
+        _rectTransform = transform as RectTransform;
+    }
 
     private void Start()
     {
-       // _resourceMiner.ExtractableResource += TakeResourcesFromBuilding;
+        _resourceMiner.ExtractableResource += TakeResourcesFromBuilding;
     }
 
     private void TakeResourcesFromBuilding(ResourceType resourceType)
@@ -37,20 +43,23 @@ public class AmimationToGUI : MonoBehaviour
 
     private Vector3 GetPositionViewResource(ResourceType resourceType)
     {
+        
         var resourceView = MainManager.ResourceManager.GetResources();
         
         foreach (var positionLabel in resourceView)
         {
+            
             if (positionLabel.Type == resourceType)
             {
+                
                 var worldPostion = transform.position;
-                var screenPoint = Camera.main.WorldToScreenPoint(worldPostion);
-                //var accumulatedResourcesParent = positionLabel. as RectTransform;
-                //RectTransformUtility.ScreenPointToLocalPointInRectangle(accumulatedResourcesParent, 
-                    //screenPoint, null, out var localPoint);
-                //var _rectTransform = localPoint;
-
-                //return _rectTransform;
+                Vector2 screenPoint = Camera.main.WorldToScreenPoint(worldPostion);
+                var accumulatedResourcesParent = (RectTransform) positionLabel;
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(accumulatedResourcesParent, 
+                    screenPoint, null, out var localPoint);
+                var rectTransform = localPoint;
+                
+                return rectTransform;
             }
         }
         return Vector3.zero;
