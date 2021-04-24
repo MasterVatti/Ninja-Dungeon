@@ -19,14 +19,13 @@ public class AmimationToGUI : MonoBehaviour
 
     [SerializeField]
     private ResourceMiner _resourceMiner;
-    
-    private float _time = 1;
-    //private RectTransform _rectTransform;
+
+    [SerializeField]
+    private float _timeOfAnimatedToHUD = 1;
 
     private void Start()
     {
-        //_rectTransform = transform as RectTransform;
-        _resourceMiner.OnTakeResources += TakeResourcesFromBuilding;
+       // _resourceMiner.ExtractableResource += TakeResourcesFromBuilding;
     }
 
     private void TakeResourcesFromBuilding(ResourceType resourceType)
@@ -38,7 +37,7 @@ public class AmimationToGUI : MonoBehaviour
 
     private Vector3 GetPositionViewResource(ResourceType resourceType)
     {
-        var resourceView = MainManager.ViewManager.ResourcesView.ResourceLabels;
+        var resourceView = MainManager.ResourceManager.GetResources();
         
         foreach (var positionLabel in resourceView)
         {
@@ -46,12 +45,12 @@ public class AmimationToGUI : MonoBehaviour
             {
                 var worldPostion = transform.position;
                 var screenPoint = Camera.main.WorldToScreenPoint(worldPostion);
-                var accumulatedResourcesParent = positionLabel.Label.transform as RectTransform;
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(accumulatedResourcesParent, 
-                    screenPoint, null, out var localPoint);
-                var _rectTransform = localPoint;
+                //var accumulatedResourcesParent = positionLabel. as RectTransform;
+                //RectTransformUtility.ScreenPointToLocalPointInRectangle(accumulatedResourcesParent, 
+                    //screenPoint, null, out var localPoint);
+                //var _rectTransform = localPoint;
 
-                return _rectTransform;
+                //return _rectTransform;
             }
         }
         return Vector3.zero;
@@ -72,6 +71,6 @@ public class AmimationToGUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        _resourceMiner.OnTakeResources -= TakeResourcesFromBuilding;
+        //_resourceMiner.ExtractableResource -= TakeResourcesFromBuilding;
     }
 }
