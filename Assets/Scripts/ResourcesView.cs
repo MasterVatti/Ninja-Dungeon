@@ -9,6 +9,10 @@ public class ResourcesView : MonoBehaviour
     
     private List<Resource> _resources;
 
+    private float _time = 0.2f;
+    
+    private const int _count = 10;
+
 
     void Start()
     {
@@ -17,7 +21,7 @@ public class ResourcesView : MonoBehaviour
 
     void Update()
     {
-        UpdateResourcesAmount();
+        //UpdateResourcesAmount();
     }
 
     private void UpdateResourcesAmount()
@@ -33,6 +37,18 @@ public class ResourcesView : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void StartEnumerator(int value,int index)
+    {
+        var _resources = _resources[index]
+        var raz = value / _count;
+        var ost = value % _count;
+        for (int i = 0; i < raz; i++)
+        {
+            _resources.Amount += _count;
+        }
+        _resources.Amount += ost;
     }
     
 }

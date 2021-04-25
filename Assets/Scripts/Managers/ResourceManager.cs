@@ -10,8 +10,14 @@ namespace Managers
     /// </summary>
     public class ResourceManager : MonoBehaviour
     {
+        
+        
         [SerializeField]
         private List<Resource> _resources;
+
+        private ResourcesView _resourcesView;
+        
+        
 
         public bool HasEnough(ResourceType type, float value)
         {
@@ -43,6 +49,7 @@ namespace Managers
         {
             var index = GetResourceIndexByType(type);
             var resource = _resources[index];
+            _resourcesView.StartEnumerator(value,index);
             resource.Amount += value;
             _resources[index] = resource;
         }
