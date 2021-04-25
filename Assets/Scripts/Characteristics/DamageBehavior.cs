@@ -1,20 +1,30 @@
+using System;
 using UnityEngine;
 
 namespace Characteristics
 {
-    public class DamageBehavior : Characteristic<int>
+    public sealed class DamageBehavior : Characteristic
     {
         [SerializeField]
         private int _damage;
 
-        protected override void Increase(int increasable)
+        protected override void Increase<T>(T increasable)
         {
-            _damage += increasable;
+            _damage += Convert.ToInt32(increasable);
         }
 
-        protected override void Decrease(int decreasable)
+        protected override void Decrease<T>(T decreasable)
         {
-            _damage -= decreasable;
+            _damage -= Convert.ToInt32(decreasable);
+            CheckForNegative();
+        }
+
+        private void CheckForNegative()
+        {
+            if (_damage < 0)
+            {
+                _damage = 0;
+            }
         }
     }
 }
