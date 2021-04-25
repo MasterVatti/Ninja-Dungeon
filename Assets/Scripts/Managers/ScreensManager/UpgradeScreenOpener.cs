@@ -1,24 +1,28 @@
 using Assets.Scripts;
 using Assets.Scripts.Managers.ScreensManager;
 using BuildingSystem;
+using BuildingSystem.BuildingUpgradeSystem;
+using SaveSystem;
 using UnityEngine;
 
-namespace Shop
+namespace Managers.ScreensManager
 {
     /// <summary>
-    /// Отвечает за открытие какого-то экрана БЕЗ КОНТЕКСТА при подходе к нему
-    /// и закрытию верхнего при отходе от здания
+    /// Отвечает за открытие экрана upgrade
     /// </summary>
-    public class ScreenOpener : MonoBehaviour
+    public class UpgradeScreenOpener<T> : MonoBehaviour where T : BaseBuildingState
     {
         [SerializeField]
-        private ScreenType _screenToOpen;
-        
+        private Building<T> _building;
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(GlobalConstants.PLAYER_TAG))
             {
-                MainManager.ScreenManager.OpenScreen(_screenToOpen);
+                var context = new UpgradeContext<T>
+                {
+                Building = _building
+                };
+                MainManager.ScreenManager.OpenScreenWithContext(ScreenType.UpgradeScreen, context);
             }
         }
 

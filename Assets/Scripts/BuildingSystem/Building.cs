@@ -1,4 +1,6 @@
-﻿using BuildingSystem.BuildingUpgradeSystem;
+﻿using System;
+using Assets.Scripts.Managers.ScreensManager;
+using BuildingSystem.BuildingUpgradeSystem;
 using Newtonsoft.Json;
 using SaveSystem;
 using UnityEngine;
@@ -26,6 +28,22 @@ namespace BuildingSystem
             BuildingSettingsID = buildingSettingsID;
             CurrentBuildingLevel = level;
         }
+        
+        public IBuilding Upgrade()
+        {
+            return BuildingUpgradeHelper.Upgrade(this);
+        }
+        
+        public BuildingData Save()
+        {
+            var state = GetState() ;
+            return new BuildingData
+            {
+            SettingsID = BuildingSettingsID,
+            BuildingLevel = CurrentBuildingLevel,
+            State = JsonConvert.SerializeObject(state)
+            };
+        }
 
         public void LoadState(string savedData)
         {
@@ -33,26 +51,10 @@ namespace BuildingSystem
             OnStateLoaded(state);
         }
         
-        protected abstract void OnStateLoaded(T data);
-
-        public IBuilding Upgrade()
-        {
-            return BuildingUpgradeHelper.Upgrade(this);
-        }
-
         public abstract void OnUpgrade(T oldBuildingState);
 
         public abstract T GetState();
-
-        public BuildingData Save()
-        {
-            var state = GetState() ;
-            return new BuildingData
-            {
-                SettingsID = BuildingSettingsID,
-                BuildingLevel = CurrentBuildingLevel,
-                State = JsonConvert.SerializeObject(state)
-            };
-        }
+        
+        protected abstract void OnStateLoaded(T data);
     }
 }
