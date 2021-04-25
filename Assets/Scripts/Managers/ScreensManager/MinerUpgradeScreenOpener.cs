@@ -1,6 +1,6 @@
 using Assets.Scripts;
 using Assets.Scripts.Managers.ScreensManager;
-using BuildingSystem;
+using Buildings;
 using BuildingSystem.BuildingUpgradeSystem;
 using SaveSystem;
 using UnityEngine;
@@ -8,21 +8,22 @@ using UnityEngine;
 namespace Managers.ScreensManager
 {
     /// <summary>
-    /// Отвечает за открытие экрана upgrade
+    /// открывает окно улучшений ResourceMiner`a
     /// </summary>
-    public class UpgradeScreenOpener<T> : MonoBehaviour where T : BaseBuildingState
+    public class MinerUpgradeScreenOpener : MonoBehaviour
     {
         [SerializeField]
-        private Building<T> _building;
+        private ResourceMiner _building;
+    
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(GlobalConstants.PLAYER_TAG))
             {
-                var context = new UpgradeContext<T>
+                var context = new UpgradeContext<MinerBuildingData>
                 {
                 Building = _building
                 };
-                MainManager.ScreenManager.OpenScreenWithContext(ScreenType.UpgradeScreen, context);
+                MainManager.ScreenManager.OpenScreenWithContext(ScreenType.MinerUpgradeScreen, context);
             }
         }
 
