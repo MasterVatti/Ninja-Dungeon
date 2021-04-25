@@ -46,17 +46,9 @@ namespace Buildings
 
         private void Awake()
         {
-            if (!_stateWasLoaded)
+            if (!stateWasLoaded)
             {
                 MiningStartTime = DateTime.UtcNow;
-            }
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Upgrade();
             }
         }
 

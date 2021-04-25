@@ -15,6 +15,6 @@
         ShopScreen,
         SawmillScreen,
         MineScreen,
-        UpgradeScreen
+        MinerUpgradeScreen
     }
 }

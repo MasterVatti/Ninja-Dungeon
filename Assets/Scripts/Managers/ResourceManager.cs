@@ -52,6 +52,11 @@ namespace Managers
             return _resources;
         }
 
+        public Resource GetResourceByType(ResourceType type)
+        {
+            return _resources[GetResourceIndexByType(type)];
+        }
+
         public void SetResources(IEnumerable<Resource> resources)
         {
             _resources = new List<Resource>(resources.ToList());

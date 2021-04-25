@@ -11,7 +11,7 @@ namespace BuildingSystem
         
         void LoadState(string savedData);
         void OnStateLoaded(int buildingSettingsID, int level);
-        IBuilding Upgrade();
+        void Upgrade();
 
         BuildingData Save();
     }

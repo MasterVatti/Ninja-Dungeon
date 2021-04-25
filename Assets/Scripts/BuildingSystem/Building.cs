@@ -1,6 +1,4 @@
-﻿using System;
-using Assets.Scripts.Managers.ScreensManager;
-using BuildingSystem.BuildingUpgradeSystem;
+﻿using BuildingSystem.BuildingUpgradeSystem;
 using Newtonsoft.Json;
 using SaveSystem;
 using UnityEngine;
@@ -17,21 +15,21 @@ namespace BuildingSystem
         public int CurrentBuildingLevel { get; private set; }
         public Transform PositionUI => _positionUI;
 
-        protected bool _stateWasLoaded;
+        protected bool stateWasLoaded;
 
         [SerializeField]
         private Transform _positionUI;
 
         public void OnStateLoaded(int buildingSettingsID, int level)
         {
-            _stateWasLoaded = true;
+            stateWasLoaded = true;
             BuildingSettingsID = buildingSettingsID;
             CurrentBuildingLevel = level;
         }
         
-        public IBuilding Upgrade()
+        public void Upgrade()
         {
-            return BuildingUpgradeHelper.Upgrade(this);
+            BuildingUpgradeHelper.Upgrade(this);
         }
         
         public BuildingData Save()
