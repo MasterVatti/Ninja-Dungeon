@@ -72,6 +72,23 @@ MonoBehaviour:
   _miningResource: 1
   _miningPerSecond: 10
   _maxStorage: 200
+--- !u!114 &7570498234804542526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496318909535179114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c7c05a1b6e54da59ce73b939fc548d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _countFlyingResourses: 5
+  _delayFlyingResourses: 0.2
+  _resourceMiner: {fileID: 7152982432150567874}
+  _resourcesView: {fileID: 0}
+  _timeOfAnimatedToHUD: 1
 --- !u!1 &8304786434994249700
 GameObject:
   m_ObjectHideFlags: 0

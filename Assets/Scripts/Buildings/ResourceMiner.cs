@@ -13,6 +13,7 @@ namespace Buildings
     /// </summary>
     public class ResourceMiner : Building<MinerBuildingData>
     {
+        public event Action<ResourceType> PlayerGotResources;
         //Свойства для UI
         public ResourceType ExtractableResource => _miningResource;
         public float MaxStorage => _maxStorage;
@@ -65,6 +66,7 @@ namespace Buildings
             if (_currentResourceCount != 0)
             {
                 MainManager.ResourceManager.AddResource(_miningResource, _currentResourceCount);
+                PlayerGotResources.Invoke(_miningResource);
                 MiningStartTime = DateTime.UtcNow;
                 StartAmount = 0;
                 _currentResourceCount = 0;
