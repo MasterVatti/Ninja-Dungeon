@@ -9,19 +9,18 @@ namespace BuildingSystem.BuildingUpgradeSystem
     /// Базовый класс для экранов-улучшений
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class BuildingScreen<T> : BaseScreenWithContext<UpgradeContext<T>> where T : BaseBuildingState
+    public abstract class BuildingUpgradeInfoView<T> : BaseScreenWithContext<UpgradeContext<T>> where T : BaseBuildingState
     {
         protected Building<T> building;
         
         protected BuildingSettings buildingSettings;
 
         [SerializeField]
-        private ScreenUpgradeInfo _upgradeInfo;
+        private UpgradeInfoDisplay _upgradeInfoDisplay;
         
         public override void Initialize(ScreenType screenType)
         {
             ScreenType = screenType;
-            SetBuildingSettings();
         }
 
         private void Update()
@@ -35,13 +34,14 @@ namespace BuildingSystem.BuildingUpgradeSystem
 
             if (IsMaxLevel())
             {
-                _upgradeInfo.MaxLevelWarning.gameObject.SetActive(true);
+                _upgradeInfoDisplay.MaxLevelWarning.gameObject.SetActive(true);
                 return;
             }
-            _upgradeInfo.MaxLevelWarning.gameObject.SetActive(false);
 
             var upgradeCost = buildingSettings.UpgradeList[buildingLevel].UpgradeCost;
-            _upgradeInfo.ActiveButton.gameObject.SetActive(MainManager.ResourceManager.HasEnough(upgradeCost));
+            var playerHasEnoughMoney = MainManager.ResourceManager.HasEnough(upgradeCost);
+            
+            _upgradeInfoDisplay.ActiveButton.gameObject.SetActive(playerHasEnoughMoney);
         }
 
         public void OnUpgradeClick()
@@ -51,7 +51,7 @@ namespace BuildingSystem.BuildingUpgradeSystem
 
         protected abstract Dictionary<string, int> GetStateDictionary(bool isNextLevelState = false);
 
-        protected bool IsMaxLevel()
+        private bool IsMaxLevel()
         {
             return buildingSettings.UpgradeList.Count <= building.CurrentBuildingLevel + 1;
         }
@@ -60,7 +60,7 @@ namespace BuildingSystem.BuildingUpgradeSystem
         {
             var oldState = GetStateDictionary();
             var newState = GetStateDictionary(true);
-            _upgradeInfo.ShowUpgradeInfo(building, buildingSettings, oldState, newState);
+            _upgradeInfoDisplay.ShowUpgradeInfo(building, buildingSettings, oldState, newState);
         }
 
         protected void SetBuildingSettings()

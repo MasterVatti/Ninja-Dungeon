@@ -4,9 +4,10 @@ using SaveSystem;
 namespace BuildingSystem.BuildingUpgradeSystem
 {
     /// <summary>
-    /// Класс для получения состояний ResourceMiner в виде Dictionary
+    /// Класс-потомок BuildingUpgradeInfoView
+    /// Представляет MinerBuildingData в виде Dictionary
     /// </summary>
-    public class ResourceMinerBuildingScreen : BuildingScreen<MinerBuildingData>
+    public class MinerUpgradeInfoView : BuildingUpgradeInfoView<MinerBuildingData>
     {
         private const string MINING_PER_SECOND_KEY = "Mining per second";
         private const string MAX_STORAGE_KEY = "Max storage";
@@ -32,6 +33,7 @@ namespace BuildingSystem.BuildingUpgradeSystem
             {
                 state = building.GetState();
             }
+            
             var resultDictionary = new Dictionary<string, int>
             {
                 {

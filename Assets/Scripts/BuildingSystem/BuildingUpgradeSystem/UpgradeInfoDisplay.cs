@@ -11,7 +11,7 @@ namespace BuildingSystem.BuildingUpgradeSystem
     /// <summary>
     /// Класс отображающий информацию об улучшении
     /// </summary>
-    public class ScreenUpgradeInfo : MonoBehaviour
+    public class UpgradeInfoDisplay : MonoBehaviour
     {
         private readonly List<Resource> _requiredResources = new List<Resource>();
         private readonly List<TextMeshProUGUI> _currentResourceLabels = new List<TextMeshProUGUI>();

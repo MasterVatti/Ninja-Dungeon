@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScreenType: 9
-  _upgradeInfo: {fileID: -5685321964022117297}
+  _upgradeInfoDisplay: {fileID: -5685321964022117297}
 --- !u!114 &-5685321964022117297
 MonoBehaviour:
   m_ObjectHideFlags: 0

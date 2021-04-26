@@ -137,7 +137,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.6
   m_Center: {x: -0.15, y: 0, z: 7.56}
---- !u!114 &4697891495606911781
+--- !u!114 &570231858178133875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,8 +164,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _positionUI: {fileID: 7866709397159217824}
   _miningResource: 0
-  _miningPerSecond: 5
-  _maxStorage: 1000
+  _miningPerSecond: 10
+  _maxStorage: 1250
 --- !u!1001 &5283205951969120863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -175,7 +175,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1483995054641872, guid: d68a61a229585ca4593a6e6a3da05572, type: 3}
       propertyPath: m_Name
-      value: mine_Lv1 Variant
+      value: mine_Lv1 Variant 1
       objectReference: {fileID: 0}
     - target: {fileID: 4007178122517590, guid: d68a61a229585ca4593a6e6a3da05572, type: 3}
       propertyPath: m_RootOrder
