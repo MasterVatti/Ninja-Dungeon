@@ -10,7 +10,7 @@ namespace Enemies.Spawner
     /// </summary>
     public class UpperWorldSpawner: MonoBehaviour
     {
-        public float CurrentTime => _currentTime;
+        public float RemainTimeToSpawn  => _nextWaveSpawnTime - Time.time;
         public float CooldownTime => _coolldownTime;
 
         [SerializeField]
@@ -42,10 +42,6 @@ namespace Enemies.Spawner
             if (Time.time >= _nextWaveSpawnTime)
             {
                 StartNextWave();
-            }
-            else
-            {
-                _currentTime = _nextWaveSpawnTime - Time.time;
             }
         }
         

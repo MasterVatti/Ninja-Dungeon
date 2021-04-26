@@ -33,7 +33,7 @@ namespace AccumulatedResources
             {
                 _slider.maxValue = _upperWorldSpawner.CooldownTime;
                 
-                var timeSpawn = _upperWorldSpawner.CurrentTime;
+                var timeSpawn = _upperWorldSpawner.RemainTimeToSpawn;
 
                 _slider.value = timeSpawn;
                 _timer.text = timeSpawn.ToString("#");
