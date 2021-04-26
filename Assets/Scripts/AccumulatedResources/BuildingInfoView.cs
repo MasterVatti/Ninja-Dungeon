@@ -28,18 +28,24 @@ public class BuildingInfoView : MonoBehaviour
     public virtual void Initialize(GameObject building, Transform uiAttachPoint, string nameBuilding)
     {
         _attachPoint = uiAttachPoint;
-        ShowNameBuilding(nameBuilding);
         _isInitialized = true;
+
+        ShowNameBuilding(nameBuilding);
         UpdateViewPosition(_attachPoint);
     }
 
     protected virtual void Update()
     {
+        if (!_isInitialized)
+        {
+            return;
+        }
+        
         if (_attachPoint != null)
         {
             UpdateViewPosition(_attachPoint);
         }
-        else if (_isInitialized)
+        else // on case the building was destroyed
         {
             Destroy(gameObject);
         }
