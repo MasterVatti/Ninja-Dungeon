@@ -374,6 +374,7 @@ MonoBehaviour:
   _projectileSpawnCooldown: 1
   _enemyDetector: {fileID: 831249545}
   _player: {fileID: 919757416}
+  _attackDistance: 15
 --- !u!1 &919757416
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,6 +942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973d4aeba44250b499bd5bbc64a1bb2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _joystickController: {fileID: 0}
   _loadingController: {fileID: 0}
   _resourceManager: {fileID: 0}
   _enemiesManager: {fileID: 1596397180}

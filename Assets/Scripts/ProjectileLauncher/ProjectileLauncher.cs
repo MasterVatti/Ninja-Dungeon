@@ -15,37 +15,46 @@ namespace ProjectileLauncher
         [SerializeField]
         private NearestEnemyDetector _enemyDetector;
         [SerializeField]
-        private GameObject _player;
-        
-        private float _currentTime; //0
+        private float _attackDistance;
+
+        private float _currentTime;
 
         private void Update()
         {
-            var enemy = _enemyDetector.GetNearestEnemy();
-            if (_currentTime < _projectileSpawnCooldown)
+            if (MainManager.EnemiesManager.Enemies.Count != 0)
             {
-                _currentTime += Time.deltaTime;
-            }
-            else
-            {
-                if (enemy != null)
+                var enemy = _enemyDetector.GetNearestEnemy();
+                if (_currentTime < _projectileSpawnCooldown)
                 {
-                    CreateProjectile(enemy.gameObject);
+                    _currentTime += Time.deltaTime;
+                }
+                else
+                {
+                    if (enemy != null & IsAtRequiredDistance(enemy))
+                    {
+                        CreateProjectile(enemy.gameObject);
+                    }
                 }
             }
         }
 
-        protected virtual void CreateProjectile(GameObject enemy)
+        private void CreateProjectile(GameObject enemy)
         {
             _currentTime = 0;
-            
+
             var enemyPosition = enemy.transform.position;
             var nearestEnemyDirection = (enemyPosition - transform.position).normalized;
             var projectile = Instantiate(_projectilePrefab, transform.position, transform.rotation);
-            
-            _player.transform.LookAt(enemy.transform);
-            
+
+            transform.parent.LookAt(enemy.transform);
+
             projectile.Initialize(nearestEnemyDirection);
+        }
+
+        private bool IsAtRequiredDistance(Enemy enemy)
+        {
+            var targetDistance = Vector3.Distance(enemy.transform.position, transform.position);
+            return targetDistance <= _attackDistance;
         }
     }
 }

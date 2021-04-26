@@ -1,6 +1,10 @@
 tree("Attack")
+  fallback  
     sequence
         EnemyInSight
-        
-    
-    
+        tree("Chase")
+        IsAtRequiredDistance(10.0)
+       
+    sequence
+        IsTargetKilled
+        tree("Patrol")

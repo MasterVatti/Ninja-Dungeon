@@ -1,3 +1,4 @@
+using System;
 using Panda;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,6 +22,16 @@ public class Unit : MonoBehaviour
     {
         _player = MainManager.Player;
         MainManager.EnemiesManager.Enemies.Add(GetComponent<Enemy>());
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        throw new NotImplementedException();
     }
 
     public void ChangePointMovement(Vector3 movePoint)

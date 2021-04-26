@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 7309898420038427012}
+  _stopChaseDistance: 0
 --- !u!114 &-616721245232159211
 MonoBehaviour:
   m_ObjectHideFlags: 0

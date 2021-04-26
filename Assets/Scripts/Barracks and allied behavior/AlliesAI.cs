@@ -11,7 +11,7 @@ namespace Barracks_and_allied_behavior
     /// </summary>
     public class AlliesAI : MonoBehaviour
     {
-        public Transform[] _patrolPoints;
+        public Transform[] _patrolPoints { get; set;}
 
         [SerializeField]
         private NavMeshAgent _agent;
@@ -42,7 +42,9 @@ namespace Barracks_and_allied_behavior
             _agent.destination = _movePoint;
 
             if (Task.isInspected)
+            {
                 Task.current.debugInfo = string.Format("({0}, {1})", _movePoint.x, _movePoint.y);
+            }
             return true;
         }
 
@@ -83,10 +85,16 @@ namespace Barracks_and_allied_behavior
                 Task.current.Succeed();
             }
         }
-
-        private bool IsRequiredDistance(Enemy enemy)
+        [Task]
+        private bool IsAtRequiredDistance(float distance)
         {
             var targetDistance = Vector3.Distance(_target.transform.position, _agent.transform.position);
+            return targetDistance <= distance;
+        }   
+        
+        private bool IsAtRequiredDistance(Enemy enemy)
+        {
+            var targetDistance = Vector3.Distance(enemy.transform.position, _agent.transform.position);
             return targetDistance <= _aggressionDistance;
         }
 
@@ -101,12 +109,15 @@ namespace Barracks_and_allied_behavior
         [Task]
         private bool EnemyInSight()
         {
-            if (MainManager.EnemiesManager.Enemies != null)
+            if (MainManager.EnemiesManager.Enemies.Count != 0)
             {
                 foreach (var enemy in MainManager.EnemiesManager.Enemies)
                 {
-                    if (IsRequiredDistance(enemy))
+                    _target = enemy.gameObject;
+
+                    if (IsAtRequiredDistance(enemy))
                     {
+                        _target = enemy.gameObject;
                         return true;
                     }
                 }
@@ -117,6 +128,12 @@ namespace Barracks_and_allied_behavior
             {
                 return false;
             }
+        }
+
+        [Task]
+        private bool IsTargetKilled()
+        {
+            return _target == null;
         }
     }
 }

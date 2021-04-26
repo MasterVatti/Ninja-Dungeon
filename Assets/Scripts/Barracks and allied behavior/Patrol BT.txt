@@ -17,3 +17,8 @@ tree("Patrol")
 				SetRandomPatrolPoint
 				MoveToDestination
 				Wait(3)
+
+tree("Chase")
+    sequence
+        IsAtRequiredDistance(20.0)
+        Chase
