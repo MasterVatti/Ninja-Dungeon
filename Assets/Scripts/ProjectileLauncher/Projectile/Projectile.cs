@@ -12,6 +12,7 @@ namespace ProjectileLauncher
         private float _projectileSpeed;
         [SerializeField] 
         private int _damage;
+        
         private Rigidbody _rigidbody;
         
         private void Awake()
