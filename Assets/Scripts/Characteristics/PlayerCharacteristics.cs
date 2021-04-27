@@ -5,7 +5,7 @@ namespace Characteristics
     /// <summary>
     /// Класс для характеристик игрока
     /// </summary>
-    public abstract class PlayerCharacteristics : PersonCharacteristics
+    public class PlayerCharacteristics : PersonCharacteristics
     {
         public int RicochetShells
         {
