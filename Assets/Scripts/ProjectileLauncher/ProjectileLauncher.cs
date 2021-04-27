@@ -40,8 +40,11 @@ namespace ProjectileLauncher
                 var spawningBulletPoint = new Vector3(projectilePosition.x, projectilePosition.y, 
                     projectilePosition.z);
                 transform.LookAt(nearestEnemyPosition);
+                
+                
                 var projectile = Instantiate(_projectilePrefab, spawningBulletPoint, transform.rotation);
                 projectile.Initialize(nearestEnemyDirection);
         }
+        
     }
 }

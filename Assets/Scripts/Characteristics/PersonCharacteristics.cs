@@ -1,35 +1,13 @@
+using Enemies;
 using UnityEngine;
 
-namespace Enemies
+namespace Characteristics
 {
-    public abstract class Enemy : MonoBehaviour
+    /// <summary>
+    /// Общий класс для всех мобов/игроков в игре
+    /// </summary>
+    public abstract class PersonCharacteristics : MonoBehaviour
     {
-        [Header("Stats")]
-        [SerializeField]
-        private int _currentHP;
-        [SerializeField]
-        private int _maxHp;
-        [SerializeField]
-        private float _moveSpeed;
-
-        [Header("Attack")]
-        [SerializeField]
-        private int _attackDamage;
-        [SerializeField]
-        private float _attackRate;
-
-        [Header("Bools")]
-        [SerializeField]
-        private bool _canMove;
-        [SerializeField]
-        private bool _canAttack;
-
-        [Header("Components")]
-        [SerializeField]
-        private Rigidbody _rigidbody;
-        [SerializeField]
-        private EnemyHealth _healthSystem;
-        
         public int CurrentHp
         {
             get => _currentHP;
@@ -45,7 +23,7 @@ namespace Enemies
             get => _moveSpeed;
             set => _moveSpeed = value;
         }
-
+    
         public int AttackDamage
         {
             get => _attackDamage;
@@ -56,7 +34,7 @@ namespace Enemies
             get => _attackRate;
             set => _attackRate = value;
         }
-
+    
         public bool CanMove
         {
             get => _canMove;
@@ -67,18 +45,43 @@ namespace Enemies
             get => _canAttack;
             set => _canAttack = value;
         }
-
+    
         public Rigidbody Rigidbody
         {
             get => _rigidbody;
             set => _rigidbody = value;
         }
-
-        public EnemyHealth HealthSystem
+    
+        public EnemyHealth HealthSystem 
         {
             get => _healthSystem;
             set => _healthSystem = value;
         }
+        
+        [Header("Stats")]
+        [SerializeField]
+        private int _currentHP;
+        [SerializeField]
+        private int _maxHp;
+        [SerializeField]
+        private float _moveSpeed;
+    
+        [Header("Attack")]
+        [SerializeField]
+        private int _attackDamage;
+        [SerializeField]
+        private float _attackRate;
+    
+        [Header("Bools")]
+        [SerializeField]
+        private bool _canMove;
+        [SerializeField]
+        private bool _canAttack;
+    
+        [Header("Components")]
+        [SerializeField]
+        private Rigidbody _rigidbody;
+        [SerializeField]
+        private EnemyHealth _healthSystem;
     }
 }
-

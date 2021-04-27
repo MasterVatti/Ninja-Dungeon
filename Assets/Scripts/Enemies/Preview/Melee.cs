@@ -3,7 +3,7 @@
     /// <summary>
     /// Представление врага-ближника
     /// </summary>
-    public class Melee : Enemy
+    public class Melee : Characteristics.EnemyCharacteristics
     {
     }
 }

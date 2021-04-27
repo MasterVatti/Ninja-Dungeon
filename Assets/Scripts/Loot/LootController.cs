@@ -28,7 +28,7 @@ namespace Loot
             _enemyHealth.EnemyDie += StartItemCreation;
         }
         
-        private void StartItemCreation(Enemies.Enemy enemy)
+        private void StartItemCreation(Characteristics.EnemyCharacteristics enemy)
         {
             CreateItem(_equipmentItems, enemy.transform);
             CreateItem(_resourceItems, enemy.transform);

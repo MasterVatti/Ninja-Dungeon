@@ -65,7 +65,7 @@ namespace Enemies.Spawner
             }
         }
         
-        private void OnEnemyDied(Enemy enemy)
+        private void OnEnemyDied(Characteristics.EnemyCharacteristics enemy)
         {
             _enemiesCount--;
 

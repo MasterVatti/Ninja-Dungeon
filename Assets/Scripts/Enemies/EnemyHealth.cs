@@ -8,12 +8,12 @@ namespace Enemies
     /// </summary>
     public class EnemyHealth : MonoBehaviour
     {
-        public event Action<Enemy> EnemyDie;
+        public event Action<Characteristics.EnemyCharacteristics> EnemyDie;
         
         public void ApplyDamage(int damage)
         {
-            GetComponent<Enemy>().CurrentHp -= damage;
-            if (GetComponent<Enemy>().CurrentHp <= 0)
+            GetComponent<Characteristics.EnemyCharacteristics>().CurrentHp -= damage;
+            if (GetComponent<Characteristics.EnemyCharacteristics>().CurrentHp <= 0)
             {
                 Death();
             }
@@ -21,7 +21,7 @@ namespace Enemies
         
         private void Death()
         {
-            EnemyDie?.Invoke(GetComponent<Enemy>());
+            EnemyDie?.Invoke(GetComponent<Characteristics.EnemyCharacteristics>());
             Destroy(gameObject);
         }
     }

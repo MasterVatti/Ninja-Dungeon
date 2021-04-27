@@ -8,18 +8,18 @@ namespace Enemies
     /// </summary>
     public class EnemiesManager : MonoBehaviour
     {
-        public List<Enemy> Enemies => _enemies;
+        public List<Characteristics.EnemyCharacteristics> Enemies => _enemies;
         
         [SerializeField] 
-        private List<Enemy> _enemies;
+        private List<Characteristics.EnemyCharacteristics> _enemies;
 
-        public void AddEnemy(Enemy enemy)
+        public void AddEnemy(Characteristics.EnemyCharacteristics enemy)
         {
             Enemies.Add(enemy);
             enemy.HealthSystem.EnemyDie += OnEnemyDied; 
         }
         
-        private void OnEnemyDied(Enemy enemy)
+        private void OnEnemyDied(Characteristics.EnemyCharacteristics enemy)
         {
             enemy.HealthSystem.EnemyDie -= OnEnemyDied;
             Enemies.Remove(enemy);

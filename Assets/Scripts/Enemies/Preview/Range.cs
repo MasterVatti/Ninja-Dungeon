@@ -3,7 +3,7 @@
     /// <summary>
     /// Представление врага-дальника
     /// </summary>
-    public class Range : Enemy
+    public class Range : Characteristics.EnemyCharacteristics
     {
     }
 }

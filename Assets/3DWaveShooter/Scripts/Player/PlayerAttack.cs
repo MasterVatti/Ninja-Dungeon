@@ -35,14 +35,14 @@ public class PlayerAttack : MonoBehaviour
         else
         {
             //Mouse down press.
-            if (Input.GetKeyDown(KeyCode.Mouse0) && Player.inst.canAttack)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && Player3DWaveShooter.inst.canAttack)
             {
                 //Are we hovering over a raycastable UI element?
                 if (!EventSystem.current.IsPointerOverGameObject())
                     TryToUseWeapon(false);
             }
             //Mouse down hold.
-            else if (Input.GetKey(KeyCode.Mouse0) && Player.inst.canAttack)
+            else if (Input.GetKey(KeyCode.Mouse0) && Player3DWaveShooter.inst.canAttack)
             {
                 //Are we hovering over a raycastable UI element?
                 if (!EventSystem.current.IsPointerOverGameObject())
@@ -50,10 +50,10 @@ public class PlayerAttack : MonoBehaviour
             }
 
             //Reload.
-            if (Input.GetKeyDown(KeyCode.R) && Player.inst.canAttack)
+            if (Input.GetKeyDown(KeyCode.R) && Player3DWaveShooter.inst.canAttack)
             {
-                if (Player.inst.curWeapon.curAmmoInClip <
-                    Player.inst.curWeapon.clipSize)
+                if (Player3DWaveShooter.inst.curWeapon.curAmmoInClip <
+                    Player3DWaveShooter.inst.curWeapon.clipSize)
                     Reload();
             }
         }
@@ -62,7 +62,7 @@ public class PlayerAttack : MonoBehaviour
     //Called when attack input is pressed or held down.
     void TryToUseWeapon(bool inputHeldDown)
     {
-        Weapon weapon = Player.inst.curWeapon;
+        Weapon weapon = Player3DWaveShooter.inst.curWeapon;
 
         //Are we able to shoot a projectile?
         if (Time.time - lastWeaponAttackTime > weapon.shootFrequency)
@@ -103,11 +103,11 @@ public class PlayerAttack : MonoBehaviour
                     if (weapon.typeOfWeapon == WeaponType.SingleShot)
                     {
                         if (!inputHeldDown)
-                            AudioManager.inst.Play(Player.inst.audioSource,
+                            AudioManager.inst.Play(Player3DWaveShooter.inst.audioSource,
                                 AudioManager.inst.dryFire);
                     }
                     else
-                        AudioManager.inst.Play(Player.inst.audioSource,
+                        AudioManager.inst.Play(Player3DWaveShooter.inst.audioSource,
                             AudioManager.inst.dryFire);
                 }
             }
@@ -117,11 +117,11 @@ public class PlayerAttack : MonoBehaviour
     //Called for the weapon to shoot.
     void Shoot()
     {
-        Weapon weapon = Player.inst.curWeapon;
+        Weapon weapon = Player3DWaveShooter.inst.curWeapon;
         ProjectileScriptableObject proj = weapon.projectile;
 
         //Are we shooting a physical projectile?
-        if (Player.inst.curWeapon.projectile.type ==
+        if (Player3DWaveShooter.inst.curWeapon.projectile.type ==
             ProjectileType.Projectile)
         {
             //Are we shooting multiple projectiles?
@@ -189,7 +189,7 @@ public class PlayerAttack : MonoBehaviour
             curBurstProjectilesShot++;
 
             //Shot all the bullets we can in a burst? Disable burst.
-            if (curBurstProjectilesShot == Player.inst.curWeapon.burstAmount)
+            if (curBurstProjectilesShot == Player3DWaveShooter.inst.curWeapon.burstAmount)
                 burstFiring = false;
         }
 
@@ -200,30 +200,30 @@ public class PlayerAttack : MonoBehaviour
         }
 
         //Play sound.
-        AudioManager.inst.Play(Player.inst.audioSource,
-            Player.inst.curWeapon.shootSFX);
+        AudioManager.inst.Play(Player3DWaveShooter.inst.audioSource,
+            Player3DWaveShooter.inst.curWeapon.shootSFX);
     }
 
     //Shoots a projectile.
     void ShootProjectile(float angle)
     {
-        Weapon weapon = Player.inst.curWeapon;
+        Weapon weapon = Player3DWaveShooter.inst.curWeapon;
 
         //Rotate the weapon pos so we can get the angle for the projectile to travel at.
-        Player.inst.weaponPos.transform.localEulerAngles = new Vector3(
-            Player.inst.weaponPos.transform.localEulerAngles.x,
+        Player3DWaveShooter.inst.weaponPos.transform.localEulerAngles = new Vector3(
+            Player3DWaveShooter.inst.weaponPos.transform.localEulerAngles.x,
             angle + Random.Range(-weapon.accuracy / 2, weapon.accuracy / 2),
-            Player.inst.weaponPos.transform.localEulerAngles.z);
+            Player3DWaveShooter.inst.weaponPos.transform.localEulerAngles.z);
 
         //Instantiate the projectile prefab.
         GameObject proj = Pool.Spawn(weapon.projectile.projectilePrefab,
-            Player.inst.weaponPos.transform.position,
-            Player.inst.weaponPos.transform.rotation);
+            Player3DWaveShooter.inst.weaponPos.transform.position,
+            Player3DWaveShooter.inst.weaponPos.transform.rotation);
 
         //Now we can rotate the weapon pos back to 0.
-        Player.inst.weaponPos.transform.localEulerAngles = new Vector3(
-            Player.inst.weaponPos.transform.localEulerAngles.x, 0,
-            Player.inst.weaponPos.transform.localEulerAngles.z);
+        Player3DWaveShooter.inst.weaponPos.transform.localEulerAngles = new Vector3(
+            Player3DWaveShooter.inst.weaponPos.transform.localEulerAngles.x, 0,
+            Player3DWaveShooter.inst.weaponPos.transform.localEulerAngles.z);
 
         //Set the projectile's velocity to make it move.
         proj.GetComponent<Rigidbody>().velocity =
@@ -238,16 +238,16 @@ public class PlayerAttack : MonoBehaviour
     //Shoots a raycast.
     void ShootRaycast(float angle)
     {
-        Weapon weapon = Player.inst.curWeapon;
+        Weapon weapon = Player3DWaveShooter.inst.curWeapon;
 
         //Rotate the weapon pos so we can get the angle for the projectile to travel at.
-        Player.inst.weaponPos.transform.localEulerAngles = new Vector3(
-            Player.inst.weaponPos.transform.localEulerAngles.x,
+        Player3DWaveShooter.inst.weaponPos.transform.localEulerAngles = new Vector3(
+            Player3DWaveShooter.inst.weaponPos.transform.localEulerAngles.x,
             angle + Random.Range(-weapon.accuracy / 2, weapon.accuracy / 2),
-            Player.inst.weaponPos.transform.localEulerAngles.z);
+            Player3DWaveShooter.inst.weaponPos.transform.localEulerAngles.z);
 
-        Ray ray = new Ray(Player.inst.weaponPos.transform.position,
-            Player.inst.weaponPos.transform.forward);
+        Ray ray = new Ray(Player3DWaveShooter.inst.weaponPos.transform.position,
+            Player3DWaveShooter.inst.weaponPos.transform.forward);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, weapon.projectile.raycastLength,
@@ -289,7 +289,7 @@ public class PlayerAttack : MonoBehaviour
         if (weapon.projectile.drawTrail)
         {
             //Make some local variables of other things so we don't need to write it all out.
-            GameObject weaponPos = Player.inst.weaponPos;
+            GameObject weaponPos = Player3DWaveShooter.inst.weaponPos;
 
             //Create the trail object and get the LineRenderer component.
             GameObject trail = Pool.Spawn(trailPrefab,
@@ -306,9 +306,9 @@ public class PlayerAttack : MonoBehaviour
                      : weapon.projectile.raycastLength)));
 
             //Now we can rotate the weapon pos back to 0.
-            Player.inst.weaponPos.transform.localEulerAngles = new Vector3(
-                Player.inst.weaponPos.transform.localEulerAngles.x, 0,
-                Player.inst.weaponPos.transform.localEulerAngles.z);
+            Player3DWaveShooter.inst.weaponPos.transform.localEulerAngles = new Vector3(
+                Player3DWaveShooter.inst.weaponPos.transform.localEulerAngles.x, 0,
+                Player3DWaveShooter.inst.weaponPos.transform.localEulerAngles.z);
 
             //Set the colour of the trail.
             lr.startColor = weapon.projectile.trail.trailColor;
@@ -320,29 +320,29 @@ public class PlayerAttack : MonoBehaviour
         else
         {
             //Now we can rotate the weapon pos back to 0.
-            Player.inst.weaponPos.transform.localEulerAngles = new Vector3(
-                Player.inst.weaponPos.transform.localEulerAngles.x, 0,
-                Player.inst.weaponPos.transform.localEulerAngles.z);
+            Player3DWaveShooter.inst.weaponPos.transform.localEulerAngles = new Vector3(
+                Player3DWaveShooter.inst.weaponPos.transform.localEulerAngles.x, 0,
+                Player3DWaveShooter.inst.weaponPos.transform.localEulerAngles.z);
         }
     }
 
     //Called when cur ammo reaches 0.
     void Reload()
     {
-        if (Player.inst.curWeapon.curAmmo == 0)
+        if (Player3DWaveShooter.inst.curWeapon.curAmmo == 0)
             return;
 
-        Player.inst.canAttack = false;
-        GameUI.inst.PlayReloadDialAnimation(Player.inst.curWeapon.reloadTime);
-        Invoke("ReloadComplete", Player.inst.curWeapon.reloadTime);
+        Player3DWaveShooter.inst.canAttack = false;
+        GameUI.inst.PlayReloadDialAnimation(Player3DWaveShooter.inst.curWeapon.reloadTime);
+        Invoke("ReloadComplete", Player3DWaveShooter.inst.curWeapon.reloadTime);
     }
 
     //Called when the reload has completed.
     void ReloadComplete()
     {
-        Weapon weapon = Player.inst.curWeapon;
+        Weapon weapon = Player3DWaveShooter.inst.curWeapon;
 
-        Player.inst.canAttack = true;
+        Player3DWaveShooter.inst.canAttack = true;
 
         if (weapon.curAmmo - weapon.clipSize > 0)
         {

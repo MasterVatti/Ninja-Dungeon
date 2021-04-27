@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //If the player is able to move, then move the player.
-        if (Player.inst.canMove)
+        if (Player3DWaveShooter.inst.canMove)
         {
             Move();
         }
@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     void LateUpdate()
     {
         //If the player is able to move, then make them look at the mouse.
-        if (Player.inst.canMove)
+        if (Player3DWaveShooter.inst.canMove)
         {
             Look();
         }
@@ -64,28 +64,28 @@ public class PlayerMovement : MonoBehaviour
         Vector3 dir = (camForward * y) + (camRight * x);
 
         //Update player state.
-        if (Player.inst.state != PlayerState.Dead)
+        if (Player3DWaveShooter.inst.state != PlayerState.Dead)
         {
             if (dir.magnitude > 0)
             {
-                if (Player.inst.state != PlayerState.Moving)
+                if (Player3DWaveShooter.inst.state != PlayerState.Moving)
                 {
-                    Player.inst.state = PlayerState.Moving;
-                    Player.inst.anim.SetBool("Moving", true);
+                    Player3DWaveShooter.inst.state = PlayerState.Moving;
+                    Player3DWaveShooter.inst.anim.SetBool("Moving", true);
                 }
             }
             else
             {
-                if (Player.inst.state != PlayerState.Idle)
+                if (Player3DWaveShooter.inst.state != PlayerState.Idle)
                 {
-                    Player.inst.state = PlayerState.Idle;
-                    Player.inst.anim.SetBool("Moving", false);
+                    Player3DWaveShooter.inst.state = PlayerState.Idle;
+                    Player3DWaveShooter.inst.anim.SetBool("Moving", false);
                 }
             }
         }
 
         //Finally set that as the player's velocity, also including the player's move speed.
-        rig.velocity = dir * Player.inst.moveSpeed;
+        rig.velocity = dir * Player3DWaveShooter.inst.moveSpeed;
     }
 
     //Rotate the player so they're facing the mouse cursor.

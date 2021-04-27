@@ -11,15 +11,15 @@ namespace Enemies.Spawner
     public class SpawnPointData
     {
         [SerializeField]
-        private Enemy _enemy;
+        private Characteristics.EnemyCharacteristics _enemy;
         [SerializeField]
         private Transform _spawnPoint;
 
-        public Enemy Enemy => _enemy;
+        public Characteristics.EnemyCharacteristics Enemy => _enemy;
 
         public Transform SpawnPoint => _spawnPoint;
 
-        public SpawnPointData(Enemy enemy, Transform spawnPoint)
+        public SpawnPointData(Characteristics.EnemyCharacteristics enemy, Transform spawnPoint)
         {
             _enemy = enemy;
             _spawnPoint = spawnPoint;

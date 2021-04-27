@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Contains data about the player.
 /// </summary>
-public class Player : MonoBehaviour
+public class Player3DWaveShooter : MonoBehaviour
 {
     [Header("Stats")]
     public PlayerState state; //Current state of the player.
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     public MeshSetter meshSetter; //Player's MeshSetter.cs component.
 
     //Instance
-    public static Player
+    public static Player3DWaveShooter
         inst; //We create an instance (singelton) of the player so that it can be accessed from anywhere.
 
     void Awake()

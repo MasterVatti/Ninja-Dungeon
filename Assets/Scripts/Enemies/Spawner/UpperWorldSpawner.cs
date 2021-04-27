@@ -25,7 +25,7 @@ namespace Enemies.Spawner
         [SerializeField]
         private int _maxEnemiesCount;
         [SerializeField]
-        private List<Enemy> _possibleEnemies;
+        private List<Characteristics.EnemyCharacteristics> _possibleEnemies;
 
         private float _coolldownTime;
         private float _nextWaveSpawnTime;
