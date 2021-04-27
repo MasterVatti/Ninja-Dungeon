@@ -10,7 +10,7 @@ namespace Enemies
     [RequireComponent(typeof(PersonCharacteristics))]
     public class HealthBehaviour : MonoBehaviour
     {
-        public event Action<PersonCharacteristics> EnemyDie;
+        public event Action<PersonCharacteristics> OnDead;
         
         private PersonCharacteristics _personCharacteristics;
         
@@ -21,11 +21,9 @@ namespace Enemies
 
         public void ApplyDamage(int damage)
         {
-            var currentHp = _personCharacteristics.CurrentHp;
+            _personCharacteristics.CurrentHp -= damage;
             
-            currentHp -= damage;
-            
-            if (currentHp <= 0)
+            if (_personCharacteristics.CurrentHp <= 0)
             {
                 Death();
             }
@@ -33,7 +31,7 @@ namespace Enemies
         
         private void Death()
         {
-            EnemyDie?.Invoke(_personCharacteristics);
+            OnDead?.Invoke(_personCharacteristics);
             Destroy(gameObject);
         }
     }

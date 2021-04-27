@@ -17,12 +17,12 @@ namespace Enemies
         public void AddEnemy(PersonCharacteristics enemy)
         {
             Enemies.Add(enemy);
-            enemy.HealthSystem.EnemyDie += OnEnemyDied; 
+            enemy.HealthSystem.OnDead += OnEnemyDied; 
         }
         
         private void OnEnemyDied(PersonCharacteristics enemy)
         {
-            enemy.HealthSystem.EnemyDie -= OnEnemyDied;
+            enemy.HealthSystem.OnDead -= OnEnemyDied;
             Enemies.Remove(enemy);
         }
         
@@ -32,7 +32,7 @@ namespace Enemies
             {
                 if (_enemies[i])
                 {
-                    _enemies[i].HealthSystem.EnemyDie -= OnEnemyDied;
+                    _enemies[i].HealthSystem.OnDead -= OnEnemyDied;
                 }
             }
         }

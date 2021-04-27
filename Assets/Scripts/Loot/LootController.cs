@@ -26,7 +26,7 @@ namespace Loot
         {
             _enemyHealth = GetComponent<HealthBehaviour>();
             
-            _enemyHealth.EnemyDie += StartItemCreation;
+            _enemyHealth.OnDead += StartItemCreation;
         }
         
         private void StartItemCreation(PersonCharacteristics enemy)
@@ -78,7 +78,7 @@ namespace Loot
 
         private void OnDestroy()
         {
-            _enemyHealth.EnemyDie -= StartItemCreation;
+            _enemyHealth.OnDead -= StartItemCreation;
         }
     }
 }
