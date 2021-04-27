@@ -14,10 +14,12 @@ namespace ProjectileLauncher
         private float _projectileSpawnCooldown;
         [SerializeField] 
         private NearestEnemyDetector _enemyDetector;
+        
         private float _currentTime;
         
         private void Update()
         {
+            var enemy = _enemyDetector.GetNearestEnemy();
             if (_currentTime < _projectileSpawnCooldown)
             {
                 _currentTime += Time.deltaTime;
@@ -39,7 +41,7 @@ namespace ProjectileLauncher
             var nearestEnemyDirection = (enemyPosition - transform.position).normalized;
             var projectile = Instantiate(_projectilePrefab, transform.position, transform.rotation);
             
-            _player.transform.LookAt(enemy.transform);
+            transform.parent.LookAt(enemy.transform);
             
             projectile.Initialize(nearestEnemyDirection);
         }

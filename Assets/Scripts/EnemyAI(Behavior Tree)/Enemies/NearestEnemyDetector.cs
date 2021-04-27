@@ -1,3 +1,4 @@
+using Characteristics;
 using UnityEngine;
 
 namespace Enemies
@@ -10,7 +11,7 @@ namespace Enemies
         [SerializeField]
         private Transform _playerTransform;
 
-        public Enemy GetNearestEnemy()
+        public PersonCharacteristics GetNearestEnemy()
         {
             var playerPosition = _playerTransform.position;
             var minDistance = float.MaxValue;
@@ -19,15 +20,18 @@ namespace Enemies
 
             foreach (var enemy in MainManager.EnemiesManager.Enemies)
             {
-                var distanceToPlayer = Vector3.Distance(enemy.transform.position,
-                    playerPosition);
-
-                if (minDistance > distanceToPlayer)
+                if (enemy != null)
                 {
-                    minDistance = distanceToPlayer;
-                    minIndex = currentIteration;
+                    var distanceToPlayer = Vector3.Distance(enemy.transform.position,
+                        playerPosition);
+                    
+                    if (minDistance > distanceToPlayer)
+                    {
+                        minDistance = distanceToPlayer;
+                        minIndex = currentIteration;
+                    }
                 }
-
+                
                 currentIteration++;
             }
 

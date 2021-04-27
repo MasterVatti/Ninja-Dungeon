@@ -35,7 +35,7 @@ namespace MagicianFolder
         }
     
         [Task]
-        private void SetBackPoint()
+        private void SetRunBackPoint()
         {
             _unit.ChangePointMovement(gameObject.transform.TransformPoint(0, 0, 0 - _runBackDistance));
             Task.current.Succeed();

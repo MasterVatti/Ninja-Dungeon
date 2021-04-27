@@ -151,7 +151,7 @@ public class EnemySpawner : MonoBehaviour
     {
         GameObject enemy = Pool.Spawn(enemyObject, pos, Quaternion.identity);
         curEnemies.Add(enemy);
-        enemy.GetComponent<Enemy>().Initialize();
+        enemy.GetComponent<Enemy3DShooter>().Initialize();
     }
 }
 

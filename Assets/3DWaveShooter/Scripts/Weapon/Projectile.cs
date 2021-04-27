@@ -72,7 +72,7 @@ public class Projectile : MonoBehaviour
     {
         damage = data.damage;
         destroyTime = Time.time + data.destroyTime;
-        knockback = Player.inst.curWeapon.enemyKnockback;
+        knockback = Player3DWaveShooter.inst.curWeapon.enemyKnockback;
         effects = data.effectsToApply;
     }
 }

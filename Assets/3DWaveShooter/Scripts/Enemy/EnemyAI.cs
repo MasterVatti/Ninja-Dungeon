@@ -148,7 +148,7 @@ public class EnemyAI : MonoBehaviour
     void AttackTarget()
     {
         if (targetType == TargetType.Player)
-            Player.inst.TakeDamage(enemy3DShooter.attackDamage);
+            Player3DWaveShooter.inst.TakeDamage(enemy3DShooter.attackDamage);
         else if (targetType == TargetType.Enemy)
             target.GetComponent<Enemy3DShooter>().TakeDamage(enemy3DShooter.attackDamage);
 

@@ -1,4 +1,9 @@
-public class Cube : Characteristics.EnemyCharacteristics
+using Characteristics;
+
+namespace Enemies.Preview
 {
+    public class Cube : Enemy
+    {
     
+    }
 }

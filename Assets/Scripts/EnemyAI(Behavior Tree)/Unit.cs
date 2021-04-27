@@ -1,3 +1,4 @@
+using Characteristics;
 using Panda;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,7 +25,7 @@ public class Unit : MonoBehaviour
     private void Start()
     {
         _player = MainManager.Player;
-        MainManager.EnemiesManager.Enemies.Add(GetComponent<Enemy>());
+        MainManager.EnemiesManager.Enemies.Add(GetComponent<EnemyCharacteristics>());
     }
 
     public void ChangePointMovement(Vector3 movePoint)

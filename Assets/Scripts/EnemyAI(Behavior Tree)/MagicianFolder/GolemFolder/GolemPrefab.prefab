@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: 7628226277611959186}
   - component: {fileID: -616721245232159211}
   - component: {fileID: 7309898420038427012}
-  - component: {fileID: -4561220251182727926}
   - component: {fileID: 4259961474249692756}
   - component: {fileID: 8935440672372812310}
+  - component: {fileID: 5551039445622805713}
+  - component: {fileID: 4938017998579153959}
   m_Layer: 0
   m_Name: GolemPrefab
   m_TagString: Enemy
@@ -137,6 +138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 7309898420038427012}
+  _stopChaseDistance: 0
+  _pointDistanceError: 0.5
 --- !u!114 &-616721245232159211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,18 +175,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-4561220251182727926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940516286941385097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae2afb1c15bf644b9fcd3ff474c7675, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &4259961474249692756
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -220,4 +211,31 @@ MonoBehaviour:
   _canMove: 0
   _canAttack: 0
   _rigidbody: {fileID: 4259961474249692756}
-  _healthSystem: {fileID: -4561220251182727926}
+  _healthSystem: {fileID: 4938017998579153959}
+--- !u!114 &5551039445622805713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940516286941385097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2136287655a0b7a4eb31474d15cce149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthBehaviour: {fileID: 4938017998579153959}
+  _rigidbody: {fileID: 4259961474249692756}
+  _enemyCharacteristics: {fileID: 8935440672372812310}
+--- !u!114 &4938017998579153959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940516286941385097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b22f00f3b5846d409eee145d80d44c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

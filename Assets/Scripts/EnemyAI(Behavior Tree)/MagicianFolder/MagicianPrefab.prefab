@@ -20,7 +20,8 @@ GameObject:
   - component: {fileID: 4460929393999622058}
   - component: {fileID: 3946989225980792668}
   - component: {fileID: 8401475512963324837}
-  - component: {fileID: 8775058036778234213}
+  - component: {fileID: 7924829721957299150}
+  - component: {fileID: 2476845914273750276}
   m_Layer: 0
   m_Name: MagicianPrefab
   m_TagString: Enemy
@@ -247,8 +248,8 @@ MonoBehaviour:
   _canMove: 0
   _canAttack: 0
   _rigidbody: {fileID: 5247192937791318919}
-  _healthSystem: {fileID: 8775058036778234213}
---- !u!114 &8775058036778234213
+  _healthSystem: {fileID: 2476845914273750276}
+--- !u!114 &7924829721957299150
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -257,6 +258,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 3344586694461362826}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae2afb1c15bf644b9fcd3ff474c7675, type: 3}
+  m_Script: {fileID: 11500000, guid: 2136287655a0b7a4eb31474d15cce149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthBehaviour: {fileID: 2476845914273750276}
+  _rigidbody: {fileID: 5247192937791318919}
+  _enemyCharacteristics: {fileID: 8401475512963324837}
+--- !u!114 &2476845914273750276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3344586694461362826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b22f00f3b5846d409eee145d80d44c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
