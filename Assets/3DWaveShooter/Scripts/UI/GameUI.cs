@@ -42,18 +42,18 @@ public class GameUI : MonoBehaviour
 
     void Update()
     {
-        if (Player.inst.curWeapon != null)
+        if (Player3DWaveShooter.inst.curWeapon != null)
         {
             ammoInClipText.text =
-                Player.inst.curWeapon.curAmmoInClip.ToString();
-            totalAmmoText.text = Player.inst.curWeapon.curAmmo.ToString();
+                Player3DWaveShooter.inst.curWeapon.curAmmoInClip.ToString();
+            totalAmmoText.text = Player3DWaveShooter.inst.curWeapon.curAmmo.ToString();
         }
     }
 
     void FixedUpdate()
     {
         UpdateHealthBar();
-        playerMoneyText.text = "$" + Player.inst.money;
+        playerMoneyText.text = "$" + Player3DWaveShooter.inst.money;
     }
 
     void LateUpdate()
@@ -62,8 +62,8 @@ public class GameUI : MonoBehaviour
         if (reloading)
             reloadDial.rectTransform.position =
                 Camera.main.WorldToScreenPoint(
-                    Player.inst.weaponPos.transform.position +
-                    (Player.inst.transform.forward * 1.5f));
+                    Player3DWaveShooter.inst.weaponPos.transform.position +
+                    (Player3DWaveShooter.inst.transform.forward * 1.5f));
     }
 
     //called when the player reloads their weapon.
@@ -95,8 +95,8 @@ public class GameUI : MonoBehaviour
     //Updates the health bar.
     public void UpdateHealthBar()
     {
-        float rate = 1.0f / Player.inst.maxHp;
-        healthBarSlider.fillAmount = rate * Player.inst.curHp;
+        float rate = 1.0f / Player3DWaveShooter.inst.maxHp;
+        healthBarSlider.fillAmount = rate * Player3DWaveShooter.inst.curHp;
 
         //if(!flashingHealthBar)
         //   StartCoroutine(HealthBarFlash());
@@ -125,14 +125,14 @@ public class GameUI : MonoBehaviour
         for (int x = 0; x < equippedWeaponIcons.Length; ++x)
         {
             //Do we have a weapon to fill out?
-            if (x < Player.inst.weapons.Count)
+            if (x < Player3DWaveShooter.inst.weapons.Count)
             {
                 equippedWeaponIcons[x].gameObject.SetActive(true);
 
-                equippedWeaponIcons[x].sprite = Player.inst.weapons[x].uiIcon;
+                equippedWeaponIcons[x].sprite = Player3DWaveShooter.inst.weapons[x].uiIcon;
 
                 //Is this the equipped weapon?
-                if (Player.inst.curWeapon.id == Player.inst.weapons[x].id)
+                if (Player3DWaveShooter.inst.curWeapon.id == Player3DWaveShooter.inst.weapons[x].id)
                 {
                     equippedWeaponIcons[x].color =
                         new Color(1.0f, 1.0f, 1.0f, 1.0f);
@@ -197,6 +197,6 @@ public class GameUI : MonoBehaviour
     //Called when a weapon icon has been pressed.
     public void OnEquipWeapon(int weaponId)
     {
-        Player.inst.EquipWeapon(Player.inst.GetWeapon(weaponId));
+        Player3DWaveShooter.inst.EquipWeapon(Player3DWaveShooter.inst.GetWeapon(weaponId));
     }
 }

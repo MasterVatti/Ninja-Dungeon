@@ -67,7 +67,7 @@ public class Effect : MonoBehaviour
     void DamageOverTime()
     {
         if (hitEntity.tag == "Enemy")
-            hitEntity.GetComponent<Enemy>().DamageOverTime(
+            hitEntity.GetComponent<EnemyShooter>().DamageOverTime(
                 damageOverTimeOptions.damage,
                 damageOverTimeOptions.damageRate, duration,
                 effectParticle ? effectParticle : null);
@@ -83,7 +83,7 @@ public class Effect : MonoBehaviour
     void TempStatChange()
     {
         if (hitEntity.tag == "Enemy")
-            hitEntity.GetComponent<Enemy>().TempStatChange(
+            hitEntity.GetComponent<EnemyShooter>().TempStatChange(
                 tempStatChangeOptions.statToChange,
                 tempStatChangeOptions.statModifier, duration);
     }

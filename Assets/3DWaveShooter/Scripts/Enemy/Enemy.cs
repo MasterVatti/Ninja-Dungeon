@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemyShooter : MonoBehaviour
 {
     [Header("Stats")]
     public int curHp;
@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
         transform.Find("EnemyModel").localEulerAngles = new Vector3(0, 90, 0);
         anim.SetTrigger("Respawn");
 
-        ai.target = Player.inst.gameObject;
+        ai.target = Player3DWaveShooter.inst.gameObject;
 
         meshSetter.SetDefaultMaterial();
 
@@ -119,7 +119,7 @@ public class Enemy : MonoBehaviour
         anim.SetTrigger("Die");
 
         //Give money.
-        Player.inst.AddMoney(moneyGivenOnDeath);
+        Player3DWaveShooter.inst.AddMoney(moneyGivenOnDeath);
 
         //Notify the enemy spawner that we died.
         EnemySpawner.inst.remainingEnemies--;

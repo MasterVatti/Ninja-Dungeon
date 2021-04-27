@@ -1,4 +1,4 @@
-public class Cube : Enemies.Enemy
+public class Cube : Characteristics.EnemyCharacteristics
 {
     
 }

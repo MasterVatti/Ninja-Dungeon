@@ -32,8 +32,8 @@ public class Projectile : MonoBehaviour
         //Did we hit an enemy?
         if (col.tag == "Enemy")
         {
-            col.GetComponent<Enemy>().TakeDamage(damage, transform.position,
-                -Player.inst.transform.forward);
+            col.GetComponent<EnemyShooter>().TakeDamage(damage, transform.position,
+                -Player3DWaveShooter.inst.transform.forward);
             col.GetComponent<Rigidbody>().AddForce(
                 (col.transform.position - transform.position).normalized *
                 knockback, ForceMode.Impulse);
@@ -72,7 +72,7 @@ public class Projectile : MonoBehaviour
     {
         damage = data.damage;
         destroyTime = Time.time + data.destroyTime;
-        knockback = Player.inst.curWeapon.enemyKnockback;
+        knockback = Player3DWaveShooter.inst.curWeapon.enemyKnockback;
         effects = data.effectsToApply;
     }
 }

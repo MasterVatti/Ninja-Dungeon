@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Characteristics;
 using UnityEngine;
 
 namespace Enemies
@@ -8,20 +9,20 @@ namespace Enemies
     /// </summary>
     public class EnemiesManager : MonoBehaviour
     {
-        public List<Enemy> Enemies => _enemies;
+        public List<PersonCharacteristics> Enemies => _enemies;
         
         [SerializeField] 
-        private List<Enemy> _enemies;
+        private List<PersonCharacteristics> _enemies;
 
-        public void AddEnemy(Enemy enemy)
+        public void AddEnemy(PersonCharacteristics enemy)
         {
             Enemies.Add(enemy);
-            enemy.HealthSystem.EnemyDie += OnEnemyDied; 
+            enemy.HealthSystem.OnDead += OnEnemyDied; 
         }
         
-        private void OnEnemyDied(Enemy enemy)
+        private void OnEnemyDied(PersonCharacteristics enemy)
         {
-            enemy.HealthSystem.EnemyDie -= OnEnemyDied;
+            enemy.HealthSystem.OnDead -= OnEnemyDied;
             Enemies.Remove(enemy);
         }
         
@@ -31,7 +32,7 @@ namespace Enemies
             {
                 if (_enemies[i])
                 {
-                    _enemies[i].HealthSystem.EnemyDie -= OnEnemyDied;
+                    _enemies[i].HealthSystem.OnDead -= OnEnemyDied;
                 }
             }
         }
