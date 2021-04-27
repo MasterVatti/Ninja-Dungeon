@@ -8,23 +8,6 @@ namespace MagicianFolder.GolemFolder
     /// </summary>
     public class GolemAI : MonoBehaviour
     {
-        [SerializeField]
-        private Unit _unit;
-        
-        private GameObject _player;
-        
-        private void Start()
-        {
-            _player = MainManager.Player;
-        }
-        
-        [Task]
-        private void SetDestinationPoint()
-        {
-            _unit.ChangePointMovement(_player.transform.position);
-            Task.current.Succeed();
-        }
-        
         [Task]
         private void Attack()
         {

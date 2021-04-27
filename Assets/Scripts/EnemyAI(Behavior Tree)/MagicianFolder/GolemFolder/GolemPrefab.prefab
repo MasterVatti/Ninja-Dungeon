@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: -4561220251182727926}
   - component: {fileID: 4259961474249692756}
   - component: {fileID: 8935440672372812310}
+  - component: {fileID: 1825157864283867157}
   m_Layer: 0
   m_Name: GolemPrefab
   m_TagString: Enemy
@@ -150,7 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ec249979e19df459b6eb426d4950b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unit: {fileID: 7628226277611959186}
 --- !u!195 &7309898420038427012
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -222,3 +222,16 @@ MonoBehaviour:
   _canAttack: 0
   _rigidbody: {fileID: 4259961474249692756}
   _healthSystem: {fileID: -4561220251182727926}
+--- !u!135 &1825157864283867157
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940516286941385097}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 19.78682
+  m_Center: {x: -0.38161087, y: 0, z: 0}

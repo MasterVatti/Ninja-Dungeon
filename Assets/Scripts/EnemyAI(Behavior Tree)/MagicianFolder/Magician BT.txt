@@ -11,12 +11,14 @@ tree("TopNode")
                     IsHealthEnoughToSpawnGolem
                     GolemSpawn
                 sequence
+                    DetermineNearestTarget
                     IsAtRequiredDistance(7.0)
                     tree("Shot")
                     GetRunBackPoint
                     MoveToDestination
                     tree("Shot")
                 sequence
+                    DetermineNearestTarget
                     IsAtRequiredDistance(20.0)
                     Chase
   	

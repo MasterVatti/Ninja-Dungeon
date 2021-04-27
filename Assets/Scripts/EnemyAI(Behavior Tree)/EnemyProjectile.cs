@@ -6,8 +6,6 @@ using UnityEngine;
 /// </summary>
 public class EnemyProjectile : MonoBehaviour
 {
-    [SerializeField] 
-    private int _damage;
     [SerializeField]
     private float _timeToRemove = 5f;
     
@@ -26,5 +24,10 @@ public class EnemyProjectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (collision.gameObject.CompareTag(GlobalConstants.ALLY_TAG))
+        {
+            Destroy(gameObject);
+        }
     }
+    
 }

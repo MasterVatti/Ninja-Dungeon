@@ -8,6 +8,7 @@
         //UNITS TAGS:
         public const string PLAYER_TAG = "Player";
         public const string ENEMY_TAG = "Enemy";
+        public const string ALLY_TAG = "Ally";
         
         //OTHER TAGS:
         public const string WALL_TAG = "Wall";

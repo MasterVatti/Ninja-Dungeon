@@ -9,7 +9,7 @@ namespace Enemies
     {
         public Enemy GetNearestEnemy()
         {
-            var min = float.MaxValue;
+            var minDistance = float.MaxValue;
             var minIndex = 0;
             var iterationCount = 0;
 
@@ -20,9 +20,9 @@ namespace Enemies
                     var distanceToPlayer = Vector3.Distance(enemy.transform.position,
                         gameObject.transform.position);
 
-                    if (min > distanceToPlayer)
+                    if (minDistance > distanceToPlayer)
                     {
-                        min = distanceToPlayer;
+                        minDistance = distanceToPlayer;
                         minIndex = iterationCount;
                     }
                 }

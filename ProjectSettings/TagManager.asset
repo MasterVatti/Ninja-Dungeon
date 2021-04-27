@@ -10,6 +10,7 @@ TagManager:
   - Projectile
   - Damageable
   - Bullet
+  - Ally
   layers:
   - Default
   - TransparentFX

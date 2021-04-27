@@ -1,3 +1,4 @@
+using System;
 using Enemies;
 using Panda;
 using UnityEngine;
@@ -11,17 +12,23 @@ namespace Barracks_and_allied_behavior
     /// </summary>
     public class AlliesAI : MonoBehaviour
     {
-        public Transform[] _patrolPoints { get; set;}
-
         [SerializeField]
         private NavMeshAgent _agent;
         [SerializeField]
         private float _stopChaseDistance;
         [SerializeField]
         private float _aggressionDistance;
+        [SerializeField]
+        private float _stopFollowingDistance;
 
         private Vector3 _movePoint;
         private GameObject _target;
+        private GameObject _player;
+
+        private void Start()
+        {
+            _player = MainManager.Player;
+        }
 
         public void ChangePointMovement(Vector3 movePoint)
         {
@@ -78,6 +85,22 @@ namespace Barracks_and_allied_behavior
             if (distance >= _stopChaseDistance)
             {
                 _agent.isStopped = false;
+                _agent.SetDestination(_target.transform.position - Vector3.left);
+            }
+            else
+            {
+                Task.current.Succeed();
+            }
+        }
+        
+        [Task]
+        private void FollowPlayer()
+        {
+            var distance = Vector3.Distance(_player.transform.position, _agent.transform.position);
+
+            if (distance >= _stopFollowingDistance)
+            {
+                _agent.isStopped = false;
                 _agent.SetDestination(_target.transform.position);
             }
             else
@@ -85,6 +108,7 @@ namespace Barracks_and_allied_behavior
                 Task.current.Succeed();
             }
         }
+        
         [Task]
         private bool IsAtRequiredDistance(float distance)
         {
@@ -99,23 +123,13 @@ namespace Barracks_and_allied_behavior
         }
 
         [Task]
-        private void SetRandomPatrolPoint()
-        {
-            var pointIndex = Random.Range(0, _patrolPoints.Length);
-            _movePoint = _patrolPoints[pointIndex].position;
-            Task.current.Succeed();
-        }
-
-        [Task]
         private bool EnemyInSight()
         {
             if (MainManager.EnemiesManager.Enemies.Count != 0)
             {
                 foreach (var enemy in MainManager.EnemiesManager.Enemies)
                 {
-                    _target = enemy.gameObject;
-
-                    if (IsAtRequiredDistance(enemy))
+                    if (enemy != null && IsAtRequiredDistance(enemy))
                     {
                         _target = enemy.gameObject;
                         return true;
@@ -124,10 +138,8 @@ namespace Barracks_and_allied_behavior
 
                 return false;
             }
-            else
-            {
-                return false;
-            }
+            
+            return false;
         }
 
         [Task]

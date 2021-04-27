@@ -16,21 +16,20 @@ public class ShootingEnemies : MonoBehaviour
     private float _shotCooldownTime;
     [SerializeField]
     private NavMeshAgent _agent;
-    
-    private GameObject _player;
+    [SerializeField]
+    private Unit _unit;
+
+    private GameObject _target;
     private float _nextShotTime;
 
-    private void Start()
-    {
-        _player = MainManager.Player;
-    }
+    
 
     private void Shot()
     {
         if (Time.time > _nextShotTime)
         {
             _nextShotTime = Time.time + _shotCooldownTime;
-            gameObject.transform.LookAt(_player.transform.position);
+            gameObject.transform.LookAt(_unit.Target.transform.position);
             _agent.isStopped = true;
 
             var newBullet = Instantiate(_bulletPrefab, transform.position,
@@ -44,11 +43,12 @@ public class ShootingEnemies : MonoBehaviour
     [Task]
     private void Shooting()
     {
-        var directionToPlayer = _player.transform.position - transform.position;
+        var directionToPlayer = _unit.Target.transform.position - transform.position;
         RaycastHit hit;
         if (Physics.Raycast(transform.position, directionToPlayer.normalized, out hit))
         {
-            if (hit.collider.CompareTag(GlobalConstants.PLAYER_TAG))
+            if (hit.collider.CompareTag(GlobalConstants.PLAYER_TAG)||
+                hit.collider.CompareTag(GlobalConstants.ALLY_TAG))
             {
                 Shot();
             }

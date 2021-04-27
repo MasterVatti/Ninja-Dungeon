@@ -51,13 +51,6 @@ namespace Barracks_and_allied_behavior
             get => _spawnPoint;
             set => _spawnPoint = value;
         }
-        public Transform[] PatrolPoints
-        {
-            get => _patrolPoints;
-            set => _patrolPoints = value;
-        }
-        
-        
 
         [SerializeField]
         private ResourceType _firstType;
@@ -75,8 +68,6 @@ namespace Barracks_and_allied_behavior
         private GameObject _allyPrefab;
         [SerializeField]
         private Transform _spawnPoint;
-        [SerializeField]
-        private Transform[] _patrolPoints;
     }
 }
 

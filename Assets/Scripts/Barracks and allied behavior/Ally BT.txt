@@ -4,19 +4,17 @@ tree("Root")
 tree("TopNode")
      fallback
         tree("Attack")
-        tree("Patrol")
+        tree("Follow")
 
-tree("Patrol")
+tree("Follow")
 	while
 		sequence
 			not EnemyInSight
 
 		repeat
-			sequence
-				Wait(3)
-				SetRandomPatrolPoint
-				MoveToDestination
-				Wait(3)
+		    sequence
+			    FollowPlayer
+
 
 tree("Chase")
     sequence

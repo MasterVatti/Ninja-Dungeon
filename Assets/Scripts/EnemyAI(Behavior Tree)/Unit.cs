@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Assets.Scripts;
 using Panda;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,35 +12,40 @@ using Enemies;
 /// </summary>
 public class Unit : MonoBehaviour
 {
-    [SerializeField]
-    private NavMeshAgent _agent;
-    [SerializeField]
-    private float _stopChaseDistance;
+    public GameObject Target => _target;
+    
+    [SerializeField] private NavMeshAgent _agent;
+    [SerializeField] private float _stopChaseDistance;
 
-    private GameObject _player;
+    private List<GameObject> _targets = new List<GameObject>();
+    private GameObject _target;
+
     private Vector3 _movePoint;
 
     private void Start()
     {
-        _player = MainManager.Player;
         MainManager.EnemiesManager.Enemies.Add(GetComponent<Enemy>());
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        throw new NotImplementedException();
+        if (other.CompareTag(GlobalConstants.PLAYER_TAG) ||
+            other.CompareTag(GlobalConstants.ALLY_TAG))
+        {
+            _targets.Add(other.gameObject);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        throw new NotImplementedException();
+        _targets.Remove(other.gameObject);
     }
 
     public void ChangePointMovement(Vector3 movePoint)
     {
         _movePoint = movePoint;
     }
-    
+
     [Task]
     private void MoveToDestination()
     {
@@ -79,16 +86,16 @@ public class Unit : MonoBehaviour
         if (Task.isInspected)
             currentTask.debugInfo = string.Format("distance-{0:0.00}", distance);
     }
-    
+
     [Task]
     private void Chase()
     {
-        var distance = Vector3.Distance(_player.transform.position, _agent.transform.position);
+        var distance = Vector3.Distance(_target.transform.position, _agent.transform.position);
 
         if (distance >= _stopChaseDistance)
         {
             _agent.isStopped = false;
-            _agent.SetDestination(_player.transform.position);
+            _agent.SetDestination(_target.transform.position);
         }
         else
         {
@@ -97,9 +104,46 @@ public class Unit : MonoBehaviour
     }
     
     [Task]
+    private void SetTargetPosition()
+    {
+        _movePoint = _target.transform.position;
+        Task.current.Succeed();
+    }
+    
+    [Task]
     private bool IsAtRequiredDistance(float distance)
     {
-        var playerDistance = Vector3.Distance(_player.transform.position, _agent.transform.position);
-        return playerDistance <= distance;
+        var targetDistance = Vector3.Distance(_target.transform.position, _agent.transform.position);
+        return targetDistance <= distance;
+    }
+    
+    [Task]
+    private bool DetermineNearestTarget()
+    {
+        if (_targets.Count != 0)
+        {
+            var minDistance = float.MaxValue;
+            var minIndex = 0;
+            var iterationCount = 0;
+            
+            foreach (var target in _targets)
+            {
+                var distanceToTarget = Vector3.Distance(target.transform.position,
+                    gameObject.transform.position);
+
+                if (minDistance > distanceToTarget)
+                {
+                    minDistance = distanceToTarget;
+                    minIndex = iterationCount;
+                }
+                
+                iterationCount++;
+            }
+
+            _target = _targets[minIndex];
+            return true;
+        }
+        
+        return false;
     }
 }

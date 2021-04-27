@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectilePrefab: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
     type: 3}
-  _projectileSpawnCooldown: 0.5
+  _projectileSpawnCooldown: 1
   _enemyDetector: {fileID: 212853652330197620}
   _attackDistance: 10
 --- !u!114 &212853652330197620
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 3097239842779378857}
   m_Layer: 0
   m_Name: Archer
-  m_TagString: Untagged
+  m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,14 +175,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c2fc2026e83f54996df7e7715f6704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _patrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   _agent: {fileID: -7116445777260105468}
   _stopChaseDistance: 10
   _aggressionDistance: 20
+  _stopFollowingDistance: 0
 --- !u!195 &-7116445777260105468
 NavMeshAgent:
   m_ObjectHideFlags: 0
