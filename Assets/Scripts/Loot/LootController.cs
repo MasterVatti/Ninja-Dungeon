@@ -29,8 +29,10 @@ namespace Loot
             _enemyHealth.OnDead += StartItemCreation;
         }
         
-        private void StartItemCreation(PersonCharacteristics enemy)
+        private void StartItemCreation(Person person)
         {
+            var enemy = person.GetComponentInChildren<Enemy>();
+            
             CreateItem(_equipmentItems, enemy.transform);
             CreateItem(_resourceItems, enemy.transform);
         }

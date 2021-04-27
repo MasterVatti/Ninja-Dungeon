@@ -14,37 +14,36 @@ namespace ProjectileLauncher
         private float _projectileSpawnCooldown;
         [SerializeField] 
         private NearestEnemyDetector _enemyDetector;
+        
         private float _currentTime;
         
         private void Update()
         {
+            var enemy = _enemyDetector.GetNearestEnemy();
             if (_currentTime < _projectileSpawnCooldown)
             {
                 _currentTime += Time.deltaTime;
             }
             else
             {
-                _currentTime = 0;
-                if (MainManager.EnemiesManager.Enemies.Count > 0)
+                if (enemy != null)
                 {
-                    CreateProjectile();
+                    CreateProjectile(enemy.gameObject);
                 }
             }
         }
 
-        private void CreateProjectile()
+        private void CreateProjectile(GameObject enemy)
         {
-                var nearestEnemyPosition = _enemyDetector.GetNearestEnemy().transform.position;
-                var nearestEnemyDirection = (nearestEnemyPosition - transform.position).normalized;
-                var projectilePosition = transform.position;
-                var spawningBulletPoint = new Vector3(projectilePosition.x, projectilePosition.y, 
-                    projectilePosition.z);
-                transform.LookAt(nearestEnemyPosition);
-                
-                
-                var projectile = Instantiate(_projectilePrefab, spawningBulletPoint, transform.rotation);
-                projectile.Initialize(nearestEnemyDirection);
+            _currentTime = 0;
+            
+            var enemyPosition = enemy.transform.position;
+            var nearestEnemyDirection = (enemyPosition - transform.position).normalized;
+            var projectile = Instantiate(_projectilePrefab, transform.position, transform.rotation);
+            
+            transform.parent.LookAt(enemy.transform);
+            
+            projectile.Initialize(nearestEnemyDirection);
         }
-        
     }
 }
