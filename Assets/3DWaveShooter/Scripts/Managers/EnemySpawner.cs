@@ -56,7 +56,7 @@ public class EnemySpawner : MonoBehaviour
         if (curEnemies.Count > 0)
         {
             for (int x = 0; x < curEnemies.Count; ++x)
-                curEnemies[x].GetComponent<EnemyShooter>().SinkAndDestroy();
+                curEnemies[x].GetComponent<Enemy3DShooter>().SinkAndDestroy();
         }
 
         curEnemies.Clear();
@@ -151,7 +151,7 @@ public class EnemySpawner : MonoBehaviour
     {
         GameObject enemy = Pool.Spawn(enemyObject, pos, Quaternion.identity);
         curEnemies.Add(enemy);
-        enemy.GetComponent<EnemyShooter>().Initialize();
+        enemy.GetComponent<Enemy3DShooter>().Initialize();
     }
 }
 

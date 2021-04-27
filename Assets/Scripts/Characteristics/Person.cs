@@ -10,7 +10,10 @@ namespace Characteristics
     {
         public Rigidbody Rigidbody => _rigidbody;
         public HealthBehaviour HealthBehaviour => _healthBehaviour;
-    
+        public PersonCharacteristics PersonCharacteristics => _personCharacteristics;
+        
+        [SerializeField]
+        private PersonCharacteristics _personCharacteristics;
         [SerializeField]
         private HealthBehaviour _healthBehaviour;
         [SerializeField]

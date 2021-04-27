@@ -45,18 +45,7 @@ namespace Characteristics
             get => _canAttack;
             set => _canAttack = value;
         }
-    
-        public Rigidbody Rigidbody
-        {
-            get => _rigidbody;
-            set => _rigidbody = value;
-        }
-    
-        public HealthBehaviour HealthSystem 
-        {
-            get => _healthSystem;
-            set => _healthSystem = value;
-        }
+        
         
         [Header("Stats")]
         [SerializeField]
@@ -77,11 +66,6 @@ namespace Characteristics
         private bool _canMove;
         [SerializeField]
         private bool _canAttack;
-    
-        [Header("Components")]
-        [SerializeField]
-        private Rigidbody _rigidbody;
-        [SerializeField]
-        private HealthBehaviour _healthSystem;
+        
     }
 }
