@@ -247,8 +247,6 @@ MonoBehaviour:
   _attackRate: 0
   _canMove: 0
   _canAttack: 0
-  _rigidbody: {fileID: 5247192937791318919}
-  _healthSystem: {fileID: 2476845914273750276}
 --- !u!114 &7924829721957299150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2136287655a0b7a4eb31474d15cce149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _personCharacteristics: {fileID: 8401475512963324837}
   _healthBehaviour: {fileID: 2476845914273750276}
   _rigidbody: {fileID: 5247192937791318919}
   _enemyCharacteristics: {fileID: 8401475512963324837}
