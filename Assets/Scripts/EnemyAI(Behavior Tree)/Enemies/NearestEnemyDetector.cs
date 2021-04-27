@@ -19,18 +19,15 @@ namespace Enemies
 
             foreach (var enemy in MainManager.EnemiesManager.Enemies)
             {
-                if (enemy != null)
+                var distanceToPlayer = Vector3.Distance(enemy.transform.position,
+                    playerPosition);
+
+                if (minDistance > distanceToPlayer)
                 {
-                    var distanceToPlayer = Vector3.Distance(enemy.transform.position,
-                        playerPosition);
-                    
-                    if (minDistance > distanceToPlayer)
-                    {
-                        minDistance = distanceToPlayer;
-                        minIndex = currentIteration;
-                    }
+                    minDistance = distanceToPlayer;
+                    minIndex = currentIteration;
                 }
-                
+
                 currentIteration++;
             }
 

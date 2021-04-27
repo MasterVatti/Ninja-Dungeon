@@ -22,6 +22,7 @@ namespace Enemies
         private void Death()
         {
             EnemyDie?.Invoke(GetComponent<Enemy>());
+            MainManager.EnemiesManager.Enemies.Remove(gameObject.GetComponent<Enemy>());
             Destroy(gameObject);
         }
     }

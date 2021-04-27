@@ -13,7 +13,7 @@ tree("TopNode")
                 sequence
                     IsAtRequiredDistance(7.0)
                     tree("Shot")
-                    SetRunBackPoint
+                    SetBackPoint
                     MoveToDestination
                     tree("Shot")
                 sequence
