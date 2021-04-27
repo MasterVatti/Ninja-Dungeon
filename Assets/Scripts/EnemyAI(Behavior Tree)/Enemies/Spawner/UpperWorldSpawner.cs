@@ -10,6 +10,9 @@ namespace Enemies.Spawner
     /// </summary>
     public class UpperWorldSpawner: MonoBehaviour
     {
+        public float RemainTimeToSpawn  => _nextWaveSpawnTime - Time.time;
+        public float CooldownTime => _coolldownTime;
+
         [SerializeField]
         private float _minCooldown;
         [SerializeField]
@@ -22,9 +25,11 @@ namespace Enemies.Spawner
         [SerializeField]
         private int _maxEnemiesCount;
         [SerializeField]
-        private List<Enemy> _possibleEnemies;
+        private List<Characteristics.EnemyCharacteristics> _possibleEnemies;
 
+        private float _coolldownTime;
         private float _nextWaveSpawnTime;
+        private float _currentTime;
         private WaveController _currentWave;
         
         private void Awake()
@@ -42,10 +47,11 @@ namespace Enemies.Spawner
         
         private void StartNextWave()
         {
-            var cooldownTime = Random.Range(_minCooldown, _maxCooldown);
-            _currentWave = new WaveController(GetRandomWave(cooldownTime));
+            _coolldownTime = Random.Range(_minCooldown, _maxCooldown);
+            _nextWaveSpawnTime = Time.time + _coolldownTime;
+            
+            _currentWave = new WaveController(GetRandomWave(_coolldownTime));
             _currentWave.Start(_delayBetweenSpawns);
-            _nextWaveSpawnTime = Time.time + cooldownTime;
         }
 
         private WaveData GetRandomWave(float cooldownTime)

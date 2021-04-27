@@ -1,14 +1,18 @@
 ﻿using SaveSystem;
 
 namespace BuildingSystem
-{
-    /// <summary>
-    /// Интерфейс для инициализации сохраненных данных и сохранения данных
+{ /// <summary>
+    /// Интерфейс для реализации зданий
     /// </summary>
     public interface IBuilding
     {
-        int BuildingSettingsID { set; get; }
-        void Initialize(string savedData);
+        public int CurrentBuildingLevel { get; }
+        public int BuildingSettingsID { get; }
+        
+        void LoadState(string savedData);
+        void OnStateLoaded(int buildingSettingsID, int level);
+        IBuilding Upgrade();
+
         BuildingData Save();
     }
 }

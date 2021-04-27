@@ -35,14 +35,14 @@ public class PlayerAttack : MonoBehaviour
         else
         {
             //Mouse down press.
-            if (Input.GetKeyDown(KeyCode.Mouse0) && Player.inst.canAttack)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && Player3DWaveShooter.inst.canAttack)
             {
                 //Are we hovering over a raycastable UI element?
                 if (!EventSystem.current.IsPointerOverGameObject())
                     TryToUseWeapon(false);
             }
             //Mouse down hold.
-            else if (Input.GetKey(KeyCode.Mouse0) && Player.inst.canAttack)
+            else if (Input.GetKey(KeyCode.Mouse0) && Player3DWaveShooter.inst.canAttack)
             {
                 //Are we hovering over a raycastable UI element?
                 if (!EventSystem.current.IsPointerOverGameObject())
@@ -50,10 +50,10 @@ public class PlayerAttack : MonoBehaviour
             }
 
             //Reload.
-            if (Input.GetKeyDown(KeyCode.R) && Player.inst.canAttack)
+            if (Input.GetKeyDown(KeyCode.R) && Player3DWaveShooter.inst.canAttack)
             {
-                if (Player.inst.curWeapon.curAmmoInClip <
-                    Player.inst.curWeapon.clipSize)
+                if (Player3DWaveShooter.inst.curWeapon.curAmmoInClip <
+                    Player3DWaveShooter.inst.curWeapon.clipSize)
                     Reload();
             }
         }
@@ -62,7 +62,7 @@ public class PlayerAttack : MonoBehaviour
     //Called when attack input is pressed or held down.
     void TryToUseWeapon(bool inputHeldDown)
     {
-        Weapon weapon = Player.inst.curWeapon;
+        Weapon weapon = Player3DWaveShooter.inst.curWeapon;
 
         //Are we able to shoot a projectile?
         if (Time.time - lastWeaponAttackTime > weapon.shootFrequency)
@@ -103,11 +103,11 @@ public class PlayerAttack : MonoBehaviour
                     if (weapon.typeOfWeapon == WeaponType.SingleShot)
                     {
                         if (!inputHeldDown)
-                            AudioManager.inst.Play(Player.inst.audioSource,
+                            AudioManager.inst.Play(Player3DWaveShooter.inst.audioSource,
                                 AudioManager.inst.dryFire);
                     }
                     else
-                        AudioManager.inst.Play(Player.inst.audioSource,
+                        AudioManager.inst.Play(Player3DWaveShooter.inst.audioSource,
                             AudioManager.inst.dryFire);
                 }
             }
@@ -255,7 +255,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (hit.collider.tag == "Enemy")
             {
-                hit.collider.GetComponent<Enemy3DShooter>()
+                hit.collider.GetComponent<Enemy>()
                     .TakeDamage(weapon.projectile.damage, hit.point,
                         hit.normal);
                 hit.collider.GetComponent<Rigidbody>().AddForce(

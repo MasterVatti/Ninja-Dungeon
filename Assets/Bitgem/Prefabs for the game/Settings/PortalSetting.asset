@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273de372e6cb1c24e9aa6d4f71f9ccf1, type: 3}
   m_Name: PortalSetting
   m_EditorClassIdentifier: 
-  _id: 0
-  _buildingNamme: Portal
-  _buildingInfoView: {fileID: 1117067079954795322, guid: 57fd1dde7650bc444b529ac2b8b691c6,
+  _buildingName: Portal
+  _buildingInfoView: {fileID: 9089490048287089754, guid: a8aabe11a6e7fea4d9149e50685d4676,
     type: 3}
-  _connectedPlaceHolders:
+  _connectedBuildings:
   - {fileID: 11400000, guid: a13cd1a59069aab4eb965d0b3c5466f4, type: 2}
-  _requiredResources:
-  - _type: 0
-    _amount: 100
-  _buildingPrefab: {fileID: 283214289208915664, guid: 0b5b6be3bf3f8b043b2b024442c690a1,
-    type: 3}
+  _upgradeList:
+  - _upgradeCost:
+    - _type: 0
+      _amount: 100
+    _upgradePrefab: {fileID: 283214289208915664, guid: 0b5b6be3bf3f8b043b2b024442c690a1,
+      type: 3}
   _placeHolderPrefab: {fileID: 3573013288105948190, guid: 6cba8c95b0150d2418abbc679a95e60e,
     type: 3}
-  _timeToBuild: 1
-  _placeHolderPosition: {x: 2.5, y: 1, z: 145.37}
+  _timeToBuild: 2
+  _position: {x: 4, y: 1, z: 150}

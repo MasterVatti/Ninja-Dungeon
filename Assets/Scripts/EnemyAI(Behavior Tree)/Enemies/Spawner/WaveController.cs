@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Characteristics;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -33,7 +34,7 @@ namespace Enemies.Spawner
                 var enemy = Object.Instantiate(enemyPrefab,
                     spawnPoint.position,
                     Quaternion.identity);
-                enemy.HealthSystem.EnemyDie += OnEnemyDied;
+                enemy.HealthSystem.OnDead += OnEnemyDied;
 
                 MainManager.EnemiesManager.AddEnemy(enemy);
             }
@@ -57,7 +58,7 @@ namespace Enemies.Spawner
                 var enemy = Object.Instantiate(enemyPrefab,
                     spawnPoint.position,
                     Quaternion.identity);
-                enemy.HealthSystem.EnemyDie += OnEnemyDied;
+                enemy.HealthSystem.OnDead += OnEnemyDied;
 
                 MainManager.EnemiesManager.AddEnemy(enemy);
 
@@ -65,7 +66,7 @@ namespace Enemies.Spawner
             }
         }
         
-        private void OnEnemyDied(Enemy enemy)
+        private void OnEnemyDied(PersonCharacteristics enemy)
         {
             _enemiesCount--;
 

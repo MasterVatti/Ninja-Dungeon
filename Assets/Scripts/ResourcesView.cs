@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Resources;
 using ResourceSystem;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ResourcesView : MonoBehaviour
 {

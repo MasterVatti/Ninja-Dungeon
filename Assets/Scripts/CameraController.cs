@@ -6,11 +6,24 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField]
-    private Transform _targetToFollow;
+    private Camera _camera;
+
     [SerializeField]
-    private Vector3 _offset;
-    void Update()
+    private Vector3 _offset; 
+
+    [SerializeField]
+    private GameObject _target;
+
+    [SerializeField]
+    private float _speed;
+
+    private Quaternion _lastRotation;
+
+    private void Update()
     {
-        transform.position = _targetToFollow.position + _offset;
+        var targetPosition = _target.transform.position - _target.transform.rotation * _offset;
+        var targetRotation = Quaternion.LookRotation(_target.transform.position - _camera.transform.position, Vector3.up);
+        _camera.transform.position = Vector3.Lerp(_camera.transform.position, targetPosition, Time.deltaTime * _speed);
+        _camera.transform.rotation = Quaternion.Slerp(_camera.transform.rotation, targetRotation, Time.deltaTime * _speed);
     }
 }

@@ -16,7 +16,7 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         if (!target)
-            target = Player.inst.gameObject;
+            target = Player3DWaveShooter.inst.gameObject;
     }
 
     void Update()

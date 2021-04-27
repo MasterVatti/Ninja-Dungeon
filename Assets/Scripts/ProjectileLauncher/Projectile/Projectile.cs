@@ -48,7 +48,7 @@ namespace ProjectileLauncher
         
         public virtual void DealDamage(Collision collision)
         {
-            var enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
+            var enemyHealth = collision.gameObject.GetComponent<HealthBehaviour>();
             enemyHealth.ApplyDamage(_damage);
         }
     }

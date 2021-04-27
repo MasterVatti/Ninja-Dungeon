@@ -8,20 +8,16 @@ namespace ProjectileLauncher
     /// </summary>
     public class ProjectileLauncher : MonoBehaviour
     {
-        [SerializeField]
+        [SerializeField] 
         private Projectile _projectilePrefab;
-        [SerializeField]
+        [SerializeField] 
         private float _projectileSpawnCooldown;
-        [SerializeField]
+        [SerializeField] 
         private NearestEnemyDetector _enemyDetector;
-        [SerializeField]
-        private GameObject _player;
-        
         private float _currentTime;
-
+        
         private void Update()
         {
-            var enemy = _enemyDetector.GetNearestEnemy();
             if (_currentTime < _projectileSpawnCooldown)
             {
                 _currentTime += Time.deltaTime;

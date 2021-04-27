@@ -1,34 +1,43 @@
-using BuildingSystem;
+using Buildings;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Класс для показа информации о добытых ресурсах майнера
-/// </summary>
-public class MinerInfoView  : BuildingInfoView
+namespace AccumulatedResources
 {
-    [SerializeField]
-    private TextMeshProUGUI _currentResource;
-    [SerializeField]
-    private TextMeshProUGUI _maxResource;
-    [SerializeField]
-    private Image _image;
+    /// <summary>
+    /// Класс для показа информации о добытых ресурсах майнера
+    /// </summary>
+    public class MinerInfoView  : BuildingInfoView
+    {
+        [SerializeField]
+        private TextMeshProUGUI _resources;
+        [SerializeField]
+        private Slider _progressFill;
+        [SerializeField]
+        private Image _image;
    
-    private ResourceMiner _resourceMiner;
+        private ResourceMiner _resourceMiner;
 
-    private void Update()
-    {
-        _currentResource.text = _resourceMiner.CurrentResourceCount.ToString();
-        _maxResource.text = _resourceMiner.MaxStorage.ToString();
-    }
+        protected override void Update()
+        {
+            base.Update();
+            _resources.text = _resourceMiner.CurrentResourceCount + "/" + _resourceMiner.MaxStorage;
+            _progressFill.value = _resourceMiner.CurrentResourceCount / (float)_resourceMiner.MaxStorage;
+        }
 
-    public override void Initialize(GameObject building, Transform uiAttachPoint, string nameBuilding)
-    {
-        _resourceMiner = building.GetComponent<ResourceMiner>();
-        
-        _image.sprite = MainManager.IconsProvider.GetResourceSprite(_resourceMiner.ExtractableResource);
-        
-        base.Initialize(building, uiAttachPoint, nameBuilding);
+        public override void Initialize(GameObject building, Transform uiAttachPoint, string nameBuilding)
+        {
+            _resourceMiner = building.GetComponent<ResourceMiner>();
+
+            if (_image != null) // for the case when we want to use custom icon
+            {
+                _image.sprite = MainManager.IconsProvider.GetResourceSprite(_resourceMiner.ExtractableResource);
+            }
+
+            Update();
+            
+            base.Initialize(building, uiAttachPoint, nameBuilding);
+        }
     }
 }

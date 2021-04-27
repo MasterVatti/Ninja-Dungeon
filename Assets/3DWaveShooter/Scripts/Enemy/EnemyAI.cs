@@ -7,13 +7,16 @@ using UnityEngine.Serialization;
 
 public class EnemyAI : MonoBehaviour
 {
-    [Header("Target")] public GameObject target; //Target object to move towards and attack.
+    [Header("Target")]
+    public GameObject target; //Target object to move towards and attack.
     public TargetType targetType; //Type of target (player, enemy, etc).
 
-    [Header("Distances")] public float
+    [Header("Distances")]
+    public float
         attackDistance; //Distance from the target at which the enemy will attack them.
 
-    [Header("Navigation")] public List<Vector3>
+    [Header("Navigation")]
+    public List<Vector3>
         path = new List<Vector3>(); //Navigation path to move along.
 
     private float
