@@ -11,7 +11,7 @@ namespace Enemies
         [SerializeField]
         private Transform _playerTransform;
 
-        public PersonCharacteristics GetNearestEnemy()
+        public Person GetNearestEnemy()
         {
             var playerPosition = _playerTransform.position;
             var minDistance = float.MaxValue;

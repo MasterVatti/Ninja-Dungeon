@@ -9,20 +9,21 @@ namespace Enemies
     /// </summary>
     public class EnemiesManager : MonoBehaviour
     {
-        public List<PersonCharacteristics> Enemies => _enemies;
+        public List<Enemy> Enemies => _enemies;
         
         [SerializeField] 
-        private List<PersonCharacteristics> _enemies;
+        private List<Enemy> _enemies;
 
-        public void AddEnemy(PersonCharacteristics enemy)
+        public void AddEnemy(Enemy enemy)
         {
             Enemies.Add(enemy);
-            enemy.HealthSystem.OnDead += OnEnemyDied; 
+            enemy.HealthBehaviour.OnDead += OnEnemyDied; 
         }
         
-        private void OnEnemyDied(PersonCharacteristics enemy)
+        private void OnEnemyDied(Person person)
         {
-            enemy.HealthSystem.OnDead -= OnEnemyDied;
+            var enemy = person.GetComponentInChildren<Enemy>();
+            enemy.HealthBehaviour.OnDead -= OnEnemyDied;
             Enemies.Remove(enemy);
         }
         
@@ -32,7 +33,7 @@ namespace Enemies
             {
                 if (_enemies[i])
                 {
-                    _enemies[i].HealthSystem.OnDead -= OnEnemyDied;
+                    _enemies[i].HealthBehaviour.OnDead -= OnEnemyDied;
                 }
             }
         }

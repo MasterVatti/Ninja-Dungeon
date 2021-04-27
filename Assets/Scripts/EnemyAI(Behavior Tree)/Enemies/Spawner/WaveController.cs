@@ -34,7 +34,7 @@ namespace Enemies.Spawner
                 var enemy = Object.Instantiate(enemyPrefab,
                     spawnPoint.position,
                     Quaternion.identity);
-                enemy.HealthSystem.OnDead += OnEnemyDied;
+                enemy.HealthBehaviour.OnDead += OnEnemyDied;
 
                 MainManager.EnemiesManager.AddEnemy(enemy);
             }
@@ -58,7 +58,7 @@ namespace Enemies.Spawner
                 var enemy = Object.Instantiate(enemyPrefab,
                     spawnPoint.position,
                     Quaternion.identity);
-                enemy.HealthSystem.OnDead += OnEnemyDied;
+                enemy.HealthBehaviour.OnDead += OnEnemyDied;
 
                 MainManager.EnemiesManager.AddEnemy(enemy);
 
@@ -66,7 +66,7 @@ namespace Enemies.Spawner
             }
         }
         
-        private void OnEnemyDied(PersonCharacteristics enemy)
+        private void OnEnemyDied(Person enemy)
         {
             _enemiesCount--;
 

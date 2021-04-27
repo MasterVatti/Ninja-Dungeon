@@ -10,20 +10,20 @@ namespace Enemies
     [RequireComponent(typeof(PersonCharacteristics))]
     public class HealthBehaviour : MonoBehaviour
     {
-        public event Action<PersonCharacteristics> OnDead;
+        public event Action<Person> OnDead;
         
-        private PersonCharacteristics _personCharacteristics;
+        private Person _person;
         
         private void Awake()
         {
-            _personCharacteristics = GetComponent<PersonCharacteristics>();
+            _person = GetComponent<Person>();
         }
 
         public void ApplyDamage(int damage)
         {
-            _personCharacteristics.CurrentHp -= damage;
+            _person.PersonCharacteristics.CurrentHp -= damage;
             
-            if (_personCharacteristics.CurrentHp <= 0)
+            if (_person.PersonCharacteristics.CurrentHp <= 0)
             {
                 Death();
             }
@@ -31,7 +31,7 @@ namespace Enemies
         
         private void Death()
         {
-            OnDead?.Invoke(_personCharacteristics);
+            OnDead?.Invoke(_person);
             Destroy(gameObject);
         }
     }

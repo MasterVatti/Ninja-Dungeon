@@ -25,7 +25,7 @@ public class Unit : MonoBehaviour
     private void Start()
     {
         _player = MainManager.Player;
-        MainManager.EnemiesManager.Enemies.Add(GetComponent<EnemyCharacteristics>());
+        MainManager.EnemiesManager.Enemies.Add(GetComponent<Enemy>());
     }
 
     public void ChangePointMovement(Vector3 movePoint)

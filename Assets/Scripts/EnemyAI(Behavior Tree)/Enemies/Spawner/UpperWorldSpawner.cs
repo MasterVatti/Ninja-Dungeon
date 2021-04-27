@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Characteristics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -25,7 +26,7 @@ namespace Enemies.Spawner
         [SerializeField]
         private int _maxEnemiesCount;
         [SerializeField]
-        private List<Characteristics.EnemyCharacteristics> _possibleEnemies;
+        private List<Enemy> _possibleEnemies;
 
         private float _coolldownTime;
         private float _nextWaveSpawnTime;

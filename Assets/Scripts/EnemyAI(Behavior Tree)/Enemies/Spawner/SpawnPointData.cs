@@ -1,4 +1,5 @@
 using System;
+using Characteristics;
 using UnityEngine;
 
 namespace Enemies.Spawner
@@ -11,15 +12,15 @@ namespace Enemies.Spawner
     public class SpawnPointData
     {
         [SerializeField]
-        private Characteristics.EnemyCharacteristics _enemy;
+        private Enemy _enemy;
         [SerializeField]
         private Transform _spawnPoint;
 
-        public Characteristics.EnemyCharacteristics Enemy => _enemy;
+        public Enemy Enemy => _enemy;
 
         public Transform SpawnPoint => _spawnPoint;
 
-        public SpawnPointData(Characteristics.EnemyCharacteristics enemy, Transform spawnPoint)
+        public SpawnPointData(Enemy enemy, Transform spawnPoint)
         {
             _enemy = enemy;
             _spawnPoint = spawnPoint;
