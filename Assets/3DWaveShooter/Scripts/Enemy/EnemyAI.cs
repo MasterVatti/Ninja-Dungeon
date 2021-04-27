@@ -23,7 +23,7 @@ public class EnemyAI : MonoBehaviour
     private float lastPathUpdateTime; //Last time the path was updated.
 
     [Header("Components")]
-    public Enemy enemy; //Enemy's enemy component.
+    public EnemyShooter enemy; //Enemy's enemy component.
     public Rigidbody rig; //Enemy's rigidbody component.
     public NavMeshAgent agent; //Enemy's NavMeshAgent component.
 
@@ -33,7 +33,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         //Get missing components.
-        if (!enemy) enemy = GetComponent<Enemy>();
+        if (!enemy) enemy = GetComponent<EnemyShooter>();
         if (!rig) rig = GetComponent<Rigidbody>();
         if (!agent) GetComponent<NavMeshAgent>();
     }
@@ -148,7 +148,7 @@ public class EnemyAI : MonoBehaviour
         if (targetType == TargetType.Player)
             Player3DWaveShooter.inst.TakeDamage(enemy.attackDamage);
         else if (targetType == TargetType.Enemy)
-            target.GetComponent<Enemy>().TakeDamage(enemy.attackDamage);
+            target.GetComponent<EnemyShooter>().TakeDamage(enemy.attackDamage);
 
         enemy.anim.SetTrigger("Attack");
     }

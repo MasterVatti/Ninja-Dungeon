@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace Characteristics
 {
-    public class Player : MonoBehaviour
+    public class Enemy : MonoBehaviour
     {
-        public PlayerCharacteristics PlayerCharacteristics => _playerCharacteristics;
+        public EnemyCharacteristics EnemyCharacteristics => _enemyCharacteristics;
         public Rigidbody Rigidbody => _rigidbody;
         public HealthBehaviour HealthBehaviour => _healthBehaviour;
-
+        
         [SerializeField]
-        private PlayerCharacteristics _playerCharacteristics;
+        private EnemyCharacteristics _enemyCharacteristics;
         [SerializeField]
         private HealthBehaviour _healthBehaviour;
         [SerializeField]

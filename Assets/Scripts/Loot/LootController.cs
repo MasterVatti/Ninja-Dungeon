@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Characteristics;
 using Enemies;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -19,16 +20,16 @@ namespace Loot
         [SerializeField]
         private List<ResourceItem> _resourceItems = new List<ResourceItem>();
 
-        private EnemyHealth _enemyHealth;
+        private HealthBehaviour _enemyHealth;
        
         private void Start()
         {
-            _enemyHealth = GetComponent<EnemyHealth>();
+            _enemyHealth = GetComponent<HealthBehaviour>();
             
             _enemyHealth.EnemyDie += StartItemCreation;
         }
         
-        private void StartItemCreation(Characteristics.EnemyCharacteristics enemy)
+        private void StartItemCreation(PersonCharacteristics enemy)
         {
             CreateItem(_equipmentItems, enemy.transform);
             CreateItem(_resourceItems, enemy.transform);

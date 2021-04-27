@@ -32,7 +32,7 @@ public class Projectile : MonoBehaviour
         //Did we hit an enemy?
         if (col.tag == "Enemy")
         {
-            col.GetComponent<Enemy>().TakeDamage(damage, transform.position,
+            col.GetComponent<EnemyShooter>().TakeDamage(damage, transform.position,
                 -Player3DWaveShooter.inst.transform.forward);
             col.GetComponent<Rigidbody>().AddForce(
                 (col.transform.position - transform.position).normalized *

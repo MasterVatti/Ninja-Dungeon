@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Characteristics;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -65,7 +66,7 @@ namespace Enemies.Spawner
             }
         }
         
-        private void OnEnemyDied(Characteristics.EnemyCharacteristics enemy)
+        private void OnEnemyDied(PersonCharacteristics enemy)
         {
             _enemiesCount--;
 

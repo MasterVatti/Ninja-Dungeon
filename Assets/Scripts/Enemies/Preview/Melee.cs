@@ -1,9 +1,11 @@
-﻿namespace Enemies
+﻿using Characteristics;
+
+namespace Enemies
 {
     /// <summary>
     /// Представление врага-ближника
     /// </summary>
-    public class Melee : Characteristics.EnemyCharacteristics
+    public class Melee : Enemy
     {
     }
 }

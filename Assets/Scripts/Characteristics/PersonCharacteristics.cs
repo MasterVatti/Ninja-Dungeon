@@ -52,7 +52,7 @@ namespace Characteristics
             set => _rigidbody = value;
         }
     
-        public EnemyHealth HealthSystem 
+        public HealthBehaviour HealthSystem 
         {
             get => _healthSystem;
             set => _healthSystem = value;
@@ -82,6 +82,6 @@ namespace Characteristics
         [SerializeField]
         private Rigidbody _rigidbody;
         [SerializeField]
-        private EnemyHealth _healthSystem;
+        private HealthBehaviour _healthSystem;
     }
 }
