@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile3D : MonoBehaviour
 {
     [Header("Values")]
     public int damage; //Damage the projectile deals upon impact.

@@ -6,9 +6,9 @@ tree("Root")
 
 tree("TopNode")
         sequence
-            Wait(1.0)
             DetermineNearestTarget
             SetTargetPosition
             MoveToDestination
             IsAtRequiredDistance(2.0)
             Attack
+            Wait(2.0)

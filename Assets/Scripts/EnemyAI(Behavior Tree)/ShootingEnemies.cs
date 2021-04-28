@@ -1,5 +1,7 @@
 using Assets.Scripts;
+using Characteristics;
 using Panda;
+using ProjectileLauncher;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,15 +10,22 @@ using UnityEngine.AI;
 /// </summary>
 public class ShootingEnemies : MonoBehaviour
 {
-    [SerializeField] private Rigidbody _bulletPrefab;
-    [SerializeField] private float _bulletSpeed;
-    [SerializeField] private float _shotCooldownTime;
-    [SerializeField] private NavMeshAgent _agent;
-    [SerializeField] private Unit _unit;
-
-    private GameObject _target;
+    [SerializeField]
+    private Projectile _bulletPrefab;
+    [SerializeField]
+    private float _shotCooldownTime;
+    [SerializeField]
+    private NavMeshAgent _agent;
+    [SerializeField]
+    private Unit _unit;
+    
     private float _nextShotTime;
+    private int _damage;
 
+    private void Awake()
+    {
+        _damage = gameObject.GetComponent<PersonCharacteristics>().AttackDamage;
+    }
 
     private void Shot()
     {
@@ -28,29 +37,33 @@ public class ShootingEnemies : MonoBehaviour
 
 
             CreateBullet();
+            
+            Task.current.Succeed();
         }
     }
 
     private void CreateBullet()
+    {
+        var newBullet = Instantiate(_bulletPrefab, transform.position,
+            transform.rotation);
+        var nearestTargetDirection = (_unit.Target.transform.position- transform.position).normalized;
+       
+        newBullet.Initialize(nearestTargetDirection, _damage);
+    }
+
+
+    [Task]
+    private void Shooting()
+    {
+        var directionToTarget = _unit.Target.transform.position - transform.position;
+
+        if (Physics.Raycast(transform.position, directionToTarget.normalized, out var hit))
         {
-            var newBullet = Instantiate(_bulletPrefab, transform.position,
-                transform.rotation);
-
-            newBullet.velocity = transform.forward * _bulletSpeed;
-        }
-
-        [Task]
-        private void Shooting()
-        {
-            var directionToPlayer = _unit.Target.transform.position - transform.position;
-
-            if (Physics.Raycast(transform.position, directionToPlayer.normalized, out var hit))
+            if (hit.collider.CompareTag(GlobalConstants.PLAYER_TAG) ||
+                hit.collider.CompareTag(GlobalConstants.ALLY_TAG))
             {
-                if (hit.collider.CompareTag(GlobalConstants.PLAYER_TAG) ||
-                    hit.collider.CompareTag(GlobalConstants.ALLY_TAG))
-                {
-                    Shot();
-                }
+                Shot();
             }
         }
     }
+}

@@ -230,7 +230,7 @@ public class PlayerAttack : MonoBehaviour
             proj.transform.forward * weapon.projectile.speed;
 
         //Get the projectile script and set the damage and other values.
-        Projectile projScript = proj.GetComponent<Projectile>();
+        Projectile3D projScript = proj.GetComponent<Projectile3D>();
 
         projScript.SetValues(weapon.projectile);
     }

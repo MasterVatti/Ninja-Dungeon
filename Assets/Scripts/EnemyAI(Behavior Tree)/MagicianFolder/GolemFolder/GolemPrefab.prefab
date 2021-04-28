@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ec249979e19df459b6eb426d4950b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unit: {fileID: 7628226277611959186}
 --- !u!195 &7309898420038427012
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -206,7 +207,7 @@ MonoBehaviour:
   _currentHP: 0
   _maxHp: 50
   _moveSpeed: 0
-  _attackDamage: 0
+  _attackDamage: 10
   _attackRate: 0
   _canMove: 0
   _canAttack: 0

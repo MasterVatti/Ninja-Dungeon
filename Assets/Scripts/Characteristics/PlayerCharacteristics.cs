@@ -7,6 +7,11 @@ namespace Characteristics
     /// </summary>
     public class PlayerCharacteristics : PersonCharacteristics
     {
+        private void Start()
+        {
+            CurrentHp = MaxHp;
+        }
+        
         public int RicochetShells
         {
             get => _ricochetShells;

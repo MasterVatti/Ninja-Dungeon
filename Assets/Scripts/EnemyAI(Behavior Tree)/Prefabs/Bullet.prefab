@@ -125,5 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9559bc0515bbb0f4eadee6bf7933c7aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 10
+  _projectileSpeed: 15
   _timeToRemove: 5
+  _rigidbody: {fileID: 2733183494529446169}

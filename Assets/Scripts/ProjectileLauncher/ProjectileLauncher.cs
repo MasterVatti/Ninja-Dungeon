@@ -1,3 +1,4 @@
+using System;
 using Characteristics;
 using Enemies;
 using UnityEngine;
@@ -17,9 +18,17 @@ namespace ProjectileLauncher
         private NearestEnemyDetector _enemyDetector;
         [SerializeField]
         private float _attackDistance;
+        [SerializeField]
+        private GameObject _shooter;
         
         private float _currentTime;
-        
+        private int _damage;
+
+        private void Start()
+        {
+            _damage = _shooter.GetComponent<PersonCharacteristics>().AttackDamage;
+        }
+
         private void Update()
         {
             var enemy = _enemyDetector.GetNearestEnemy();
@@ -44,9 +53,9 @@ namespace ProjectileLauncher
             var nearestEnemyDirection = (enemyPosition - transform.position).normalized;
             var projectile = Instantiate(_projectilePrefab, transform.position, transform.rotation);
             
-            transform.parent.LookAt(enemy.transform);
+            _shooter.transform.LookAt(enemy.transform);
             
-            projectile.Initialize(nearestEnemyDirection);
+            projectile.Initialize(nearestEnemyDirection,_damage);
         }
 
         private bool IsAtRequiredDistance(Person enemy)

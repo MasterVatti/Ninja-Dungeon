@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2660066435425416739}
   - component: {fileID: 2660066435425416740}
   - component: {fileID: 2660066435425416741}
-  - component: {fileID: 2660066435425416738}
   - component: {fileID: 2660066435425416736}
+  - component: {fileID: 2014971044819557750}
   m_Layer: 12
   m_Name: ProjectilePrefab
   m_TagString: Projectile
@@ -97,22 +97,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2660066435425416738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2660066435425416743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 165be62b8b082e446a152b0aa6777396, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _projectileSpeed: 10
-  _damage: 5
-  _timeToRemove: 5
-  _rigidbody: {fileID: 2660066435425416736}
 --- !u!54 &2660066435425416736
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -129,3 +113,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2014971044819557750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2660066435425416743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf7a3155ea78247498a902efd25789ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectileSpeed: 15
+  _timeToRemove: 5
+  _rigidbody: {fileID: 2660066435425416736}
