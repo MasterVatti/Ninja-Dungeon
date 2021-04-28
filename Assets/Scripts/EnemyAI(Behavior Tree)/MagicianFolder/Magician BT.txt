@@ -8,13 +8,13 @@ tree("Root")
 tree("TopNode")
      fallback
                 sequence
-                    IsHealthEnoughToSpawnGolem
+                    IsTimeToSpawnGolem 
                     GolemSpawn
                 sequence
                     DetermineNearestTarget
                     IsAtRequiredDistance(7.0)
                     tree("Shot")
-                    GetRunBackPoint
+                    SetBackPoint
                     MoveToDestination
                     tree("Shot")
                 sequence

@@ -1,3 +1,4 @@
+using Characteristics;
 using Enemies;
 using UnityEngine;
 
@@ -14,11 +15,10 @@ namespace ProjectileLauncher
         private float _projectileSpawnCooldown;
         [SerializeField]
         private NearestEnemyDetector _enemyDetector;
-        
-        private float _currentTime;
-        
         [SerializeField]
         private float _attackDistance;
+        
+        private float _currentTime;
         
         private void Update()
         {
@@ -29,7 +29,7 @@ namespace ProjectileLauncher
             }
             else
             {
-                if (enemy != null)
+                if (enemy != null && IsAtRequiredDistance(enemy))
                 {
                     CreateProjectile(enemy.gameObject);
                 }
@@ -49,7 +49,7 @@ namespace ProjectileLauncher
             projectile.Initialize(nearestEnemyDirection);
         }
 
-        private bool IsAtRequiredDistance(Enemy enemy)
+        private bool IsAtRequiredDistance(Person enemy)
         {
             var targetDistance = Vector3.Distance(enemy.transform.position, transform.position);
             return targetDistance <= _attackDistance;

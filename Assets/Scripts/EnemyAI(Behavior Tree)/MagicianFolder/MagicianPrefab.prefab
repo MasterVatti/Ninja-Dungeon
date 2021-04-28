@@ -20,8 +20,9 @@ GameObject:
   - component: {fileID: 4460929393999622058}
   - component: {fileID: 3946989225980792668}
   - component: {fileID: 8401475512963324837}
-  - component: {fileID: 8775058036778234213}
   - component: {fileID: 6347868306591521622}
+  - component: {fileID: 3586072214158325891}
+  - component: {fileID: 417170660410821016}
   m_Layer: 0
   m_Name: MagicianPrefab
   m_TagString: Enemy
@@ -141,6 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 839100401563898178}
   _stopChaseDistance: 7
+  _pointDistanceError: 0.5
 --- !u!195 &839100401563898178
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -247,20 +249,6 @@ MonoBehaviour:
   _attackRate: 0
   _canMove: 0
   _canAttack: 0
-  _rigidbody: {fileID: 5247192937791318919}
-  _healthSystem: {fileID: 8775058036778234213}
---- !u!114 &8775058036778234213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3344586694461362826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae2afb1c15bf644b9fcd3ff474c7675, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &6347868306591521622
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -274,3 +262,30 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 17.119804
   m_Center: {x: 0.045703888, y: 0, z: -0.088466644}
+--- !u!114 &3586072214158325891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3344586694461362826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b22f00f3b5846d409eee145d80d44c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &417170660410821016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3344586694461362826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2136287655a0b7a4eb31474d15cce149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _personCharacteristics: {fileID: 8401475512963324837}
+  _healthBehaviour: {fileID: 3586072214158325891}
+  _rigidbody: {fileID: 5247192937791318919}

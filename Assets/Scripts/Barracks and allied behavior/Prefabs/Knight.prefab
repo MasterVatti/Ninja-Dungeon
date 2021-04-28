@@ -17,7 +17,8 @@ GameObject:
   - component: {fileID: 8637482196848305538}
   - component: {fileID: 6697829752094606592}
   - component: {fileID: 8347178985741170688}
-  - component: {fileID: 1277169559642744995}
+  - component: {fileID: 5079080549896897640}
+  - component: {fileID: 1144536422368776136}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Untagged
@@ -173,10 +174,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c2fc2026e83f54996df7e7715f6704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _patrolPoints: []
   _agent: {fileID: 179097156764800952}
-  _stopChaseDistance: 0
-  _aggressionDistance: 0
+  _stopChaseDistance: 2
+  _aggressionDistance: 15
+  _stopFollowingDistance: 2
 --- !u!114 &8347178985741170688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,15 +191,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHP: 0
-  _maxHp: 0
+  _maxHp: 100
   _moveSpeed: 0
   _attackDamage: 0
   _attackRate: 0
   _canMove: 0
   _canAttack: 0
-  _rigidbody: {fileID: 4848752698304241106}
-  _healthSystem: {fileID: 1277169559642744995}
---- !u!114 &1277169559642744995
+--- !u!114 &5079080549896897640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,6 +206,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1672505441962123926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3473ae93a7a3354a8d97c2913b4eee1, type: 3}
+  m_Script: {fileID: 11500000, guid: 152adcd9a0b455242bdef016029036b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _personCharacteristics: {fileID: 8347178985741170688}
+  _healthBehaviour: {fileID: 1144536422368776136}
+  _rigidbody: {fileID: 4848752698304241106}
+--- !u!114 &1144536422368776136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672505441962123926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b22f00f3b5846d409eee145d80d44c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

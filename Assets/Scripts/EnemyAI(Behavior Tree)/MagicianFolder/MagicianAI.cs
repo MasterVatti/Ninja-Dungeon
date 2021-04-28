@@ -28,6 +28,7 @@ namespace MagicianFolder
             {
                 var golem = Instantiate(_golemPrefab, gameObject.transform.position, Quaternion.identity);
                  _isGolemCreated = true;
+                 
                  Task.current.Succeed();
             }
             
@@ -35,7 +36,7 @@ namespace MagicianFolder
         }
     
         [Task]
-        private void SetRunBackPoint()
+        private void SetBackPoint()
         {
             _unit.ChangePointMovement(gameObject.transform.TransformPoint(0, 0, 0 - _runBackDistance));
             Task.current.Succeed();

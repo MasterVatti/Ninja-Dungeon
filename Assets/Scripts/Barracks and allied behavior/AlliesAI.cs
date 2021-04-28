@@ -1,9 +1,7 @@
-using System;
-using Enemies;
+using Characteristics;
 using Panda;
 using UnityEngine;
 using UnityEngine.AI;
-using Random = UnityEngine.Random;
 
 namespace Barracks_and_allied_behavior
 {
@@ -116,7 +114,7 @@ namespace Barracks_and_allied_behavior
             return targetDistance <= distance;
         }   
         
-        private bool IsAtRequiredDistance(Enemy enemy)
+        private bool IsAtRequiredDistance(Person enemy)
         {
             var targetDistance = Vector3.Distance(enemy.transform.position, _agent.transform.position);
             return targetDistance <= _aggressionDistance;

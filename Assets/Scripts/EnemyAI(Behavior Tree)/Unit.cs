@@ -1,15 +1,16 @@
-using System;
 using System.Collections.Generic;
 using Assets.Scripts;
+using Characteristics;
 using Panda;
 using UnityEngine;
 using UnityEngine.AI;
-using Enemies;
+
 
 /// <summary>
 /// Отвечает за базовые навыки(Таски) Врага
 /// передвежение и хп. Должен висеть на всех енеми.
 /// </summary>
+
 public class Unit : MonoBehaviour
 {
     public GameObject Target => _target;

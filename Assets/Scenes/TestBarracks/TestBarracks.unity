@@ -932,7 +932,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8775058036778234213, guid: e2cb250021ab716488e629bff7370cd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e2cb250021ab716488e629bff7370cd9, type: 3}
 --- !u!1 &1349037360
 GameObject:
@@ -1111,11 +1112,6 @@ MonoBehaviour:
     _allyPrefab: {fileID: 2394056606855407061, guid: 0e7753f0449641045a1850f3d7318b07,
       type: 3}
     _spawnPoint: {fileID: 417041138}
-    _patrolPoints:
-    - {fileID: 1452233410}
-    - {fileID: 1349037361}
-    - {fileID: 1483866919}
-    - {fileID: 1928652804}
   - _firstType: 0
     _firstPrice: 150
     _secondType: 2
@@ -1125,11 +1121,6 @@ MonoBehaviour:
     _allyPrefab: {fileID: 1672505441962123926, guid: 9a1a7ffbfc4cb0147af9fdf1e865a08e,
       type: 3}
     _spawnPoint: {fileID: 417041138}
-    _patrolPoints:
-    - {fileID: 1452233410}
-    - {fileID: 1349037361}
-    - {fileID: 1483866919}
-    - {fileID: 1928652804}
   - _firstType: 0
     _firstPrice: 300
     _secondType: 2
@@ -1139,11 +1130,6 @@ MonoBehaviour:
     _allyPrefab: {fileID: 1219256799547053490, guid: da322b15d8972fe45bfa45def067306f,
       type: 3}
     _spawnPoint: {fileID: 417041138}
-    _patrolPoints:
-    - {fileID: 1452233410}
-    - {fileID: 1349037361}
-    - {fileID: 1483866919}
-    - {fileID: 1928652804}
 --- !u!4 &1830642505 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4469324318138216, guid: d73a2930895e6ff4ea6e0602b7eecf71,

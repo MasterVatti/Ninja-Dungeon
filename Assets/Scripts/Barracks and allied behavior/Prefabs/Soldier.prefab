@@ -14,10 +14,11 @@ GameObject:
   - component: {fileID: 8113254313363259452}
   - component: {fileID: 1264193907932122623}
   - component: {fileID: 621544001498614016}
-  - component: {fileID: 628531477183728323}
   - component: {fileID: 666163551287211885}
   - component: {fileID: 6623126129897150305}
   - component: {fileID: 5779794459243143245}
+  - component: {fileID: 3825063092995507234}
+  - component: {fileID: 7605742107750937693}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -135,22 +136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c2fc2026e83f54996df7e7715f6704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _patrolPoints: []
   _agent: {fileID: 666163551287211885}
   _stopChaseDistance: 0
   _aggressionDistance: 0
---- !u!114 &628531477183728323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1219256799547053490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3473ae93a7a3354a8d97c2913b4eee1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _stopFollowingDistance: 0
 --- !u!195 &666163551287211885
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -186,14 +175,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHP: 0
-  _maxHp: 0
+  _maxHp: 150
   _moveSpeed: 0
-  _attackDamage: 0
+  _attackDamage: 20
   _attackRate: 0
   _canMove: 0
   _canAttack: 0
-  _rigidbody: {fileID: 5779794459243143245}
-  _healthSystem: {fileID: 628531477183728323}
 --- !u!54 &5779794459243143245
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -210,3 +197,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3825063092995507234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219256799547053490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b22f00f3b5846d409eee145d80d44c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7605742107750937693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219256799547053490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 152adcd9a0b455242bdef016029036b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _personCharacteristics: {fileID: 6623126129897150305}
+  _healthBehaviour: {fileID: 3825063092995507234}
+  _rigidbody: {fileID: 5779794459243143245}
