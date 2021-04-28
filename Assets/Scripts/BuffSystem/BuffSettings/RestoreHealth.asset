@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: RestoreHealth
   m_EditorClassIdentifier: 
   _buffType: 0
-  _amountHealthRestored: 50
+  _percentageIncrease: 20

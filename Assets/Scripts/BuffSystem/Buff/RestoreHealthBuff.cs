@@ -12,6 +12,7 @@ public class RestoreHealthBuff : IBuff
     {
         _amountHealthRestored = amountHealthRestored;
     }
+    
     public void StartBuff(PersonCharacteristics personCharacteristics)
     {
         personCharacteristics.CurrentHp += _amountHealthRestored;

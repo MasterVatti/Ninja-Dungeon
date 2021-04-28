@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Assets.Scripts.Managers.ScreensManager;
 using BuffSystem.BuffInterface;
 using BuffSystem.BuffSettings.ScriptsSettings;
 using UnityEngine;
@@ -6,7 +7,7 @@ using Random = UnityEngine.Random;
 
 namespace BuffSystem
 {
-    public class BuffScreenManager : MonoBehaviour
+    public class BuffScreenManager : BaseScreen
     {
         [SerializeField]
         private List<BuffButton> _buffButtons = new List<BuffButton>();
@@ -34,8 +35,13 @@ namespace BuffSystem
             
             return _settingsBuffs[randomValue];
         }
+        
+        public override void Initialize(ScreenType screenType)
+        {
+            ScreenType = screenType;
+        }
 
-        private void OnDestroy()
+        private void OnDestroy() 
         {
             foreach (var buffbutton in _buffButtons)
             {

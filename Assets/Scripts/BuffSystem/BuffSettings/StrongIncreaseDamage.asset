@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: StrongIncreaseDamage
   m_EditorClassIdentifier: 
   _buffType: 1
-  _damageIncreaseAmount: 35
+  _percentageIncrease: 20

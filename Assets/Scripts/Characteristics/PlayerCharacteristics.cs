@@ -25,7 +25,7 @@ namespace Characteristics
             set => _frontalityShells = value;
         }
         
-        public bool DiagonalShells
+        public int DiagonalShells
         {
             get => _diagonalShells;
             set => _diagonalShells = value;
@@ -39,6 +39,6 @@ namespace Characteristics
         [SerializeField]
         private int _frontalityShells;    
         [SerializeField]
-        private bool _diagonalShells;
+        private int _diagonalShells;
     }
 }
