@@ -3,32 +3,31 @@ using Characteristics;
 
 namespace BuffSystem.Buff
 {
-    public class HealthBoostBuff : IPassiveBuff
+    public class AttackRateBuff : IPassiveBuff
     {
+        
         private double _percentageIncrease;
         
-        public HealthBoostBuff(double percentageIncrease)
+        public AttackRateBuff(double percentageIncrease)
         {
             _percentageIncrease = percentageIncrease;
         }
-        
         public void StartBuff(PersonCharacteristics personCharacteristics)
         {
             var percent = _percentageIncrease / 100;
 
-            var amountIncreasedHealth = personCharacteristics.MaxHp * percent;
+            var attackRateIncreaseQuantity = personCharacteristics.AttackRate * percent;
             
-            personCharacteristics.MaxHp += (int)amountIncreasedHealth;
+            personCharacteristics.AttackDamage += (int)attackRateIncreaseQuantity;
         }
-        
+
         public void StopBuff(PersonCharacteristics personCharacteristics)
         {
             var percent = _percentageIncrease / 100;
 
-            var amountIncreasedHealth = personCharacteristics.MaxHp * percent;
+            var attackRateIncreaseQuantity = personCharacteristics.AttackRate * percent;
             
-            personCharacteristics.MaxHp -= (int)amountIncreasedHealth;
+            personCharacteristics.AttackDamage -= (int)attackRateIncreaseQuantity;
         }
-        
     }
 }

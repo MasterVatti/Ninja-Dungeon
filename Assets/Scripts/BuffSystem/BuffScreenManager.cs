@@ -23,9 +23,9 @@ namespace BuffSystem
             }
         }
 
-        private void ClickedBuff(IBuff buff)
+        private void ClickedBuff(IBuff buff, BuffType buffType)
         {
-            MainManager.BuffManager.AddBuff(buff);
+            MainManager.BuffManager.AddBuff(buff, buffType);
         }
         
         private SettingsBuff GetRandomSettingBuffs()

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c97d34fc3b6f547b50de701569683d, type: 3}
-  m_Name: HealthBoost
+  m_Script: {fileID: 11500000, guid: 8f568f3814ce6ad4a95ab9f101a50494, type: 3}
+  m_Name: RestoreHealth
   m_EditorClassIdentifier: 
-  _buffType: 1
-  _percentageIncrease: 20
+  _buffType: 0
+  _amountHealthRestored: 50

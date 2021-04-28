@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using BuffSystem.BuffInterface;
 using Characteristics;
@@ -9,50 +8,56 @@ namespace BuffSystem
     [RequireComponent(typeof(Player))]
     public class BuffManager : MonoBehaviour
     {
-        private PersonCharacteristics _personCharacteristics;
+        private PlayerCharacteristics _playerCharacteristics;
         
-        private List<IBuff> _passiveBuffs = new List<IBuff>();
-        private List<IUpdatableBuff> _updatableBuffs = new List<IUpdatableBuff>();
+        private List<IPassiveBuff> _passiveBuffs;
+        private List<IUpdatableBuff> _updatableBuffs;
 
         private void Awake()
         {
-            _personCharacteristics = GetComponent<Player>().PlayerCharacteristics;
+            var personCharacteristics = GetComponent<Player>().PersonCharacteristics;
+            _playerCharacteristics = personCharacteristics.GetComponentInChildren<PlayerCharacteristics>();
+            
+            _passiveBuffs = new List<IPassiveBuff>();
+            _updatableBuffs = new List<IUpdatableBuff>();
         }
+        
 
-        public void AddBuff(IBuff buff)
+        public void AddBuff(IBuff buff, BuffType buffType)
         {
-            if (buff is IUpdatableBuff updatableBuff)
+            switch (buffType)
             {
-                _updatableBuffs.Add(updatableBuff);
-            }
-            else
-            {
-                _passiveBuffs.Add(buff);
+                case BuffType.PassiveBuff:
+                    _passiveBuffs.Add((IPassiveBuff)buff);
+                    break;
+                case BuffType.UpdatableBuff:
+                    _updatableBuffs.Add((IUpdatableBuff)buff);
+                    break;
             }
             
-            buff.StartBuff(_personCharacteristics);
+            buff.StartBuff(_playerCharacteristics);
         }
 
         private void Update()
         {
             foreach (var updatableBuff in _updatableBuffs)
             {
-                updatableBuff.UpdateBuff(_personCharacteristics);
+                updatableBuff.UpdateBuff(_playerCharacteristics);
             }
         }
 
-        private void StopBuff<T>(List<T> buffs) where T : IBuff
+        private void StopBuff<T>(List<T> _buffs) where T : IPassiveBuff
         {
-            foreach (var buff in buffs)
+            foreach (var buff in _buffs)
             {
-                buff.StopBuff(_personCharacteristics);
+                buff.StopBuff(_playerCharacteristics);
             }
         }
 
         private void OnDestroy()
         {
-            StopBuff(_passiveBuffs);
-            StopBuff(_updatableBuffs);
+           StopBuff(_passiveBuffs);
+           StopBuff(_updatableBuffs);
         }
     }
 }

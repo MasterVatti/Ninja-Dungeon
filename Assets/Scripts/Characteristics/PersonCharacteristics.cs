@@ -1,3 +1,4 @@
+using System;
 using Enemies;
 using UnityEngine;
 
@@ -11,7 +12,11 @@ namespace Characteristics
         public int CurrentHp
         {
             get => _currentHP;
-            set => _currentHP = value;
+            set
+            {
+                _currentHP = value;
+                _currentHP = Mathf.Clamp(_currentHP, 0 , _maxHp);
+            }
         }
         public int MaxHp
         {
