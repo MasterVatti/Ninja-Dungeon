@@ -1,4 +1,6 @@
-﻿namespace Enemies
+﻿using Characteristics;
+
+namespace Enemies
 {
     /// <summary>
     /// Представление врага-ближника

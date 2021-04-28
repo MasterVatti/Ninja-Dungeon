@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SawmillSetting
   m_EditorClassIdentifier: 
   _buildingName: Sawmill
-  _buildingInfoView: {fileID: 3654191358967922677, guid: 14463b3fb13ca184089be8199baceeea,
+  _buildingInfoView: {fileID: 8190536544479169298, guid: 559fa6678c05e4e4588e394f127aa907,
     type: 3}
   _connectedBuildings:
   - {fileID: 11400000, guid: 600f404c0c98baf4eb2eb843e8f400e4, type: 2}
@@ -36,5 +36,5 @@ MonoBehaviour:
       type: 3}
   _placeHolderPrefab: {fileID: 7724395076348898431, guid: c979f707646aa634593061efb40ed5ca,
     type: 3}
-  _timeToBuild: 1
+  _timeToBuild: 2
   _position: {x: 15, y: 1, z: 65}

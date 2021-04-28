@@ -37,12 +37,6 @@ namespace PlayerScripts.Movement
             MoveJoystickToTapPosition();
         }
 
-        private void MoveJoystickToTapPosition()
-        {
-            var position = Input.mousePosition;
-            _joystickBorder.transform.position = position;
-        }
-
         public void OnDrag(PointerEventData eventData)
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(_joystickBorder.rectTransform,
@@ -66,6 +60,12 @@ namespace PlayerScripts.Movement
         {
             ReturnJoystickToStartPosition();
             InputDirection = Vector2.zero;
+        }
+        
+        private void MoveJoystickToTapPosition()
+        {
+            var position = Input.mousePosition;
+            _joystickBorder.transform.position = position;
         }
 
         private void ReturnJoystickToStartPosition()

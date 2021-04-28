@@ -8,7 +8,6 @@ namespace SaveSystem
     /// </summary>
     public class MinerBuildingData : BaseBuildingState
     {
-        // todo: check json, can he save DateTime?
         [JsonProperty("startTime")]
         public DateTime StartTime { get; set; }
         [JsonProperty("startAmount")]
@@ -17,7 +16,5 @@ namespace SaveSystem
         public float MiningPerSecond { get; set; }
         [JsonProperty("maxStorage")]
         public int MaxStorage { get; set; }
-        [JsonProperty("resourceType")]
-        public ResourceSystem.ResourceType Resource { get; set; }
     }
 }

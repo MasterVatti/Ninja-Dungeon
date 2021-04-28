@@ -11,26 +11,32 @@ namespace AccumulatedResources
     public class MinerInfoView  : BuildingInfoView
     {
         [SerializeField]
-        private TextMeshProUGUI _currentResource;
+        private TextMeshProUGUI _resources;
         [SerializeField]
-        private TextMeshProUGUI _maxResource;
+        private Slider _progressFill;
         [SerializeField]
         private Image _image;
    
         private ResourceMiner _resourceMiner;
 
-        private void Update()
+        protected override void Update()
         {
-            _currentResource.text = _resourceMiner.CurrentResourceCount.ToString();
-            _maxResource.text = _resourceMiner.MaxStorage.ToString();
+            base.Update();
+            _resources.text = _resourceMiner.CurrentResourceCount + "/" + _resourceMiner.MaxStorage;
+            _progressFill.value = _resourceMiner.CurrentResourceCount / (float)_resourceMiner.MaxStorage;
         }
 
         public override void Initialize(GameObject building, Transform uiAttachPoint, string nameBuilding)
         {
             _resourceMiner = building.GetComponent<ResourceMiner>();
-        
-            _image.sprite = MainManager.IconsProvider.GetResourceSprite(_resourceMiner.ExtractableResource);
-        
+
+            if (_image != null) // for the case when we want to use custom icon
+            {
+                _image.sprite = MainManager.IconsProvider.GetResourceSprite(_resourceMiner.ExtractableResource);
+            }
+
+            Update();
+            
             base.Initialize(building, uiAttachPoint, nameBuilding);
         }
     }

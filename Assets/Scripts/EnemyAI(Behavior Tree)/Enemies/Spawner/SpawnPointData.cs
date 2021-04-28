@@ -1,4 +1,5 @@
 using System;
+using Characteristics;
 using UnityEngine;
 
 namespace Enemies.Spawner

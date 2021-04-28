@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Characteristics;
 using UnityEngine;
 
 namespace Enemies
@@ -16,12 +17,13 @@ namespace Enemies
         public void AddEnemy(Enemy enemy)
         {
             Enemies.Add(enemy);
-            enemy.HealthSystem.EnemyDie += OnEnemyDied; 
+            enemy.HealthBehaviour.OnDead += OnEnemyDied; 
         }
         
-        private void OnEnemyDied(Enemy enemy)
+        private void OnEnemyDied(Person person)
         {
-            enemy.HealthSystem.EnemyDie -= OnEnemyDied;
+            var enemy = person.GetComponentInChildren<Enemy>();
+            enemy.HealthBehaviour.OnDead -= OnEnemyDied;
             Enemies.Remove(enemy);
         }
         
@@ -31,7 +33,7 @@ namespace Enemies
             {
                 if (_enemies[i])
                 {
-                    _enemies[i].HealthSystem.EnemyDie -= OnEnemyDied;
+                    _enemies[i].HealthBehaviour.OnDead -= OnEnemyDied;
                 }
             }
         }

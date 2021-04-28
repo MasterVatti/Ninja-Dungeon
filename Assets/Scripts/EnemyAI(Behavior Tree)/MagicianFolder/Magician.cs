@@ -1,11 +1,11 @@
-using Enemies;
+using Characteristics;
 
 namespace MagicianFolder
 {
     /// <summary>
-    /// Класс Маг, наследуемый от енеми.
+    /// Класс отвечает за базовые характеристики Мага.
     /// </summary>
-    public class Magician : Enemy
+    public class Magician : EnemyCharacteristics
     {
         private void Start()
         {
