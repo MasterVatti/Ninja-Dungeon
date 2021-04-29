@@ -24,18 +24,7 @@ public class ResourcesView : MonoBehaviour
         _resources = MainManager.ResourceManager.GetResources();
         UpdateResourcesAmount();
     }
-    
-    /// <summary>
-    /// Добавлено для теста. При нажатии на спейс дает 100 дерева
-    /// </summary>
-    private void Update()
-    {
-        if (Input.GetKeyUp("space"))
-        {
-            MainManager.ResourceManager.AddResource(ResourceType.Lumber, 100);
-        }
-    }
-    
+
     private void OnResourceAmountChanged(Resource resource, int amount)
     {
         StartCoroutine(UpdateResource(resource, amount));
@@ -43,42 +32,22 @@ public class ResourcesView : MonoBehaviour
 
     private IEnumerator UpdateResource(Resource resource, int amount)
     {
-        var exitCondition = resource.Amount + amount;
         var sign = GetOperationSign(amount);
         var label = GetLabel(resource);
+        var value = amount / _count;
+        var remainder = amount % _count;
         
-        while (int.Parse(label.text) != exitCondition)
+        for (int i = 0; i < value; i++)
         {
-            if (int.Parse(label.text) < exitCondition && sign > 0)
-            {
-                var currentAmount = float.Parse(label.text);
-                var newAmount = currentAmount + (_count * sign);
-                label.text = newAmount.ToString(CultureInfo.InvariantCulture);
-                yield return new WaitForSeconds(_time);
-                if (int.Parse(label.text) >= exitCondition)
-                { 
-                    label.text = exitCondition.ToString();
-                }
-            }
-            
-            if (int.Parse(label.text) > exitCondition && sign < 0)
-            {
-                var currentAmount = float.Parse(label.text);
-                var newAmount = currentAmount + (_count * sign);
-                label.text = newAmount.ToString(CultureInfo.InvariantCulture);
-                yield return new WaitForSeconds(_time);
-                if (int.Parse(label.text) <= exitCondition)
-                { 
-                    label.text = exitCondition.ToString();
-                }
-            }
+            var currentAmount = Convert.ToSingle(label.text);
+            var newAmount = currentAmount + (_count * sign);
+            label.text = newAmount.ToString(CultureInfo.InvariantCulture);
+            yield return new WaitForSeconds(_time);
 
-            if (int.Parse(label.text) == exitCondition && sign < 0 || int.Parse(label.text) == exitCondition && sign > 0)
-            {
-                break;
-            }
         }
-        
+        remainder += Convert.ToInt32(label.text);
+        label.text = remainder.ToString();
+
     }
 
     private TextMeshProUGUI GetLabel(Resource resource)
