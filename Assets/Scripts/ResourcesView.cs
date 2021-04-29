@@ -1,5 +1,9 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using ResourceSystem;
+using TMPro;
 using UnityEngine;
 
 public class ResourcesView : MonoBehaviour
@@ -11,17 +15,70 @@ public class ResourcesView : MonoBehaviour
 
     private float _time = 0.2f;
     
-    private const int _count = 10;
+    private int _count = 10;
 
 
-    void Start()
+    private void Start()
     {
+        MainManager.ResourceManager.OnResourceAmountChanged += OnResourceAmountChanged;
+        
         _resources = MainManager.ResourceManager.GetResources();
+        UpdateResourcesAmount();
+    }
+    
+    /// <summary>
+    /// Добавлено для теста. При нажатии на спейс дает 100 дерева
+    /// </summary>
+    private void Update()
+    {
+        if (Input.GetKeyUp("space"))
+        {
+            MainManager.ResourceManager.AddResource(ResourceType.Lumber, 100);
+        }
+    }
+    
+    private void OnResourceAmountChanged(Resource resource, int amount)
+    {
+        StartCoroutine(UpdateResource(resource, amount));
     }
 
-    void Update()
+    private IEnumerator UpdateResource(Resource resource, int amount)
     {
-        //UpdateResourcesAmount();
+        var exitCondition = resource.Amount + amount;
+        var sign = GetOperationSign(amount);
+        var label = GetLabel(resource);
+        
+        while (int.Parse(label.text) != exitCondition)
+        {
+            var currentAmount = float.Parse(label.text);
+            var newAmount = currentAmount + (_count * sign);
+            label.text = newAmount.ToString(CultureInfo.InvariantCulture);
+            yield return new WaitForSeconds(_time);
+        }
+    }
+
+    private TextMeshProUGUI GetLabel(Resource resource)
+    {
+        foreach (var resourceLabel in _resourceLabels)
+        {
+            if (resourceLabel.Type == resource.Type)
+            {
+                return resourceLabel.Label;
+            }
+        }
+
+        throw new ArgumentNullException("Не могу найти текстовое поле " +
+                                        " для вывода ресурсов. Проверьте, добавили ли вы его");
+    }
+
+    private int GetOperationSign(float amount)
+    {
+        if (amount < 0)
+        {
+            return -1;
+        }
+        
+        return 1;
     }
 
     private void UpdateResourcesAmount()
@@ -38,17 +95,4 @@ public class ResourcesView : MonoBehaviour
             }
         }
     }
-
-    public void StartEnumerator(int value,int index)
-    {
-        var _resources = _resources[index]
-        var raz = value / _count;
-        var ost = value % _count;
-        for (int i = 0; i < raz; i++)
-        {
-            _resources.Amount += _count;
-        }
-        _resources.Amount += ost;
-    }
-    
 }
