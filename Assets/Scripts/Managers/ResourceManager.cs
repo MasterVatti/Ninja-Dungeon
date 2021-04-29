@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ResourceSystem;
@@ -10,9 +11,23 @@ namespace Managers
     /// </summary>
     public class ResourceManager : MonoBehaviour
     {
+        public float OldAmount => _oldAmount;
+        
+        public float NewAmount => _newAmount;
+
+        public event Action<float> OnResourceChanged; 
+        
         [SerializeField]
         private List<Resource> _resources;
 
+        private ResourcesView _resourcesView;
+
+        private float _substracting;
+
+        private float _oldAmount;
+
+        private float _newAmount;
+        
         public bool HasEnough(ResourceType type, float value)
         {
             return _resources[GetResourceIndexByType(type)].Amount >= value;
@@ -44,7 +59,11 @@ namespace Managers
             var index = GetResourceIndexByType(type);
             var resource = _resources[index];
             resource.Amount += value;
+            _substracting = value;
+            var newAmount = resource.Amount;
             _resources[index] = resource;
+            OnResourceChanged?.Invoke(_substracting);
+            
         }
 
         public List<Resource> GetResources()

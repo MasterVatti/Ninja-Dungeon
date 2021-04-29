@@ -24,10 +24,9 @@ public class ResourcesView : MonoBehaviour
 
     void Start()
     {
-        _resources = MainManager.ResourceManager.GetResources();
         _substracting = _resourceManager.Substracting;
+        _resources = MainManager.ResourceManager.GetResources();
         _resourceManager.OnResourceChanged += StartCoroutines;
-        
     }
 
     void Update()
