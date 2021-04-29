@@ -11,21 +11,13 @@ namespace Managers
     /// </summary>
     public class ResourceManager : MonoBehaviour
     {
-        public float OldAmount => _oldAmount;
-        
-        public float NewAmount => _newAmount;
-
-        public event Action<float, float> OnResourceChanged; 
+        public event Action<Resource, int> OnResourceAmountChanged; 
         
         [SerializeField]
         private List<Resource> _resources;
 
         private ResourcesView _resourcesView;
 
-        private float _oldAmount;
-
-        private float _newAmount;
-        
         public bool HasEnough(ResourceType type, float value)
         {
             return _resources[GetResourceIndexByType(type)].Amount >= value;
@@ -36,10 +28,13 @@ namespace Managers
             return resources.TrueForAll(resource => HasEnough(resource.Type, resource.Amount));
         }
 
-        public void Pay(ResourceType type, float value)
+        public void Pay(ResourceType type, int value)
         {
             var index = GetResourceIndexByType(type);
             var resource = _resources[index];
+            
+            OnResourceAmountChanged?.Invoke(resource, -value);
+            
             resource.Amount -= value;
             _resources[index] = resource;
         }
@@ -56,12 +51,11 @@ namespace Managers
         {
             var index = GetResourceIndexByType(type);
             var resource = _resources[index];
-            _oldAmount = resource.Amount;
-            resource.Amount += value;
-            _newAmount = resource.Amount;
-            _resources[index] = resource;
-            OnResourceChanged?.Invoke(_oldAmount, _newAmount);
             
+            OnResourceAmountChanged?.Invoke(resource, value);
+            
+            resource.Amount += value;
+            _resources[index] = resource;
         }
 
         public List<Resource> GetResources()
@@ -78,6 +72,11 @@ namespace Managers
         {
             var index = _resources.FindIndex(resource => resource.Type == type);
             return index;
+        }
+
+        public float GetResourceAmount(ResourceType type)
+        {
+            return _resources.Find(resource => resource.Type == type).Amount;
         }
     }
 }

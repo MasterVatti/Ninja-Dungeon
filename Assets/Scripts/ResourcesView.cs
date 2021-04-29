@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Dynamic;
-using System.Resources;
+using System.Globalization;
 using ResourceSystem;
+using TMPro;
 using UnityEngine;
 
 public class ResourcesView : MonoBehaviour
@@ -12,55 +13,72 @@ public class ResourcesView : MonoBehaviour
     
     private List<Resource> _resources;
 
-    private Managers.ResourceManager _resourceManager;
-
-    private float _time = 1f;
-
-    private float _oldAmount;
-    private float _newAmount;
+    private float _time = 0.2f;
+    
+    private int _count = 10;
 
 
-
-
-
-    void Start()
+    private void Start()
     {
-        _resources = MainManager.ResourceManager.GetResources();
-        _oldAmount = _resourceManager.OldAmount;
-        _newAmount = _resourceManager.NewAmount;
-        _resourceManager.OnResourceChanged += StartCoroutines;
+        MainManager.ResourceManager.OnResourceAmountChanged += OnResourceAmountChanged;
         
-    }
-
-    void Update()
-    {
+        _resources = MainManager.ResourceManager.GetResources();
         UpdateResourcesAmount();
     }
-
-    void StartCoroutines(float _oldAmount, float _newAmount)
+    
+    /// <summary>
+    /// Добавлено для теста. При нажатии на спейс дает 100 дерева
+    /// </summary>
+    private void Update()
     {
-        StartCoroutine(moveResource(_oldAmount, _newAmount));
+        if (Input.GetKeyUp("space"))
+        {
+            MainManager.ResourceManager.AddResource(ResourceType.Lumber, 100);
+        }
     }
     
-
-
-    public IEnumerator moveResource(float _oldAmount, float _newAmount)
+    private void OnResourceAmountChanged(Resource resource, int amount)
     {
-        var speed = _time / (_newAmount - _oldAmount);
-        var value = (_newAmount - _oldAmount);
-        for (int i = 0; i < value; i++)
-        {
-            _oldAmount += i;
-            yield return new WaitForSeconds(speed);
-        }
-        
-
-
+        StartCoroutine(UpdateResource(resource, amount));
     }
 
-    private void OnDestroy()
+    private IEnumerator UpdateResource(Resource resource, int amount)
     {
-        _resourceManager.OnResourceChanged -=  StartCoroutines;
+        var exitCondition = resource.Amount + amount;
+        var sign = GetOperationSign(amount);
+        var label = GetLabel(resource);
+        
+        while (int.Parse(label.text) != exitCondition)
+        {
+            var currentAmount = float.Parse(label.text);
+            var newAmount = currentAmount + (_count * sign);
+            label.text = newAmount.ToString(CultureInfo.InvariantCulture);
+            yield return new WaitForSeconds(_time);
+        }
+    }
+
+    private TextMeshProUGUI GetLabel(Resource resource)
+    {
+        foreach (var resourceLabel in _resourceLabels)
+        {
+            if (resourceLabel.Type == resource.Type)
+            {
+                return resourceLabel.Label;
+            }
+        }
+
+        throw new ArgumentNullException("Не могу найти текстовое поле " +
+                                        " для вывода ресурсов. Проверьте, добавили ли вы его");
+    }
+
+    private int GetOperationSign(float amount)
+    {
+        if (amount < 0)
+        {
+            return -1;
+        }
+        
+        return 1;
     }
 
     private void UpdateResourcesAmount()
@@ -77,11 +95,4 @@ public class ResourcesView : MonoBehaviour
             }
         }
     }
-    
-    
-    
-    
 }
-
-
-
