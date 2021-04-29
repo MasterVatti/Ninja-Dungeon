@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace BuffSystem
 {
+    /// <summary>
+    /// Класс служит для активации, обновления и остановки бафов
+    /// </summary>
     [RequireComponent(typeof(PersonCharacteristics))]
     public class BuffManager : MonoBehaviour
     {

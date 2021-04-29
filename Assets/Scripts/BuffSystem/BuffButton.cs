@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 namespace BuffSystem
 {
+    /// <summary>
+    /// Кнопка способностей служит для передачи выбранного баффа
+    /// </summary>
     public class BuffButton : MonoBehaviour
     {
         public event Action<IBuff, BuffType> OnClicked;

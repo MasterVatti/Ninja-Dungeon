@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace BuffSystem.BuffSettings.ScriptsSettings
 {
+    /// <summary>
+    /// Базовые настройки для бафов
+    /// </summary>
     public abstract class SettingsBuff : ScriptableObject
     {
         public BuffType BuffType => _buffType;

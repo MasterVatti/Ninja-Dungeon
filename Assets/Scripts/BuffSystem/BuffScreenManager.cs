@@ -7,6 +7,9 @@ using Random = UnityEngine.Random;
 
 namespace BuffSystem
 {
+    /// <summary>
+    /// Класс служит для распределения кнопкам рандомные баффы
+    /// </summary>
     public class BuffScreenManager : BaseScreen
     {
         [SerializeField]

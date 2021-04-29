@@ -15,8 +15,6 @@ namespace ProjectileLauncher
         [SerializeField] 
         private Projectile.Projectile _projectilePrefab;
         [SerializeField] 
-        private float _projectileSpawnCooldown;
-        [SerializeField] 
         private NearestEnemyDetector _enemyDetector;
         [SerializeField]
         private float _distanceBetweenProjectiles;
@@ -29,6 +27,7 @@ namespace ProjectileLauncher
         [SerializeField]
         private int _delaySecondaryProjectiles = 50;
         
+        private float _projectileSpawnCooldown;
         private ObjectPool _objectPool;
         private Vector3 _nearestEnemyDirection;
         private float _currentTime;
@@ -36,6 +35,7 @@ namespace ProjectileLauncher
 
         private void Start()
         {
+            _projectileSpawnCooldown = _playerCharacteristics.AttackRate;
             _objectPool = new ObjectPool(_projectilePrefab.gameObject, 10);
         }
 

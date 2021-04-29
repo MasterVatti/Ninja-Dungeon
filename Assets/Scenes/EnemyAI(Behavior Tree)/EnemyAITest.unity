@@ -371,7 +371,6 @@ MonoBehaviour:
   _playerCharacteristics: {fileID: 919757421}
   _projectilePrefab: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
     type: 3}
-  _projectileSpawnCooldown: 1
   _enemyDetector: {fileID: 831249545}
   _distanceBetweenProjectiles: 0.5
   _swivelDiagonalArrows: 45
@@ -718,7 +717,7 @@ PrefabInstance:
     - target: {fileID: 3344586694461362826, guid: e2cb250021ab716488e629bff7370cd9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3344586694461362830, guid: e2cb250021ab716488e629bff7370cd9,
         type: 3}
