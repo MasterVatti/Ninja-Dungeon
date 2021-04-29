@@ -21,7 +21,6 @@ public class ResourcesView : MonoBehaviour
     private void Start()
     {
         MainManager.ResourceManager.OnResourceAmountChanged += OnResourceAmountChanged;
-        
         _resources = MainManager.ResourceManager.GetResources();
         UpdateResourcesAmount();
     }
@@ -50,11 +49,36 @@ public class ResourcesView : MonoBehaviour
         
         while (int.Parse(label.text) != exitCondition)
         {
-            var currentAmount = float.Parse(label.text);
-            var newAmount = currentAmount + (_count * sign);
-            label.text = newAmount.ToString(CultureInfo.InvariantCulture);
-            yield return new WaitForSeconds(_time);
+            if (int.Parse(label.text) < exitCondition && sign > 0)
+            {
+                var currentAmount = float.Parse(label.text);
+                var newAmount = currentAmount + (_count * sign);
+                label.text = newAmount.ToString(CultureInfo.InvariantCulture);
+                yield return new WaitForSeconds(_time);
+                if (int.Parse(label.text) >= exitCondition)
+                { 
+                    label.text = exitCondition.ToString();
+                }
+            }
+            
+            if (int.Parse(label.text) > exitCondition && sign < 0)
+            {
+                var currentAmount = float.Parse(label.text);
+                var newAmount = currentAmount + (_count * sign);
+                label.text = newAmount.ToString(CultureInfo.InvariantCulture);
+                yield return new WaitForSeconds(_time);
+                if (int.Parse(label.text) <= exitCondition)
+                { 
+                    label.text = exitCondition.ToString();
+                }
+            }
+
+            if (int.Parse(label.text) == exitCondition && sign < 0 || int.Parse(label.text) == exitCondition && sign > 0)
+            {
+                break;
+            }
         }
+        
     }
 
     private TextMeshProUGUI GetLabel(Resource resource)
@@ -79,6 +103,11 @@ public class ResourcesView : MonoBehaviour
         }
         
         return 1;
+    }
+
+    private void OnDestroy()
+    {
+        MainManager.ResourceManager.OnResourceAmountChanged -= OnResourceAmountChanged;
     }
 
     private void UpdateResourcesAmount()

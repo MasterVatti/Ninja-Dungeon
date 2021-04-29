@@ -32,8 +32,11 @@ namespace Managers
         {
             var index = GetResourceIndexByType(type);
             var resource = _resources[index];
+            if (value > 1)
+            {
+                OnResourceAmountChanged?.Invoke(resource, -value);
+            }
             
-            OnResourceAmountChanged?.Invoke(resource, -value);
             
             resource.Amount -= value;
             _resources[index] = resource;
