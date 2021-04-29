@@ -17,11 +17,11 @@ GameObject:
   - component: {fileID: 839100401563898178}
   - component: {fileID: 5247192937791318919}
   - component: {fileID: 6194538759664303999}
-  - component: {fileID: 4460929393999622058}
   - component: {fileID: 3946989225980792668}
   - component: {fileID: 8401475512963324837}
   - component: {fileID: 7924829721957299150}
   - component: {fileID: 2476845914273750276}
+  - component: {fileID: 4607569714851684957}
   m_Layer: 0
   m_Name: MagicianPrefab
   m_TagString: Enemy
@@ -193,23 +193,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4460929393999622058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3344586694461362826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b7c8756b692088479911f2367a302a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 2733183494529446169, guid: a0ea9b697dcc44c49b2a57d10ec9ef49,
-    type: 3}
-  _bulletSpeed: 15
-  _shotCooldownTime: 0.5
-  _agent: {fileID: 839100401563898178}
 --- !u!114 &3946989225980792668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +245,6 @@ MonoBehaviour:
   _personCharacteristics: {fileID: 8401475512963324837}
   _healthBehaviour: {fileID: 2476845914273750276}
   _rigidbody: {fileID: 5247192937791318919}
-  _enemyCharacteristics: {fileID: 8401475512963324837}
 --- !u!114 &2476845914273750276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,3 +257,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b22f00f3b5846d409eee145d80d44c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4607569714851684957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3344586694461362826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7c8756b692088479911f2367a302a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletPrefab: {fileID: 2733183494529446169, guid: a0ea9b697dcc44c49b2a57d10ec9ef49,
+    type: 3}
+  _bulletSpeed: 15
+  _shotCooldownTime: 0.5
+  _agent: {fileID: 839100401563898178}

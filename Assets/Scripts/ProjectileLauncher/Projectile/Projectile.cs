@@ -1,3 +1,4 @@
+using System;
 using Assets.Scripts;
 using Enemies;
 using UnityEngine;
@@ -14,38 +15,34 @@ namespace ProjectileLauncher
         [SerializeField] 
         private int _damage;
         [SerializeField]
-        private float _timeToRemove = 5f;
-        [SerializeField]
         private Rigidbody _rigidbody;
-        
-        private void Awake()
-        {
-            Destroy(gameObject, _timeToRemove);
-        }
+        private Vector3 _forward;
 
+        
         public void Initialize(Vector3 direction)
         {
-            SetProjectileDirection(direction);
+            _forward = direction;
         }
         
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag(GlobalConstants.ENEMY_TAG))
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
                 DealDamage(collision);
             }
             if (collision.gameObject.CompareTag(GlobalConstants.WALL_TAG))
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
 
-        private void SetProjectileDirection(Vector3 direction)
+        private void Update()
         {
-            _rigidbody.velocity = direction * _projectileSpeed;
+            _rigidbody.velocity = _forward * _projectileSpeed;
         }
-        
+
+
         public virtual void DealDamage(Collision collision)
         {
             var enemyHealth = collision.gameObject.GetComponent<HealthBehaviour>();
