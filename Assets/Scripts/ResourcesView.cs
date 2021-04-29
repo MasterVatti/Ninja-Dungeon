@@ -24,11 +24,15 @@ public class ResourcesView : MonoBehaviour
         _resources = MainManager.ResourceManager.GetResources();
         UpdateResourcesAmount();
     }
+    
+    
 
     private void OnResourceAmountChanged(Resource resource, int amount)
     {
         StartCoroutine(UpdateResource(resource, amount));
     }
+    
+    
 
     private IEnumerator UpdateResource(Resource resource, int amount)
     {
@@ -49,6 +53,8 @@ public class ResourcesView : MonoBehaviour
         label.text = remainder.ToString();
 
     }
+    
+    
 
     private TextMeshProUGUI GetLabel(Resource resource)
     {
@@ -63,6 +69,8 @@ public class ResourcesView : MonoBehaviour
         throw new ArgumentNullException("Не могу найти текстовое поле " +
                                         " для вывода ресурсов. Проверьте, добавили ли вы его");
     }
+    
+    
 
     private int GetOperationSign(float amount)
     {
@@ -73,11 +81,15 @@ public class ResourcesView : MonoBehaviour
         
         return 1;
     }
+    
+    
 
     private void OnDestroy()
     {
         MainManager.ResourceManager.OnResourceAmountChanged -= OnResourceAmountChanged;
     }
+    
+    
 
     private void UpdateResourcesAmount()
     {
