@@ -5,7 +5,9 @@ using System.Globalization;
 using ResourceSystem;
 using TMPro;
 using UnityEngine;
-
+/// <summary>
+/// Класс отвечает за HUDResource
+/// </summary>
 public class ResourcesView : MonoBehaviour
 {
     [SerializeField]
