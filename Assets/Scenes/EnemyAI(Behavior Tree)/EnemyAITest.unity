@@ -373,7 +373,7 @@ MonoBehaviour:
     type: 3}
   _projectileSpawnCooldown: 1
   _enemyDetector: {fileID: 831249545}
-  _multishotDelay: 0.05
+  _delaySecondaryProjectiles: 0.05
   _swivelDiagonalArrows: 45
 --- !u!1 &919757416
 GameObject:
@@ -493,7 +493,7 @@ MonoBehaviour:
   _canMove: 0
   _canAttack: 0
   _ricochetShells: 0
-  _multishotShells: 0
+  _multishotShells: 5
   _frontalityShells: 0
   _diagonalShells: 0
 --- !u!114 &919757422

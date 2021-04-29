@@ -22,9 +22,9 @@ namespace ProjectileLauncher
 
         [Header("Ability parameters")]
         [SerializeField]
-        private float _multishotDelay;
+        private float _delaySecondaryProjectiles;
         [SerializeField]
-        private float _swivelDiagonalArrows;
+        private float _swivelDiagonalArrows = 45;
         
         private float _currentTime;
         private Vector3 _nearestEnemyDirection;
@@ -50,8 +50,6 @@ namespace ProjectileLauncher
                     
                     CreateProjectile();
 
-                    DiagonalShells();
-                    
                     StartCoroutine(Multishot());
                 }
             }
@@ -80,25 +78,38 @@ namespace ProjectileLauncher
             }
         }
 
+        
+
         private IEnumerator Multishot()
         {
             for (int i = 0; i < _playerCharacteristics.MultishotShells; i++)
             {
-                yield return new WaitForSeconds(_multishotDelay);
+                Debug.Log("Multishot");
                 
                 CreateProjectile();
+                
+                yield return new WaitForSeconds(_delaySecondaryProjectiles);
             }
+            
+            yield return StartCoroutine(DiagonalShells());      
         }
 
-        private void DiagonalShells()
-        {
-            for (int i = 0; i < _playerCharacteristics.DiagonalShells; i++)
-            {
-                _nearestEnemyDirection += new Vector3(0.25f, 0f, 0.25f);
-                CreateProjectile();
-                _nearestEnemyDirection -= new Vector3(0.50f, 0f, 0.50f);
-                CreateProjectile();
-            }
-        }  
+       private IEnumerator DiagonalShells()
+       {
+           var direction = _nearestEnemyDirection;
+           
+           for (int i = 0; i < _playerCharacteristics.DiagonalShells; i++)
+           {
+               Debug.Log("Diagonal"); 
+               
+               _nearestEnemyDirection = Quaternion.AngleAxis(_swivelDiagonalArrows, Vector3.up) * direction;
+               CreateProjectile();
+               
+               _nearestEnemyDirection = Quaternion.AngleAxis(-_swivelDiagonalArrows, Vector3.up) * direction;
+               CreateProjectile();
+               
+               yield return new WaitForSeconds(_delaySecondaryProjectiles);
+           }
+       }  
     }
 }

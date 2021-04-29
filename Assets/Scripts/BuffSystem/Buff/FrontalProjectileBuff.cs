@@ -25,5 +25,5 @@ namespace BuffSystem.Buff
 
             playerCharacteristics.FrontalityShells -= _diagonalProjectileNumber;
         }
-    }
+    }    
 }
