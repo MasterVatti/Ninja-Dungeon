@@ -18,7 +18,7 @@ namespace BuffSystem.Buff
 
             var attackRateIncreaseQuantity = personCharacteristics.AttackRate * percent;
             
-            personCharacteristics.AttackDamage += (int)attackRateIncreaseQuantity;
+            personCharacteristics.AttackRate -= (float)attackRateIncreaseQuantity;
         }
 
         public void StopBuff(PersonCharacteristics personCharacteristics)
@@ -27,7 +27,7 @@ namespace BuffSystem.Buff
 
             var attackRateIncreaseQuantity = personCharacteristics.AttackRate * percent;
             
-            personCharacteristics.AttackDamage -= (int)attackRateIncreaseQuantity;
+            personCharacteristics.AttackRate += (float)attackRateIncreaseQuantity;
         }
     }
 }

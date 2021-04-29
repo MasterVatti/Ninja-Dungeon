@@ -8,10 +8,10 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
     public class FrontalProjectileBuffSettings : SettingsBuff
     {
         [SerializeField]
-        private int _diagonalProjectileNumber;
+        private bool _hasFrontalProjectiles;
         public override IBuff CreateBuff()
         {
-            return new FrontalProjectileBuff(_diagonalProjectileNumber);
+            return new FrontalProjectileBuff(_hasFrontalProjectiles);
         }
     }
 }

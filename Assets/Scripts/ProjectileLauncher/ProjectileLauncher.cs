@@ -1,5 +1,4 @@
-using System;
-using System.Collections;
+using System.Threading.Tasks;
 using Characteristics;
 using Enemies;
 using UnityEngine;
@@ -14,21 +13,26 @@ namespace ProjectileLauncher
         [SerializeField]
         private PlayerCharacteristics _playerCharacteristics;
         [SerializeField] 
-        private Projectile _projectilePrefab;
+        private Projectile.Projectile _projectilePrefab;
         [SerializeField] 
         private float _projectileSpawnCooldown;
         [SerializeField] 
         private NearestEnemyDetector _enemyDetector;
-
-        [Header("Ability parameters")]
         [SerializeField]
-        private float _delaySecondaryProjectiles;
+        private float _distanceBetweenProjectiles;
+        
+        [Header("Degrees")]
         [SerializeField]
         private float _swivelDiagonalArrows = 45;
+
+        [Header("Milliseconds latency")]
+        [SerializeField]
+        private int _delaySecondaryProjectiles = 50;
         
-        private float _currentTime;
-        private Vector3 _nearestEnemyDirection;
         private ObjectPool _objectPool;
+        private Vector3 _nearestEnemyDirection;
+        private float _currentTime;
+        private int _reboundNumber;
 
         private void Start()
         {
@@ -47,10 +51,12 @@ namespace ProjectileLauncher
                 if (enemy != null)
                 {
                     DirectionNearestEnemy(enemy.gameObject);
-                    
-                    CreateProjectile();
 
-                    StartCoroutine(Multishot());
+                    CreateProjectile(transform.position);
+
+                    Multishot();
+                    
+                    DiagonalShells();
                 }
             }
         }
@@ -65,50 +71,63 @@ namespace ProjectileLauncher
             transform.parent.LookAt(enemy.transform);
         }
 
-        private void CreateProjectile()
+
+        private void CreateProjectile(Vector3 position)
         {
-            var gameObject = _objectPool.Get();
-
-            gameObject.transform.position = transform.position;
-            gameObject.transform.rotation = transform.rotation;
-
-            if (gameObject.TryGetComponent<Projectile>(out var projectile))
+            if (_playerCharacteristics.FrontalityShells)
             {
-                projectile.Initialize(_nearestEnemyDirection);
+                CreateFrontalShells(position);
+            }
+            else
+            {
+                CreateStandardProjectile(position);
             }
         }
-
         
+        private void CreateStandardProjectile(Vector3 position)
+        {
+            var newBullet = _objectPool.Get();
 
-        private IEnumerator Multishot()
+            newBullet.transform.position = position;
+            newBullet.transform.rotation = transform.rotation;
+
+            if (newBullet.TryGetComponent<Projectile.Projectile>(out var projectile))
+            {
+                projectile.Initialize(_nearestEnemyDirection, _playerCharacteristics.RicochetShells);
+            }
+        }
+        
+        private void CreateFrontalShells(Vector3 position)
+        {
+            CreateStandardProjectile(position + new Vector3(_distanceBetweenProjectiles, 0f, 0f));
+            CreateStandardProjectile(position + new Vector3(-_distanceBetweenProjectiles, 0f, 0f));
+        }
+        
+        private async void Multishot()
         {
             for (int i = 0; i < _playerCharacteristics.MultishotShells; i++)
             {
-                Debug.Log("Multishot");
+                await Task.Delay(_delaySecondaryProjectiles);
                 
-                CreateProjectile();
-                
-                yield return new WaitForSeconds(_delaySecondaryProjectiles);
+                CreateProjectile(transform.position);
             }
-            
-            yield return StartCoroutine(DiagonalShells());      
         }
 
-       private IEnumerator DiagonalShells()
+       private async void DiagonalShells()
        {
            var direction = _nearestEnemyDirection;
            
            for (int i = 0; i < _playerCharacteristics.DiagonalShells; i++)
            {
-               Debug.Log("Diagonal"); 
+               await Task.Delay(_delaySecondaryProjectiles);
                
                _nearestEnemyDirection = Quaternion.AngleAxis(_swivelDiagonalArrows, Vector3.up) * direction;
-               CreateProjectile();
+               CreateStandardProjectile(transform.position);
                
                _nearestEnemyDirection = Quaternion.AngleAxis(-_swivelDiagonalArrows, Vector3.up) * direction;
-               CreateProjectile();
-               
-               yield return new WaitForSeconds(_delaySecondaryProjectiles);
+               CreateStandardProjectile(transform.position);
+
+               _nearestEnemyDirection = direction;
            }
        }  
     }

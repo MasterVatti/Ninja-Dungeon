@@ -27,6 +27,8 @@ namespace BuffSystem
         private void ClickedBuff(IBuff buff, BuffType buffType)
         {
             MainManager.BuffManager.AddBuff(buff, buffType);
+            
+            MainManager.ScreenManager.CloseTopScreen();
         }
         
         private SettingsBuff GetRandomSettingBuffs()

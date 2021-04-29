@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165ba7a1026011b448c8de5a52fbd45e, type: 3}
   m_Name: WeakDamageIncrease
   m_EditorClassIdentifier: 
+  _nameBuff: Damage increase (weak)
+  _imageBuff: {fileID: 21300000, guid: 69a585faba9b7224eb81ee0d1f168637, type: 3}
   _buffType: 1
   _percentageIncrease: 20

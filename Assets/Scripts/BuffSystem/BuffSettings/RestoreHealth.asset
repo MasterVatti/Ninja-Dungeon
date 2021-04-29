@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f568f3814ce6ad4a95ab9f101a50494, type: 3}
   m_Name: RestoreHealth
   m_EditorClassIdentifier: 
+  _nameBuff: Healing
+  _imageBuff: {fileID: 21300000, guid: aea23e1bac0b3f7428819b22fbbbfea1, type: 3}
   _buffType: 0
-  _percentageIncrease: 20
+  _percentageIncrease: 40

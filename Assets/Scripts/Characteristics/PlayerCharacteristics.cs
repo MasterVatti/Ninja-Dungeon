@@ -19,7 +19,7 @@ namespace Characteristics
             set => _multishotShells = value;
         }
         
-        public int FrontalityShells
+        public bool FrontalityShells
         {
             get => _frontalityShells;
             set => _frontalityShells = value;
@@ -37,7 +37,7 @@ namespace Characteristics
         [SerializeField]
         private int _multishotShells;
         [SerializeField]
-        private int _frontalityShells;    
+        private bool _frontalityShells;    
         [SerializeField]
         private int _diagonalShells;
     }

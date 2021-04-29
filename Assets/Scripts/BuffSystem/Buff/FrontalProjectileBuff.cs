@@ -6,24 +6,24 @@ namespace BuffSystem.Buff
 {
     public class FrontalProjectileBuff : IPassiveBuff
     {
-        private int _diagonalProjectileNumber;
+        private bool _hasFrontalProjectiles;
 
-        public FrontalProjectileBuff(int diagonalProjectileNumber)
+        public FrontalProjectileBuff(bool hasFrontalProjectiles)
         {
-            _diagonalProjectileNumber = diagonalProjectileNumber;
+            _hasFrontalProjectiles = hasFrontalProjectiles;
         }
         public void StartBuff(PersonCharacteristics personCharacteristics)
         {
             var playerCharacteristics = personCharacteristics.GetComponentInChildren<PlayerCharacteristics>();
 
-            playerCharacteristics.FrontalityShells += _diagonalProjectileNumber;
+            playerCharacteristics.FrontalityShells = true;
         }
 
         public void StopBuff(PersonCharacteristics personCharacteristics)
         {
             var playerCharacteristics = personCharacteristics.GetComponentInChildren<PlayerCharacteristics>();
 
-            playerCharacteristics.FrontalityShells -= _diagonalProjectileNumber;
+            playerCharacteristics.FrontalityShells = false;
         }
     }    
 }

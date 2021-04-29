@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c97d34fc3b6f547b50de701569683d, type: 3}
-  m_Name: HealthBoost
+  m_Script: {fileID: 11500000, guid: a1a438c73110c5141af03b7349c558fb, type: 3}
+  m_Name: StrongAttackRate
   m_EditorClassIdentifier: 
-  _nameBuff: Increased maximum HP
-  _imageBuff: {fileID: 21300000, guid: c7251488664c81a4c917921e48f92fd8, type: 3}
+  _nameBuff: Attack Speed Increase (Strong)
+  _imageBuff: {fileID: 21300000, guid: 6ad8a5d73c0def4418cd226aa5e33607, type: 3}
   _buffType: 1
-  _percentageIncrease: 20
+  _percentageIncrease: 40
