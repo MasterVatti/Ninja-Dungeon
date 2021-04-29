@@ -16,8 +16,7 @@ public class ResourcesView : MonoBehaviour
     private float _time = 0.2f;
     
     private int _count = 10;
-
-
+    
     private void Start()
     {
         MainManager.ResourceManager.OnResourceAmountChanged += OnResourceAmountChanged;
@@ -25,37 +24,29 @@ public class ResourcesView : MonoBehaviour
         UpdateResourcesAmount();
     }
     
-    
-
     private void OnResourceAmountChanged(Resource resource, int amount)
     {
         StartCoroutine(UpdateResource(resource, amount));
     }
     
-    
-
     private IEnumerator UpdateResource(Resource resource, int amount)
     {
         var sign = GetOperationSign(amount);
         var label = GetLabel(resource);
-        var value = amount / _count;
+        var step = amount / _count;
         var remainder = amount % _count;
         
-        for (int i = 0; i < value; i++)
+        for (int i = 0; i < step; i++)
         {
             var currentAmount = Convert.ToSingle(label.text);
             var newAmount = currentAmount + (_count * sign);
             label.text = newAmount.ToString(CultureInfo.InvariantCulture);
             yield return new WaitForSeconds(_time);
-
         }
         remainder += Convert.ToInt32(label.text);
         label.text = remainder.ToString();
-
     }
     
-    
-
     private TextMeshProUGUI GetLabel(Resource resource)
     {
         foreach (var resourceLabel in _resourceLabels)
@@ -70,8 +61,6 @@ public class ResourcesView : MonoBehaviour
                                         " для вывода ресурсов. Проверьте, добавили ли вы его");
     }
     
-    
-
     private int GetOperationSign(float amount)
     {
         if (amount < 0)
@@ -82,15 +71,11 @@ public class ResourcesView : MonoBehaviour
         return 1;
     }
     
-    
-
     private void OnDestroy()
     {
         MainManager.ResourceManager.OnResourceAmountChanged -= OnResourceAmountChanged;
     }
     
-    
-
     private void UpdateResourcesAmount()
     {
         for (int i = 0; i < _resourceLabels.Count; i++)
