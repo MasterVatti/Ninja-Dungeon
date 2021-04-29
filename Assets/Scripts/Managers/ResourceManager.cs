@@ -15,14 +15,12 @@ namespace Managers
         
         public float NewAmount => _newAmount;
 
-        public event Action<float> OnResourceChanged; 
+        public event Action<float, float> OnResourceChanged; 
         
         [SerializeField]
         private List<Resource> _resources;
 
         private ResourcesView _resourcesView;
-
-        private float _substracting;
 
         private float _oldAmount;
 
@@ -58,11 +56,11 @@ namespace Managers
         {
             var index = GetResourceIndexByType(type);
             var resource = _resources[index];
+            _oldAmount = resource.Amount;
             resource.Amount += value;
-            _substracting = value;
-            var newAmount = resource.Amount;
+            _newAmount = resource.Amount;
             _resources[index] = resource;
-            OnResourceChanged?.Invoke(_substracting);
+            OnResourceChanged?.Invoke(_oldAmount, _newAmount);
             
         }
 

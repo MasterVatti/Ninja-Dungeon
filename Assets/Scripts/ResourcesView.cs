@@ -16,7 +16,8 @@ public class ResourcesView : MonoBehaviour
 
     private float _time = 1f;
 
-    private float _substracting;
+    private float _oldAmount;
+    private float _newAmount;
 
 
 
@@ -25,7 +26,8 @@ public class ResourcesView : MonoBehaviour
     void Start()
     {
         _resources = MainManager.ResourceManager.GetResources();
-        _substracting = _resourceManager.Substracting;
+        _oldAmount = _resourceManager.OldAmount;
+        _newAmount = _resourceManager.NewAmount;
         _resourceManager.OnResourceChanged += StartCoroutines;
         
     }
@@ -35,18 +37,23 @@ public class ResourcesView : MonoBehaviour
         UpdateResourcesAmount();
     }
 
-    void StartCoroutines(float _substracting)
+    void StartCoroutines(float _oldAmount, float _newAmount)
     {
-        StartCoroutine(moveResource(_substracting));
+        StartCoroutine(moveResource(_oldAmount, _newAmount));
     }
     
 
 
-    public IEnumerator moveResource(float _substracting)
+    public IEnumerator moveResource(float _oldAmount, float _newAmount)
     {
-        var speed = _time / _substracting;
+        var speed = _time / (_newAmount - _oldAmount);
+        var value = (_newAmount - _oldAmount);
+        for (int i = 0; i < value; i++)
+        {
+            _oldAmount += i;
+            yield return new WaitForSeconds(speed);
+        }
         
-        yield return new WaitForSeconds(speed);
 
 
     }
@@ -64,7 +71,6 @@ public class ResourcesView : MonoBehaviour
             {
                 if (_resourceLabels[i].Type == _resources[j].Type )
                 {
-                    
                     _resourceLabels[i].Label.text = _resources[j].Amount.ToString();
                     break;
                 }
