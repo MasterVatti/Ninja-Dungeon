@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Dynamic;
+using System.Resources;
 using ResourceSystem;
-using TMPro;
 using UnityEngine;
 
 public class ResourcesView : MonoBehaviour
@@ -13,72 +12,55 @@ public class ResourcesView : MonoBehaviour
     
     private List<Resource> _resources;
 
-    private float _time = 0.2f;
-    
-    private int _count = 10;
+    private Managers.ResourceManager _resourceManager;
+
+    private float _time = 1f;
+
+    private float _oldAmount;
+    private float _newAmount;
 
 
-    private void Start()
+
+
+
+    void Start()
     {
-        MainManager.ResourceManager.OnResourceAmountChanged += OnResourceAmountChanged;
-        
         _resources = MainManager.ResourceManager.GetResources();
+        _oldAmount = _resourceManager.OldAmount;
+        _newAmount = _resourceManager.NewAmount;
+        _resourceManager.OnResourceChanged += StartCoroutines;
+        
+    }
+
+    void Update()
+    {
         UpdateResourcesAmount();
     }
-    
-    /// <summary>
-    /// Добавлено для теста. При нажатии на спейс дает 100 дерева
-    /// </summary>
-    private void Update()
+
+    void StartCoroutines(float _oldAmount, float _newAmount)
     {
-        if (Input.GetKeyUp("space"))
-        {
-            MainManager.ResourceManager.AddResource(ResourceType.Lumber, 100);
-        }
+        StartCoroutine(moveResource(_oldAmount, _newAmount));
     }
     
-    private void OnResourceAmountChanged(Resource resource, int amount)
-    {
-        StartCoroutine(UpdateResource(resource, amount));
-    }
 
-    private IEnumerator UpdateResource(Resource resource, int amount)
+
+    public IEnumerator moveResource(float _oldAmount, float _newAmount)
     {
-        var exitCondition = resource.Amount + amount;
-        var sign = GetOperationSign(amount);
-        var label = GetLabel(resource);
-        
-        while (int.Parse(label.text) != exitCondition)
+        var speed = _time / (_newAmount - _oldAmount);
+        var value = (_newAmount - _oldAmount);
+        for (int i = 0; i < value; i++)
         {
-            var currentAmount = float.Parse(label.text);
-            var newAmount = currentAmount + (_count * sign);
-            label.text = newAmount.ToString(CultureInfo.InvariantCulture);
-            yield return new WaitForSeconds(_time);
-        }
-    }
-
-    private TextMeshProUGUI GetLabel(Resource resource)
-    {
-        foreach (var resourceLabel in _resourceLabels)
-        {
-            if (resourceLabel.Type == resource.Type)
-            {
-                return resourceLabel.Label;
-            }
-        }
-
-        throw new ArgumentNullException("Не могу найти текстовое поле " +
-                                        " для вывода ресурсов. Проверьте, добавили ли вы его");
-    }
-
-    private int GetOperationSign(float amount)
-    {
-        if (amount < 0)
-        {
-            return -1;
+            _oldAmount += i;
+            yield return new WaitForSeconds(speed);
         }
         
-        return 1;
+
+
+    }
+
+    private void OnDestroy()
+    {
+        _resourceManager.OnResourceChanged -=  StartCoroutines;
     }
 
     private void UpdateResourcesAmount()
@@ -95,4 +77,11 @@ public class ResourcesView : MonoBehaviour
             }
         }
     }
+    
+    
+    
+    
 }
+
+
+

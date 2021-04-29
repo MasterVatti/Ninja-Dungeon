@@ -73,7 +73,7 @@ public class ShopUI : MonoBehaviour
 
                 //Is this the player's starting weapon?
                 if (WeaponManager.inst.weaponScriptableObjects[x] ==
-                    Player.inst.startingWeapon)
+                    Player3DWaveShooter.inst.startingWeapon)
                 {
                     int upgrades = weapons[x].upgrades.Length;
 
@@ -143,8 +143,8 @@ public class ShopUI : MonoBehaviour
     public void ToggleShop(bool open)
     {
         shopScreen.SetActive(open);
-        Player.inst.canAttack = !open;
-        Player.inst.canMove = !open;
+        Player3DWaveShooter.inst.canAttack = !open;
+        Player3DWaveShooter.inst.canMove = !open;
 
         if (open)
         {
@@ -156,7 +156,7 @@ public class ShopUI : MonoBehaviour
     //Updates the weapon buttons.
     void UpdateWeaponButtons()
     {
-        List<Weapon> playerWeapons = Player.inst.weapons;
+        List<Weapon> playerWeapons = Player3DWaveShooter.inst.weapons;
         List<Weapon> allWeapons = WeaponManager.baseWeapons;
 
         //Loop through all the weapon buttons.
@@ -168,7 +168,7 @@ public class ShopUI : MonoBehaviour
                 Weapon curWeapon = allWeapons[x];
 
                 //Does the player own this weapon?
-                if (Player.inst.GetWeapon(curWeapon.id) != null)
+                if (Player3DWaveShooter.inst.GetWeapon(curWeapon.id) != null)
                 {
                     Image upgradeProgressBar = weaponButtons[x].transform
                         .Find("UpgradeButton/ProgressBar")
@@ -215,7 +215,7 @@ public class ShopUI : MonoBehaviour
     //Updates various shop UI elements like player money.
     void UpdateShop()
     {
-        playerMoneyText.text = "$" + Player.inst.money;
+        playerMoneyText.text = "$" + Player3DWaveShooter.inst.money;
 
         //Refill Health and Ammo
         refillHealthText.text = "$" + ShopData.inst.refillHealthCost;
@@ -240,11 +240,11 @@ public class ShopUI : MonoBehaviour
         Weapon weapon = WeaponManager.GetWeapon(weaponId);
 
         //Does the player have enough money to purchase?
-        if (Player.inst.money >= weapon.purchaseCost)
+        if (Player3DWaveShooter.inst.money >= weapon.purchaseCost)
         {
             //If so, remove the money and give the weapon.
-            Player.inst.RemoveMoney(weapon.purchaseCost);
-            Player.inst.GiveWeapon(weapon);
+            Player3DWaveShooter.inst.RemoveMoney(weapon.purchaseCost);
+            Player3DWaveShooter.inst.GiveWeapon(weapon);
 
             //Change listener.
             weaponButtons[weaponId].transform.Find("UpgradeButton")
@@ -264,14 +264,14 @@ public class ShopUI : MonoBehaviour
     //Called when a weapon's "Upgrade" button is pressed.
     public void OnUpgradeButton(int weaponId)
     {
-        Weapon weapon = Player.inst.GetWeapon(weaponId);
+        Weapon weapon = Player3DWaveShooter.inst.GetWeapon(weaponId);
 
         //Does the player have enough money to upgrade?
-        if (Player.inst.money >=
+        if (Player3DWaveShooter.inst.money >=
             weapon.upgrades[weapon.nextUpgradeIndex].cost)
         {
             //If so, remove the money and upgrade.
-            Player.inst.RemoveMoney(weapon.upgrades[weapon.nextUpgradeIndex]
+            Player3DWaveShooter.inst.RemoveMoney(weapon.upgrades[weapon.nextUpgradeIndex]
                 .cost);
             weapon.Upgrade();
 
@@ -285,11 +285,11 @@ public class ShopUI : MonoBehaviour
     public void OnRefillHealthButton()
     {
         //Does the player have enough money to refill?
-        if (Player.inst.money >= ShopData.inst.refillHealthCost)
+        if (Player3DWaveShooter.inst.money >= ShopData.inst.refillHealthCost)
         {
             //Is so, take the money and refill health.
-            Player.inst.RemoveMoney(ShopData.inst.refillHealthCost);
-            Player.inst.curHp = Player.inst.maxHp;
+            Player3DWaveShooter.inst.RemoveMoney(ShopData.inst.refillHealthCost);
+            Player3DWaveShooter.inst.curHp = Player3DWaveShooter.inst.maxHp;
 
             //Update shop.
             UpdateWeaponButtons();
@@ -301,13 +301,13 @@ public class ShopUI : MonoBehaviour
     public void OnRefillAmmoButton()
     {
         //Does the player have enough money to refill?
-        if (Player.inst.money >= ShopData.inst.refillAmmoCost)
+        if (Player3DWaveShooter.inst.money >= ShopData.inst.refillAmmoCost)
         {
             //Is so, take the money and refill ammo.
-            Player.inst.RemoveMoney(ShopData.inst.refillAmmoCost);
+            Player3DWaveShooter.inst.RemoveMoney(ShopData.inst.refillAmmoCost);
 
-            for (int x = 0; x < Player.inst.weapons.Count; ++x)
-                Player.inst.RefillAmmo(Player.inst.weapons[x].id);
+            for (int x = 0; x < Player3DWaveShooter.inst.weapons.Count; ++x)
+                Player3DWaveShooter.inst.RefillAmmo(Player3DWaveShooter.inst.weapons[x].id);
 
             //Update shop.
             UpdateWeaponButtons();
@@ -319,14 +319,14 @@ public class ShopUI : MonoBehaviour
     public void OnUpgradeMoveSpeedButton()
     {
         //Does the player have enough money to upgrade move speed?
-        if (Player.inst.money >= ShopData.inst.moveSpeedUpgrade.curPrice &&
+        if (Player3DWaveShooter.inst.money >= ShopData.inst.moveSpeedUpgrade.curPrice &&
             ShopData.inst.moveSpeedUpgrade.canUpgrade)
         {
             ShopStatUpgrade upgrade = ShopData.inst.moveSpeedUpgrade;
 
-            Player.inst.RemoveMoney(upgrade.curPrice);
+            Player3DWaveShooter.inst.RemoveMoney(upgrade.curPrice);
 
-            Player.inst.moveSpeed *= upgrade.statIncreaseModifier;
+            Player3DWaveShooter.inst.moveSpeed *= upgrade.statIncreaseModifier;
 
             upgrade.curPrice = Mathf.CeilToInt((float) upgrade.curPrice *
                                                upgrade.priceIncreaseRate);

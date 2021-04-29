@@ -36,7 +36,7 @@ public class Explosion : MonoBehaviour
             //If it's an enemy, damage them.
             if (hits[i].collider.tag == "Enemy")
             {
-                hits[i].collider.GetComponent<Enemy>()
+                hits[i].collider.GetComponent<Enemy3DShooter>()
                     .TakeDamage(data.explosiveDamage);
             }
             else if (hits[i].collider.tag == "Damageable")

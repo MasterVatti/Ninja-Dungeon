@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
+using UnityEngine.Serialization;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -17,13 +18,14 @@ public class EnemyAI : MonoBehaviour
     [Header("Navigation")]
     public List<Vector3>
         path = new List<Vector3>(); //Navigation path to move along.
+
     private float
         pathUpdateRate =
             0.5f; //How often will the navigation path be updated?
+
     private float lastPathUpdateTime; //Last time the path was updated.
 
-    [Header("Components")]
-    public Enemy enemy; //Enemy's enemy component.
+    [FormerlySerializedAs("enemy")] [Header("Components")] public Enemy3DShooter enemy3DShooter; //Enemy's enemy component.
     public Rigidbody rig; //Enemy's rigidbody component.
     public NavMeshAgent agent; //Enemy's NavMeshAgent component.
 
@@ -33,7 +35,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         //Get missing components.
-        if (!enemy) enemy = GetComponent<Enemy>();
+        if (!enemy3DShooter) enemy3DShooter = GetComponent<Enemy3DShooter>();
         if (!rig) rig = GetComponent<Rigidbody>();
         if (!agent) GetComponent<NavMeshAgent>();
     }
@@ -41,16 +43,16 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         //Return if we don't have a target or we're dead.
-        if (!target || enemy.state == EnemyState.Dead)
+        if (!target || enemy3DShooter.state == EnemyState.Dead)
             return;
 
         //Check distance to target to change state.
         DistanceCheck();
 
         //Can we move? Then move.
-        if (enemy.canMove)
+        if (enemy3DShooter.canMove)
         {
-            if (enemy.state == EnemyState.Chasing)
+            if (enemy3DShooter.state == EnemyState.Chasing)
             {
                 Move();
 
@@ -64,13 +66,13 @@ public class EnemyAI : MonoBehaviour
         }
 
         //Can we attack?
-        if (enemy.canAttack)
+        if (enemy3DShooter.canAttack)
         {
             //Are we attacking?
-            if (enemy.state == EnemyState.Attacking)
+            if (enemy3DShooter.state == EnemyState.Attacking)
             {
                 //Do we have the correct time to attack?
-                if (Time.time - lastAttackTime > enemy.attackRate)
+                if (Time.time - lastAttackTime > enemy3DShooter.attackRate)
                 {
                     lastAttackTime = Time.time;
                     AttackTarget();
@@ -87,16 +89,16 @@ public class EnemyAI : MonoBehaviour
             Vector3.Distance(transform.position, target.transform.position);
 
         //Are we in the attack range? Then start attacking.
-        if (dist <= attackDistance && enemy.state != EnemyState.Attacking)
+        if (dist <= attackDistance && enemy3DShooter.state != EnemyState.Attacking)
         {
-            enemy.state = EnemyState.Attacking;
-            enemy.anim.SetBool("Moving", false);
+            enemy3DShooter.state = EnemyState.Attacking;
+            enemy3DShooter.anim.SetBool("Moving", false);
         }
         //Otherwise keep chasing the target.
-        else if (dist > attackDistance && enemy.state != EnemyState.Chasing)
+        else if (dist > attackDistance && enemy3DShooter.state != EnemyState.Chasing)
         {
-            enemy.state = EnemyState.Chasing;
-            enemy.anim.SetBool("Moving", true);
+            enemy3DShooter.state = EnemyState.Chasing;
+            enemy3DShooter.anim.SetBool("Moving", true);
         }
     }
 
@@ -122,7 +124,7 @@ public class EnemyAI : MonoBehaviour
                 targetPos = target.transform.position;
 
             transform.position +=
-                transform.forward * enemy.moveSpeed * Time.deltaTime;
+                transform.forward * enemy3DShooter.moveSpeed * Time.deltaTime;
             transform.rotation = Quaternion.Lerp(transform.rotation,
                 Quaternion.Euler(transform.rotation.x,
                     GetRotationToPosition(targetPos), transform.rotation.z),
@@ -146,11 +148,11 @@ public class EnemyAI : MonoBehaviour
     void AttackTarget()
     {
         if (targetType == TargetType.Player)
-            Player.inst.TakeDamage(enemy.attackDamage);
+            Player3DWaveShooter.inst.TakeDamage(enemy3DShooter.attackDamage);
         else if (targetType == TargetType.Enemy)
-            target.GetComponent<Enemy>().TakeDamage(enemy.attackDamage);
+            target.GetComponent<Enemy3DShooter>().TakeDamage(enemy3DShooter.attackDamage);
 
-        enemy.anim.SetTrigger("Attack");
+        enemy3DShooter.anim.SetTrigger("Attack");
     }
 
     //Returns a direction between two points.
