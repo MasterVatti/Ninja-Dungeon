@@ -6,7 +6,7 @@ namespace HealthBars
     /// <summary>
     /// отвечает за хелсбар, который висит на сущности
     /// </summary>
-    public class HealthBarOnEnemy : MonoBehaviour
+    public class HealthBarOnEntity : MonoBehaviour
     {
         [SerializeField]
         private HealthBarsManager _healthBarsManager;
@@ -15,14 +15,15 @@ namespace HealthBars
         private HealthBehavior _healthBehavior;
         private int _health;
     
+        
         private void Awake()
         {
             _healthBehavior = GetComponent<HealthBehavior>();
             _health = _healthBehavior.Health;
-            _healthBar = _healthBarsManager.CreateHealthBar();
+            _healthBar = _healthBarsManager.InitHealthBar();
             _healthBar.SetMaximalHealth(_health);
             _healthBar.StabilizatePosition(transform.position);
-            _healthBehavior.HealthBarValueDecrease += SetValueOnHealthBar;
+            //_healthBehavior.HealthBarValueDecrease += SetValueOnHealthBar;
         }
     
         private void Update()
@@ -32,7 +33,7 @@ namespace HealthBars
 
         private void OnDestroy()
         {
-            _healthBehavior.HealthBarValueDecrease -= SetValueOnHealthBar;
+            //_healthBehavior.HealthBarValueDecrease -= SetValueOnHealthBar;
         }
 
         private void SetValueOnHealthBar(int health)

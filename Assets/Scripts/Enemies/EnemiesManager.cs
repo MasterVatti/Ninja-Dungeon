@@ -17,7 +17,7 @@ namespace Enemies
         {
             for (int i = 0; i < _enemies.Count; i++)
             {
-                _enemies[i].HealthSystem.EnemyDie += OnEnemyDie;
+                _enemies[i].HealthSystem.EntityDie += OnEntityDie;
             }
         }
 
@@ -27,7 +27,7 @@ namespace Enemies
             {
                 if (_enemies[i])
                 {
-                    _enemies[i].HealthSystem.EnemyDie -= OnEnemyDie;
+                    _enemies[i].HealthSystem.EntityDie -= OnEntityDie;
                 }
             }
         }
@@ -35,12 +35,12 @@ namespace Enemies
         public void AddEnemy(Enemy enemy)
         {
             Enemies.Add(enemy);
-            enemy.HealthSystem.EnemyDie += OnEnemyDie; 
+            enemy.HealthSystem.EntityDie += OnEntityDie; 
         }
         
-        private void OnEnemyDie(Enemy enemy)
+        private void OnEntityDie(Enemy enemy)
         {
-            enemy.HealthSystem.EnemyDie -= OnEnemyDie;
+            enemy.HealthSystem.EntityDie -= OnEntityDie;
             Enemies.Remove(enemy);
         }
     }

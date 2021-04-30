@@ -13,17 +13,19 @@ namespace Enemies
 
         [SerializeField]
         private int _health;
+        [SerializeField] 
+        private HealthBehaviorsManager _healthBehaviorsManager;
         
-        public event Action<Enemy> EnemyDie;
-        public event Action<int> HealthBarValueDecrease;
+        public event Action<Enemy> EntityDie;
+
+        private void Awake()
+        {
+            _healthBehaviorsManager.HealthBehaviors.Add(this);
+        }
 
         public void ApplyDamage(int damage)
         {
             _health -= damage;
-            if (GetComponent<HealthBarOnEnemy>())
-            {
-                HealthBarValueDecrease?.Invoke(_health);
-            }
             if (_health <= 0)
             {
                 Death();
@@ -32,7 +34,8 @@ namespace Enemies
         
         private void Death()
         {
-            EnemyDie?.Invoke(GetComponent<Enemy>());
+            EntityDie?.Invoke(GetComponent<Enemy>());
+            _healthBehaviorsManager.HealthBehaviors.Remove(this);
             Destroy(gameObject);
         }
     }
