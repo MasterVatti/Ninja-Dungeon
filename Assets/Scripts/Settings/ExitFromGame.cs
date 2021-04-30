@@ -1,9 +1,13 @@
+using Assets.Scripts.Managers.ScreensManager;
 using UnityEngine;
 
-public class ExitFromGame : MonoBehaviour
+namespace Settings
 {
-    public void OnExitGameClick()
+    public class ExitFromGame : MonoBehaviour
     {
-        Application.Quit();
+        public void OnClick()
+        {
+            ScreenManager.Instance.OpenScreen(ScreenType.AcceptScreen);
+        }
     }
 }

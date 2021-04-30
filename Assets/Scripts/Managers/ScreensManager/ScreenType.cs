@@ -11,6 +11,7 @@
         PortalScreen,
         LoadingScreen,
         DoorScreen,
-        SettingsScreen
+        SettingsScreen,
+        AcceptScreen
     }
 }
