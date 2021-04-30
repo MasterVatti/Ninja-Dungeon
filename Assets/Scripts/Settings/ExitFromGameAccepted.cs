@@ -1,11 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ExitFromGameAccepted : MonoBehaviour
+namespace Settings
 {
-    public void OnClick()
+    /// <summary>
+    /// Онончательный выход из игры
+    /// </summary>
+    public class ExitFromGameAccepted : MonoBehaviour
     {
-        Application.Quit();
+        public void OnClick()
+        {
+            Application.Quit();
+        }
     }
 }

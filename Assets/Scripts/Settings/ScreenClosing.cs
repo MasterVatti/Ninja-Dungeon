@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Settings
 {
+    /// <summary>
+    /// закрыть экран
+    /// </summary>
     public class ScreenClosing : MonoBehaviour
     {
         public void OnClick()

@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace Settings.Sound
 {
+    /// <summary>
+    /// Контроль звука по слайдеру
+    /// </summary>
     public class SoundAdjust : MonoBehaviour
     {
         [SerializeField] 

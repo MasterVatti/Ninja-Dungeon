@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace Settings.Sound
 {
+    /// <summary>
+    /// включить/выключить звук
+    /// </summary>
     public class OnOffSound : MonoBehaviour
     {
         [SerializeField] 

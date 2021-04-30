@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Settings
 {
+    /// <summary>
+    /// открытие экрана настроек
+    /// </summary>
     public class SettingsScreenOpener : MonoBehaviour
     {
         public void OnClick()
