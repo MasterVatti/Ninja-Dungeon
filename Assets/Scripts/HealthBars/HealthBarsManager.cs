@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using Enemies;
-using TMPro;
 using UnityEngine;
 
 namespace HealthBars

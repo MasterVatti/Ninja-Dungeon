@@ -20,7 +20,7 @@ namespace Enemies
 
         private void Awake()
         {
-            _healthBehaviorsManager.HealthBehaviors.Add(this);
+            _healthBehaviorsManager.AddToHealthBehaviors(this);
         }
 
         public void ApplyDamage(int damage)
@@ -35,7 +35,7 @@ namespace Enemies
         private void Death()
         {
             EntityDie?.Invoke(GetComponent<Enemy>());
-            _healthBehaviorsManager.HealthBehaviors.Remove(this);
+            _healthBehaviorsManager.RemoveFromHealthBehaviors(this);
             Destroy(gameObject);
         }
     }
