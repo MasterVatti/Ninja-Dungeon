@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a685f7f5b25553b409aa6433e95e7e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectilePrefab: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
+  _projectilePrefab: {fileID: 2014971044819557750, guid: b77933a8c45357c468592dceafcacd0f,
     type: 3}
   _projectileSpawnCooldown: 1
   _enemyDetector: {fileID: 212853652330197620}
   _attackDistance: 10
+  _shooter: {fileID: 2394056606855407061}
 --- !u!114 &212853652330197620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,7 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37bde8e4f1cb1343b366a129f54bd06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTransform: {fileID: 0}
 --- !u!1 &2394056606855407061
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,9 +178,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: -7116445777260105468}
-  _stopChaseDistance: 10
+  _stopChaseDistance: 15
   _aggressionDistance: 20
-  _stopFollowingDistance: 0
+  _stopFollowingDistance: 5
+  _guardsDistance: 3
 --- !u!195 &-7116445777260105468
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -215,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50f94ce4438c56d46b3ea411df2fe272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHP: 0
+  _currentHP: 100
   _maxHp: 100
   _moveSpeed: 0
   _attackDamage: 10
@@ -264,7 +265,7 @@ MonoBehaviour:
   - isFoldout: 1
     breakPoints: 
     breakPointStatuses: 
-    collapsedLines: 
+    collapsedLines: 10000000
     btScript: 
 --- !u!114 &9162167110737348107
 MonoBehaviour:

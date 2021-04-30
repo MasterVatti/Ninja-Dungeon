@@ -127,8 +127,13 @@ public class Unit : MonoBehaviour
     [Task]
     private bool IsAtRequiredDistance(float distance)
     {
-        var targetDistance = Vector3.Distance(_target.transform.position, _agent.transform.position);
-        return targetDistance <= distance;
+        if (IsThereTarget())
+        {
+            var targetDistance = Vector3.Distance(_target.transform.position, _agent.transform.position);
+            return targetDistance <= distance;
+        }
+
+        return false;
     }
     
     [Task]
@@ -142,16 +147,19 @@ public class Unit : MonoBehaviour
             
             foreach (var target in _targets)
             {
-                var distanceToTarget = Vector3.Distance(target.transform.position,
-                    gameObject.transform.position);
-
-                if (minDistance > distanceToTarget)
+                if (target != null)
                 {
-                    minDistance = distanceToTarget;
-                    minIndex = iterationCount;
-                }
+                    var distanceToTarget = Vector3.Distance(target.transform.position,
+                        gameObject.transform.position);
+
+                    if (minDistance > distanceToTarget)
+                    {
+                        minDistance = distanceToTarget;
+                        minIndex = iterationCount;
+                    }
                 
-                iterationCount++;
+                    iterationCount++;  
+                }
             }
 
             _target = _targets[minIndex];
@@ -159,5 +167,11 @@ public class Unit : MonoBehaviour
         }
         
         return false;
+    }
+
+    [Task]
+    private bool IsThereTarget()
+    {
+       return _target != null;
     }
 }

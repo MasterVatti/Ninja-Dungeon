@@ -7,23 +7,36 @@ tree("Root")
 //Если хп меньше 30 спавнит голема.
 tree("TopNode")
      fallback
-                sequence
-                    IsTimeToSpawnGolem 
-                    GolemSpawn
-                sequence
-                    DetermineNearestTarget
-                    IsAtRequiredDistance(7.0)
-                    tree("Shot")
-                    SetBackPoint
-                    MoveToDestination
-                    tree("Shot")
-                sequence
-                    DetermineNearestTarget
-                    IsAtRequiredDistance(20.0)
-                    Chase
+                tree("GolemSpawn")
+                tree("Attack")
+                tree("Chase")
   	
 tree("Shot")
     repeat(3)
         sequence
             Wait(0.5)
             Shooting
+            
+tree("GolemSpawn")
+    sequence
+        IsTimeToSpawnGolem 
+        GolemSpawn
+
+tree("Chase")
+    sequence
+        DetermineNearestTarget
+        IsAtRequiredDistance(20.0)
+        Chase
+        
+tree("Attack")
+    while
+        IsThereTarget
+        
+        sequence
+            DetermineNearestTarget
+            IsAtRequiredDistance(7.0)
+            tree("Shot")
+            SetBackPoint
+            MoveToDestination
+            DetermineNearestTarget
+            tree("Shot")

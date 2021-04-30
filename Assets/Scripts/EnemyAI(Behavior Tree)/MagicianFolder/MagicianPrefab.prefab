@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 839100401563898178}
-  _stopChaseDistance: 7
+  _stopChaseDistance: 9
   _pointDistanceError: 0.5
 --- !u!195 &839100401563898178
 NavMeshAgent:
@@ -230,7 +230,7 @@ MonoBehaviour:
   _currentHP: 0
   _maxHp: 100
   _moveSpeed: 0
-  _attackDamage: 0
+  _attackDamage: 5
   _attackRate: 0
   _canMove: 0
   _canAttack: 0

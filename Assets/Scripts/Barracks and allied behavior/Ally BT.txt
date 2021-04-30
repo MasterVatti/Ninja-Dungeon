@@ -1,20 +1,17 @@
 tree("Root")
-    tree("TopNode")
-    
-tree("TopNode")
-     fallback
+    fallback
         tree("Attack")
         tree("Follow")
 
 tree("Follow")
-	while
-		sequence
-			not EnemyInSight
+    while
+        sequence
+            not EnemyInSight
 
-		repeat
-		    sequence
-			    FollowPlayer
-
+        repeat
+            sequence
+                IsTherePlayer
+                FollowPlayer
 
 tree("Chase")
     sequence

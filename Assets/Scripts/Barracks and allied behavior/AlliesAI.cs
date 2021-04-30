@@ -10,6 +10,8 @@ namespace Barracks_and_allied_behavior
     /// </summary>
     public class AlliesAI : MonoBehaviour
     {
+        public GameObject Target => _target;
+            
         [SerializeField]
         private NavMeshAgent _agent;
         [SerializeField]
@@ -18,6 +20,8 @@ namespace Barracks_and_allied_behavior
         private float _aggressionDistance;
         [SerializeField]
         private float _stopFollowingDistance;
+        [SerializeField]
+        private float _guardsDistance = 3;
 
         private Vector3 _movePoint;
         private GameObject _target;
@@ -26,11 +30,6 @@ namespace Barracks_and_allied_behavior
         private void Start()
         {
             _player = MainManager.Player;
-        }
-
-        public void ChangePointMovement(Vector3 movePoint)
-        {
-            _movePoint = movePoint;
         }
 
         [Task]
@@ -83,7 +82,7 @@ namespace Barracks_and_allied_behavior
             if (distance >= _stopChaseDistance)
             {
                 _agent.isStopped = false;
-                _agent.SetDestination(_target.transform.position - Vector3.left);
+                _agent.SetDestination(_target.transform.position);
             }
             else
             {
@@ -99,12 +98,18 @@ namespace Barracks_and_allied_behavior
             if (distance >= _stopFollowingDistance)
             {
                 _agent.isStopped = false;
-                _agent.SetDestination(_target.transform.position);
+                _agent.SetDestination(GetRandomFollowingPoint());
             }
             else
             {
                 Task.current.Succeed();
             }
+        }
+
+        private Vector3 GetRandomFollowingPoint()
+        {
+            var offsetX = Random.Range(-_guardsDistance, _guardsDistance);
+            return _player.transform.TransformPoint(offsetX, 0, 0 - _guardsDistance);
         }
         
         [Task]
@@ -144,6 +149,12 @@ namespace Barracks_and_allied_behavior
         private bool IsTargetKilled()
         {
             return _target == null;
+        }
+        
+        [Task]
+        private bool IsTherePlayer()
+        {
+            return _player != null;
         }
     }
 }

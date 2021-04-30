@@ -115,10 +115,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scripts:
-  - {fileID: 0}
+  - {fileID: 4900000, guid: 20f57f71cb0f6fe46a569f97024e4cb8, type: 3}
+  - {fileID: 4900000, guid: ccb552202e37f494eb8ce898ea21065e, type: 3}
   autoReset: 1
   tickOn: 0
   sourceInfos:
+  - isFoldout: 1
+    breakPoints: 
+    breakPointStatuses: 
+    collapsedLines: 
+    btScript: 
   - isFoldout: 1
     breakPoints: 
     breakPointStatuses: 
@@ -137,9 +143,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 666163551287211885}
-  _stopChaseDistance: 0
-  _aggressionDistance: 0
-  _stopFollowingDistance: 0
+  _stopChaseDistance: 1
+  _aggressionDistance: 20
+  _stopFollowingDistance: 5
+  _guardsDistance: 3
 --- !u!195 &666163551287211885
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -175,12 +182,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHP: 0
-  _maxHp: 150
-  _moveSpeed: 0
-  _attackDamage: 20
+  _maxHp: 200
+  _moveSpeed: 3.5
+  _attackDamage: 30
   _attackRate: 0
   _canMove: 0
   _canAttack: 0
+  _alliesAI: {fileID: 621544001498614016}
+  _agent: {fileID: 666163551287211885}
+  _accelerateSpeed: 0
 --- !u!54 &5779794459243143245
 Rigidbody:
   m_ObjectHideFlags: 0
