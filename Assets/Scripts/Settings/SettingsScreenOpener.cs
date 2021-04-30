@@ -12,12 +12,8 @@ namespace Settings
     
         private void OpenSettingsScreen()
         {
-            var context = new SettingsContext
-            {
-                FirstSettingText = "_settings.ScreenDescription, "
-            };
-            ScreenManager.Instance.OpenScreenWithContext(ScreenType
-                .SettingsScreen, context);
+            ScreenManager.Instance.OpenScreen(ScreenType.SettingsScreen);
+            Time.timeScale = 0;
         }
     }
 }
