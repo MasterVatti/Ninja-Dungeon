@@ -44,8 +44,15 @@ namespace Shop
             var resultResourceAmountValue =
                 Convert.ToInt32(Math.Round(sourceResourceAmount * _playerCoefficient * _rateCoefficient, 0));
 
-            MainManager.ResourceManager.Pay(resourceToPay, sourceResourceAmountValue);
-            MainManager.ResourceManager.AddResource(resourceToGet, resultResourceAmountValue);
+            if (MainManager.ResourceManager.HasEnough(resourceToPay, sourceResourceAmountValue))
+            {
+                MainManager.ResourceManager.Pay(resourceToPay, sourceResourceAmountValue);
+                MainManager.ResourceManager.AddResource(resourceToGet, resultResourceAmountValue);
+            }
+            else
+            {
+                Debug.Log("У вас недостаточно средств для совершения обмена");
+            }
         }
 
         private void UpdateResultAmount(string newValue)
