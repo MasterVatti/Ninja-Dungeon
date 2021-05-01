@@ -11,18 +11,18 @@ namespace ProjectileLauncher.Projectile
     {
         [SerializeField] 
         private float _projectileSpeed;
-        [SerializeField] 
-        private int _damage;
         [SerializeField]
         private Rigidbody _rigidbody;
         
         private Vector3 _direction;
         private int _reboundNumber;
+        private int _damage;
         
-        public void Initialize(Vector3 direction, int reboundNumber)
+        public void Initialize(Vector3 direction, int reboundNumber, int damage)
         {
             _direction = direction;
             _reboundNumber = reboundNumber;
+            _damage = damage;
         }
         
         public void OnCollisionEnter(Collision collision)

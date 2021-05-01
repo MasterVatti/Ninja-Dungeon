@@ -86,6 +86,7 @@ namespace ProjectileLauncher
         
         private void CreateStandardProjectile(Vector3 position)
         {
+
             var newBullet = _objectPool.Get();
 
             newBullet.transform.position = position;
@@ -93,7 +94,9 @@ namespace ProjectileLauncher
 
             if (newBullet.TryGetComponent<Projectile.Projectile>(out var projectile))
             {
-                projectile.Initialize(_nearestEnemyDirection, _playerCharacteristics.RicochetShells);
+                var player = _playerCharacteristics;
+                
+                projectile.Initialize(_nearestEnemyDirection, player.RicochetShells, player.AttackDamage);
             }
         }
         
