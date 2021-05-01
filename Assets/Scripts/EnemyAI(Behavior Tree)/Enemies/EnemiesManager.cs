@@ -12,7 +12,7 @@ namespace Enemies
         public List<Enemy> Enemies => _enemies;
         
         [SerializeField] 
-        private List<Enemy> _enemies;
+        private List<Enemy> _enemies = new List<Enemy>();
 
         public void AddEnemy(Enemy enemy)
         {

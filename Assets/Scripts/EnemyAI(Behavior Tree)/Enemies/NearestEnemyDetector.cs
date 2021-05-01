@@ -35,7 +35,15 @@ namespace Enemies
                 currentIteration++;
             }
 
-            return MainManager.EnemiesManager.Enemies[minIndex];
+            Debug.Log(MainManager.EnemiesManager.Enemies.Count);
+            if (MainManager.EnemiesManager.Enemies.Count != 0)
+            {
+               return MainManager.EnemiesManager.Enemies[minIndex]; 
+            }
+            else
+            { 
+                return null;  
+            }
         }
     }
 }

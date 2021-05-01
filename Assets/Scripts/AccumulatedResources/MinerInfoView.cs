@@ -12,8 +12,10 @@ namespace AccumulatedResources
     {
         [SerializeField]
         private TextMeshProUGUI _resources;
+        
         [SerializeField]
         private Slider _progressFill;
+        
         [SerializeField]
         private Image _image;
    

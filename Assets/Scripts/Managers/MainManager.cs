@@ -1,3 +1,4 @@
+using Assets.Scripts.BattleManager;
 using Enemies;
 using LoadingScene;
 using Managers;
@@ -7,6 +8,7 @@ using UnityEngine;
 
 public class MainManager : Singleton<MainManager>
 {
+    public static BattleManager BattleManager => Instance._battleManager;
     public static LoadingController LoadingController => Instance._loadingController;
     public static ResourceManager ResourceManager => Instance._resourceManager;
     public static EnemiesManager EnemiesManager => Instance._enemiesManager;
@@ -18,7 +20,9 @@ public class MainManager : Singleton<MainManager>
     public static GameObject Player => Instance._player;
     public static IconsProvider IconsProvider => Instance._iconsProvider;
     public static JoystickController JoystickController => Instance._joystickController;
-    
+
+    [SerializeField]
+    private BattleManager _battleManager;
     [SerializeField]
     private JoystickController _joystickController;
     [SerializeField]

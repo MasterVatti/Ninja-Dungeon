@@ -1,54 +1,80 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Collections.Generic;
 using Characteristics;
 using Enemies;
 using Enemies.Spawner;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.BattleManager
 {
     /// <summary>
     /// Менеджер боя
     /// </summary>
-    public class BattleManager : Singleton<BattleManager>
+    public class BattleManager : MonoBehaviour
     {
-        public static BattleManager instance = null;
+        public int Reward
+        {
+            get { return _reward; }
+            set { _reward = value; }
+        }
 
+        [SerializeField]
         private Spawner _enemiesSpawner;
-        private HealthBehaviour _healthBehaviour;
 
+        [SerializeField]
+        private List<SceneAsset> _battleScenes = new List<SceneAsset>();
+        
+        private HealthBehaviour _healthBehaviour;
+        private int _reward;
+        
         private void Awake()
         {
-            var playerStartPosition = new Vector3(-15.5f, 0.5f, 18.75f);
+            _healthBehaviour = MainManager.Player.GetComponent<HealthBehaviour>();
+            _healthBehaviour.OnDead += PlayerDeath;
+            SceneManager.sceneLoaded += LoadedScrene;
 
-            _healthBehaviour = gameObject.GetComponent<HealthBehaviour>();
-            
-            MainManager.Player.transform.position = playerStartPosition;
-        }
-        
-        private void Start()
-        {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else if (instance == this)
-            {
-                Destroy(gameObject);
-            }
-            DontDestroyOnLoad(gameObject);
-            InitializeManager();
+            //сделать универсальным для всех сцен
         }
 
         private void Update()
         {
-            if (MainManager.Player.)
+            foreach (var enemy in MainManager.EnemiesManager.Enemies)
+            {
+                if (enemy == null)
+                {
+                    //UI выигрыша
+                }
+            }
+
+            //Решить вопрос с лутом
         }
 
-        private void InitializeManager()
+        private void PlayerDeath(Person person)
+        {
+            //UI проигрыша
+        }
+
+        private void LoadedScrene(Scene scene, LoadSceneMode loadSceneMode)
+        {
+            foreach (var battleScene in _battleScenes)
+            {
+                if (battleScene.name == scene.name)
+                {
+                    StartBattle();
+                }
+            }
+        }
+
+        private void StartBattle()
         {
             _enemiesSpawner.Initialize();
+            Debug.Log("Я начался");
+        }
+
+        private void OnDestroy()
+        {
+            _healthBehaviour.OnDead -= PlayerDeath;
         }
     }
 }
