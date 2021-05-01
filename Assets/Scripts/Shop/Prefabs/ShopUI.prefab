@@ -131,7 +131,7 @@ RectTransform:
   m_GameObject: {fileID: 6220453730170157414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1.3, z: 1}
+  m_LocalScale: {x: 4, y: 3, z: 1}
   m_Children:
   - {fileID: 5273319357944675885}
   - {fileID: 5862481122473154497}
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScreenType: 6
   _shopView: {fileID: 6094682607736121415}
-  _exchangeTemplate: {fileID: 2353654620567759445, guid: acf4cd2096c2bce448b52c5c69c71e54,
+  _exchangeTemplate: {fileID: 6244835546491145034, guid: dea778eb4cdd268499cb3c6592deb985,
     type: 3}
   _minimumCoefficient: 0.9
   _maximumCoefficient: 1.1

@@ -19,14 +19,14 @@ namespace Shop
         [SerializeField]
         private Image _sourceImage;
         [SerializeField]
-        private Text _sourceName;
+        private TMP_Text _sourceName;
         [SerializeField]
         private TMP_InputField _sourceAmount;
 
         [SerializeField]
         private Image _resultImage;
         [SerializeField]
-        private Text _resultName;
+        private TMP_Text _resultName;
         [SerializeField]
         private TMP_InputField _resultAmount;
 
