@@ -24,7 +24,7 @@ namespace Assets.Scripts.BattleManager
 
         [SerializeField]
         private List<SceneAsset> _battleScenes = new List<SceneAsset>();
-        
+
         private HealthBehaviour _healthBehaviour;
         private int _reward;
         
@@ -39,20 +39,26 @@ namespace Assets.Scripts.BattleManager
 
         private void Update()
         {
+            var _player = MainManager.Player;
+            var _playerCharecteristics = _player.GetComponent<PlayerCharacteristics>();
+            
             foreach (var enemy in MainManager.EnemiesManager.Enemies)
             {
                 if (enemy == null)
                 {
-                    //UI выигрыша
+                    //UI выигрыша: предложение двойной награды или выхода
+                }
+                else if (enemy != null && _playerCharecteristics.CurrentHp <= 0)
+                {
+                    //UI проигрыша
                 }
             }
 
-            //Решить вопрос с лутом
+            //Решить вопрос с выпадением лута (будет ли он вообще выпадать)
         }
 
         private void PlayerDeath(Person person)
         {
-            //UI проигрыша
         }
 
         private void LoadedScrene(Scene scene, LoadSceneMode loadSceneMode)
@@ -69,7 +75,7 @@ namespace Assets.Scripts.BattleManager
         private void StartBattle()
         {
             _enemiesSpawner.Initialize();
-            Debug.Log("Я начался");
+            Debug.Log("BattleManager начал свои тёмные дела ☻");
         }
 
         private void OnDestroy()
