@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using Assets.Scripts.Shop;
 using ResourceSystem;
 using TMPro;
@@ -29,6 +30,12 @@ namespace Shop
         private TMP_Text _resultName;
         [SerializeField]
         private TMP_InputField _resultAmount;
+
+        private void OnGUI()
+        {
+            Regex.Replace(_sourceAmount.text, @"[^0-9 ]", "");
+            Regex.Replace(_resultAmount.text, @"[^0-9 ]", "");
+        }
 
         public void Initialize(ExchangeRate rate, float pickedCoefficient)
         {

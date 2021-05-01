@@ -14,14 +14,14 @@ namespace Shop
     public class ExchangeRateController : MonoBehaviour
     {
         public event Action OnPlayerHasInsufficientFunds;
-        
+
         [SerializeField]
         private Button _exchangeButton;
         [SerializeField]
         private TMP_InputField _sourceAmountInput;
         [SerializeField]
         private TMP_InputField _finalAmountInput;
-        
+
         private ExchangeRate _rate;
         private float _rateCoefficient;
         private float _playerCoefficient;
@@ -42,7 +42,7 @@ namespace Shop
             _exchangeButton.onClick.AddListener(ExchangeButtonClicked);
             _sourceAmountInput.onValueChanged.AddListener(UpdateResultAmount);
         }
-        
+
         private void ExchangeButtonClicked()
         {
             var resourceToPay = _rate.SourceResource.Type;
@@ -68,11 +68,30 @@ namespace Shop
 
         private void UpdateResultAmount(string newValue)
         {
-            var resultAmount =
-                Convert.ToInt32(Math.Round(float.Parse(newValue) * _playerCoefficient * _rateCoefficient, 0));
+            if (!float.TryParse(newValue, out var resultValue) 
+                || resultValue <= 0)
+            {
+                SetInputToEmptyString();
+                return;
+            }
 
-            var resultAmountInputField = GetComponent<ExchangeRateView>().ResultAmount;
-            resultAmountInputField.text = resultAmount.ToString(CultureInfo.InvariantCulture);
+            try
+            {
+                var resultAmount =
+                    Convert.ToInt32(Math.Round(resultValue * _playerCoefficient * _rateCoefficient, 0));
+                var resultAmountInputField = GetComponent<ExchangeRateView>().ResultAmount;
+                resultAmountInputField.text = resultAmount.ToString(CultureInfo.InvariantCulture);
+            }
+            catch (OverflowException)
+            {
+                SetInputToEmptyString();
+            }
+        }
+
+        private void SetInputToEmptyString()
+        {
+            _sourceAmountInput.text = "";
+            _finalAmountInput.text = "";
         }
     }
 }

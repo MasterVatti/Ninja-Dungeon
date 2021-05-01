@@ -209,7 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScreenType: 6
   _shopView: {fileID: 6094682607736121415}
-  _exchangeTemplate: {fileID: 6244835546491145034, guid: dea778eb4cdd268499cb3c6592deb985,
+  _exchangeTemplate: {fileID: 6755773622622579352, guid: 7f188e6da4486484bb037dd129924dbe,
     type: 3}
   _minimumCoefficient: 0.9
   _maximumCoefficient: 1.1
