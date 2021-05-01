@@ -22,6 +22,13 @@ MonoBehaviour:
       _amount: 500
     _upgradePrefab: {fileID: 5284114885193351311, guid: df511b266d69cb149a1fe6726790908b,
       type: 3}
+  - _upgradeCost:
+    - _type: 1
+      _amount: 500
+    - _type: 0
+      _amount: 250
+    _upgradePrefab: {fileID: 5284114885193351311, guid: df511b266d69cb149a1fe6726790908b,
+      type: 3}
   _placeHolderPrefab: {fileID: 1796408563735853696, guid: df1732c3adc0ba248b05da99c743c527,
     type: 3}
   _timeToBuild: 2

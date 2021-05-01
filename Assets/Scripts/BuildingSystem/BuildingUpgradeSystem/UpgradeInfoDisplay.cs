@@ -19,7 +19,6 @@ namespace BuildingSystem.BuildingUpgradeSystem
         public Button ActiveButton => _activeButton;
         public Image MaxLevelWarning => _maxLevelWarningImage;
 
-
         [SerializeField]
         private TextMeshProUGUI _nameLabel;
         [SerializeField]
@@ -146,6 +145,7 @@ namespace BuildingSystem.BuildingUpgradeSystem
         {
             var goTransform = go.transform;
             var goPosition = goTransform.position;
+            
             goTransform.position = new Vector2(goPosition.x, goPosition.y - offset);
         }
         
@@ -161,8 +161,10 @@ namespace BuildingSystem.BuildingUpgradeSystem
         private static TextMeshProUGUI CreateElement(TextMeshProUGUI element, Transform parent, float offset)
         {
             var go = Instantiate(element, parent);
+            
             go.gameObject.SetActive(true);
             ApplyOffset(go, offset);
+            
             return go;
         }
     }
