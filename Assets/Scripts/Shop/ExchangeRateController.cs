@@ -13,14 +13,25 @@ namespace Shop
     /// </summary>
     public class ExchangeRateController : MonoBehaviour
     {
+        public event Action OnPlayerHasInsufficientFunds;
+        
         [SerializeField]
         private Button _exchangeButton;
         [SerializeField]
         private TMP_InputField _sourceAmountInput;
-
+        [SerializeField]
+        private TMP_InputField _finalAmountInput;
+        
         private ExchangeRate _rate;
         private float _rateCoefficient;
         private float _playerCoefficient;
+
+        public void SetInteractable(bool state)
+        {
+            _exchangeButton.interactable = state;
+            _sourceAmountInput.interactable = state;
+            _finalAmountInput.interactable = state;
+        }
 
         public void Initialize(ExchangeRate rate, float coefficient)
         {
@@ -31,7 +42,7 @@ namespace Shop
             _exchangeButton.onClick.AddListener(ExchangeButtonClicked);
             _sourceAmountInput.onValueChanged.AddListener(UpdateResultAmount);
         }
-
+        
         private void ExchangeButtonClicked()
         {
             var resourceToPay = _rate.SourceResource.Type;
@@ -51,7 +62,7 @@ namespace Shop
             }
             else
             {
-                Debug.Log("У вас недостаточно средств для совершения обмена");
+                OnPlayerHasInsufficientFunds?.Invoke();
             }
         }
 
