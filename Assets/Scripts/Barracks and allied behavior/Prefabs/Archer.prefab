@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 3097239842779378857}
   - component: {fileID: 9162167110737348107}
   - component: {fileID: 117749519555223931}
+  - component: {fileID: 3867819842158158202}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Ally
@@ -178,11 +179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: -7116445777260105468}
-  _stopChaseDistance: 15
   _aggressionDistance: 20
   _stopFollowingDistance: 5
   _guardsDistance: 3
-  _pointDistanceError: 0.5
 --- !u!195 &-7116445777260105468
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -295,3 +294,18 @@ MonoBehaviour:
   _personCharacteristics: {fileID: -6501167769399255928}
   _healthBehaviour: {fileID: 9162167110737348107}
   _rigidbody: {fileID: 8430845619470533281}
+--- !u!114 &3867819842158158202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394056606855407061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ece3497b0dce848bcf23723c55aa05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _agent: {fileID: -7116445777260105468}
+  _stopChaseDistance: 10
+  _pointDistanceError: 0.5

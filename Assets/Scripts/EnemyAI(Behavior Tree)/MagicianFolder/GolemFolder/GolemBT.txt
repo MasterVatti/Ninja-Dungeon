@@ -7,7 +7,7 @@ tree("Root")
 tree("TopNode")
         sequence
             DetermineNearestTarget
-            while IsThereTarget
+            while not IsTargetKilled
                 sequence
                     SetTargetPosition
                     MoveToDestination

@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using Assets.Scripts;
-using Characteristics;
+using System;
 using Panda;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,38 +9,18 @@ using UnityEngine.AI;
 /// </summary>
 public class Unit : MonoBehaviour
 {
-    public GameObject Target => _target;
-    
     [SerializeField]
     private NavMeshAgent _agent;
     [SerializeField]
     private float _stopChaseDistance;
     [SerializeField]
     private float _pointDistanceError = 0.5f;
-    
-
-    private readonly List<GameObject> _targets = new List<GameObject>();
-    private GameObject _target;
 
     private Vector3 _movePoint;
-
+    private ITargetProvider _targetProvider;
     private void Start()
     {
-        MainManager.EnemiesManager.Enemies.Add(GetComponent<Enemy>());
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(GlobalConstants.PLAYER_TAG) ||
-            other.CompareTag(GlobalConstants.ALLY_TAG))
-        {
-            _targets.Add(other.gameObject);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        _targets.Remove(other.gameObject);
+        _targetProvider = GetComponent<ITargetProvider>();
     }
 
     public void ChangePointMovement(Vector3 movePoint)
@@ -92,84 +70,46 @@ public class Unit : MonoBehaviour
         {
             currentTask.Succeed();
         }
-        
+
         if (Task.isInspected)
         {
-            currentTask.debugInfo = string.Format("distance-{0:0.00}", distance); 
+            currentTask.debugInfo = string.Format("distance-{0:0.00}", distance);
         }
     }
 
     [Task]
     private void Chase()
     {
-        var distance = Vector3.Distance(_target.transform.position, _agent.transform.position);
+        var distance = Vector3.Distance(_targetProvider.Target.transform.position, _agent.transform.position);
 
         if (distance >= _stopChaseDistance)
         {
             _agent.isStopped = false;
-            _agent.SetDestination(_target.transform.position);
+            _agent.SetDestination(_targetProvider.Target.transform.position);
         }
         else
         {
             Task.current.Succeed();
         }
     }
-    
+
     [Task]
     private void SetTargetPosition()
     {
-        _movePoint = _target.transform.position;
+        _movePoint = _targetProvider.Target.transform.position;
         Task.current.Succeed();
     }
-    
+
     [Task]
     private bool IsAtRequiredDistance(float distance)
     {
-        if (IsThereTarget())
-        {
-            var targetDistance = Vector3.Distance(_target.transform.position, _agent.transform.position);
-            return targetDistance <= distance;
-        }
-
-        return false;
-    }
-    
-    [Task]
-    private bool DetermineNearestTarget()
-    {
-        if (_targets.Count != 0)
-        {
-            var minDistance = float.MaxValue;
-            var minIndex = 0;
-            var iterationCount = 0;
-            
-            foreach (var target in _targets)
-            {
-                if (target != null)
-                {
-                    var distanceToTarget = Vector3.Distance(target.transform.position,
-                        gameObject.transform.position);
-
-                    if (minDistance > distanceToTarget)
-                    {
-                        minDistance = distanceToTarget;
-                        minIndex = iterationCount;
-                    }
-                
-                    iterationCount++;  
-                }
-            }
-
-            _target = _targets[minIndex];
-            return true;
-        }
-        
-        return false;
+        var targetDistance = Vector3.Distance(_targetProvider.Target.transform.position, _agent.transform.position);
+        return targetDistance <= distance;
     }
 
     [Task]
-    private bool IsThereTarget()
+    private bool IsTargetKilled()
     {
-       return _target != null;
+        return _targetProvider.Target == null;
     }
 }

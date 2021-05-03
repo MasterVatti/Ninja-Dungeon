@@ -18,34 +18,34 @@ namespace MagicianFolder
         private Magician _magician;
         [SerializeField]
         private float _lowHealthThreshold;
-    
+
         private bool _isGolemCreated;
-    
+
         [Task]
         private void GolemSpawn()
         {
             if (!_isGolemCreated)
             {
-                var golem = Instantiate(_golemPrefab, gameObject.transform.position, Quaternion.identity);
-                 _isGolemCreated = true;
-                 
-                 Task.current.Succeed();
+                Instantiate(_golemPrefab, gameObject.transform.position, Quaternion.identity);
+                _isGolemCreated = true;
+
+                Task.current.Succeed();
             }
-            
+
             Task.current.Fail();
         }
-    
+
         [Task]
         private void SetBackPoint()
         {
             _unit.ChangePointMovement(gameObject.transform.TransformPoint(0, 0, 0 - _runBackDistance));
             Task.current.Succeed();
         }
-        
+
         [Task]
         private bool IsTimeToSpawnGolem()
         {
             return _magician.CurrentHp <= _lowHealthThreshold;
         }
-    } 
+    }
 }

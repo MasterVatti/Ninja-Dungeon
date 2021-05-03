@@ -12,7 +12,7 @@ namespace MagicianFolder.GolemFolder
     public class GolemAI : MonoBehaviour
     {
         [SerializeField]
-        private Unit _unit;
+        private EnemyAI _enemyAI;
 
         private int _damage;
         
@@ -24,7 +24,7 @@ namespace MagicianFolder.GolemFolder
         [Task]
         private void Attack()
         {
-            _unit.Target.GetComponent<HealthBehaviour>().ApplyDamage(_damage);
+            _enemyAI.Target.GetComponent<HealthBehaviour>().ApplyDamage(_damage);
             Task.current.Succeed();
         }
     }

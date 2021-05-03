@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 6347868306591521622}
   - component: {fileID: 3586072214158325891}
   - component: {fileID: 417170660410821016}
+  - component: {fileID: 3734217257487702833}
   m_Layer: 0
   m_Name: MagicianPrefab
   m_TagString: Enemy
@@ -196,7 +197,7 @@ MonoBehaviour:
     type: 3}
   _shotCooldownTime: 0.5
   _agent: {fileID: 839100401563898178}
-  _unit: {fileID: 3344586694461362831}
+  _enemyAI: {fileID: 3734217257487702833}
 --- !u!114 &3946989225980792668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,3 +275,15 @@ MonoBehaviour:
   _personCharacteristics: {fileID: 8401475512963324837}
   _healthBehaviour: {fileID: 3586072214158325891}
   _rigidbody: {fileID: 5247192937791318919}
+--- !u!114 &3734217257487702833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3344586694461362826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecaccc676b5e10f4eaf93c5e5d80ecbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

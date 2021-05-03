@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Barracks_and_allied_behavior
 {
     /// <summary>
-    /// Отвечает за открытие скрина Барраков и инициализацю каждого конкретного поля союзника.
+    /// Отвечает за  скрин Барраков и инициализацю каждого конкретного поля союзника.
     /// </summary>
     public class BarracksScreen : BaseScreenWithContext<BuildingContext>
     {

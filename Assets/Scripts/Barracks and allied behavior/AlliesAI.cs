@@ -8,90 +8,25 @@ namespace Barracks_and_allied_behavior
     /// <summary>
     /// Отвечает за базовое поведение союзников. Передвижение, определение цели.
     /// </summary>
-    public class AlliesAI : MonoBehaviour
+    public class AlliesAI : MonoBehaviour, ITargetProvider
     {
         public GameObject Target => _target;
             
         [SerializeField]
         private NavMeshAgent _agent;
         [SerializeField]
-        private float _stopChaseDistance;
-        [SerializeField]
         private float _aggressionDistance;
         [SerializeField]
         private float _stopFollowingDistance;
         [SerializeField]
         private float _guardsDistance = 3;
-        [SerializeField]
-        private float _pointDistanceError = 0.5f;
-
-        private Vector3 _movePoint;
+        
         private GameObject _target;
         private GameObject _player;
 
         private void Start()
         {
             _player = MainManager.Player;
-        }
-
-        [Task]
-        private void MoveToDestination()
-        {
-            MoveTo(_movePoint);
-            WaitArrival();
-        }
-
-        [Task]
-        private bool SetDestination(Vector3 movePoint)
-        {
-            _movePoint = movePoint;
-            _agent.destination = _movePoint;
-
-            if (Task.isInspected)
-            {
-                Task.current.debugInfo = string.Format("({0}, {1})", _movePoint.x, _movePoint.y);
-            }
-            return true;
-        }
-
-        [Task]
-        private void MoveTo(Vector3 movePoint)
-        {
-            SetDestination(movePoint);
-            if (Task.current.isStarting)
-                _agent.isStopped = false;
-            WaitArrival();
-        }
-
-        private void WaitArrival()
-        {
-            var currentTask = Task.current;
-            var distance = _agent.remainingDistance;
-            if (!currentTask.isStarting && _agent.remainingDistance <= _pointDistanceError)
-            {
-                currentTask.Succeed();
-            }
-
-            if (Task.isInspected)
-            {
-                currentTask.debugInfo = string.Format("distance-{0:0.00}", distance);
-            }
-        }
-
-        [Task]
-        private void Chase()
-        {
-            var distance = Vector3.Distance(_target.transform.position, _agent.transform.position);
-
-            if (distance >= _stopChaseDistance)
-            {
-                _agent.isStopped = false;
-                _agent.SetDestination(_target.transform.position);
-            }
-            else
-            {
-                Task.current.Succeed();
-            }
         }
         
         [Task]
@@ -115,13 +50,6 @@ namespace Barracks_and_allied_behavior
             var offsetX = Random.Range(-_guardsDistance, _guardsDistance);
             return _player.transform.TransformPoint(offsetX, 0, 0 - _guardsDistance);
         }
-        
-        [Task]
-        private bool IsAtRequiredDistance(float distance)
-        {
-            var targetDistance = Vector3.Distance(_target.transform.position, _agent.transform.position);
-            return targetDistance <= distance;
-        }   
         
         private bool IsAtRequiredDistance(Person enemy)
         {
@@ -147,12 +75,6 @@ namespace Barracks_and_allied_behavior
             }
             
             return false;
-        }
-
-        [Task]
-        private bool IsTargetKilled()
-        {
-            return _target == null;
         }
         
         [Task]

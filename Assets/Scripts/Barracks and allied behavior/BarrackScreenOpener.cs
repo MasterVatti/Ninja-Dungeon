@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Barracks_and_allied_behavior
 {
     /// <summary>
-    /// Отвечает за открытие скрина с контекстом.
+    /// Отвечает за открытие скрина Барак с контекстом.
     /// </summary>
     public class BarrackScreenOpener : MonoBehaviour, IScreenOpenerWithContext
     {
