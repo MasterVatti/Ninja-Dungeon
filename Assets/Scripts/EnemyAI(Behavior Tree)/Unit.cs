@@ -1,11 +1,9 @@
-using System;
 using Panda;
 using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// Отвечает за базовые навыки(Таски) Врага
-/// передвежение и определение врага. Должен висеть на всех енеми.
+/// Отвечает за базовые навыки(Таски) передвежение.
 /// </summary>
 public class Unit : MonoBehaviour
 {

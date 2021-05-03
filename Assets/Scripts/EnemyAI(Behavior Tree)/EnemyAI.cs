@@ -4,6 +4,9 @@ using Characteristics;
 using Panda;
 using UnityEngine;
 
+/// <summary>
+/// Отвечает за базовые навыки(Таски) енеми, определение врага и ближайшей цели
+/// </summary>
 public class EnemyAI : MonoBehaviour, ITargetProvider
 {
     public GameObject Target => _target;
