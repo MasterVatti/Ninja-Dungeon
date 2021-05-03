@@ -22,6 +22,8 @@ namespace Barracks_and_allied_behavior
         private float _stopFollowingDistance;
         [SerializeField]
         private float _guardsDistance = 3;
+        [SerializeField]
+        private float _pointDistanceError = 0.5f;
 
         private Vector3 _movePoint;
         private GameObject _target;
@@ -65,13 +67,15 @@ namespace Barracks_and_allied_behavior
         {
             var currentTask = Task.current;
             var distance = _agent.remainingDistance;
-            if (!currentTask.isStarting && _agent.remainingDistance <= 0.5f)
+            if (!currentTask.isStarting && _agent.remainingDistance <= _pointDistanceError)
             {
                 currentTask.Succeed();
             }
 
             if (Task.isInspected)
+            {
                 currentTask.debugInfo = string.Format("distance-{0:0.00}", distance);
+            }
         }
 
         [Task]

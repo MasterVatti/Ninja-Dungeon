@@ -17,7 +17,7 @@ namespace Enemies
 
             foreach (var enemy in MainManager.EnemiesManager.Enemies)
             {
-                if (enemy != null)
+                if (enemy != null) // тут удаление не успевает происходить и вылетает NULL, хотя по коду все ок.
                 {
                     var distanceToPlayer = Vector3.Distance(enemy.transform.position,
                         gameObject.transform.position);

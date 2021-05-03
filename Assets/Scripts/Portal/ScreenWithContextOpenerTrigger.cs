@@ -2,7 +2,7 @@ using Assets.Scripts;
 using UnityEngine;
 
 /// <summary>
-/// Класс отвечает за тригер портала(вызов панели портала) 
+/// Класс отвечает за открытие окон с контекстом.
 /// </summary>
 public class ScreenWithContextOpenerTrigger : MonoBehaviour
 {

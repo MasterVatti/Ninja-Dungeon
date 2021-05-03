@@ -147,6 +147,7 @@ MonoBehaviour:
   _aggressionDistance: 20
   _stopFollowingDistance: 5
   _guardsDistance: 3
+  _pointDistanceError: 0.5
 --- !u!195 &666163551287211885
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -181,8 +182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779de56f172bc9a4289fb5367e881bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHP: 10
-  _maxHp: 10
+  _currentHP: 200
+  _maxHp: 200
   _moveSpeed: 3.5
   _attackDamage: 30
   _attackRate: 0

@@ -3,7 +3,7 @@ using ProjectileLauncher;
 using UnityEngine;
 
 /// <summary>
-/// Пуля врагов 
+/// Пуля врагов, обрабатывает колизии для врагов. 
 /// </summary>
 public class EnemyProjectile : Projectile
 {

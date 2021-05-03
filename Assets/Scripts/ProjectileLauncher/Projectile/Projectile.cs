@@ -1,11 +1,10 @@
-using Assets.Scripts;
-using Enemies;
+using  Enemies;
 using UnityEngine;
 
 namespace ProjectileLauncher
 {
     /// <summary>
-    /// Движение каждой конкретной пули к ближайшему противнику
+    /// Баззовое движение каждой конкретной пули к ближайшему противнику
     /// </summary>
     public abstract class Projectile : MonoBehaviour
     {

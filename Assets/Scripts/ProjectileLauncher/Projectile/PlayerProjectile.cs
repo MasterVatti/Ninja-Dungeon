@@ -2,7 +2,9 @@ using Assets.Scripts;
 using ProjectileLauncher;
 using UnityEngine;
 
-
+/// <summary>
+/// Пуля игрока и союзников. Обрабатываются колизии.
+/// </summary>
 public class PlayerProjectile : Projectile
 {
     private void OnCollisionEnter(Collision collision)

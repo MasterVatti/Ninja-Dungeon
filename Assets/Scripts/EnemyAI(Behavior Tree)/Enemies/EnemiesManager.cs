@@ -23,8 +23,9 @@ namespace Enemies
         private void OnEnemyDied(Person person)
         {
             var enemy = person.GetComponentInChildren<Enemy>();
-            enemy.HealthBehaviour.OnDead -= OnEnemyDied;
             Enemies.Remove(enemy);
+            enemy.HealthBehaviour.OnDead -= OnEnemyDied;
+            
         }
         
         private void OnDestroy()

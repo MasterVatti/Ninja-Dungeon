@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using System.Linq;
 using UnityEngine.Serialization;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI3D : MonoBehaviour
 {
     [Header("Target")]
     public GameObject target; //Target object to move towards and attack.

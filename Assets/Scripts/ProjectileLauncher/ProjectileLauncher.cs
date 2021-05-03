@@ -1,4 +1,3 @@
-using System;
 using Characteristics;
 using Enemies;
 using UnityEngine;
@@ -6,7 +5,7 @@ using UnityEngine;
 namespace ProjectileLauncher
 {
     /// <summary>
-    /// Отвечает за создание пуль
+    /// Отвечает за создание пуль, получение урона с PersonCharacteristics.
     /// </summary>
     public class ProjectileLauncher : MonoBehaviour
     {
@@ -20,7 +19,7 @@ namespace ProjectileLauncher
         private float _attackDistance;
         [SerializeField]
         private GameObject _shooter;
-        
+
         private float _currentTime;
         private int _damage;
 
@@ -48,14 +47,14 @@ namespace ProjectileLauncher
         private void CreateProjectile(GameObject enemy)
         {
             _currentTime = 0;
-            
+
             var enemyPosition = enemy.transform.position;
             var nearestEnemyDirection = (enemyPosition - transform.position).normalized;
             var projectile = Instantiate(_projectilePrefab, transform.position, transform.rotation);
-            
+
             _shooter.transform.LookAt(enemy.transform);
-            
-            projectile.Initialize(nearestEnemyDirection,_damage);
+
+            projectile.Initialize(nearestEnemyDirection, _damage);
         }
 
         private bool IsAtRequiredDistance(Person enemy)

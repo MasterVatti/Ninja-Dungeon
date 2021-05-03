@@ -9,8 +9,10 @@ namespace Barracks_and_allied_behavior
     /// </summary>
     public class BarracksScreen : BaseScreenWithContext<BuildingContext>
     {
-        [SerializeField] private GameObject _barracksContent;
-        [SerializeField] private GameObject _allyItem;
+        [SerializeField]
+        private GameObject _barracksContent;
+        [SerializeField]
+        private GameObject _allyItem;
 
         private Barrack _barrack;
 
