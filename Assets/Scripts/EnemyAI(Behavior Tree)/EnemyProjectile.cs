@@ -8,6 +8,7 @@ public class EnemyProjectile : MonoBehaviour
 {
     [SerializeField] 
     private int _damage;
+    
     [SerializeField]
     private float _timeToRemove = 5f;
     

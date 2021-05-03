@@ -24,7 +24,7 @@ namespace Assets.Scripts.BattleManager
 
         [SerializeField]
         private List<SceneAsset> _battleScenes = new List<SceneAsset>();
-
+        
         private HealthBehaviour _healthBehaviour;
         private int _reward;
         
@@ -33,7 +33,6 @@ namespace Assets.Scripts.BattleManager
             _healthBehaviour = MainManager.Player.GetComponent<HealthBehaviour>();
             _healthBehaviour.OnDead += PlayerDeath;
             SceneManager.sceneLoaded += LoadedScrene;
-
             //сделать универсальным для всех сцен
         }
 
