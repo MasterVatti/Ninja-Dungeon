@@ -35,8 +35,10 @@ namespace BuildingSystem.BuildingUpgradeSystem
             {
                 var newBuildingGameObject = BuildingUtils.CreateNewBuilding(settings, buildingLevel);
                 var newBuilding = newBuildingGameObject.GetComponent<Building<T>>();
-                newBuilding.OnUpgrade(oldBuilding.GetState());
-                
+
+                var upgradableBuilding = newBuilding.GetComponent<IUpgradable<T>>();
+                upgradableBuilding.OnUpgrade(oldBuilding.GetState());
+
                 DestroyOldBuilding(oldBuilding.gameObject);
                 return newBuilding;
             }
