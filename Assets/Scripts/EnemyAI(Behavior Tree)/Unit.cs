@@ -23,7 +23,7 @@ public class Unit : MonoBehaviour
     private float _pointDistanceError = 0.5f;
     
 
-    private List<GameObject> _targets = new List<GameObject>();
+    private readonly List<GameObject> _targets = new List<GameObject>();
     private GameObject _target;
 
     private Vector3 _movePoint;

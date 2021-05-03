@@ -7,7 +7,7 @@ using UnityEngine.AI;
 namespace Barracks_and_allied_behavior
 {
     /// <summary>
-    /// Отвечает  конкретного союзника Рыцарь и его специальное поведение.
+    /// Отвечает  конкретного союзника Рыцарь и его специальное поведение(ускорение, атака).
     /// </summary>
     public class KnightAlly : PersonCharacteristics
     {

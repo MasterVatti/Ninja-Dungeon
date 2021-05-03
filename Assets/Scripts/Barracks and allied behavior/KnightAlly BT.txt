@@ -1,12 +1,12 @@
 tree("Attack")
-  fallback  
-    sequence
-        EnemyInSight
-        WillAccelerate
-        tree("Chase")
-        EnemyInSight
-        IsAtRequiredDistance(2.0)
-        tree("ToDamage")
+  fallback
+    while not IsTargetKilled  
+        sequence
+            EnemyInSight
+            WillAccelerate
+            tree("Chase")
+            IsAtRequiredDistance(2.0)
+            tree("ToDamage")
         
     sequence
             IsTargetKilled

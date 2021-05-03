@@ -6,7 +6,7 @@ using UnityEngine.AI;
 namespace Barracks_and_allied_behavior
 {
     /// <summary>
-    /// Отвечает за базовое поведение союзников. Передвижение, патрулирование, определение цели.
+    /// Отвечает за базовое поведение союзников. Передвижение, определение цели.
     /// </summary>
     public class AlliesAI : MonoBehaviour
     {

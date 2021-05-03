@@ -25,13 +25,13 @@ tree("GolemSpawn")
 tree("Chase")
     sequence
         DetermineNearestTarget
-        IsAtRequiredDistance(20.0)
-        Chase
+        while IsThereTarget
+            sequence
+                IsAtRequiredDistance(20.0)
+                Chase
         
 tree("Attack")
-    while
-        IsThereTarget
-        
+    while IsThereTarget
         sequence
             DetermineNearestTarget
             IsAtRequiredDistance(7.0)

@@ -7,8 +7,10 @@ tree("Root")
 tree("TopNode")
         sequence
             DetermineNearestTarget
-            SetTargetPosition
-            MoveToDestination
-            IsAtRequiredDistance(2.0)
-            Attack
-            Wait(2.0)
+            while IsThereTarget
+                sequence
+                    SetTargetPosition
+                    MoveToDestination
+                    IsAtRequiredDistance(2.0)
+                    Attack
+                    Wait(2.0)

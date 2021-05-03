@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 7605742107750937693}
   m_Layer: 0
   m_Name: Soldier
-  m_TagString: Untagged
+  m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,8 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779de56f172bc9a4289fb5367e881bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHP: 0
-  _maxHp: 200
+  _currentHP: 10
+  _maxHp: 10
   _moveSpeed: 3.5
   _attackDamage: 30
   _attackRate: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
   _canAttack: 0
   _alliesAI: {fileID: 621544001498614016}
   _agent: {fileID: 666163551287211885}
-  _accelerateSpeed: 0
+  _accelerateSpeed: 6
 --- !u!54 &5779794459243143245
 Rigidbody:
   m_ObjectHideFlags: 0
