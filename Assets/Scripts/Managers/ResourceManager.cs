@@ -11,7 +11,7 @@ namespace Managers
     /// </summary>
     public class ResourceManager : MonoBehaviour
     {
-        public event Action<Resource, int> OnResourceAmountChanged; 
+        public event Action<Resource, int, int> OnResourceAmountChanged; 
         
         [SerializeField]
         private List<Resource> _resources;
@@ -33,8 +33,12 @@ namespace Managers
             var index = GetResourceIndexByType(type);
             var resource = _resources[index];
             
-            OnResourceAmountChanged?.Invoke(resource, -value);
-            resource.Amount -= value;
+            var oldAmount = resource.Amount;
+            var newAmount = resource.Amount - value;
+            OnResourceAmountChanged?.Invoke(resource, oldAmount, newAmount);
+
+
+            resource.Amount = newAmount;
             _resources[index] = resource;
         }
 
@@ -51,9 +55,11 @@ namespace Managers
             var index = GetResourceIndexByType(type);
             var resource = _resources[index];
             
-            OnResourceAmountChanged?.Invoke(resource, value);
+            var oldAmount = resource.Amount;
+            var newAmount = resource.Amount + value;
+            OnResourceAmountChanged?.Invoke(resource, oldAmount, newAmount);
             
-            resource.Amount += value;
+            resource.Amount = newAmount;
             _resources[index] = resource;
         }
 

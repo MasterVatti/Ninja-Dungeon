@@ -12,13 +12,12 @@ public class ResourcesView : MonoBehaviour
 {
     [SerializeField]
     private List<ResourceLabel> _resourceLabels;
-    
     private List<Resource> _resources;
+    [SerializeField]
+    private float animationTime;
+    private float elapsedTime;
+    private Coroutine currentCoroutine;
 
-    private float _time = 0.2f;
-    
-    private int _count = 10;
-    
     private void Start()
     {
         MainManager.ResourceManager.OnResourceAmountChanged += OnResourceAmountChanged;
@@ -26,27 +25,29 @@ public class ResourcesView : MonoBehaviour
         UpdateResourcesAmount();
     }
     
-    private void OnResourceAmountChanged(Resource resource, int amount)
+
+    private void OnResourceAmountChanged(Resource resource, int oldAmount , int newAmount )
     {
-        StartCoroutine(UpdateResource(resource, amount));
+        if (Mathf.Round(oldAmount - newAmount) == 1 )
+        {
+            StopCoroutine();
+        }
+        currentCoroutine = StartCoroutine(UpdateResource(resource, oldAmount, newAmount));
     }
     
-    private IEnumerator UpdateResource(Resource resource, int amount)
+    private IEnumerator UpdateResource(Resource resource, int oldAmount , int newAmount)
     {
-        var sign = GetOperationSign(amount);
         var label = GetLabel(resource);
-        var step = amount / _count;
-        var remainder = amount % _count;
         
-        for (int i = 0; i < step; i++)
+        while (elapsedTime < animationTime)
         {
-            var currentAmount = Convert.ToSingle(label.text);
-            var newAmount = currentAmount + (_count * sign);
-            label.text = newAmount.ToString(CultureInfo.InvariantCulture);
-            yield return new WaitForSeconds(_time);
+            label.text = Mathf.Round(Mathf.Lerp(oldAmount, newAmount, (elapsedTime / animationTime))).ToString(CultureInfo.InvariantCulture);
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
         }
-        remainder += Convert.ToInt32(label.text);
-        label.text = remainder.ToString();
+        
+        elapsedTime = 0;
     }
     
     private TextMeshProUGUI GetLabel(Resource resource)
@@ -61,16 +62,6 @@ public class ResourcesView : MonoBehaviour
 
         throw new ArgumentNullException("Не могу найти текстовое поле " +
                                         " для вывода ресурсов. Проверьте, добавили ли вы его");
-    }
-    
-    private int GetOperationSign(float amount)
-    {
-        if (amount < 0)
-        {
-            return -1;
-        }
-        
-        return 1;
     }
     
     private void OnDestroy()
@@ -90,6 +81,15 @@ public class ResourcesView : MonoBehaviour
                     break;
                 }
             }
+        }
+    }
+
+    private void StopCoroutine()
+    {
+        if( currentCoroutine != null ) 
+        {
+            StopCoroutine(currentCoroutine);
+            currentCoroutine = null;
         }
     }
 }
