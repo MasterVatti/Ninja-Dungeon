@@ -46,7 +46,7 @@ namespace Buildings
 
         private void Awake()
         {
-            if (!stateWasLoaded)
+            if (!_stateWasLoaded)
             {
                 MiningStartTime = DateTime.UtcNow;
             }
@@ -63,7 +63,7 @@ namespace Buildings
             }
         }
         
-        public override void OnUpgrade(MinerBuildingData oldBuildingState)
+        public override void OnUpgraded(MinerBuildingData oldBuildingState)
         {
             var minedResourceCount = GetMinedResourceCount(oldBuildingState.StartTime, oldBuildingState.MiningPerSecond);
             StartAmount = oldBuildingState.StartAmount + minedResourceCount;

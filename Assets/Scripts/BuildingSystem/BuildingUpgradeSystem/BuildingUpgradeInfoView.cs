@@ -11,26 +11,20 @@ namespace BuildingSystem.BuildingUpgradeSystem
     /// <typeparam name="T"></typeparam>
     public abstract class BuildingUpgradeInfoView<T> : BaseScreenWithContext<UpgradeContext<T>> where T : BaseBuildingState
     {
-        protected Building<T> building;
-        
-        protected BuildingSettings buildingSettings;
-
         [SerializeField]
         private UpgradeInfoDisplay _upgradeInfoDisplay;
         
-        public override void Initialize(ScreenType screenType)
-        {
-            ScreenType = screenType;
-        }
+        private Building<T> _building;
+        private BuildingSettings _buildingSettings;
 
         private void Update()
         {
-            if (buildingSettings == null)
+            if (_buildingSettings == null)
             {
                 SetBuildingSettings();
             }
             
-            var buildingLevel = building.CurrentBuildingLevel + 1;
+            var buildingLevel = _building.CurrentBuildingLevel + 1;
 
             if (IsMaxLevel())
             {
@@ -38,34 +32,62 @@ namespace BuildingSystem.BuildingUpgradeSystem
                 return;
             }
 
-            var upgradeCost = buildingSettings.UpgradeList[buildingLevel].UpgradeCost;
+            var upgradeCost = _buildingSettings.UpgradeList[buildingLevel].UpgradeCost;
             var playerHasEnoughMoney = MainManager.ResourceManager.HasEnough(upgradeCost);
             
             _upgradeInfoDisplay.ActiveButton.gameObject.SetActive(playerHasEnoughMoney);
         }
+        
+        public override void Initialize(ScreenType screenType)
+        {
+            ScreenType = screenType;
+        }
+
+        public override void ApplyContext(UpgradeContext<T> context)
+        {
+            _building = context.Building;
+            SetBuildingSettings();
+            ShowUpgradeInfo();
+        }
 
         public void OnUpgradeClick()
         {
-            building.Upgrade();
+            _building.Upgrade();
         }
 
-        protected abstract Dictionary<string, int> GetStateDictionary(bool isNextLevelState = false);
+        protected abstract Dictionary<string, int> GetBuildingStateAsDictionary(T state);
+
+        private Dictionary<string, int> GetCurrentBuildingState()
+        {
+            var state = _building.GetState();
+            
+            return GetBuildingStateAsDictionary(state);
+        }
+
+        private Dictionary<string, int> GetNextUpgradeState()
+        {
+            var nextLevel = _building.CurrentBuildingLevel + 1;
+            var building = _buildingSettings.UpgradeList[nextLevel].UpgradePrefab;
+            var state = building.GetComponent<Building<T>>().GetState();
+
+            return GetBuildingStateAsDictionary(state);
+        }
 
         private bool IsMaxLevel()
         {
-            return buildingSettings.UpgradeList.Count <= building.CurrentBuildingLevel + 1;
+            return _buildingSettings.UpgradeList.Count <= _building.CurrentBuildingLevel + 1;
         }
         
-        protected void ShowUpgradeInfo()
+        private void ShowUpgradeInfo()
         {
-            var oldState = GetStateDictionary();
-            var newState = GetStateDictionary(true);
-            _upgradeInfoDisplay.ShowUpgradeInfo(building, buildingSettings, oldState, newState);
+            var oldState = GetCurrentBuildingState();
+            var newState = GetNextUpgradeState();
+            _upgradeInfoDisplay.ShowUpgradeInfo(_building, _buildingSettings, oldState, newState);
         }
 
-        protected void SetBuildingSettings()
+        private void SetBuildingSettings()
         {
-            buildingSettings = MainManager.BuildingManager.GetBuildingSettings(building.BuildingSettingsID);
+            _buildingSettings = MainManager.BuildingManager.GetBuildingSettings(_building.BuildingSettingsID);
         }
     }
 }

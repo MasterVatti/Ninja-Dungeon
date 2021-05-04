@@ -3,7 +3,7 @@ using SaveSystem;
 
 public class ShopBuilding : Building<DataShop>
 {
-    public override void OnUpgrade(DataShop oldBuildingState)
+    public override void OnUpgraded(DataShop oldBuildingState)
     {
         
     }

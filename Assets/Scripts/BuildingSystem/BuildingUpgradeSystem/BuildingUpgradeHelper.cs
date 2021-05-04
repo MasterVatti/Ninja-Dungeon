@@ -17,8 +17,7 @@ namespace BuildingSystem.BuildingUpgradeSystem
             Upgrade(building, settings, buildingLevel);
         }
 
-        private static void Upgrade<T>(Building<T> oldBuilding, BuildingSettings settings, int buildingLevel)
-        where T : BaseBuildingState
+        private static void Upgrade<T>(Building<T> oldBuilding, BuildingSettings settings, int buildingLevel) where T : BaseBuildingState
         {
             var upgrade = settings.UpgradeList[buildingLevel];
             var upgradeCost = upgrade.UpgradeCost;
@@ -26,7 +25,7 @@ namespace BuildingSystem.BuildingUpgradeSystem
             MainManager.ResourceManager.Pay(upgradeCost);
             var newBuildingGameObject = BuildingUtils.CreateNewBuilding(settings, buildingLevel);
             var newBuilding = newBuildingGameObject.GetComponent<Building<T>>();
-            newBuilding.OnUpgrade(oldBuilding.GetState());
+            newBuilding.OnUpgraded(oldBuilding.GetState());
 
             DestroyOldBuilding(oldBuilding.gameObject);
         }

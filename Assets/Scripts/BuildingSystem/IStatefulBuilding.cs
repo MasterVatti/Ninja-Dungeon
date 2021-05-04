@@ -8,7 +8,7 @@ namespace BuildingSystem
     /// <typeparam name="T"></typeparam>
     public interface IStatefulBuilding<T> : IBuilding where T : BaseBuildingState
     {
-        void OnUpgrade(T oldBuildingState);
+        void OnUpgraded(T oldBuildingState);
         T GetState();
     }
 }

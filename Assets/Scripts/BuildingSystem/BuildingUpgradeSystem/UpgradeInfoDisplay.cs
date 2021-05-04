@@ -51,12 +51,6 @@ namespace BuildingSystem.BuildingUpgradeSystem
         [SerializeField]
         private TextMeshProUGUI _newParameterDifference;
 
-        [Header("LinesOffsets")]
-        [SerializeField]
-        private float _resourceLineOffset;
-        [SerializeField]
-        private float _differenceLineOffset;
-
         [Header("MaxLevelWarning")]
         [SerializeField]
         private Image _maxLevelWarningImage;
@@ -98,22 +92,21 @@ namespace BuildingSystem.BuildingUpgradeSystem
 
         private void ShowUpgradeCost(BuildingUpgrade buildingUpgrade)
         {
-            var offset = 0f;
             foreach (var resource in buildingUpgrade.UpgradeCost)
             {
                 var icon = Instantiate(_icon, _resourceParent);
                 icon.gameObject.SetActive(true);
-                ApplyOffset(icon, offset);
                 icon.sprite = MainManager.IconsProvider.GetResourceSprite(resource.Type);
 
-                var requiredAmount = CreateElement(_requiredAmount, _resourceParent, offset);
+                var requiredAmount = Instantiate(_requiredAmount, _resourceParent);
                 requiredAmount.text = " / " + resource.Amount;
+                requiredAmount.gameObject.SetActive(true);
 
-                var currentAmount = CreateElement(_currentAmount, _resourceParent, offset);
+                var currentAmount = Instantiate(_currentAmount, _resourceParent);
                 var currentResource = MainManager.ResourceManager.GetResourceByType(resource.Type);
+                
                 currentAmount.text = currentResource.Amount.ToString();
-
-                offset += _resourceLineOffset;
+                currentAmount.gameObject.SetActive(true);
                 
                 _requiredResources.Add(resource);
                 _currentResourceLabels.Add(currentAmount);
@@ -124,29 +117,20 @@ namespace BuildingSystem.BuildingUpgradeSystem
         {
             var upgradeDifference = GetUpgradeDifference(_oldStateDictionary, _newStateDictionary);
 
-            var offset = 0f;
-
             foreach (var pair in upgradeDifference)
             {
-                var key = CreateElement(_keyLabel, _differenceParent, offset);
+                var key = Instantiate(_keyLabel, _differenceParent);
                 key.text = pair.Key;
+                key.gameObject.SetActive(true);
 
-                var newParameter = CreateElement(_newParameter, _differenceParent, offset);
+                var newParameter = Instantiate(_newParameter, _differenceParent);
                 newParameter.text = _newStateDictionary[pair.Key].ToString();
+                newParameter.gameObject.SetActive(true);
 
-                var newParameterDifference = CreateElement(_newParameterDifference, _differenceParent, offset);
+                var newParameterDifference = Instantiate(_newParameterDifference, _differenceParent);
                 newParameterDifference.text = "+" + upgradeDifference[pair.Key];
-
-                offset += _differenceLineOffset;
+                newParameterDifference.gameObject.SetActive(true);
             }
-        }
-
-        private static void ApplyOffset(Component go, float offset)
-        {
-            var goTransform = go.transform;
-            var goPosition = goTransform.position;
-            
-            goTransform.position = new Vector2(goPosition.x, goPosition.y - offset);
         }
         
         private static Dictionary<string, int> GetUpgradeDifference(IReadOnlyDictionary<string, int> oldStateDictionary, 
@@ -156,16 +140,6 @@ namespace BuildingSystem.BuildingUpgradeSystem
             pair => newStateDictionary[pair.Key] - oldStateDictionary[pair.Key]);
             
             return result;
-        }
-
-        private static TextMeshProUGUI CreateElement(TextMeshProUGUI element, Transform parent, float offset)
-        {
-            var go = Instantiate(element, parent);
-            
-            go.gameObject.SetActive(true);
-            ApplyOffset(go, offset);
-            
-            return go;
         }
     }
 }

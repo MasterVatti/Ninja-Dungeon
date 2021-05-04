@@ -15,14 +15,14 @@ namespace BuildingSystem
         public int CurrentBuildingLevel { get; private set; }
         public Transform PositionUI => _positionUI;
 
-        protected bool stateWasLoaded;
+        protected bool _stateWasLoaded;
 
         [SerializeField]
         private Transform _positionUI;
 
         public void OnStateLoaded(int buildingSettingsID, int level)
         {
-            stateWasLoaded = true;
+            _stateWasLoaded = true;
             BuildingSettingsID = buildingSettingsID;
             CurrentBuildingLevel = level;
         }
@@ -37,9 +37,9 @@ namespace BuildingSystem
             var state = GetState() ;
             return new BuildingData
             {
-            SettingsID = BuildingSettingsID,
-            BuildingLevel = CurrentBuildingLevel,
-            State = JsonConvert.SerializeObject(state)
+                SettingsID = BuildingSettingsID,
+                BuildingLevel = CurrentBuildingLevel,
+                State = JsonConvert.SerializeObject(state)
             };
         }
 
@@ -49,7 +49,7 @@ namespace BuildingSystem
             OnStateLoaded(state);
         }
         
-        public abstract void OnUpgrade(T oldBuildingState);
+        public abstract void OnUpgraded(T oldBuildingState);
 
         public abstract T GetState();
         

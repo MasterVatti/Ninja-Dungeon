@@ -3,7 +3,7 @@ using SaveSystem;
 
 public class PortalBuilding : Building<PortalData>
 {
-    public override void OnUpgrade(PortalData oldBuildingState)
+    public override void OnUpgraded(PortalData oldBuildingState)
     {
         
     }
