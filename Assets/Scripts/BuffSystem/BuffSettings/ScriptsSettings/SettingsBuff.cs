@@ -1,4 +1,5 @@
 using BuffSystem.BuffInterface;
+using Characteristics;
 using UnityEngine;
 
 namespace BuffSystem.BuffSettings.ScriptsSettings
@@ -8,7 +9,12 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
     /// </summary>
     public abstract class SettingsBuff : ScriptableObject
     {
-        public BuffType BuffType => _buffType;
+        public PersonCharacteristics PersonCharacteristics
+        {
+            get => _personCharacteristics;
+            set => _personCharacteristics = value;
+        }
+        
         public string NameBuff => _nameBuff;
         public Sprite ImageBuff => _imageBuff;
         
@@ -16,9 +22,8 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
         private string _nameBuff;
         [SerializeField]
         private Sprite _imageBuff;
-        [SerializeField]
-        private BuffType _buffType;
-        
+
+        private PersonCharacteristics _personCharacteristics;
         public abstract IBuff CreateBuff();
     }
 }

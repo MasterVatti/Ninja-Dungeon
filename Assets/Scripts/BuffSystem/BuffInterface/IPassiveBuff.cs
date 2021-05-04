@@ -4,6 +4,6 @@ namespace BuffSystem.BuffInterface
 {
     public interface IPassiveBuff : IBuff
     {
-        void StopBuff(PersonCharacteristics personCharacteristics);
+        void StopBuff();
     }
 }

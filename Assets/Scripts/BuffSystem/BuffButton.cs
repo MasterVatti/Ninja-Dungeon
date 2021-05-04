@@ -12,10 +12,8 @@ namespace BuffSystem
     /// </summary>
     public class BuffButton : MonoBehaviour
     {
-        public event Action<IBuff, BuffType> OnClicked;
-
-        public BuffType BuffType => _settingsBuff.BuffType;
-            
+        public event Action<IBuff> OnClicked;
+        
         [SerializeField]
         private Image _imageBuff;
         [SerializeField]
@@ -29,12 +27,11 @@ namespace BuffSystem
 
             _imageBuff.sprite = settingsBuff.ImageBuff;
             _textBuff.text = settingsBuff.NameBuff;
-
         }
         
         public void OnClick()
         {
-            OnClicked?.Invoke(_settingsBuff.CreateBuff(), BuffType);
+            OnClicked?.Invoke(_settingsBuff.CreateBuff());
         }
     }
 }

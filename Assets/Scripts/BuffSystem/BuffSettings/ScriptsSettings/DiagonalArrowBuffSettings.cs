@@ -1,5 +1,7 @@
+using System;
 using BuffSystem.Buff;
 using BuffSystem.BuffInterface;
+using Characteristics;
 using UnityEngine;
 
 namespace BuffSystem.BuffSettings.ScriptsSettings
@@ -8,10 +10,11 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
     public class DiagonalArrowBuffSettings : SettingsBuff
     {
         [SerializeField]
-        private int _diagonalArrowsNumber;
+        private bool _hasDiagonalArrows;
+        
         public override IBuff CreateBuff()
         {
-            return new DiagonalArrowBuff(_diagonalArrowsNumber);
+            return new DiagonalProjectileBuff(_hasDiagonalArrows, (PlayerCharacteristics)PersonCharacteristics);
         }
     }
 }

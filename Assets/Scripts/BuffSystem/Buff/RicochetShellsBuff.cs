@@ -6,24 +6,23 @@ namespace BuffSystem.Buff
     public class RicochetShellsBuff : IPassiveBuff
     {
         private int _ricochetsNumber;
+        private PlayerCharacteristics _playerCharacteristics;
         
-        public RicochetShellsBuff(int ricochetsNumber)
+        public RicochetShellsBuff(int ricochetsNumber, PlayerCharacteristics playerCharacteristics)
         {
             _ricochetsNumber = ricochetsNumber;
+            
+            _playerCharacteristics = playerCharacteristics;
         }
         
-        public void StartBuff(PersonCharacteristics personCharacteristics)
+        public void StartBuff()
         {
-            var playerCharacteristics = personCharacteristics.GetComponentInChildren<PlayerCharacteristics>();
-
-            playerCharacteristics.RicochetShells += _ricochetsNumber;
+            _playerCharacteristics.RicochetShells += _ricochetsNumber;
         }
 
-        public void StopBuff(PersonCharacteristics personCharacteristics)
+        public void StopBuff()
         {
-            var playerCharacteristics = personCharacteristics.GetComponentInChildren<PlayerCharacteristics>();
-
-            playerCharacteristics.RicochetShells -= _ricochetsNumber;
+            _playerCharacteristics.RicochetShells -= _ricochetsNumber;
         }
     }
 }

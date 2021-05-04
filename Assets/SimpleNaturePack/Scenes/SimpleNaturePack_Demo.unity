@@ -1997,18 +1997,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1877973915}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &212603096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212603095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b22f00f3b5846d409eee145d80d44c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &212603097 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 729379172147054469, guid: 023c32ed79838cb40ab63e3542a568da,
@@ -2027,44 +2015,6 @@ Rigidbody:
     type: 3}
   m_PrefabInstance: {fileID: 1877973915}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &212603099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212603095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9604bc4aa00a7fe47a52484d76e9ab04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentHP: 100
-  _maxHp: 100
-  _moveSpeed: 0
-  _attackDamage: 10
-  _attackRate: 10
-  _canMove: 0
-  _canAttack: 0
-  _ricochetShells: 0
-  _multishotShells: 0
-  _frontalityShells: 0
-  _diagonalShells: 0
---- !u!114 &212603100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212603095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dc2c43e763d67d48ad240f9a3a41073, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _personCharacteristics: {fileID: 212603099}
-  _healthBehaviour: {fileID: 212603096}
-  _rigidbody: {fileID: 212603098}
 --- !u!114 &212603101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15609,7 +15559,7 @@ PrefabInstance:
     - target: {fileID: 1631761049566942306, guid: 1d436f2929f844c49b94164af2b0e5eb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.03765869
+      value: -0.037597656
       objectReference: {fileID: 0}
     - target: {fileID: 1631761049566942306, guid: 1d436f2929f844c49b94164af2b0e5eb,
         type: 3}
@@ -17399,6 +17349,31 @@ PrefabInstance:
       propertyPath: _rotationSpeed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 961365608366097261, guid: 023c32ed79838cb40ab63e3542a568da,
+        type: 3}
+      propertyPath: _maxHp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 961365608366097261, guid: 023c32ed79838cb40ab63e3542a568da,
+        type: 3}
+      propertyPath: _currentHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 961365608366097261, guid: 023c32ed79838cb40ab63e3542a568da,
+        type: 3}
+      propertyPath: _moveSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 961365608366097261, guid: 023c32ed79838cb40ab63e3542a568da,
+        type: 3}
+      propertyPath: _attackRate
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 961365608366097261, guid: 023c32ed79838cb40ab63e3542a568da,
+        type: 3}
+      propertyPath: _attackDamage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5332810461773097028, guid: 023c32ed79838cb40ab63e3542a568da,
         type: 3}
       propertyPath: m_Controller
@@ -17509,7 +17484,8 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -233623980944576220, guid: 023c32ed79838cb40ab63e3542a568da, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 023c32ed79838cb40ab63e3542a568da, type: 3}
 --- !u!1001 &1878553453
 PrefabInstance:

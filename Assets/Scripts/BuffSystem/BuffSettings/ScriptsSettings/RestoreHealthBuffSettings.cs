@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BuffSystem.BuffSettings.ScriptsSettings
 {
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/BuffSettings/InstantBuff/BuffHealthBoost", order = 0)]
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/BuffSettings/InstantBuff/BuffHealthBoost", order = 2)]
     public class RestoreHealthBuffSettings : SettingsBuff
     {
         [Header("Health increase by %")]
@@ -14,7 +14,7 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
         
         public override IBuff CreateBuff()
         {
-            return new RestoreHealthBuff(_percentageIncrease);
+            return new RestoreHealthBuff(_percentageIncrease, PersonCharacteristics);
         }
     }
 }

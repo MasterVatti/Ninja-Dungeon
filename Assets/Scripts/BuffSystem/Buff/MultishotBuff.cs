@@ -3,27 +3,26 @@ using Characteristics;
 
 namespace BuffSystem.Buff
 {
-    public class MultishotBuff : IPassiveBuff
+    public class ProjectileCountBuff : IPassiveBuff
     {
-        private int _multishotsNumber;
+        private int _projectileCount;
+        private PlayerCharacteristics _playerCharacteristics;
         
-        public MultishotBuff(int multishotsNumber)
+        public ProjectileCountBuff(int projectileCount, PlayerCharacteristics playerCharacteristics)
         {
-            _multishotsNumber = multishotsNumber;
+            _projectileCount = projectileCount;
+            
+            _playerCharacteristics = playerCharacteristics;
         }
         
-        public void StartBuff(PersonCharacteristics personCharacteristics)
+        public void StartBuff()
         {
-            var playerCharacteristics = personCharacteristics.GetComponentInChildren<PlayerCharacteristics>();
-
-            playerCharacteristics.MultishotShells += _multishotsNumber;
+            _playerCharacteristics.ProjectileCount += _projectileCount;
         }
 
-        public void StopBuff(PersonCharacteristics personCharacteristics)
+        public void StopBuff()
         {
-            var playerCharacteristics = personCharacteristics.GetComponentInChildren<PlayerCharacteristics>();
-
-            playerCharacteristics.MultishotShells += _multishotsNumber;
+            _playerCharacteristics.ProjectileCount += _projectileCount;
         }
     }
 }

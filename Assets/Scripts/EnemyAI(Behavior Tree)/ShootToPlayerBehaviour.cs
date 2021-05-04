@@ -1,3 +1,4 @@
+using System;
 using Assets.Scripts;
 using Panda;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.AI;
 /// <summary>
 /// Отвечает за дальние атаки врагов
 /// </summary>
-public class ShootingEnemies : MonoBehaviour
+public class ShootToPlayerBehaviour : MonoBehaviour
 {
     [SerializeField]
     private GameObject _bulletPrefab;
@@ -54,6 +55,10 @@ public class ShootingEnemies : MonoBehaviour
         if (newBullet.TryGetComponent<EnemyProjectile>(out var projectile))
         {
             projectile.Initialize(direction);
+        }
+        else
+        {
+            throw new ArgumentNullException("На снаряде нету Projectile");
         }
     }
 

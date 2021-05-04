@@ -1,29 +1,26 @@
 using BuffSystem.BuffInterface;
 using Characteristics;
-using UnityEngine;
 
 namespace BuffSystem.Buff
 {
     public class FrontalProjectileBuff : IPassiveBuff
     {
-        private bool _hasFrontalProjectiles;
-
-        public FrontalProjectileBuff(bool hasFrontalProjectiles)
+        private PlayerCharacteristics _playerCharacteristics;
+        private bool _hasFrontalProjectile;
+        
+        public FrontalProjectileBuff(PlayerCharacteristics playerCharacteristics)
         {
-            _hasFrontalProjectiles = hasFrontalProjectiles;
+            _playerCharacteristics = playerCharacteristics;
         }
-        public void StartBuff(PersonCharacteristics personCharacteristics)
+        
+        public void StartBuff()
         {
-            var playerCharacteristics = personCharacteristics.GetComponentInChildren<PlayerCharacteristics>();
-
-            playerCharacteristics.FrontalityShells = true;
+            _playerCharacteristics.FrontalityShells = true;
         }
 
-        public void StopBuff(PersonCharacteristics personCharacteristics)
+        public void StopBuff()
         {
-            var playerCharacteristics = personCharacteristics.GetComponentInChildren<PlayerCharacteristics>();
-
-            playerCharacteristics.FrontalityShells = false;
+            _playerCharacteristics.FrontalityShells = false;
         }
     }    
 }

@@ -1,4 +1,6 @@
-using System.Threading.Tasks;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using Characteristics;
 using Enemies;
 using UnityEngine;
@@ -12,26 +14,27 @@ namespace ProjectileLauncher
     {
         [SerializeField]
         private PlayerCharacteristics _playerCharacteristics;
-        [SerializeField] 
-        private Projectile.Projectile _projectilePrefab;
-        [SerializeField] 
-        private NearestEnemyDetector _enemyDetector;
         [SerializeField]
-        private float _distanceBetweenProjectiles;
-        
+        private Projectile.Projectile _projectilePrefab;
+        [SerializeField]
+        private NearestEnemyDetector _enemyDetector;
+     
         [Header("Degrees")]
         [SerializeField]
-        private float _swivelDiagonalArrows = 45;
+        private float _turnDiagonalArrows = 45;
 
-        [Header("Milliseconds latency")]
+        [Header("Seconds latency")]
         [SerializeField]
-        private int _delaySecondaryProjectiles = 50;
+        private float _delaySecondaryProjectiles = 0.05f;
         
+        [Space]
+        [SerializeField]
+        private List<Transform> _positionFrontalShells;
+        
+        private List<TransformProjectile> _transformProjectiles;
         private float _projectileSpawnCooldown;
         private ObjectPool _objectPool;
-        private Vector3 _nearestEnemyDirection;
         private float _currentTime;
-        private int _reboundNumber;
 
         private void Start()
         {
@@ -50,88 +53,106 @@ namespace ProjectileLauncher
             {
                 if (enemy != null)
                 {
-                    DirectionNearestEnemy(enemy.gameObject);
-
-                    CreateProjectile(transform.position);
-
-                    Multishot();
+                    StartCoroutine(Shoot());
                     
-                    DiagonalShells();
+                    _currentTime = 0;
+                }
+                else
+                {
+                    StopCoroutine(Shoot());
                 }
             }
         }
 
-        private void DirectionNearestEnemy(GameObject enemy)
+        private Vector3 GetNearestEnemyDirection()
         {
-            _currentTime = 0;
+            var enemy = _enemyDetector.GetNearestEnemy();
             
-            var enemyPosition = enemy.transform.position;
-            _nearestEnemyDirection = (enemyPosition - transform.position).normalized;
+            if (enemy != null)
+            {
+                var enemyPosition = enemy.transform.position;
+
+                transform.parent.LookAt(enemy.transform);
+
+                return (enemyPosition - transform.position).normalized;
+            }
             
-            transform.parent.LookAt(enemy.transform);
+            return Vector3.forward;
+        }
+        
+        private IEnumerator Shoot()
+        {
+            for (int i = 0; i < _playerCharacteristics.ProjectileCount; i++)
+            {
+                foreach (var transformProjectile in GetTransformProjectiles())
+                {
+                    CreateProjectile(transformProjectile.Position, transformProjectile.Direction);
+                }
+                
+                yield return new WaitForSeconds(_delaySecondaryProjectiles);
+            }
         }
 
-
-        private void CreateProjectile(Vector3 position)
+        private List<TransformProjectile> GetTransformProjectiles()
         {
+            _transformProjectiles = new List<TransformProjectile>();
+
             if (_playerCharacteristics.FrontalityShells)
             {
-                CreateFrontalShells(position);
+                foreach (var positionFrontalShell in _positionFrontalShells)
+                {
+                    AddTransformProjectile(GetNearestEnemyDirection(), positionFrontalShell.position);
+                }
             }
             else
             {
-                CreateStandardProjectile(position);
+                AddTransformProjectile(GetNearestEnemyDirection(), transform.position);
             }
+
+            if (_playerCharacteristics.DiagonalShells)
+            {
+                var directionDiagonalArrows =
+                    Quaternion.AngleAxis(_turnDiagonalArrows, Vector3.up) * GetNearestEnemyDirection();
+                
+                AddTransformProjectile(directionDiagonalArrows, transform.position);
+
+                directionDiagonalArrows =
+                    Quaternion.AngleAxis(-_turnDiagonalArrows, Vector3.up) * GetNearestEnemyDirection();
+                
+                AddTransformProjectile(directionDiagonalArrows, transform.position);
+            }
+
+            return _transformProjectiles;
         }
         
-        private void CreateStandardProjectile(Vector3 position)
+        private void CreateProjectile(Vector3 position, Vector3 direction)
         {
-
             var newBullet = _objectPool.Get();
 
             newBullet.transform.position = position;
             newBullet.transform.rotation = transform.rotation;
-
+            
             if (newBullet.TryGetComponent<Projectile.Projectile>(out var projectile))
             {
                 var player = _playerCharacteristics;
-                
-                projectile.Initialize(_nearestEnemyDirection, player.RicochetShells, player.AttackDamage);
+
+                projectile.Initialize(direction, player.RicochetShells, player.AttackDamage);
             }
-        }
-        
-        private void CreateFrontalShells(Vector3 position)
-        {
-            CreateStandardProjectile(position + new Vector3(_distanceBetweenProjectiles, 0f, 0f));
-            CreateStandardProjectile(position + new Vector3(-_distanceBetweenProjectiles, 0f, 0f));
-        }
-        
-        private async void Multishot()
-        {
-            for (int i = 0; i < _playerCharacteristics.MultishotShells; i++)
+            else
             {
-                await Task.Delay(_delaySecondaryProjectiles);
-                
-                CreateProjectile(transform.position);
+                throw new ArgumentNullException("На снаряде нету Projectile");
             }
         }
 
-       private async void DiagonalShells()
-       {
-           var direction = _nearestEnemyDirection;
-           
-           for (int i = 0; i < _playerCharacteristics.DiagonalShells; i++)
-           {
-               await Task.Delay(_delaySecondaryProjectiles);
-               
-               _nearestEnemyDirection = Quaternion.AngleAxis(_swivelDiagonalArrows, Vector3.up) * direction;
-               CreateStandardProjectile(transform.position);
-               
-               _nearestEnemyDirection = Quaternion.AngleAxis(-_swivelDiagonalArrows, Vector3.up) * direction;
-               CreateStandardProjectile(transform.position);
-
-               _nearestEnemyDirection = direction;
-           }
-       }  
+        private void AddTransformProjectile(Vector3 direction, Vector3 position)
+        {
+            var transformProjectile = new TransformProjectile
+            {
+                Direction = direction, 
+                Position = position
+            };
+                
+            _transformProjectiles.Add(transformProjectile);
+        }
     }
 }

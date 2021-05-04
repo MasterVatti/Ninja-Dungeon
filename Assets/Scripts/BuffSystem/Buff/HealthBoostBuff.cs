@@ -5,29 +5,24 @@ namespace BuffSystem.Buff
 {
     public class HealthBoostBuff : IPassiveBuff
     {
-        private double _percentageIncrease;
+        private PersonCharacteristics _personCharacteristics;
+        private float _amountBonusBuff;
         
-        public HealthBoostBuff(double percentageIncrease)
+        public HealthBoostBuff(float percentageIncrease, PersonCharacteristics personCharacteristics)
         {
-            _percentageIncrease = percentageIncrease;
+            _personCharacteristics = personCharacteristics;
+            
+            _amountBonusBuff = _personCharacteristics.MaxHp * (percentageIncrease / 100);
         }
         
-        public void StartBuff(PersonCharacteristics personCharacteristics)
+        public void StartBuff()
         {
-            var percent = _percentageIncrease / 100;
-
-            var amountIncreasedHealth = personCharacteristics.MaxHp * percent;
-            
-            personCharacteristics.MaxHp += (int)amountIncreasedHealth;
+            _personCharacteristics.MaxHp += (int)_amountBonusBuff;
         }
         
-        public void StopBuff(PersonCharacteristics personCharacteristics)
+        public void StopBuff()
         {
-            var percent = _percentageIncrease / 100;
-
-            var amountIncreasedHealth = personCharacteristics.MaxHp * percent;
-            
-            personCharacteristics.MaxHp -= (int)amountIncreasedHealth;
+            _personCharacteristics.MaxHp -= (int)_amountBonusBuff;
         }
         
     }

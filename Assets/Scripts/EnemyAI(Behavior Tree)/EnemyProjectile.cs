@@ -13,18 +13,12 @@ public class EnemyProjectile : MonoBehaviour
     private int _damage;
     [SerializeField]
     private Rigidbody _rigidbody;
-        
-    private Vector3 _direction;
+    
     private int _reboundNumber;
         
     public void Initialize(Vector3 direction)
     {
-        _direction = direction;
-    }
-
-    private void Update()
-    {
-        _rigidbody.velocity = _direction * _projectileSpeed;
+        _rigidbody.velocity = direction * _projectileSpeed;
     }
     
     public void OnCollisionEnter(Collision collision)

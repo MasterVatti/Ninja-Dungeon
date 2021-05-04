@@ -7,25 +7,25 @@ namespace Characteristics
     /// </summary>
     public class PlayerCharacteristics : PersonCharacteristics
     {
+        public int ProjectileCount
+        {
+            get => _projectileCount;
+            set => _projectileCount = value;
+        }
+        
         public int RicochetShells
         {
             get => _ricochetShells;
             set => _ricochetShells = value;
         }
-        
-        public int MultishotShells
-        {
-            get => _multishotShells;
-            set => _multishotShells = value;
-        }
-        
+
         public bool FrontalityShells
         {
             get => _frontalityShells;
             set => _frontalityShells = value;
         }
         
-        public int DiagonalShells
+        public bool DiagonalShells
         {
             get => _diagonalShells;
             set => _diagonalShells = value;
@@ -33,12 +33,12 @@ namespace Characteristics
 
         [Header("Weapon")]
         [SerializeField]
-        private int _ricochetShells;
+        private int _projectileCount;
         [SerializeField]
-        private int _multishotShells;
+        private int _ricochetShells;
         [SerializeField]
         private bool _frontalityShells;    
         [SerializeField]
-        private int _diagonalShells;
+        private bool _diagonalShells;
     }
 }

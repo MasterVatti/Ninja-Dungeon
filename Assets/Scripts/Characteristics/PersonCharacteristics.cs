@@ -15,7 +15,7 @@ namespace Characteristics
             set
             {
                 _currentHP = value;
-                _currentHP = Mathf.Clamp(_currentHP, 0 , _maxHp);
+                _currentHP = Mathf.Clamp(value, 0 , _maxHp);
             }
         }
         public int MaxHp

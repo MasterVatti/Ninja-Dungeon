@@ -11,48 +11,44 @@ namespace BuffSystem
     [RequireComponent(typeof(PersonCharacteristics))]
     public class BuffManager : MonoBehaviour
     {
-        private PersonCharacteristics _personCharacteristics;
-        
-        private Stack<IPassiveBuff> _passiveBuffs;
-        private Stack<IUpdatableBuff> _updatableBuffs;
+        private List<IPassiveBuff> _passiveBuffs;
+        private List<IUpdatableBuff> _updatableBuffs;
 
         private void Awake()
         {
-            _personCharacteristics = GetComponent<PersonCharacteristics>();
-
-            _passiveBuffs = new Stack<IPassiveBuff>();
-            _updatableBuffs = new Stack<IUpdatableBuff>();
+            _passiveBuffs = new List<IPassiveBuff>();
+            _updatableBuffs = new List<IUpdatableBuff>();
         }
         
-
-        public void AddBuff(IBuff buff, BuffType buffType)
+        public void AddBuff(IBuff buff)
         {
-            switch (buffType)
+            switch (buff)
             {
-                case BuffType.PassiveBuff:
-                    _passiveBuffs.Push((IPassiveBuff)buff);
+                case IUpdatableBuff updatableBuff:
+                    _updatableBuffs.Add(updatableBuff);
                     break;
-                case BuffType.UpdatableBuff:
-                    _updatableBuffs.Push((IUpdatableBuff)buff);
+                
+                case IPassiveBuff passiveBuff:
+                    _passiveBuffs.Add(passiveBuff);
                     break;
             }
             
-            buff.StartBuff(_personCharacteristics);
+            buff.StartBuff();
         }
 
         private void Update()
         {
             foreach (var updatableBuff in _updatableBuffs)
             {
-                updatableBuff.UpdateBuff(_personCharacteristics);
+                updatableBuff.UpdateBuff();
             }
         }
 
-        private void StopBuff<T>(Stack<T> _buffs) where T : IPassiveBuff
+        private void StopBuff<T>(List<T> _buffs) where T : IPassiveBuff
         {
             foreach (var buff in _buffs)
             {
-                buff.StopBuff(_personCharacteristics);
+                buff.StopBuff();
             }
         }
 

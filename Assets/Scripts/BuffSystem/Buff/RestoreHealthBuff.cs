@@ -1,20 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using BuffSystem.BuffInterface;
 using Characteristics;
-using UnityEngine;
 
-public class RestoreHealthBuff : IBuff
+namespace BuffSystem.Buff
 {
-    private int _amountHealthRestored;
-    
-    public RestoreHealthBuff(int amountHealthRestored)
+    public class RestoreHealthBuff : IBuff
     {
-        _amountHealthRestored = amountHealthRestored;
-    }
+        private int _amountHealthRestored;
+        private PersonCharacteristics _personCharacteristics;
     
-    public void StartBuff(PersonCharacteristics personCharacteristics)
-    {
-        personCharacteristics.CurrentHp += _amountHealthRestored;
+        public RestoreHealthBuff(int amountHealthRestored, PersonCharacteristics personCharacteristics)
+        {
+            _amountHealthRestored = amountHealthRestored;
+        
+            _personCharacteristics = personCharacteristics;
+        }
+    
+        public void StartBuff()
+        {
+            _personCharacteristics.CurrentHp += _amountHealthRestored;
+        }
     }
 }

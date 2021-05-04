@@ -11,10 +11,10 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
         [Range(0, 100)]
         [SerializeField]
         private int _percentageIncrease;
-
+        
         public override IBuff CreateBuff()
         {
-            return new HealthBoostBuff(_percentageIncrease);
+            return new HealthBoostBuff(_percentageIncrease, PersonCharacteristics);
         }
     }
 }

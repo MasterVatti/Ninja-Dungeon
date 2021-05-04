@@ -28,7 +28,7 @@ namespace Enemies
                     if (minDistance > distanceToPlayer)
                     {
                         minDistance = distanceToPlayer;
-                        minIndex = currentIteration;
+                        minIndex = currentIteration;    
                     }
                 }
                 

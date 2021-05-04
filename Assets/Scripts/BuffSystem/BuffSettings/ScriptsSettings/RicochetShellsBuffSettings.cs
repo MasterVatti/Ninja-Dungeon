@@ -1,5 +1,6 @@
 using BuffSystem.Buff;
 using BuffSystem.BuffInterface;
+using Characteristics;
 using UnityEngine;
 
 namespace BuffSystem.BuffSettings.ScriptsSettings
@@ -12,7 +13,7 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
         
         public override IBuff CreateBuff()
         {
-            return new RicochetShellsBuff(_ricochetsNumber);
+            return new RicochetShellsBuff(_ricochetsNumber, (PlayerCharacteristics)PersonCharacteristics);
         }
     }
 }

@@ -5,28 +5,24 @@ namespace BuffSystem.Buff
 {
     public class IncreasedDamageBuff : IPassiveBuff
     {
-        private double _percentageIncrease;
+        private PersonCharacteristics _personCharacteristics;
+        private float _amountBonusBuff;
         
-        public IncreasedDamageBuff(double percentageIncrease)
+        public IncreasedDamageBuff(float percentageIncrease, PersonCharacteristics personCharacteristics)
         {
-            _percentageIncrease = percentageIncrease;
-        }
-        public void StartBuff(PersonCharacteristics personCharacteristics)
-        {
-            var percent = _percentageIncrease / 100;
-
-            var damageIncreaseAmount = personCharacteristics.AttackDamage * percent;
+            _personCharacteristics = personCharacteristics;
             
-            personCharacteristics.AttackDamage += (int)damageIncreaseAmount;
+            _amountBonusBuff = _personCharacteristics.AttackDamage * (percentageIncrease / 100);
+        }
+        
+        public void StartBuff()
+        { 
+            _personCharacteristics.AttackDamage += (int)_amountBonusBuff;
         }
 
-        public void StopBuff(PersonCharacteristics personCharacteristics)
+        public void StopBuff()
         {
-            var percent = _percentageIncrease / 100;
-
-            var damageIncreaseAmount = personCharacteristics.AttackDamage * percent;
-            
-            personCharacteristics.AttackDamage -= (int)damageIncreaseAmount;
+            _personCharacteristics.AttackDamage -= (int)_amountBonusBuff;
         }
         
     }
