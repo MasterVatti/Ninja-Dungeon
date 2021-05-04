@@ -99,16 +99,18 @@ MonoBehaviour:
   - {fileID: 6586061816716549553}
   - {fileID: 4390081153625359973}
   _settingsBuffs:
-  - {fileID: 11400000, guid: f306f15d0c0d0a445985b7c38ab390ff, type: 2}
   - {fileID: 11400000, guid: 079ad970d9ced904990c0ebd94676eae, type: 2}
   - {fileID: 11400000, guid: f2d8bf6b0c838664baf1ce3937ad68eb, type: 2}
   - {fileID: 11400000, guid: 60894cae8d8694940ae97e2933a5e801, type: 2}
-  - {fileID: 11400000, guid: ef502b54f0b282d4f9d52eb7e19556b7, type: 2}
+  - {fileID: 11400000, guid: 70e0c2b4a1d6201429daf89f1a226984, type: 2}
+  - {fileID: 11400000, guid: 4dd8cf1813f36cb4fb71c0f541ed2f9c, type: 2}
   - {fileID: 11400000, guid: d8804ea4e97d7634ea5044361474c153, type: 2}
   - {fileID: 11400000, guid: 642392d83fc955043b406103e6542fe7, type: 2}
+  - {fileID: 11400000, guid: 4542302f1cb31064cbcccc0b91d20a8f, type: 2}
   - {fileID: 11400000, guid: bfe85e7bbe02a8e4a94ca883c8baa00d, type: 2}
   - {fileID: 11400000, guid: c396c7e16a8126144845cd1f1d951897, type: 2}
   - {fileID: 11400000, guid: 12ecb418c42c1a04290c89c9a1945c3c, type: 2}
+  - {fileID: 11400000, guid: f306f15d0c0d0a445985b7c38ab390ff, type: 2}
 --- !u!114 &1297545544985809609
 MonoBehaviour:
   m_ObjectHideFlags: 0

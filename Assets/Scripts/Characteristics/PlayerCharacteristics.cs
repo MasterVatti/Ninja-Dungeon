@@ -31,14 +31,30 @@ namespace Characteristics
             set => _diagonalShells = value;
         }
 
+        public bool ProjectileBack
+        {
+            get => _projectileBack;
+            set => _projectileBack = value;
+        }
+
+        public bool SideShells
+        {
+            get => _sideShells;
+            set => _sideShells = value;
+        }
+
         [Header("Weapon")]
         [SerializeField]
-        private int _projectileCount;
+        private int _projectileCount = 1;
         [SerializeField]
         private int _ricochetShells;
         [SerializeField]
         private bool _frontalityShells;    
         [SerializeField]
         private bool _diagonalShells;
+        [SerializeField]
+        private bool _projectileBack;
+        [SerializeField]
+        private bool _sideShells;
     }
 }

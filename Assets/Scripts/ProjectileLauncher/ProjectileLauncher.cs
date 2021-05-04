@@ -32,8 +32,9 @@ namespace ProjectileLauncher
         private List<Transform> _positionFrontalShells;
         
         private List<TransformProjectile> _transformProjectiles;
-        private float _projectileSpawnCooldown;
         private ObjectPool _objectPool;
+        private int _sideProjectileAngle = 90;
+        private float _projectileSpawnCooldown;
         private float _currentTime;
 
         private void Start()
@@ -93,6 +94,26 @@ namespace ProjectileLauncher
             }
         }
 
+        private void CreateProjectile(Vector3 position, Vector3 direction)
+        {
+            var newBullet = _objectPool.Get();
+
+            newBullet.transform.position = position;
+            newBullet.transform.rotation = transform.rotation;
+            
+            if (newBullet.TryGetComponent<Projectile.Projectile>(out var projectile))
+            {
+                var player = _playerCharacteristics;
+
+                projectile.Initialize(direction, player.RicochetShells, player.AttackDamage);
+            }
+            else
+            {
+                throw new ArgumentNullException("На снаряде нету Projectile");
+            }
+        }
+
+        
         private List<TransformProjectile> GetTransformProjectiles()
         {
             _transformProjectiles = new List<TransformProjectile>();
@@ -122,28 +143,27 @@ namespace ProjectileLauncher
                 AddTransformProjectile(directionDiagonalArrows, transform.position);
             }
 
+            if (_playerCharacteristics.ProjectileBack)
+            {
+                AddTransformProjectile(GetNearestEnemyDirection() * -1.0f, transform.position);
+            }
+
+            if (_playerCharacteristics.SideShells)
+            {
+                var directionSideShells =
+                    Quaternion.AngleAxis(_sideProjectileAngle, Vector3.up) * GetNearestEnemyDirection();
+                
+                AddTransformProjectile(directionSideShells, transform.position);
+
+                directionSideShells =
+                    Quaternion.AngleAxis(-_sideProjectileAngle, Vector3.up) * GetNearestEnemyDirection();
+                
+                AddTransformProjectile(directionSideShells, transform.position);
+            }
+
             return _transformProjectiles;
         }
         
-        private void CreateProjectile(Vector3 position, Vector3 direction)
-        {
-            var newBullet = _objectPool.Get();
-
-            newBullet.transform.position = position;
-            newBullet.transform.rotation = transform.rotation;
-            
-            if (newBullet.TryGetComponent<Projectile.Projectile>(out var projectile))
-            {
-                var player = _playerCharacteristics;
-
-                projectile.Initialize(direction, player.RicochetShells, player.AttackDamage);
-            }
-            else
-            {
-                throw new ArgumentNullException("На снаряде нету Projectile");
-            }
-        }
-
         private void AddTransformProjectile(Vector3 direction, Vector3 position)
         {
             var transformProjectile = new TransformProjectile

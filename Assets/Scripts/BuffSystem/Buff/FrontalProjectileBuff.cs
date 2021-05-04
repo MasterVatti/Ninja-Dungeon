@@ -8,19 +8,20 @@ namespace BuffSystem.Buff
         private PlayerCharacteristics _playerCharacteristics;
         private bool _hasFrontalProjectile;
         
-        public FrontalProjectileBuff(PlayerCharacteristics playerCharacteristics)
+        public FrontalProjectileBuff(PlayerCharacteristics playerCharacteristics, bool hasFrontalProjectile)
         {
             _playerCharacteristics = playerCharacteristics;
+            _hasFrontalProjectile = hasFrontalProjectile;
         }
         
         public void StartBuff()
         {
-            _playerCharacteristics.FrontalityShells = true;
+            _playerCharacteristics.FrontalityShells = _hasFrontalProjectile;
         }
 
         public void StopBuff()
         {
-            _playerCharacteristics.FrontalityShells = false;
+            _playerCharacteristics.FrontalityShells = !_hasFrontalProjectile;
         }
     }    
 }

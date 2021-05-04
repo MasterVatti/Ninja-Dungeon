@@ -23,10 +23,10 @@ TagManager:
   - Damageable
   - Environment
   - ScreenFade
-  - Projectile
+  - ProjectilePlayer
+  - ProjectileEnemy
   - Player
   - Enemy
-  - 
   - 
   - 
   - 

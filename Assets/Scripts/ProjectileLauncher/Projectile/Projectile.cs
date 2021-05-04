@@ -42,7 +42,7 @@ namespace ProjectileLauncher.Projectile
                 
                 _reboundNumber--;
                 
-                _direction = collision.contacts[0].normal;
+                _direction = Vector3.Reflect(_direction, collision.contacts[0].normal);
             }
         }
 
