@@ -5,6 +5,8 @@ using System.Globalization;
 using ResourceSystem;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
+
 /// <summary>
 /// Класс отвечает за HUDResource
 /// </summary>
@@ -15,8 +17,9 @@ public class ResourcesView : MonoBehaviour
     private List<Resource> _resources;
     [SerializeField]
     private float animationTime;
-    private float elapsedTime;
-    private Coroutine currentCoroutine;
+    private float _elapsedTime;
+    private Coroutine _currentCoroutine;
+    private int[] _currentValue = new int[3];
 
     private void Start()
     {
@@ -25,29 +28,36 @@ public class ResourcesView : MonoBehaviour
         UpdateResourcesAmount();
     }
     
-
-    private void OnResourceAmountChanged(Resource resource, int oldAmount , int newAmount )
+    private void OnResourceAmountChanged(Resource resource, int oldAmount , int newAmount, int index )
     {
-        if (Mathf.Round(oldAmount - newAmount) == 1 )
+        StopCoroutine();
+        if (_currentValue[index] < oldAmount)
         {
-            StopCoroutine();
+            _currentValue[index] = oldAmount;
         }
-        currentCoroutine = StartCoroutine(UpdateResource(resource, oldAmount, newAmount));
+        if (_currentValue[index] != newAmount)
+        {
+            _currentCoroutine = StartCoroutine(UpdateResource(resource, _currentValue[index], newAmount, index));
+            
+        }
+
     }
     
-    private IEnumerator UpdateResource(Resource resource, int oldAmount , int newAmount)
+    private IEnumerator UpdateResource(Resource resource, int oldAmount , int newAmount, int index)
     {
         var label = GetLabel(resource);
         
-        while (elapsedTime < animationTime)
+        
+        while (_elapsedTime < animationTime)
         {
-            label.text = Mathf.Round(Mathf.Lerp(oldAmount, newAmount, (elapsedTime / animationTime))).ToString(CultureInfo.InvariantCulture);
-            elapsedTime += Time.deltaTime;
+            label.text = Mathf.Round(Mathf.Lerp(oldAmount, newAmount, (_elapsedTime / animationTime))).ToString(CultureInfo.InvariantCulture);
+            _currentValue[index] = Convert.ToInt32(label.text);
+            _elapsedTime += Time.deltaTime;
 
             yield return null;
         }
         
-        elapsedTime = 0;
+        _elapsedTime = 0;
     }
     
     private TextMeshProUGUI GetLabel(Resource resource)
@@ -86,10 +96,10 @@ public class ResourcesView : MonoBehaviour
 
     private void StopCoroutine()
     {
-        if( currentCoroutine != null ) 
+        if( _currentCoroutine != null ) 
         {
-            StopCoroutine(currentCoroutine);
-            currentCoroutine = null;
+            StopCoroutine(_currentCoroutine);
+            _currentCoroutine = null;
         }
     }
 }
