@@ -2,6 +2,7 @@
 using Assets.Scripts.Managers.ScreensManager;
 using SaveSystem;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BuildingSystem.BuildingUpgradeSystem
 {
@@ -13,6 +14,10 @@ namespace BuildingSystem.BuildingUpgradeSystem
     {
         [SerializeField]
         private UpgradeInfoDisplay _upgradeInfoDisplay;
+        [SerializeField]
+        private Button _activeButton;
+        [SerializeField]
+        private Image _maxLevelWarningImage;
         
         private Building<T> _building;
         private BuildingSettings _buildingSettings;
@@ -28,14 +33,14 @@ namespace BuildingSystem.BuildingUpgradeSystem
 
             if (IsMaxLevel())
             {
-                _upgradeInfoDisplay.MaxLevelWarning.gameObject.SetActive(true);
+                _maxLevelWarningImage.gameObject.SetActive(true);
                 return;
             }
 
             var upgradeCost = _buildingSettings.UpgradeList[buildingLevel].UpgradeCost;
             var playerHasEnoughMoney = MainManager.ResourceManager.HasEnough(upgradeCost);
             
-            _upgradeInfoDisplay.ActiveButton.gameObject.SetActive(playerHasEnoughMoney);
+            _activeButton.gameObject.SetActive(playerHasEnoughMoney);
         }
         
         public override void Initialize(ScreenType screenType)
@@ -53,24 +58,25 @@ namespace BuildingSystem.BuildingUpgradeSystem
         public void OnUpgradeClick()
         {
             _building.Upgrade();
+            MainManager.ScreenManager.CloseTopScreen();
         }
 
-        protected abstract Dictionary<string, int> GetBuildingStateAsDictionary(T state);
+        protected abstract Dictionary<string, int> ParseStateToDictionary(T state);
 
-        private Dictionary<string, int> GetCurrentBuildingState()
+        private Dictionary<string, int> ParseCurrentBuildingState()
         {
             var state = _building.GetState();
             
-            return GetBuildingStateAsDictionary(state);
+            return ParseStateToDictionary(state);
         }
 
-        private Dictionary<string, int> GetNextUpgradeState()
+        private Dictionary<string, int> ParseNextUpgradeState()
         {
             var nextLevel = _building.CurrentBuildingLevel + 1;
             var building = _buildingSettings.UpgradeList[nextLevel].UpgradePrefab;
             var state = building.GetComponent<Building<T>>().GetState();
 
-            return GetBuildingStateAsDictionary(state);
+            return ParseStateToDictionary(state);
         }
 
         private bool IsMaxLevel()
@@ -80,8 +86,8 @@ namespace BuildingSystem.BuildingUpgradeSystem
         
         private void ShowUpgradeInfo()
         {
-            var oldState = GetCurrentBuildingState();
-            var newState = GetNextUpgradeState();
+            var oldState = ParseCurrentBuildingState();
+            var newState = ParseNextUpgradeState();
             _upgradeInfoDisplay.ShowUpgradeInfo(_building, _buildingSettings, oldState, newState);
         }
 

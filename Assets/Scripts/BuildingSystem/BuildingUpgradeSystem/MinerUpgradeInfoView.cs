@@ -12,7 +12,7 @@ namespace BuildingSystem.BuildingUpgradeSystem
         private const string MINING_PER_SECOND_KEY = "Mining per second";
         private const string MAX_STORAGE_KEY = "Max storage";
 
-        protected override Dictionary<string, int> GetBuildingStateAsDictionary(MinerBuildingData state)
+        protected override Dictionary<string, int> ParseStateToDictionary(MinerBuildingData state)
         {
             var resultDictionary = new Dictionary<string, int>
             {
