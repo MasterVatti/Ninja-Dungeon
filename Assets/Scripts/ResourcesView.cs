@@ -16,20 +16,20 @@ public class ResourcesView : MonoBehaviour
     private List<ResourceLabel> _resourceLabels;
     private List<Resource> _resources;
     [SerializeField]
-    private float animationTime;
+    private float _animationTime;
     private float _elapsedTime;
     private Coroutine _currentCoroutine;
-    private int[] _currentValue;
+    private float[] _currentValue;
 
     private void Start()
     {
-        _currentValue = new int[_resourceLabels.Count];
+        _currentValue = new float[_resourceLabels.Count];
         MainManager.ResourceManager.OnResourceAmountChanged += OnResourceAmountChanged;
         _resources = MainManager.ResourceManager.GetResources();
         UpdateResourcesAmount();
     }
     
-    private void OnResourceAmountChanged(Resource resource, int oldAmount , int newAmount, int index )
+    private void OnResourceAmountChanged(Resource resource, float oldAmount , int newAmount, int index )
     {
         StopCoroutine();
         if (_currentValue[index] != newAmount)
@@ -40,19 +40,16 @@ public class ResourcesView : MonoBehaviour
 
     }
     
-    private IEnumerator UpdateResource(Resource resource, int oldAmount , int newAmount, int index)
+    private IEnumerator UpdateResource(Resource resource, float oldAmount , int newAmount, int index)
     {
         var label = GetLabel(resource);
         
         
-        while (_elapsedTime < animationTime)
+        while (_elapsedTime < _animationTime)
         {
-            label.text = Mathf.Round(Mathf.Lerp(oldAmount, newAmount, (_elapsedTime / animationTime))).ToString(CultureInfo.InvariantCulture);
-            if (Convert.ToInt32(label.text) > newAmount && oldAmount > newAmount || Convert.ToInt32(label.text) > newAmount && oldAmount < newAmount)
-            {
-                label.text = newAmount.ToString();
-            }
-            _currentValue[index] = Convert.ToInt32(label.text);
+            var currentProgress = _elapsedTime / _animationTime;
+            _currentValue[index] = Mathf.Lerp(oldAmount, newAmount, currentProgress);
+            label.text =  Mathf.Round(_currentValue[index]).ToString(CultureInfo.InvariantCulture);
             _elapsedTime += Time.deltaTime;
 
             yield return null;

@@ -15577,7 +15577,7 @@ MonoBehaviour:
     _label: {fileID: 1711541425}
   - _type: 2
     _label: {fileID: 1290380288}
-  animationTime: 0.3
+  _animationTime: 0.3
 --- !u!1 &1711541422 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1631761048946135472, guid: 1d436f2929f844c49b94164af2b0e5eb,

@@ -11,7 +11,7 @@ namespace Managers
     /// </summary>
     public class ResourceManager : MonoBehaviour
     {
-        public event Action<Resource, int, int, int> OnResourceAmountChanged; 
+        public event Action<Resource, float, int, int> OnResourceAmountChanged; 
         
         [SerializeField]
         private List<Resource> _resources;
