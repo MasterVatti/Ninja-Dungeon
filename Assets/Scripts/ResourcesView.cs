@@ -19,10 +19,11 @@ public class ResourcesView : MonoBehaviour
     private float animationTime;
     private float _elapsedTime;
     private Coroutine _currentCoroutine;
-    private int[] _currentValue = new int[3];
+    private int[] _currentValue;
 
     private void Start()
     {
+        _currentValue = new int[_resourceLabels.Count];
         MainManager.ResourceManager.OnResourceAmountChanged += OnResourceAmountChanged;
         _resources = MainManager.ResourceManager.GetResources();
         UpdateResourcesAmount();
