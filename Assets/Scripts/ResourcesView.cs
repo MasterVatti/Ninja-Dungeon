@@ -48,6 +48,10 @@ public class ResourcesView : MonoBehaviour
         while (_elapsedTime < animationTime)
         {
             label.text = Mathf.Round(Mathf.Lerp(oldAmount, newAmount, (_elapsedTime / animationTime))).ToString(CultureInfo.InvariantCulture);
+            if (Convert.ToInt32(label.text) > newAmount && oldAmount > newAmount || Convert.ToInt32(label.text) > newAmount && oldAmount < newAmount)
+            {
+                label.text = newAmount.ToString();
+            }
             _currentValue[index] = Convert.ToInt32(label.text);
             _elapsedTime += Time.deltaTime;
 
