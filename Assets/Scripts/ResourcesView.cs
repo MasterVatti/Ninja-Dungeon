@@ -31,10 +31,6 @@ public class ResourcesView : MonoBehaviour
     private void OnResourceAmountChanged(Resource resource, int oldAmount , int newAmount, int index )
     {
         StopCoroutine();
-        if (_currentValue[index] < oldAmount)
-        {
-            _currentValue[index] = oldAmount;
-        }
         if (_currentValue[index] != newAmount)
         {
             _currentCoroutine = StartCoroutine(UpdateResource(resource, _currentValue[index], newAmount, index));
