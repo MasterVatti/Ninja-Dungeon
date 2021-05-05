@@ -24,13 +24,14 @@ public class ResourcesView : MonoBehaviour
 
     private void Start()
     {
-        _currentValue = new float[_resourceLabels.Count];
         MainManager.ResourceManager.OnResourceAmountChanged += OnResourceAmountChanged;
         _resources = MainManager.ResourceManager.GetResources();
         UpdateResourcesAmount();
+        InitialValueOfPresentValue();
+        
     }
     
-    private void OnResourceAmountChanged(Resource resource, float oldAmount , int newAmount, int index )
+    private void OnResourceAmountChanged(Resource resource, float oldAmount , int newAmount, int index)
     {
         var label = GetLabel(resource);
         StopCoroutine();
@@ -99,6 +100,15 @@ public class ResourcesView : MonoBehaviour
         {
             StopCoroutine(_currentCoroutine);
             _currentCoroutine = null;
+        }
+    }
+
+    private void InitialValueOfPresentValue()
+    {
+        _currentValue = new float[_resources.Count];
+        for (int i = 0; i < _resources.Count; i++)
+        {
+            _currentValue[i] = _resources[i].Amount;
         }
     }
 }
