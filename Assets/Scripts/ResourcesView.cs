@@ -20,6 +20,7 @@ public class ResourcesView : MonoBehaviour
     private float _elapsedTime;
     private Coroutine _currentCoroutine;
     private float[] _currentValue;
+    private TextMeshProUGUI _lable;
 
     private void Start()
     {
@@ -31,20 +32,21 @@ public class ResourcesView : MonoBehaviour
     
     private void OnResourceAmountChanged(Resource resource, float oldAmount , int newAmount, int index )
     {
+        var label = GetLabel(resource);
         StopCoroutine();
         if (_currentValue[index] != newAmount)
         {
-            _currentCoroutine = StartCoroutine(UpdateResource(resource, _currentValue[index], newAmount, index));
+            _currentCoroutine = StartCoroutine(UpdateResource(label, _currentValue[index], newAmount, index));
             
         }
 
+        label.text = newAmount.ToString();
+
+
     }
     
-    private IEnumerator UpdateResource(Resource resource, float oldAmount , int newAmount, int index)
+    private IEnumerator UpdateResource(TextMeshProUGUI label, float oldAmount , int newAmount, int index)
     {
-        var label = GetLabel(resource);
-        
-        
         while (_elapsedTime < _animationTime)
         {
             var currentProgress = _elapsedTime / _animationTime;
@@ -54,7 +56,6 @@ public class ResourcesView : MonoBehaviour
 
             yield return null;
         }
-        
         _elapsedTime = 0;
     }
     
