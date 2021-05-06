@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Enemies;
 using UnityEngine;
 
-namespace HealthBars
+namespace HealthBehaviors
 {
     /// <summary>
     /// отвечает за систему хелсбаров

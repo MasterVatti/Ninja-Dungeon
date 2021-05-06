@@ -1,3 +1,4 @@
+using HealthBehaviors;
 using UnityEngine;
 
 namespace Enemies

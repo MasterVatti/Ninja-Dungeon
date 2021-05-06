@@ -1,8 +1,7 @@
-using Enemies;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HealthBars
+namespace HealthBehaviors
 {
     /// <summary>
     /// отвечает за хелсбар

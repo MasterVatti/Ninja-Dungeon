@@ -1,8 +1,7 @@
 using System;
-using HealthBars;
 using UnityEngine;
 
-namespace Enemies
+namespace HealthBehaviors
 {
     /// <summary>
     /// Отвечает за здоровье сущности
@@ -16,7 +15,7 @@ namespace Enemies
         [SerializeField] 
         private HealthBehaviorsManager _healthBehaviorsManager;
         
-        public event Action<Enemy> EntityDie;
+        public event Action<Enemies.Enemy> EntityDie;
 
         private void Awake()
         {
@@ -34,7 +33,7 @@ namespace Enemies
         
         private void Death()
         {
-            EntityDie?.Invoke(GetComponent<Enemy>());
+            EntityDie?.Invoke(GetComponent<Enemies.Enemy>());
             _healthBehaviorsManager.RemoveFromHealthBehaviors(this);
             Destroy(gameObject);
         }
