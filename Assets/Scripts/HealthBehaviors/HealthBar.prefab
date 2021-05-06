@@ -252,4 +252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a5d28d28288814f854871574952402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _noramlizePosition: {x: 0, y: 2, z: 0}
+  _stabilizateToPosition: {x: 0, y: 0, z: 0}
+  _healthBarsManager: {fileID: 0}
+  _currentSlider: {fileID: 2450411470807550466}

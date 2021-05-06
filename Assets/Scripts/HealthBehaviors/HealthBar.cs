@@ -12,13 +12,13 @@ namespace HealthBehaviors
         private Vector3 _stabilizateToPosition;
         [SerializeField]
         private HealthBarsManager _healthBarsManager;
+        [SerializeField] 
+        private Slider _currentSlider;
         
-        private Slider _slider;
         private HealthBehavior _healthBehaviorToAttach;
         
         private void OnEnable()
         {
-            _slider = GetComponent<Slider>();
             _healthBehaviorToAttach = _healthBarsManager.InitHealthBehaviorToAttach();
             SetMaximalHealth(_healthBehaviorToAttach.Health);
         }
@@ -32,19 +32,19 @@ namespace HealthBehaviors
             }
             else
             {
-                Destroy(gameObject);
+                OnDestroy();
             }
         }
 
         private void SetMaximalHealth(int health)
         {
-            _slider.maxValue = health;
-            _slider.value = health;
+            _currentSlider.maxValue = health;
+            _currentSlider.value = health;
         }
 
         private void SetHealthBarValue(int health)
         {
-            _slider.value = health;
+            _currentSlider.value = health;
         }
 
         private void StabilizatePosition(Vector3 entityPositionToAttach)
@@ -52,7 +52,7 @@ namespace HealthBehaviors
             transform.position = entityPositionToAttach + _stabilizateToPosition;
         }
         
-        private void Destroy()
+        private void OnDestroy()
         {
             Destroy(gameObject);
         }
