@@ -27,14 +27,6 @@ namespace HealthBars
             }
         }
 
-        public HealthBar InitHealthBar()
-        {
-            var healthBar = Instantiate(_healthBarPrefab, transform.position, transform.rotation,
-                _canvas.transform);
-            
-            return healthBar;
-        }
-
         public HealthBehavior InitHealthBehaviorToAttach()
         {
             _currentHealthBehaviorToAttach++;
@@ -43,7 +35,10 @@ namespace HealthBars
         
         private void CreateHealthBar()
         {
-            _healthBars.Add(InitHealthBar());
+            var healthBar = Instantiate(_healthBarPrefab, transform.position, transform.rotation,
+                _canvas.transform);
+            
+            _healthBars.Add(healthBar);
         }
     }
 }

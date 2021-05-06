@@ -17,7 +17,7 @@ namespace HealthBars
         private Slider _slider;
         private HealthBehavior _healthBehaviorToAttach;
         
-        private void Start()
+        private void OnEnable()
         {
             _slider = GetComponent<Slider>();
             _healthBehaviorToAttach = _healthBarsManager.InitHealthBehaviorToAttach();
@@ -37,23 +37,23 @@ namespace HealthBars
             }
         }
 
-        public void SetMaximalHealth(int health)
+        private void SetMaximalHealth(int health)
         {
             _slider.maxValue = health;
             _slider.value = health;
         }
 
-        public void SetHealthBarValue(int health)
+        private void SetHealthBarValue(int health)
         {
             _slider.value = health;
         }
 
-        public void StabilizatePosition(Vector3 entityPositionToAttach)
+        private void StabilizatePosition(Vector3 entityPositionToAttach)
         {
             transform.position = entityPositionToAttach + _stabilizateToPosition;
         }
         
-        public void Destroy()
+        private void Destroy()
         {
             Destroy(gameObject);
         }
