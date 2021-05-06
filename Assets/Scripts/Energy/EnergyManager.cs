@@ -1,48 +1,50 @@
-using System;
 using UnityEngine;
 
-public class EnergyManager : MonoBehaviour
+namespace Energy
 {
-    public int Energy => _energyCount;
+    public class EnergyManager : MonoBehaviour
+    {
+        public int Energy => _energyCount;
     
-    [SerializeField]
-    private int _energyCount = 100;
-    [SerializeField]
-    private int _maximalEnergy = 100;
+        [SerializeField]
+        private int _energyCount = 100;
+        [SerializeField]
+        private int _maximalEnergy = 100;
 
-    private void Awake()
-    {
-        SetCurrentEnergyToMaximal();
-    }
+        private void Awake()
+        {
+            SetCurrentEnergyToMaximal();
+        }
 
-    private void OnDestroy()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
+        private void OnDestroy()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
     
-    public void EnergyDecrease(int decreaseNumber)
-    {
-        if (_energyCount >= decreaseNumber)
+        public void EnergyDecrease(int decreaseNumber)
         {
-            _energyCount -= decreaseNumber;
+            if (_energyCount >= decreaseNumber)
+            {
+                _energyCount -= decreaseNumber;
+            }
+            if (_energyCount < 0)
+            {
+                _energyCount = 0;
+            }
         }
-        if (_energyCount < 0)
+
+        public void EnergyIncrease(int increaseNumber)
         {
-            _energyCount = 0;
+            _energyCount += increaseNumber;
+            SetCurrentEnergyToMaximal();
         }
-    }
 
-    public void EnergyIncrease(int increaseNumber)
-    {
-        _energyCount += increaseNumber;
-        SetCurrentEnergyToMaximal();
-    }
-
-    private void SetCurrentEnergyToMaximal()
-    {
-        if (_energyCount > _maximalEnergy)
+        private void SetCurrentEnergyToMaximal()
         {
-            _energyCount = _maximalEnergy;
+            if (_energyCount > _maximalEnergy)
+            {
+                _energyCount = _maximalEnergy;
+            }
         }
     }
 }

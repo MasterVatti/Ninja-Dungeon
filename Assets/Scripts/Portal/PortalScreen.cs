@@ -12,8 +12,6 @@ public class PortalScreen : BaseScreenWithContext<PortalContext>
 {
     [SerializeField]
     private TMP_Text _descriptionField;
-
-    
     private string _sceneName;
     
     [UsedImplicitly]
