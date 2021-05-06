@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace LoadingScene 
 {
     /// <summary>
-    /// Класс отвечает за окно загрузки меджу сценами.
+    /// Класс отвечает за окно загрузки между сценами.
     /// </summary>
     public class LoadingScreen : BaseScreen
     {
