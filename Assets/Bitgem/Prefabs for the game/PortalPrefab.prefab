@@ -80,7 +80,7 @@ MonoBehaviour:
     _screenDescription: "\u0425\u043E\u0442\u0438\u0442\u0435 \u0441\u043F\u0443\u0441\u0442\u0438\u0442\u044C\u0441\u044F
       \u0432 \u043F\u043E\u0434\u0437\u0435\u043C\u0435\u043B\u044C\u0435?"
     _sceneName: DungeonDoorsRoom
-    _teleportPosition: {x: -15, y: 0.5, z: 18.75}
+    _teleportPosition: {x: -15, y: 0.5, z: 15}
 --- !u!114 &1824388498338098427
 MonoBehaviour:
   m_ObjectHideFlags: 0

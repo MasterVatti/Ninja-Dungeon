@@ -5910,6 +5910,8 @@ MonoBehaviour:
   _enemiesSpawner: {fileID: 1883038470}
   _battleScenes:
   - {fileID: 102900000, guid: 4a943aab3f3a252408553087c3e58674, type: 3}
+  - {fileID: 102900000, guid: cf472504f955f8543be48c8081cde153, type: 3}
+  - {fileID: 102900000, guid: 13a881b67b0ac8142896d98a505069d4, type: 3}
 --- !u!4 &588576036
 Transform:
   m_ObjectHideFlags: 0
