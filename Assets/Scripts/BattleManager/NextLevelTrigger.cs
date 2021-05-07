@@ -14,7 +14,7 @@ namespace Assets.Scripts.BattleManager
             {
                 if (enemy == null & nextLevelCollider.CompareTag(GlobalConstants.PLAYER_TAG))
                 {
-                    _levelSettings.SceneIndex++;
+                    MainManager.BattleManager.CurrentSceneIndex++;
                     //начислить базовую награду за уровень (без UI)
                     //телепорт на некст левел
                 }

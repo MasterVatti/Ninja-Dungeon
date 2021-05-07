@@ -15,6 +15,12 @@ namespace Assets.Scripts.BattleManager
     /// </summary>
     public class BattleManager : MonoBehaviour
     {
+        public int CurrentSceneIndex
+        {
+            get => _currentSceneIndex;
+            set => _currentSceneIndex = value;
+        }
+        
         [SerializeField]
         private Spawner _enemiesSpawner;
         [SerializeField]
@@ -26,10 +32,13 @@ namespace Assets.Scripts.BattleManager
         private LevelSettings _levelSettings;
         private RoomSettings _roomSettings;
 
+        private int _currentSceneIndex;
+
 
         private void Awake()
         {
-            int CurrentSceneIndex = _levelSettings.SceneName[0];
+            _currentSceneIndex = _levelSettings.SceneName[0];
+            
             _playerCharacteristics = MainManager.Player.GetComponent<PlayerCharacteristics>();
             _healthBehaviour = MainManager.Player.GetComponent<HealthBehaviour>();
 
@@ -68,7 +77,6 @@ namespace Assets.Scripts.BattleManager
                     return true;
                 }
             }
-
             return false;
         }
 

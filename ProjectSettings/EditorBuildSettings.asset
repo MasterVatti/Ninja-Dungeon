@@ -12,10 +12,10 @@ EditorBuildSettings:
     path: Assets/SimpleNaturePack/Scenes/SimpleNaturePack_Demo.unity
     guid: 5e7af4bd95ac53a4cb784a9eedf8f6f9
   - enabled: 1
-    path: Assets/Scenes/Dungeon scene and room with enemies/DungeonDoorsRoom.unity
+    path: Assets/Scripts/BattleManager/Levels scenes/DungeonDoorsRoom.unity
     guid: 24c4de5edfcec0d4b859c69a7b627d0e
   - enabled: 1
-    path: Assets/Scenes/Dungeon scene and room with enemies/RoomLightTest.unity
+    path: Assets/Scenes/Dungeon scene and room with enemies/Level1.unity
     guid: 4a943aab3f3a252408553087c3e58674
   - enabled: 1
     path: Assets/Scenes/Dungeon scene and room with enemies/RoomNormalTest.unity
