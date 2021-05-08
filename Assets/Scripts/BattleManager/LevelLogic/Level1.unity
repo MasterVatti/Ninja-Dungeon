@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 88d41c9cb21370547bbe7cbc0479bcda, type: 2}
 --- !u!1001 &21279592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -480,20 +480,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 71006800}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &71006803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 71006802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2217e05f231346eeace4add78767aafd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _roomSettings: {fileID: 11400000, guid: 00656223ec680bf49ae1de9b149b0da2, type: 2}
-  _teleportPosition: {x: -15.5, y: 0, z: -10}
 --- !u!65 &71006805
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5064,7 +5050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: b2f96746c6005c64888263f64272a556, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b2f96746c6005c64888263f64272a556, type: 3}
       propertyPath: m_RootOrder

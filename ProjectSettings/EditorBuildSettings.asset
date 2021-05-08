@@ -15,12 +15,18 @@ EditorBuildSettings:
     path: Assets/Scripts/BattleManager/LevelLogic/DungeonDoorsRoom.unity
     guid: 24c4de5edfcec0d4b859c69a7b627d0e
   - enabled: 1
-    path: Assets/Scenes/Dungeon scene and room with enemies/Level1.unity
-    guid: 4a943aab3f3a252408553087c3e58674
+    path: Assets/Scripts/BattleManager/LevelLogic/Level1.unity
+    guid: 8a88006a88584e9bbca291fb95c35642
   - enabled: 1
-    path: Assets/Scenes/Dungeon scene and room with enemies/RoomNormalTest.unity
-    guid: cf472504f955f8543be48c8081cde153
+    path: Assets/Scripts/BattleManager/LevelLogic/Level2.unity
+    guid: 62dce0257f06e644e8702b96f52081fe
   - enabled: 1
-    path: Assets/Scenes/Dungeon scene and room with enemies/RoomHardTest.unity
-    guid: 13a881b67b0ac8142896d98a505069d4
+    path: Assets/Scripts/BattleManager/LevelLogic/Level3.unity
+    guid: 499af6366ce36d941a984d13aff8f5b5
+  - enabled: 1
+    path: Assets/Scripts/BattleManager/LevelLogic/Level4.unity
+    guid: 943454b19ffba3842a5abecf0ba7e385
+  - enabled: 1
+    path: Assets/Scripts/BattleManager/LevelLogic/Level5.unity
+    guid: e05682f6a47de0b4b8e9bf3569abd522
   m_configObjects: {}

@@ -58,12 +58,13 @@ namespace Assets.Scripts.BattleManager
             return false;
         }
 
-        public void StartBattle(RoomSettings roomSettings)
+        public void StartBattle(RoomSettings roomSettings, Vector3 teleportPosition)
         {
             _currentLevel = 0;
             var level = roomSettings.LevelSettingsList[_currentLevel];
 
             MainManager.LoadingController.StartLoad(level.SceneName);
+            MainManager.Player.transform.position = teleportPosition;
             Debug.Log("BattleManager начал свою работу!");
             _enemiesSpawner.Initialize();
         }

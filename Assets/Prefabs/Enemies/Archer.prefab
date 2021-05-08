@@ -758,7 +758,7 @@ MonoBehaviour:
   autoReset: 1
   tickOn: 0
   sourceInfos:
-  - isFoldout: 0
+  - isFoldout: 1
     breakPoints: 
     breakPointStatuses: 
     collapsedLines: 
@@ -826,6 +826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ece3497b0dce848bcf23723c55aa05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _projectileStartPosition: {fileID: 0}
   _agent: {fileID: -3681777020214956798}
   _stopChaseDistance: 7
   _pointDistanceError: 0.5
@@ -841,9 +842,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b7c8756b692088479911f2367a302a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _projectileStartPosition: {fileID: 4651375330801422060}
   _bulletPrefab: {fileID: 2733183494529446169, guid: a0ea9b697dcc44c49b2a57d10ec9ef49,
     type: 3}
-  _projectileStartPosition: {fileID: 4651375330801422060}
   _bulletSpeed: 3
   _shotCooldownTime: 3
   _agent: {fileID: -3681777020214956798}

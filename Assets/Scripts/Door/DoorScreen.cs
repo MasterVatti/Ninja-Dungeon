@@ -30,8 +30,7 @@ namespace Door
         public void OnClick()
         {
             MainManager.ScreenManager.CloseTopScreen();
-            MainManager.BattleManager.StartBattle(_roomSettings);
-            MainManager.Player.transform.position = _teleportPosition;
+            MainManager.BattleManager.StartBattle(_roomSettings, _teleportPosition);
         }
 
         public override void Initialize(ScreenType screenType)
