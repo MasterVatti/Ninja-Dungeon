@@ -1,7 +1,7 @@
+using System.Collections.Generic;
+using Assets.Scripts.BattleManager;
 using Assets.Scripts.Managers.ScreensManager;
 using JetBrains.Annotations;
-using LoadingScene;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,13 +10,10 @@ namespace Door
     /// <summary>
     /// Класс отвечает за окно двери(предложение отправиться в комнату) и обработку кнопок
     /// </summary>
-    public class DoorScreen : BaseScreenWithContext<PortalContext>
+    public class DoorScreen : BaseScreenWithContext<DungeonDoorContext>
     {
-        [SerializeField]
-        private Text _descriptionField;
-        [SerializeField]
-        private Text _difficultyLevelField;
-        private string _sceneName;
+        private Vector3 _teleportPosition;
+        private RoomSettings _roomSettings;
 
         [UsedImplicitly]
         public void TurnOffPanel()
@@ -24,17 +21,17 @@ namespace Door
             MainManager.ScreenManager.CloseTopScreen();
         }
 
-        public override void ApplyContext(PortalContext context)
+        public override void ApplyContext(DungeonDoorContext context)
         {
-            _descriptionField.text = context.Description;
-            _difficultyLevelField.text = context.DifficultyLevel;
-            _sceneName = context.SceneName;
+            _roomSettings = context.RoomSettings;
+            _teleportPosition = context.TeleportPosition;
         }
 
         public void OnClick()
         {
             MainManager.ScreenManager.CloseTopScreen();
-            MainManager.LoadingController.StartLoad(_sceneName);
+            MainManager.BattleManager.StartBattle(_roomSettings);
+            MainManager.Player.transform.position = _teleportPosition;
         }
 
         public override void Initialize(ScreenType screenType)

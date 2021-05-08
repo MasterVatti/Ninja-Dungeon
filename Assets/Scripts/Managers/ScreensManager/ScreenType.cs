@@ -11,9 +11,10 @@
         RewardScreen,
         PortalScreen,
         LoadingScreen,
+        DungeonDoorScreen,
         DoorScreen,
         ShopScreen,
         SawmillScreen,
-        MineScreen
+        MineScreen,
     }
 }

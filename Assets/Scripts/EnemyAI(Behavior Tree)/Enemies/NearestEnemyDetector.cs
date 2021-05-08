@@ -8,8 +8,7 @@ namespace Enemies
     /// </summary>
     public class NearestEnemyDetector : MonoBehaviour
     {
-        [SerializeField]
-        private Transform _playerTransform;
+        [SerializeField] private Transform _playerTransform;
 
         public Person GetNearestEnemy()
         {
@@ -24,25 +23,24 @@ namespace Enemies
                 {
                     var distanceToPlayer = Vector3.Distance(enemy.transform.position,
                         playerPosition);
-                    
+
                     if (minDistance > distanceToPlayer)
                     {
                         minDistance = distanceToPlayer;
                         minIndex = currentIteration;
                     }
                 }
-                
+
                 currentIteration++;
             }
-
-            Debug.Log(MainManager.EnemiesManager.Enemies.Count);
+            
             if (MainManager.EnemiesManager.Enemies.Count != 0)
             {
-               return MainManager.EnemiesManager.Enemies[minIndex]; 
+                return MainManager.EnemiesManager.Enemies[minIndex];
             }
             else
-            { 
-                return null;  
+            {
+                return null;
             }
         }
     }

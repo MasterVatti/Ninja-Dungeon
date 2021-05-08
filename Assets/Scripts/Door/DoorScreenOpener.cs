@@ -1,3 +1,4 @@
+using Assets.Scripts.BattleManager;
 using Assets.Scripts.Managers.ScreensManager;
 using UnityEngine;
 
@@ -10,17 +11,16 @@ namespace Door
     {
         [SerializeField]
         private DoorSettings _settings;
-    
+
         public void ShowPortalScreen()
         {
-            var context = new PortalContext()
+            var context = new DungeonDoorContext()
             {
-                Description = _settings.ScreenDescription,
-                SceneName = _settings.SceneName,
-                DifficultyLevel = _settings.DifficultyLevel
+                RoomSettings = _settings.RoomSettings,
+                TeleportPosition = _settings.TeleportPosition
             };
-            
-            MainManager.ScreenManager.OpenScreenWithContext(ScreenType.DoorScreen,
+
+            MainManager.ScreenManager.OpenScreenWithContext(ScreenType.DungeonDoorScreen,
                 context);
         }
     }

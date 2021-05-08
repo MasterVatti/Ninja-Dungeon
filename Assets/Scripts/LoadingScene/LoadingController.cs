@@ -14,7 +14,6 @@ namespace LoadingScene
         
         public void StartLoad(string sceneName)
         {
-            
             MainManager.ScreenManager.OpenScreen(ScreenType.LoadingScreen);
             
             StartCoroutine(LoadCoroutine(sceneName));

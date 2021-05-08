@@ -8,7 +8,7 @@ public class PortalScreenOpener : MonoBehaviour, IPortalScreenOpener
 {
     [SerializeField]
     private PortalSettings _settings;
-    
+
     public void ShowPortalScreen()
     {
         var context = new PortalContext()
@@ -17,7 +17,7 @@ public class PortalScreenOpener : MonoBehaviour, IPortalScreenOpener
             SceneName = _settings.SceneName,
             TeleportPosition = _settings.TeleportPosition
         };
-        
+
         MainManager.ScreenManager.OpenScreenWithContext(ScreenType.PortalScreen,
             context);
     }
