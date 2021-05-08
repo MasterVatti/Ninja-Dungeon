@@ -69,12 +69,15 @@ namespace Assets.Scripts.BattleManager
             _enemiesSpawner.Initialize();
         }
 
-        public void GoToNextLevel(RoomSettings roomSettings)
+        public void GoToNextLevel(DungeonDoorContext roomSettings, DungeonDoorContext teleportPosition)
         {
             _currentLevel++;
-            var level = roomSettings.LevelSettingsList[_currentLevel];
+            var nextLevelTeleportPosition = teleportPosition.TeleportPosition;
+            var nextRoomSettings = roomSettings.RoomSettings;
+            var level = nextRoomSettings.LevelSettingsList[_currentLevel];
             
             MainManager.LoadingController.StartLoad(level.SceneName);
+            MainManager.Player.transform.position = nextLevelTeleportPosition;
             Debug.Log($"Level №{_currentLevel}");
         }
 

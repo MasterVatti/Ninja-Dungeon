@@ -1,27 +1,30 @@
 ﻿using System;
+using Assets.Scripts.Managers.ScreensManager;
+using Door;
 using UnityEngine;
 
 namespace Assets.Scripts.BattleManager
 {
     public class NextLevelTrigger : MonoBehaviour
     {
+        [SerializeField]
+        private DoorSettings _settings;
         private RoomSettings _roomSettings;
+
         private void OnTriggerEnter(Collider nextLevelCollider)
         {
-            if (IsNextLevelAccessed(nextLevelCollider))
+            var context = new DungeonDoorContext()
             {
-                BattleManager.Instance.GoToNextLevel(_roomSettings);
-            }
-        }
-
-        private bool IsNextLevelAccessed(Collider nextLevelCollider)
-        {
+                RoomSettings = _settings.RoomSettings,
+                TeleportPosition = _settings.TeleportPosition
+            };
+            
             if (MainManager.EnemiesManager.Enemies.Count == 0 &&
                 nextLevelCollider.CompareTag(GlobalConstants.PLAYER_TAG))
             {
-                return true;
+                BattleManager.Instance.GoToNextLevel(context, context);
             }
-            return false;
         }
+        
     }
 }
