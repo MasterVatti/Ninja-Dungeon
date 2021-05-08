@@ -6,22 +6,19 @@ namespace Buildings
 {
     public class PlayerImprover : Building<PlayerImproverData>
     {
-        [SerializeField]
-        private int _maxLevel;
-        [SerializeField]
-        private int _startCost;
-        [SerializeField]
-        private int _costPerLevelAdjustment;
+        public int HpPerPoint => _hpPerPoint;
+        public int AttackPerPoint => _attackPerPoint;
+        public float AttackSpeedPerPoint => _attackSpeedPerPoint;
+        public float MovementSpeedPerPoint => _movementSpeedPerPoint;
         
-        [Header("State")]
         [SerializeField]
         private int _hpPerPoint;
         [SerializeField]
         private int _attackPerPoint;
         [SerializeField]
-        private int _attackSpeedPerPoint;
+        private float _attackSpeedPerPoint;
         [SerializeField]
-        private int _movementSpeedPerPoint;
+        private float _movementSpeedPerPoint;
         
         protected override void OnStateLoaded(PlayerImproverData data)
         {

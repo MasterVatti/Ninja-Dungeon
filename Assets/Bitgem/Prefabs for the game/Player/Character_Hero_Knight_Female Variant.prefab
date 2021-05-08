@@ -43,6 +43,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _player: {fileID: 5999530186611411129}
+  _rotationSpeed: 0.5
+--- !u!114 &-8661391310361051255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332810461780597416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9604bc4aa00a7fe47a52484d76e9ab04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHP: 0
+  _maxHp: 0
+  _moveSpeed: 0
+  _attackDamage: 0
+  _attackRate: 0
+  _canMove: 0
+  _canAttack: 0
+  _ricochetShells: 0
+  _multishotShells: 0
+  _frontalityShells: 0
+  _diagonalShells: 0
 --- !u!1001 &5332810461780465864
 PrefabInstance:
   m_ObjectHideFlags: 0

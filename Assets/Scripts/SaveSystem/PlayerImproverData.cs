@@ -9,8 +9,8 @@ namespace SaveSystem
         [JsonProperty("attackPerPoint")]
         public int AttackPerPoint { get; set; }
         [JsonProperty("attackSpeedPerPoint")]
-        public int AttackSpeedPerPoint { get; set; }
+        public float AttackSpeedPerPoint { get; set; }
         [JsonProperty("movementSpeedPerPoint")]
-        public int MovementSpeedPerPoint { get; set; }
+        public float MovementSpeedPerPoint { get; set; }
     }
 }
