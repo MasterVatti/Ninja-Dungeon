@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ObjectPools;
+using TMPro;
 using UnityEngine;
 
 namespace BuildingSystem.BuildingUpgradeSystem
@@ -8,32 +10,25 @@ namespace BuildingSystem.BuildingUpgradeSystem
     {
         [SerializeField]
         private RectTransform _differenceLayoutGroup;
-
-        private ObjectPool _labelPool;
-
-        public void Initialize(ObjectPool labelPool)
-        {
-            _labelPool = labelPool;
-        }
+        [SerializeField]
+        private TextMeshProUGUI _labelPrefab;
         
         public void ShowUpgradeDifference(IReadOnlyDictionary<string, int> oldStateDictionary, 
         IReadOnlyDictionary<string, int> newStateDictionary)
         {
             var upgradeDifference = GetUpgradeDifference(oldStateDictionary, newStateDictionary);
-
+            var labelPool = new MonoBehaviourPool<TextMeshProUGUI>(_labelPrefab, _differenceLayoutGroup);
+            
             foreach (var pair in upgradeDifference)
             {
-                var keyLabel = _labelPool.Get();
-                UpgradeLabelHandler.SetLabelText(keyLabel, pair.Key);
-                keyLabel.transform.SetParent(_differenceLayoutGroup, false);
+                var keyLabel = labelPool.Take();
+                keyLabel.text = pair.Key;
                 
-                var newValueLabel = _labelPool.Get();
-                UpgradeLabelHandler.SetLabelText(newValueLabel, newStateDictionary[pair.Key].ToString());
-                newValueLabel.transform.SetParent(_differenceLayoutGroup, false);
+                var newValueLabel = labelPool.Take();
+                newValueLabel.text = newStateDictionary[pair.Key].ToString();
 
-                var newValueDifferenceLabel = _labelPool.Get();
-                UpgradeLabelHandler.SetLabelText(newValueDifferenceLabel, "(+" + upgradeDifference[pair.Key]+")");
-                newValueDifferenceLabel.transform.SetParent(_differenceLayoutGroup, false);
+                var newValueDifferenceLabel = labelPool.Take();
+                newValueDifferenceLabel.text = "(+" + upgradeDifference[pair.Key] + ")";
             }
         }
         

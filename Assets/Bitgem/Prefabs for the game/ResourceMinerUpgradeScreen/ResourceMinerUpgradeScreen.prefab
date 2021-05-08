@@ -751,8 +751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c0287d3328741ef9197fd0314e1098b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textLabel: {fileID: 5680090655309628765}
-  _image: {fileID: 7991609429780854437}
   _costDisplay: {fileID: 2536547443517505329}
   _differenceDisplay: {fileID: 5431126404210041718}
   _nameLabel: {fileID: 2891763121280014019}
@@ -771,6 +769,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _costLayoutGroup: {fileID: 7348239395376544923}
+  _imagePrefab: {fileID: 7766805953999103422}
+  _labelPrefab: {fileID: 1300128222926101418}
 --- !u!114 &5431126404210041718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -784,6 +784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _differenceLayoutGroup: {fileID: 237745103021058073}
+  _labelPrefab: {fileID: 1300128222926101418}
 --- !u!1 &2432567255880662503
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ResourceSystem;
+using ObjectPools;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,54 +8,48 @@ namespace BuildingSystem.BuildingUpgradeSystem
 {
     public class UpgradeCostDisplay : MonoBehaviour
     {
-        private readonly List<Resource> _requiredResources = new List<Resource>();
-        private readonly List<TextMeshProUGUI> _currentResourceLabels = new List<TextMeshProUGUI>();
+        private readonly Dictionary<ResourceLabel, float> _resourceLabels = new Dictionary<ResourceLabel, float>();
         
         [SerializeField]
         private RectTransform _costLayoutGroup;
-
-        private ObjectPool _imagePool;
-        private ObjectPool _labelPool;
+        [SerializeField]
+        private Image _imagePrefab;
+        [SerializeField]
+        private TextMeshProUGUI _labelPrefab;
 
         private void Update()
         {
-            for(var i = 0; i < _requiredResources.Count; i++)
+            UpdateUpgradeCost();
+        }
+
+        public void ShowUpgradeCost(BuildingUpgrade buildingUpgrade)
+        {
+            var upgradeCost = buildingUpgrade.UpgradeCost;
+            var imagePool = new MonoBehaviourPool<Image>(_imagePrefab, _costLayoutGroup, upgradeCost.Count);
+            var labelPool = new MonoBehaviourPool<TextMeshProUGUI>(_labelPrefab, _costLayoutGroup);
+            foreach (var resource in upgradeCost)
             {
-                var currentResource = MainManager.ResourceManager.GetResourceByType(_requiredResources[i].Type);
-                var requiredAmount = _requiredResources[i].Amount;
-                var currentAmount = Mathf.Clamp(currentResource.Amount, 0, requiredAmount);
-                
-                _currentResourceLabels[i].text = currentAmount.ToString();
-                _currentResourceLabels[i].color = Mathf.Approximately(currentAmount, requiredAmount) ? Color.green : Color.red;
+                var icon = imagePool.Take();
+                icon.sprite = MainManager.IconsProvider.GetResourceSprite(resource.Type);
+
+                var currentAmountLabel = labelPool.Take();
+                var resourceLabel = new ResourceLabel {Label = currentAmountLabel, Type = resource.Type};
+                _resourceLabels.Add(resourceLabel, resource.Amount);
+
+                var requiredAmountLabel = labelPool.Take();
+                requiredAmountLabel.text = "/" + resource.Amount;
             }
         }
 
-        public void Initialize(ObjectPool imagePool, ObjectPool labelPool)
+        private void UpdateUpgradeCost()
         {
-            _imagePool = imagePool;
-            _labelPool = labelPool;
-        }
-        
-        public void ShowUpgradeCost(BuildingUpgrade buildingUpgrade)
-        {
-            foreach (var resource in buildingUpgrade.UpgradeCost)
+            foreach (var resource in _resourceLabels)
             {
-                var icon = _imagePool.Get();
-                var image = icon.GetComponent<Image>();
-                image.sprite = MainManager.IconsProvider.GetResourceSprite(resource.Type);
-                icon.transform.SetParent(_costLayoutGroup, false);
-                
-                var currentAmountLabel = _labelPool.Get();
-                var currentResource = MainManager.ResourceManager.GetResourceByType(resource.Type);
-                UpgradeLabelHandler.SetLabelText(currentAmountLabel, currentResource.Amount.ToString());
-                currentAmountLabel.transform.SetParent(_costLayoutGroup, false);
-                
-                _requiredResources.Add(resource);
-                _currentResourceLabels.Add(currentAmountLabel.GetComponent<TextMeshProUGUI>());
-
-                var requiredAmountLabel = _labelPool.Get();
-                UpgradeLabelHandler.SetLabelText(requiredAmountLabel, "/" + resource.Amount);
-                requiredAmountLabel.transform.SetParent(_costLayoutGroup, false);
+                var key = resource.Key;
+                var keyLabel = key.Label;
+                var playerResource = MainManager.ResourceManager.GetResourceByType(key.Type);
+                keyLabel.text = Mathf.Clamp(playerResource.Amount, 0, resource.Value).ToString();
+                keyLabel.color = playerResource.Amount < resource.Value ? Color.red : Color.green;
             }
         }
     }

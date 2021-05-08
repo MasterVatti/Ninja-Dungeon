@@ -10,12 +10,6 @@ namespace BuildingSystem.BuildingUpgradeSystem
     /// </summary>
     public class UpgradeInfoDisplay : MonoBehaviour
     {
-        [Header("ElementPrefabs")]
-        [SerializeField]
-        private GameObject _textLabel;
-        [SerializeField]
-        private GameObject _image;
-
         [Header("Displays")]
         [SerializeField]
         private UpgradeCostDisplay _costDisplay;
@@ -30,14 +24,9 @@ namespace BuildingSystem.BuildingUpgradeSystem
         [SerializeField]
         private TextMeshProUGUI _nextLevelLabel;
 
-        private ObjectPool _labelPool;
-        private ObjectPool _imagePool;
-
         public void ShowUpgradeInfo<T>(Building<T> building, BuildingSettings buildingSettings, Dictionary<string, int> 
         oldStateDictionary, Dictionary<string, int> newStateDictionary) where T : BaseBuildingState
         {
-            InitializeObjectPools();
-            
             _nameLabel.text = buildingSettings.BuildingName;
             
             var buildingLevel = building.CurrentBuildingLevel;
@@ -46,17 +35,8 @@ namespace BuildingSystem.BuildingUpgradeSystem
             _nextLevelLabel.text = buildingNextLevel.ToString();
 
             var buildingUpgrade = buildingSettings.UpgradeList[buildingNextLevel];
-            _costDisplay.Initialize(_imagePool, _labelPool);
             _costDisplay.ShowUpgradeCost(buildingUpgrade);
-            
-            _differenceDisplay.Initialize(_labelPool);
             _differenceDisplay.ShowUpgradeDifference(oldStateDictionary, newStateDictionary);
-        }
-
-        private void InitializeObjectPools()
-        {
-            _labelPool = new ObjectPool(_textLabel);
-            _imagePool = new ObjectPool(_image, 1);
         }
     }
 }

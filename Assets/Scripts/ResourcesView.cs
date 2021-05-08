@@ -1,37 +1,22 @@
 using System.Collections.Generic;
-using ResourceSystem;
 using UnityEngine;
 
 public class ResourcesView : MonoBehaviour
 {
     [SerializeField]
     private List<ResourceLabel> _resourceLabels;
-    
-    private List<Resource> _resources;
 
-
-    void Start()
-    {
-        _resources = MainManager.ResourceManager.GetResources();
-    }
-
-    void Update()
+    private void Update()
     {
         UpdateResourcesAmount();
     }
 
     private void UpdateResourcesAmount()
     {
-        for (int i = 0; i < _resourceLabels.Count; i++)
+        foreach (var resourceLabel in _resourceLabels)
         {
-            for (int j = 0; j < _resources.Count; j++)
-            {
-                if (_resourceLabels[i].Type == _resources[j].Type )
-                {
-                    _resourceLabels[i].Label.text = _resources[j].Amount.ToString();
-                    break;
-                }
-            }
+            var resource = MainManager.ResourceManager.GetResourceByType(resourceLabel.Type);
+            resourceLabel.Label.text = resource.Amount.ToString();
         }
     }
     
