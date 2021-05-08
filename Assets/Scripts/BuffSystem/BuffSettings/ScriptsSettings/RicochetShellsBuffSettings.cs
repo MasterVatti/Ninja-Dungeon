@@ -11,9 +11,9 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
         [SerializeField]
         private int _ricochetsNumber;
         
-        public override IBuff CreateBuff()
+        public override IBuff CreateBuff(PersonCharacteristics personCharacteristics)
         {
-            return new RicochetShellsBuff(_ricochetsNumber, (PlayerCharacteristics)PersonCharacteristics);
+            return new RicochetShellsBuff(_ricochetsNumber, (PlayerCharacteristics)personCharacteristics);
         }
     }
 }

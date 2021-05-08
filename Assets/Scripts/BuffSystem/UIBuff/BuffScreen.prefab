@@ -94,6 +94,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScreenType: 9
+  _personCharacteristics: {fileID: 961365608366097261, guid: 023c32ed79838cb40ab63e3542a568da,
+    type: 3}
   _buffButtons:
   - {fileID: 986950901222557777}
   - {fileID: 6586061816716549553}
@@ -289,6 +291,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4336388706764441898}
     m_Modifications:
+    - target: {fileID: 1092256329610282263, guid: 9b3af4e0f4c0d5a44a470958db9d7277,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092256329610282263, guid: 9b3af4e0f4c0d5a44a470958db9d7277,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092256329610282263, guid: 9b3af4e0f4c0d5a44a470958db9d7277,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 6837350032959784475}
+    - target: {fileID: 1092256329610282263, guid: 9b3af4e0f4c0d5a44a470958db9d7277,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092256329610282263, guid: 9b3af4e0f4c0d5a44a470958db9d7277,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092256329610282263, guid: 9b3af4e0f4c0d5a44a470958db9d7277,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: BuffSystem.BuffButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092256329610282263, guid: 9b3af4e0f4c0d5a44a470958db9d7277,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7660242972722875280, guid: 9b3af4e0f4c0d5a44a470958db9d7277,
         type: 3}
       propertyPath: m_Pivot.x

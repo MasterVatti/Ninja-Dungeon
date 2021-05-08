@@ -5,8 +5,8 @@ namespace BuffSystem.Buff
 {
     public class DiagonalProjectileBuff : IPassiveBuff
     {
-        private bool _hasDiagonalArrows;
-        private PlayerCharacteristics _playerCharacteristics;
+        private readonly bool _hasDiagonalArrows;
+        private readonly PlayerCharacteristics _playerCharacteristics;
         
         public DiagonalProjectileBuff(bool hasDiagonalArrows, PlayerCharacteristics playerCharacteristics)
         {

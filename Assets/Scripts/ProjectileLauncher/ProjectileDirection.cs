@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ProjectileLauncher
 {
-    public struct TransformProjectile
+    public struct ProjectileDirection
     {
         public Vector3 Direction
         {

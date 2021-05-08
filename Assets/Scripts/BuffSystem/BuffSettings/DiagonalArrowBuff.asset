@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda6c15e030a17440a14af4b3f8929ec, type: 3}
   m_Name: DiagonalArrowBuff
   m_EditorClassIdentifier: 
-  _nameBuff: Diagonal arrows +1
+  _nameBuff: 'Diagonal arrows '
   _imageBuff: {fileID: 21300000, guid: 22a4faca03bcd2547801817a87bd3d42, type: 3}
-  _buffType: 0
-  _diagonalArrowsNumber: 1
+  _hasDiagonalArrows: 1

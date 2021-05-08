@@ -11,9 +11,9 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
         [SerializeField]
         private int _projectileCount;
         
-        public override IBuff CreateBuff()
+        public override IBuff CreateBuff(PersonCharacteristics personCharacteristics)
         {
-            return new ProjectileCountBuff(_projectileCount, (PlayerCharacteristics)PersonCharacteristics);
+            return new ProjectileCountBuff(_projectileCount, (PlayerCharacteristics)personCharacteristics);
         }
     }
 }

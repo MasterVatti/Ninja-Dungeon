@@ -9,12 +9,6 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
     /// </summary>
     public abstract class SettingsBuff : ScriptableObject
     {
-        public PersonCharacteristics PersonCharacteristics
-        {
-            get => _personCharacteristics;
-            set => _personCharacteristics = value;
-        }
-        
         public string NameBuff => _nameBuff;
         public Sprite ImageBuff => _imageBuff;
         
@@ -22,8 +16,7 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
         private string _nameBuff;
         [SerializeField]
         private Sprite _imageBuff;
-
-        private PersonCharacteristics _personCharacteristics;
-        public abstract IBuff CreateBuff();
+        
+        public abstract IBuff CreateBuff(PersonCharacteristics personCharacteristics);
     }
 }

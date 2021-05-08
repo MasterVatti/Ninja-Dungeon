@@ -13,9 +13,9 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
         [SerializeField]
         private int _percentageIncrease;
         
-        public override IBuff CreateBuff()
+        public override IBuff CreateBuff(PersonCharacteristics personCharacteristics)
         {
-            return new AttackRateBuff(_percentageIncrease, PersonCharacteristics);
+            return new AttackRateBuff(_percentageIncrease, personCharacteristics);
         }
     }
 }

@@ -5,8 +5,8 @@ namespace BuffSystem.Buff
 {
     public class HealthBoostBuff : IPassiveBuff
     {
-        private PersonCharacteristics _personCharacteristics;
-        private float _amountBonusBuff;
+        private readonly PersonCharacteristics _personCharacteristics;
+        private readonly float _amountBonusBuff;
         
         public HealthBoostBuff(float percentageIncrease, PersonCharacteristics personCharacteristics)
         {

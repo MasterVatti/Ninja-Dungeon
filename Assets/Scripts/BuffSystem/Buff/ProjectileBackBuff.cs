@@ -5,8 +5,8 @@ namespace BuffSystem.Buff
 {
     public class ProjectileBackBuff : IPassiveBuff
     {
-        private PlayerCharacteristics _playerCharacteristics;
-        private bool _hasProjectileBack;
+        private readonly PlayerCharacteristics _playerCharacteristics;
+        private readonly bool _hasProjectileBack;
         
         public ProjectileBackBuff(PlayerCharacteristics playerCharacteristics, bool hasProjectileBack)
         {

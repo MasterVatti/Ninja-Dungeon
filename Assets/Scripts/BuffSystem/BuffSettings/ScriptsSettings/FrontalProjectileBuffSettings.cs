@@ -10,9 +10,9 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
     {
         [SerializeField] 
         private bool _hasFrontalProjectile;
-        public override IBuff CreateBuff()
+        public override IBuff CreateBuff(PersonCharacteristics personCharacteristics)
         {
-            return new FrontalProjectileBuff((PlayerCharacteristics)PersonCharacteristics, _hasFrontalProjectile);
+            return new FrontalProjectileBuff((PlayerCharacteristics)personCharacteristics, _hasFrontalProjectile);
         }
     }
 }

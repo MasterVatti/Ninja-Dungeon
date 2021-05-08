@@ -5,8 +5,8 @@ namespace BuffSystem.Buff
 {
     public class RicochetShellsBuff : IPassiveBuff
     {
-        private int _ricochetsNumber;
-        private PlayerCharacteristics _playerCharacteristics;
+        private readonly int _ricochetsNumber;
+        private readonly PlayerCharacteristics _playerCharacteristics;
         
         public RicochetShellsBuff(int ricochetsNumber, PlayerCharacteristics playerCharacteristics)
         {

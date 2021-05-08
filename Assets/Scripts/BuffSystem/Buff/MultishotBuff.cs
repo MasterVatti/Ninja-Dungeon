@@ -5,8 +5,8 @@ namespace BuffSystem.Buff
 {
     public class ProjectileCountBuff : IPassiveBuff
     {
-        private int _projectileCount;
-        private PlayerCharacteristics _playerCharacteristics;
+        private readonly int _projectileCount;
+        private readonly PlayerCharacteristics _playerCharacteristics;
         
         public ProjectileCountBuff(int projectileCount, PlayerCharacteristics playerCharacteristics)
         {

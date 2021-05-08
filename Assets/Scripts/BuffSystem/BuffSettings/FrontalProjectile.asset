@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nameBuff: Frontal arrows
   _imageBuff: {fileID: 21300000, guid: 0404d142ebd169245b5b43c16a48b237, type: 3}
-  _buffType: 0
-  _hasFrontalProjectiles: 1
+  _hasFrontalProjectile: 1

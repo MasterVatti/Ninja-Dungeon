@@ -5,8 +5,8 @@ namespace BuffSystem.Buff
 {
     public class SideShellsBuff : IPassiveBuff
     {
-        private PlayerCharacteristics _playerCharacteristics;
-        private bool _hasSideShells;
+        private readonly PlayerCharacteristics _playerCharacteristics;
+        private readonly bool _hasSideShells;
         
         public SideShellsBuff(PlayerCharacteristics playerCharacteristics, bool hasSideShells)
         {

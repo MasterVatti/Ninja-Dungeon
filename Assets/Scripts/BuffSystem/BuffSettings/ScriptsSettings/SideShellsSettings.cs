@@ -11,9 +11,9 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
         [SerializeField]
         private bool _hasSideShells;
         
-        public override IBuff CreateBuff()
+        public override IBuff CreateBuff(PersonCharacteristics personCharacteristics)
         {
-            return new SideShellsBuff((PlayerCharacteristics)PersonCharacteristics, _hasSideShells);
+            return new SideShellsBuff((PlayerCharacteristics)personCharacteristics, _hasSideShells);
         }
     }
 }

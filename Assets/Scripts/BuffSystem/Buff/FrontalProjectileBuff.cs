@@ -5,8 +5,8 @@ namespace BuffSystem.Buff
 {
     public class FrontalProjectileBuff : IPassiveBuff
     {
-        private PlayerCharacteristics _playerCharacteristics;
-        private bool _hasFrontalProjectile;
+        private readonly PlayerCharacteristics _playerCharacteristics;
+        private readonly bool _hasFrontalProjectile;
         
         public FrontalProjectileBuff(PlayerCharacteristics playerCharacteristics, bool hasFrontalProjectile)
         {

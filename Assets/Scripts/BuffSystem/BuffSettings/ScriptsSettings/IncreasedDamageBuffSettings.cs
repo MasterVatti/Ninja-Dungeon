@@ -1,5 +1,6 @@
 using BuffSystem.Buff;
 using BuffSystem.BuffInterface;
+using Characteristics;
 using UnityEngine;
 
 namespace BuffSystem.BuffSettings.ScriptsSettings
@@ -12,9 +13,9 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
         [SerializeField]
         private int _percentageIncrease;
         
-        public override IBuff CreateBuff()
+        public override IBuff CreateBuff(PersonCharacteristics personCharacteristics)
         {
-            return new IncreasedDamageBuff(_percentageIncrease, PersonCharacteristics);
+            return new IncreasedDamageBuff(_percentageIncrease, personCharacteristics);
         }
     }
 }

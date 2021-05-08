@@ -11,9 +11,9 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
         [SerializeField]
         private bool _hasProjectileBack;
         
-        public override IBuff CreateBuff()
+        public override IBuff CreateBuff(PersonCharacteristics personCharacteristics)
         {
-            return new ProjectileBackBuff((PlayerCharacteristics)PersonCharacteristics, _hasProjectileBack);
+            return new ProjectileBackBuff((PlayerCharacteristics)personCharacteristics, _hasProjectileBack);
         }
     }
 }

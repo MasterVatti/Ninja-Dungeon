@@ -5,8 +5,8 @@ namespace BuffSystem.Buff
 {
     public class IncreasedDamageBuff : IPassiveBuff
     {
-        private PersonCharacteristics _personCharacteristics;
-        private float _amountBonusBuff;
+        private readonly PersonCharacteristics _personCharacteristics;
+        private readonly float _amountBonusBuff;
         
         public IncreasedDamageBuff(float percentageIncrease, PersonCharacteristics personCharacteristics)
         {

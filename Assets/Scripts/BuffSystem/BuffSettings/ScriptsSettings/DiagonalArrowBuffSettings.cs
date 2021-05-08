@@ -12,9 +12,9 @@ namespace BuffSystem.BuffSettings.ScriptsSettings
         [SerializeField]
         private bool _hasDiagonalArrows;
         
-        public override IBuff CreateBuff()
+        public override IBuff CreateBuff(PersonCharacteristics personCharacteristics)
         {
-            return new DiagonalProjectileBuff(_hasDiagonalArrows, (PlayerCharacteristics)PersonCharacteristics);
+            return new DiagonalProjectileBuff(_hasDiagonalArrows, (PlayerCharacteristics)personCharacteristics);
         }
     }
 }
