@@ -12,23 +12,33 @@ namespace BuildingSystem.BuildingUpgradeSystem
         private RectTransform _differenceLayoutGroup;
         [SerializeField]
         private TextMeshProUGUI _labelPrefab;
-        
+
+        private MonoBehaviourPool<TextMeshProUGUI> _labelPool;
+
+        private void Awake()
+        {
+            _labelPool = new MonoBehaviourPool<TextMeshProUGUI>(_labelPrefab, _differenceLayoutGroup);
+        }
+
         public void ShowUpgradeDifference(IReadOnlyDictionary<string, int> oldStateDictionary, 
         IReadOnlyDictionary<string, int> newStateDictionary)
         {
             var upgradeDifference = GetUpgradeDifference(oldStateDictionary, newStateDictionary);
-            var labelPool = new MonoBehaviourPool<TextMeshProUGUI>(_labelPrefab, _differenceLayoutGroup);
+            _labelPool.ReleaseAll();
             
             foreach (var pair in upgradeDifference)
             {
-                var keyLabel = labelPool.Take();
-                keyLabel.text = pair.Key;
-                
-                var newValueLabel = labelPool.Take();
-                newValueLabel.text = newStateDictionary[pair.Key].ToString();
+                var characteristicName = pair.Key;
+                var newCharacteristicValue = newStateDictionary[characteristicName]; 
+                var differenceValue = upgradeDifference[characteristicName];
 
-                var newValueDifferenceLabel = labelPool.Take();
-                newValueDifferenceLabel.text = "(+" + upgradeDifference[pair.Key] + ")";
+                //лейблы распологаются в GridLayoutGroup
+                //результат: Скорость добычи 50 (+10)
+                _labelPool.Take().text = characteristicName;
+                _labelPool.Take().text = newCharacteristicValue.ToString();
+                var differentLabel = _labelPool.Take();
+                differentLabel.text = "(+" + differenceValue + ")";
+                differentLabel.color = Color.green;
             }
         }
         

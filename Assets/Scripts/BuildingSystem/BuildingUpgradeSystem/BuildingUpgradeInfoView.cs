@@ -28,15 +28,14 @@ namespace BuildingSystem.BuildingUpgradeSystem
             {
                 SetBuildingSettings();
             }
-            
-            var buildingLevel = _building.CurrentBuildingLevel + 1;
 
             if (IsMaxLevel())
             {
                 _maxLevelWarningImage.gameObject.SetActive(true);
                 return;
             }
-
+            
+            var buildingLevel = _building.CurrentBuildingLevel + 1;
             var upgradeCost = _buildingSettings.UpgradeList[buildingLevel].UpgradeCost;
             var playerHasEnoughMoney = MainManager.ResourceManager.HasEnough(upgradeCost);
             
@@ -86,9 +85,12 @@ namespace BuildingSystem.BuildingUpgradeSystem
         
         private void ShowUpgradeInfo()
         {
-            var oldState = ParseCurrentBuildingState();
-            var newState = ParseNextUpgradeState();
-            _upgradeInfoDisplay.ShowUpgradeInfo(_building, _buildingSettings, oldState, newState);
+            if (!IsMaxLevel())
+            {
+                var oldState = ParseCurrentBuildingState();
+                var newState = ParseNextUpgradeState();
+                _upgradeInfoDisplay.ShowUpgradeInfo(_building, _buildingSettings, oldState, newState);
+            }
         }
 
         private void SetBuildingSettings()
