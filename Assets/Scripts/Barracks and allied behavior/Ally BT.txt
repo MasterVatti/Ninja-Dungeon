@@ -6,7 +6,7 @@ tree("Root")
 tree("Follow")
     while
         sequence
-            not EnemyInSight
+            not IsEnemyInSight
 
         repeat
             sequence

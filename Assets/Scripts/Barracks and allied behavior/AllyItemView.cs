@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Globalization;
 using JetBrains.Annotations;
+using ResourceSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +12,6 @@ namespace Barracks_and_allied_behavior
     /// Отвечает за поле и настройку конкретного поля союзника,
     /// покупку(проверку наличия ресурсов) оплату и инстанциацию префаба.
     /// </summary>
-    
     public class AllyItemView : MonoBehaviour
     {
         [SerializeField]
@@ -18,59 +19,46 @@ namespace Barracks_and_allied_behavior
         [SerializeField]
         private TextMeshProUGUI _descriptionField;
         [SerializeField]
-        private Image _firstResourceImage;
+        private List<Image> _resourceImages;
         [SerializeField]
-        private TextMeshProUGUI _firstPriceField;
-        [SerializeField]
-        private Image _secondResourceImage;
-        [SerializeField]
-        private TextMeshProUGUI _secondPriceField;
+        private List<TextMeshProUGUI> _priceFields;
 
-        private AlliesListSetting _ally;
+        private AlliesSetting _ally;
+        private Barrack _barrack;
 
-        public void Initialize(AlliesListSetting ally)
+        public void Initialize(AlliesSetting ally, Barrack barrack)
         {
+            _barrack = barrack;
             _ally = ally;
-           _allyIcon.sprite= ally.AllyIcon;
-           _descriptionField.text = ally.Description;
-           _firstResourceImage.sprite = MainManager.IconsProvider.GetResourceSprite(ally.FirstType);
-           _firstPriceField.text = ally.FirstPrice.ToString(CultureInfo.InvariantCulture);
-           
-           if (ally.SecondPrice != 0)
-           {
-               _secondPriceField.text = ally.SecondPrice.ToString(CultureInfo.InvariantCulture);
-               _secondResourceImage.sprite = MainManager.IconsProvider.GetResourceSprite(ally.SecondType);
-           }
-           else
-           {
-               Destroy(_secondResourceImage);
-           }
+            Initialize();
         }
-        
+
         [UsedImplicitly]
         public void AllyBuyButtonClick()
         {
-            if (MainManager.ResourceManager.HasEnough(_ally.FirstType, _ally.FirstPrice))
+            if (MainManager.ResourceManager.HasEnough(_ally.Price))
             {
-                if (_ally.SecondPrice != 0 && MainManager.ResourceManager.HasEnough(_ally.SecondType, _ally.SecondPrice))
-                {
-                    MainManager.ResourceManager.Pay(_ally.FirstType,_ally.FirstPrice);
-                    MainManager.ResourceManager.Pay(_ally.SecondType,_ally.SecondPrice);
-                    CreateAlly();
-                }
-                else
-                {
-                    MainManager.ResourceManager.Pay(_ally.FirstType,_ally.FirstPrice);
-                    CreateAlly();
-                }
+                MainManager.ResourceManager.Pay(_ally.Price);
+                _barrack.CreateAlly(_ally);
+
+                MainManager.ScreenManager.CloseTopScreen();
             }
         }
 
-        private void CreateAlly()
+        private void Initialize()
         {
-            Instantiate(_ally.AllyPrefab, _ally.SpawnPoint.position, Quaternion.identity);
+            _allyIcon.sprite = _ally.AllyIcon;
+            _descriptionField.text = _ally.Description;
+            for (var i = 0; i < _ally.Price.Count; i++)
+            {
+                _resourceImages[i].gameObject.SetActive(true);
+                _priceFields[i].gameObject.SetActive(true);
 
-            MainManager.ScreenManager.CloseTopScreen(); 
+                _resourceImages[i].sprite = MainManager.IconsProvider
+                    .GetResourceSprite(_ally.Price[i].Type);
+                _priceFields[i].text = _ally.Price[i].Amount
+                    .ToString(CultureInfo.InvariantCulture);
+            }
         }
     }
 }

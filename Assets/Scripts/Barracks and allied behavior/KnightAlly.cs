@@ -9,8 +9,10 @@ namespace Barracks_and_allied_behavior
     /// <summary>
     /// Отвечает  конкретного союзника Рыцарь и его специальное поведение(ускорение, атака).
     /// </summary>
-    public class KnightAlly : PersonCharacteristics
+    public class KnightAlly : MonoBehaviour
     {
+        [SerializeField]
+        public PersonCharacteristics _personCharacteristics;
         [SerializeField]
         private AlliesAI _alliesAI;
         [SerializeField]
@@ -21,9 +23,9 @@ namespace Barracks_and_allied_behavior
         [Task]
         private void Attack()
         {
-            _alliesAI.Target.GetComponent<HealthBehaviour>().ApplyDamage(AttackDamage);
+            _alliesAI.Target.GetComponent<HealthBehaviour>().ApplyDamage(_personCharacteristics.AttackDamage);
 
-            _agent.speed = MoveSpeed;
+            _agent.speed = _personCharacteristics.MoveSpeed;
             
             Task.current.Succeed();
         }

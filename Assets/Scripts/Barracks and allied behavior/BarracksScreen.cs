@@ -12,7 +12,7 @@ namespace Barracks_and_allied_behavior
         [SerializeField]
         private GameObject _barracksContent;
         [SerializeField]
-        private GameObject _allyItem;
+        private AllyItemView _allyItem;
 
         private Barrack _barrack;
 
@@ -34,10 +34,10 @@ namespace Barracks_and_allied_behavior
             ScreenType = screenType;
         }
 
-        private void CreateAndInitializeAllyItem(AlliesListSetting ally)
+        private void CreateAndInitializeAllyItem(AlliesSetting ally)
         {
-            var rateObject = Instantiate(_allyItem, _barracksContent.transform);
-            rateObject.GetComponent<AllyItemView>().Initialize(ally);
+            var allyItem = Instantiate(_allyItem, _barracksContent.transform);
+            allyItem.Initialize(ally, _barrack);
         }
 
         [UsedImplicitly]

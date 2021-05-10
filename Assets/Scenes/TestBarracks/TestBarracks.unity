@@ -1099,34 +1099,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f25fe99fa5b47c4085dc9690f30589a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _positionUI: {fileID: 0}
   _allies:
-  - _firstType: 0
-    _firstPrice: 100
-    _secondType: 2
-    _secondPrice: 0
+  - _price:
+    - _type: 0
+      _amount: 100
     _allyIcon: {fileID: 21300000, guid: 5d10c7ae0e6f94a4898417e1ea75a663, type: 3}
     _description: Archer
     _allyPrefab: {fileID: 2394056606855407061, guid: 0e7753f0449641045a1850f3d7318b07,
       type: 3}
-    _spawnPoint: {fileID: 417041138}
-  - _firstType: 0
-    _firstPrice: 150
-    _secondType: 2
-    _secondPrice: 20
+  - _price:
+    - _type: 0
+      _amount: 150
+    - _type: 2
+      _amount: 20
     _allyIcon: {fileID: 21300000, guid: 8ccee245265bb40b2a74bc4eba2c1e99, type: 3}
     _description: Knight
     _allyPrefab: {fileID: 1672505441962123926, guid: 9a1a7ffbfc4cb0147af9fdf1e865a08e,
       type: 3}
-    _spawnPoint: {fileID: 417041138}
-  - _firstType: 0
-    _firstPrice: 300
-    _secondType: 2
-    _secondPrice: 50
+  - _price:
+    - _type: 0
+      _amount: 300
+    - _type: 2
+      _amount: 50
     _allyIcon: {fileID: 21300000, guid: 68a3cdecef36744d8a9f77eca93e595d, type: 3}
     _description: Soldier
     _allyPrefab: {fileID: 1219256799547053490, guid: da322b15d8972fe45bfa45def067306f,
       type: 3}
-    _spawnPoint: {fileID: 417041138}
+  _spawnPoint: {fileID: 417041138}
 --- !u!4 &1830642505 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4469324318138216, guid: d73a2930895e6ff4ea6e0602b7eecf71,

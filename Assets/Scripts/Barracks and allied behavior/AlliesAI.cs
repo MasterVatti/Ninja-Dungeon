@@ -58,7 +58,7 @@ namespace Barracks_and_allied_behavior
         }
 
         [Task]
-        private bool EnemyInSight()
+        private bool IsEnemyInSight()
         {
             if (MainManager.EnemiesManager.Enemies.Count != 0)
             {
