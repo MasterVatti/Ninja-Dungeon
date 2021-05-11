@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using Characteristics;
 using ResourceSystem;
 using UnityEngine;
 
@@ -10,6 +10,8 @@ public class IconsProvider : MonoBehaviour
 {
     [SerializeField]
     private List<ResourceImage> _resourceImages = new List<ResourceImage>();
+    [SerializeField]
+    private List<CharacteristicImage> _characteristicImages = new List<CharacteristicImage>();
     
     public Sprite GetResourceSprite(ResourceType resourceType)
     {
@@ -18,6 +20,19 @@ public class IconsProvider : MonoBehaviour
             if (resource.Type == resourceType)
             {
                 return resource.Sprite;
+            }
+        }
+
+        return null;
+    }
+
+    public Sprite GetCharacteristicImage(CharacteristicType type)
+    {
+        foreach (var characteristicImage in _characteristicImages)
+        {
+            if (characteristicImage.Type == type)
+            {
+                return characteristicImage.Sprite;
             }
         }
 

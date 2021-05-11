@@ -1,7 +1,9 @@
+using Characteristics;
 using Enemies;
 using LoadingScene;
 using Managers;
 using Managers.ScreensManager;
+using PlayerScripts;
 using PlayerScripts.Movement;
 using UnityEngine;
 
@@ -18,6 +20,8 @@ public class MainManager : Singleton<MainManager>
     public static GameObject Player => Instance._player;
     public static IconsProvider IconsProvider => Instance._iconsProvider;
     public static JoystickController JoystickController => Instance._joystickController;
+    public static UserData UserData => Instance._userData;
+    public static CharacteristicList CharacteristicList => Instance._characteristicList;
     
     [SerializeField]
     private JoystickController _joystickController;
@@ -41,5 +45,9 @@ public class MainManager : Singleton<MainManager>
     private GameObject _player; 
     [SerializeField]
     private IconsProvider _iconsProvider;
+    [SerializeField]
+    private UserData _userData;
+    [SerializeField]
+    private CharacteristicList _characteristicList;
 
 }
