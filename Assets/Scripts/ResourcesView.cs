@@ -48,6 +48,7 @@ public class ResourcesView : MonoBehaviour
                 if (_resourceLabels[i].Type == _resources[j].Type )
                 {
                     _resourceLabels[i].Label.text = _resources[j].Amount.ToString();
+                    _resourceLabels[i].СurrentValue = _resources[j].Amount;
                 }
             }
         }

@@ -22,6 +22,12 @@ public class ResourceLabel : MonoBehaviour
         set => _label = value;
     }
     
+    public float СurrentValue
+    {
+        get => _currentValue;
+        set => _currentValue = value;
+    }
+    
     [SerializeField]
     private ResourceType _type;
     [SerializeField]
@@ -29,12 +35,7 @@ public class ResourceLabel : MonoBehaviour
     private float _currentValue;
     private Coroutine _currentCoroutine;
     private float _elapsedTime;
-
-    private void Start()
-    {
-        _currentValue = Convert.ToSingle(_label.text);
-    }
-
+    
     public void SetAmount(int newAmount, float animationTime)
     {
         StopCoroutine();
