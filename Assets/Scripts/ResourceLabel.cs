@@ -32,7 +32,7 @@ public class ResourceLabel : MonoBehaviour
 
     private void Start()
     {
-        _currentValue = Convert.ToSingle(Label.text);
+        _currentValue = Convert.ToSingle(_label.text);
     }
 
     public void SetAmount(int newAmount, float animationTime)
