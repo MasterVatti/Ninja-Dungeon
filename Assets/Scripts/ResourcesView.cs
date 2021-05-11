@@ -17,33 +17,29 @@ public class ResourcesView : MonoBehaviour
     private List<Resource> _resources;
     [SerializeField]
     private float _animationTime;
-    private float _elapsedTime;
-    private Coroutine _currentCoroutine;
-    private float[] _currentValue;
     private TextMeshProUGUI _lable;
+    private ResourceLabel _resourceLabelCar;
+    private float _elapsedTime;
 
     private void Start()
     {
         MainManager.ResourceManager.OnResourceAmountChanged += OnResourceAmountChanged;
         _resources = MainManager.ResourceManager.GetResources();
         UpdateResourcesAmount();
-        InitialValueOfPresentValue();
-        
+
     }
     
     private void OnResourceAmountChanged(Resource resource, float oldAmount , int newAmount, int index)
     {
-        var label = GetLabel(resource);
-        StopCoroutine();
-        if (_currentValue[index] != newAmount)
+        var lable = GetLabel(resource);
+        StopCoroutine(index);
+        var currentValue = _resourceLabels[index].CurrentValue;
+        if (currentValue != newAmount)
         {
-            _currentCoroutine = StartCoroutine(UpdateResource(label, _currentValue[index], newAmount, index));
+          _resourceLabels[index].CurrentCoroutine = StartCoroutine(UpdateResource(lable,currentValue, newAmount,  index));
             
         }
-
-        label.text = newAmount.ToString();
-
-
+        
     }
     
     private IEnumerator UpdateResource(TextMeshProUGUI label, float oldAmount , int newAmount, int index)
@@ -51,14 +47,16 @@ public class ResourcesView : MonoBehaviour
         while (_elapsedTime < _animationTime)
         {
             var currentProgress = _elapsedTime / _animationTime;
-            _currentValue[index] = Mathf.Lerp(oldAmount, newAmount, currentProgress);
-            label.text =  Mathf.Round(_currentValue[index]).ToString(CultureInfo.InvariantCulture);
+            _resourceLabels[index].CurrentValue= Mathf.Lerp(oldAmount, newAmount, currentProgress);
+            label.text =  Mathf.Round(_resourceLabels[index].CurrentValue).ToString(CultureInfo.InvariantCulture);
             _elapsedTime += Time.deltaTime;
 
             yield return null;
         }
         _elapsedTime = 0;
     }
+    
+    
     
     private TextMeshProUGUI GetLabel(Resource resource)
     {
@@ -88,27 +86,19 @@ public class ResourcesView : MonoBehaviour
                 if (_resourceLabels[i].Type == _resources[j].Type )
                 {
                     _resourceLabels[i].Label.text = _resources[j].Amount.ToString();
-                    break;
+                    _resourceLabels[i].CurrentValue = _resources[j].Amount;
                 }
             }
         }
     }
-
-    private void StopCoroutine()
-    {
-        if( _currentCoroutine != null ) 
+    
+    private void StopCoroutine(int index)
         {
-            StopCoroutine(_currentCoroutine);
-            _currentCoroutine = null;
+            if( _resourceLabels[index].CurrentCoroutine != null ) 
+            {
+                StopCoroutine(_resourceLabels[index].CurrentCoroutine);
+                _resourceLabels[index].CurrentCoroutine = null;
+            }
         }
-    }
-
-    private void InitialValueOfPresentValue()
-    {
-        _currentValue = new float[_resources.Count];
-        for (int i = 0; i < _resources.Count; i++)
-        {
-            _currentValue[i] = _resources[i].Amount;
-        }
-    }
+    
 }
