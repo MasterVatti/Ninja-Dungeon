@@ -1,4 +1,6 @@
-﻿using Characteristics;
+﻿using System;
+using System.Linq;
+using Characteristics;
 using Enemies;
 using Enemies.Spawner;
 using UnityEngine;
@@ -6,7 +8,7 @@ using UnityEngine;
 namespace Assets.Scripts.BattleManager
 {
     /// <summary>
-    /// Менеджер боя
+    /// Класс контролирует бой (организует)
     /// </summary>
     public class BattleManager : Singleton<BattleManager>
     {
@@ -17,8 +19,11 @@ namespace Assets.Scripts.BattleManager
         private HealthBehaviour _healthBehaviour;
 
         private LevelSettings _levelSettings;
+        private RoomSettings _roomSettings;
+        private NextLevelTrigger _nextLevelTrigger;
 
         private int _currentLevel;
+        private int _currentReward;
 
         private void Awake()
         {
@@ -31,28 +36,46 @@ namespace Assets.Scripts.BattleManager
 
         private void Update()
         {
-            IsPlayerDie();
-            IsLevelLast();
-        }
-
-        private bool IsPlayerDie()
-        {
-            if ( _playerCharacteristics.CurrentHp <= 0 && MainManager.EnemiesManager.Enemies.Count > 0)
+            if (IsPlayerDead())
             {
                 //UI проигрыша
                 //Выдать награду за пройденные левелы
-                return true;
             }
 
-            return false;
-        }
-
-        private bool IsLevelLast()
-        {
-            if ( _currentLevel == 10 && MainManager.EnemiesManager.Enemies.Count == 0) //получить индекс последней сцены
+            if (IsLastLevel())
             {
                 //UI выигрыша
                 //Выдать награду + бонус + вернуться в верхний мир
+            }
+
+            if (IsNextLevelAvailable())
+            {
+                _nextLevelTrigger.
+            }
+        }
+
+        private bool IsNextLevelAvailable()
+        {
+            if (MainManager.EnemiesManager.Enemies.Count == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        
+        private bool IsPlayerDead()
+        {
+            if ( _playerCharacteristics.CurrentHp <= 0 && MainManager.EnemiesManager.Enemies.Count > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool IsLastLevel()
+        {
+            if ( _currentLevel == 10 && MainManager.EnemiesManager.Enemies.Count == 0)
+            {
                 return true;
             }
             return false;
@@ -60,12 +83,12 @@ namespace Assets.Scripts.BattleManager
 
         public void StartBattle(RoomSettings roomSettings, Vector3 teleportPosition)
         {
+            _currentReward = 0;
             _currentLevel = 0;
             var level = roomSettings.LevelSettingsList[_currentLevel];
 
             MainManager.LoadingController.StartLoad(level.SceneName);
             MainManager.Player.transform.position = teleportPosition;
-            Debug.Log("BattleManager начал свою работу!");
             _enemiesSpawner.Initialize();
         }
 
@@ -74,11 +97,12 @@ namespace Assets.Scripts.BattleManager
             _currentLevel++;
             var nextLevelTeleportPosition = teleportPosition.TeleportPosition;
             var nextRoomSettings = roomSettings.RoomSettings;
+            
             var level = nextRoomSettings.LevelSettingsList[_currentLevel];
+            var reward = _levelSettings.Rewards[_currentReward]
             
             MainManager.LoadingController.StartLoad(level.SceneName);
             MainManager.Player.transform.position = nextLevelTeleportPosition;
-            Debug.Log($"Level №{_currentLevel}");
         }
 
         private void PlayerDeath(Person person)

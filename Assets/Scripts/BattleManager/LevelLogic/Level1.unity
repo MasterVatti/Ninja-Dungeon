@@ -505,6 +505,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b90655d4c640dda8c7bc3585e2b970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _settings:
+    _roomSettings: {fileID: 11400000, guid: 00656223ec680bf49ae1de9b149b0da2, type: 2}
+    _teleportPosition: {x: -15.5, y: 0, z: -10}
 --- !u!1001 &143203311
 PrefabInstance:
   m_ObjectHideFlags: 0

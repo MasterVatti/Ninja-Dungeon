@@ -17858,10 +17858,7 @@ MonoBehaviour:
     _spawnPointsData:
     - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
         type: 3}
-      _spawnPoint: {fileID: 0}
-    - _enemy: {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a,
-        type: 3}
-      _spawnPoint: {fileID: 0}
+      _spawnPoint: {fileID: 387155073}
 --- !u!1001 &1883203833
 PrefabInstance:
   m_ObjectHideFlags: 0

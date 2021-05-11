@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.BattleManager
 {
+    /// <summary>
+    /// Класс отвечает за переход на следующий уровень
+    /// </summary>
     public class NextLevelTrigger : MonoBehaviour
     {
         [SerializeField]

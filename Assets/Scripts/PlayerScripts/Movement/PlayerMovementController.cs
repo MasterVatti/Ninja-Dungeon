@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using UnityEngine;
+
 namespace PlayerScripts.Movement
 {
     /// <summary>
