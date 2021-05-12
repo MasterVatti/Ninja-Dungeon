@@ -6,7 +6,7 @@ namespace Settings.Sound
     /// <summary>
     /// включить/выключить звук
     /// </summary>
-    public class OnOffSound : MonoBehaviour
+    public class SoundSettingWidget : MonoBehaviour
     {
         [SerializeField] 
         private Toggle _currentToggle;
