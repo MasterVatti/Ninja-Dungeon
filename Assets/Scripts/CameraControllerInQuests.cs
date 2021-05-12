@@ -2,7 +2,8 @@
 
 public class CameraControllerInQuests : MonoBehaviour
 {
-    // Класс отвечает за передвижение камеры к игроку
+    // Класс отвечает за передвижение камеры в подземелье
+    
     [SerializeField]
     private GameObject _player;
     [SerializeField]
@@ -12,9 +13,7 @@ public class CameraControllerInQuests : MonoBehaviour
     {
         if (_player != null)
         {
-            transform.position = new Vector3(_player.transform.position.x + _offset.x, _player.transform.position.y + _offset.y,_player.transform.position.z + 
-            _offset.z) ;
+            transform.position = _player.transform.position + _offset ;
         }
-        
     }
 }

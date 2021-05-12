@@ -18,8 +18,7 @@ public class MainManager : Singleton<MainManager>
     public static GameObject Player => Instance._player;
     public static IconsProvider IconsProvider => Instance._iconsProvider;
     public static JoystickController JoystickController => Instance._joystickController;
-    public static CameraManager CameraManager => Instance._cameraManager;
-    
+
     [SerializeField]
     private JoystickController _joystickController;
     [SerializeField]

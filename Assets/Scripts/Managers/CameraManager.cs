@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,13 +16,23 @@ namespace Managers
         private GameObject _cameraDungeon;
         [SerializeField] 
         private string _sceneNameStart;
+        private string _currentNameScene;
         private string _sceneName;
-       
 
-        void Start()
+        private void Start()
+        {
+            _currentNameScene = _sceneNameStart;
+        }
+
+        void Update()
         {
             _sceneName = SceneManager.GetActiveScene().name;
-            CameraDefinition();
+            if (_currentNameScene != _sceneName)
+            {
+                CameraDefinition();
+                _currentNameScene = _sceneName;
+            }
+            
         }
 
         private void CameraDefinition()
@@ -36,7 +47,6 @@ namespace Managers
                 _cameraCity.SetActive(false);
                 _cameraDungeon.SetActive(true);
             }
-
         }
     }
 }
