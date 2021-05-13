@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7603747272438297866}
   - component: {fileID: 1824388498338098427}
   - component: {fileID: 821233814808746517}
+  - component: {fileID: 4819236055989805974}
   m_Layer: 0
   m_Name: PortalPrefab
   m_TagString: Untagged
@@ -106,6 +107,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _positionUI: {fileID: 6120231944466007368}
+--- !u!114 &4819236055989805974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283214289208915664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a386a9aa9541668f798885879e2374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minCooldown: 3000
+  _maxCooldown: 10000
+  _delayBetweenSpawns: 0.5
+  _minEnemiesCount: 2
+  _maxEnemiesCount: 5
+  _possibleEnemies: []
 --- !u!1 &3450469052181993017
 GameObject:
   m_ObjectHideFlags: 0
