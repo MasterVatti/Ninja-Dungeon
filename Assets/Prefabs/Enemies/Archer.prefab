@@ -715,9 +715,9 @@ GameObject:
   - component: {fileID: 3259245188263208102}
   - component: {fileID: 5411165918598687182}
   - component: {fileID: 4543747951456498334}
-  - component: {fileID: 6468529548311081048}
   - component: {fileID: 3148261823362872109}
   - component: {fileID: 3949848097472200842}
+  - component: {fileID: 982788362052599211}
   m_Layer: 9
   m_Name: Archer
   m_TagString: Enemy
@@ -895,21 +895,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b22f00f3b5846d409eee145d80d44c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6468529548311081048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1959266855851146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9637f3aebb4b60a45bd2355e1de34e38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _personCharacteristics: {fileID: 3148261823362872109}
-  _healthBehaviour: {fileID: 4543747951456498334}
-  _rigidbody: {fileID: 3949848097472200842}
 --- !u!114 &3148261823362872109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -937,7 +922,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959266855851146}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 75
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -945,6 +930,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &982788362052599211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959266855851146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3837db2886d2940b8fd5125fa47e0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _throwUpForce: 15
+  _recliningForce: 5
+  _equipmentItems: []
+  _resourceItems:
+  - _dropChance: 95
+    _item: {fileID: 2119652477169920758, guid: aa1963baff582314ba3d3cbd81c750c1, type: 3}
+    _resource:
+      _type: 1
+      _amount: 500
+  - _dropChance: 95
+    _item: {fileID: 2119652477169920758, guid: aa1963baff582314ba3d3cbd81c750c1, type: 3}
+    _resource:
+      _type: 2
+      _amount: 5
 --- !u!1 &4651375330801422060
 GameObject:
   m_ObjectHideFlags: 0

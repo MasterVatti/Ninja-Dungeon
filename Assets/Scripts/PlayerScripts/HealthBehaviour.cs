@@ -25,14 +25,8 @@ namespace Enemies
             
             if (_person.PersonCharacteristics.CurrentHp <= 0)
             {
-                Death();
+                OnDead?.Invoke(_person);
             }
-        }
-        
-        private void Death()
-        {
-            OnDead?.Invoke(_person);
-            Destroy(gameObject);
         }
     }
 }

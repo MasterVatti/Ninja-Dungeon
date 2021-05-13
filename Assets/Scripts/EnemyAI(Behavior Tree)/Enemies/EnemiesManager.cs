@@ -16,15 +16,17 @@ namespace Enemies
 
         public void AddEnemy(Enemy enemy)
         {
-            Enemies.Add(enemy);
+            _enemies.Add(enemy);
             enemy.HealthBehaviour.OnDead += OnEnemyDied; 
         }
         
         private void OnEnemyDied(Person person)
         {
-            var enemy = person.GetComponentInChildren<Enemy>();
+            var enemy = person.GetComponent<Enemy>();
+            
             enemy.HealthBehaviour.OnDead -= OnEnemyDied;
-            Enemies.Remove(enemy);
+            _enemies.Remove(enemy);
+            Destroy(enemy.gameObject);
         }
         
         private void OnDestroy()

@@ -11,7 +11,7 @@ namespace Enemies.Spawner
     public class WaveController
     {
         public bool IsFinished;
-        
+
         private readonly WaveData _waveData;
         private int _enemiesCount;
 
@@ -21,51 +21,29 @@ namespace Enemies.Spawner
             _enemiesCount = _waveData.SpawnPointsData.Count;
         }
 
-        public async void Start()
-        {
-            var cooldown = (int) (_waveData.Cooldown * 1000);
-            await Task.Delay(cooldown);
-            
-            foreach (var enemyWithSpawnPoint in _waveData.SpawnPointsData)
-            {
-                var enemyPrefab = enemyWithSpawnPoint.Enemy;
-                var spawnPoint = enemyWithSpawnPoint.SpawnPoint;
-
-                var enemy = Object.Instantiate(enemyPrefab,
-                    spawnPoint.position,
-                    Quaternion.identity);
-                enemy.HealthBehaviour.OnDead += OnEnemyDied;
-
-                MainManager.EnemiesManager.AddEnemy(enemy);
-            }
-        }
-        
         /// <summary>
         /// Перегрузка для того, чтобы использовать задержку
         /// между спавнами каждого отдельного врага
         /// </summary>
         /// <param name="delayBetweenSpawns">Задержка в секундах</param>
-        public async void Start(float delayBetweenSpawns)
+        public async void Start(float delayBetweenSpawns = 0f)
         {
             var cooldown = (int) (_waveData.Cooldown * 1000);
             await Task.Delay(cooldown);
-            
+
             foreach (var enemyWithSpawnPoint in _waveData.SpawnPointsData)
             {
                 var enemyPrefab = enemyWithSpawnPoint.Enemy;
                 var spawnPoint = enemyWithSpawnPoint.SpawnPoint;
-
-                var enemy = Object.Instantiate(enemyPrefab,
-                    spawnPoint.position,
-                    Quaternion.identity);
+                var enemy = Object.Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+                
                 enemy.HealthBehaviour.OnDead += OnEnemyDied;
-
                 MainManager.EnemiesManager.AddEnemy(enemy);
 
-                await Task.Delay((int)(delayBetweenSpawns * 1000));
+                await Task.Delay((int) (delayBetweenSpawns * 1000));
             }
         }
-        
+
         private void OnEnemyDied(Person enemy)
         {
             _enemiesCount--;

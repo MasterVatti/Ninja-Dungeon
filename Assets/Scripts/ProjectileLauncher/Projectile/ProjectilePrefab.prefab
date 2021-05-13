@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectileSpeed: 10
-  _damage: 5
+  _damage: 19
   _timeToRemove: 5
   _rigidbody: {fileID: 2660066435425416736}
 --- !u!54 &2660066435425416736

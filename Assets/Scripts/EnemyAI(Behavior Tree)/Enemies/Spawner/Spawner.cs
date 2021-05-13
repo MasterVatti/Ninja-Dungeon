@@ -19,6 +19,7 @@ namespace Enemies.Spawner
 
         private void Update()
         {
+
             if (_activeWave != null && _activeWave.IsFinished)
             {
                 StartNextWave();
@@ -48,6 +49,8 @@ namespace Enemies.Spawner
             }
             
             StartNextWave();
+            Debug.Log("Initialize");
+
         }
     }
 }
