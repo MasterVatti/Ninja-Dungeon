@@ -74,14 +74,16 @@ GameObject:
   - component: {fileID: 7103443657992172629}
   - component: {fileID: 4044857438897410492}
   - component: {fileID: 4198304870644389448}
-  - component: {fileID: 3064294594360770537}
   - component: {fileID: -7116445777260105468}
-  - component: {fileID: -6501167769399255928}
   - component: {fileID: 8430845619470533281}
   - component: {fileID: 3097239842779378857}
+  - component: {fileID: 3064294594360770537}
   - component: {fileID: 9162167110737348107}
   - component: {fileID: 117749519555223931}
   - component: {fileID: 3867819842158158202}
+  - component: {fileID: 9065075714013820798}
+  - component: {fileID: 1963808504090235557}
+  - component: {fileID: 1485795765110793482}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Ally
@@ -166,22 +168,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3064294594360770537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2394056606855407061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34c2fc2026e83f54996df7e7715f6704, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _agent: {fileID: -7116445777260105468}
-  _aggressionDistance: 20
-  _stopFollowingDistance: 5
-  _guardsDistance: 3
 --- !u!195 &-7116445777260105468
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -204,25 +190,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-6501167769399255928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2394056606855407061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50f94ce4438c56d46b3ea411df2fe272, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentHP: 100
-  _maxHp: 100
-  _moveSpeed: 0
-  _attackDamage: 10
-  _attackRate: 0
-  _canMove: 0
-  _canAttack: 0
 --- !u!54 &8430845619470533281
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -267,6 +234,20 @@ MonoBehaviour:
     breakPointStatuses: 
     collapsedLines: 10000000
     btScript: 
+--- !u!114 &3064294594360770537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394056606855407061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34c2fc2026e83f54996df7e7715f6704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _agent: {fileID: -7116445777260105468}
+  _aggressionDistance: 20
 --- !u!114 &9162167110737348107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152adcd9a0b455242bdef016029036b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _personCharacteristics: {fileID: -6501167769399255928}
+  _personCharacteristics: {fileID: 9065075714013820798}
   _healthBehaviour: {fileID: 9162167110737348107}
   _rigidbody: {fileID: 8430845619470533281}
 --- !u!114 &3867819842158158202
@@ -306,6 +287,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ece3497b0dce848bcf23723c55aa05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _movement: {fileID: 1485795765110793482}
+  _characteristics: {fileID: 9065075714013820798}
+--- !u!114 &9065075714013820798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394056606855407061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86990d793c2f72498a9b8482e24e1e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHP: 100
+  _maxHp: 100
+  _moveSpeed: 3.5
+  _attackDamage: 15
+  _attackRate: 0
+  _canMove: 0
+  _canAttack: 0
+--- !u!114 &1963808504090235557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394056606855407061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 532984f78cab4c745a4b444139af2157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stopFollowingDistance: 5
+  _guardsDistance: 3
   _agent: {fileID: -7116445777260105468}
-  _stopChaseDistance: 10
+--- !u!114 &1485795765110793482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394056606855407061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0429689b06cf0a84792781bc99cd3cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit: {fileID: 3867819842158158202}
+  _agent: {fileID: -7116445777260105468}
+  _stopChaseDistance: 13
   _pointDistanceError: 0.5

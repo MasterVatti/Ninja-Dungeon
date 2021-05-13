@@ -14,14 +14,15 @@ GameObject:
   - component: {fileID: 8803715198208828380}
   - component: {fileID: 7129265471506597536}
   - component: {fileID: 7628226277611959186}
-  - component: {fileID: -616721245232159211}
   - component: {fileID: 7309898420038427012}
   - component: {fileID: 8205912418606709640}
   - component: {fileID: 4259961474249692756}
-  - component: {fileID: 8935440672372812310}
   - component: {fileID: 1825157864283867157}
   - component: {fileID: 7732128025546475612}
   - component: {fileID: 6289494025265705038}
+  - component: {fileID: 7072585114897098615}
+  - component: {fileID: 4551545635822364203}
+  - component: {fileID: 6245484983145196989}
   m_Layer: 0
   m_Name: GolemPrefab
   m_TagString: Enemy
@@ -139,22 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ece3497b0dce848bcf23723c55aa05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent: {fileID: 7309898420038427012}
-  _stopChaseDistance: 0
-  _pointDistanceError: 0.5
---- !u!114 &-616721245232159211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940516286941385097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ec249979e19df459b6eb426d4950b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyAI: {fileID: 8205912418606709640}
+  _movement: {fileID: 4551545635822364203}
+  _characteristics: {fileID: 7072585114897098615}
 --- !u!195 &7309898420038427012
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -205,25 +192,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8935440672372812310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940516286941385097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7775d5d223d95f4a9150bfec120654c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentHP: 0
-  _maxHp: 50
-  _moveSpeed: 0
-  _attackDamage: 10
-  _attackRate: 0
-  _canMove: 0
-  _canAttack: 0
 --- !u!135 &1825157864283867157
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -249,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2136287655a0b7a4eb31474d15cce149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _personCharacteristics: {fileID: 8935440672372812310}
+  _personCharacteristics: {fileID: 7072585114897098615}
   _healthBehaviour: {fileID: 6289494025265705038}
   _rigidbody: {fileID: 4259961474249692756}
 --- !u!114 &6289494025265705038
@@ -264,3 +232,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b22f00f3b5846d409eee145d80d44c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7072585114897098615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940516286941385097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c752e006ecbf62f4980061719971fdf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHP: 50
+  _maxHp: 50
+  _moveSpeed: 3.5
+  _attackDamage: 15
+  _attackRate: 0
+  _canMove: 0
+  _canAttack: 0
+--- !u!114 &4551545635822364203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940516286941385097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0429689b06cf0a84792781bc99cd3cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit: {fileID: 7628226277611959186}
+  _agent: {fileID: 7309898420038427012}
+  _stopChaseDistance: 1
+  _pointDistanceError: 0.5
+--- !u!114 &6245484983145196989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940516286941385097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a437ac52be5264fbdc7520b5657126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit: {fileID: 7628226277611959186}

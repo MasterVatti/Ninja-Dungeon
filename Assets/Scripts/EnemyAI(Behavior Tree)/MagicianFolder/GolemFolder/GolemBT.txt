@@ -9,6 +9,7 @@ tree("TopNode")
             DetermineNearestTarget
             while not IsTargetKilled
                 sequence
+                    GetTarget
                     SetTargetPosition
                     MoveToDestination
                     IsAtRequiredDistance(2.0)

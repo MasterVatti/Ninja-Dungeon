@@ -7,7 +7,8 @@ using UnityEngine;
 namespace Barracks_and_allied_behavior
 {
     /// <summary>
-    /// Отвечает за бараки.(пока только сохраняет лист союзников)
+    /// Отвечает за бараки, хранит список союзников. Создает союзника в определнной точке.
+    /// Открывает скрин барраков.
     /// </summary>
     
     public class Barrack : Building<BarrackData>, IScreenOpenerWithContext

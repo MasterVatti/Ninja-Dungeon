@@ -27,6 +27,7 @@ tree("Chase")
         DetermineNearestTarget
         while not IsTargetKilled
             sequence
+                GetTarget
                 IsAtRequiredDistance(20.0)
                 Chase
         
@@ -34,6 +35,7 @@ tree("Attack")
     while not IsTargetKilled
         sequence
             DetermineNearestTarget
+            GetTarget
             IsAtRequiredDistance(7.0)
             tree("Shot")
             SetBackPoint

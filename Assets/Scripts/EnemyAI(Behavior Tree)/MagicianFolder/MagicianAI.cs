@@ -15,8 +15,6 @@ namespace MagicianFolder
         [SerializeField]
         private float _runBackDistance;
         [SerializeField]
-        private Magician _magician;
-        [SerializeField]
         private float _lowHealthThreshold;
 
         private bool _isGolemCreated;
@@ -38,14 +36,14 @@ namespace MagicianFolder
         [Task]
         private void SetBackPoint()
         {
-            _unit.ChangePointMovement(gameObject.transform.TransformPoint(0, 0, 0 - _runBackDistance));
+            _unit.Movement.ChangePointMovement(gameObject.transform.TransformPoint(0, 0, 0 - _runBackDistance));
             Task.current.Succeed();
         }
 
         [Task]
         private bool IsTimeToSpawnGolem()
         {
-            return _magician.CurrentHp <= _lowHealthThreshold;
+            return _unit.Characteristics.CurrentHp <= _lowHealthThreshold;
         }
     }
 }

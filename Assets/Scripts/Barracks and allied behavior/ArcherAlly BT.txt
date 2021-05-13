@@ -3,6 +3,7 @@ tree("Attack")
     while not IsTargetKilled
         sequence    
             IsEnemyInSight
+            GetTarget
             tree("Chase")
             IsAtRequiredDistance(10.0)
        

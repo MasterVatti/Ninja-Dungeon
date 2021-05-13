@@ -16,10 +16,14 @@ GameObject:
   - component: {fileID: 4848752698304241106}
   - component: {fileID: 8637482196848305538}
   - component: {fileID: 6697829752094606592}
+  - component: {fileID: 5376457146948466840}
   - component: {fileID: 8347178985741170688}
   - component: {fileID: 5079080549896897640}
   - component: {fileID: 1144536422368776136}
-  - component: {fileID: 5376457146948466840}
+  - component: {fileID: 8194196920360209178}
+  - component: {fileID: 8708325738461760921}
+  - component: {fileID: 895330350875414952}
+  - component: {fileID: 5259289154252573925}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Ally
@@ -183,8 +187,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 179097156764800952}
   _aggressionDistance: 15
-  _stopFollowingDistance: 5
-  _guardsDistance: 3
+--- !u!114 &5376457146948466840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672505441962123926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ece3497b0dce848bcf23723c55aa05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movement: {fileID: 8708325738461760921}
+  _characteristics: {fileID: 8194196920360209178}
 --- !u!114 &8347178985741170688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,14 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779de56f172bc9a4289fb5367e881bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHP: 100
-  _maxHp: 100
-  _moveSpeed: 3.5
-  _attackDamage: 15
-  _attackRate: 0
-  _canMove: 0
-  _canAttack: 0
-  _alliesAI: {fileID: 6697829752094606592}
+  _unit: {fileID: 5376457146948466840}
   _agent: {fileID: 179097156764800952}
   _accelerateSpeed: 6
 --- !u!114 &5079080549896897640
@@ -219,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152adcd9a0b455242bdef016029036b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _personCharacteristics: {fileID: 8347178985741170688}
+  _personCharacteristics: {fileID: 8194196920360209178}
   _healthBehaviour: {fileID: 1144536422368776136}
   _rigidbody: {fileID: 4848752698304241106}
 --- !u!114 &1144536422368776136
@@ -234,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b22f00f3b5846d409eee145d80d44c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5376457146948466840
+--- !u!114 &8194196920360209178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,9 +252,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 1672505441962123926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32ece3497b0dce848bcf23723c55aa05, type: 3}
+  m_Script: {fileID: 11500000, guid: d86990d793c2f72498a9b8482e24e1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentHP: 150
+  _maxHp: 150
+  _moveSpeed: 3.5
+  _attackDamage: 15
+  _attackRate: 0
+  _canMove: 0
+  _canAttack: 0
+--- !u!114 &8708325738461760921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672505441962123926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0429689b06cf0a84792781bc99cd3cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit: {fileID: 5376457146948466840}
   _agent: {fileID: 179097156764800952}
   _stopChaseDistance: 1
   _pointDistanceError: 0.5
+--- !u!114 &895330350875414952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672505441962123926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a437ac52be5264fbdc7520b5657126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit: {fileID: 5376457146948466840}
+--- !u!114 &5259289154252573925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672505441962123926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 532984f78cab4c745a4b444139af2157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stopFollowingDistance: 5
+  _guardsDistance: 3
+  _agent: {fileID: 179097156764800952}

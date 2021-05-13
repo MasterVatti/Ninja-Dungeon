@@ -5,12 +5,10 @@ using Panda;
 using UnityEngine;
 
 /// <summary>
-/// Отвечает за базовые навыки(Таски) енеми, определение врага и ближайшей цели
+/// Отвечает за определение ближайшего противника (Ally либо Player) и передачу его.
 /// </summary>
-public class EnemyAI : MonoBehaviour, ITargetProvider
+public class EnemyTargetProvider : MonoBehaviour, ITargetProvider
 {
-    public GameObject Target => _target;
-        
     private readonly List<GameObject> _targets = new List<GameObject>();
     private GameObject _target;
     
@@ -19,6 +17,11 @@ public class EnemyAI : MonoBehaviour, ITargetProvider
         MainManager.EnemiesManager.Enemies.Add(GetComponent<Enemy>());
     }
 
+    public GameObject ProvideTarget()
+    {
+        return _target;
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(GlobalConstants.PLAYER_TAG) ||
@@ -64,5 +67,11 @@ public class EnemyAI : MonoBehaviour, ITargetProvider
         }
         
         return false;
+    }
+    
+    [Task]
+    private bool IsTargetKilled()
+    {
+        return _target == null;
     }
 }

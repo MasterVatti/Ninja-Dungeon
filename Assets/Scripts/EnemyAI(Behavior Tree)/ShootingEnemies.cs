@@ -4,6 +4,7 @@ using Panda;
 using ProjectileLauncher;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// Отвечает за дальние атаки врагов
@@ -17,14 +18,14 @@ public class ShootingEnemies : MonoBehaviour
     [SerializeField]
     private NavMeshAgent _agent;
     [SerializeField]
-    private EnemyAI _enemyAI;
+    private Unit _unit;
     
     private float _nextShotTime;
     private int _damage;
 
     private void Awake()
     {
-        _damage = gameObject.GetComponent<PersonCharacteristics>().AttackDamage;
+        _damage = _unit.Characteristics.AttackDamage;
     }
 
     private void Shot()
@@ -33,7 +34,8 @@ public class ShootingEnemies : MonoBehaviour
         if (Time.time > _nextShotTime)
         {
             _nextShotTime = Time.time + _shotCooldownTime;
-            gameObject.transform.LookAt(_enemyAI.Target.transform.position);
+            gameObject.transform.LookAt(_unit.TargetProvider.ProvideTarget()
+                .transform.position);
 
 
             CreateBullet();
@@ -46,7 +48,8 @@ public class ShootingEnemies : MonoBehaviour
     {
         var newBullet = Instantiate(_bulletPrefab, transform.position,
             transform.rotation);
-        var nearestTargetDirection = (_enemyAI.Target.transform.position- transform.position).normalized;
+        var nearestTargetDirection = (_unit.TargetProvider.ProvideTarget()
+            .transform.position- transform.position).normalized;
        
         newBullet.Initialize(nearestTargetDirection, _damage);
     }
@@ -55,7 +58,8 @@ public class ShootingEnemies : MonoBehaviour
     [Task]
     private void Shooting()
     {
-        var directionToTarget = _enemyAI.Target.transform.position - transform.position;
+        var directionToTarget = _unit.TargetProvider.ProvideTarget()
+            .transform.position - transform.position;
 
         if (Physics.Raycast(transform.position, directionToTarget.normalized, out var hit))
         {

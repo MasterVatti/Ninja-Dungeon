@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using JetBrains.Annotations;
-using ResourceSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +9,7 @@ namespace Barracks_and_allied_behavior
 {
     /// <summary>
     /// Отвечает за поле и настройку конкретного поля союзника,
-    /// покупку(проверку наличия ресурсов) оплату и инстанциацию префаба.
+    /// покупку(проверку наличия ресурсов) оплату.
     /// </summary>
     public class AllyItemView : MonoBehaviour
     {
@@ -30,7 +29,7 @@ namespace Barracks_and_allied_behavior
         {
             _barrack = barrack;
             _ally = ally;
-            Initialize();
+            InitializeFields();
         }
 
         [UsedImplicitly]
@@ -45,7 +44,7 @@ namespace Barracks_and_allied_behavior
             }
         }
 
-        private void Initialize()
+        private void InitializeFields()
         {
             _allyIcon.sprite = _ally.AllyIcon;
             _descriptionField.text = _ally.Description;

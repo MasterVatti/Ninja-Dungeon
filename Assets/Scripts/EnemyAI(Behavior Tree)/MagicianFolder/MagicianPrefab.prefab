@@ -14,15 +14,16 @@ GameObject:
   - component: {fileID: 3344586694461362824}
   - component: {fileID: 3344586694461362827}
   - component: {fileID: 3344586694461362831}
+  - component: {fileID: 8642794081240862332}
+  - component: {fileID: 3946989225980792668}
   - component: {fileID: 839100401563898178}
   - component: {fileID: 5247192937791318919}
   - component: {fileID: 4460929393999622058}
-  - component: {fileID: 3946989225980792668}
-  - component: {fileID: 8401475512963324837}
   - component: {fileID: 6347868306591521622}
   - component: {fileID: 3586072214158325891}
   - component: {fileID: 417170660410821016}
   - component: {fileID: 3734217257487702833}
+  - component: {fileID: 6679208512381025490}
   m_Layer: 0
   m_Name: MagicianPrefab
   m_TagString: Enemy
@@ -140,9 +141,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ece3497b0dce848bcf23723c55aa05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _movement: {fileID: 8642794081240862332}
+  _characteristics: {fileID: 6679208512381025490}
+--- !u!114 &8642794081240862332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3344586694461362826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0429689b06cf0a84792781bc99cd3cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit: {fileID: 3344586694461362831}
   _agent: {fileID: 839100401563898178}
-  _stopChaseDistance: 9
+  _stopChaseDistance: 13
   _pointDistanceError: 0.5
+--- !u!114 &3946989225980792668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3344586694461362826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 923ba0a87d664ae41baf70274d5c4e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _golemPrefab: {fileID: 940516286941385097, guid: 6d3b558d5923e244ea8e825658415066,
+    type: 3}
+  _unit: {fileID: 3344586694461362831}
+  _runBackDistance: 3
+  _lowHealthThreshold: 30
 --- !u!195 &839100401563898178
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -197,44 +230,7 @@ MonoBehaviour:
     type: 3}
   _shotCooldownTime: 0.5
   _agent: {fileID: 839100401563898178}
-  _enemyAI: {fileID: 3734217257487702833}
---- !u!114 &3946989225980792668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3344586694461362826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 923ba0a87d664ae41baf70274d5c4e03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _golemPrefab: {fileID: 940516286941385097, guid: 6d3b558d5923e244ea8e825658415066,
-    type: 3}
   _unit: {fileID: 3344586694461362831}
-  _runBackDistance: 3
-  _magician: {fileID: 8401475512963324837}
-  _lowHealthThreshold: 30
---- !u!114 &8401475512963324837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3344586694461362826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88c8766c47c6707468df024d9e4c5b51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentHP: 0
-  _maxHp: 100
-  _moveSpeed: 0
-  _attackDamage: 5
-  _attackRate: 0
-  _canMove: 0
-  _canAttack: 0
 --- !u!135 &6347868306591521622
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -272,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2136287655a0b7a4eb31474d15cce149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _personCharacteristics: {fileID: 8401475512963324837}
+  _personCharacteristics: {fileID: 6679208512381025490}
   _healthBehaviour: {fileID: 3586072214158325891}
   _rigidbody: {fileID: 5247192937791318919}
 --- !u!114 &3734217257487702833
@@ -287,3 +283,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecaccc676b5e10f4eaf93c5e5d80ecbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6679208512381025490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3344586694461362826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c752e006ecbf62f4980061719971fdf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHP: 100
+  _maxHp: 100
+  _moveSpeed: 0
+  _attackDamage: 15
+  _attackRate: 0
+  _canMove: 0
+  _canAttack: 0

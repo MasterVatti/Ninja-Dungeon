@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface ITargetProvider
 {
-    public GameObject Target { get; }
+    public GameObject ProvideTarget();
 }
