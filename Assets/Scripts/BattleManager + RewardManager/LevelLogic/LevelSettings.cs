@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Assets.Scripts.BattleManager
 {
     /// <summary>
-    /// Класс отвечает за настройки уровня (имя сцены, награда)
+    /// Класс отвечает за настройки уровня (имя сцены, награда, бонус)
     /// </summary>
     [Serializable]
     public class LevelSettings

@@ -19,6 +19,5 @@ namespace Assets.Scripts.BattleManager
                 MainManager.BattleManager.GoToNextLevel(_settings.RoomSettings, _settings.TeleportPosition);
             }
         }
-        
     }
 }

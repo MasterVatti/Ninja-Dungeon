@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: RoomSettings
   m_EditorClassIdentifier: 
   _levelSettingsList:
-  - _sceneIndex: 1
-    _sceneName: Level1
-    _rewards:
+  - _sceneName: Level1
+    _defaultReward:
     - _type: 0
       _amount: 1000
-  - _sceneIndex: 2
-    _sceneName: Level2
-    _rewards:
+    _bonusReward: []
+  - _sceneName: Level2
+    _defaultReward:
     - _type: 0
       _amount: 1200
-  - _sceneIndex: 3
-    _sceneName: Level3
-    _rewards:
+    _bonusReward: []
+  - _sceneName: Level3
+    _defaultReward:
     - _type: 0
       _amount: 1400
+    _bonusReward: []
