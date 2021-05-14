@@ -22,3 +22,5 @@ MonoBehaviour:
   _startBuildings: []
   _startPlaceHolders:
   - {fileID: 11400000, guid: cd1e6a9f37a024a46b8b7918b3a680f9, type: 2}
+  _defaultCharacteristics: {fileID: 11400000, guid: 69f0972efb94b0b4789a82c63c2ce3a5,
+    type: 2}

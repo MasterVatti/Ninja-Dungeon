@@ -24,8 +24,8 @@ namespace Buildings.PlayerCharacteristicsImprove
             var characteristic = playerCharacteristics.GetCharacteristic(_settings.CharacteristicType);
             _label.text = characteristic.StepValue.ToString();
             
-            _improvePurchaseViews[0].Initialize(_settings.CharacteristicType, _settings.Cost);
-            _improvePurchaseViews[1].Initialize(_settings.CharacteristicType, _settings.VariantCost);
+            _improvePurchaseViews[0].Initialize(_settings);
+            _improvePurchaseViews[1].Initialize(_settings, true);
         }
     }
 }

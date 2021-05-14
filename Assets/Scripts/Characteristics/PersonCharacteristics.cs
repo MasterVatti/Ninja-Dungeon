@@ -8,11 +8,22 @@ namespace Characteristics
     /// </summary>
     public abstract class PersonCharacteristics : MonoBehaviour
     {
-        public List<Characteristic> Characteristics { get; protected set; }
+        protected List<Characteristic> Characteristics { get; set; }
 
         public Characteristic GetCharacteristic(CharacteristicType type)
         {
             return Characteristics.Find(characteristic => characteristic.Type == type);
+        }
+
+        public int GetCharacteristicValue(CharacteristicType type)
+        {
+            return GetCharacteristic(type).CurrentValue;
+        }
+        
+        public void ImproveCharacteristic(CharacteristicType type, int value = 1)
+        {
+            var characteristic = GetCharacteristic(type);
+            characteristic.Level += value;
         }
     }
 }

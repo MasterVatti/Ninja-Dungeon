@@ -12,18 +12,21 @@ namespace Enemies
     {
         public event Action<Person> OnDead;
         
-        private Person _person;
+        public int CurrentHP { get; private set; }
         
+        private Person _person;
+
         private void Awake()
         {
             _person = GetComponent<Person>();
+            CurrentHP = _person.PersonCharacteristics.GetCharacteristicValue(CharacteristicType.MaxHP);
         }
 
         public void ApplyDamage(int damage)
         {
-            _person.PersonCharacteristics.CurrentHp -= damage;
+            CurrentHP -= damage;
             
-            if (_person.PersonCharacteristics.CurrentHp <= 0)
+            if (CurrentHP <= 0)
             {
                 Death();
             }

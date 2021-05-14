@@ -10,8 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23aed3d0e3ec4e328810014756ed5e2a, type: 3}
-  m_Name: Data
+  m_Name: AttackImproveSettings
   m_EditorClassIdentifier: 
-  _baseCost: []
-  _variantCost: []
+  _baseCost:
+  - _type: 0
+    _amount: 250
+  _variantCost:
+  - _type: 2
+    _amount: 100
   _characteristicType: 0

@@ -1,3 +1,4 @@
+using Enemies;
 using Panda;
 using UnityEngine;
 
@@ -20,7 +21,13 @@ namespace MagicianFolder
         private float _lowHealthThreshold;
     
         private bool _isGolemCreated;
-    
+        private HealthBehaviour _healthBehaviour;
+
+        private void Awake()
+        {
+            _healthBehaviour = _magician.GetComponent<HealthBehaviour>();
+        }
+
         [Task]
         private void GolemSpawn()
         {
@@ -44,7 +51,7 @@ namespace MagicianFolder
         [Task]
         private bool IsTimeToSpawnGolem()
         {
-            return _magician.CurrentHp <= _lowHealthThreshold;
+            return _healthBehaviour.CurrentHP <= _lowHealthThreshold;
         }
     } 
 }

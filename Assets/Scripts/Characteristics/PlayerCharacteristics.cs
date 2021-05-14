@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Characteristics
 {
     /// <summary>
@@ -10,12 +8,6 @@ namespace Characteristics
         private void Awake()
         {
             Characteristics = MainManager.UserData.GetCharacteristics();
-        }
-
-        public void ImproveCharacteristic(CharacteristicType type)
-        {
-            var characteristic = GetCharacteristic(type);
-            characteristic.Level += 1;
         }
     }
 }

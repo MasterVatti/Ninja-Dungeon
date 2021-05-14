@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Characteristics;
-using PlayerScripts;
 using ResourceSystem;
 using UnityEngine;
 
@@ -15,11 +14,14 @@ namespace Buildings.PlayerCharacteristicsImprove
             {
                 var playerCharacteristics = MainManager.Player.GetComponent<PlayerCharacteristics>();
                 var characteristicLevel = playerCharacteristics.GetCharacteristic(CharacteristicType).Level;
+
                 var newCost = new List<Resource>();
+                
                 foreach (var resource in _baseCost)
                 {
                     var res = resource;
-                    res.Amount *= Mathf.Pow(characteristicLevel == 0 ? 1 : characteristicLevel, 2);
+                    res.Amount = resource.Amount * characteristicLevel == 0
+                    ? Mathf.Ceil(resource.Amount / 2) : Mathf.Pow(characteristicLevel, 2);
                     newCost.Add(res);
                 }
 

@@ -29,12 +29,12 @@ namespace SaveSystem
                 var buildingController = placeHolder.GetComponent<BuildingController>();
                 var placeHolderData = new PlaceHolderData
                 {
-                RemainResources = buildingController.RequiredResource
+                    RemainResources = buildingController.RequiredResource
                 };
                 savedConstructions.Add(new BuildingData
                 {
-                SettingsID = buildingController.BuildingSettings.ID,
-                State = JsonConvert.SerializeObject(placeHolderData)
+                    SettingsID = buildingController.BuildingSettings.ID,
+                    State = JsonConvert.SerializeObject(placeHolderData)
                 });
             }
 

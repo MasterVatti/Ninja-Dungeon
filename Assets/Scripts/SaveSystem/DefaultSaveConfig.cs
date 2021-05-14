@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Buildings.PlayerCharacteristicsImprove;
 using BuildingSystem;
+using Characteristics;
 using Newtonsoft.Json;
 using ResourceSystem;
 using UnityEngine;
@@ -10,11 +12,9 @@ namespace SaveSystem
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/DefaultSave", order = 0)]
     public class DefaultSaveConfig : ScriptableObject
     {
-        public Save DefaultSave => new Save
-        {
-            Buildings = StartConstructions,
-            Resources = new List<Resource>(_startResources).ToArray()
-        };
+        public BuildingData[] Buildings => StartConstructions;
+        public List<Resource> Resources => _startResources;
+        public List<CharacteristicType> Characteristics => _defaultCharacteristics.Characteristics;
 
         private BuildingData[] StartConstructions
         {
@@ -44,5 +44,7 @@ namespace SaveSystem
         private BuildingSettings[] _startBuildings;
         [SerializeField]
         private BuildingSettings[] _startPlaceHolders;
+        [SerializeField]
+        private DefaultCharacteristics _defaultCharacteristics;
     }
 }

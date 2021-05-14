@@ -7,9 +7,5 @@ namespace MagicianFolder
     /// </summary>
     public class Magician : EnemyCharacteristics
     {
-        private void Start()
-        {
-            CurrentHp = MaxHp;
-        }
     }
 }

@@ -7,10 +7,6 @@ namespace MagicianFolder.GolemFolder
     /// </summary>
     public class Golem : EnemyCharacteristics
     {
-        void Start()
-        {
-            CurrentHp = MaxHp;
-        }
         
     }
 }
