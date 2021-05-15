@@ -37,8 +37,8 @@ public class JoystickController : MonoBehaviour, IPointerDownHandler, IPointerUp
     public void OnDrag (PointerEventData eventData)
     {
         var sizeDelta = _joystickBorder.rectTransform.rect.size;
-        float backgroundImageSizeX = sizeDelta.x;
-        float backgroundImageSizeY = sizeDelta.y;
+        var backgroundImageSizeX = sizeDelta.x;
+        var backgroundImageSizeY = sizeDelta.y;
 
         if(RectTransformUtility.ScreenPointToLocalPointInRectangle(_joystickBorder.rectTransform,
             eventData.position, eventData.pressEventCamera, out var position))
