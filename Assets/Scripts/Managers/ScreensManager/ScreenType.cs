@@ -12,6 +12,7 @@
         PortalScreen,
         LoadingScreen,
         DungeonDoorScreen,
+        DeathScreen,
         DoorScreen,
         ShopScreen,
         SawmillScreen,

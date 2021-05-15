@@ -17,12 +17,18 @@ MonoBehaviour:
     _defaultReward:
     - _type: 0
       _amount: 1000
-    _bonusReward: []
+    - _type: 0
+      _amount: 1000
+    _bonusReward:
+    - _type: 2
+      _amount: 20
   - _sceneName: Level2
     _defaultReward:
     - _type: 0
       _amount: 1200
-    _bonusReward: []
+    _bonusReward:
+    - _type: 1
+      _amount: 1500
   - _sceneName: Level3
     _defaultReward:
     - _type: 0

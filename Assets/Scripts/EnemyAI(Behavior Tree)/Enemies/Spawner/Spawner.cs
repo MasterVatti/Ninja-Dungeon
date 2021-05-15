@@ -49,7 +49,6 @@ namespace Enemies.Spawner
             }
             
             StartNextWave();
-            Debug.Log("Initialize");
 
         }
     }
