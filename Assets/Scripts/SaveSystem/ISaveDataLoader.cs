@@ -2,6 +2,6 @@
 {
     public interface ISaveDataLoader
     {
-        void Load(string loader);
+        void Load(string loader, DefaultSaveConfig saveConfig);
     }
 }

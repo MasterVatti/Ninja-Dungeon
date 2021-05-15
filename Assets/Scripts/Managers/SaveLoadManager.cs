@@ -28,13 +28,6 @@ namespace Managers
 
             SetLoaders();
             
-            if (json == "")
-            {
-                ((BuildingLoader)_loaders[BuildingLoader.KEY]).BuildingData = _saveConfig.Buildings;
-                ((ResourceLoader)_loaders[ResourceLoader.KEY]).Resources = _saveConfig.Resources;
-                ((CharacteristicsLoader)_loaders[CharacteristicsLoader.KEY]).Initialize(_saveConfig.Characteristics);
-            }
-            
             foreach (var loader in _loaders)
             {
                 var value = "";
@@ -43,7 +36,7 @@ namespace Managers
                     value = JsonConvert.SerializeObject(savedLoaders[loader.Key]);
                 }
                 
-                _loaders[loader.Key].Load(value);
+                _loaders[loader.Key].Load(value, _saveConfig);
             }
         }
 

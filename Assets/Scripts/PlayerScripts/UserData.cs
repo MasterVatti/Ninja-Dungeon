@@ -14,7 +14,7 @@ namespace PlayerScripts
             var resultList = new List<Characteristic>();
             foreach (var characteristicPair in Characteristics)
             {
-                var characteristic = GetCharacteristicFromAll(characteristicPair.Key);
+                var characteristic = MainManager.CharacteristicList.GetCharacteristic(characteristicPair.Key);
                 if (characteristic != null)
                 {
                     characteristic.Level = characteristicPair.Value;
@@ -22,12 +22,6 @@ namespace PlayerScripts
                 }
             }
             return resultList;
-        }
-
-        private static Characteristic GetCharacteristicFromAll(CharacteristicType type)
-        {
-            var allCharacteristics = MainManager.CharacteristicList.AllCharacteristics;
-            return allCharacteristics.Find(character => character.Type == type);
         }
     }
 }

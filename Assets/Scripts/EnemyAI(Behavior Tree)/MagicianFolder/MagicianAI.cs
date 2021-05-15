@@ -16,8 +16,6 @@ namespace MagicianFolder
         [SerializeField]
         private float _runBackDistance;
         [SerializeField]
-        private Magician _magician;
-        [SerializeField]
         private float _lowHealthThreshold;
     
         private bool _isGolemCreated;
@@ -25,7 +23,7 @@ namespace MagicianFolder
 
         private void Awake()
         {
-            _healthBehaviour = _magician.GetComponent<HealthBehaviour>();
+            _healthBehaviour = GetComponent<HealthBehaviour>();
         }
 
         [Task]
@@ -33,11 +31,11 @@ namespace MagicianFolder
         {
             if (!_isGolemCreated)
             {
-                var golem = Instantiate(_golemPrefab, gameObject.transform.position, Quaternion.identity);
-                 _isGolemCreated = true;
-                 Task.current.Succeed();
+                Instantiate(_golemPrefab, gameObject.transform.position, Quaternion.identity);
+                _isGolemCreated = true;
+                Task.current.Succeed();
             }
-            
+
             Task.current.Fail();
         }
     

@@ -7,18 +7,15 @@ namespace SaveSystem
     public class ResourceLoader : ISaveDataLoader
     {
         public const string KEY = "resources";
+        
+        [JsonProperty(KEY)]
         public List<Resource> Resources { get; set; }
 
-        public ResourceLoader()
-        {
-            Resources = MainManager.ResourceManager.GetResources();
-        }
-
-        public void Load(string loader)
+        public void Load(string loader, DefaultSaveConfig saveConfig)
         {
             var resourceLoader = JsonConvert.DeserializeObject<ResourceLoader>(loader);
             
-            Resources = resourceLoader is null? Resources : resourceLoader.Resources;
+            Resources = resourceLoader is null? saveConfig.Resources : resourceLoader.Resources;
             MainManager.ResourceManager.SetResources(Resources);
         }
     }

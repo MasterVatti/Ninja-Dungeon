@@ -1540,13 +1540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7390c15acb2a13f448b8ff327a7c5654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resources:
-  - _type: 0
-    _amount: 1000
-  - _type: 1
-    _amount: 1000
-  - _type: 2
-    _amount: 1000
+  _resources: []
 --- !u!4 &132117907
 Transform:
   m_ObjectHideFlags: 0
@@ -11649,7 +11643,7 @@ MonoBehaviour:
   _player: {fileID: 212603095}
   _iconsProvider: {fileID: 450222909}
   _userData: {fileID: 991906723}
-  _characteristicList: {fileID: 1963510847}
+  _characteristicList: {fileID: 0}
 --- !u!4 &1332029420
 Transform:
   m_ObjectHideFlags: 0
@@ -18236,8 +18230,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _allCharacteristics:
-  - _baseValue: 50
-    _stepValue: 5
+  - _baseValue: 100
+    _stepValue: 50
     _type: 0
 --- !u!4 &1963510848
 Transform:
