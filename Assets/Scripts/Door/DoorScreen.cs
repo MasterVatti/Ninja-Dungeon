@@ -27,8 +27,10 @@ namespace Door
             _teleportPosition = context.TeleportPosition;
         }
 
+        [UsedImplicitly]
         public void OnClick()
         {
+            Debug.Log("CLICK");
             MainManager.ScreenManager.CloseTopScreen();
             MainManager.BattleManager.StartBattle(_roomSettings, _teleportPosition);
         }
