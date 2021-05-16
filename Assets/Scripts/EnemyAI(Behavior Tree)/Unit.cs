@@ -11,14 +11,20 @@ using Enemies;
 [RequireComponent(typeof(Enemy))]
 public class Unit : MonoBehaviour
 {
+    public bool IsWalk
+    {
+        get => _isWalk;
+        set => _isWalk = value;
+    }
+    
     [SerializeField]
     private NavMeshAgent _agent;
     [SerializeField]
     private float _stopChaseDistance;
     [SerializeField]
     private float _pointDistanceError = 0.5f;
-    
 
+    private bool _isWalk;
     private GameObject _player;
     private Vector3 _movePoint;
 
@@ -35,6 +41,7 @@ public class Unit : MonoBehaviour
     [Task]
     private void MoveToDestination()
     {
+        _isWalk = true;
         MoveTo(_movePoint);
         WaitArrival();
     }
@@ -68,6 +75,8 @@ public class Unit : MonoBehaviour
     [Task]
     private void WaitArrival()
     {
+        _isWalk = false;
+        
         var currentTask = Task.current;
         var distance = _agent.remainingDistance;
         if (!currentTask.isStarting && _agent.remainingDistance <= _pointDistanceError)
@@ -88,6 +97,8 @@ public class Unit : MonoBehaviour
 
         if (distance >= _stopChaseDistance)
         {
+            _isWalk = true;
+            
             _agent.isStopped = false;
             _agent.SetDestination(_player.transform.position);
         }

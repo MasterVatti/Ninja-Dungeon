@@ -3,19 +3,19 @@ using UnityEngine;
 public class EnemyAnimationController : MonoBehaviour
 {
     private Animator _animator;
-    private EnemiesTestPatrol _enemiesTestPatrol;
+    private Unit _unit;
     
     private static readonly int StayOnPlace = Animator.StringToHash("StayOnPlace");
 
     private void Start()
     {
-        _enemiesTestPatrol = GetComponent<EnemiesTestPatrol>();
+        _unit = GetComponent<Unit>();
         _animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if (_enemiesTestPatrol.IsOnPoint == true)
+        if (!_unit.IsWalk)
         {
             _animator.SetBool(StayOnPlace, true);
         }

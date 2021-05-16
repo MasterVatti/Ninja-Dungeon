@@ -29,3 +29,24 @@ MonoBehaviour:
     _bonusReward:
     - _type: 1
       _amount: 1500
+  - _sceneName: Level_3Light
+    _defaultReward:
+    - _type: 0
+      _amount: 1400
+    _bonusReward:
+    - _type: 1
+      _amount: 1500
+  - _sceneName: Level_4Light
+    _defaultReward:
+    - _type: 0
+      _amount: 1600
+    _bonusReward:
+    - _type: 1
+      _amount: 1500
+  - _sceneName: Level_5Light
+    _defaultReward:
+    - _type: 0
+      _amount: 1800
+    _bonusReward:
+    - _type: 1
+      _amount: 1500
