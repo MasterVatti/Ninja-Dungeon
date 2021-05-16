@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts;
 using Characteristics;
 using Newtonsoft.Json;
 
@@ -7,7 +8,7 @@ namespace SaveSystem
 {
     public class CharacteristicsLoader : ISaveDataLoader
     {
-        public const string KEY = "characteristics";
+        public const string KEY = GlobalConstants.CHARACTERISTICS_KEY;
 
         [JsonProperty(KEY)]
         public Dictionary<CharacteristicType, int> Characteristics { get; private set; }

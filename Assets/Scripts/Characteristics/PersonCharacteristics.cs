@@ -15,6 +15,11 @@ namespace Characteristics
             return Characteristics.Find(characteristic => characteristic.Type == type);
         }
 
+        public List<Characteristic> GetCharacteristics()
+        {
+            return Characteristics;
+        }
+
         public int GetCharacteristicValue(CharacteristicType type)
         {
             return GetCharacteristic(type).CurrentValue;

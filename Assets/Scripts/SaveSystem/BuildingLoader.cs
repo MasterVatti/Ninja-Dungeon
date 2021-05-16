@@ -1,11 +1,13 @@
-﻿using BuildingSystem;
+﻿using System.Collections;
+using Assets.Scripts;
+using BuildingSystem;
 using Newtonsoft.Json;
 
 namespace SaveSystem
 {
     public class BuildingLoader : ISaveDataLoader
     {
-        public const string KEY = "buildings";
+        public const string KEY = GlobalConstants.BUILDING_KEY;
         
         [JsonProperty(KEY)]
         public BuildingData[] Buildings { get; set; }

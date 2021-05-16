@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BuildingSystem.BuildingUpgradeSystem;
-using Characteristics;
 using ObjectPools;
 using ResourceSystem;
 using UnityEngine;
@@ -10,6 +10,8 @@ namespace Buildings.PlayerCharacteristicsImprove
 {
     public class ImprovePurchaseView : MonoBehaviour
     {
+        public List<Resource> Resources { get; private set; }
+        
         private readonly List<ResourceView> _resourceViews = new List<ResourceView>();
         
         [SerializeField]
@@ -18,30 +20,23 @@ namespace Buildings.PlayerCharacteristicsImprove
         private ResourceView _resourceViewPrefab;
         
         private MonoBehaviourPool<ResourceView> _resourceViewPool;
-        private CharacteristicImproveSettings _settings;
-        private CharacteristicType _type;
-        private List<Resource> _resources;
-        private bool _useVariantCost;
 
         private void Awake()
         {
-            _resourceViewPool = new MonoBehaviourPool<ResourceView>(_resourceViewPrefab, gameObject.transform, 2);
+            _resourceViewPool = new MonoBehaviourPool<ResourceView>(_resourceViewPrefab, gameObject.transform, 1);
         }
 
         private void Update()
         {
-            _button.interactable = MainManager.ResourceManager.HasEnough(_resources);
+            _button.interactable = MainManager.ResourceManager.HasEnough(Resources);
         }
 
-        public void Initialize(CharacteristicImproveSettings settings, bool useVariantCost = false)
+        public void Initialize(List<Resource> resources)
         {
-            _settings = settings;
-            _useVariantCost = useVariantCost;
-            _type = _settings.CharacteristicType;
-            SetResources();
-
+            Resources = resources;
+            
             _resourceViewPool.ReleaseAll();
-            for(var i = 0; i < _resources.Count; i++)
+            for(var i = 0; i < Resources.Count; i++)
             {
                 _resourceViews.Add(_resourceViewPool.Take());
             }
@@ -49,27 +44,24 @@ namespace Buildings.PlayerCharacteristicsImprove
             UpdateView();
         }
         
-        private void SetResources()
+        public void SetButtonOnClick(Action action)
         {
-            _resources = _useVariantCost ? _settings.VariantCost : _settings.Cost;
+            _button.onClick.RemoveAllListeners();
+            _button.onClick.AddListener(action.Invoke);
         }
-
+        
+        public void SetResources(List<Resource> resources)
+        {
+            Resources = resources;
+            UpdateView();
+        }
+        
         private void UpdateView()
         {
-            for(var i = 0; i < _resources.Count; i++)
+            for(var i = 0; i < Resources.Count; i++)
             {
-                _resourceViews[i].Initialize(_resources[i].Type, _resources[i].Amount);
+                _resourceViews[i].Initialize(Resources[i].Type, Resources[i].Amount);
             }
-
-            var playerCharacteristics = MainManager.Player.GetComponent<PlayerCharacteristics>();
-            _button.onClick.RemoveAllListeners();
-            _button.onClick.AddListener(delegate
-            {
-                playerCharacteristics.ImproveCharacteristic(_type);
-                MainManager.ResourceManager.Pay(_resources);
-                SetResources();
-                UpdateView();
-            });
         }
     }
 }

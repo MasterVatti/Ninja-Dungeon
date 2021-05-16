@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts;
 using Newtonsoft.Json;
 using ResourceSystem;
 
@@ -6,7 +7,7 @@ namespace SaveSystem
 {
     public class ResourceLoader : ISaveDataLoader
     {
-        public const string KEY = "resources";
+        public const string KEY = GlobalConstants.RESOURCE_KEY;
         
         [JsonProperty(KEY)]
         public List<Resource> Resources { get; set; }

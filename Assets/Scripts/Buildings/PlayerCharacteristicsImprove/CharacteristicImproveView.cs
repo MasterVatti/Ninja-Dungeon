@@ -18,14 +18,28 @@ namespace Buildings.PlayerCharacteristicsImprove
 
         private void Awake()
         {
-            _icon.sprite = MainManager.IconsProvider.GetCharacteristicImage(_settings.CharacteristicType);
+            var characteristicType = _settings.CharacteristicType;
+            _icon.sprite = MainManager.IconsProvider.GetCharacteristicImage(characteristicType);
             
             var playerCharacteristics = MainManager.Player.GetComponent<PlayerCharacteristics>();
-            var characteristic = playerCharacteristics.GetCharacteristic(_settings.CharacteristicType);
+            var characteristic = playerCharacteristics.GetCharacteristic(characteristicType);
             _label.text = characteristic.StepValue.ToString();
+
+            _improvePurchaseViews[0].Initialize(_settings.Cost);
+            _improvePurchaseViews[1].Initialize(_settings.VariantCost);
             
-            _improvePurchaseViews[0].Initialize(_settings);
-            _improvePurchaseViews[1].Initialize(_settings, true);
+            foreach (var purchaseView in _improvePurchaseViews)
+            {
+                purchaseView.SetButtonOnClick(delegate { OnClick(purchaseView); });
+            }
+
+            void OnClick(ImprovePurchaseView purchaseView)
+            {
+                playerCharacteristics.ImproveCharacteristic(characteristicType);
+                MainManager.ResourceManager.Pay(purchaseView.Resources);
+                _improvePurchaseViews[0].SetResources(_settings.Cost);
+                _improvePurchaseViews[1].SetResources(_settings.VariantCost);
+            }
         }
     }
 }

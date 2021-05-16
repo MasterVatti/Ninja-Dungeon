@@ -11643,7 +11643,7 @@ MonoBehaviour:
   _player: {fileID: 212603095}
   _iconsProvider: {fileID: 450222909}
   _userData: {fileID: 991906723}
-  _characteristicList: {fileID: 0}
+  _characteristicList: {fileID: 1963510847}
 --- !u!4 &1332029420
 Transform:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using SaveSystem;
 using UnityEngine;
@@ -12,8 +13,9 @@ namespace Managers
     {
         [SerializeField]
         private DefaultSaveConfig _saveConfig;
-        
-        private Dictionary<string, ISaveDataLoader> _loaders = new Dictionary<string, ISaveDataLoader>();
+
+        private Dictionary<string, ISaveDataLoader> _loaders;
+        private Dictionary<string, IDataSaver<IEnumerable>> _savers;
         
         private void Awake()
         {
@@ -23,28 +25,34 @@ namespace Managers
         private void Load()
         {
             var json = PlayerPrefs.GetString("save");
-            var savedLoaders = JsonConvert.DeserializeObject<Dictionary<string, object>>(json) ?? 
+            var savers = JsonConvert.DeserializeObject<Dictionary<string, object>>(json) ?? 
                        new Dictionary<string, object>();
 
             SetLoaders();
-            
+
             foreach (var loader in _loaders)
             {
                 var value = "";
-                if (savedLoaders.ContainsKey(loader.Key))
+                if (savers.ContainsKey(loader.Key))
                 {
-                    value = JsonConvert.SerializeObject(savedLoaders[loader.Key]);
+                    value = JsonConvert.SerializeObject(savers[loader.Key]);
                 }
                 
-                _loaders[loader.Key].Load(value, _saveConfig);
+                loader.Value.Load(value, _saveConfig);
             }
         }
 
         private void Save()
         {
             SetLoaders();
-            
-            var json = JsonConvert.SerializeObject(_loaders, Formatting.Indented);
+            SetSavers();
+
+            foreach (var saver in _savers)
+            {
+                saver.Value.Save();
+            }
+
+            var json = JsonConvert.SerializeObject(_savers, Formatting.Indented);
             
             PlayerPrefs.SetString("save", json);
         }
@@ -56,6 +64,16 @@ namespace Managers
                 {BuildingLoader.KEY, new BuildingLoader()},
                 {ResourceLoader.KEY, new ResourceLoader()},
                 {CharacteristicsLoader.KEY, new CharacteristicsLoader()}
+            };
+        }
+
+        private void SetSavers()
+        {
+            _savers = new Dictionary<string, IDataSaver<IEnumerable>>
+            {
+                {ResourceDataSaver.KEY, new ResourceDataSaver()},
+                {CharacteristicsDataSaver.KEY, new CharacteristicsDataSaver()},
+                {BuildingDataSaver.KEY, new BuildingDataSaver()}
             };
         }
 

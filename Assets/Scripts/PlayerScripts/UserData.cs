@@ -6,8 +6,7 @@ namespace PlayerScripts
 {
     public class UserData : MonoBehaviour
     {
-        public Dictionary<CharacteristicType, int> Characteristics { get; set; } =
-            new Dictionary<CharacteristicType, int>();
+        public Dictionary<CharacteristicType, int> Characteristics { get; set; }
 
         public List<Characteristic> GetCharacteristics()
         {

@@ -12,5 +12,10 @@
         //OTHER TAGS:
         public const string WALL_TAG = "Wall";
         public const string PROJECTILE_TAG = "Projectile";
+        
+        //SAVE KEYS
+        public const string RESOURCE_KEY = "resources";
+        public const string BUILDING_KEY = "buildings";
+        public const string CHARACTERISTICS_KEY = "characteristics";
     }
 }

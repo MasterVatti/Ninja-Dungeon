@@ -16,12 +16,14 @@ namespace Buildings.PlayerCharacteristicsImprove
                 var characteristicLevel = playerCharacteristics.GetCharacteristic(CharacteristicType).Level;
 
                 var newCost = new List<Resource>();
-                
+
                 foreach (var resource in _baseCost)
                 {
                     var res = resource;
-                    res.Amount = resource.Amount * characteristicLevel == 0
-                    ? Mathf.Ceil(resource.Amount / 2) : Mathf.Pow(characteristicLevel, 2);
+                    var multiplier = characteristicLevel == 0 ? 0.5f : Mathf.Pow(characteristicLevel, 2); 
+                    
+                    res.Amount = resource.Amount * multiplier;
+                    
                     newCost.Add(res);
                 }
 
