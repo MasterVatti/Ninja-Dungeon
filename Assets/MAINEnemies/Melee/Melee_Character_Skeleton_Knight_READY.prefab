@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 3170371608700471132}
-  _stopChaseDistance: 2
+  _stopChaseDistance: 10
   _pointDistanceError: 0.5
 --- !u!114 &3170371608700471106
 MonoBehaviour:
@@ -325,8 +325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c752e006ecbf62f4980061719971fdf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHP: 100
-  _maxHp: 100
+  _currentHP: 200
+  _maxHp: 200
   _moveSpeed: 2
   _attackDamage: 25
   _attackRate: 0
@@ -379,8 +379,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c8766c47c6707468df024d9e4c5b51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHP: 0
-  _maxHp: 0
+  _currentHP: 200
+  _maxHp: 200
   _moveSpeed: 0
   _attackDamage: 0
   _attackRate: 0
@@ -401,7 +401,7 @@ MonoBehaviour:
   _golemPrefab: {fileID: 940516286941385097, guid: 6d3b558d5923e244ea8e825658415066,
     type: 3}
   _unit: {fileID: 3170371608700471109}
-  _runBackDistance: 2
+  _runBackDistance: 5
   _magician: {fileID: 3170371608700471135}
   _lowHealthThreshold: 0
 --- !u!114 &3170371608700471130
