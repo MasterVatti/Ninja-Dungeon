@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 namespace PlayerScripts.Movement
 {
     /// <summary>
@@ -9,15 +11,20 @@ namespace PlayerScripts.Movement
     /// </summary>
     public class JoystickController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
+        public event Action OnJoystickDown;
+
+        public Vector2 InputDirection { get; private set; }
+
         [SerializeField]
         private Image _joystickBorder;
+
         [SerializeField]
         private Image _joystickCircle;
+
         [SerializeField]
         private float _offset;
-    
+
         private Vector2 _startPosition;
-        public static Vector2 InputDirection { get; private set; }
 
         private void Start()
         {
@@ -26,24 +33,19 @@ namespace PlayerScripts.Movement
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            OnJoystickDown?.Invoke();
             MoveJoystickToTapPosition();
-        }
-    
-        private void MoveJoystickToTapPosition()
-        {
-            var position = Input.mousePosition;
-            _joystickBorder.transform.position = position;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(_joystickBorder.rectTransform,
                 eventData.position, eventData.pressEventCamera, out var position);
-        
+
             var size = _joystickBorder.rectTransform.rect.size;
             var backgroundImageSizeX = size.x;
             var backgroundImageSizeY = size.y;
-        
+
             position.x /= backgroundImageSizeX;
             position.y /= backgroundImageSizeY;
 
@@ -59,7 +61,13 @@ namespace PlayerScripts.Movement
             ReturnJoystickToStartPosition();
             InputDirection = Vector2.zero;
         }
-    
+        
+        private void MoveJoystickToTapPosition()
+        {
+            var position = Input.mousePosition;
+            _joystickBorder.transform.position = position;
+        }
+
         private void ReturnJoystickToStartPosition()
         {
             _joystickBorder.transform.position = _startPosition;
