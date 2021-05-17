@@ -94,10 +94,6 @@ MonoBehaviour:
   _resourceLabels:
   - _type: 0
     _label: {fileID: 872461510877309939}
-  - _type: 1
-    _label: {fileID: 0}
-  - _type: 2
-    _label: {fileID: 0}
 --- !u!1 &872461510450326177
 GameObject:
   m_ObjectHideFlags: 0
