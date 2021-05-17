@@ -15,7 +15,7 @@ namespace Settings
     
         private void OpenSettingsScreen()
         {
-            ScreenManager.Instance.OpenScreen(ScreenType.SettingsScreen);
+            MainManager.ScreenManager.OpenScreen(ScreenType.SettingsScreen);
             Time.timeScale = 0;
         }
     }

@@ -1,4 +1,3 @@
-using Assets.Scripts.Managers.ScreensManager;
 using UnityEngine;
 
 namespace Settings
@@ -15,7 +14,7 @@ namespace Settings
         
         private void CloseSettingsScreen()
         {
-            ScreenManager.Instance.CloseTopScreen();
+            MainManager.ScreenManager.CloseTopScreen();
             Time.timeScale = 1;
         }
     }

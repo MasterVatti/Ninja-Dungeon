@@ -10,7 +10,7 @@ namespace Settings
     {
         public void OnClick()
         {
-            ScreenManager.Instance.OpenScreen(ScreenType.AcceptScreen);
+            MainManager.ScreenManager.OpenScreen(ScreenType.AcceptScreen);
         }
     }
 }
