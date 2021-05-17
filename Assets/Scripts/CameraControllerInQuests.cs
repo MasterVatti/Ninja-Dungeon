@@ -13,7 +13,7 @@ public class CameraControllerInQuests : MonoBehaviour
     {
         if (_player != null)
         {
-            transform.position = _player.transform.position + _offset ;
+            transform.position = new Vector3(transform.position.x, transform.position.y, _player.transform.position.z + _offset.z);
         }
     }
 }
