@@ -228,7 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 8484312229174051074, guid: a0ea9b697dcc44c49b2a57d10ec9ef49,
     type: 3}
-  _shotCooldownTime: 0.5
+  _shotCooldownTime: 1
   _agent: {fileID: 839100401563898178}
   _unit: {fileID: 3344586694461362831}
 --- !u!135 &6347868306591521622

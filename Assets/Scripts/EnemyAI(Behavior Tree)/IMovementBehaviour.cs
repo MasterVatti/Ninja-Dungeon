@@ -1,3 +1,4 @@
+using System;
 using Panda;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,10 +16,16 @@ public class IMovementBehaviour : MonoBehaviour
     private float _stopChaseDistance;
     [SerializeField]
     private float _pointDistanceError = 0.5f;
-    
+
+    private NavMeshPath _navMeshPath;
     private Vector3 _movePoint;
     
     private GameObject _target;
+
+    private void Start()
+    {
+        _navMeshPath = new NavMeshPath();
+    }
 
     [Task]
     private void GetTarget()
@@ -29,7 +36,14 @@ public class IMovementBehaviour : MonoBehaviour
     
     public void ChangePointMovement(Vector3 movePoint)
     {
-        _movePoint = movePoint;
+        if (_agent.CalculatePath(movePoint, _navMeshPath))
+        {
+            _movePoint = movePoint;
+        }
+        else
+        {
+            _movePoint = _agent.transform.position;
+        }
     }
 
     [Task]

@@ -36,7 +36,7 @@ tree("Attack")
         sequence
             DetermineNearestTarget
             GetTarget
-            IsAtRequiredDistance(7.0)
+            IsAtRequiredDistance(12.0)
             tree("Shot")
             SetBackPoint
             MoveToDestination
