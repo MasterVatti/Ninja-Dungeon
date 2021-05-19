@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Characteristics
 {
+    /// <summary>
+    /// Тут хранятся характеристики всех персонажей
+    /// </summary>
     public class CharacteristicsManager : MonoBehaviour
     {
         public List<PersonCharacteristics> CharacteristicsAllUnits => _characteristicsAllUnits;
