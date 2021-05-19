@@ -8,14 +8,14 @@ namespace LoadingScene
     /// <summary>
     /// Класс отвечает за  загрузку сцены.
     /// </summary>
-    public class LoadingController : Singleton<LoadingController>
+    public class LoadingController : MonoBehaviour
     {
         public float LoadingProgress { get; private set; }
         
         public void StartLoad(string sceneName)
         {
             
-            ScreenManager.Instance.OpenScreen(ScreenType.LoadingScreen);
+            MainManager.ScreenManager.OpenScreen(ScreenType.LoadingScreen);
             
             StartCoroutine(LoadCoroutine(sceneName));
         }
@@ -29,7 +29,7 @@ namespace LoadingScene
                 yield return null;
             }
             
-            ScreenManager.Instance.CloseTopScreen();
+            MainManager.ScreenManager.CloseTopScreen();
         }
     }
 }

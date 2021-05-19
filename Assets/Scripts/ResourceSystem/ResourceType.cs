@@ -4,6 +4,6 @@
     {
         Gold = 0,
         Lumber = 1,
-        Ore = 2
+        Crystal = 2
     }
 }

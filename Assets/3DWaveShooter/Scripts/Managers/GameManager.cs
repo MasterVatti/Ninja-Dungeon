@@ -67,12 +67,12 @@ public class GameManager : MonoBehaviour
     {
         //If we refill health, do it.
         if (refillHealthOnNewWave)
-            Player.inst.curHp = Player.inst.maxHp;
+            Player3DWaveShooter.inst.curHp = Player3DWaveShooter.inst.maxHp;
 
         //Same with ammo for all weapons.
         if (refillAmmoOnNewWave)
-            foreach (Weapon weapon in Player.inst.weapons)
-                Player.inst.RefillAmmo(weapon.id);
+            foreach (Weapon weapon in Player3DWaveShooter.inst.weapons)
+                Player3DWaveShooter.inst.RefillAmmo(weapon.id);
 
         EnemySpawner.inst.SetNewWave();
     }

@@ -9,7 +9,7 @@ namespace ResourceSystem
     /// Класс для работы с ресурсами
     /// </summary>
     [Serializable]
-    public class Resource
+    public struct Resource
     {
         public ResourceType Type
         {
