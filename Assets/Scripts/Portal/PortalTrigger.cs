@@ -8,8 +8,6 @@ using UnityEngine;
 /// </summary>
 public class PortalTrigger : MonoBehaviour
 {
-    
-    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(GlobalConstants.PLAYER_TAG))

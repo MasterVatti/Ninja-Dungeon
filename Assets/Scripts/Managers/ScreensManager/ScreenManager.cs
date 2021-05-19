@@ -103,7 +103,7 @@ namespace Managers.ScreensManager
             {
                 throw new NotImplementedException($"You have not added {screenType} " +
                           "screen to screen list");
-            }*/
+            }
 
             screen.Initialize(screenType);
         }
