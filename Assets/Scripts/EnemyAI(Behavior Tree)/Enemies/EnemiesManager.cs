@@ -10,7 +10,6 @@ namespace Enemies
     /// </summary>
     public class EnemiesManager : MonoBehaviour
     {
-        public event Action OnDeadAllEnemy;
         public List<Enemy> Enemies => _enemies;
         
         [SerializeField] 

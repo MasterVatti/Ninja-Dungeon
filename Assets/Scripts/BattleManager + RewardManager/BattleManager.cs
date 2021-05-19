@@ -17,8 +17,8 @@ namespace Assets.Scripts.BattleManager
     public class BattleManager : MonoBehaviour, ISpawnHandler
     {
         public event Action IsLevelFinished;
-        public bool HasLevelPassed => _hasLevelPassed;
-        
+        public bool HasLevelPassed { get; private set; }
+
         [SerializeField]
         private RoomSettings _roomSettings;
 
@@ -27,13 +27,13 @@ namespace Assets.Scripts.BattleManager
         private HealthBehaviour _healthBehaviour;
         private Spawner _spawner;
 
-        private bool _hasLevelPassed;
         private int _lastLevelIndex;
         private int _currentLevelIndex;
 
         private void Awake()
         {
-            _lastLevelIndex = _roomSettings.LevelSettingsList.Count-1;
+            _lastLevelIndex = _roomSettings.LevelSettingsList.Count - 1;
+            
             _healthBehaviour = MainManager.Player.GetComponent<HealthBehaviour>();
             _healthBehaviour.OnDead += PlayerDeath;
             
@@ -44,8 +44,7 @@ namespace Assets.Scripts.BattleManager
         
         public void EndSpawn()
         {
-            Debug.Log("Конец спавна");
-            _hasLevelPassed = true;
+            HasLevelPassed = true;
             
             IsLevelFinished?.Invoke();
         }
@@ -53,36 +52,28 @@ namespace Assets.Scripts.BattleManager
         public void SetSpawner(Spawner spawner)
         {
             _spawner = spawner;
-            
             _spawner.Initialize();
             
-            _hasLevelPassed = false;
+            HasLevelPassed = false;
         }
 
         public void StartBattle(RoomSettings roomSettings, Vector3 teleportPosition)
         {
             _currentLevelIndex = 0;
+            
             var level = roomSettings.LevelSettingsList[_currentLevelIndex];
 
-            MainManager.LoadingController.StartLoad(level.SceneName);
-            MainManager.Player.transform.position = teleportPosition;
+            LoadLevel(level, teleportPosition);
         }
 
         public void GoToNextLevel(RoomSettings roomSettings, Vector3 teleportPosition)
         {
-            var nextLevel = roomSettings.LevelSettingsList;
+            LevelRewardAccrual(roomSettings);
             
-            var rewardList = nextLevel[_currentLevelIndex].DefaultReward;
-            GetLevelReward(roomSettings, _rewardDictionary, rewardList);
-            
-            rewardList = nextLevel[_currentLevelIndex].BonusReward;
-            GetLevelReward(roomSettings, _rewardDictionary, rewardList);
-
             _currentLevelIndex++;
+            
             var nextLevelIndex = roomSettings.LevelSettingsList[_currentLevelIndex];
-
-            MainManager.LoadingController.StartLoad(nextLevelIndex.SceneName);
-            MainManager.Player.transform.position = teleportPosition;
+            LoadLevel(nextLevelIndex, teleportPosition);
             
             if (IsLastLevelPassed())
             {
@@ -94,13 +85,46 @@ namespace Assets.Scripts.BattleManager
             }
         }
 
+        private void LoadLevel(LevelSettings levelSettings, Vector3 teleportPosition)
+        {
+            MainManager.LoadingController.StartLoad(levelSettings.SceneName);
+            MainManager.Player.transform.position = teleportPosition;
+        }
+        
         private bool IsLastLevelPassed()
         {
-            if (_currentLevelIndex == _lastLevelIndex && MainManager.EnemiesManager.Enemies.Count == 0)
+            return _currentLevelIndex == _lastLevelIndex && HasLevelPassed;
+        }
+        
+        private void LevelRewardAccrual(RoomSettings roomSettings)
+        {
+            var nextLevel = roomSettings.LevelSettingsList;
+            
+            var rewardList = nextLevel[_currentLevelIndex].DefaultReward;
+            GetLevelReward(_rewardDictionary, rewardList);
+            
+            rewardList = nextLevel[_currentLevelIndex].BonusReward;
+            GetLevelReward(_rewardDictionary, rewardList);
+        }
+        
+        private void GetLevelReward(Dictionary<ResourceType, List<int>> rewardDictionary, List<Resource> rewardList)
+        {
+            foreach (var reward in rewardList)
             {
-                return true;
+                if (rewardDictionary.TryGetValue(reward.Type, out var amountList))
+                {
+                    amountList.Add((int) reward.Amount);
+                }
+                else
+                {
+                    amountList = new List<int>
+                    {
+                        (int) reward.Amount
+                    };
+
+                    rewardDictionary.Add(reward.Type, amountList);
+                }
             }
-            return false;
         }
         
         private void GetFinalReward()
@@ -123,29 +147,10 @@ namespace Assets.Scripts.BattleManager
         {
             foreach (var reward in amount)
             {
-                Debug.Log(type + " " + reward);
                 MainManager.ResourceManager.AddResource(type, reward); //<-- Награда за все уровни
             }
         }
-
-        private void GetLevelReward(RoomSettings roomSettings, Dictionary<ResourceType, List<int>> rewardDictionary, List<Resource> rewardList)
-        {
-            foreach (var reward in rewardList)
-            {
-                if (rewardDictionary.TryGetValue(reward.Type, out var amountList))
-                {
-                    amountList.Add((int) reward.Amount);
-                }
-                else
-                {
-                    amountList = new List<int>();
-                    
-                    amountList.Add((int) reward.Amount);
-                    rewardDictionary.Add(reward.Type, amountList);
-                }
-            }
-        }
-
+        
         private void PlayerDeath(Person person)
         {
             MainManager.ScreenManager.OpenScreen(ScreenType.DeathScreen); //Окно смерти Игрока
