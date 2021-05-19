@@ -1,3 +1,4 @@
+using Characteristics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,41 +11,42 @@ namespace HealthBehaviors
     {
         [SerializeField] 
         private Vector3 _stabilizateToPosition;
-        [SerializeField]
-        private HealthBarsManager _healthBarsManager;
         [SerializeField] 
         private Slider _currentSlider;
         
-        private HealthBehavior _healthBehaviorToAttach;
+        private PersonCharacteristics _characteristicsToAttach;
+        private int _health;
         
         private void OnEnable()
         {
-            _healthBehaviorToAttach = _healthBarsManager.InitHealthBehaviorToAttach();
-            SetMaximalHealth(_healthBehaviorToAttach.Health);
+            _characteristicsToAttach = MainManager.HealthBarsManager.InitCharacteristicToAttach();
+            SetMaximalHealth();
         }
 
         private void Update()
         {
-            if (_healthBehaviorToAttach)
+            if (_characteristicsToAttach)
             {
-                StabilizatePosition(_healthBehaviorToAttach.transform.position);
-                SetHealthBarValue(_healthBehaviorToAttach.Health);
+                StabilizatePosition(_characteristicsToAttach.transform.position);
+                SetHealthBarValue();
             }
             else
             {
                 OnDestroy();
             }
         }
-
-        private void SetMaximalHealth(int health)
+        
+        private void SetMaximalHealth()
         {
-            _currentSlider.maxValue = health;
-            _currentSlider.value = health;
+            _health = _characteristicsToAttach.MaxHp;
+            _currentSlider.maxValue = _health;
+            _currentSlider.value = _health;
         }
 
-        private void SetHealthBarValue(int health)
+        private void SetHealthBarValue()
         {
-            _currentSlider.value = health;
+            _health = _characteristicsToAttach.CurrentHp;
+            _currentSlider.value = _health;
         }
 
         private void StabilizatePosition(Vector3 entityPositionToAttach)

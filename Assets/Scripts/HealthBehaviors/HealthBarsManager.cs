@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Characteristics;
+using Managers;
 using UnityEngine;
 
 namespace HealthBehaviors
@@ -8,28 +10,30 @@ namespace HealthBehaviors
     /// </summary>
     public class HealthBarsManager : MonoBehaviour
     {
+        public List<HealthBar> HealthBars => _healthBars;
+        
         [SerializeField]
         private HealthBar _healthBarPrefab;
         [SerializeField] 
         private Canvas _canvas;
         [SerializeField] 
-        private HealthBehaviorsManager _healthBehaviorsManager;
+        private CharacteristicsManager _characteristicsManager;
         
         private List<HealthBar> _healthBars = new List<HealthBar>();
-        private int _currentHealthBehaviorToAttach;
+        private int _currentHealthBehaviorToAttach = -1;
 
         private void Awake()
         {
-            for (int i = 0; i < _healthBehaviorsManager.HealthBehaviors.Count - 1; i++)
+            for (int i = 0; i < _characteristicsManager.CharacteristicsAllUnits.Count; i++)
             {
                 CreateHealthBar();
             }
         }
 
-        public HealthBehavior InitHealthBehaviorToAttach()
+        public PersonCharacteristics InitCharacteristicToAttach()
         {
-            _currentHealthBehaviorToAttach++;
-            return _healthBehaviorsManager.HealthBehaviors[_currentHealthBehaviorToAttach - 1];
+            ++_currentHealthBehaviorToAttach;
+            return _characteristicsManager.CharacteristicsAllUnits[_currentHealthBehaviorToAttach].GetComponent<PersonCharacteristics>();
         }
         
         private void CreateHealthBar()
@@ -37,7 +41,7 @@ namespace HealthBehaviors
             var healthBar = Instantiate(_healthBarPrefab, transform.position, transform.rotation,
                 _canvas.transform);
             
-            _healthBars.Add(healthBar);
+            MainManager.HealthBarsManager._healthBars.Add(healthBar);
         }
     }
 }

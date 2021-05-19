@@ -1,4 +1,5 @@
 using Enemies;
+using HealthBehaviors;
 using LoadingScene;
 using Managers;
 using Managers.ScreensManager;
@@ -18,6 +19,7 @@ public class MainManager : Singleton<MainManager>
     public static GameObject Player => Instance._player;
     public static IconsProvider IconsProvider => Instance._iconsProvider;
     public static JoystickController JoystickController => Instance._joystickController;
+    public static HealthBarsManager HealthBarsManager => Instance._healthBarsManager;
     
     [SerializeField]
     private JoystickController _joystickController;
@@ -41,5 +43,6 @@ public class MainManager : Singleton<MainManager>
     private GameObject _player; 
     [SerializeField]
     private IconsProvider _iconsProvider;
-
+    [SerializeField] 
+    private HealthBarsManager _healthBarsManager;
 }
