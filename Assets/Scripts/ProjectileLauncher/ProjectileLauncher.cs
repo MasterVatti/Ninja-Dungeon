@@ -8,40 +8,42 @@ namespace ProjectileLauncher
     /// </summary>
     public class ProjectileLauncher : MonoBehaviour
     {
-        
         [SerializeField] 
         private Projectile _projectilePrefab;
         [SerializeField] 
         private float _projectileSpawnCooldown;
         [SerializeField] 
         private NearestEnemyDetector _enemyDetector;
+        
         private float _currentTime;
         
         private void Update()
         {
+            var enemy = _enemyDetector.GetNearestEnemy();
             if (_currentTime < _projectileSpawnCooldown)
             {
                 _currentTime += Time.deltaTime;
             }
             else
             {
-                _currentTime = 0;
-                if (EnemiesManager.Instance.Enemies.Count > 0)
+                if (enemy != null)
                 {
-                    CreateProjectile();
+                    CreateProjectile(enemy.gameObject);
                 }
             }
         }
 
-        protected virtual void CreateProjectile()
+        private void CreateProjectile(GameObject enemy)
         {
-                var nearestEnemyPosition = _enemyDetector.GetNearestEnemy().transform.position;
-                var nearestEnemyDirection = (nearestEnemyPosition - transform.position).normalized;
-                var projectilePosition = transform.position;
-                var spawningBulletPoint = new Vector3(projectilePosition.x, projectilePosition.y, 
-                    projectilePosition.z);
-                var projectile = Instantiate(_projectilePrefab, spawningBulletPoint, transform.rotation);
-                projectile.Initialize(nearestEnemyDirection);
+            _currentTime = 0;
+            
+            var enemyPosition = enemy.transform.position;
+            var nearestEnemyDirection = (enemyPosition - transform.position).normalized;
+            var projectile = Instantiate(_projectilePrefab, transform.position, transform.rotation);
+            
+            transform.parent.LookAt(enemy.transform);
+            
+            projectile.Initialize(nearestEnemyDirection);
         }
     }
 }

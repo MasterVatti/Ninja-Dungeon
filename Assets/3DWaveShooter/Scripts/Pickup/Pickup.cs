@@ -51,27 +51,27 @@ public class Pickup : MonoBehaviour
         {
             if (type == PickupType.Health)
             {
-                Player.inst.AddHealth(healthToGive);
+                Player3DWaveShooter.inst.AddHealth(healthToGive);
                 Destroy(gameObject);
             }
             else if (type == PickupType.Weapon)
             {
-                Player.inst.GiveWeapon(weaponToGive);
+                Player3DWaveShooter.inst.GiveWeapon(weaponToGive);
                 Destroy(gameObject);
             }
             else if (type == PickupType.Ammo)
             {
                 if (spreadAmmoAcrossAllWeapons)
                 {
-                    for (int x = 0; x < Player.inst.weapons.Count; ++x)
+                    for (int x = 0; x < Player3DWaveShooter.inst.weapons.Count; ++x)
                     {
-                        Player.inst.GiveAmmo(Player.inst.weapons[x].id,
+                        Player3DWaveShooter.inst.GiveAmmo(Player3DWaveShooter.inst.weapons[x].id,
                             Mathf.FloorToInt((float) ammoToGive /
-                                             Player.inst.weapons.Count));
+                                             Player3DWaveShooter.inst.weapons.Count));
                     }
                 }
                 else
-                    Player.inst.GiveAmmo(Player.inst.curWeapon.id,
+                    Player3DWaveShooter.inst.GiveAmmo(Player3DWaveShooter.inst.curWeapon.id,
                         ammoToGive);
 
                 Destroy(gameObject);

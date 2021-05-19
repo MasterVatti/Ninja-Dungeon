@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using LoadingScene;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Door
 {
@@ -12,20 +13,15 @@ namespace Door
     public class DoorScreen : BaseScreenWithContext<PortalContext>
     {
         [SerializeField]
-        private TMP_Text _descriptionField;
+        private Text _descriptionField;
         [SerializeField]
-        private TMP_Text _difficultyLevelField;
-        [SerializeField] 
-        private EnergyManager _energyManager;
-
-        [SerializeField]
-        private int _energyDecreaseCount = 35;
+        private Text _difficultyLevelField;
         private string _sceneName;
 
         [UsedImplicitly]
         public void TurnOffPanel()
         {
-            ScreenManager.Instance.CloseTopScreen();
+            MainManager.ScreenManager.CloseTopScreen();
         }
 
         public override void ApplyContext(PortalContext context)
@@ -37,12 +33,8 @@ namespace Door
 
         public void OnClick()
         {
-            if (_energyManager.Energy > 0)
-            {
-                _energyManager.EnergyDecrease(_energyDecreaseCount);
-                ScreenManager.Instance.CloseTopScreen();
-                LoadingController.Instance.StartLoad(_sceneName);
-            }
+            MainManager.ScreenManager.CloseTopScreen();
+            MainManager.LoadingController.StartLoad(_sceneName);
         }
 
         public override void Initialize(ScreenType screenType)

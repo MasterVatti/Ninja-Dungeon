@@ -1,8 +1,7 @@
 using Assets.Scripts.Managers.ScreensManager;
 using JetBrains.Annotations;
-using LoadingScene;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Класс отвечает за окно портала(предложение спустится в инст и наоборот) и обработку кнопки Yes
@@ -10,31 +9,32 @@ using UnityEngine;
 public class PortalScreen : BaseScreenWithContext<PortalContext>
 {
     [SerializeField]
-    private TMP_Text _descriptionField;
-
-    
+    private Text _descriptionField;
     private string _sceneName;
+    private Vector3 _teleportPosition;
     
     [UsedImplicitly]
     public void TurnOffPanel()
     {
-        ScreenManager.Instance.CloseTopScreen();
+         MainManager.ScreenManager.CloseTopScreen();
     }
     
     public override void ApplyContext(PortalContext context)
     {
         _descriptionField.text = context.Description;
         _sceneName = context.SceneName;
+        _teleportPosition = context.TeleportPosition;
+    }
+    
+    public void OnClick()
+    {
+        MainManager.Player.transform.position = _teleportPosition;
+        MainManager.ScreenManager.CloseTopScreen();
+        MainManager.LoadingController.StartLoad(_sceneName);
     }
 
     public override void Initialize(ScreenType screenType)
     {
         ScreenType = screenType;
-    }
-    
-    private void OnClick()
-    {
-        ScreenManager.Instance.CloseTopScreen();
-        LoadingController.Instance.StartLoad(_sceneName);
     }
 }

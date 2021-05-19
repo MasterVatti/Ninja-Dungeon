@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 namespace PlayerScripts.Movement
 {
@@ -10,10 +11,49 @@ namespace PlayerScripts.Movement
         private float _speed = 1.0F;
         [SerializeField]
         private Rigidbody _player;
+        [SerializeField]
+        private float _rotationSpeed = 0.5f;
+        
+        [UsedImplicitly]
+        private Quaternion _playerStartRotation;
+        
+        private void Start()
+        {
+            DontDestroyOnLoad(gameObject);
+            MainManager.JoystickController.OnJoystickDown += JoystickDownHandler;
+        }
+
+        private void JoystickDownHandler()
+        {
+            _playerStartRotation = _player.transform.rotation;
+        }
+
+        private void OnDestroy()
+        {
+            if (MainManager.JoystickController)
+            {
+                MainManager.JoystickController.OnJoystickDown -= JoystickDownHandler;
+            }
+        }
 
         private void Update()
         {
-            _player.velocity = InputController.GetDirection() * _speed;
+            var inputDirection = InputController.GetDirection();
+
+            #if UNITY_EDITOR
+            transform.rotation = Quaternion.Euler(0, 
+                transform.rotation.eulerAngles.y + inputDirection.z * _rotationSpeed, 
+                0);
+            _player.velocity = transform.forward * _speed * inputDirection.x;
+            #else
+            _player.velocity = _playerStartRotation * inputDirection * _speed;
+
+            var direction = _player.velocity;
+            if (!direction.Equals(Vector3.zero))
+            {
+                transform.rotation = Quaternion.LookRotation(direction);
+            }
+            #endif
         }
     }
 }
