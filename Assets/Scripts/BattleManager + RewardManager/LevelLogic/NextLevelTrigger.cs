@@ -1,4 +1,5 @@
 ﻿using Door;
+using Enemies.Spawner;
 using UnityEngine;
 
 namespace Assets.Scripts.BattleManager
@@ -13,8 +14,9 @@ namespace Assets.Scripts.BattleManager
         
         private void OnTriggerEnter(Collider nextLevelCollider)
         {
-            if (MainManager.EnemiesManager.Enemies.Count == 0 
-                && nextLevelCollider.CompareTag(GlobalConstants.PLAYER_TAG))
+            var hasLevelPassed = MainManager.BattleManager.HasLevelPassed;
+            
+            if (hasLevelPassed && nextLevelCollider.CompareTag(GlobalConstants.PLAYER_TAG))
             {
                 MainManager.BattleManager.GoToNextLevel(_settings.RoomSettings, _settings.TeleportPosition);
             }

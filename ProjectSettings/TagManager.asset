@@ -14,9 +14,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
+  - Wall
   - Player
   - Item
   - PostProcessing
@@ -24,7 +25,6 @@ TagManager:
   - Environment
   - ScreenFade
   - Projectile
-  - 
   - 
   - 
   - 

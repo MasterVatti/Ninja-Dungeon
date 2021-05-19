@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Characteristics;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace Enemies
     /// </summary>
     public class EnemiesManager : MonoBehaviour
     {
+        public event Action OnDeadAllEnemy;
         public List<Enemy> Enemies => _enemies;
         
         [SerializeField] 
@@ -28,6 +30,7 @@ namespace Enemies
             _enemies.Remove(enemy);
             Destroy(enemy.gameObject);
         }
+        
         
         private void OnDestroy()
         {

@@ -1,5 +1,5 @@
 using System.Collections;
-using Assets.Scripts;
+using Assets.Scripts.BattleManager;
 using UnityEngine;
 
 namespace Loot
@@ -10,24 +10,37 @@ namespace Loot
     public class EquipmentItemLoot : MonoBehaviour
     {   
         [SerializeField]
-        private float _arrivalTime = 0.2f;
-        
-        private void OnTriggerEnter(Collider other)
+        private float _arrivalTime = 1f;
+
+        private BattleManager _battleManager;
+        private void Start()
         {
-            if (other.CompareTag(GlobalConstants.PLAYER_TAG))
+            _battleManager = MainManager.BattleManager;
+
+            if (_battleManager.HasLevelPassed)
             {
-                GetComponent<Collider>().enabled = false;
-                
-                StartCoroutine(MoveToPosition());
+                StartMoveToPosition();
+            }
+            else
+            {
+                _battleManager.IsLevelFinished += StartMoveToPosition;
             }
         }
-        
+
         protected virtual void OnItemPickup()
         {
         }
         
         public virtual void Initialize(ItemLoot itemLoot)
         {
+        }
+        
+
+        private void StartMoveToPosition()
+        {
+            GetComponent<Collider>().enabled = false;
+                
+            StartCoroutine(MoveToPosition());
         }
         
         private IEnumerator MoveToPosition()
@@ -46,6 +59,11 @@ namespace Loot
             
             OnItemPickup();
             Destroy(gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            _battleManager.IsLevelFinished -= StartMoveToPosition;
         }
     }
 }
