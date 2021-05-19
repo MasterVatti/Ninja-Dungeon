@@ -13,7 +13,7 @@ namespace Energy
 
         private void Awake()
         {
-            SetCurrentEnergyToMaximal();
+            _energyCount = Mathf.Clamp(_energyCount, 0, _maximalEnergy);
         }
 
         private void OnDestroy()
@@ -21,7 +21,7 @@ namespace Energy
             DontDestroyOnLoad(gameObject);
         }
     
-        public void EnergyDecrease(int decreaseNumber)
+        public void DecreaseEnergy(int decreaseNumber)
         {
             if (_energyCount >= decreaseNumber)
             {
@@ -33,18 +33,9 @@ namespace Energy
             }
         }
 
-        public void EnergyIncrease(int increaseNumber)
+        public void IncreaseEnergy(int increaseNumber)
         {
-            _energyCount += increaseNumber;
-            SetCurrentEnergyToMaximal();
-        }
-
-        private void SetCurrentEnergyToMaximal()
-        {
-            if (_energyCount > _maximalEnergy)
-            {
-                _energyCount = _maximalEnergy;
-            }
+            _energyCount = Mathf.Clamp(_energyCount += increaseNumber, 0, _maximalEnergy);
         }
     }
 }
