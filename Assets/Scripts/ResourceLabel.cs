@@ -44,10 +44,9 @@ public class ResourceLabel : MonoBehaviour
             _currentCoroutine = StartCoroutine(UpdateResource(_currentValue, newAmount, animationTime));
             
         }
-        
     }
     
-    private IEnumerator UpdateResource( float oldAmount , int newAmount, float animationTime)
+    private IEnumerator UpdateResource(float oldAmount , int newAmount, float animationTime)
     {
         while (_elapsedTime < animationTime)
         {
