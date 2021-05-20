@@ -32,7 +32,7 @@ namespace Managers
         {
             var index = GetResourceIndexByType(type);
             var resource = _resources[index];
-            resource.Amount = resource.Amount - value;
+            resource.Amount -= value;
             OnResourceAmountChanged?.Invoke(resource, resource.Amount);
             _resources[index] = resource;
         }
@@ -49,7 +49,7 @@ namespace Managers
         {
             var index = GetResourceIndexByType(type);
             var resource = _resources[index];
-            resource.Amount = resource.Amount + value;
+            resource.Amount += value;
             OnResourceAmountChanged?.Invoke(resource, resource.Amount);
             _resources[index] = resource;
         }

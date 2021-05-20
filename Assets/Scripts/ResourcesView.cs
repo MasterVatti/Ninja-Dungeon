@@ -17,7 +17,6 @@ public class ResourcesView : MonoBehaviour
     private List<Resource> _resources;
     [SerializeField]
     private float _animationTime;
-    private ResourceType _labelType;
 
 
     private void Start()
@@ -29,8 +28,7 @@ public class ResourcesView : MonoBehaviour
     
     private void OnResourceAmountChanged(Resource resource, int newAmount)
     {
-        var type = FindType(resource);
-        var index = _resourceLabels.IndexOf(type);
+        var index = _resourceLabels.FindIndex(resourceLabel => resourceLabel.Type == resource.Type);
         _resourceLabels[index].SetAmount(newAmount , _animationTime);
     }
     
@@ -38,21 +36,7 @@ public class ResourcesView : MonoBehaviour
     {
         MainManager.ResourceManager.OnResourceAmountChanged -= OnResourceAmountChanged;
     }
-    
-    private ResourceLabel FindType(Resource resource)
-    {
-        foreach (var resourceLabel in _resourceLabels)
-        {
-            if (resourceLabel.Type == resource.Type)
-            {
-                return resourceLabel;
-            }
-        }
 
-        throw new ArgumentNullException("Не могу найти текстовое поле " +
-                                        " для вывода ресурсов. Проверьте, добавили ли вы его");
-    }
-    
     private void UpdateResourcesAmount()
     {
         for (int i = 0; i < _resourceLabels.Count; i++)
