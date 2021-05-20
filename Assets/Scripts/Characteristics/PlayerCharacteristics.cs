@@ -31,6 +31,12 @@ namespace Characteristics
             set => _diagonalShells = value;
         }
 
+        public int PlayerExperience
+        {
+            get => _playerExperience;
+            set => _playerExperience = value;
+        }
+
         [Header("Weapon")]
         [SerializeField]
         private int _ricochetShells;
@@ -40,5 +46,7 @@ namespace Characteristics
         private int _frontalityShells;    
         [SerializeField]
         private bool _diagonalShells;
+
+        private int _playerExperience;
     }
 }
