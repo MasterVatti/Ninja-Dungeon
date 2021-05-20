@@ -14,7 +14,7 @@ namespace Barracks_and_allied_behavior
         [SerializeField]
         private NavMeshAgent _agent;
         [SerializeField]
-        private int _accelerateSpeed;
+        private int _accelerateSpeed = 3;
         
         [Task]
         private void SlowDown()
@@ -25,9 +25,9 @@ namespace Barracks_and_allied_behavior
         }
         
         [Task]
-        private void WillAccelerate()
+        private void IncreaseSpeed()
         {
-            _agent.speed = _accelerateSpeed;
+            _agent.speed = _accelerateSpeed + _unit.Characteristics.MoveSpeed;
             
             Task.current.Succeed();
         }

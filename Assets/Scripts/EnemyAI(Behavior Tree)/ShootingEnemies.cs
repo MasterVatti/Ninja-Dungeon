@@ -34,7 +34,7 @@ public class ShootingEnemies : MonoBehaviour
         if (Time.time > _nextShotTime)
         {
             _nextShotTime = Time.time + _shotCooldownTime;
-            gameObject.transform.LookAt(_unit.TargetProvider.ProvideTarget()
+            transform.LookAt(_unit.TargetProvider.ProvideTarget()
                 .transform.position);
 
 
@@ -58,8 +58,8 @@ public class ShootingEnemies : MonoBehaviour
     [Task]
     private void Shooting()
     {
-        var directionToTarget = _unit.TargetProvider.ProvideTarget()
-            .transform.position - transform.position;
+        var target = _unit.TargetProvider.ProvideTarget();
+        var directionToTarget = target.transform.position - transform.position;
 
         if (Physics.Raycast(transform.position, directionToTarget.normalized, out var hit))
         {

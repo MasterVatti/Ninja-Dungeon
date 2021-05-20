@@ -53,10 +53,8 @@ namespace Barracks_and_allied_behavior
                 _resourceImages[i].gameObject.SetActive(true);
                 _priceFields[i].gameObject.SetActive(true);
 
-                _resourceImages[i].sprite = MainManager.IconsProvider
-                    .GetResourceSprite(_ally.Price[i].Type);
-                _priceFields[i].text = _ally.Price[i].Amount
-                    .ToString(CultureInfo.InvariantCulture);
+                _resourceImages[i].sprite = MainManager.IconsProvider.GetResourceSprite(_ally.Price[i].Type);
+                _priceFields[i].text = _ally.Price[i].Amount.ToString(CultureInfo.InvariantCulture);
             }
         }
     }

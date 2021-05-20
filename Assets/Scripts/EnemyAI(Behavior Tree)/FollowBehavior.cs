@@ -5,7 +5,7 @@ using UnityEngine.AI;
 /// <summary>
 /// Отвечает за следованием за Игроком.
 /// </summary>
-public class IFollowBehavior : MonoBehaviour
+public class FollowBehavior : MonoBehaviour
 {
     [SerializeField]
     private float _stopFollowingDistance;

@@ -11,29 +11,10 @@ namespace Barracks_and_allied_behavior
     [Serializable]
     public class AlliesSetting
     {
-        public List<Resource> Price
-        {
-            get => _price;
-            set => _price = value;
-        }
-
-        public string Description
-        {
-            get => _description;
-            set => _description = value;
-        }
-
-        public GameObject AllyPrefab
-        {
-            get => _allyPrefab;
-            set => _allyPrefab = value;
-        }
-
-        public Sprite AllyIcon
-        {
-            get => _allyIcon;
-            set => _allyIcon = value;
-        }
+        public List<Resource> Price => _price;
+        public string Description => _description;
+        public GameObject AllyPrefab => _allyPrefab;
+        public Sprite AllyIcon => _allyIcon;
 
         [SerializeField]
         private List<Resource> _price;

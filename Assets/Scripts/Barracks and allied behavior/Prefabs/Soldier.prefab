@@ -215,7 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unit: {fileID: 5005554032435607307}
   _agent: {fileID: 666163551287211885}
-  _accelerateSpeed: 6
+  _accelerateSpeed: 4
 --- !u!114 &3825063092995507234
 MonoBehaviour:
   m_ObjectHideFlags: 0

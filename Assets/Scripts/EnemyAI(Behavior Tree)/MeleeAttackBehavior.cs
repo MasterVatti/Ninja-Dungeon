@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Отвечает за аттаки ближнего боя.
 /// </summary>
-public class IMeleeAttackBehavior : MonoBehaviour
+public class MeleeAttackBehavior : MonoBehaviour
 {
     [SerializeField]
     private Unit _unit;

@@ -4,7 +4,7 @@ tree("Attack")
         sequence
             IsEnemyInSight
             GetTarget
-            WillAccelerate
+            IncreaseSpeed
             tree("Chase")
             IsAtRequiredDistance(2.0)
             tree("ToDamage")

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 /// <summary>
 /// Отвечает за передвижение.
 /// </summary>
-public class IMovementBehaviour : MonoBehaviour
+public class MovementBehaviour : MonoBehaviour
 {
     [SerializeField]
     private Unit _unit;
