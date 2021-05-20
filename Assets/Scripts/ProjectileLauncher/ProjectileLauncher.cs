@@ -1,49 +1,81 @@
+using System;
+using Characteristics;
 using Enemies;
 using UnityEngine;
 
 namespace ProjectileLauncher
 {
     /// <summary>
-    /// Отвечает за создание пуль
+    /// Отвечает за поворот к цели, авто атаку и создание пуль.
     /// </summary>
     public class ProjectileLauncher : MonoBehaviour
     {
-        [SerializeField] 
+        public event Action IsShoot;
+
+        [SerializeField]
         private Projectile _projectilePrefab;
-        [SerializeField] 
+        [SerializeField]
         private float _projectileSpawnCooldown;
-        [SerializeField] 
+        [SerializeField]
         private NearestEnemyDetector _enemyDetector;
-        
+        [SerializeField]
+        private float _rotationSpeed = 2;
+
         private float _currentTime;
-        
+        private bool _isAutoFire;
+
+
         private void Update()
         {
             var enemy = _enemyDetector.GetNearestEnemy();
-            if (_currentTime < _projectileSpawnCooldown)
+            
+            if (_isAutoFire)
             {
-                _currentTime += Time.deltaTime;
-            }
-            else
-            {
-                if (enemy != null)
+                TurnToTarget(enemy);
+                
+                if (_currentTime < _projectileSpawnCooldown)
                 {
-                    CreateProjectile(enemy.gameObject);
+                    _currentTime += Time.deltaTime;
+                }
+                else
+                {
+                    if (enemy != null)
+                    {
+                        CreateProjectile(enemy.gameObject);
+                    }
                 }
             }
+        }
+
+        private void TurnToTarget(Person enemy)
+        {
+            var nearestEnemyDirection = enemy.transform.position - transform.position;
+            var rotation = Quaternion.LookRotation(nearestEnemyDirection);
+            transform.parent.rotation = Quaternion.Lerp(transform.rotation, rotation,
+                _rotationSpeed * Time.deltaTime);
         }
 
         private void CreateProjectile(GameObject enemy)
         {
             _currentTime = 0;
-            
+
             var enemyPosition = enemy.transform.position;
             var nearestEnemyDirection = (enemyPosition - transform.position).normalized;
             var projectile = Instantiate(_projectilePrefab, transform.position, transform.rotation);
-            
-            transform.parent.LookAt(enemy.transform);
-            
+
+            IsShoot?.Invoke();
+
             projectile.Initialize(nearestEnemyDirection);
+        }
+
+        public void StartAutoFire()
+        {
+            _isAutoFire = true;
+        }
+
+        public void StopAutoFire()
+        {
+            _isAutoFire = false;
         }
     }
 }

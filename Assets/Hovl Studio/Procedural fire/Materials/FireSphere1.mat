@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: FireSphere1
   m_Shader: {fileID: 4800000, guid: 1d4a9c916d62a324e90c32798caf3f13, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _USEBLACK_ON _USEDEPTH_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -36,15 +36,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amplitude: 1
-    - _Depthpower: 1
-    - _Emission: 2
-    - _Frequency: 10
+    - _Amplitude: 1.32
+    - _Depthpower: 2.84
+    - _Emission: 4.57
+    - _Frequency: 5.4
     - _Opacity: 1
-    - _StartFrequency: 2
-    - _Useblack: 0
-    - _Usedepth: 0
+    - _StartFrequency: 8.32
+    - _Useblack: 1
+    - _Usedepth: 1
     - __dirty: 1
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _Color: {r: 0, g: 0.85831976, b: 1, a: 1}
   m_BuildTextureStacks: []
