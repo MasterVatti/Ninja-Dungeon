@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Energy
 {
+    /// <summary>
+    /// отвечает за управление энергией
+    /// </summary>
     public class EnergyManager : MonoBehaviour
     {
         public int Energy => _energyCount;

@@ -1,8 +1,10 @@
-using System;
 using UnityEngine;
 
 namespace Energy
 {
+    /// <summary>
+    /// отвечает за восстановление энергии
+    /// </summary>
     public class EnergyRestore : MonoBehaviour
     {
         private const int SecondsInMinute = 60;
