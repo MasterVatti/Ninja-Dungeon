@@ -26,14 +26,7 @@ namespace Energy
     
         public void DecreaseEnergy(int decreaseNumber)
         {
-            if (_energyCount >= decreaseNumber)
-            {
-                _energyCount -= decreaseNumber;
-            }
-            if (_energyCount < 0)
-            {
-                _energyCount = 0;
-            }
+            _energyCount = Mathf.Clamp(_energyCount -= decreaseNumber, 0, _maximalEnergy);
         }
 
         public void IncreaseEnergy(int increaseNumber)
