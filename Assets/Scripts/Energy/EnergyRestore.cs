@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Energy
 {
     /// <summary>
-    /// отвечает за восстановление энергии
+    /// Отвечает за восстановление энергии
     /// </summary>
     public class EnergyRestore : MonoBehaviour
     {

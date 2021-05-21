@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Energy
 {
     /// <summary>
-    /// отвечает за управление энергией
+    /// Отвечает за управление энергией
     /// </summary>
     public class EnergyManager : MonoBehaviour
     {
