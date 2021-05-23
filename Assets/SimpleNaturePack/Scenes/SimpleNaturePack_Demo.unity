@@ -16110,6 +16110,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -233623980944576220, guid: 023c32ed79838cb40ab63e3542a568da,
+        type: 3}
+      propertyPath: _maxHp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -233623980944576220, guid: 023c32ed79838cb40ab63e3542a568da,
+        type: 3}
+      propertyPath: _currentHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -233623980944576220, guid: 023c32ed79838cb40ab63e3542a568da,
+        type: 3}
+      propertyPath: _moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -233623980944576220, guid: 023c32ed79838cb40ab63e3542a568da,
+        type: 3}
+      propertyPath: _attackRate
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -233623980944576220, guid: 023c32ed79838cb40ab63e3542a568da,
+        type: 3}
+      propertyPath: _attackDamage
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 729379172147054469, guid: 023c32ed79838cb40ab63e3542a568da,
         type: 3}
       propertyPath: _speed
