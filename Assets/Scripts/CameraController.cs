@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Класс отвечает за передвижение камеры в подземелье
+/// </summary>
 public class CameraController : MonoBehaviour
 {
-    // Класс отвечает за передвижение камеры в подземелье
-    
-    [SerializeField]
-    private GameObject _player;
     [SerializeField]
     private Vector3 _offset;
     
     void LateUpdate()
     {
-        if (_player != null)
+        var player =  MainManager.Player;
+        if (player != null)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, _player.transform.position.z + _offset.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y, player.transform.position.z + _offset.z);
         }
     }
 }
