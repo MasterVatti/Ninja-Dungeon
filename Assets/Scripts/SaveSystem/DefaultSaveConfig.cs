@@ -15,7 +15,6 @@ namespace SaveSystem
         {
             Buildings = StartConstructions,
             Resources = new List<Resource>(_startResources).ToArray(),
-            LastPlayTime = DateTime.Now
         };
 
         private BuildingData[] StartConstructions

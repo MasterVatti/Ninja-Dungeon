@@ -13,7 +13,5 @@ namespace SaveSystem
         public Resource[] Resources { get; set; }
         [JsonProperty("buildings")]
         public BuildingData[] Buildings { get; set; }
-        [JsonProperty("lastPlayTime")]
-        public DateTime LastPlayTime { get; set; }
     }
 }
