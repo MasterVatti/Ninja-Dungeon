@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[RequireComponent(typeof(Slider))]
 public class ExperienceView : MonoBehaviour
 {
     // Класс отвечает за UI уровня
@@ -25,37 +27,32 @@ public class ExperienceView : MonoBehaviour
         get => _experienceText;
         set => _experienceText = value;
     }
-    
     [SerializeField] 
     private TextMeshProUGUI _levelPlayer;
     [SerializeField] 
     private Slider _playerExperience;
     [SerializeField] 
     private TextMeshProUGUI _experienceText;
-
+    [SerializeField]
     private ExperienceController _experienceController;
-
     void Start()
     {
         ExperienceController.OnExperienceChanged += OnExperienceChanged;
-        _levelPlayer.text = "1";
+        _playerExperience.maxValue = 100;
     }
 
     void Update()
     {
-        if (Input.GetKeyUp("Space"))
+        if (Input.GetKeyUp("space"))
         {
-            _experienceController.AddExperience(100);
+            _experienceController.AddExperience(10);
         }
-        
     }
     
     private void OnExperienceChanged(int newExperience)
     {
         _experienceController.SetExperience(newExperience);
     }
-    
-    
     
     private void OnDestroy()
     {
