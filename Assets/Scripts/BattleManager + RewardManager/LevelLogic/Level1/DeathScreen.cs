@@ -18,7 +18,7 @@ namespace Assets.Scripts.BattleManager.Level1
 
         public void GoToUpperWorld()
         {
-            MainManager.LoadingController.StartLoad("SimpleNaturePack_Demo");
+            MainManager.LoadingController.StartLoad(GlobalConstants.MAIN_SCENE_TAG);
         }
     }
 }

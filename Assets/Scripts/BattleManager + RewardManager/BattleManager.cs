@@ -11,7 +11,7 @@ namespace Assets.Scripts.BattleManager
     /// <summary>
     /// Класс контролирует бой (организует)
     /// </summary>
-    public class BattleManager : Singleton<BattleManager>
+    public class BattleManager : MonoBehaviour
     {
         [SerializeField]
         private Spawner _enemiesSpawner;
@@ -59,10 +59,10 @@ namespace Assets.Scripts.BattleManager
             var nextLevel = roomSettings.LevelSettingsList;
             
             var rewardList = nextLevel[_currentLevelIndex].DefaultReward;
-            GetLevelReward(roomSettings, _rewardDictionary, rewardList);
+            GetLevelReward(_rewardDictionary, rewardList);
             
             rewardList = nextLevel[_currentLevelIndex].BonusReward;
-            GetLevelReward(roomSettings, _rewardDictionary, rewardList);
+            GetLevelReward(_rewardDictionary, rewardList);
 
             _currentLevelIndex++;
             var nextLevelIndex = roomSettings.LevelSettingsList[_currentLevelIndex];
@@ -78,7 +78,7 @@ namespace Assets.Scripts.BattleManager
 
                 //UI выигрыша Алексея
 
-                MainManager.LoadingController.StartLoad("SimpleNaturePack_Demo"); //<-- Или по кнопке Алексея
+                MainManager.LoadingController.StartLoad(GlobalConstants.MAIN_SCENE_TAG); //<-- Или по кнопке Алексея
             }
         }
 
@@ -107,7 +107,7 @@ namespace Assets.Scripts.BattleManager
             }
         }
 
-        private void GetLevelReward(RoomSettings roomSettings, Dictionary<ResourceType, List<int>> rewardDictionary, List<Resource> rewardList)
+        private void GetLevelReward(Dictionary<ResourceType, List<int>> rewardDictionary, List<Resource> rewardList)
         {
             foreach (var reward in rewardList)
             {

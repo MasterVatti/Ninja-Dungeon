@@ -10,15 +10,27 @@ namespace Assets.Scripts.BattleManager
     {
         public RoomSettings RoomSettings
         {
-            get { return _roomSettings; }
-            set { _roomSettings = value; }
+            get
+            {
+                return _roomSettings;
+            }
+            set
+            {
+                _roomSettings = value;
+            }
         }
         public Vector3 TeleportPosition
         {
-            get { return _teleportPosition; }
-            set { _teleportPosition = value; }
+            get
+            {
+                return _teleportPosition;
+            }
+            set
+            {
+                _teleportPosition = value;
+            }
         }
-
+        
         [SerializeField]
         private RoomSettings _roomSettings;
         [SerializeField]

@@ -6,8 +6,7 @@ using UnityEngine;
 /// <summary>
 /// Этот класс позволяет получить иконку для соответствуюшего ресурса
 /// </summary>
-public class 
-    IconsProvider : MonoBehaviour
+public class IconsProvider : MonoBehaviour
 {
     [SerializeField]
     private List<ResourceImage> _resourceImages = new List<ResourceImage>();

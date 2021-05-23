@@ -16,6 +16,6 @@
         DoorScreen,
         ShopScreen,
         SawmillScreen,
-        MineScreen,
+        MineScreen
     }
 }
