@@ -1,4 +1,5 @@
 using BuffSystem;
+using Characteristics;
 using Enemies;
 using Energy;
 using LoadingScene;
@@ -18,11 +19,10 @@ public class MainManager : Singleton<MainManager>
     public static BuildingManager BuildingManager => Instance._buildingManager;
     public static PlayerMovementController PlayerMovementController => Instance._playerMovementController;
     public static SaveLoadManager SaveLoadManager => Instance._saveLoadManager;
-    public static GameObject Player => Instance._player;
+    public static Player Player => Instance._player;
     public static IconsProvider IconsProvider => Instance._iconsProvider;
     public static JoystickController JoystickController => Instance._joystickController;
-    public static BuffManager BuffManager => Instance._buffManager;
-    
+
     [SerializeField]
     private JoystickController _joystickController;
     [SerializeField]
@@ -44,9 +44,7 @@ public class MainManager : Singleton<MainManager>
     [SerializeField]
     private SaveLoadManager _saveLoadManager;
     [SerializeField]
-    private GameObject _player; 
+    private Player _player; 
     [SerializeField]
     private IconsProvider _iconsProvider;
-    [SerializeField]
-    private BuffManager _buffManager;
 }
