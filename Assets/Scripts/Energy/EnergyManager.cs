@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Energy
@@ -7,31 +8,69 @@ namespace Energy
     /// </summary>
     public class EnergyManager : MonoBehaviour
     {
-        public int Energy => _energyCount;
-    
-        [SerializeField]
-        private int _energyCount = 100;
+        private const string LAST_PLAY_TIME_KEY = "LastPlayTime";
+        private const string ENERGY_COUNT_KEY = "EnergyCount";
+
+        public int CurrentEnergy { get; private set; } 
+
         [SerializeField]
         private int _maximalEnergy = 100;
+        [SerializeField]
+        private float _oneEnergyRestoreTimeSec = 5f;
+
+        private float _lastRestoreTime;
 
         private void Awake()
         {
-            _energyCount = Mathf.Clamp(_energyCount, 0, _maximalEnergy);
+            CurrentEnergy = PlayerPrefs.GetInt(ENERGY_COUNT_KEY, _maximalEnergy);
+            _lastRestoreTime = Time.realtimeSinceStartup;
+            RestoreEnergyForOfflineTime();
         }
 
+        private void RestoreEnergyForOfflineTime()
+        {
+            if (!DateTime.TryParse(PlayerPrefs.GetString(LAST_PLAY_TIME_KEY), out var lastPlayTime))
+            {
+                lastPlayTime = DateTime.UtcNow;
+            }
+
+            var offlineTime = DateTime.UtcNow - lastPlayTime;
+            var offlineTimeInSeconds = offlineTime.TotalSeconds;
+            var restoredEnergyAmount = offlineTimeInSeconds / _oneEnergyRestoreTimeSec;
+
+            CurrentEnergy = (int) Math.Min(CurrentEnergy + restoredEnergyAmount, _maximalEnergy);
+        }
+
+        private void Update()
+        {
+            if (_lastRestoreTime + _oneEnergyRestoreTimeSec < Time.realtimeSinceStartup &&
+                CurrentEnergy < _maximalEnergy)
+            {
+                _lastRestoreTime = Time.realtimeSinceStartup;
+                CurrentEnergy++;
+            }
+        }
+        
         private void OnDestroy()
         {
             DontDestroyOnLoad(gameObject);
+            PlayerPrefs.SetString(LAST_PLAY_TIME_KEY, DateTime.UtcNow.ToString());
+            PlayerPrefs.SetInt(ENERGY_COUNT_KEY, CurrentEnergy);
+        }
+
+        public bool HasEnoughEnergy(int amount)
+        {
+            return CurrentEnergy >= amount;
         }
     
         public void DecreaseEnergy(int decreaseNumber)
         {
-            _energyCount = Mathf.Clamp(_energyCount -= decreaseNumber, 0, _maximalEnergy);
+            CurrentEnergy = Mathf.Clamp(CurrentEnergy - decreaseNumber, 0, _maximalEnergy);
         }
 
         public void IncreaseEnergy(int increaseNumber)
         {
-            _energyCount = Mathf.Clamp(_energyCount += increaseNumber, 0, _maximalEnergy);
+            CurrentEnergy = Mathf.Clamp(CurrentEnergy + increaseNumber, 0, _maximalEnergy);
         }
     }
 }

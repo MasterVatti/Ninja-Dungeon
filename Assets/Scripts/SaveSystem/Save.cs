@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using ResourceSystem;
 
 namespace SaveSystem
@@ -12,5 +13,7 @@ namespace SaveSystem
         public Resource[] Resources { get; set; }
         [JsonProperty("buildings")]
         public BuildingData[] Buildings { get; set; }
+        [JsonProperty("lastPlayTime")]
+        public DateTime LastPlayTime { get; set; }
     }
 }

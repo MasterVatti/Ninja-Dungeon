@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44664782, g: 0.49649352, b: 0.57486135, a: 1}
+  m_IndirectSpecularColor: {r: 0.44664752, g: 0.4964931, b: 0.57486045, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7872,6 +7872,7 @@ MonoBehaviour:
   - {fileID: 6497616817769258762, guid: 4be64c8f9cf8e2a40a424ca2fc046fe9, type: 3}
   - {fileID: 1930917441066494165, guid: 32114c6b05a5e37449a7445a35c5e27e, type: 3}
   - {fileID: 2150105575320372067, guid: cd5cca3eaea55a14c83066a0c4bb0a7e, type: 3}
+  - {fileID: 1598474132641623115, guid: 7e8d756f5abc145078187b1320d35c0c, type: 3}
 --- !u!4 &846114136
 Transform:
   m_ObjectHideFlags: 0
@@ -11493,6 +11494,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1332029420}
   - component: {fileID: 1332029419}
+  - component: {fileID: 1332029421}
   m_Layer: 0
   m_Name: MainManager
   m_TagString: Untagged
@@ -11516,6 +11518,7 @@ MonoBehaviour:
   _loadingController: {fileID: 546436552}
   _resourceManager: {fileID: 132117906}
   _enemiesManager: {fileID: 900863143}
+  _energyManager: {fileID: 1332029421}
   _screenManager: {fileID: 846114135}
   _animationManager: {fileID: 1829479210}
   _buildingManager: {fileID: 1717845924}
@@ -11545,6 +11548,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1332029421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332029418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0851597b96b2b584ba6b06a0af0832f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maximalEnergy: 100
+  _oneEnergyRestoreTimeSec: 5
 --- !u!1001 &1340376595
 PrefabInstance:
   m_ObjectHideFlags: 0

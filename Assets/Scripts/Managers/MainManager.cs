@@ -1,4 +1,5 @@
 using Enemies;
+using Energy;
 using LoadingScene;
 using Managers;
 using Managers.ScreensManager;
@@ -10,6 +11,7 @@ public class MainManager : Singleton<MainManager>
     public static LoadingController LoadingController => Instance._loadingController;
     public static ResourceManager ResourceManager => Instance._resourceManager;
     public static EnemiesManager EnemiesManager => Instance._enemiesManager;
+    public static EnergyManager EnergyManager => Instance._energyManager;
     public static ScreenManager ScreenManager => Instance._screenManager;
     public static AnimationManager AnimationManager => Instance._animationManager;
     public static BuildingManager BuildingManager => Instance._buildingManager;
@@ -27,6 +29,8 @@ public class MainManager : Singleton<MainManager>
     private ResourceManager _resourceManager;
     [SerializeField]
     private EnemiesManager _enemiesManager;
+    [SerializeField]
+    private EnergyManager _energyManager;
     [SerializeField]
     private ScreenManager _screenManager;   
     [SerializeField]
