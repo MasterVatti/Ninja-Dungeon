@@ -41,7 +41,7 @@ namespace Shop
         {
             _sourceName.text = Enum.GetName(typeof(ResourceType), rate.SourceResource.Type);
             _sourceImage.sprite = rate.SourceResourceIcon;
-            var sourceResourceAmountValue = Math.Round(rate.SourceResource.Amount, 0);
+            var sourceResourceAmountValue = rate.SourceResource.Amount;
             _sourceAmount.text = sourceResourceAmountValue.ToString(CultureInfo.InvariantCulture);
 
             _resultName.text = Enum.GetName(typeof(ResourceType), rate.ResultResource.Type);
