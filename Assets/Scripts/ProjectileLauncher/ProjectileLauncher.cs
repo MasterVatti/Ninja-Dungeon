@@ -1,66 +1,39 @@
-using Characteristics;
-using Enemies;
 using UnityEngine;
 
 namespace ProjectileLauncher
 {
     /// <summary>
-    /// Отвечает за создание пуль, получение урона с PersonCharacteristics.
+    /// Находит ближайшего врага и атакует его
     /// </summary>
+    [RequireComponent(typeof(IEnemyDetector))]
+    [RequireComponent(typeof(IAttackMechanic))]
     public class ProjectileLauncher : MonoBehaviour
     {
-        [SerializeField]
-        private Projectile _projectilePrefab;
-        [SerializeField]
-        private float _projectileSpawnCooldown;
-        [SerializeField]
-        private NearestEnemyDetector _enemyDetector;
-        [SerializeField]
-        private float _attackDistance;
-        [SerializeField]
-        private GameObject _shooter;
+        private IAttackMechanic _attackMechanic;
+        private IEnemyDetector _enemyDetector;
 
-        private float _currentTime;
-        private int _damage;
-
-        private void Start()
+        private void Awake()
         {
-            _damage = _shooter.GetComponent<PersonCharacteristics>().AttackDamage;
+            _enemyDetector = GetComponent<IEnemyDetector>();
+            _attackMechanic = GetComponent<IAttackMechanic>();
         }
 
         private void Update()
         {
-            var enemy = _enemyDetector.GetNearestEnemy();
-            if (_currentTime < _projectileSpawnCooldown)
+            if (_attackMechanic.IsCooldown || !_attackMechanic.CanShoot)
             {
-                _currentTime += Time.deltaTime;
+                return;
             }
-            else
+            
+            var enemy = _enemyDetector.GetEnemy();
+            if (enemy != null)
             {
-                if (enemy != null && IsAtRequiredDistance(enemy))
-                {
-                    CreateProjectile(enemy.gameObject);
-                }
+                // TODO : should be fixed in Max's branch
+                //transform.parent.LookAt(enemy.transform);
+                
+                var enemyDirection = (enemy.transform.position - transform.position).normalized;
+                _attackMechanic.Shoot(enemyDirection);
             }
-        }
-
-        private void CreateProjectile(GameObject enemy)
-        {
-            _currentTime = 0;
-
-            var enemyPosition = enemy.transform.position;
-            var nearestEnemyDirection = (enemyPosition - transform.position).normalized;
-            var projectile = Instantiate(_projectilePrefab, transform.position, transform.rotation);
-
-            _shooter.transform.LookAt(enemy.transform);
-
-            projectile.Initialize(nearestEnemyDirection, _damage);
-        }
-
-        private bool IsAtRequiredDistance(Person enemy)
-        {
-            var targetDistance = Vector3.Distance(enemy.transform.position, transform.position);
-            return targetDistance <= _attackDistance;
         }
     }
 }

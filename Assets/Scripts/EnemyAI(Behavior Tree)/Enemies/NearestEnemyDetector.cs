@@ -1,4 +1,5 @@
 using Characteristics;
+using ProjectileLauncher;
 using UnityEngine;
 
 namespace Enemies
@@ -6,29 +7,29 @@ namespace Enemies
     /// <summary>
     /// Ищет ближайшего врага по отношению к игроку
     /// </summary>
-    public class NearestEnemyDetector : MonoBehaviour
+    public class NearestEnemyDetector : MonoBehaviour, IEnemyDetector
     {
-
-        public Person GetNearestEnemy()
+        public Person GetEnemy()
         {
+            var playerPosition = transform.position;
             var minDistance = float.MaxValue;
             var minIndex = 0;
             var currentIteration = 0;
 
             foreach (var enemy in MainManager.EnemiesManager.Enemies)
             {
-                if (enemy != null) // тут удаление не успевает происходить и вылетает NULL, хотя по коду все ок.
+                if (enemy != null)
                 {
                     var distanceToPlayer = Vector3.Distance(enemy.transform.position,
-                        gameObject.transform.position);
-                    
+                        playerPosition);
+
                     if (minDistance > distanceToPlayer)
                     {
                         minDistance = distanceToPlayer;
                         minIndex = currentIteration;
                     }
                 }
-                
+
                 currentIteration++;
             }
 

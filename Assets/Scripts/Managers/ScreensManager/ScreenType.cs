@@ -16,5 +16,7 @@
         SawmillScreen,
         MineScreen,
         BarrackScreen,
+        BuffScreen,
+        InsufficientResources
     }
 }
