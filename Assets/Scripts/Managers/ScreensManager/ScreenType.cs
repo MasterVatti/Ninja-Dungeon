@@ -14,6 +14,8 @@
         DoorScreen,
         ShopScreen,
         SawmillScreen,
-        MineScreen
+        MineScreen,
+        BuffScreen,
+        InsufficientResources
     }
 }
