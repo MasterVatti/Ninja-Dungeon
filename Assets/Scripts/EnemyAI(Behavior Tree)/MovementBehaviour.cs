@@ -1,4 +1,3 @@
-using System;
 using Panda;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,11 +8,7 @@ using UnityEngine.AI;
 public class MovementBehaviour : MonoBehaviour
 {
     [SerializeField]
-    private Unit _unit;
-    [SerializeField]
     private NavMeshAgent _agent;
-    [SerializeField]
-    private float _stopChaseDistance;
     [SerializeField]
     private float _pointDistanceError = 0.5f;
 
@@ -25,13 +20,6 @@ public class MovementBehaviour : MonoBehaviour
     private void Start()
     {
         _navMeshPath = new NavMeshPath();
-    }
-
-    [Task]
-    private void GetTarget()
-    {
-        _target = _unit.TargetProvider.ProvideTarget();
-        Task.current.Succeed();
     }
     
     public void ChangePointMovement(Vector3 movePoint)
@@ -94,34 +82,12 @@ public class MovementBehaviour : MonoBehaviour
             currentTask.debugInfo = string.Format("distance-{0:0.00}", distance);
         }
     }
-
-    [Task]
-    private void Chase()
-    {
-        var distance = Vector3.Distance(_target.transform.position, _agent.transform.position);
-
-        if (distance >= _stopChaseDistance)
-        {
-            _agent.isStopped = false;
-            _agent.SetDestination(_target.transform.position);
-        }
-        else
-        {
-            Task.current.Succeed();
-        }
-    }
-
+    
     [Task]
     private void SetTargetPosition()
     {
         _movePoint = _target.transform.position;
         Task.current.Succeed();
     }
-
-    [Task]
-    private bool IsAtRequiredDistance(float distance)
-    {
-        var targetDistance = Vector3.Distance(_target.transform.position, _agent.transform.position);
-        return targetDistance <= distance;
-    }
+    
 }

@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 8708325738461760921}
   - component: {fileID: 895330350875414952}
   - component: {fileID: 5259289154252573925}
+  - component: {fileID: 3822597225674598366}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Ally
@@ -274,9 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0429689b06cf0a84792781bc99cd3cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unit: {fileID: 5376457146948466840}
   _agent: {fileID: 179097156764800952}
-  _stopChaseDistance: 1
   _pointDistanceError: 0.5
 --- !u!114 &895330350875414952
 MonoBehaviour:
@@ -305,4 +304,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stopFollowingDistance: 5
   _guardsDistance: 3
+  _agent: {fileID: 179097156764800952}
+--- !u!114 &3822597225674598366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672505441962123926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa55d590a9b6b64c93c385bf3acf6e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit: {fileID: 5376457146948466840}
+  _stopChaseDistance: 1
   _agent: {fileID: 179097156764800952}

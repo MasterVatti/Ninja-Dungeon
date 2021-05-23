@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 9065075714013820798}
   - component: {fileID: 1963808504090235557}
   - component: {fileID: 1485795765110793482}
+  - component: {fileID: 2819743483183285248}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Ally
@@ -335,7 +336,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0429689b06cf0a84792781bc99cd3cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unit: {fileID: 3867819842158158202}
   _agent: {fileID: -7116445777260105468}
-  _stopChaseDistance: 13
   _pointDistanceError: 0.5
+--- !u!114 &2819743483183285248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394056606855407061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa55d590a9b6b64c93c385bf3acf6e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit: {fileID: 3867819842158158202}
+  _stopChaseDistance: 13
+  _agent: {fileID: -7116445777260105468}

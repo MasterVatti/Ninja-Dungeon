@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 417170660410821016}
   - component: {fileID: 3734217257487702833}
   - component: {fileID: 6679208512381025490}
+  - component: {fileID: 6502043909504820618}
   m_Layer: 0
   m_Name: MagicianPrefab
   m_TagString: Enemy
@@ -155,9 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0429689b06cf0a84792781bc99cd3cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unit: {fileID: 3344586694461362831}
   _agent: {fileID: 839100401563898178}
-  _stopChaseDistance: 13
   _pointDistanceError: 0.5
 --- !u!114 &3946989225980792668
 MonoBehaviour:
@@ -302,3 +301,18 @@ MonoBehaviour:
   _attackRate: 0
   _canMove: 0
   _canAttack: 0
+--- !u!114 &6502043909504820618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3344586694461362826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa55d590a9b6b64c93c385bf3acf6e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit: {fileID: 3344586694461362831}
+  _stopChaseDistance: 13
+  _agent: {fileID: 839100401563898178}
