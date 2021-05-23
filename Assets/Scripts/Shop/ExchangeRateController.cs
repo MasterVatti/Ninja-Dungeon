@@ -13,14 +13,25 @@ namespace Shop
     /// </summary>
     public class ExchangeRateController : MonoBehaviour
     {
+        public event Action OnPlayerHasInsufficientFunds;
+
         [SerializeField]
         private Button _exchangeButton;
         [SerializeField]
         private TMP_InputField _sourceAmountInput;
+        [SerializeField]
+        private TMP_InputField _finalAmountInput;
 
         private ExchangeRate _rate;
         private float _rateCoefficient;
         private float _playerCoefficient;
+
+        public void SetInteractable(bool state)
+        {
+            _exchangeButton.interactable = state;
+            _sourceAmountInput.interactable = state;
+            _finalAmountInput.interactable = state;
+        }
 
         public void Initialize(ExchangeRate rate, float coefficient)
         {
@@ -44,17 +55,37 @@ namespace Shop
             var resultResourceAmountValue =
                 Convert.ToInt32(Math.Round(sourceResourceAmount * _playerCoefficient * _rateCoefficient, 0));
 
-            MainManager.ResourceManager.Pay(resourceToPay, sourceResourceAmountValue);
-            MainManager.ResourceManager.AddResource(resourceToGet, resultResourceAmountValue);
+            if (MainManager.ResourceManager.HasEnough(resourceToPay, sourceResourceAmountValue))
+            {
+                MainManager.ResourceManager.Pay(resourceToPay, sourceResourceAmountValue);
+                MainManager.ResourceManager.AddResource(resourceToGet, resultResourceAmountValue);
+            }
+            else
+            {
+                OnPlayerHasInsufficientFunds?.Invoke();
+            }
         }
 
         private void UpdateResultAmount(string newValue)
         {
-            var resultAmount =
-                Convert.ToInt32(Math.Round(float.Parse(newValue) * _playerCoefficient * _rateCoefficient, 0));
+            try
+            {
+                var resultValue = float.Parse(newValue);
+                var resultAmount =
+                    Convert.ToInt32(Math.Round(resultValue * _playerCoefficient * _rateCoefficient, 0));
+                var resultAmountInputField = GetComponent<ExchangeRateView>().ResultAmount;
+                resultAmountInputField.text = resultAmount.ToString(CultureInfo.InvariantCulture);
+            }
+            catch (OverflowException)
+            {
+                SetInputToEmptyString();
+            }
+        }
 
-            var resultAmountInputField = GetComponent<ExchangeRateView>().ResultAmount;
-            resultAmountInputField.text = resultAmount.ToString(CultureInfo.InvariantCulture);
+        private void SetInputToEmptyString()
+        {
+            _sourceAmountInput.text = "";
+            _finalAmountInput.text = "";
         }
     }
 }
