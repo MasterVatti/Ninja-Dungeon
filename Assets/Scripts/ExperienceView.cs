@@ -38,7 +38,6 @@ public class ExperienceView : MonoBehaviour
     void Start()
     {
         ExperienceController.OnExperienceChanged += OnExperienceChanged;
-        _playerExperience.maxValue = 100;
     }
 
     void Update()

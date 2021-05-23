@@ -2011,6 +2011,7 @@ MonoBehaviour:
   _animationTime: 0.3
   _playerExperience: {fileID: 1645122649}
   _experienceView: {fileID: 529197742}
+  _saveTime: 0
 --- !u!114 &212603097 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 729379172147054469, guid: 023c32ed79838cb40ab63e3542a568da,
@@ -18766,7 +18767,12 @@ PrefabInstance:
     - target: {fileID: 5381420381666731750, guid: 5f06d9bd92633a14e8e2aede92502a76,
         type: 3}
       propertyPath: m_text
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381420381666731750, guid: 5f06d9bd92633a14e8e2aede92502a76,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 34.2
       objectReference: {fileID: 0}
     - target: {fileID: 5381420381858226770, guid: 5f06d9bd92633a14e8e2aede92502a76,
         type: 3}

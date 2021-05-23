@@ -14,29 +14,39 @@ public class ExperienceController : MonoBehaviour
     private Characteristics.PlayerCharacteristics _playerExperience;
     [SerializeField]
     private ExperienceView _experienceView;
+    [SerializeField]
+    private float _saveTime;
     
     private int _currentExperience;
     private float _currentValue;
     private float _elapsedTime;
-    private int _newExperience;
     private Coroutine _currentCoroutine;
+    private int _startLevel = 1;
+    private int _startMaxValue = 100;
     private string _currentLevelPlayer;
 
     void Start()
     {
-        _experienceView.LevelPlayer.text = "1";
         _currentLevelPlayer =_experienceView.LevelPlayer.text;
+        LoadingExperienceFields();
+        if (Convert.ToInt32(_experienceView.LevelPlayer.text) < _startLevel)
+        {
+            _experienceView.LevelPlayer.text = _startLevel.ToString();
+        }
+        
+        
     }
     
     void Update()
     {
-        
+       
     }
 
     public void AddExperience(int value)
     {
         _currentExperience = _playerExperience.PlayerExperience;
-        OnExperienceChanged?.Invoke( _playerExperience.PlayerExperience += value);
+        var newExperience = Mathf.Clamp(value, 0, _experienceView.PlayerExperience.maxValue);
+        OnExperienceChanged?.Invoke( _playerExperience.PlayerExperience += (int) newExperience);
     }
 
     public void SetExperience(int newExperience)
@@ -61,19 +71,18 @@ public class ExperienceController : MonoBehaviour
             var currentProgress = _elapsedTime / animationTime;
             _currentValue= Mathf.Lerp(oldExperience, newExperience, currentProgress);
             _currentExperience = (int) _currentValue;
+            if (_currentExperience >= _experienceView.PlayerExperience.maxValue)
+            {
+                LevelUp();
+            }
             _experienceView.PlayerExperience.value = _currentExperience;
             _experienceView.ExperienceText.text =_experienceView.PlayerExperience.value + "/" + _experienceView.PlayerExperience.maxValue;
             _elapsedTime += Time.deltaTime;
             
-
             yield return null;
         }
-        if (_currentExperience >= _experienceView.PlayerExperience.maxValue)
-        {
-            LevelUp();
-        }
-        
         _elapsedTime = 0;
+        SaveExperienceFields();
     }
 
     private void LevelUp()
@@ -97,7 +106,23 @@ public class ExperienceController : MonoBehaviour
 
     private void SaveExperienceFields()
     {
-        
+        PlayerPrefs.SetInt("PlayerExperience",_playerExperience.PlayerExperience);
+        PlayerPrefs.SetFloat("MaxValue",_experienceView.PlayerExperience.maxValue);
+        PlayerPrefs.SetString("LevelPlayer",_experienceView.LevelPlayer.text);
+        PlayerPrefs.SetFloat("Value",_experienceView.PlayerExperience.value);
+    }
+
+    private void LoadingExperienceFields()
+    {
+        _playerExperience.PlayerExperience = PlayerPrefs.GetInt("PlayerExperience");
+        _experienceView.PlayerExperience.maxValue = PlayerPrefs.GetFloat("MaxValue");
+        _experienceView.LevelPlayer.text = PlayerPrefs.GetString("LevelPlayer");
+        _experienceView.PlayerExperience.value = PlayerPrefs.GetFloat("Value");
+        if (_experienceView.PlayerExperience.maxValue == 0)
+        {
+            _experienceView.PlayerExperience.maxValue = _startMaxValue;
+            _experienceView.LevelPlayer.text = _startLevel.ToString();
+        }
     }
     
     
