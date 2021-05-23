@@ -119,12 +119,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a386a9aa9541668f798885879e2374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minCooldown: 3000
-  _maxCooldown: 10000
+  _minCooldown: 600
+  _maxCooldown: 1200
   _delayBetweenSpawns: 0.5
   _minEnemiesCount: 2
   _maxEnemiesCount: 5
-  _possibleEnemies: []
+  _possibleEnemies:
+  - {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a, type: 3}
+  - {fileID: -7617768688791774286, guid: 41401f314877af94587ece4aa0a01dfc, type: 3}
 --- !u!1 &3450469052181993017
 GameObject:
   m_ObjectHideFlags: 0
