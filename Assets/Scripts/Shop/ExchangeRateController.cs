@@ -68,15 +68,9 @@ namespace Shop
 
         private void UpdateResultAmount(string newValue)
         {
-            if (!float.TryParse(newValue, out var resultValue) 
-                || resultValue <= 0)
-            {
-                SetInputToEmptyString();
-                return;
-            }
-
             try
             {
+                var resultValue = float.Parse(newValue);
                 var resultAmount =
                     Convert.ToInt32(Math.Round(resultValue * _playerCoefficient * _rateCoefficient, 0));
                 var resultAmountInputField = GetComponent<ExchangeRateView>().ResultAmount;

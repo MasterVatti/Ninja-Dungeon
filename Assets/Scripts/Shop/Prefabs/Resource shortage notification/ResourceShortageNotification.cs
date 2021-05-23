@@ -1,19 +1,21 @@
 using System;
-using UnityEngine;
+using Assets.Scripts.Managers.ScreensManager;
 
-namespace Shop.Prefabs.InsufficientMoneyNotification
+namespace Shop.Prefabs.Resource_shortage_notification
 {
     /// <summary>
     /// Представляет собой уведомление о том, что у игрока не хватает ресурсов
     /// </summary>
-    public class ResourceShortageNotification : MonoBehaviour
+    public class ResourceShortageNotification : BaseScreen
     {
-        public event Action OkButtonClicked;
-        
         public void OkButtonHandler()
         {
-            gameObject.SetActive(false);
-            OkButtonClicked?.Invoke();
+            MainManager.ScreenManager.CloseTopScreen();
+        }
+
+        public override void Initialize(ScreenType screenType)
+        {
+            ScreenType = screenType;
         }
     }
 }

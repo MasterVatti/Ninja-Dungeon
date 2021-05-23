@@ -37,8 +37,6 @@ namespace Shop
                 
                 rateController.OnPlayerHasInsufficientFunds += OnPlayerHasInsufficientFunds;
             }
-            
-            _shopView.Notification.OkButtonClicked += NotificationOnOkButtonClicked;
         }
 
         private ExchangeRateController CreateAndInitializeExchangeItem(ExchangeRate rate)
@@ -52,30 +50,15 @@ namespace Shop
         
         private void OnPlayerHasInsufficientFunds()
         {
-            _shopView.Notification.gameObject.SetActive(true);
-
-            foreach (var exchangeRateController in _rateControllers)
-            {
-                exchangeRateController.SetInteractable(false);
-            }
+            MainManager.ScreenManager.OpenScreen(ScreenType.InsufficientResources);
         }
         
-        private void NotificationOnOkButtonClicked()
-        {
-            foreach (var exchangeRateController in _rateControllers)
-            {
-                exchangeRateController.SetInteractable(true);
-            }
-        }
-
         private void OnDestroy()
         {
             foreach (var exchangeRateController in _rateControllers)
             {
                 exchangeRateController.OnPlayerHasInsufficientFunds -= OnPlayerHasInsufficientFunds;
             }
-            
-            _shopView.Notification.OkButtonClicked -= NotificationOnOkButtonClicked;
         }
 
         [UsedImplicitly]

@@ -31,12 +31,6 @@ namespace Shop
         [SerializeField]
         private TMP_InputField _resultAmount;
 
-        private void OnGUI()
-        {
-            Regex.Replace(_sourceAmount.text, @"[^0-9 ]", "");
-            Regex.Replace(_resultAmount.text, @"[^0-9 ]", "");
-        }
-
         public void Initialize(ExchangeRate rate, float pickedCoefficient)
         {
             _sourceName.text = Enum.GetName(typeof(ResourceType), rate.SourceResource.Type);
