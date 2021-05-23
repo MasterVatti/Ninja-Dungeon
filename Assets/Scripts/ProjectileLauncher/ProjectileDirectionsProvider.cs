@@ -34,7 +34,7 @@ namespace ProjectileLauncher
 
         private void GetFrontalProjectileDirections(Vector3 position, Vector3 nearestEnemyDirection)
         {
-            if (_playerCharacteristics.FrontalityShells)
+            if (_playerCharacteristics.FrontalProjectiles)
             {
                 foreach (var positionFrontalShell in _positionFrontalShells)
                 {
@@ -49,7 +49,7 @@ namespace ProjectileLauncher
 
         private void GetDiagonalProjectileDirections(Vector3 position, Vector3 nearestEnemyDirection)
         {
-            if (_playerCharacteristics.DiagonalShells)
+            if (_playerCharacteristics.DiagonalProjectiles)
             {
                 var directionDiagonalArrows =
                     Quaternion.AngleAxis(_turnDiagonalArrows, Vector3.up) * nearestEnemyDirection;
@@ -73,7 +73,7 @@ namespace ProjectileLauncher
 
         private void GetSideShellsDirections(Vector3 position, Vector3 nearestEnemyDirection)
         {
-            if (_playerCharacteristics.SideShells)
+            if (_playerCharacteristics.SideProjectiles)
             {
                 var directionSideShells =
                     Quaternion.AngleAxis(_sideProjectileAngle, Vector3.up) * nearestEnemyDirection;

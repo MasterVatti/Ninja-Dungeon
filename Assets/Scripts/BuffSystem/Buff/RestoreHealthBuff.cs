@@ -5,19 +5,19 @@ namespace BuffSystem.Buff
 {
     public class RestoreHealthBuff : IBuff
     {
-        private readonly float _amountBonusBuff;
         private readonly PersonCharacteristics _personCharacteristics;
-    
+        private readonly int _percentageIncrease;
+
         public RestoreHealthBuff(int percentageIncrease, PersonCharacteristics personCharacteristics)
         {
+            _percentageIncrease = percentageIncrease;
             _personCharacteristics = personCharacteristics;
-            
-            _amountBonusBuff = _personCharacteristics.MaxHp * (percentageIncrease / 100f);
         }
     
         public void StartBuff()
         {
-            _personCharacteristics.CurrentHp += (int)_amountBonusBuff;
+            var healAmount = _personCharacteristics.MaxHp * (_percentageIncrease / 100f);
+            _personCharacteristics.CurrentHp += (int)healAmount;
         }
     }
 }

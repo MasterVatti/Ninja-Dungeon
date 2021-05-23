@@ -6,17 +6,18 @@ namespace BuffSystem.Buff
     public class IncreasedDamageBuff : IPassiveBuff
     {
         private readonly PersonCharacteristics _personCharacteristics;
-        private readonly float _amountBonusBuff;
-        
+        private readonly float _percentageIncrease;
+        private float _amountBonusBuff;
+
         public IncreasedDamageBuff(float percentageIncrease, PersonCharacteristics personCharacteristics)
         {
+            _percentageIncrease = percentageIncrease;
             _personCharacteristics = personCharacteristics;
-            
-            _amountBonusBuff = _personCharacteristics.AttackDamage * (percentageIncrease / 100);
         }
         
         public void StartBuff()
         { 
+            _amountBonusBuff = _personCharacteristics.AttackDamage * (_percentageIncrease / 100f);
             _personCharacteristics.AttackDamage += (int)_amountBonusBuff;
         }
 

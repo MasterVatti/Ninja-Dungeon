@@ -16,12 +16,12 @@ namespace BuffSystem.Buff
 
         public void StartBuff()
         {
-            _playerCharacteristics.SideShells = _hasSideShells;
+            _playerCharacteristics.SideProjectiles = _hasSideShells;
         }
 
         public void StopBuff()
         {
-            _playerCharacteristics.SideShells = !_hasSideShells;
+            _playerCharacteristics.SideProjectiles = !_hasSideShells;
         }
     }
 }

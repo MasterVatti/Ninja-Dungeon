@@ -11,18 +11,17 @@ namespace BuffSystem.Buff
         public RicochetShellsBuff(int ricochetsNumber, PlayerCharacteristics playerCharacteristics)
         {
             _ricochetsNumber = ricochetsNumber;
-            
             _playerCharacteristics = playerCharacteristics;
         }
         
         public void StartBuff()
         {
-            _playerCharacteristics.RicochetShells += _ricochetsNumber;
+            _playerCharacteristics.RicochetProjectiles += _ricochetsNumber;
         }
 
         public void StopBuff()
         {
-            _playerCharacteristics.RicochetShells -= _ricochetsNumber;
+            _playerCharacteristics.RicochetProjectiles -= _ricochetsNumber;
         }
     }
 }

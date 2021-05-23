@@ -11,7 +11,6 @@ namespace BuffSystem.Buff
         public ProjectileCountBuff(int projectileCount, PlayerCharacteristics playerCharacteristics)
         {
             _projectileCount = projectileCount;
-            
             _playerCharacteristics = playerCharacteristics;
         }
         

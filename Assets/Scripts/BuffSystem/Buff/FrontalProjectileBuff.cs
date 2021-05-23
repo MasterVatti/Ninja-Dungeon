@@ -16,12 +16,12 @@ namespace BuffSystem.Buff
         
         public void StartBuff()
         {
-            _playerCharacteristics.FrontalityShells = _hasFrontalProjectile;
+            _playerCharacteristics.FrontalProjectiles = _hasFrontalProjectile;
         }
 
         public void StopBuff()
         {
-            _playerCharacteristics.FrontalityShells = !_hasFrontalProjectile;
+            _playerCharacteristics.FrontalProjectiles = !_hasFrontalProjectile;
         }
     }    
 }

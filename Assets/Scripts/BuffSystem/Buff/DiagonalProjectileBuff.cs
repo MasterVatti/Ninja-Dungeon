@@ -11,18 +11,17 @@ namespace BuffSystem.Buff
         public DiagonalProjectileBuff(bool hasDiagonalArrows, PlayerCharacteristics playerCharacteristics)
         {
             _hasDiagonalArrows = hasDiagonalArrows;
-            
             _playerCharacteristics = playerCharacteristics;
         }
 
         public void StartBuff()
         {
-            _playerCharacteristics.DiagonalShells = _hasDiagonalArrows;
+            _playerCharacteristics.DiagonalProjectiles = _hasDiagonalArrows;
         }
 
         public void StopBuff()
         {
-            _playerCharacteristics.DiagonalShells = !_hasDiagonalArrows;
+            _playerCharacteristics.DiagonalProjectiles = !_hasDiagonalArrows;
         }
     }
 }
