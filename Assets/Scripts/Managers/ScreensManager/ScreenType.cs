@@ -16,5 +16,7 @@
         SawmillScreen = 7,
         MineScreen = 8,
         InformationPopupScreen = 9,
+        BuffScreen = 10,
+        InsufficientResources = 11,
     }
 }

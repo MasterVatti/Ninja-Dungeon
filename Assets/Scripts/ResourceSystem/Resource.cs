@@ -17,7 +17,7 @@ namespace ResourceSystem
             set => _type = value;
         }
 
-        public float Amount
+        public int Amount
         {
             get => _amount;
             set => _amount = value;
@@ -26,6 +26,6 @@ namespace ResourceSystem
         [SerializeField]
         private ResourceType _type;
         [SerializeField]
-        private float _amount;
+        private int _amount;
     }
 }
