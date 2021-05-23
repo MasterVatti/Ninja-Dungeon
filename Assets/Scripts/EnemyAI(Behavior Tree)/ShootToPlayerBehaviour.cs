@@ -1,5 +1,6 @@
 using System;
 using Assets.Scripts;
+using Characteristics;
 using Panda;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,7 +18,7 @@ public class ShootToPlayerBehaviour : MonoBehaviour
     private NavMeshAgent _agent;
 
     private ObjectPool _objectPool;
-    private GameObject _player;
+    private Player _player;
     private float _nextShotTime;
     private int _reboundNumber;
     private void Start()
