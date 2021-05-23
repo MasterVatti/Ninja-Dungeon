@@ -19,7 +19,7 @@ public class Unit : MonoBehaviour
     private float _pointDistanceError = 0.5f;
     
 
-    private GameObject _player;
+    private Player _player;
     private Vector3 _movePoint;
 
     private void Start()

@@ -20,9 +20,12 @@ namespace BuffSystem
         
         private SettingsBuff _settingsBuff;
         private PersonCharacteristics _personCharacteristics;
-        
-        public void Initialize(PersonCharacteristics personCharacteristics, SettingsBuff settingsBuff)
+        private BuffManager _buffManager;
+
+        public void Initialize(PersonCharacteristics personCharacteristics, BuffManager buffManager, 
+            SettingsBuff settingsBuff)
         {
+            _buffManager = buffManager;
             _settingsBuff = settingsBuff;
 
             _personCharacteristics = personCharacteristics;
@@ -32,7 +35,7 @@ namespace BuffSystem
         
         public void OnClick()
         {
-            MainManager.BuffManager.AddBuff(_settingsBuff.CreateBuff(_personCharacteristics));
+            _buffManager.AddBuff(_settingsBuff.CreateBuff(_personCharacteristics));
             
             MainManager.ScreenManager.CloseTopScreen();
         }

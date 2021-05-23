@@ -20,11 +20,12 @@ namespace BuffSystem
         private void Awake()
         {
             var player = MainManager.Player;
+            var buffManager = player.BuffManager;
             var personCharacteristics = player.GetComponent<PersonCharacteristics>();
             
             foreach (var buffbutton in _buffButtons)
             {
-                buffbutton.Initialize(personCharacteristics, GetRandomSettingBuffs());
+                buffbutton.Initialize(personCharacteristics, buffManager, GetRandomSettingBuffs());
             }
         }
         
