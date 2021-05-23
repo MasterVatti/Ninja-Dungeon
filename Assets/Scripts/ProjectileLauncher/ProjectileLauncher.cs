@@ -1,49 +1,39 @@
-using Enemies;
 using UnityEngine;
 
 namespace ProjectileLauncher
 {
     /// <summary>
-    /// Отвечает за создание пуль
+    /// Находит ближайшего врага и атакует его
     /// </summary>
+    [RequireComponent(typeof(IEnemyDetector))]
+    [RequireComponent(typeof(IAttackMechanic))]
     public class ProjectileLauncher : MonoBehaviour
     {
-        [SerializeField] 
-        private Projectile _projectilePrefab;
-        [SerializeField] 
-        private float _projectileSpawnCooldown;
-        [SerializeField] 
-        private NearestEnemyDetector _enemyDetector;
-        
-        private float _currentTime;
-        
-        private void Update()
+        private IAttackMechanic _attackMechanic;
+        private IEnemyDetector _enemyDetector;
+
+        private void Awake()
         {
-            var enemy = _enemyDetector.GetNearestEnemy();
-            if (_currentTime < _projectileSpawnCooldown)
-            {
-                _currentTime += Time.deltaTime;
-            }
-            else
-            {
-                if (enemy != null)
-                {
-                    CreateProjectile(enemy.gameObject);
-                }
-            }
+            _enemyDetector = GetComponent<IEnemyDetector>();
+            _attackMechanic = GetComponent<IAttackMechanic>();
         }
 
-        private void CreateProjectile(GameObject enemy)
+        private void Update()
         {
-            _currentTime = 0;
+            if (_attackMechanic.IsCooldown || !_attackMechanic.CanShoot)
+            {
+                return;
+            }
             
-            var enemyPosition = enemy.transform.position;
-            var nearestEnemyDirection = (enemyPosition - transform.position).normalized;
-            var projectile = Instantiate(_projectilePrefab, transform.position, transform.rotation);
-            
-            transform.parent.LookAt(enemy.transform);
-            
-            projectile.Initialize(nearestEnemyDirection);
+            var enemy = _enemyDetector.GetEnemy();
+            if (enemy != null)
+            {
+                // TODO : should be fixed in Max's branch
+                //transform.parent.LookAt(enemy.transform);
+                
+                var enemyDirection = (enemy.transform.position - transform.position).normalized;
+                _attackMechanic.Shoot(enemyDirection);
+            }
         }
     }
 }
