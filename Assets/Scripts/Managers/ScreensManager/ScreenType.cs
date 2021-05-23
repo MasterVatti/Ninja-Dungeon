@@ -15,6 +15,7 @@
         ShopScreen,
         SawmillScreen,
         MineScreen,
+        BuffScreen,
         InsufficientResources
     }
 }

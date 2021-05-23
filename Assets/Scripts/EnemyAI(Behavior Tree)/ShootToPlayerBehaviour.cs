@@ -1,3 +1,4 @@
+using System;
 using Assets.Scripts;
 using Panda;
 using UnityEngine;
@@ -6,23 +7,24 @@ using UnityEngine.AI;
 /// <summary>
 /// Отвечает за дальние атаки врагов
 /// </summary>
-public class ShootingEnemies : MonoBehaviour
+public class ShootToPlayerBehaviour : MonoBehaviour
 {
     [SerializeField]
-    private Rigidbody _bulletPrefab;
-    [SerializeField]
-    private float _bulletSpeed;
+    private GameObject _bulletPrefab;
     [SerializeField]
     private float _shotCooldownTime;
     [SerializeField]
     private NavMeshAgent _agent;
 
+    private ObjectPool _objectPool;
     private GameObject _player;
     private float _nextShotTime;
-
+    private int _reboundNumber;
     private void Start()
     {
         _player = MainManager.Player;
+
+        _objectPool = new ObjectPool(_bulletPrefab.gameObject);
     }
 
     private void Shot()
@@ -42,10 +44,22 @@ public class ShootingEnemies : MonoBehaviour
 
     private void CreateBullet()
     {
-        var newBullet = Instantiate(_bulletPrefab, transform.position,
-            transform.rotation);
+        var newBullet = _objectPool.Get();
 
-        newBullet.velocity = transform.forward * _bulletSpeed;
+        newBullet.transform.position = transform.position;
+        newBullet.transform.rotation = transform.rotation;
+
+        
+        var direction = (_player.transform.position - transform.position).normalized;
+        
+        if (newBullet.TryGetComponent<EnemyProjectile>(out var projectile))
+        {
+            projectile.Initialize(direction);
+        }
+        else
+        {
+            throw new ArgumentNullException("На снаряде нету Projectile");
+        }
     }
 
     [Task]
