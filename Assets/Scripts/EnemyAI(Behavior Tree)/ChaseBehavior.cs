@@ -1,3 +1,4 @@
+using Characteristics;
 using Panda;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,12 +15,12 @@ public class ChaseBehavior : MonoBehaviour
     [SerializeField]
     private NavMeshAgent _agent;
     
-    private GameObject _target;
+    private Person _target;
     
     [Task]
     private void GetTarget()
     {
-        _target = _unit.TargetProvider.ProvideTarget();
+        _target = _unit.TargetProvider.GetTarget();
         Task.current.Succeed();
     }
     

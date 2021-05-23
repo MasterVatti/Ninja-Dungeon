@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using  Enemies;
 using UnityEngine;
 
@@ -6,37 +7,51 @@ namespace ProjectileLauncher
     /// <summary>
     /// Баззовое движение каждой конкретной пули к ближайшему противнику
     /// </summary>
-    public abstract class Projectile : MonoBehaviour
+    public class Projectile : MonoBehaviour
     {
         [SerializeField] 
         private float _projectileSpeed;
         [SerializeField]
-        private float _timeToRemove;
-        [SerializeField]
         private Rigidbody _rigidbody;
         
         private int _damage;
-        
-        protected void Awake()
-        {
-            Destroy(gameObject, _timeToRemove);
-        }
+        private int _reboundNumber;
+        private Team _ownerTeam;
 
-        public void Initialize(Vector3 direction, int damage)
+        public void Initialize(Team ownerTeam, Vector3 direction, int damage, int reboundNumber = 1)
         {
-            SetProjectileDirection(direction);
+            _ownerTeam = ownerTeam;
+            _reboundNumber = reboundNumber;
             _damage = damage;
-        }
-        
-        private void SetProjectileDirection(Vector3 direction)
-        {
             _rigidbody.velocity = direction * _projectileSpeed;
         }
 
-        protected  void DealDamage(Collision collision)
+        private void DealDamage(Collision collision)
         {
-            var enemyHealth = collision.gameObject.GetComponent<HealthBehaviour>();
-            enemyHealth.ApplyDamage(_damage);
+            var healthBehaviour = collision.gameObject.GetComponent<HealthBehaviour>();
+            healthBehaviour.ApplyDamage(_ownerTeam, _damage);
         }
+        
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag(GlobalConstants.WALL_TAG))
+            {
+                if (_reboundNumber == 0)
+                {
+                    Destroy(gameObject);
+                }
+
+                _reboundNumber--;
+            }
+        
+            if (collision.gameObject.CompareTag(GlobalConstants.PLAYER_TAG) ||
+                collision.gameObject.CompareTag(GlobalConstants.ALLY_TAG) || 
+                collision.gameObject.CompareTag(GlobalConstants.ENEMY_TAG))
+            {
+                DealDamage(collision);
+                Destroy(gameObject);
+            }
+        }
+
     }
 }

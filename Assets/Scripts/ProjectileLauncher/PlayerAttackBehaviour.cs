@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Characteristics;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace ProjectileLauncher
 {
-    public class PlayerAttackMechanic : SimpleAttackMechanic
+    public class PlayerAttackBehaviour : SimpleAttackBehaviour
     {
-        [SerializeField]
-        private PlayerCharacteristics _playerCharacteristics;
         [SerializeField]
         private List<Transform> _muzzlesPositions;
         
@@ -17,14 +16,18 @@ namespace ProjectileLauncher
         private float _delayBetweenProjectiles = 0.05f;
 
         private ProjectileDirectionsProvider _projectileDirectionsProvider;
+        private PlayerCharacteristics _playerCharacteristics;
 
         protected override void Awake()
         {
             base.Awake();
+            
+            _playerCharacteristics = _personCharacteristics as PlayerCharacteristics;
+            Assert.IsNotNull(_playerCharacteristics);
             _projectileDirectionsProvider = new ProjectileDirectionsProvider(_playerCharacteristics, _muzzlesPositions);
         }
 
-        protected override void ShootInternal(Vector3 direction)
+        protected override void Shoot(Vector3 direction)
         {
             StartCoroutine(ShootInAllDirections(direction));
         }
@@ -37,7 +40,7 @@ namespace ProjectileLauncher
                 foreach (var transformProjectile in fireDirections)
                 {
                     CreateProjectile(transformProjectile.Position, transformProjectile.Direction, 
-                        _playerCharacteristics.RicochetProjectiles, _playerCharacteristics.AttackDamage);
+                        _playerCharacteristics.AttackDamage, _playerCharacteristics.RicochetProjectiles);
                 }
                 
                 yield return new WaitForSeconds(_delayBetweenProjectiles);

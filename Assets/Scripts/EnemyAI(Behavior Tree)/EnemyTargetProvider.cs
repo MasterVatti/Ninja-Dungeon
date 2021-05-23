@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Assets.Scripts;
 using Characteristics;
 using Panda;
+using ProjectileLauncher;
 using UnityEngine;
 
 /// <summary>
@@ -9,15 +10,10 @@ using UnityEngine;
 /// </summary>
 public class EnemyTargetProvider : MonoBehaviour, ITargetProvider
 {
-    private readonly List<GameObject> _targets = new List<GameObject>();
-    private GameObject _target;
-    
-    private void Start()
-    {
-        MainManager.EnemiesManager.Enemies.Add(GetComponent<Enemy>());
-    }
+    private readonly List<Person> _targets = new List<Person>();
+    private Person _target;
 
-    public GameObject ProvideTarget()
+    public Person GetTarget()
     {
         return _target;
     }
@@ -27,13 +23,13 @@ public class EnemyTargetProvider : MonoBehaviour, ITargetProvider
         if (other.CompareTag(GlobalConstants.PLAYER_TAG) ||
             other.CompareTag(GlobalConstants.ALLY_TAG))
         {
-            _targets.Add(other.gameObject);
+            _targets.Add(other.gameObject.GetComponent<Person>());
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        _targets.Remove(other.gameObject);
+        _targets.Remove(other.gameObject.GetComponent<Person>());
     }
     
     [Task]

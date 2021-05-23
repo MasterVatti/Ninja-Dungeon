@@ -5,34 +5,31 @@ namespace ProjectileLauncher
     /// <summary>
     /// Находит ближайшего врага и атакует его
     /// </summary>
-    [RequireComponent(typeof(IEnemyDetector))]
-    [RequireComponent(typeof(IAttackMechanic))]
+    [RequireComponent(typeof(ITargetProvider))]
+    [RequireComponent(typeof(IAttackBehaviour))]
     public class ProjectileLauncher : MonoBehaviour
     {
-        private IAttackMechanic _attackMechanic;
-        private IEnemyDetector _enemyDetector;
+        private IAttackBehaviour _attackBehaviour;
+        private ITargetProvider _targetProvider;
 
         private void Awake()
         {
-            _enemyDetector = GetComponent<IEnemyDetector>();
-            _attackMechanic = GetComponent<IAttackMechanic>();
+            _targetProvider = GetComponent<ITargetProvider>();
+            _attackBehaviour = GetComponent<IAttackBehaviour>();
         }
 
         private void Update()
         {
-            if (_attackMechanic.IsCooldown || !_attackMechanic.CanShoot)
+            if (_attackBehaviour.IsCooldown)
             {
                 return;
             }
             
-            var enemy = _enemyDetector.GetEnemy();
-            if (enemy != null)
+            var enemy = _targetProvider.GetTarget();
+            if (_attackBehaviour.CanAttack(enemy))
             {
-                // TODO : should be fixed in Max's branch
-                //transform.parent.LookAt(enemy.transform);
-                
-                var enemyDirection = (enemy.transform.position - transform.position).normalized;
-                _attackMechanic.Shoot(enemyDirection);
+                transform.parent.LookAt(enemy.transform);
+                _attackBehaviour.Attack(enemy);
             }
         }
     }

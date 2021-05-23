@@ -34,14 +34,12 @@ public class MovementBehaviour : MonoBehaviour
         }
     }
 
-    [Task]
     private void MoveToDestination()
     {
         MoveTo(_movePoint);
         WaitArrival();
     }
 
-    [Task]
     private bool SetDestination(Vector3 movePoint)
     {
         _movePoint = movePoint;
@@ -55,7 +53,6 @@ public class MovementBehaviour : MonoBehaviour
         return true;
     }
 
-    [Task]
     private void MoveTo(Vector3 movePoint)
     {
         SetDestination(movePoint);
@@ -67,7 +64,6 @@ public class MovementBehaviour : MonoBehaviour
         WaitArrival();
     }
 
-    [Task]
     private void WaitArrival()
     {
         var currentTask = Task.current;
@@ -83,7 +79,6 @@ public class MovementBehaviour : MonoBehaviour
         }
     }
     
-    [Task]
     private void SetTargetPosition()
     {
         _movePoint = _target.transform.position;

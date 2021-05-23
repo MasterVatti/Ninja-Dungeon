@@ -1,3 +1,4 @@
+using Characteristics;
 using Panda;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,7 +15,7 @@ public class FollowBehavior : MonoBehaviour
     [SerializeField]
     private NavMeshAgent _agent;
 
-    private GameObject _player;
+    private Player _player;
 
     private void Start()
     {

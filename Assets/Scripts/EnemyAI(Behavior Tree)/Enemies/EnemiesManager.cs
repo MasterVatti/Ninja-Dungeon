@@ -9,23 +9,22 @@ namespace Enemies
     /// </summary>
     public class EnemiesManager : MonoBehaviour
     {
-        public List<Enemy> Enemies => _enemies;
+        public IReadOnlyList<Enemy> Enemies => _enemies;
         
         [SerializeField] 
         private List<Enemy> _enemies;
 
         public void AddEnemy(Enemy enemy)
         {
-            Enemies.Add(enemy);
+            _enemies.Add(enemy);
             enemy.HealthBehaviour.OnDead += OnEnemyDied; 
         }
         
         private void OnEnemyDied(Person person)
         {
             var enemy = person.GetComponentInChildren<Enemy>();
-            Enemies.Remove(enemy);
+            _enemies.Remove(enemy);
             enemy.HealthBehaviour.OnDead -= OnEnemyDied;
-            
         }
         
         private void OnDestroy()
