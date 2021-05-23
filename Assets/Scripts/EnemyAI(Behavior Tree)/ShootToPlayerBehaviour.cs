@@ -22,8 +22,7 @@ public class ShootToPlayerBehaviour : MonoBehaviour
     private Unit _unit;
 
     private ObjectPool _objectPool;
-    private GameObject _player;
-    
+    private Player _player;
     private float _nextShotTime;
     private int _reboundNumber;
     private int _damage;
