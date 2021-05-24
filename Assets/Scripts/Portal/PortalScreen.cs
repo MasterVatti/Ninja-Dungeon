@@ -9,7 +9,10 @@ using UnityEngine.UI;
 public class PortalScreen : BaseScreenWithContext<PortalContext>
 {
     [SerializeField]
+    private int _energyCost;
+    [SerializeField]
     private Text _descriptionField;
+    
     private string _sceneName;
     private Vector3 _teleportPosition;
     
@@ -28,9 +31,18 @@ public class PortalScreen : BaseScreenWithContext<PortalContext>
     
     public void OnClick()
     {
-        MainManager.Player.transform.position = _teleportPosition;
-        MainManager.ScreenManager.CloseTopScreen();
-        MainManager.LoadingController.StartLoad(_sceneName);
+        if (MainManager.EnergyManager.HasEnoughEnergy(_energyCost))
+        {
+            MainManager.Player.transform.position = _teleportPosition;
+            MainManager.ScreenManager.CloseTopScreen();
+            MainManager.LoadingController.StartLoad(_sceneName);
+            MainManager.EnergyManager.DecreaseEnergy(_energyCost);
+        }
+        else
+        {
+            MainManager.ScreenManager.OpenScreenWithContext(ScreenType.InformationPopupScreen, 
+                new InformationScreenContext("Energy Warning", "You don't have enough energy"));
+        }
     }
 
     public override void Initialize(ScreenType screenType)

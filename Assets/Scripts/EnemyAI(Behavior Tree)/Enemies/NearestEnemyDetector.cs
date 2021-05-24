@@ -1,24 +1,17 @@
 using Characteristics;
+using ProjectileLauncher;
 using UnityEngine;
 
 namespace Enemies
 {
     /// <summary>
-    /// Ищет ближайшего врага по отношению к атакующему
+    /// Ищет ближайшего врага по отношению к игроку
     /// </summary>
-    public class NearestEnemyDetector : MonoBehaviour
+    public class NearestEnemyDetector : MonoBehaviour, IEnemyDetector
     {
-        public Transform AttackerTransform
+        public Person GetEnemy()
         {
-            set => _attackerTransform = value;
-        }
-        
-        [SerializeField]
-        private Transform _attackerTransform;
-
-        public Person GetNearestEnemy()
-        {
-            var playerPosition = _attackerTransform.position;
+            var playerPosition = transform.position;
             var minDistance = float.MaxValue;
             var minIndex = 0;
             var currentIteration = 0;
@@ -29,14 +22,14 @@ namespace Enemies
                 {
                     var distanceToPlayer = Vector3.Distance(enemy.transform.position,
                         playerPosition);
-                    
+
                     if (minDistance > distanceToPlayer)
                     {
                         minDistance = distanceToPlayer;
                         minIndex = currentIteration;
                     }
                 }
-                
+
                 currentIteration++;
             }
 

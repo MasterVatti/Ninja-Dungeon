@@ -1,60 +1,39 @@
-using Enemies;
 using UnityEngine;
 
 namespace ProjectileLauncher
 {
     /// <summary>
-    /// Отвечает за создание пуль
+    /// Находит ближайшего врага и атакует его
     /// </summary>
+    [RequireComponent(typeof(IEnemyDetector))]
+    [RequireComponent(typeof(IAttackMechanic))]
     public class ProjectileLauncher : MonoBehaviour
     {
-        public Projectile Projectile => _projectile;
-        public float ProjectileSpawnCooldown
+        private IAttackMechanic _attackMechanic;
+        private IEnemyDetector _enemyDetector;
+
+        private void Awake()
         {
-            set => _projectileSpawnCooldown = value;
+            _enemyDetector = GetComponent<IEnemyDetector>();
+            _attackMechanic = GetComponent<IAttackMechanic>();
         }
 
-        public NearestEnemyDetector EnemyDetector
-        {
-            set => _enemyDetector = value;
-        }
-        
-        [SerializeField] 
-        private Projectile _projectile;
-        [SerializeField] 
-        private float _projectileSpawnCooldown;
-        [SerializeField] 
-        private NearestEnemyDetector _enemyDetector;
-        
-        private float _currentTime;
-        
         private void Update()
         {
-            var enemy = _enemyDetector.GetNearestEnemy();
-            if (_currentTime < _projectileSpawnCooldown)
+            if (_attackMechanic.IsCooldown || !_attackMechanic.CanShoot)
             {
-                _currentTime += Time.deltaTime;
+                return;
             }
-            else
+            
+            var enemy = _enemyDetector.GetEnemy();
+            if (enemy != null)
             {
-                if (enemy != null)
-                {
-                    CreateProjectile(enemy.gameObject);
-                }
+                // TODO : should be fixed in Max's branch
+                //transform.parent.LookAt(enemy.transform);
+                
+                var enemyDirection = (enemy.transform.position - transform.position).normalized;
+                _attackMechanic.Shoot(enemyDirection);
             }
-        }
-
-        private void CreateProjectile(GameObject enemy)
-        {
-            _currentTime = 0;
-            
-            var enemyPosition = enemy.transform.position;
-            var nearestEnemyDirection = (enemyPosition - transform.position).normalized;
-            var projectile = Instantiate(_projectile, transform.position, transform.rotation);
-            
-            transform.parent.LookAt(enemy.transform);
-            
-            projectile.Initialize(nearestEnemyDirection);
         }
     }
 }

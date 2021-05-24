@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using Assets.Scripts.Shop;
 using ResourceSystem;
 using TMPro;
@@ -19,14 +20,14 @@ namespace Shop
         [SerializeField]
         private Image _sourceImage;
         [SerializeField]
-        private Text _sourceName;
+        private TMP_Text _sourceName;
         [SerializeField]
         private TMP_InputField _sourceAmount;
 
         [SerializeField]
         private Image _resultImage;
         [SerializeField]
-        private Text _resultName;
+        private TMP_Text _resultName;
         [SerializeField]
         private TMP_InputField _resultAmount;
 

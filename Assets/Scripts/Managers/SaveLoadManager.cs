@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Energy;
 using Newtonsoft.Json;
 using SaveSystem;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Managers
     {
         [SerializeField]
         private DefaultSaveConfig _saveConfig;
+        
         private void Awake()
         {
             Load();

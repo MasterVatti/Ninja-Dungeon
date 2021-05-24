@@ -24,23 +24,43 @@ namespace Shop
         private List<ExchangeRate> _rates;
 
         private float _pickedCoefficient;
+        private List<ExchangeRateController> _rateControllers = new List<ExchangeRateController>();
         
         public override void Initialize(ScreenType screenType)
         {
             _pickedCoefficient = Random.Range(_minimumCoefficient, _maximumCoefficient);
+            
             foreach (var rate in _rates)
             {
-                CreateAndInitializeExchangeItem(rate);
+                var rateController = CreateAndInitializeExchangeItem(rate);
+                _rateControllers.Add(rateController);
+                
+                rateController.OnPlayerHasInsufficientFunds += OnPlayerHasInsufficientFunds;
             }
         }
-        
-        private void CreateAndInitializeExchangeItem(ExchangeRate rate)
+
+        private ExchangeRateController CreateAndInitializeExchangeItem(ExchangeRate rate)
         {
             var rateObject = Instantiate(_exchangeTemplate, _shopView.Content.transform);
             rateObject.GetComponent<ExchangeRateView>().Initialize(rate, _pickedCoefficient);
             rateObject.GetComponent<ExchangeRateController>().Initialize(rate, _pickedCoefficient);
+
+            return rateObject.GetComponent<ExchangeRateController>();
         }
         
+        private void OnPlayerHasInsufficientFunds()
+        {
+            MainManager.ScreenManager.OpenScreen(ScreenType.InsufficientResources);
+        }
+        
+        private void OnDestroy()
+        {
+            foreach (var exchangeRateController in _rateControllers)
+            {
+                exchangeRateController.OnPlayerHasInsufficientFunds -= OnPlayerHasInsufficientFunds;
+            }
+        }
+
         [UsedImplicitly]
         private void CloseShop()
         {

@@ -32,15 +32,18 @@ public class ObjectPool
         
         var newObject = CreateObject(_pooledObjects.First());
         newObject.SetActive(true);
+        
         return newObject;
     }
     
     private GameObject CreateObject(GameObject gameObject)
     {
         var instantiate = Object.Instantiate(gameObject);
+        
         instantiate.name = gameObject.name;
         instantiate.SetActive(false);
         _pooledObjects.Add(instantiate);
+        
         return instantiate;
     }
 }

@@ -2,59 +2,59 @@ using Assets.Scripts;
 using Enemies;
 using UnityEngine;
 
-namespace ProjectileLauncher
+namespace ProjectileLauncher.Projectile
 {
     /// <summary>
     /// Движение каждой конкретной пули к ближайшему противнику
     /// </summary>
     public class Projectile : MonoBehaviour
     {
-        public int Damage
-        {
-            set => _damage = value;
-        }
-        
         [SerializeField] 
         private float _projectileSpeed;
-        [SerializeField] 
-        private int _damage;
-        [SerializeField]
-        private float _timeToRemove = 5f;
         [SerializeField]
         private Rigidbody _rigidbody;
         
-        private void Awake()
+        private Vector3 _direction;
+        private int _reboundNumber;
+        private int _damage;
+        
+        public void Initialize(Vector3 direction, int reboundNumber, int damage)
         {
-            Destroy(gameObject, _timeToRemove);
-        }
-
-        public void Initialize(Vector3 direction)
-        {
-            SetProjectileDirection(direction);
+            _direction = direction;
+            _reboundNumber = reboundNumber;
+            _damage = damage;
         }
         
-        private void OnCollisionEnter(Collision collision)
+        public void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag(GlobalConstants.ENEMY_TAG))
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
                 DealDamage(collision);
             }
+            
             if (collision.gameObject.CompareTag(GlobalConstants.WALL_TAG))
             {
-                Destroy(gameObject);
+                if (_reboundNumber <= 0)
+                {
+                    gameObject.SetActive(false);
+                }
+                
+                _reboundNumber--;
+                
+                _direction = Vector3.Reflect(_direction, collision.contacts[0].normal);
             }
         }
 
-        private void SetProjectileDirection(Vector3 direction)
+        private void Update()
         {
-            _rigidbody.velocity = direction * _projectileSpeed;
+            _rigidbody.velocity = _direction * _projectileSpeed;
         }
-        
+
         private void DealDamage(Collision collision)
         {
-            var enemyHealth = collision.gameObject.GetComponent<HealthBehaviour>();
-            enemyHealth.ApplyDamage(_damage);
+            var objectHealth = collision.gameObject.GetComponent<HealthBehaviour>();
+            objectHealth.ApplyDamage(_damage);
         }
     }
 }
