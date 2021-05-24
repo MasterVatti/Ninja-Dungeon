@@ -9,6 +9,11 @@ namespace ProjectileLauncher
     /// </summary>
     public class Projectile : MonoBehaviour
     {
+        public int Damage
+        {
+            set => _damage = value;
+        }
+        
         [SerializeField] 
         private float _projectileSpeed;
         [SerializeField] 
@@ -46,7 +51,7 @@ namespace ProjectileLauncher
             _rigidbody.velocity = direction * _projectileSpeed;
         }
         
-        public virtual void DealDamage(Collision collision)
+        private void DealDamage(Collision collision)
         {
             var enemyHealth = collision.gameObject.GetComponent<HealthBehaviour>();
             enemyHealth.ApplyDamage(_damage);

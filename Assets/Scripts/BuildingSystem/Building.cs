@@ -40,8 +40,6 @@ namespace BuildingSystem
             return BuildingUpgradeHelper.Upgrade(this);
         }
 
-        public abstract void OnUpgrade(T oldBuildingState);
-
         public abstract T GetState();
 
         public BuildingData Save()

@@ -1,5 +1,6 @@
 using System;
 using BuildingSystem;
+using BuildingSystem.BuildingUpgradeSystem;
 using ResourceSystem;
 using SaveSystem;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Buildings
     /// через свойство CurrentResourceCount.
     /// Выдает ресурс игроку, если подойти.
     /// </summary>
-    public class ResourceMiner : Building<MinerBuildingData>
+    public class ResourceMiner : Building<MinerBuildingData>, IUpgradable<MinerBuildingData>
     {
         //Свойства для UI
         public ResourceType ExtractableResource => _miningResource;
@@ -71,7 +72,7 @@ namespace Buildings
             }
         }
         
-        public override void OnUpgrade(MinerBuildingData oldBuildingState)
+        public void OnUpgrade(MinerBuildingData oldBuildingState)
         {
             var minedResourceCount = GetMinedResourceCount(oldBuildingState.StartTime, oldBuildingState.MiningPerSecond);
             StartAmount = oldBuildingState.StartAmount + minedResourceCount;

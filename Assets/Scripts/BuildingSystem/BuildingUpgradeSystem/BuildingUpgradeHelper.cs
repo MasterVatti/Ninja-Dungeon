@@ -34,11 +34,11 @@ namespace BuildingSystem.BuildingUpgradeSystem
             if (TryPayForUpgrade(upgradeCost))
             {
                 var newBuildingGameObject = BuildingUtils.CreateNewBuilding(settings, buildingLevel);
-                var newBuilding = newBuildingGameObject.GetComponent<Building<T>>();
+                var newBuilding = newBuildingGameObject.GetComponent<IUpgradable<T>>();
                 newBuilding.OnUpgrade(oldBuilding.GetState());
                 
                 DestroyOldBuilding(oldBuilding.gameObject);
-                return newBuilding;
+                return newBuildingGameObject.GetComponent<Building<T>>();
             }
 
             return oldBuilding;

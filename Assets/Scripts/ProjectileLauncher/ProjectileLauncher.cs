@@ -8,8 +8,19 @@ namespace ProjectileLauncher
     /// </summary>
     public class ProjectileLauncher : MonoBehaviour
     {
+        public Projectile Projectile => _projectile;
+        public float ProjectileSpawnCooldown
+        {
+            set => _projectileSpawnCooldown = value;
+        }
+
+        public NearestEnemyDetector EnemyDetector
+        {
+            set => _enemyDetector = value;
+        }
+        
         [SerializeField] 
-        private Projectile _projectilePrefab;
+        private Projectile _projectile;
         [SerializeField] 
         private float _projectileSpawnCooldown;
         [SerializeField] 
@@ -39,7 +50,7 @@ namespace ProjectileLauncher
             
             var enemyPosition = enemy.transform.position;
             var nearestEnemyDirection = (enemyPosition - transform.position).normalized;
-            var projectile = Instantiate(_projectilePrefab, transform.position, transform.rotation);
+            var projectile = Instantiate(_projectile, transform.position, transform.rotation);
             
             transform.parent.LookAt(enemy.transform);
             

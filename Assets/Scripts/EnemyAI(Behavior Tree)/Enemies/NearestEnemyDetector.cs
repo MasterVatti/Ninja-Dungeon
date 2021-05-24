@@ -4,16 +4,21 @@ using UnityEngine;
 namespace Enemies
 {
     /// <summary>
-    /// Ищет ближайшего врага по отношению к игроку
+    /// Ищет ближайшего врага по отношению к атакующему
     /// </summary>
     public class NearestEnemyDetector : MonoBehaviour
     {
+        public Transform AttackerTransform
+        {
+            set => _attackerTransform = value;
+        }
+        
         [SerializeField]
-        private Transform _playerTransform;
+        private Transform _attackerTransform;
 
         public Person GetNearestEnemy()
         {
-            var playerPosition = _playerTransform.position;
+            var playerPosition = _attackerTransform.position;
             var minDistance = float.MaxValue;
             var minIndex = 0;
             var currentIteration = 0;

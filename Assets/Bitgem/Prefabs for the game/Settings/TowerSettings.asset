@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273de372e6cb1c24e9aa6d4f71f9ccf1, type: 3}
+  m_Name: TowerSettings
+  m_EditorClassIdentifier: 
+  _buildingName: Tower
+  _buildingInfoView: {fileID: 0}
+  _connectedBuildings: []
+  _upgradeList:
+  - _upgradeCost:
+    - _type: 0
+      _amount: 1000
+    - _type: 1
+      _amount: 1000
+    _upgradePrefab: {fileID: 1429124387701340, guid: 6fa9d6e34229dd2438a7ebd8995f2d32,
+      type: 3}
+  - _upgradeCost:
+    - _type: 0
+      _amount: 1500
+    - _type: 1
+      _amount: 1500
+    _upgradePrefab: {fileID: 1314814462719674, guid: b74efa784ff8886498b88ee1597e3f42,
+      type: 3}
+  - _upgradeCost:
+    - _type: 0
+      _amount: 5000
+    - _type: 1
+      _amount: 5000
+    _upgradePrefab: {fileID: 1452148775312848, guid: e782302032443aa47bcb76178ef014a5,
+      type: 3}
+  _placeHolderPrefab: {fileID: 4248506280021078957, guid: 808781949a25abd49a45c4e45ae2c513,
+    type: 3}
+  _timeToBuild: 0
+  _position: {x: 0, y: 0, z: 0}
