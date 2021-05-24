@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using Enemies;
 using UnityEngine;
 
 /// <summary>
@@ -7,25 +8,36 @@ using UnityEngine;
 public class EnemyProjectile : MonoBehaviour
 {
     [SerializeField] 
+    private float _projectileSpeed;
+    [SerializeField] 
     private int _damage;
     
     [SerializeField]
-    private float _timeToRemove = 5f;
+    private Rigidbody _rigidbody;
     
-    private void Awake()
+    private int _reboundNumber;
+        
+    public void Initialize(Vector3 direction)
     {
-        Destroy(gameObject, _timeToRemove);
+        _rigidbody.velocity = direction * _projectileSpeed;
     }
     
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag(GlobalConstants.WALL_TAG))
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         if (collision.gameObject.CompareTag(GlobalConstants.PLAYER_TAG))
         {
-            Destroy(gameObject);
+            DealDamage(collision);
+            gameObject.SetActive(false);
         }
+    }
+    
+    private void DealDamage(Collision collision)
+    {
+        var objectHealth = collision.gameObject.GetComponent<HealthBehaviour>();
+        objectHealth.ApplyDamage(_damage);
     }
 }

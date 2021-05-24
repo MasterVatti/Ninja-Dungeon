@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characteristics
 {
@@ -7,38 +8,58 @@ namespace Characteristics
     /// </summary>
     public class PlayerCharacteristics : PersonCharacteristics
     {
-        public int RicochetShells
+        public int ProjectileCount
         {
-            get => _ricochetShells;
-            set => _ricochetShells = value;
+            get => _projectileCount;
+            set => _projectileCount = value;
         }
         
-        public int MultishotShells
+        public int RicochetProjectiles
         {
-            get => _multishotShells;
-            set => _multishotShells = value;
+            get => _ricochetProjectiles;
+            set => _ricochetProjectiles = value;
+        }
+
+        public bool FrontalProjectiles
+        {
+            get => _frontalProjectiles;
+            set => _frontalProjectiles = value;
         }
         
-        public int FrontalityShells
+        public bool DiagonalProjectiles
         {
-            get => _frontalityShells;
-            set => _frontalityShells = value;
+            get => _diagonalProjectiles;
+            set => _diagonalProjectiles = value;
         }
-        
-        public bool DiagonalShells
+
+        public bool ProjectileBack
         {
-            get => _diagonalShells;
-            set => _diagonalShells = value;
+            get => _projectileBack;
+            set => _projectileBack = value;
+        }
+
+        public bool SideProjectiles
+        {
+            get => _sideProjectiles;
+            set => _sideProjectiles = value;
         }
 
         [Header("Weapon")]
         [SerializeField]
-        private int _ricochetShells;
+        private int _projectileCount = 1;
+        [FormerlySerializedAs("ricochetProjectiles")]
         [SerializeField]
-        private int _multishotShells;
+        private int _ricochetProjectiles;
+        [FormerlySerializedAs("frontalProjectiles")]
         [SerializeField]
-        private int _frontalityShells;    
+        private bool _frontalProjectiles;    
+        [FormerlySerializedAs("diagonalProjectiles")]
         [SerializeField]
-        private bool _diagonalShells;
+        private bool _diagonalProjectiles;
+        [SerializeField]
+        private bool _projectileBack;
+        [FormerlySerializedAs("sideProjectiles")]
+        [SerializeField]
+        private bool _sideProjectiles;
     }
 }

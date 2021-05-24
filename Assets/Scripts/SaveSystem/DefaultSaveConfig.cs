@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BuildingSystem;
 using Newtonsoft.Json;
@@ -13,7 +14,7 @@ namespace SaveSystem
         public Save DefaultSave => new Save
         {
             Buildings = StartConstructions,
-            Resources = new List<Resource>(_startResources).ToArray()
+            Resources = new List<Resource>(_startResources).ToArray(),
         };
 
         private BuildingData[] StartConstructions

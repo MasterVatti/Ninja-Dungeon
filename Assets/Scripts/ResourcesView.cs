@@ -1,23 +1,40 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using ResourceSystem;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
+/// <summary>
+/// Класс отвечает за HUDResource
+/// </summary>
 public class ResourcesView : MonoBehaviour
 {
     [SerializeField]
     private List<ResourceLabel> _resourceLabels;
-    
     private List<Resource> _resources;
+    [SerializeField]
+    private float _animationTime;
 
 
-    void Start()
+    private void Start()
     {
+        MainManager.ResourceManager.OnResourceAmountChanged += OnResourceAmountChanged;
         _resources = MainManager.ResourceManager.GetResources();
-    }
-
-    void Update()
-    {
         UpdateResourcesAmount();
+    }
+    
+    private void OnResourceAmountChanged(Resource resource, int newAmount)
+    {
+        var index = _resourceLabels.FindIndex(resourceLabel => resourceLabel.Type == resource.Type);
+        _resourceLabels[index].SetAmount(newAmount , _animationTime);
+    }
+    
+    private void OnDestroy()
+    {
+        MainManager.ResourceManager.OnResourceAmountChanged -= OnResourceAmountChanged;
     }
 
     private void UpdateResourcesAmount()
@@ -29,10 +46,9 @@ public class ResourcesView : MonoBehaviour
                 if (_resourceLabels[i].Type == _resources[j].Type )
                 {
                     _resourceLabels[i].Label.text = _resources[j].Amount.ToString();
-                    break;
+                    _resourceLabels[i].СurrentValue = _resources[j].Amount;
                 }
             }
         }
     }
-    
 }

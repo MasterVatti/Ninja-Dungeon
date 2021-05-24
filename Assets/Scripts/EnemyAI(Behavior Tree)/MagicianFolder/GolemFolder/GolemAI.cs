@@ -1,3 +1,4 @@
+using Characteristics;
 using Panda;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace MagicianFolder.GolemFolder
         [SerializeField]
         private Unit _unit;
         
-        private GameObject _player;
+        private Player _player;
         
         private void Start()
         {

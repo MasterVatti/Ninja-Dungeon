@@ -1,3 +1,4 @@
+using Characteristics;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -6,10 +7,9 @@ namespace PlayerScripts.Movement
     /// <summary>
     /// Этот класс отвечает за перемещения игрока в пространстве
     /// </summary>
+    [RequireComponent(typeof(PlayerCharacteristics))]
     public class PlayerMovementController : MonoBehaviour
     {
-        [SerializeField]
-        private float _speed = 1.0F;
         [SerializeField]
         private Rigidbody _player;
         [SerializeField]
@@ -17,11 +17,15 @@ namespace PlayerScripts.Movement
         
         [UsedImplicitly]
         private Quaternion _playerStartRotation;
+
+        private PlayerCharacteristics _playerCharacteristics;
         
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
             MainManager.JoystickController.OnJoystickDown += JoystickDownHandler;
+
+            _playerCharacteristics = GetComponent<PlayerCharacteristics>();
         }
 
         private void JoystickDownHandler()
@@ -45,7 +49,7 @@ namespace PlayerScripts.Movement
             transform.rotation = Quaternion.Euler(0, 
                 transform.rotation.eulerAngles.y + inputDirection.z * _rotationSpeed, 
                 0);
-            _player.velocity = transform.forward * _speed * inputDirection.x;
+            _player.velocity = transform.forward * (_playerCharacteristics.MoveSpeed * inputDirection.x);
             #else
             _player.velocity = _playerStartRotation * inputDirection * _speed;
 
