@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Characteristics;
 using UnityEngine;
@@ -28,6 +29,7 @@ namespace Enemies
             _enemies.Remove(enemy);
             Destroy(enemy.gameObject);
         }
+        
         
         private void OnDestroy()
         {
