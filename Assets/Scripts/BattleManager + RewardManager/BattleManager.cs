@@ -47,6 +47,7 @@ namespace Assets.Scripts.BattleManager
             HasLevelPassed = true;
             
             IsLevelFinished?.Invoke();
+            Debug.Log(HasLevelPassed);
         }
         
         public void SetSpawner(Spawner spawner)
@@ -55,6 +56,7 @@ namespace Assets.Scripts.BattleManager
             _spawner.Initialize();
             
             HasLevelPassed = false;
+            Debug.Log(HasLevelPassed);
         }
 
         public void StartBattle(RoomSettings roomSettings, Vector3 teleportPosition)

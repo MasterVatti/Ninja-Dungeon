@@ -9,7 +9,7 @@ namespace Enemies
     /// </summary>
     public class EnemiesManager : MonoBehaviour
     {
-        public IReadOnlyList<Enemy> Enemies => _enemies;
+        public List<Enemy> Enemies => _enemies;
         
         [SerializeField] 
         private List<Enemy> _enemies = new List<Enemy>();
