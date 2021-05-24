@@ -16,24 +16,26 @@ namespace Enemies
             var minIndex = 0;
             var currentIteration = 0;
 
-            foreach (var enemy in MainManager.EnemiesManager.Enemies)
+            if (MainManager.EnemiesManager.Enemies.Count <= 0)
             {
-                if (enemy != null)
+                return null;
+            }
+            else
+            {
+                foreach (var enemy in MainManager.EnemiesManager.Enemies)
                 {
-                    var distanceToPlayer = Vector3.Distance(enemy.transform.position,
-                        playerPosition);
-
+                    var distanceToPlayer = Vector3.Distance(enemy.transform.position, playerPosition);
                     if (minDistance > distanceToPlayer)
                     {
                         minDistance = distanceToPlayer;
                         minIndex = currentIteration;
                     }
+
+                    currentIteration++;
                 }
 
-                currentIteration++;
+                return MainManager.EnemiesManager.Enemies[minIndex];
             }
-
-            return MainManager.EnemiesManager.Enemies[minIndex];
         }
     }
 }

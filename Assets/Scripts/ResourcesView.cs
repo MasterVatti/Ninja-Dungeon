@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using ResourceSystem;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 /// <summary>
 /// Класс отвечает за HUDResource
@@ -14,11 +9,11 @@ public class ResourcesView : MonoBehaviour
 {
     [SerializeField]
     private List<ResourceLabel> _resourceLabels;
-    private List<Resource> _resources;
     [SerializeField]
     private float _animationTime;
-
-
+    
+    private List<Resource> _resources;
+  
     private void Start()
     {
         MainManager.ResourceManager.OnResourceAmountChanged += OnResourceAmountChanged;

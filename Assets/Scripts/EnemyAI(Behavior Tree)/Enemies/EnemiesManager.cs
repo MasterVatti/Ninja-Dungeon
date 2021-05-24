@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Characteristics;
 using UnityEngine;
@@ -10,7 +9,7 @@ namespace Enemies
     /// </summary>
     public class EnemiesManager : MonoBehaviour
     {
-        public List<Enemy> Enemies => _enemies;
+        public IReadOnlyList<Enemy> Enemies => _enemies;
         
         [SerializeField] 
         private List<Enemy> _enemies = new List<Enemy>();
@@ -29,7 +28,6 @@ namespace Enemies
             _enemies.Remove(enemy);
             Destroy(enemy.gameObject);
         }
-        
         
         private void OnDestroy()
         {

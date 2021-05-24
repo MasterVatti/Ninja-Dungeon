@@ -41,7 +41,7 @@ namespace Loot
             {
                 if (GetRandomChance() <= item.DropChance)
                 {
-                    var itemObject = Instantiate(item.Item, transform.position, Quaternion.identity);
+                    var itemObject = Instantiate(item.Item, transform.position, transform.rotation);
                     
                     InitializeItem(itemObject, item);
                     ScatterObjects(itemObject);

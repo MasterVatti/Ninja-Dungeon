@@ -1,5 +1,7 @@
 using Assets.Scripts.BattleManager;
+using Characteristics;
 using Enemies;
+using Energy;
 using LoadingScene;
 using Managers;
 using Managers.ScreensManager;
@@ -17,9 +19,10 @@ public class MainManager : Singleton<MainManager>
     public static BuildingManager BuildingManager => Instance._buildingManager;
     public static PlayerMovementController PlayerMovementController => Instance._playerMovementController;
     public static SaveLoadManager SaveLoadManager => Instance._saveLoadManager;
-    public static GameObject Player => Instance._player;
+    public static Player Player => Instance._player;
     public static IconsProvider IconsProvider => Instance._iconsProvider;
     public static JoystickController JoystickController => Instance._joystickController;
+    public static EnergyManager EnergyManager => Instance._energyManager;
 
     [SerializeField]
     private BattleManager _battleManager;
@@ -42,7 +45,9 @@ public class MainManager : Singleton<MainManager>
     [SerializeField]
     private SaveLoadManager _saveLoadManager;
     [SerializeField]
-    private GameObject _player; 
+    private Player _player; 
     [SerializeField]
     private IconsProvider _iconsProvider;
+    [SerializeField]
+    private EnergyManager _energyManager;
 }

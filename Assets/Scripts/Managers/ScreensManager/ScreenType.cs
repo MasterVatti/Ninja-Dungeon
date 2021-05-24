@@ -13,6 +13,8 @@
         LoadingScreen,
         DungeonDoorScreen,
         DeathScreen,
+        InformationPopupScreen,
+        InsufficientResources,
         DoorScreen,
         ShopScreen,
         SawmillScreen,

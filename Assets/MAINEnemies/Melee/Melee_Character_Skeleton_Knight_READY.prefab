@@ -145,7 +145,6 @@ GameObject:
   - component: {fileID: 3170371608700471134}
   - component: {fileID: 3170371608700471135}
   - component: {fileID: 3170371608700471133}
-  - component: {fileID: 3170371608700471130}
   - component: {fileID: 6767116402517686261}
   m_Layer: 0
   m_Name: Melee_Character_Skeleton_Knight_READY
@@ -196,7 +195,7 @@ Animator:
   m_GameObject: {fileID: 3170371607921988994}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b69174d668ba02d44b14a084b217670a, type: 3}
-  m_Controller: {fileID: 9100000, guid: e2da4ea3275f70843b9a6fed8ce5c9e2, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -260,7 +259,7 @@ MonoBehaviour:
   autoReset: 1
   tickOn: 0
   sourceInfos:
-  - isFoldout: 1
+  - isFoldout: 0
     breakPoints: 
     breakPointStatuses: 
     collapsedLines: 
@@ -292,6 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2136287655a0b7a4eb31474d15cce149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buffManager: {fileID: 0}
   _personCharacteristics: {fileID: 3170371608700471104}
   _healthBehaviour: {fileID: 3170371608700471105}
   _rigidbody: {fileID: 3170371608700471111}
@@ -307,10 +307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b7c8756b692088479911f2367a302a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 2733183494529446169, guid: a0ea9b697dcc44c49b2a57d10ec9ef49,
+  _bulletPrefab: {fileID: 3313221147460074698, guid: a0ea9b697dcc44c49b2a57d10ec9ef49,
     type: 3}
-  _projectileStartPosition: {fileID: 3170371608086214955}
-  _bulletSpeed: 5
   _shotCooldownTime: 2
   _agent: {fileID: 3170371608700471132}
 --- !u!114 &3170371608700471104
@@ -329,9 +327,9 @@ MonoBehaviour:
   _maxHp: 200
   _moveSpeed: 2
   _attackDamage: 25
-  _attackRate: 0
-  _canMove: 0
-  _canAttack: 0
+  _attackRate: 5
+  _canMove: 1
+  _canAttack: 1
 --- !u!114 &3170371608700471105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,12 +356,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _throwUpForce: 15
   _recliningForce: 5
-  _equipmentItems:
-  - _dropChance: 100
-    _item: {fileID: 8243937841869306052, guid: 7a4a15cae5d0de044a5a31518922bef8, type: 3}
+  _equipmentItems: []
   _resourceItems:
   - _dropChance: 100
-    _item: {fileID: 8243937841869306052, guid: 7a4a15cae5d0de044a5a31518922bef8, type: 3}
+    _item: {fileID: 5141984139122782786, guid: a773397c6b1ed7549ba91e9ebb0e4186, type: 3}
     _resource:
       _type: 0
       _amount: 100
@@ -404,18 +400,6 @@ MonoBehaviour:
   _runBackDistance: 5
   _magician: {fileID: 3170371608700471135}
   _lowHealthThreshold: 0
---- !u!114 &3170371608700471130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3170371607921988994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d608230683c2b84888f5308472d06c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &6767116402517686261
 BoxCollider:
   m_ObjectHideFlags: 0
