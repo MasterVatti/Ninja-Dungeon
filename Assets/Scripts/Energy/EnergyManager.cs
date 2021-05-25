@@ -24,7 +24,7 @@ namespace Energy
 
         private void Awake()
         {
-            CurrentEnergy = PlayerPrefs.GetInt(ENERGY_COUNT_KEY, 27);
+            CurrentEnergy = PlayerPrefs.GetInt(ENERGY_COUNT_KEY, _maximalEnergy);
             _lastRestoreTime = Time.realtimeSinceStartup;
             RestoreEnergyForOfflineTime();
         }
