@@ -36,6 +36,7 @@ public class PortalScreen : DungeonScreenTransition
         }
         else
         {
+            MainManager.ScreenManager.CloseTopScreen();
             MainManager.ScreenManager.OpenScreen(ScreenType.InsufficientResources);
         }
     }
