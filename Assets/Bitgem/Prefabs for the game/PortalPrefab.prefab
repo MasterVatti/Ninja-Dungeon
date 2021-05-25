@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1824388498338098427}
   - component: {fileID: 821233814808746517}
   - component: {fileID: 4819236055989805974}
+  - component: {fileID: 8570179568876667337}
   m_Layer: 0
   m_Name: PortalPrefab
   m_TagString: Untagged
@@ -127,6 +128,22 @@ MonoBehaviour:
   _possibleEnemies:
   - {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a, type: 3}
   - {fileID: -7617768688791774286, guid: 41401f314877af94587ece4aa0a01dfc, type: 3}
+--- !u!114 &8570179568876667337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283214289208915664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9f529fef2c89774da8c7cebc7b29530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings:
+    _screenDescription: 
+    _sceneName: 
+    _difficultyLevel: 
 --- !u!1 &3450469052181993017
 GameObject:
   m_ObjectHideFlags: 0

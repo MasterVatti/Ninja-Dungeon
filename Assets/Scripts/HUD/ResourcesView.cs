@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using ResourceSystem;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 /// <summary>
 /// Класс отвечает за HUDResource
