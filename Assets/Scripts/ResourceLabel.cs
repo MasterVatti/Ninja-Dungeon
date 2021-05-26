@@ -1,11 +1,9 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
 using ResourceSystem;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 [Serializable]
 public class ResourceLabel : MonoBehaviour
@@ -42,7 +40,6 @@ public class ResourceLabel : MonoBehaviour
         if (_currentValue != newAmount)
         {
             _currentCoroutine = StartCoroutine(UpdateResource(_currentValue, newAmount, animationTime));
-            
         }
     }
     
@@ -68,5 +65,4 @@ public class ResourceLabel : MonoBehaviour
             _currentCoroutine = null;
         }
     }
-    
 }

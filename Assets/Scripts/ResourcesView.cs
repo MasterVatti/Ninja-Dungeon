@@ -24,7 +24,7 @@ public class ResourcesView : MonoBehaviour
     private void OnResourceAmountChanged(Resource resource, int newAmount)
     {
         var index = _resourceLabels.FindIndex(resourceLabel => resourceLabel.Type == resource.Type);
-        _resourceLabels[index].SetAmount(newAmount , _animationTime);
+        _resourceLabels[index].SetAmount(newAmount, _animationTime);
     }
     
     private void OnDestroy()

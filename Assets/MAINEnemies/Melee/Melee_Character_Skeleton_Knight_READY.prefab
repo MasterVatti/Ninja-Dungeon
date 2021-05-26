@@ -354,10 +354,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3837db2886d2940b8fd5125fa47e0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _throwUpForce: 15
-  _recliningForce: 5
+  _throwUpForce: 30
+  _recliningForce: 3
   _equipmentItems: []
   _resourceItems:
+  - _dropChance: 100
+    _item: {fileID: 5141984139122782786, guid: a773397c6b1ed7549ba91e9ebb0e4186, type: 3}
+    _resource:
+      _type: 0
+      _amount: 100
+  - _dropChance: 100
+    _item: {fileID: 5141984139122782786, guid: a773397c6b1ed7549ba91e9ebb0e4186, type: 3}
+    _resource:
+      _type: 0
+      _amount: 100
+  - _dropChance: 100
+    _item: {fileID: 5141984139122782786, guid: a773397c6b1ed7549ba91e9ebb0e4186, type: 3}
+    _resource:
+      _type: 0
+      _amount: 100
+  - _dropChance: 100
+    _item: {fileID: 5141984139122782786, guid: a773397c6b1ed7549ba91e9ebb0e4186, type: 3}
+    _resource:
+      _type: 0
+      _amount: 100
   - _dropChance: 100
     _item: {fileID: 5141984139122782786, guid: a773397c6b1ed7549ba91e9ebb0e4186, type: 3}
     _resource:
@@ -411,7 +431,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.7303467, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0.99401706, z: 0}
 --- !u!1 &3170371607921990812
 GameObject:

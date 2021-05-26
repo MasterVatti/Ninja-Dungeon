@@ -31,11 +31,11 @@ namespace Enemies
         
         private void OnDestroy()
         {
-            for (int i = 0; i < _enemies.Count; i++)
+            foreach (var enemy in _enemies)
             {
-                if (_enemies[i])
+                if (enemy)
                 {
-                    _enemies[i].HealthBehaviour.OnDead -= OnEnemyDied;
+                    enemy.HealthBehaviour.OnDead -= OnEnemyDied;
                 }
             }
         }
