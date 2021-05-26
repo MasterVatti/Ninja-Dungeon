@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using Characteristics;
-using ProjectileLauncher;
 using UnityEngine;
 
 namespace Enemies
@@ -7,27 +7,28 @@ namespace Enemies
     /// <summary>
     /// Ищет ближайшего врага по отношению к игроку
     /// </summary>
-    public class NearestTargetProvider : MonoBehaviour, ITargetProvider
+    public class NearestTargetProvider
     {
-        public Person GetTarget()
+        public T GetNearestTarget<T>(List<T> targets, Vector3 position)
+         where T : Person
         {
-            var playerPosition = transform.position;
             var minDistance = float.MaxValue;
             var minIndex = 0;
 
-            for (var index = 0; index < MainManager.EnemiesManager.Enemies.Count; index++)
+            for (var index = 0; index < targets.Count; index++)
             {
-                var enemy = MainManager.EnemiesManager.Enemies[index];
-                var distanceToPlayer = Vector3.Distance(enemy.transform.position, playerPosition);
+                var target = targets[index];
+                var distanceToTarget = Vector3.Distance(target.transform.position, position);
 
-                if (minDistance > distanceToPlayer)
+                if (minDistance > distanceToTarget)
                 {
-                    minDistance = distanceToPlayer;
+                    minDistance = distanceToTarget;
                     minIndex = index;
                 }
             }
 
-            return MainManager.EnemiesManager.Enemies[minIndex];
+            return targets[minIndex];
         }
+        
     }
 }

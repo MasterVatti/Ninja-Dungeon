@@ -1,28 +1,29 @@
+using Characteristics;
 using Enemies;
-using Panda;
 using ProjectileLauncher;
-using UnityEngine;
 
 /// <summary>
 /// Отвечает за аттаки ближнего боя.
 /// </summary>
-[RequireComponent(typeof(Unit))]
-public class MeleeAttackBehavior : MonoBehaviour
+public class MeleeAttackBehavior : IAttackBehaviour
 {
-    private Unit _unit;
-
-    private void Awake()
-    {
-        _unit = GetComponent<Unit>();
-    }
+    public bool IsCooldown { get; }
     
-    [Task]
-    private void Attack()
+    private readonly PersonCharacteristics _personCharacteristics;
+
+    public bool CanAttack(Person person)
     {
-        var target = _unit.TargetProvider.GetTarget();
-        var healthBehaviour = target.GetComponent<HealthBehaviour>();
-        healthBehaviour.ApplyDamage(Team.Enemy, _unit.Characteristics.AttackDamage);
-            
-        Task.current.Succeed();
+        return true;
+    }
+
+    public MeleeAttackBehavior(PersonCharacteristics personCharacteristics)
+    {
+        _personCharacteristics = personCharacteristics;
+    }
+
+    public void Attack(Person person)
+    {
+        var healthBehaviour = person.GetComponent<HealthBehaviour>();
+        healthBehaviour.ApplyDamage(Team.Enemy, _personCharacteristics.AttackDamage);
     }
 }

@@ -6,40 +6,25 @@ using UnityEngine.AI;
 /// <summary>
 /// Отвечает за погоню.
 /// </summary>
-public class ChaseBehavior : MonoBehaviour
+public class ChaseBehavior 
 {
-    [SerializeField]
-    private Unit _unit;
-    [SerializeField]
     private float _stopChaseDistance;
-    [SerializeField]
     private NavMeshAgent _agent;
-    
-    private Person _target;
-    
-    [Task]
-    private void GetTarget()
+
+    public ChaseBehavior(NavMeshAgent agent, float stopChaseDistance)
     {
-        _target = _unit.TargetProvider.GetTarget();
-        Task.current.Succeed();
+        _agent = agent;
+        _stopChaseDistance = stopChaseDistance;
     }
-    
-    [Task]
-    private bool IsAtRequiredDistance(float distance)
+
+    public void Chase(Person target)
     {
-        var targetDistance = Vector3.Distance(_target.transform.position, _agent.transform.position);
-        return targetDistance <= distance;
-    }
-    
-    [Task]
-    private void Chase()
-    {
-        var distance = Vector3.Distance(_target.transform.position, _agent.transform.position);
+        var distance = Vector3.Distance(target.transform.position, _agent.transform.position);
 
         if (distance >= _stopChaseDistance)
         {
             _agent.isStopped = false;
-            _agent.SetDestination(_target.transform.position);
+            _agent.SetDestination(target.transform.position);
         }
         else
         {

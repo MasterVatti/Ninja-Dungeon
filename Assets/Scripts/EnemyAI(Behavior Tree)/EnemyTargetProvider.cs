@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Assets.Scripts;
 using Characteristics;
-using Panda;
+using Enemies;
 using ProjectileLauncher;
 using UnityEngine;
 
@@ -11,11 +11,21 @@ using UnityEngine;
 public class EnemyTargetProvider : MonoBehaviour, ITargetProvider
 {
     private readonly List<Person> _targets = new List<Person>();
-    private Person _target;
+    private NearestTargetProvider _nearestTargetProvider;
+
+    private void Awake()
+    {
+        _nearestTargetProvider = new NearestTargetProvider();
+    }
 
     public Person GetTarget()
     {
-        return _target;
+        if (_targets != null)
+        {
+            return _nearestTargetProvider.GetNearestTarget(_targets, transform.position);  
+        }
+
+        return null;
     }
     
     private void OnTriggerEnter(Collider other)
@@ -30,44 +40,5 @@ public class EnemyTargetProvider : MonoBehaviour, ITargetProvider
     private void OnTriggerExit(Collider other)
     {
         _targets.Remove(other.gameObject.GetComponent<Person>());
-    }
-    
-    [Task]
-    private bool DetermineNearestTarget()
-    {
-        if (_targets.Count != 0)
-        {
-            var minDistance = float.MaxValue;
-            var minIndex = 0;
-            var iterationCount = 0;
-            
-            foreach (var target in _targets)
-            {
-                if (target != null)
-                {
-                    var distanceToTarget = Vector3.Distance(target.transform.position,
-                        gameObject.transform.position);
-
-                    if (minDistance > distanceToTarget)
-                    {
-                        minDistance = distanceToTarget;
-                        minIndex = iterationCount;
-                    }
-                
-                    iterationCount++;  
-                }
-            }
-
-            _target = _targets[minIndex];
-            return true;
-        }
-        
-        return false;
-    }
-    
-    [Task]
-    private bool IsTargetKilled()
-    {
-        return _target == null;
     }
 }

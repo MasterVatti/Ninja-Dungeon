@@ -6,24 +6,22 @@ using UnityEngine.AI;
 /// <summary>
 /// Отвечает за следованием за Игроком.
 /// </summary>
-public class FollowBehavior : MonoBehaviour
+public class FollowBehavior
 {
-    [SerializeField]
-    private float _stopFollowingDistance;
-    [SerializeField]
-    private float _guardsDistance = 3;
-    [SerializeField]
-    private NavMeshAgent _agent;
+    private readonly float _stopFollowingDistance;
+    private readonly float _guardsDistance;
+    private readonly NavMeshAgent _agent;
+    private readonly Player _player;
 
-    private Player _player;
-
-    private void Start()
+    public FollowBehavior(NavMeshAgent agent, float stopFollowingDistance, float guardsDistance)
     {
+        _stopFollowingDistance = stopFollowingDistance;
+        _guardsDistance = guardsDistance;
+        _agent = agent;
         _player = MainManager.Player;
     }
-
-    [Task]
-    private void FollowPlayer()
+    
+    public void FollowPlayer()
     {
         var distance = Vector3.Distance(_player.transform.position, _agent.transform.position);
 
@@ -37,16 +35,10 @@ public class FollowBehavior : MonoBehaviour
             Task.current.Succeed();
         }
     }
-
+    
     private Vector3 GetRandomFollowingPoint()
     {
         var offsetX = Random.Range(-_guardsDistance, _guardsDistance);
         return _player.transform.TransformPoint(offsetX, 0, 0 - _guardsDistance);
-    }
-
-    [Task]
-    private bool IsTherePlayer()
-    {
-        return _player != null;
     }
 }

@@ -26,7 +26,6 @@ public class AIProjectileLauncher : MonoBehaviour
     private void Shooting()
     {
         // TODO:
-        // 1. ITargetProvider - эти классы не должны содержать ничего кроме определения цели
         // 2. Написать новый AttackBehaviour, в котором вернуть все проверки на рейкасты внутри 
         // CanAttack
         var target = _targetProvider.GetTarget();

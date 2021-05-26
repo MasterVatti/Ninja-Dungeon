@@ -5,41 +5,27 @@ using UnityEngine.AI;
 /// <summary>
 /// Отвечает за передвижение.
 /// </summary>
-public class MovementBehaviour : MonoBehaviour
+public class MovementBehaviour :  IMovementBehavior 
 {
-    [SerializeField]
+    private const float POINT_DISTANCE_ERROR = 0.5f;
     private NavMeshAgent _agent;
-    [SerializeField]
-    private float _pointDistanceError = 0.5f;
-
     private NavMeshPath _navMeshPath;
     private Vector3 _movePoint;
-    
-    private GameObject _target;
 
-    private void Start()
+    public MovementBehaviour(NavMeshAgent agent)
     {
+        _agent = agent;
         _navMeshPath = new NavMeshPath();
     }
     
-    public void ChangePointMovement(Vector3 movePoint)
+    public void CheckMoveDestination(Vector3 movePoint)
     {
         if (_agent.CalculatePath(movePoint, _navMeshPath))
         {
-            _movePoint = movePoint;
-        }
-        else
-        {
-            _movePoint = _agent.transform.position;
+            MoveTo(movePoint);
         }
     }
-
-    private void MoveToDestination()
-    {
-        MoveTo(_movePoint);
-        WaitArrival();
-    }
-
+    
     private bool SetDestination(Vector3 movePoint)
     {
         _movePoint = movePoint;
@@ -53,7 +39,7 @@ public class MovementBehaviour : MonoBehaviour
         return true;
     }
 
-    private void MoveTo(Vector3 movePoint)
+    public void MoveTo(Vector3 movePoint)
     {
         SetDestination(movePoint);
         if (Task.current.isStarting)
@@ -68,7 +54,7 @@ public class MovementBehaviour : MonoBehaviour
     {
         var currentTask = Task.current;
         var distance = _agent.remainingDistance;
-        if (!currentTask.isStarting && _agent.remainingDistance <= _pointDistanceError)
+        if (!currentTask.isStarting && _agent.remainingDistance <= POINT_DISTANCE_ERROR)
         {
             currentTask.Succeed();
         }
@@ -78,11 +64,4 @@ public class MovementBehaviour : MonoBehaviour
             currentTask.debugInfo = string.Format("distance-{0:0.00}", distance);
         }
     }
-    
-    private void SetTargetPosition()
-    {
-        _movePoint = _target.transform.position;
-        Task.current.Succeed();
-    }
-    
 }
