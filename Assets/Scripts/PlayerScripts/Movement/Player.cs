@@ -28,11 +28,11 @@ namespace PlayerScripts.Movement
             var direction = InputController.GetDirection();
             if (direction.x != 0 || direction.z != 0)
             {
-                _launcher.StopAutoFire();
+                _launcher.TurnAutoFire(false);
             }
             else
             {
-                _launcher.StartAutoFire();
+                _launcher.TurnAutoFire(true);
             }
         }
         

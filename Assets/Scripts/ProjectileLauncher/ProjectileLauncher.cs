@@ -67,13 +67,8 @@ namespace ProjectileLauncher
 
             projectile.Initialize(nearestEnemyDirection);
         }
-
-        public void StartAutoFire()
-        {
-            _isAutoFire = true;
-        }
-
-        public void StopAutoFire()
+        
+        public void TurnAutoFire(bool active)
         {
             _isAutoFire = false;
         }
