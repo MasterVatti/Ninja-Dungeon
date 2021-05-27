@@ -38,7 +38,6 @@ namespace Enemies.Spawner
             }
             else
             {
-                Debug.Log("EventBus");
                 EventBus.Publish<ISpawnHandler>(spawner => spawner.EndSpawn());
             }
         }
