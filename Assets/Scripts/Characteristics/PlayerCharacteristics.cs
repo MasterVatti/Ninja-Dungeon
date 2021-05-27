@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characteristics
 {
@@ -7,64 +8,58 @@ namespace Characteristics
     /// </summary>
     public class PlayerCharacteristics : PersonCharacteristics
     {
-        public int RicochetShells
+        public int ProjectileCount
         {
-            get => _ricochetShells;
-            set => _ricochetShells = value;
+            get => _projectileCount;
+            set => _projectileCount = value;
         }
         
-        public int MultishotShells
+        public int RicochetProjectiles
         {
-            get => _multishotShells;
-            set => _multishotShells = value;
+            get => _ricochetProjectiles;
+            set => _ricochetProjectiles = value;
+        }
+
+        public bool FrontalProjectiles
+        {
+            get => _frontalProjectiles;
+            set => _frontalProjectiles = value;
         }
         
-        public int FrontalityShells
+        public bool DiagonalProjectiles
         {
-            get => _frontalityShells;
-            set => _frontalityShells = value;
+            get => _diagonalProjectiles;
+            set => _diagonalProjectiles = value;
         }
-        
-        public bool DiagonalShells
+
+        public bool ProjectileBack
         {
-            get => _diagonalShells;
-            set => _diagonalShells = value;
+            get => _projectileBack;
+            set => _projectileBack = value;
         }
-        
-        public int LevelUpperWorld
+
+        public bool SideProjectiles
         {
-            get => LevelUpperWorld;
-            set => Mathf.Clamp(value,1,_levelMaxUpperWorld);
+            get => _sideProjectiles;
+            set => _sideProjectiles = value;
         }
-        
-        public int LevelDungeon
-        {
-            get => _levelDungeon;
-            set => Mathf.Clamp(value, 1, _levelMaxDungeon);
-        }
-        
-        public int ExperienceUpperWorld { get; set; }
-        
-        public int ExperienceDungeon { get; set; }
 
         [Header("Weapon")]
         [SerializeField]
-        private int _ricochetShells;
+        private int _projectileCount = 1;
+        [FormerlySerializedAs("ricochetProjectiles")]
         [SerializeField]
-        private int _multishotShells;
+        private int _ricochetProjectiles;
+        [FormerlySerializedAs("frontalProjectiles")]
         [SerializeField]
-        private int _frontalityShells;    
+        private bool _frontalProjectiles;    
+        [FormerlySerializedAs("diagonalProjectiles")]
         [SerializeField]
-        private bool _diagonalShells;
-        
-        [Header("Level")]
+        private bool _diagonalProjectiles;
         [SerializeField]
-        private int _levelMaxUpperWorld;
+        private bool _projectileBack;
+        [FormerlySerializedAs("sideProjectiles")]
         [SerializeField]
-        private int _levelMaxDungeon;
-
-        private int _levelDungeon;
-        private int _levelUpperWorld;
-
+        private bool _sideProjectiles;
     }
 }

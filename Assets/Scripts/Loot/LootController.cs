@@ -31,10 +31,8 @@ namespace Loot
         
         private void StartItemCreation(Person person)
         {
-            var enemy = person.GetComponentInChildren<Enemy>();
-            
-            CreateItem(_equipmentItems, enemy.transform);
-            CreateItem(_resourceItems, enemy.transform);
+            CreateItem(_equipmentItems, person.transform);
+            CreateItem(_resourceItems, person.transform);
         }
 
         private void CreateItem<T>(List<T> listItem, Transform transform) where T : ItemLoot

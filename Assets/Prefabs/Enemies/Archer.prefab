@@ -709,7 +709,8 @@ GameObject:
   - component: {fileID: 65047768532222198}
   - component: {fileID: 54406403011211884}
   - component: {fileID: 6468529548311081048}
-  - component: {fileID: -4737009511530673049}
+  - component: {fileID: 1897514327507736814}
+  - component: {fileID: 7338849949044535725}
   m_Layer: 9
   m_Name: Archer
   m_TagString: Enemy
@@ -773,16 +774,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9637f3aebb4b60a45bd2355e1de34e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHP: 100
-  _maxHp: 100
-  _moveSpeed: 25
-  _attackDamage: 0
-  _attackRate: 0
-  _canMove: 0
-  _canAttack: 0
+  _personCharacteristics: {fileID: 1897514327507736814}
+  _healthBehaviour: {fileID: 7338849949044535725}
   _rigidbody: {fileID: 54406403011211884}
-  _healthSystem: {fileID: -4737009511530673049}
---- !u!114 &-4737009511530673049
+--- !u!114 &1897514327507736814
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -791,6 +786,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1959266855851146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae2afb1c15bf644b9fcd3ff474c7675, type: 3}
+  m_Script: {fileID: 11500000, guid: c752e006ecbf62f4980061719971fdf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHP: 100
+  _maxHp: 100
+  _moveSpeed: 20
+  _attackDamage: 5
+  _attackRate: 5
+  _canMove: 1
+  _canAttack: 1
+--- !u!114 &7338849949044535725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959266855851146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b22f00f3b5846d409eee145d80d44c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
