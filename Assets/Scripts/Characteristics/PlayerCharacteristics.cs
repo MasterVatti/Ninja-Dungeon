@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -43,6 +44,35 @@ namespace Characteristics
             get => _sideProjectiles;
             set => _sideProjectiles = value;
         }
+        
+        public int LevelUpperWorld
+        {
+            get => _levelUpperWorld;
+            set => _levelUpperWorld = Mathf.Clamp(value, 0, _levelMaxUpperWorld);
+        }
+
+        public int LevelDungeon
+        {
+            get => _levelDungeon;
+            set => _levelDungeon = Mathf.Clamp(value, 0, _levelMaxDungeon);
+        }
+
+        public int MaximumExperienceLevelDungeon
+        {
+            get => _maximumExperienceLevelDungeon;
+            set => _maximumExperienceLevelDungeon = value;
+        }
+
+        public int MaximumExperienceLevelUpperWorld
+        {
+            get => _maximumExperienceLevelUpperWorld;
+            set => _maximumExperienceLevelUpperWorld = value;
+        }
+        
+        public int ExperienceUpperWorld { get; set; }
+        public int ExperienceDungeon { get; set; }
+        public int LevelMaxDungeon => _levelMaxDungeon;
+        public int LevelMaxUpperWorld => _levelMaxUpperWorld;
 
         [Header("Weapon")]
         [SerializeField]
@@ -61,5 +91,18 @@ namespace Characteristics
         [FormerlySerializedAs("sideProjectiles")]
         [SerializeField]
         private bool _sideProjectiles;
+        
+        [Header("Level")]
+        [SerializeField]
+        private int _levelMaxUpperWorld;
+        [SerializeField]
+        private int _levelMaxDungeon;
+        [SerializeField]
+        private int _maximumExperienceLevelUpperWorld;
+        [SerializeField]
+        private int _maximumExperienceLevelDungeon;
+        
+        private int _levelDungeon;
+        private int _levelUpperWorld;
     }
 }

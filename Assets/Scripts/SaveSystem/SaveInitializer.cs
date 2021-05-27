@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using BuildingSystem;
+using Characteristics;
+using ExperienceSystem;
 using Newtonsoft.Json;
 using ResourceSystem;
 
@@ -32,6 +34,15 @@ namespace SaveSystem
                     }
                 }
             }
+        }
+
+        public static void InitializePlayer(PlayerData playerData)
+        {
+            var player = (PlayerCharacteristics)MainManager.Player.PersonCharacteristics;
+
+            player.ExperienceUpperWorld = playerData.ExperienceUpperWorld;
+            player.LevelUpperWorld = playerData.LevelUpperWorld;
+            player.MaximumExperienceLevelUpperWorld = playerData.MaximumExperienceLevelUpperWorld;
         }
 
         public static void InitializeResources(IEnumerable<Resource> resources)

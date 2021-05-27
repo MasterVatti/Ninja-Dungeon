@@ -1,4 +1,5 @@
 ﻿using System;
+using ExperienceSystem;
 using Newtonsoft.Json;
 using ResourceSystem;
 
@@ -13,5 +14,7 @@ namespace SaveSystem
         public Resource[] Resources { get; set; }
         [JsonProperty("buildings")]
         public BuildingData[] Buildings { get; set; }
+        [JsonProperty("player")]
+        public PlayerData Player { get; set; }
     }
 }

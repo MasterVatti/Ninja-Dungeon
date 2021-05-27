@@ -5319,7 +5319,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5381420381248884878
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15973,12 +15973,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resourceLabels:
-  - _type: 0
-    _label: {fileID: 5381420382677161169}
-  - _type: 1
-    _label: {fileID: 5381420382311262082}
-  - _type: 2
-    _label: {fileID: 5381420381773474265}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _animationTime: 0
 --- !u!114 &5095047051130847021
 MonoBehaviour:
   m_ObjectHideFlags: 0

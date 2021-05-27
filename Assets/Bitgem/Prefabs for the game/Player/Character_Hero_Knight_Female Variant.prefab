@@ -123,9 +123,115 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97e0167566cac94390de02b2b4b5160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
   _player: {fileID: 5999530186611411129}
   _rotationSpeed: 0.5
+--- !u!114 &2449130821658452670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332810461780597416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b22f00f3b5846d409eee145d80d44c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3640009805018513011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332810461780597416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bf122090a4af4540beb418d813a6d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4448001720697327697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332810461780597416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9604bc4aa00a7fe47a52484d76e9ab04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHP: 100
+  _maxHp: 100
+  _moveSpeed: 5
+  _attackDamage: 50
+  _attackRate: 2
+  _canMove: 0
+  _canAttack: 0
+  _projectileCount: 1
+  _ricochetProjectiles: 0
+  _frontalProjectiles: 0
+  _diagonalProjectiles: 0
+  _projectileBack: 0
+  _sideProjectiles: 0
+  _levelMaxUpperWorld: 25
+  _levelMaxDungeon: 25
+  _maximumExperienceLevelUpperWorld: 1000
+  _maximumExperienceLevelDungeon: 1000
+--- !u!114 &4855041260196846328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332810461780597416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aabd24cbe2483e41be3ca3524465e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5056956823601547232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332810461780597416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f6b8953c830574e88e51dd502eec6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7302497127201166515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332810461780597416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dc2c43e763d67d48ad240f9a3a41073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buffManager: {fileID: 4855041260196846328}
+  _personCharacteristics: {fileID: 4448001720697327697}
+  _healthBehaviour: {fileID: 2449130821658452670}
+  _rigidbody: {fileID: 5999530186611411129}
+  _experienceControllerUpperWorld: {fileID: 3640009805018513011}
+  _experienceControllerDungeon: {fileID: 5056956823601547232}
+--- !u!114 &8127279552458918950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332810461780597416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f64567e3e7f7a7479737900c1500aee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8612368028911967637
 GameObject:
   m_ObjectHideFlags: 0
