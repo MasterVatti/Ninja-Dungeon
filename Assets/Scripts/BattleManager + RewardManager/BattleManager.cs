@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using Assets.Scripts.Managers.ScreensManager;
 using Characteristics;
 using DefaultNamespace;
 using Enemies;
 using Enemies.Spawner;
-using ResourceSystem;
 using UnityEngine;
 
 namespace Assets.Scripts.BattleManager

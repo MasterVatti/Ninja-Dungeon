@@ -16,7 +16,7 @@ namespace Assets.Scripts.BattleManager
             GetLevelReward(_rewardDictionary, rewardList);
 
             rewardList = nextLevel[currentLevelIndex].BonusReward;
-            GetLevelReward(_rewardDictionary, rewardList);
+            GetLevelReward(_bonusDictionary, rewardList);
         }
 
         private void GetLevelReward(Dictionary<ResourceType, List<int>> rewardDictionary, List<Resource> rewardList)
