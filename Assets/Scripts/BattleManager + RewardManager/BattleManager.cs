@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Assets.Scripts.Managers.ScreensManager;
 using Characteristics;
 using DefaultNamespace;
@@ -22,8 +21,7 @@ namespace Assets.Scripts.BattleManager
         [SerializeField]
         private RoomSettings _roomSettings;
 
-        private Dictionary<ResourceType, List<int>> _rewardDictionary = new Dictionary<ResourceType, List<int>>();
-        private Dictionary<ResourceType, List<int>> _bonusDictionary = new Dictionary<ResourceType, List<int>>();
+        private RewardManager _rewardManager;
         private HealthBehaviour _healthBehaviour;
         private Spawner _spawner;
 
@@ -33,6 +31,7 @@ namespace Assets.Scripts.BattleManager
         private void Awake()
         {
             _lastLevelIndex = _roomSettings.LevelSettingsList.Count - 1;
+            _rewardManager = new RewardManager();
             
             _healthBehaviour = MainManager.Player.GetComponent<HealthBehaviour>();
             _healthBehaviour.OnDead += PlayerDeath;
@@ -47,7 +46,6 @@ namespace Assets.Scripts.BattleManager
             HasLevelPassed = true;
             
             IsLevelFinished?.Invoke();
-            Debug.Log(HasLevelPassed);
         }
         
         public void SetSpawner(Spawner spawner)
@@ -56,7 +54,6 @@ namespace Assets.Scripts.BattleManager
             _spawner.Initialize();
             
             HasLevelPassed = false;
-            Debug.Log(HasLevelPassed);
         }
 
         public void StartBattle(RoomSettings roomSettings, Vector3 teleportPosition)
@@ -70,7 +67,7 @@ namespace Assets.Scripts.BattleManager
 
         public void GoToNextLevel(RoomSettings roomSettings, Vector3 teleportPosition)
         {
-            LevelRewardAccrual(roomSettings);
+            _rewardManager.LevelRewardAccrual(roomSettings, _currentLevelIndex);
             
             _currentLevelIndex++;
             
@@ -79,7 +76,7 @@ namespace Assets.Scripts.BattleManager
             
             if (IsLastLevelPassed())
             {
-                GetFinalReward();
+                _rewardManager.GetFinalReward();
 
                 //UI выигрыша Алексея
 
@@ -98,62 +95,7 @@ namespace Assets.Scripts.BattleManager
         {
             return _currentLevelIndex == _lastLevelIndex && HasLevelPassed;
         }
-        
-        private void LevelRewardAccrual(RoomSettings roomSettings)
-        {
-            var nextLevel = roomSettings.LevelSettingsList;
-            
-            var rewardList = nextLevel[_currentLevelIndex].DefaultReward;
-            GetLevelReward(_rewardDictionary, rewardList);
-            
-            rewardList = nextLevel[_currentLevelIndex].BonusReward;
-            GetLevelReward(_rewardDictionary, rewardList);
-        }
-        
-        private void GetLevelReward(Dictionary<ResourceType, List<int>> rewardDictionary, List<Resource> rewardList)
-        {
-            foreach (var reward in rewardList)
-            {
-                if (rewardDictionary.TryGetValue(reward.Type, out var amountList))
-                {
-                    amountList.Add((int) reward.Amount);
-                }
-                else
-                {
-                    amountList = new List<int>
-                    {
-                        (int) reward.Amount
-                    };
 
-                    rewardDictionary.Add(reward.Type, amountList);
-                }
-            }
-        }
-        
-        private void GetFinalReward()
-        {
-            foreach (var reward in _rewardDictionary)
-            {
-                EarnReward(reward.Key, reward.Value);
-            }
-
-            foreach (var bonus in _bonusDictionary)
-            {
-                EarnReward(bonus.Key, bonus.Value);
-            }
-
-            _rewardDictionary.Clear();
-            _bonusDictionary.Clear();
-        }
-
-        private void EarnReward(ResourceType type, List<int> amount)
-        {
-            foreach (var reward in amount)
-            {
-                MainManager.ResourceManager.AddResource(type, reward); //<-- Награда за все уровни
-            }
-        }
-        
         private void PlayerDeath(Person person)
         {
             MainManager.ScreenManager.OpenScreen(ScreenType.DeathScreen); //Окно смерти Игрока
