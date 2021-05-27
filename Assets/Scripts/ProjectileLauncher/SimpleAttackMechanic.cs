@@ -13,6 +13,8 @@ namespace ProjectileLauncher
         public virtual bool CanShoot => true;
         
         [SerializeField]
+        private Transform _positionTrunk;
+        [SerializeField]
         private Projectile.Projectile _projectilePrefab;
         
         private float _lastShotTime;
@@ -53,7 +55,7 @@ namespace ProjectileLauncher
 
         protected virtual void ShootInternal(Vector3 direction)
         {
-            CreateProjectile(transform.position, direction, 1, _personCharacteristics.AttackDamage);
+            CreateProjectile(_positionTrunk.position, direction, 1, _personCharacteristics.AttackDamage);
         }
     }
 }

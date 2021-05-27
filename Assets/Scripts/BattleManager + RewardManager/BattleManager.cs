@@ -91,6 +91,7 @@ namespace Assets.Scripts.BattleManager
         {
             MainManager.LoadingController.StartLoad(levelSettings.SceneName);
             MainManager.Player.transform.position = teleportPosition;
+            MainManager.Player.transform.rotation = Quaternion.LookRotation(Vector3.forward);
         }
         
         private bool IsLastLevelPassed()

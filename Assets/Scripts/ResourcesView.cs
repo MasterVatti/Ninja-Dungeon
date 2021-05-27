@@ -9,6 +9,7 @@ public class ResourcesView : MonoBehaviour
 {
     [SerializeField]
     private List<ResourceLabel> _resourceLabels;
+    [Min(1)]
     [SerializeField]
     private float _animationTime;
     
