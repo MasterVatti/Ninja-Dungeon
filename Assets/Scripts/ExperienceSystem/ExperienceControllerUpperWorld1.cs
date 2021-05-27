@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExperienceController : MonoBehaviour
+public class ExperienceControllerUpperWorld1 : MonoBehaviour
 {
     // Класс Отвечает за логику начисления опыта
     public static event Action<int> OnExperienceChanged;
@@ -23,16 +23,16 @@ public class ExperienceController : MonoBehaviour
     private Coroutine _currentCoroutine;
     private int _startLevel = 1;
     private int _startMaxValue = 100;
-    private string _currentLevelPlayer;
+    
 
     void Start()
     {
-        _currentLevelPlayer =_experienceView.LevelPlayer.text;
-        LoadingExperienceFields();
-        if (Convert.ToInt32(_experienceView.LevelPlayer.text) < _startLevel)
-        {
-            _experienceView.LevelPlayer.text = _startLevel.ToString();
-        }
+      //  _currentLevelPlayer =_experienceView.LevelPlayer.text;
+      //  LoadingExperienceFields();
+      //  if (Convert.ToInt32(_experienceView.LevelPlayer.text) < _startLevel)
+      //  {
+      //      _experienceView.LevelPlayer.text = _startLevel.ToString();
+      //  }
         
         
     }
@@ -44,9 +44,9 @@ public class ExperienceController : MonoBehaviour
 
     public void AddExperience(int value)
     {
-        _currentExperience = _playerExperience.PlayerExperience;
-        var newExperience = Mathf.Clamp(value, 0, _experienceView.PlayerExperience.maxValue);
-        OnExperienceChanged?.Invoke( _playerExperience.PlayerExperience += (int) newExperience);
+       // _currentExperience = _playerExperience.PlayerExperience;
+       // var newExperience = Mathf.Clamp(value, 0, _experienceView.PlayerExperience.maxValue);
+       // OnExperienceChanged?.Invoke( _playerExperience.PlayerExperience += (int) newExperience);
     }
 
     public void SetExperience(int newExperience)
@@ -87,11 +87,11 @@ public class ExperienceController : MonoBehaviour
 
     private void LevelUp()
     {
-        _playerExperience.PlayerExperience -= (int) _experienceView.PlayerExperience.maxValue;
-        _experienceView.PlayerExperience.maxValue += _experienceView.PlayerExperience.maxValue;
-        var levelUp = Convert.ToInt32(_experienceView.LevelPlayer.text);
-        levelUp++;
-        _experienceView.LevelPlayer.text = levelUp.ToString();
+     //   _playerExperience.PlayerExperience -= (int) _experienceView.PlayerExperience.maxValue;
+     //   _experienceView.PlayerExperience.maxValue += _experienceView.PlayerExperience.maxValue;
+     //   var levelUp = Convert.ToInt32(_experienceView.LevelPlayer.text);
+     //   levelUp++;
+     //   _experienceView.LevelPlayer.text = levelUp.ToString();
     }
     
     private void StopCoroutine()
@@ -106,23 +106,23 @@ public class ExperienceController : MonoBehaviour
 
     private void SaveExperienceFields()
     {
-        PlayerPrefs.SetInt("PlayerExperience",_playerExperience.PlayerExperience);
-        PlayerPrefs.SetFloat("MaxValue",_experienceView.PlayerExperience.maxValue);
-        PlayerPrefs.SetString("LevelPlayer",_experienceView.LevelPlayer.text);
-        PlayerPrefs.SetFloat("Value",_experienceView.PlayerExperience.value);
-    }
+     //   PlayerPrefs.SetInt("PlayerExperience",_playerExperience.PlayerExperience);
+     //   PlayerPrefs.SetFloat("MaxValue",_experienceView.PlayerExperience.maxValue);
+     //   PlayerPrefs.SetString("LevelPlayer",_experienceView.LevelPlayer.text);
+     //   PlayerPrefs.SetFloat("Value",_experienceView.PlayerExperience.value);
+    }//
 
     private void LoadingExperienceFields()
     {
-        _playerExperience.PlayerExperience = PlayerPrefs.GetInt("PlayerExperience");
-        _experienceView.PlayerExperience.maxValue = PlayerPrefs.GetFloat("MaxValue");
-        _experienceView.LevelPlayer.text = PlayerPrefs.GetString("LevelPlayer");
-        _experienceView.PlayerExperience.value = PlayerPrefs.GetFloat("Value");
-        if (_experienceView.PlayerExperience.maxValue == 0)
-        {
-            _experienceView.PlayerExperience.maxValue = _startMaxValue;
-            _experienceView.LevelPlayer.text = _startLevel.ToString();
-        }
+     //   _playerExperience.PlayerExperience = PlayerPrefs.GetInt("PlayerExperience");
+     //   _experienceView.PlayerExperience.maxValue = PlayerPrefs.GetFloat("MaxValue");
+     //   _experienceView.LevelPlayer.text = PlayerPrefs.GetString("LevelPlayer");
+     //   _experienceView.PlayerExperience.value = PlayerPrefs.GetFloat("Value");
+     //   if (_experienceView.PlayerExperience.maxValue == 0)
+     //   {
+     //       _experienceView.PlayerExperience.maxValue = _startMaxValue;
+     //       _experienceView.LevelPlayer.text = _startLevel.ToString();
+     //   }
     }
     
     

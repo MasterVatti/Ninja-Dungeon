@@ -30,12 +30,22 @@ namespace Characteristics
             get => _diagonalShells;
             set => _diagonalShells = value;
         }
-
-        public int PlayerExperience
+        
+        public int LevelUpperWorld
         {
-            get => _playerExperience;
-            set => _playerExperience = value;
+            get => LevelUpperWorld;
+            set => Mathf.Clamp(value,1,_levelMaxUpperWorld);
         }
+        
+        public int LevelDungeon
+        {
+            get => _levelDungeon;
+            set => Mathf.Clamp(value, 1, _levelMaxDungeon);
+        }
+        
+        public int ExperienceUpperWorld { get; set; }
+        
+        public int ExperienceDungeon { get; set; }
 
         [Header("Weapon")]
         [SerializeField]
@@ -46,7 +56,15 @@ namespace Characteristics
         private int _frontalityShells;    
         [SerializeField]
         private bool _diagonalShells;
+        
+        [Header("Level")]
+        [SerializeField]
+        private int _levelMaxUpperWorld;
+        [SerializeField]
+        private int _levelMaxDungeon;
 
-        private int _playerExperience;
+        private int _levelDungeon;
+        private int _levelUpperWorld;
+
     }
 }

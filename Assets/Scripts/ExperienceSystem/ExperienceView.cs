@@ -33,29 +33,28 @@ public class ExperienceView : MonoBehaviour
     private Slider _playerExperience;
     [SerializeField] 
     private TextMeshProUGUI _experienceText;
-    [SerializeField]
-    private ExperienceController _experienceController;
+   //private ExperienceController _experienceController;
     void Start()
     {
-        ExperienceController.OnExperienceChanged += OnExperienceChanged;
+   //     ExperienceController.OnExperienceChanged += OnExperienceChanged;
     }
 
     void Update()
     {
         if (Input.GetKeyUp("space"))
         {
-            _experienceController.AddExperience(10);
+         //   _experienceController.AddExperience(10);
         }
     }
     
     private void OnExperienceChanged(int newExperience)
     {
-        _experienceController.SetExperience(newExperience);
+     //   _experienceController.SetExperience(newExperience);
     }
     
     private void OnDestroy()
     {
-        ExperienceController.OnExperienceChanged -= OnExperienceChanged;
+      //  ExperienceController.OnExperienceChanged -= OnExperienceChanged;
     }
     
     
