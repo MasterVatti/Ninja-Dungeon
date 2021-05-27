@@ -1,4 +1,4 @@
-using Shop.Prefabs.Resource_shortage_notification;
+using Shop.Resource_shortage_notification;
 using UnityEngine;
 
 namespace Shop
