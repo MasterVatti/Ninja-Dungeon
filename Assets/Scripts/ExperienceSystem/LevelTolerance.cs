@@ -19,6 +19,7 @@ namespace ExperienceSystem
 
         private void Start()
         {
+            _playerCharacteristics = (PlayerCharacteristics) MainManager.Player.PersonCharacteristics;
             UnlockLevel(_playerCharacteristics.LevelUpperWorld);
             MainManager.Player.ExperienceControllerUpperWorld.OnLevelUp += UnlockLevel;
         }
