@@ -1,6 +1,6 @@
 ﻿namespace SaveSystem
 {
-    public abstract class BaseBuildingState
+    public class BaseBuildingState
     {
     }
 }

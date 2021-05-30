@@ -26,7 +26,6 @@ namespace BuildingSystem
             BuildingSettingsID = buildingSettingsID;
             CurrentBuildingLevel = level;
         }
-
         public void LoadState(string savedData)
         {
             var state = JsonConvert.DeserializeObject<T>(savedData);
@@ -34,11 +33,6 @@ namespace BuildingSystem
         }
         
         protected abstract void OnStateLoaded(T data);
-
-        public IBuilding Upgrade()
-        {
-            return BuildingUpgradeHelper.Upgrade(this);
-        }
 
         public abstract T GetState();
 

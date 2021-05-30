@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Vector3 _offset;
     
-    void LateUpdate()
+    private void LateUpdate()
     {
         var player =  MainManager.Player;
         if (player != null)
