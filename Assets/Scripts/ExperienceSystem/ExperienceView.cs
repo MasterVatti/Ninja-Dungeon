@@ -10,13 +10,11 @@ namespace ExperienceSystem
         private TextMeshProUGUI _currentLevel;
         [SerializeField]
         private Slider _slider;
-
-        private LevelTolerance _levelTolerance;
+        
 
         protected void ShowLevel(int currentLevel)
         {
             _currentLevel.text = currentLevel.ToString();
-            _levelTolerance.UnlockLevel();
         }
         
         protected void ShowProgressExperience(int maxExperience, int currentExperience)

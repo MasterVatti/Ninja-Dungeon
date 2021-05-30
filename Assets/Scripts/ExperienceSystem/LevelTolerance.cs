@@ -10,15 +10,24 @@ public class LevelTolerance : MonoBehaviour
     private GameObject _teleportScene;
     [SerializeField]
     private int _levelUnlock;
-    
+    private Player _player;
     private PlayerCharacteristics _playerCharacteristics;
 
-    public void UnlockLevel()
+    private void Start()
     {
-        if (_levelUnlock <= _playerCharacteristics.LevelUpperWorld)
+        _player.ExperienceControllerUpperWorld.OnLevelUp += UnlockLevel;
+    }
+
+    public void UnlockLevel(int level)
+    {
+        if (_levelUnlock <= level)
         {
             _teleportScene.SetActive(true);
         }
-        _teleportScene.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        _player.ExperienceControllerUpperWorld.OnLevelUp -= UnlockLevel;
     }
 }

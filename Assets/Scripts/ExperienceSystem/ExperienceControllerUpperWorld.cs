@@ -9,6 +9,7 @@ namespace ExperienceSystem
     public class ExperienceControllerUpperWorld : MonoBehaviour
     {
         public event Action<int> OnLevelUp;
+        public event Action<int> OnUnlockLevel;
         
         private PlayerCharacteristics _playerCharacteristics;
         
@@ -36,6 +37,7 @@ namespace ExperienceSystem
             _playerCharacteristics.MaximumExperienceLevelUpperWorld += maximumExperience;
 
             OnLevelUp?.Invoke(_playerCharacteristics.LevelUpperWorld);
+            OnUnlockLevel.Invoke(_playerCharacteristics.LevelUpperWorld);
         }
 
         private bool IsLevelMax()
