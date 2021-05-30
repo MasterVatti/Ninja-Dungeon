@@ -37,7 +37,7 @@ namespace ExperienceSystem
             
             OnLevelUp?.Invoke(_playerCharacteristics.LevelDungeon);
         }
-        
+
         private bool IsLevelMax()
         {
             return _playerCharacteristics.LevelMaxDungeon == _playerCharacteristics.LevelDungeon;
