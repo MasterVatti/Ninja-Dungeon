@@ -17,6 +17,7 @@ public class AfterBattleParticles : MonoBehaviour
     }
 
     private void OnDestroy()
+    
     {
         MainManager.BattleManager.IsLevelFinished -= StartParticles;
     }
