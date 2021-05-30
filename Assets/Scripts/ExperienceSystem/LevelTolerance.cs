@@ -18,7 +18,7 @@ public class LevelTolerance : MonoBehaviour
         MainManager.Player.ExperienceControllerUpperWorld.OnLevelUp += UnlockLevel;
     }
 
-    public void UnlockLevel(int level)
+    private void UnlockLevel(int level)
     {
         if (_levelUnlock <= level)
         {
