@@ -1,5 +1,4 @@
 using Characteristics;
-using UnityEngine;
 
 namespace ProjectileLauncher
 {

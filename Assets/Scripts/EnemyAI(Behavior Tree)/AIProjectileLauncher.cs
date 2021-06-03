@@ -25,14 +25,14 @@ public class AIProjectileLauncher : MonoBehaviour
     [Task]
     private void Shooting()
     {
-        // TODO:
-        // 2. Написать новый AttackBehaviour, в котором вернуть все проверки на рейкасты внутри 
-        // CanAttack
         var target = _targetProvider.GetTarget();
         if (_attackBehaviour.CanAttack(target) && !_attackBehaviour.IsCooldown)
         {
             _agent.isStopped = true;
+            transform.LookAt(target.transform);
+            
             _attackBehaviour.Attack(target);
+            
             Task.current.Succeed();
         }
     }

@@ -8,15 +8,13 @@ namespace ProjectileLauncher
     public class SimpleAttackBehaviour : MonoBehaviour, IAttackBehaviour
     {
         private const int START_BULLETS_COUNT = 10;
-
+        
         public bool IsCooldown => _lastShotTime + _projectileSpawnCooldown > Time.time;
 
         [SerializeField]
         private Team _ownerTeam;
-        
         [SerializeField]
         private Projectile _projectilePrefab;
-
         [SerializeField]
         protected PersonCharacteristics _personCharacteristics;
         
@@ -28,7 +26,7 @@ namespace ProjectileLauncher
 
         protected virtual void Awake()
         {
-            _projectileSpawnCooldown = 1 / _personCharacteristics.AttackRate;
+            _projectileSpawnCooldown = _personCharacteristics.AttackRate;
             _bulletsPool = new ObjectPool(_projectilePrefab.gameObject, START_BULLETS_COUNT);
         }
 

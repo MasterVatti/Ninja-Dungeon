@@ -26,9 +26,11 @@ namespace ProjectileLauncher
             }
             
             var enemy = _nearestTargetProvider.GetNearestTarget(MainManager.EnemiesManager.Enemies, transform.position);
+            
             if (_attackBehaviour.CanAttack(enemy))
             {
                 transform.parent.LookAt(enemy.transform);
+                
                 _attackBehaviour.Attack(enemy);
             }
         }

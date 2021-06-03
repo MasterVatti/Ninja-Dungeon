@@ -1,11 +1,9 @@
-tree("Root")
-    tree("TopNode")
 //Последовательность: бездействует если на 
 //растоянии 20 нет игрока, 
 //если есть приследует, останавливается на 7,
 //стреляет 3 раза отбегает назад стреляет 3 раза.
 //Если хп меньше 30 спавнит голема.
-tree("TopNode")
+tree("Root")
      fallback
                 tree("GolemSpawn")
                 tree("Attack")
@@ -24,21 +22,17 @@ tree("GolemSpawn")
 
 tree("Chase")
     sequence
-        DetermineNearestTarget
+        GetTarget
         while not IsTargetKilled
             sequence
-                GetTarget
                 IsAtRequiredDistance(20.0)
                 Chase
         
 tree("Attack")
     while not IsTargetKilled
         sequence
-            DetermineNearestTarget
-            GetTarget
             IsAtRequiredDistance(12.0)
             tree("Shot")
-            SetBackPoint
+            SetMoveBackPoint
             MoveToDestination
-            DetermineNearestTarget
             tree("Shot")

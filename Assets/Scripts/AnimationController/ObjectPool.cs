@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class ObjectPool
 {
-    private List<GameObject> _pooledObjects = new List<GameObject>();
+    private readonly List<GameObject> _pooledObjects = new List<GameObject>();
 
     public ObjectPool(GameObject prefab, int amount = 5)
     {

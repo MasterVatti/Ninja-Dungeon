@@ -11,8 +11,6 @@ namespace Barracks_and_allied_behavior
         [SerializeField]
         protected NavMeshAgent _agent;
         [SerializeField]
-        protected PandaBehaviour _panda;
-        [SerializeField]
         protected PersonCharacteristics _personCharacteristics;
         [SerializeField]
         protected float _stopChaseDistance;
@@ -22,49 +20,67 @@ namespace Barracks_and_allied_behavior
         protected FollowBehavior _followBehavior;
         protected IAttackBehaviour _attackBehaviour;
         protected IMovementBehavior _iMovementBehavior;
-        
-        protected Person _target;
 
-        protected void ActivateBehaviorTree()
+        protected Person _target;
+        
+        [Task]
+        protected bool GetTarget()
         {
-            _panda.enabled = true;
+            _target = _targetProvider.GetTarget();
+            return _target != null;
+        }
+
+        [Task]
+        protected void MoveToDestination()
+        {
+            _iMovementBehavior.MoveToDestination();
         }
         
         [Task]
-        private bool IsTargetKilled()
+        protected bool IsTargetKilled()
         {
             return _target == null;
         }
-        
+
         [Task]
-        private void Attack()
+        protected void Attack()
         {
-            _attackBehaviour.Attack(_target);
+            if (_attackBehaviour.CanAttack(_target) && !_attackBehaviour.IsCooldown)
+            {
+                _attackBehaviour.Attack(_target);
+                Task.current.Succeed();
+            }
         }
 
         [Task]
-        private bool IsAtRequiredDistance(float distance)
+        protected bool IsAtRequiredDistance(float distance)
         {
+            if (!GetTarget())
+            {
+                return false;
+            }
+            
             var targetDistance = Vector3.Distance(_target.transform.position, _agent.transform.position);
             return targetDistance <= distance;
         }
 
         [Task]
-        private void Chase()
+        protected void Chase()
         {
             _chaseBehavior.Chase(_target);
         }
-        
+
         [Task]
-        private void FollowPlayer()
+        protected void FollowPlayer()
         {
             _followBehavior.FollowPlayer();
         }
 
         [Task]
-        private bool IsTherePlayer()
+        protected bool IsTherePlayer()
         {
             return MainManager.Player != null;
         }
+        
     }
 }

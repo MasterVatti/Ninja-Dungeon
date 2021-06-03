@@ -23,6 +23,15 @@ namespace Enemies
             _person = GetComponent<Person>();
         }
 
+        public void ApplyDamage(int damage)
+        {
+            _person.PersonCharacteristics.CurrentHp -= damage;
+            if (_person.PersonCharacteristics.CurrentHp <= 0)
+            {
+                Death();
+            }
+        }
+        
         public void ApplyDamage(Team damageDealerTeam, int damage)
         {
             if (damageDealerTeam == _team)

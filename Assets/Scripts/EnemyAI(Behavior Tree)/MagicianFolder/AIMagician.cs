@@ -23,13 +23,12 @@ namespace MagicianFolder
         private void Awake()
         {
             _personCharacteristics.CurrentHp = _personCharacteristics.MaxHp;
-            
+
+            _attackBehaviour = GetComponent<IAttackBehaviour>();
             _targetProvider = GetComponent<EnemyTargetProvider>();
             _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistance);
-            _attackBehaviour = new RangeAttackBehavior();
             _iMovementBehavior = new MovementBehaviour(_agent);
             
-            ActivateBehaviorTree();
         }
         
         [Task]
@@ -47,7 +46,7 @@ namespace MagicianFolder
         }
 
         [Task]
-        private void MoveBackPoint()
+        private void SetMoveBackPoint()
         {
             _iMovementBehavior.CheckMoveDestination(gameObject.transform.TransformPoint(0, 0, 0 - _runBackDistance));
             Task.current.Succeed();

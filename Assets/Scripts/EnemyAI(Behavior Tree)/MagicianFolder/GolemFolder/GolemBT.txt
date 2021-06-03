@@ -2,16 +2,14 @@ tree("Root")
     tree("TopNode")
 //Бежит на точку к игроку.
 //Если игрок на в радиусе атаки, атакует.
-//Станится на 1 сек и опять бежит на точку к игроку.
+//Станится на 2 сек и опять бежит на точку к игроку.
 
 tree("TopNode")
         sequence
-            DetermineNearestTarget
+            GetTarget
             while not IsTargetKilled
                 sequence
-                    GetTarget
                     SetTargetPosition
                     MoveToDestination
                     IsAtRequiredDistance(2.0)
                     Attack
-                    Wait(2.0)

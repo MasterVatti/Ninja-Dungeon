@@ -7,9 +7,9 @@ using UnityEngine.AI;
 /// </summary>
 public class MovementBehaviour :  IMovementBehavior 
 {
-    private const float POINT_DISTANCE_ERROR = 0.5f;
-    private NavMeshAgent _agent;
-    private NavMeshPath _navMeshPath;
+    private const float POINT_DISTANCE_ERROR = 1f;
+    private readonly NavMeshAgent _agent;
+    private readonly NavMeshPath _navMeshPath;
     private Vector3 _movePoint;
 
     public MovementBehaviour(NavMeshAgent agent)
@@ -18,11 +18,21 @@ public class MovementBehaviour :  IMovementBehavior
         _navMeshPath = new NavMeshPath();
     }
     
+    public void MoveToDestination()
+    {
+        MoveTo(_movePoint);
+        WaitArrival();
+    }
+    
     public void CheckMoveDestination(Vector3 movePoint)
     {
         if (_agent.CalculatePath(movePoint, _navMeshPath))
         {
-            MoveTo(movePoint);
+            _movePoint = movePoint;
+        }
+        else
+        {
+            _movePoint = _agent.transform.position;
         }
     }
     
@@ -38,7 +48,7 @@ public class MovementBehaviour :  IMovementBehavior
 
         return true;
     }
-
+    
     public void MoveTo(Vector3 movePoint)
     {
         SetDestination(movePoint);

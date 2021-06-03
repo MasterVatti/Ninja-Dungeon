@@ -2,11 +2,8 @@ tree("Attack")
   fallback
     while not IsTargetKilled  
         sequence
-            IsEnemyInSight
-            GetTarget
             IncreaseSpeed
             tree("Chase")
-            IsAtRequiredDistance(2.0)
             tree("ToDamage")
         
     sequence
@@ -16,6 +13,6 @@ tree("Attack")
               
 tree("ToDamage")
     sequence
+            IsAtRequiredDistance(2.0)
             Attack
-            Wait(1.0)
               

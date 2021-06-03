@@ -38,7 +38,7 @@ namespace ProjectileLauncher
             {
                 if (_reboundNumber == 0)
                 {
-                    Destroy(gameObject);
+                    gameObject.SetActive(false);
                 }
 
                 _reboundNumber--;
@@ -49,7 +49,7 @@ namespace ProjectileLauncher
                 collision.gameObject.CompareTag(GlobalConstants.ENEMY_TAG))
             {
                 DealDamage(collision);
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
 

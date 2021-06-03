@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 417170660410821016}
   - component: {fileID: 3734217257487702833}
   - component: {fileID: 6679208512381025490}
+  - component: {fileID: 3845332231185987230}
   m_Layer: 0
   m_Name: MagicianPrefab
   m_TagString: Enemy
@@ -37,9 +38,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3344586694461362826}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.00243, y: 0.5000019, z: 12.4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5582567259165157545}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50,7 +52,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3344586694461362826}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17e43e7170fb45b4b81dcd16d0ff55d9, type: 3}
   m_Name: 
@@ -191,7 +193,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 839100401563898178}
-  _panda: {fileID: 5023461158055467195}
   _personCharacteristics: {fileID: 6679208512381025490}
   _stopChaseDistance: 12
   _golemPrefab: {fileID: 940516286941385097, guid: 6d3b558d5923e244ea8e825658415066,
@@ -268,6 +269,53 @@ MonoBehaviour:
   _maxHp: 100
   _moveSpeed: 0
   _attackDamage: 15
-  _attackRate: 0
+  _attackRate: 0.8
   _canMove: 0
   _canAttack: 0
+--- !u!114 &3845332231185987230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3344586694461362826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2337432253198f44da509e5c05100654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ownerTeam: 0
+  _projectilePrefab: {fileID: 2472122781938320418, guid: a0ea9b697dcc44c49b2a57d10ec9ef49,
+    type: 3}
+  _personCharacteristics: {fileID: 6679208512381025490}
+  _muzzlesPosition: {fileID: 5582567259165157545}
+--- !u!1 &6226491467814902596
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5582567259165157545}
+  m_Layer: 0
+  m_Name: MuzzlesPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5582567259165157545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6226491467814902596}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.105, z: 1.108}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3344586694461362830}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

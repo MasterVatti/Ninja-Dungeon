@@ -12,6 +12,11 @@ namespace Enemies
         public T GetNearestTarget<T>(List<T> targets, Vector3 position)
          where T : Person
         {
+            if (targets.Count == 0)
+            {
+                return null;
+            }
+            
             var minDistance = float.MaxValue;
             var minIndex = 0;
 

@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fae4cf5f65e5326459cc95c4e8eb92f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScreenType: 9
+  ScreenType: 12
   _barracksContent: {fileID: 1008998239772653638}
   _allyItem: {fileID: 5621367368269762486, guid: 13c7ab19fd3f112418bf881ee92eedba,
     type: 3}

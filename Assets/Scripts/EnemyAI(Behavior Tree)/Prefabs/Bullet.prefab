@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6203684477038138343}
   - component: {fileID: 7684742337687309035}
   - component: {fileID: 2733183494529446169}
-  - component: {fileID: 8484312229174051074}
+  - component: {fileID: 2472122781938320418}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Projectile
@@ -113,7 +113,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8484312229174051074
+--- !u!114 &2472122781938320418
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,9 +122,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3313221147460074698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9559bc0515bbb0f4eadee6bf7933c7aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 165be62b8b082e446a152b0aa6777396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _projectileSpeed: 15
-  _timeToRemove: 5
   _rigidbody: {fileID: 2733183494529446169}

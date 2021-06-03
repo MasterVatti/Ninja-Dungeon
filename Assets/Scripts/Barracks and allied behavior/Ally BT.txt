@@ -6,7 +6,7 @@ tree("Root")
 tree("Follow")
     while
         sequence
-            not IsEnemyInSight
+            not IsAtRequiredDistance(20.0)
 
         repeat
             sequence
@@ -15,5 +15,7 @@ tree("Follow")
 
 tree("Chase")
     sequence
-        IsAtRequiredDistance(20.0)
-        Chase
+            GetTarget
+            while not IsTargetKilled
+                sequence
+                    Chase

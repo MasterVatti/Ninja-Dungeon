@@ -20,7 +20,7 @@ public class EnemyTargetProvider : MonoBehaviour, ITargetProvider
 
     public Person GetTarget()
     {
-        if (_targets != null)
+        if (_targets.Count > 0)
         {
             return _nearestTargetProvider.GetNearestTarget(_targets, transform.position);  
         }

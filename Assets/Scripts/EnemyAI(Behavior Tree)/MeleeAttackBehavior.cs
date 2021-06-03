@@ -1,16 +1,20 @@
 using Characteristics;
 using Enemies;
 using ProjectileLauncher;
+using UnityEngine;
 
 /// <summary>
 /// Отвечает за аттаки ближнего боя.
 /// </summary>
 public class MeleeAttackBehavior : IAttackBehaviour
 {
-    public bool IsCooldown { get; }
+    public bool IsCooldown => _lastHitTime + _HitCooldown > Time.time;
     
     private readonly PersonCharacteristics _personCharacteristics;
-
+    private readonly float _HitCooldown;
+    private float _lastHitTime;
+    
+    
     public bool CanAttack(Person person)
     {
         return true;
@@ -19,11 +23,13 @@ public class MeleeAttackBehavior : IAttackBehaviour
     public MeleeAttackBehavior(PersonCharacteristics personCharacteristics)
     {
         _personCharacteristics = personCharacteristics;
+        _HitCooldown = personCharacteristics.AttackRate;
     }
 
     public void Attack(Person person)
     {
+        _lastHitTime = Time.time;
         var healthBehaviour = person.GetComponent<HealthBehaviour>();
-        healthBehaviour.ApplyDamage(Team.Enemy, _personCharacteristics.AttackDamage);
+        healthBehaviour.ApplyDamage(_personCharacteristics.AttackDamage);
     }
 }

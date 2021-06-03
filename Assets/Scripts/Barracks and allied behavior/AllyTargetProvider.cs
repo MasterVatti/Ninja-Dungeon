@@ -9,18 +9,18 @@ namespace Barracks_and_allied_behavior
     /// <summary>
     /// Отвечает за определение  Enemy и передачу ее.
     /// </summary>
-    public class AllyTargetProvider : ITargetProvider
+    public class AllyTargetProvider : MonoBehaviour, ITargetProvider
     {
-        private readonly GameObject _unit;
         private NearestTargetProvider _nearestTargetProvider;
-        public AllyTargetProvider(GameObject unit)
+        
+        private void Awake()
         {
-            _unit = unit;
+            _nearestTargetProvider = new NearestTargetProvider();
         }
 
         public Person GetTarget()
         {
-            return _nearestTargetProvider.GetNearestTarget(MainManager.EnemiesManager.Enemies, _unit.transform.position);
+            return _nearestTargetProvider.GetNearestTarget(MainManager.EnemiesManager.Enemies, transform.position);
         }
     }
 }
