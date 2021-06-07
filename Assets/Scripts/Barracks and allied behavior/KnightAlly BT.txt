@@ -7,7 +7,7 @@ tree("Attack")
             tree("ToDamage")
         
     sequence
-            IsTargetKilled
+            not IsAtRequiredDistance(20.0)
             SlowDown
             tree("Follow")  
               

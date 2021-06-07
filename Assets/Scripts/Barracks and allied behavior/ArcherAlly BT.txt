@@ -1,16 +1,11 @@
 tree("Attack")
   fallback  
-    while IsAtRequiredDistance(20.0)
+    while not IsTargetKilled
         sequence
-            GetTarget
             tree("Chase")
             IsAtRequiredDistance(13.0)
             tree("Shoot")
-            
-    sequence
-        not IsAtRequiredDistance(20.0)
-        tree("Follow")
-        
+                   
 tree("Shoot")
     while not IsTargetKilled
         Shooting

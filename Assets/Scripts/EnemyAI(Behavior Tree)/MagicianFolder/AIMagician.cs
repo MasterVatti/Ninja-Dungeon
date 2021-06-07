@@ -48,7 +48,7 @@ namespace MagicianFolder
         [Task]
         private void SetMoveBackPoint()
         {
-            _iMovementBehavior.CheckMoveDestination(gameObject.transform.TransformPoint(0, 0, 0 - _runBackDistance));
+            _iMovementBehavior.SetMoveDestination(gameObject.transform.TransformPoint(0, 0, 0 - _runBackDistance));
             Task.current.Succeed();
         }
 

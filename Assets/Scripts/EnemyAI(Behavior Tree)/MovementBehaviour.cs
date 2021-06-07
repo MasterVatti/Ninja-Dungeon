@@ -24,7 +24,7 @@ public class MovementBehaviour :  IMovementBehavior
         WaitArrival();
     }
     
-    public void CheckMoveDestination(Vector3 movePoint)
+    public void SetMoveDestination(Vector3 movePoint)
     {
         if (_agent.CalculatePath(movePoint, _navMeshPath))
         {

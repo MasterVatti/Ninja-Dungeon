@@ -839,6 +839,7 @@ GameObject:
   - component: {fileID: 1199332486}
   - component: {fileID: 1199332485}
   - component: {fileID: 1199332488}
+  - component: {fileID: 1199332489}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -966,7 +967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentHP: 200
   _maxHp: 200
-  _moveSpeed: 0
+  _moveSpeed: 4.5
   _attackDamage: 10
   _attackRate: 0
   _canMove: 0
@@ -1009,6 +1010,20 @@ MonoBehaviour:
   _personCharacteristics: {fileID: 0}
   _healthBehaviour: {fileID: 0}
   _rigidbody: {fileID: 0}
+--- !u!114 &1199332489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199332479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b97e0167566cac94390de02b2b4b5160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 1199332484}
+  _rotationSpeed: 1
 --- !u!1001 &1242705325
 PrefabInstance:
   m_ObjectHideFlags: 0

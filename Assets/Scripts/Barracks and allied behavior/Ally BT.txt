@@ -3,19 +3,19 @@ tree("Root")
         tree("Attack")
         tree("Follow")
 
-tree("Follow")
-    while
-        sequence
-            not IsAtRequiredDistance(20.0)
-
-        repeat
-            sequence
-                IsTherePlayer
-                FollowPlayer
 
 tree("Chase")
     sequence
-            GetTarget
-            while not IsTargetKilled
-                sequence
-                    Chase
+        GetTarget
+        while IsAtRequiredDistance(20.0)
+            Chase
+
+
+
+tree("Follow")
+    sequence
+        GetTarget
+        while not IsAtRequiredDistance(20.0)
+            sequence
+                IsTherePlayer
+                FollowPlayer

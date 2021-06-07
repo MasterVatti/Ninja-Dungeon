@@ -10,7 +10,7 @@ namespace MagicianFolder.GolemFolder
         {
             _personCharacteristics.CurrentHp = _personCharacteristics.MaxHp;
             
-            MainManager.EnemiesManager.Enemies.Add(GetComponent<Enemy>());
+            MainManager.EnemiesManager.AddEnemy(GetComponent<Enemy>());
             
             _targetProvider = GetComponent<EnemyTargetProvider>();
             _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistance);
@@ -21,7 +21,7 @@ namespace MagicianFolder.GolemFolder
         [Task]
         private void SetTargetPosition()
         {
-            _iMovementBehavior.CheckMoveDestination(_target.transform.position);
+            _iMovementBehavior.SetMoveDestination(_target.transform.position);
             
             Task.current.Succeed();
         }

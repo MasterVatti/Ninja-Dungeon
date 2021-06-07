@@ -22,7 +22,7 @@ namespace PlayerScripts.Movement
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
-            MainManager.JoystickController.OnJoystickDown += JoystickDownHandler;
+         //   MainManager.JoystickController.OnJoystickDown += JoystickDownHandler;
 
             _playerCharacteristics = GetComponent<PlayerCharacteristics>();
         }
@@ -34,10 +34,10 @@ namespace PlayerScripts.Movement
 
         private void OnDestroy()
         {
-            if (MainManager.JoystickController)
-            {
-                MainManager.JoystickController.OnJoystickDown -= JoystickDownHandler;
-            }
+          //  if (MainManager.JoystickController)
+           // {
+          //      MainManager.JoystickController.OnJoystickDown -= JoystickDownHandler;
+           // }
         }
 
         private void Update()

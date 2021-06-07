@@ -11,5 +11,9 @@ tree("TopNode")
                 sequence
                     SetTargetPosition
                     MoveToDestination
-                    IsAtRequiredDistance(2.0)
-                    Attack
+                    tree("Attack")
+                    Wait 0.5
+tree("Attack")
+    sequence
+        IsAtRequiredDistance(2.0)
+        Attack

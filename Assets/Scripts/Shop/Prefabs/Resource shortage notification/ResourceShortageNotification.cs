@@ -1,4 +1,3 @@
-using System;
 using Assets.Scripts.Managers.ScreensManager;
 
 namespace ShopResource_shortage_notification

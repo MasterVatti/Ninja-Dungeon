@@ -33,12 +33,12 @@ public class EnemyTargetProvider : MonoBehaviour, ITargetProvider
         if (other.CompareTag(GlobalConstants.PLAYER_TAG) ||
             other.CompareTag(GlobalConstants.ALLY_TAG))
         {
-            _targets.Add(other.gameObject.GetComponent<Person>());
+            _targets.Add(other.GetComponent<Person>());
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        _targets.Remove(other.gameObject.GetComponent<Person>());
+        _targets.Remove(other.GetComponent<Person>());
     }
 }

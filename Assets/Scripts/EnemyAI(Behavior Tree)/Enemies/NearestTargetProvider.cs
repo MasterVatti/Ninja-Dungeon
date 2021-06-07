@@ -23,6 +23,10 @@ namespace Enemies
             for (var index = 0; index < targets.Count; index++)
             {
                 var target = targets[index];
+                if (target == null)
+                {
+                    return null; //TODO:  Убрать эту проверку, понять почему тут выпадает налреференс.
+                }
                 var distanceToTarget = Vector3.Distance(target.transform.position, position);
 
                 if (minDistance > distanceToTarget)

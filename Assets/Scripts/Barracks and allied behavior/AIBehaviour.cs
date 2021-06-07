@@ -55,11 +55,10 @@ namespace Barracks_and_allied_behavior
         [Task]
         protected bool IsAtRequiredDistance(float distance)
         {
-            if (!GetTarget())
+            if (_target == null)
             {
                 return false;
             }
-            
             var targetDistance = Vector3.Distance(_target.transform.position, _agent.transform.position);
             return targetDistance <= distance;
         }
