@@ -15,13 +15,13 @@ namespace MagicianFolder.GolemFolder
             _targetProvider = GetComponent<EnemyTargetProvider>();
             _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistance);
             _attackBehaviour = new MeleeAttackBehavior(_personCharacteristics);
-            _iMovementBehavior = new MovementBehaviour(_agent);
+            _movementBehavior = new MovementBehaviour(_agent);
         }
         
         [Task]
         private void SetTargetPosition()
         {
-            _iMovementBehavior.SetMoveDestination(_target.transform.position);
+            _movementBehavior.SetMoveDestination(_targetProvider.GetTarget().transform.position);
             
             Task.current.Succeed();
         }

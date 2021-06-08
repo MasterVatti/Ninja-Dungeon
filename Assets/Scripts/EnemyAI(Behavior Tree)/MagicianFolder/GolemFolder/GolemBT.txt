@@ -6,8 +6,7 @@ tree("Root")
 
 tree("TopNode")
         sequence
-            GetTarget
-            while not IsTargetKilled
+            while IsEnemyInSight
                 sequence
                     SetTargetPosition
                     MoveToDestination

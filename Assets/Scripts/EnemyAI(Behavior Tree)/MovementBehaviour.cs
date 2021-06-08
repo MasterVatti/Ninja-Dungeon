@@ -66,6 +66,7 @@ public class MovementBehaviour :  IMovementBehavior
         var distance = _agent.remainingDistance;
         if (!currentTask.isStarting && _agent.remainingDistance <= POINT_DISTANCE_ERROR)
         {
+            _agent.isStopped = true;
             currentTask.Succeed();
         }
 

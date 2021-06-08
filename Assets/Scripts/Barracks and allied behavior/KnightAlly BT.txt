@@ -1,13 +1,13 @@
 tree("Attack")
   fallback
-    while not IsTargetKilled  
+    while IsEnemyInSight
         sequence
             IncreaseSpeed
             tree("Chase")
             tree("ToDamage")
         
     sequence
-            not IsAtRequiredDistance(20.0)
+            not IsEnemyInSight
             SlowDown
             tree("Follow")  
               

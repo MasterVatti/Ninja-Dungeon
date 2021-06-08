@@ -10,6 +10,9 @@ namespace Barracks_and_allied_behavior
     /// </summary>
     public class AllyTargetProvider : MonoBehaviour, ITargetProvider
     {
+        [SerializeField]
+        private float _aggressionDistance;
+        
         private NearestTargetProvider _nearestTargetProvider;
         
         private void Awake()
@@ -19,7 +22,7 @@ namespace Barracks_and_allied_behavior
 
         public Person GetTarget()
         {
-            return _nearestTargetProvider.GetNearestTarget(MainManager.EnemiesManager.Enemies, transform.position);
+            return _nearestTargetProvider.GetNearestTarget(MainManager.EnemiesManager.Enemies, transform.position, _aggressionDistance);
         }
     }
 }

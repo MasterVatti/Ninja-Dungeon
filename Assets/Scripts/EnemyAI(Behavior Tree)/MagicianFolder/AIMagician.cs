@@ -1,5 +1,6 @@
-using Barracks_and_allied_behavior;
-using Panda;
+ using Barracks_and_allied_behavior;
+ using Characteristics;
+ using Panda;
 using ProjectileLauncher;
 using UnityEngine;
 
@@ -23,11 +24,13 @@ namespace MagicianFolder
         private void Awake()
         {
             _personCharacteristics.CurrentHp = _personCharacteristics.MaxHp;
+            
+            MainManager.EnemiesManager.AddEnemy(GetComponent<Enemy>()); //TODO: Удалить перед мержем, эта функция в Спавн контроллере
 
             _attackBehaviour = GetComponent<IAttackBehaviour>();
             _targetProvider = GetComponent<EnemyTargetProvider>();
             _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistance);
-            _iMovementBehavior = new MovementBehaviour(_agent);
+            _movementBehavior = new MovementBehaviour(_agent);
             
         }
         
@@ -48,7 +51,7 @@ namespace MagicianFolder
         [Task]
         private void SetMoveBackPoint()
         {
-            _iMovementBehavior.SetMoveDestination(gameObject.transform.TransformPoint(0, 0, 0 - _runBackDistance));
+            _movementBehavior.SetMoveDestination(gameObject.transform.TransformPoint(0, 0, 0 - _runBackDistance));
             Task.current.Succeed();
         }
 

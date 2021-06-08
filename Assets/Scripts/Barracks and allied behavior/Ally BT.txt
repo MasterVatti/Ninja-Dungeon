@@ -6,16 +6,13 @@ tree("Root")
 
 tree("Chase")
     sequence
-        GetTarget
-        while IsAtRequiredDistance(20.0)
-            Chase
+        Chase
 
 
 
 tree("Follow")
     sequence
-        GetTarget
-        while not IsAtRequiredDistance(20.0)
+        while not IsEnemyInSight
             sequence
                 IsTherePlayer
                 FollowPlayer

@@ -6,10 +6,13 @@ using ProjectileLauncher;
 using UnityEngine;
 
 /// <summary>
-/// Отвечает за определение ближайшего противника (Ally либо Player) и передачу его.
+/// Отвечает за определение ближайшего союзника (Ally либо Player) и передачу его.
 /// </summary>
 public class EnemyTargetProvider : MonoBehaviour, ITargetProvider
 {
+    [SerializeField]
+    private float _aggressionDistance;
+
     private readonly List<Person> _targets = new List<Person>();
     private NearestTargetProvider _nearestTargetProvider;
 
@@ -20,14 +23,9 @@ public class EnemyTargetProvider : MonoBehaviour, ITargetProvider
 
     public Person GetTarget()
     {
-        if (_targets.Count > 0)
-        {
-            return _nearestTargetProvider.GetNearestTarget(_targets, transform.position);  
-        }
-
-        return null;
+        return _nearestTargetProvider.GetNearestTarget(_targets, transform.position, _aggressionDistance);
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(GlobalConstants.PLAYER_TAG) ||

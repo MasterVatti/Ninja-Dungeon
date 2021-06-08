@@ -9,8 +9,9 @@ namespace Enemies
     /// </summary>
     public class NearestTargetProvider
     {
-        public T GetNearestTarget<T>(List<T> targets, Vector3 position)
-         where T : Person
+        
+        public T GetNearestTarget<T>(List<T> targets, Vector3 position, float aggressionDistance = float.MaxValue)
+            where T : Person
         {
             if (targets.Count == 0)
             {
@@ -27,16 +28,19 @@ namespace Enemies
                 {
                     return null; //TODO:  Убрать эту проверку, понять почему тут выпадает налреференс.
                 }
+                
                 var distanceToTarget = Vector3.Distance(target.transform.position, position);
-
-                if (minDistance > distanceToTarget)
+                
+                if (minDistance > distanceToTarget )
                 {
                     minDistance = distanceToTarget;
                     minIndex = index;
                 }
             }
+            
+            var distanceToNearestTarget = Vector3.Distance(targets[minIndex].transform.position, position);
 
-            return targets[minIndex];
+            return distanceToNearestTarget <= aggressionDistance ? targets[minIndex] : null;
         }
         
     }

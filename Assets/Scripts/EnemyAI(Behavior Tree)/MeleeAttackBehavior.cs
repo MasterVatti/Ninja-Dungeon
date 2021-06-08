@@ -8,10 +8,10 @@ using UnityEngine;
 /// </summary>
 public class MeleeAttackBehavior : IAttackBehaviour
 {
-    public bool IsCooldown => _lastHitTime + _HitCooldown > Time.time;
+    public bool IsCooldown => _lastHitTime + _hitCooldown > Time.time;
     
     private readonly PersonCharacteristics _personCharacteristics;
-    private readonly float _HitCooldown;
+    private readonly float _hitCooldown;
     private float _lastHitTime;
     
     
@@ -23,7 +23,7 @@ public class MeleeAttackBehavior : IAttackBehaviour
     public MeleeAttackBehavior(PersonCharacteristics personCharacteristics)
     {
         _personCharacteristics = personCharacteristics;
-        _HitCooldown = personCharacteristics.AttackRate;
+        _hitCooldown = personCharacteristics.AttackRate;
     }
 
     public void Attack(Person person)

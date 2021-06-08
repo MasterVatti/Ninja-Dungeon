@@ -27,11 +27,12 @@ public class FollowBehavior
 
         if (distance >= _stopFollowingDistance)
         {
-            _agent.isStopped = false;
+            _agent.isStopped= false;
             _agent.SetDestination(GetRandomFollowingPoint());
         }
         else
         {
+            _agent.isStopped = true;
             Task.current.Succeed();
         }
     }

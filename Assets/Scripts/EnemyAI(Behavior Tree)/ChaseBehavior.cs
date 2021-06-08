@@ -28,6 +28,7 @@ public class ChaseBehavior
         }
         else
         {
+            _agent.isStopped = true;
             Task.current.Succeed();
         }
     }

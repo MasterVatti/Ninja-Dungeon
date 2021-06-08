@@ -19,35 +19,32 @@ namespace Barracks_and_allied_behavior
         protected ChaseBehavior _chaseBehavior;
         protected FollowBehavior _followBehavior;
         protected IAttackBehaviour _attackBehaviour;
-        protected IMovementBehavior _iMovementBehavior;
-
-        protected Person _target;
+        protected IMovementBehavior _movementBehavior;
         
         [Task]
         protected bool GetTarget()
         {
-            _target = _targetProvider.GetTarget();
-            return _target != null;
+            return false;
         }
 
         [Task]
         protected void MoveToDestination()
         {
-            _iMovementBehavior.MoveToDestination();
+            _movementBehavior.MoveToDestination();
         }
         
         [Task]
-        protected bool IsTargetKilled()
+        protected bool IsEnemyInSight()
         {
-            return _target == null;
+            return  _targetProvider.GetTarget() != null;
         }
 
         [Task]
         protected void Attack()
         {
-            if (_attackBehaviour.CanAttack(_target) && !_attackBehaviour.IsCooldown)
+            if (_attackBehaviour.CanAttack(_targetProvider.GetTarget()) && !_attackBehaviour.IsCooldown)
             {
-                _attackBehaviour.Attack(_target);
+                _attackBehaviour.Attack(_targetProvider.GetTarget());
                 Task.current.Succeed();
             }
         }
@@ -55,18 +52,14 @@ namespace Barracks_and_allied_behavior
         [Task]
         protected bool IsAtRequiredDistance(float distance)
         {
-            if (_target == null)
-            {
-                return false;
-            }
-            var targetDistance = Vector3.Distance(_target.transform.position, _agent.transform.position);
+            var targetDistance = Vector3.Distance(_targetProvider.GetTarget().transform.position, _agent.transform.position);
             return targetDistance <= distance;
         }
 
         [Task]
         protected void Chase()
         {
-            _chaseBehavior.Chase(_target);
+            _chaseBehavior.Chase(_targetProvider.GetTarget());
         }
 
         [Task]
