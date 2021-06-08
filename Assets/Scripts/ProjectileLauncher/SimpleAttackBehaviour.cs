@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ProjectileLauncher
 {
+    /// <summary>
+    /// Отвечает за стрельбу одиночными снарядами
+    /// </summary>
     [RequireComponent(typeof(PersonCharacteristics))]
     public class SimpleAttackBehaviour : MonoBehaviour, IAttackBehaviour
     {

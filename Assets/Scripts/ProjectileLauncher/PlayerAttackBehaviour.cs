@@ -6,6 +6,9 @@ using UnityEngine.Assertions;
 
 namespace ProjectileLauncher
 {
+    /// <summary>
+    /// Отвечает за стрельбу игрока 
+    /// </summary>
     public class PlayerAttackBehaviour : SimpleAttackBehaviour
     {
         [SerializeField]

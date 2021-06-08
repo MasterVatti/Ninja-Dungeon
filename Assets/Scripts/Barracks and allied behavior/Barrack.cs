@@ -20,9 +20,9 @@ namespace Barracks_and_allied_behavior
         [SerializeField]
         private Transform _spawnPoint;
         
-        public void CreateAlly(AlliesSetting _ally)
+        public void CreateAlly(AlliesSetting ally)
         {
-            Instantiate(_ally.AllyPrefab, _spawnPoint.position, Quaternion.identity);
+            Instantiate(ally.AllyPrefab, _spawnPoint.position, Quaternion.identity);
         }
         
         public void ShowScreenWithContext()

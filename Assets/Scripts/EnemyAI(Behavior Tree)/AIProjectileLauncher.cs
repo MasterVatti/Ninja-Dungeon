@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// Отвечает за дальние атаки врагов
+/// Отвечает за дальние атаки AI
 /// </summary>
 [RequireComponent(typeof(ITargetProvider))]
 [RequireComponent(typeof(IAttackBehaviour))]

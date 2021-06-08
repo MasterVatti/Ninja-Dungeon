@@ -4,6 +4,9 @@ using Panda;
 
 namespace MagicianFolder.GolemFolder
 {
+    /// <summary>
+    /// Отвечает за AI Голема.
+    /// </summary>
     public class AIGolem : AIBehaviour
     {
         private void Awake()

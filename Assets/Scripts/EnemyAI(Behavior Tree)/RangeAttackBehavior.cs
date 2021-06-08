@@ -2,11 +2,12 @@ using Assets.Scripts;
 using Characteristics;
 using ProjectileLauncher;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RangeAttackBehavior : SimpleAttackBehaviour
 {
     [SerializeField]
-    private Transform _muzzlesPosition;
+    private Transform _muzzlePosition;
     
     public override bool CanAttack(Person person)
     {
@@ -30,6 +31,6 @@ public class RangeAttackBehavior : SimpleAttackBehaviour
 
     protected override void Shoot(Vector3 direction)
     {
-        CreateProjectile(_muzzlesPosition.position, direction,  _personCharacteristics.AttackDamage);
+        CreateProjectile(_muzzlePosition.position, direction,  _personCharacteristics.AttackDamage);
     }
 }

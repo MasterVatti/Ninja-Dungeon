@@ -5,7 +5,6 @@ namespace Characteristics
     /// </summary>
     public class EnemyCharacteristics : PersonCharacteristics
     {
-       
     }
 }   
 

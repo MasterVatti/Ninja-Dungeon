@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Barracks_and_allied_behavior
 {
+    /// <summary>
+    /// Класс отвечающий за AI Лучника .
+    /// </summary>
     [RequireComponent(typeof(AllyTargetProvider))]
     public class AIArcherAlly : AIBehaviour
     {
@@ -19,7 +22,6 @@ namespace Barracks_and_allied_behavior
             _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistance);
             _followBehavior = new FollowBehavior(_agent, _stopFollowingDistance, _guardsDistance);
             _attackBehaviour = new MeleeAttackBehavior(_personCharacteristics);
-            
         }
     }
 }

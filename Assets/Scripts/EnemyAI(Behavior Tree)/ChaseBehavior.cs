@@ -8,8 +8,8 @@ using UnityEngine.AI;
 /// </summary>
 public class ChaseBehavior 
 {
-    private float _stopChaseDistance;
-    private NavMeshAgent _agent;
+    private readonly float _stopChaseDistance;
+    private readonly NavMeshAgent _agent;
 
     public ChaseBehavior(NavMeshAgent agent, float stopChaseDistance)
     {
@@ -29,6 +29,7 @@ public class ChaseBehavior
         else
         {
             _agent.isStopped = true;
+            
             Task.current.Succeed();
         }
     }

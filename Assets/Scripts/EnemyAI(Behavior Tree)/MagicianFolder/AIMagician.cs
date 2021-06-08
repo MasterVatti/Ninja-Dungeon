@@ -7,7 +7,7 @@ using UnityEngine;
 namespace MagicianFolder
 {
     /// <summary>
-    /// Отвечает за базовые навыки(Таски) мага (пока спавн голема и отбегание).
+    /// Отвечает за AI  мага.
     /// </summary>
     [RequireComponent(typeof(EnemyTargetProvider))]
     public class AIMagician : AIBehaviour
@@ -49,9 +49,10 @@ namespace MagicianFolder
         }
 
         [Task]
-        private void SetMoveBackPoint()
+        private void SetBackPoint()
         {
-            _movementBehavior.SetMoveDestination(gameObject.transform.TransformPoint(0, 0, 0 - _runBackDistance));
+            _movementBehavior.SetMoveDestination(transform.TransformPoint(0, 0, 0 - _runBackDistance));
+            
             Task.current.Succeed();
         }
 

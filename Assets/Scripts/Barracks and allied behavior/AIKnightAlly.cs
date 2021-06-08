@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Barracks_and_allied_behavior
 {
     /// <summary>
-    /// Cпециальное поведение Рыцаря (Ускорение).
+    /// Класс отвечающий за AI Рыцаря .
     /// </summary>
     [RequireComponent(typeof(AllyTargetProvider))]
     public class AIKnightAlly : AIBehaviour

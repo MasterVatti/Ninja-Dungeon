@@ -23,6 +23,7 @@ public class EnemyTargetProvider : MonoBehaviour, ITargetProvider
 
     public Person GetTarget()
     {
+        CleanDestroyedTargets();
         return _nearestTargetProvider.GetNearestTarget(_targets, transform.position, _aggressionDistance);
     }
 
@@ -37,6 +38,21 @@ public class EnemyTargetProvider : MonoBehaviour, ITargetProvider
 
     private void OnTriggerExit(Collider other)
     {
-        _targets.Remove(other.GetComponent<Person>());
+        if (other.CompareTag(GlobalConstants.PLAYER_TAG) ||
+            other.CompareTag(GlobalConstants.ALLY_TAG))
+        {
+            _targets.Remove(other.GetComponent<Person>());
+        }
+    }
+
+    private void CleanDestroyedTargets()
+    {
+        for (var i = 0; i < _targets.Count; i++)
+        {
+            if (_targets[i] == null)
+            {
+                _targets.Remove(_targets[i]);
+            }
+        }
     }
 }

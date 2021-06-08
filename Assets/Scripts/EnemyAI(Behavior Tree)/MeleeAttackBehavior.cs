@@ -4,7 +4,7 @@ using ProjectileLauncher;
 using UnityEngine;
 
 /// <summary>
-/// Отвечает за аттаки ближнего боя.
+/// Отвечает за атаки ближнего боя.
 /// </summary>
 public class MeleeAttackBehavior : IAttackBehaviour
 {

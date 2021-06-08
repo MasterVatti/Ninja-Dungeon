@@ -5,10 +5,7 @@ tree("Root")
 
 
 tree("Chase")
-    sequence
         Chase
-
-
 
 tree("Follow")
     sequence
