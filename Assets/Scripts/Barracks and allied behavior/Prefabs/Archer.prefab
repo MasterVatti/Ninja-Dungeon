@@ -283,7 +283,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
     type: 3}
   _personCharacteristics: {fileID: 9065075714013820798}
-  _muzzlesPosition: {fileID: 3637453737402022426}
+  _muzzlePosition: {fileID: 3637453737402022426}
 --- !u!114 &4994451221405812214
 MonoBehaviour:
   m_ObjectHideFlags: 0

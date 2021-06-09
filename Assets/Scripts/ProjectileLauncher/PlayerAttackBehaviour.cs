@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Characteristics;
@@ -11,6 +12,8 @@ namespace ProjectileLauncher
     /// </summary>
     public class PlayerAttackBehaviour : SimpleAttackBehaviour
     {
+        public event Action IsShoot;
+        
         [SerializeField]
         private List<Transform> _muzzlesPositions;
         
@@ -20,6 +23,11 @@ namespace ProjectileLauncher
 
         private ProjectileDirectionsProvider _projectileDirectionsProvider;
         private PlayerCharacteristics _playerCharacteristics;
+
+        public override bool CanAttack(Person person)
+        {
+            return base.CanAttack(person);
+        }
 
         protected override void Awake()
         {
@@ -33,6 +41,8 @@ namespace ProjectileLauncher
         protected override void Shoot(Vector3 direction)
         {
             StartCoroutine(ShootInAllDirections(direction));
+            
+            IsShoot?.Invoke();
         }
 
         private IEnumerator ShootInAllDirections(Vector3 direction)

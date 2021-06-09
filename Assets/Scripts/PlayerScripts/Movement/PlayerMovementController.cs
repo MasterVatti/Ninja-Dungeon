@@ -7,7 +7,7 @@ namespace PlayerScripts.Movement
     /// <summary>
     /// Этот класс отвечает за перемещения игрока в пространстве
     /// </summary>
-    [RequireComponent(typeof(PlayerCharacteristics))]
+    
     public class PlayerMovementController : MonoBehaviour
     {
         [SerializeField]

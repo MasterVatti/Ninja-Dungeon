@@ -286,10 +286,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ownerTeam: 0
-  _projectilePrefab: {fileID: 2472122781938320418, guid: a0ea9b697dcc44c49b2a57d10ec9ef49,
+  _projectilePrefab: {fileID: 2472122781938320418, guid: 03dbbe3a25b668f448ded4c5f16dca1e,
     type: 3}
   _personCharacteristics: {fileID: 6679208512381025490}
-  _muzzlesPosition: {fileID: 5582567259165157545}
+  _muzzlePosition: {fileID: 5582567259165157545}
 --- !u!1 &6226491467814902596
 GameObject:
   m_ObjectHideFlags: 0

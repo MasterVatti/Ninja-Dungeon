@@ -467,7 +467,7 @@ MonoBehaviour:
   - _type: 0
     _amount: 1000
   - _type: 2
-    _amount: 200
+    _amount: 1000
 --- !u!4 &317441906
 Transform:
   m_ObjectHideFlags: 0
@@ -637,11 +637,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973d4aeba44250b499bd5bbc64a1bb2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _battleManager: {fileID: 0}
   _joystickController: {fileID: 0}
   _loadingController: {fileID: 0}
   _resourceManager: {fileID: 317441905}
   _enemiesManager: {fileID: 150275614}
-  _energyManager: {fileID: 0}
   _screenManager: {fileID: 2022494969}
   _animationManager: {fileID: 0}
   _buildingManager: {fileID: 0}
@@ -649,6 +649,7 @@ MonoBehaviour:
   _saveLoadManager: {fileID: 0}
   _player: {fileID: 1199332488}
   _iconsProvider: {fileID: 2107725901}
+  _energyManager: {fileID: 0}
 --- !u!4 &534049961
 Transform:
   m_ObjectHideFlags: 0
@@ -946,7 +947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b22f00f3b5846d409eee145d80d44c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _team: 1
+  _team: 0
 --- !u!114 &1199332486
 MonoBehaviour:
   m_ObjectHideFlags: 0
