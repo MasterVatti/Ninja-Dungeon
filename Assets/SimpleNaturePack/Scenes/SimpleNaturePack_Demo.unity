@@ -2271,7 +2271,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1877973916}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &155833263 stripped
 Transform:
@@ -3007,6 +3007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b22f00f3b5846d409eee145d80d44c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _team: 0
 --- !u!114 &212603097 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 729379172147054469, guid: 023c32ed79838cb40ab63e3542a568da,
@@ -3041,6 +3042,24 @@ MonoBehaviour:
   _personCharacteristics: {fileID: 0}
   _healthBehaviour: {fileID: 212603096}
   _rigidbody: {fileID: 212603098}
+--- !u!114 &212603100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212603095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41f2e68724c41ed863784853dd65e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ownerTeam: 1
+  _projectilePrefab: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
+    type: 3}
+  _personCharacteristics: {fileID: 212603102}
+  _muzzlesPositions: []
+  _delayBetweenProjectiles: 0.05
 --- !u!114 &212603101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3053,6 +3072,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f64567e3e7f7a7479737900c1500aee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 212603104}
+--- !u!114 &212603102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212603095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9604bc4aa00a7fe47a52484d76e9ab04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHP: 0
+  _maxHp: 100
+  _moveSpeed: 6
+  _attackDamage: 20
+  _attackRate: 1
+  _canMove: 0
+  _canAttack: 0
+  _projectileCount: 1
+  _ricochetProjectiles: 0
+  _frontalProjectiles: 0
+  _diagonalProjectiles: 0
+  _projectileBack: 0
+  _sideProjectiles: 0
+--- !u!95 &212603104 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5332810461773097028, guid: 023c32ed79838cb40ab63e3542a568da,
+    type: 3}
+  m_PrefabInstance: {fileID: 1877973915}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &212603105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3065,21 +3116,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f318d69cced4be98f876693a910cbe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _positionTrunk: {fileID: 154396114}
+  _ownerTeam: 1
   _projectilePrefab: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
     type: 3}
---- !u!114 &212603106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212603095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b37bde8e4f1cb1343b366a129f54bd06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _personCharacteristics: {fileID: 212603102}
 --- !u!114 &212603107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29088,7 +29128,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5378577305797981982, guid: 023c32ed79838cb40ab63e3542a568da, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 023c32ed79838cb40ab63e3542a568da, type: 3}
 --- !u!4 &1877973916 stripped
 Transform:
