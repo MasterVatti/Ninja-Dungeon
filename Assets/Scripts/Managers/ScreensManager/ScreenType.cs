@@ -19,5 +19,6 @@
         BuffScreen = 10,
         InsufficientResources = 11,
         DeathScreen = 12,
+        BarrackScreen = 13
     }
 }

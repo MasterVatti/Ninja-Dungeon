@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Класс отвечает за открытие окна портала
 /// </summary>
-public class PortalScreenOpener : MonoBehaviour, IPortalScreenOpener
+public class PortalScreenOpener : MonoBehaviour
 {
     [SerializeField]
     private PortalSettings _settings;
