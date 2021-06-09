@@ -11,6 +11,7 @@
         public const string ALLY_TAG = "Ally";
         
         //OTHER TAGS:
+        public const string MAIN_SCENE_TAG = "SimpleNaturePack_Demo";
         public const string WALL_TAG = "Wall";
         public const string PROJECTILE_TAG = "Projectile";
     }

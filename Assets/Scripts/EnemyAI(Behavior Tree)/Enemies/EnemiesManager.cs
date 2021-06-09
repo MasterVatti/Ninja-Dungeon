@@ -12,7 +12,7 @@ namespace Enemies
         public List<Enemy> Enemies => _enemies;
         
         [SerializeField] 
-        private List<Enemy> _enemies;
+        private List<Enemy> _enemies = new List<Enemy>();
 
         public void AddEnemy(Enemy enemy)
         {
@@ -22,18 +22,20 @@ namespace Enemies
         
         private void OnEnemyDied(Person person)
         {
-            var enemy = person.GetComponentInChildren<Enemy>();
-            _enemies.Remove(enemy);
+            var enemy = person.GetComponent<Enemy>();
+            
             enemy.HealthBehaviour.OnDead -= OnEnemyDied;
+            _enemies.Remove(enemy);
+            Destroy(enemy.gameObject);
         }
         
         private void OnDestroy()
         {
-            for (int i = 0; i < _enemies.Count; i++)
+            foreach (var enemy in _enemies)
             {
-                if (_enemies[i])
+                if (enemy)
                 {
-                    _enemies[i].HealthBehaviour.OnDead -= OnEnemyDied;
+                    enemy.HealthBehaviour.OnDead -= OnEnemyDied;
                 }
             }
         }

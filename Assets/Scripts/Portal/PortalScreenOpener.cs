@@ -4,12 +4,12 @@ using UnityEngine;
 /// <summary>
 /// Класс отвечает за открытие окна портала
 /// </summary>
-public class PortalScreenOpener : MonoBehaviour, IScreenOpenerWithContext
+public class PortalScreenOpener : MonoBehaviour, IPortalScreenOpener
 {
     [SerializeField]
     private PortalSettings _settings;
-    
-    public void ShowScreenWithContext()
+
+    public void ShowPortalScreen()
     {
         var context = new PortalContext()
         {
@@ -17,7 +17,7 @@ public class PortalScreenOpener : MonoBehaviour, IScreenOpenerWithContext
             SceneName = _settings.SceneName,
             TeleportPosition = _settings.TeleportPosition
         };
-        
+
         MainManager.ScreenManager.OpenScreenWithContext(ScreenType.PortalScreen,
             context);
     }

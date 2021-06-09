@@ -13,6 +13,7 @@ namespace AccumulatedResources
     {
         [SerializeField]
         private TextMeshProUGUI _timer;
+        
         [SerializeField]
         private Slider _slider;
         

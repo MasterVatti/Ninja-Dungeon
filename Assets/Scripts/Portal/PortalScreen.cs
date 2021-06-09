@@ -34,6 +34,7 @@ public class PortalScreen : BaseScreenWithContext<PortalContext>
         if (MainManager.EnergyManager.HasEnoughEnergy(_energyCost))
         {
             MainManager.Player.transform.position = _teleportPosition;
+            MainManager.Player.transform.rotation = Quaternion.LookRotation(Vector3.forward);
             MainManager.ScreenManager.CloseTopScreen();
             MainManager.LoadingController.StartLoad(_sceneName);
             MainManager.EnergyManager.DecreaseEnergy(_energyCost);

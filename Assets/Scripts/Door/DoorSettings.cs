@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Scripts.BattleManager;
 using UnityEngine;
 
 namespace Door
@@ -9,16 +10,12 @@ namespace Door
     [Serializable]
     public class DoorSettings
     {
-        public string ScreenDescription => _screenDescription;
-        public string SceneName => _sceneName;
-        public string DifficultyLevel => _difficultyLevel;
-    
-        [SerializeField]
-        private string _screenDescription;
-        [SerializeField]
-        private string _sceneName;
-        [SerializeField]
-        private string _difficultyLevel;
+        public RoomSettings RoomSettings => _roomSettings;
+        public Vector3 TeleportPosition => _teleportPosition;
 
+        [SerializeField]
+        private RoomSettings _roomSettings;
+        [SerializeField]
+        private Vector3 _teleportPosition;
     }
 }

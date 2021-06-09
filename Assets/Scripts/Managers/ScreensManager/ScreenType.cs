@@ -11,13 +11,13 @@
         RewardScreen = 2,
         PortalScreen = 3,
         LoadingScreen = 4,
-        DoorScreen = 5,
+        DungeonDoorScreen = 5,
         ShopScreen = 6,
         SawmillScreen = 7,
         MineScreen = 8,
         InformationPopupScreen = 9,
         BuffScreen = 10,
         InsufficientResources = 11,
-        BarrackScreen = 12,
+        DeathScreen = 12,
     }
 }

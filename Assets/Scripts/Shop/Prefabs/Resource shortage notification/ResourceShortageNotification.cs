@@ -1,6 +1,7 @@
+using System;
 using Assets.Scripts.Managers.ScreensManager;
 
-namespace ShopResource_shortage_notification
+namespace Shop.Resource_shortage_notification
 {
     /// <summary>
     /// Представляет собой уведомление о том, что у игрока не хватает ресурсов

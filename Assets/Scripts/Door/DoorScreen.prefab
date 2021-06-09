@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f848bee2cc55ceb4aacb39c30e56337e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScreenType: 4
+  ScreenType: 5
   _descriptionField: {fileID: 4245431442043017256}
   _difficultyLevelField: {fileID: 8638925057926351094}
 --- !u!1 &2866428797708432056
