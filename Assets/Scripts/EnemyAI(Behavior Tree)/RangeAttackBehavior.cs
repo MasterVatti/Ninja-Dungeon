@@ -2,8 +2,10 @@ using Assets.Scripts;
 using Characteristics;
 using ProjectileLauncher;
 using UnityEngine;
-using UnityEngine.Serialization;
 
+/// <summary>
+/// Отвечает за дальние атаки AI.
+/// </summary>
 public class RangeAttackBehavior : SimpleAttackBehaviour
 {
     [SerializeField]

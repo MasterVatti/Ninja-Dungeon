@@ -51,7 +51,10 @@ namespace ProjectileLauncher
                 DealDamage(collision);
                 gameObject.SetActive(false);
             }
+            if (collision.gameObject.CompareTag(GlobalConstants.PROJECTILE_TAG))
+            {
+                gameObject.SetActive(false);
+            }
         }
-
     }
 }

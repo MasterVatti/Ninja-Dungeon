@@ -31,7 +31,6 @@ namespace Barracks_and_allied_behavior
         private void SlowDown()
         {
             _agent.speed = _personCharacteristics.MoveSpeed;
-            
             Task.current.Succeed();
         }
         
@@ -39,7 +38,6 @@ namespace Barracks_and_allied_behavior
         private void IncreaseSpeed()
         {
             _agent.speed = _accelerateSpeed + _personCharacteristics.MoveSpeed;
-            
             Task.current.Succeed();
         }
     }

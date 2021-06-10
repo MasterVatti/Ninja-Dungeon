@@ -43,8 +43,8 @@ namespace Barracks_and_allied_behavior
             {
                 return;
             }
+            
             _attackBehaviour.Attack(_targetProvider.GetTarget());
-                
             Task.current.Succeed();
         }
 

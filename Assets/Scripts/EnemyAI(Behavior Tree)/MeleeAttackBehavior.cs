@@ -13,8 +13,7 @@ public class MeleeAttackBehavior : IAttackBehaviour
     private readonly PersonCharacteristics _personCharacteristics;
     private readonly float _hitCooldown;
     private float _lastHitTime;
-    
-    
+
     public bool CanAttack(Person person)
     {
         return true;

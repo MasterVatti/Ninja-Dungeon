@@ -38,7 +38,7 @@ public class MovementBehaviour :  IMovementBehavior
         {
             Task.current.debugInfo = string.Format("({0}, {1})", _movePoint.x, _movePoint.y);
         }
-
+        
         return true;
     }
 

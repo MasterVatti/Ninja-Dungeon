@@ -18,6 +18,7 @@ MonoBehaviour:
   _connectedBuildings:
   - {fileID: 11400000, guid: 600f404c0c98baf4eb2eb843e8f400e4, type: 2}
   - {fileID: 11400000, guid: 924d24cd3e08e8a43999d89dd5de98c9, type: 2}
+  - {fileID: 11400000, guid: 5258feace2de2db4d963ec9a6d6e3f30, type: 2}
   _upgradeList:
   - _upgradeCost:
     - _type: 0

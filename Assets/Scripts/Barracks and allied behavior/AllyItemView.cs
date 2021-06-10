@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
+using Assets.Scripts.Managers.ScreensManager;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
@@ -41,6 +42,11 @@ namespace Barracks_and_allied_behavior
                 _barrack.CreateAlly(_ally);
 
                 MainManager.ScreenManager.CloseTopScreen();
+            }
+            else
+            {
+                MainManager.ScreenManager.OpenScreenWithContext(ScreenType.InformationPopupScreen, 
+                    new InformationScreenContext("Resource  Warning", "You don't have enough resource "));
             }
         }
 
