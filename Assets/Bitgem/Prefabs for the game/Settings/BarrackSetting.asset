@@ -13,10 +13,18 @@ MonoBehaviour:
   m_Name: BarrackSetting
   m_EditorClassIdentifier: 
   _buildingName: Barrack
-  _buildingInfoView: {fileID: 0}
+  _buildingInfoView: {fileID: 2838927722039180749, guid: fcd7258a2e5b64cb0b3c565ae4c0f86d,
+    type: 3}
   _connectedBuildings: []
-  _upgradeList: []
-  _placeHolderPrefab: {fileID: 1865195110207408634, guid: da0de1a311696af4a85c68638a05b84b,
+  _upgradeList:
+  - _upgradeCost:
+    - _type: 0
+      _amount: 700
+    - _type: 1
+      _amount: 1000
+    _upgradePrefab: {fileID: 1865195110207408634, guid: da0de1a311696af4a85c68638a05b84b,
+      type: 3}
+  _placeHolderPrefab: {fileID: 3984928345223576583, guid: 151e3a37d78a8a64184f2f185222163e,
     type: 3}
   _timeToBuild: 2
-  _position: {x: 9.743765, y: 5.76, z: -40.27681}
+  _position: {x: -1.64, y: 0.9, z: 62.62}

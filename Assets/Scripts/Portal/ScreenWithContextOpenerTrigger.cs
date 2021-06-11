@@ -13,4 +13,12 @@ public class ScreenWithContextOpenerTrigger : MonoBehaviour
             GetComponent<IScreenOpenerWithContext>().ShowScreenWithContext();
         }
     }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag(GlobalConstants.PLAYER_TAG))
+        {
+            MainManager.ScreenManager.CloseTopScreen();
+        }
+    }
 }

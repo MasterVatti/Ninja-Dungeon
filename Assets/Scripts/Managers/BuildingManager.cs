@@ -15,8 +15,10 @@ namespace Managers
 
         [SerializeField]
         private List<BuildingSettings> _buildings = new List<BuildingSettings>();
-        [SerializeField] private List<GameObject> _activePlaceHolders = new List<GameObject>();
-        [SerializeField] private List<GameObject> _activeBuildings = new List<GameObject>();
+        [SerializeField]
+        private List<GameObject> _activePlaceHolders = new List<GameObject>();
+        [SerializeField]
+        private List<GameObject> _activeBuildings = new List<GameObject>();
 
         private void Start()
         {
