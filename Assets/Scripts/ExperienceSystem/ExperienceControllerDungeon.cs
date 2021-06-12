@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using Characteristics;
 using UnityEngine;
-
+//// <summary>
+///  класс контроля метода в подземелье
+/// </summary>
 namespace ExperienceSystem
 {
     [RequireComponent(typeof(PlayerCharacteristics))]
-    public class ExperienceControllerDungeon : MonoBehaviour
+    public class ExperienceControllerDungeon : ExperienceController
     {
         public event Action<int> OnLevelUp;
         
@@ -17,7 +19,7 @@ namespace ExperienceSystem
             _playerCharacteristics = GetComponent<PlayerCharacteristics>();
         }
         
-        public void AddExperience(int value)
+        public override void AddExperience(int value)
         {
             _playerCharacteristics.ExperienceDungeon += value;
             
@@ -27,7 +29,7 @@ namespace ExperienceSystem
             }
         }
 
-        private void LevelUp()
+        public override void LevelUp()
         {
             var maximumExperience = _playerCharacteristics.MaximumExperienceLevelDungeon;
             

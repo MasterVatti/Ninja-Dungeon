@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using Characteristics;
 using UnityEngine;
-
+//// <summary>
+///  класс контроля метода в городе
+/// </summary>
 namespace ExperienceSystem
 {
     [RequireComponent(typeof(PlayerCharacteristics))]
-    public class ExperienceControllerUpperWorld : MonoBehaviour
+    public class ExperienceControllerUpperWorld : ExperienceController
     {
         public event Action<int> OnLevelUp;
 
@@ -17,7 +19,7 @@ namespace ExperienceSystem
             _playerCharacteristics = GetComponent<PlayerCharacteristics>();
         }
         
-        public void AddExperience(int value)
+        public override void AddExperience(int value)
         {
             _playerCharacteristics.ExperienceUpperWorld += value;
 
@@ -27,7 +29,7 @@ namespace ExperienceSystem
             }
         }
 
-        private void LevelUp()
+        public override void LevelUp()
         {
             var maximumExperience = _playerCharacteristics.MaximumExperienceLevelUpperWorld;
             
