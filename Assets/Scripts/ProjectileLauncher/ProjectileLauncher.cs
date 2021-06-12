@@ -29,7 +29,7 @@ namespace ProjectileLauncher
             
             if (_attackBehaviour.CanAttack(enemy))
             {
-                transform.parent.LookAt(enemy.transform);
+                transform.LookAt(enemy.transform);
                 
                 _attackBehaviour.Attack(enemy);
             }

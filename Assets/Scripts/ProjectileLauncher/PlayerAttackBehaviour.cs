@@ -23,12 +23,7 @@ namespace ProjectileLauncher
 
         private ProjectileDirectionsProvider _projectileDirectionsProvider;
         private PlayerCharacteristics _playerCharacteristics;
-
-        public override bool CanAttack(Person person)
-        {
-            return base.CanAttack(person);
-        }
-
+        
         protected override void Awake()
         {
             base.Awake();

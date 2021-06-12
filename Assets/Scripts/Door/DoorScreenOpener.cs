@@ -7,12 +7,12 @@ namespace Door
     /// <summary>
     /// Класс отвечает за открытие окна дверей
     /// </summary>
-    public class DoorScreenOpener : MonoBehaviour
+    public class DoorScreenOpener : MonoBehaviour, IScreenOpenerWithContext
     {
         [SerializeField]
         private DoorSettings _settings;
-
-        public void ShowPortalScreen()
+        
+        public void ShowScreenWithContext()
         {
             var context = new DungeonDoorContext()
             {

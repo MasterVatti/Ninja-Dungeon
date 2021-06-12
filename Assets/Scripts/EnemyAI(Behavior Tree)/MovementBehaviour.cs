@@ -1,3 +1,4 @@
+using Characteristics;
 using Panda;
 using UnityEngine;
 using UnityEngine.AI;
