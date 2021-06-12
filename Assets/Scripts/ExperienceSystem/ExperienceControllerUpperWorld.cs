@@ -40,7 +40,7 @@ namespace ExperienceSystem
             OnLevelUp?.Invoke(_playerCharacteristics.LevelUpperWorld);
         }
 
-        private bool IsLevelMax()
+        public override bool IsLevelMax()
         {
             return _playerCharacteristics.LevelMaxUpperWorld == _playerCharacteristics.LevelUpperWorld;
         }

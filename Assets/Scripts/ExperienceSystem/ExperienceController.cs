@@ -10,15 +10,10 @@ namespace ExperienceSystem
 {
     public abstract class ExperienceController : MonoBehaviour
     {
-        public virtual void AddExperience(int value)
-        {
-            
-        }
+        public abstract void AddExperience(int value);
+        public abstract void LevelUp();
+        public abstract bool IsLevelMax();
 
-        public virtual void LevelUp()
-        {
-            
-        }
     }
 }
 
