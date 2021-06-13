@@ -1,6 +1,7 @@
 using System;
 using Characteristics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ProjectileLauncher
 {
@@ -16,6 +17,9 @@ namespace ProjectileLauncher
 
         [SerializeField]
         private Team _ownerTeam;
+        [FormerlySerializedAs("_muzzlePosition")]
+        [SerializeField]
+        protected Transform _muzzle;
         [SerializeField]
         private Projectile _projectilePrefab;
         [SerializeField]

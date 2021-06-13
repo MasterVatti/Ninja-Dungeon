@@ -2265,7 +2265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 154396114}
   m_Layer: 7
-  m_Name: GameObject
+  m_Name: FrontalMuzzle1
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3071,10 +3071,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ownerTeam: 1
-  _projectilePrefab: {fileID: 2472122781938320418, guid: 03dbbe3a25b668f448ded4c5f16dca1e,
+  _muzzle: {fileID: 478852305}
+  _projectilePrefab: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
     type: 3}
   _personCharacteristics: {fileID: 212603102}
-  _muzzlesPositions:
+  _frontalBuffMuzzles:
   - {fileID: 154396114}
   - {fileID: 533678719}
   _delayBetweenProjectiles: 0.05
@@ -7549,6 +7550,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e289bf5debb17f6459818c207d781953, type: 3}
+--- !u!1 &478852304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 478852305}
+  m_Layer: 7
+  m_Name: MainMuzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &478852305
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478852304}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.108, y: 1.33, z: 0.65}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1877973916}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &481394911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8738,7 +8769,7 @@ GameObject:
   m_Component:
   - component: {fileID: 533678719}
   m_Layer: 7
-  m_Name: GameObject (1)
+  m_Name: FrontalMuzzle2
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -15320,7 +15351,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 320
   m_TargetDisplay: 0
 --- !u!114 &996524424
 MonoBehaviour:
@@ -28251,6 +28282,7 @@ GameObject:
   - component: {fileID: 1850388564}
   - component: {fileID: 1850388565}
   - component: {fileID: 1850388563}
+  - component: {fileID: 1850388566}
   m_Layer: 5
   m_Name: Building Views
   m_TagString: Untagged
@@ -28333,6 +28365,20 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1850388566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850388561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802096ad065740e459e1bca8bcf6d538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _placeholderViewPrefab: {fileID: 8572590426009315497, guid: 59099b9e6f4ec614da43428a9599b17e,
+    type: 3}
 --- !u!4 &1850564310 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1686021177305034388, guid: ebee340de387f334f9ac44e044abd8fb,

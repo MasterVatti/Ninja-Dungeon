@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using JetBrains.Annotations;
+using ResourceSystem;
+using UnityEngine;
 
 namespace BuildingSystem
 {
@@ -7,16 +10,17 @@ namespace BuildingSystem
     /// </summary>
     public static class BuildingUtils
     {
-        public static GameObject CreateNewBuilding(BuildingSettings settings, int buildingLevel = 0)
+        public static GameObject CreateNewBuilding([CanBeNull]GameObject placeHolder,
+            BuildingSettings settings, int buildingLevel = 0)
         {
             var position = settings.Position;
-            var buildingUpgrade = settings.UpgradeList[buildingLevel];
+            var buildingUpgrade = settings.UpgradesInfo[buildingLevel];
             var buildingPrefab = buildingUpgrade.UpgradePrefab;
             var rotation = buildingPrefab.transform.rotation;
             
             var building = Object.Instantiate(buildingPrefab, position, rotation);
 
-            MainManager.BuildingManager.AddNewConstructedBuilding(building, settings);
+            MainManager.BuildingManager.AddNewConstructedBuilding(placeHolder, building, settings);
             if (building.TryGetComponent<IBuilding>(out var buildingData))
             {
                 buildingData.OnStateLoaded(settings.ID, buildingLevel);
@@ -25,18 +29,17 @@ namespace BuildingSystem
             return building;
         }
 
-        public static GameObject CreateNewPlaceHolder(BuildingSettings settings)
+        public static void CreatePlaceHolder(BuildingSettings settings, List<Resource> requiredResources)
         {
             var position = settings.Position;
             var placeHolderPrefab = settings.PlaceHolderPrefab;
             var placeHolderRotation = placeHolderPrefab.transform.rotation;
 
             var placeHolder = Object.Instantiate(placeHolderPrefab, position, placeHolderRotation);
+            var buildingController = placeHolder.GetComponent<BuildingPlaceholder>();
+            buildingController.Initialize(settings, requiredResources);
             
-            placeHolder.GetComponent<BuildingController>().Initialize(settings);
-            MainManager.BuildingManager.ActivePlaceHolders.Add(placeHolder);
-
-            return placeHolder;
+            MainManager.BuildingManager.AddPlaceholder(placeHolder);
         }
     }
 }

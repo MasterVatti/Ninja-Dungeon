@@ -31,7 +31,8 @@ public class BuildingInfoView : MonoBehaviour
         _isInitialized = true;
 
         ShowNameBuilding(nameBuilding);
-        UpdateViewPosition(_attachPoint);
+        
+        Update();
     }
 
     protected virtual void Update()
@@ -43,7 +44,7 @@ public class BuildingInfoView : MonoBehaviour
         
         if (_attachPoint != null)
         {
-            UpdateViewPosition(_attachPoint);
+            UpdateViewPosition(_currentTransform, _parent, _attachPoint);
         }
         else // on case the building was destroyed
         {
@@ -51,13 +52,13 @@ public class BuildingInfoView : MonoBehaviour
         }
     }
 
-    private void UpdateViewPosition(Transform attachPoint)
+    private static void UpdateViewPosition(RectTransform currentTransform, RectTransform parent, Transform attachPoint)
     {
         var worldPoint = attachPoint.transform.position;
         
         var screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, worldPoint);
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(_parent, screenPoint, null,
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(parent, screenPoint, null,
             out var localPoint);
-        _currentTransform.anchoredPosition = localPoint;
+        currentTransform.anchoredPosition = localPoint;
     }
 }

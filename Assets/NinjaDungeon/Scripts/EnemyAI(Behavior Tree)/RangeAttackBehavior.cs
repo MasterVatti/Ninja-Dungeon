@@ -8,9 +8,6 @@ using UnityEngine;
 /// </summary>
 public class RangeAttackBehavior : SimpleAttackBehaviour
 {
-    [SerializeField]
-    private Transform _muzzlePosition;
-    
     public override bool CanAttack(Person person)
     {
         if (!base.CanAttack(person))
@@ -33,6 +30,6 @@ public class RangeAttackBehavior : SimpleAttackBehaviour
 
     protected override void Shoot(Vector3 direction)
     {
-        CreateProjectile(_muzzlePosition.position, direction,  _personCharacteristics.AttackDamage);
+        CreateProjectile(_muzzle.position, direction,  _personCharacteristics.AttackDamage);
     }
 }

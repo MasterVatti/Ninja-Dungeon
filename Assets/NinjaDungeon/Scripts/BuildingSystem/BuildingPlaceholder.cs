@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts;
 using ResourceSystem;
 using UnityEngine;
@@ -6,29 +8,31 @@ using UnityEngine;
 namespace BuildingSystem
 {
     /// <summary>
-    /// Класс вычисляет скорость оплаты строительства
-    /// и контролирует процесс строительства
+    /// Класс вычисляет скорость оплаты строительства и контролирует процесс строительства
     /// </summary>
-    public class BuildingController : MonoBehaviour
+    public class BuildingPlaceholder : MonoBehaviour, IBuildingUIPositionHolder
     {
         private const int PAY_PER_TICK = 1;
 
-        public List<Resource> RequiredResource { get; set; } = new List<Resource>();
+        public event Action OnPayForBuilding;
+
+        public Transform PositionUI => _uiPosition;
+
+        public List<Resource> RequiredResource { get; private set; }
         public BuildingSettings BuildingSettings { get; private set; }
+
+        [SerializeField]
+        private Transform _uiPosition;
 
         private Dictionary<ResourceType, float> _requiredCooldown;
         private Dictionary<ResourceType, float> _currentCooldown;
 
-        private void Start()
+        public void Initialize(BuildingSettings buildingSettings, List<Resource> requiredResources)
         {
-            //копируем значения списка необходимых ресурсов, чтобы не менять настройки
-            // но только в том случае, если из сохранения нам сюда прилетел пустой список
-            if (RequiredResource.Count == 0)
-            {
-                RequiredResource = new List<Resource>(BuildingSettings.UpgradeList[0].UpgradeCost);
-            }
+            BuildingSettings = buildingSettings;
+            RequiredResource = requiredResources ?? BuildingSettings.UpgradesInfo[0].UpgradeCost.ToList();
         }
-
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag(GlobalConstants.PLAYER_TAG))
@@ -46,18 +50,13 @@ namespace BuildingSystem
             }
         }
 
-        public void Initialize(BuildingSettings buildingSettings)
-        {
-            BuildingSettings = buildingSettings;
-        }
-
         private void SetRequiredCooldown()
         {
             _requiredCooldown = new Dictionary<ResourceType, float>();
             _currentCooldown = new Dictionary<ResourceType, float>();
             foreach (var requiredResource in RequiredResource)
             {
-                _requiredCooldown.Add(requiredResource.Type, 
+                _requiredCooldown.Add(requiredResource.Type,
                     BuildingSettings.TimeToBuild / requiredResource.Amount);
                 _currentCooldown.Add(requiredResource.Type, float.MinValue);
             }
@@ -65,28 +64,28 @@ namespace BuildingSystem
 
         private void Build()
         {
-            for(var i = 0; i < RequiredResource.Count; i++)
+            for (var i = 0; i < RequiredResource.Count; i++)
             {
                 if (RequiredResource[i].Amount > 0 &&
                     IsPaymentTime(RequiredResource[i]) &&
                     MainManager.ResourceManager.HasEnough(RequiredResource[i].Type, PAY_PER_TICK))
                 {
                     MainManager.ResourceManager.Pay(RequiredResource[i].Type, PAY_PER_TICK);
-                    
+
                     var resource = RequiredResource[i];
                     resource.Amount -= PAY_PER_TICK;
                     RequiredResource[i] = resource;
 
                     var playerPosition = MainManager.PlayerMovementController.transform.position;
-                    MainManager.AnimationManager.ShowFlyingResource(RequiredResource[i].Type,
-                    playerPosition, transform.position);
+                    MainManager.AnimationManager.ShowFlyingResource(RequiredResource[i].Type, playerPosition, transform.position);
+
+                    OnPayForBuilding?.Invoke();
                 }
             }
 
             if (IsConstructionFinished())
             {
                 FinishConstruction();
-                MainManager.BuildingManager.ActivePlaceHolders.Remove(gameObject);
                 Destroy(gameObject);
             }
         }
@@ -114,10 +113,11 @@ namespace BuildingSystem
 
         private void FinishConstruction()
         {
-            BuildingUtils.CreateNewBuilding(BuildingSettings);
+            BuildingUtils.CreateNewBuilding(gameObject, BuildingSettings);
+            
             foreach (var placeHolder in BuildingSettings.ConnectedBuildings)
             {
-                BuildingUtils.CreateNewPlaceHolder(placeHolder);
+                BuildingUtils.CreatePlaceHolder(placeHolder, null);
             }
         }
     }

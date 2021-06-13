@@ -13,7 +13,7 @@ namespace SaveSystem
         public static IEnumerable<BuildingData> SaveConstructions()
         {
             var buildings = MainManager.BuildingManager.ActiveBuildings;
-            var placeHolders = MainManager.BuildingManager.ActivePlaceHolders;
+            var placeHolders = MainManager.BuildingManager.GetActivePlaceholders();
             var savedConstructions = new List<BuildingData>();
 
             foreach (var building in buildings)
@@ -26,15 +26,15 @@ namespace SaveSystem
 
             foreach (var placeHolder in placeHolders)
             {
-                var buildingController = placeHolder.GetComponent<BuildingController>();
+                var buildingController = placeHolder.GetComponent<BuildingPlaceholder>();
                 var placeHolderData = new PlaceHolderData
                 {
-                RemainResources = buildingController.RequiredResource
+                    RemainResources = buildingController.RequiredResource
                 };
                 savedConstructions.Add(new BuildingData
                 {
-                SettingsID = buildingController.BuildingSettings.ID,
-                State = JsonConvert.SerializeObject(placeHolderData)
+                    SettingsID = buildingController.BuildingSettings.ID,
+                    State = JsonConvert.SerializeObject(placeHolderData)
                 });
             }
 

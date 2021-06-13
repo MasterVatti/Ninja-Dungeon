@@ -17,7 +17,7 @@ namespace BuildingSystem.BuildingUpgradeSystem
             var settings = MainManager.BuildingManager.GetBuildingSettings(settingsID);
             var buildingLevel = building.CurrentBuildingLevel + 1;
             
-            if (settings.UpgradeList.Count <= buildingLevel)
+            if (settings.UpgradesInfo.Count <= buildingLevel)
             {
                 return building;
             }
@@ -28,12 +28,12 @@ namespace BuildingSystem.BuildingUpgradeSystem
         private static Building<T> Upgrade<T>(Building<T> oldBuilding, BuildingSettings settings, int buildingLevel)
             where T : BaseBuildingState
         {
-            var upgrade = settings.UpgradeList[buildingLevel];
+            var upgrade = settings.UpgradesInfo[buildingLevel];
             var upgradeCost = upgrade.UpgradeCost;
 
             if (TryPayForUpgrade(upgradeCost))
             {
-                var newBuildingGameObject = BuildingUtils.CreateNewBuilding(settings, buildingLevel);
+                var newBuildingGameObject = BuildingUtils.CreateNewBuilding(null, settings, buildingLevel);
                 var newBuilding = newBuildingGameObject.GetComponent<Building<T>>();
                 newBuilding.OnUpgrade(oldBuilding.GetState());
                 

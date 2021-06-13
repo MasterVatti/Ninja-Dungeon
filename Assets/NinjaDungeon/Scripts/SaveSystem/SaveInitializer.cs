@@ -14,18 +14,16 @@ namespace SaveSystem
         {
             foreach (var building in buildings)
             {
-                var settings =  MainManager.BuildingManager.GetBuildingSettings(building.SettingsID);
+                var settings = MainManager.BuildingManager.GetBuildingSettings(building.SettingsID);
 
                 var placeHolderData = JsonConvert.DeserializeObject<PlaceHolderData>(building.State);
                 if (placeHolderData?.RemainResources != null)
                 {
-                    var newPlaceHolder = BuildingUtils.CreateNewPlaceHolder(settings);
-                    var buildingController = newPlaceHolder.GetComponent<BuildingController>();
-                    buildingController.RequiredResource = placeHolderData.RemainResources;
+                    BuildingUtils.CreatePlaceHolder(settings, placeHolderData.RemainResources);
                 }
                 else
                 {
-                    var newBuilding = BuildingUtils.CreateNewBuilding(settings, building.BuildingLevel);
+                    var newBuilding = BuildingUtils.CreateNewBuilding(null, settings, building.BuildingLevel);
                     if (newBuilding.TryGetComponent<IBuilding>(out var buildingData))
                     {
                         buildingData.LoadState(building.State);

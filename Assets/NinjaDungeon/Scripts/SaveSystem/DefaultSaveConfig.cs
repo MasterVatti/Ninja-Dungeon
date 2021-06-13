@@ -31,7 +31,7 @@ namespace SaveSystem
                     SettingsID = placeHolder.ID, 
                     State = JsonConvert.SerializeObject(new PlaceHolderData
                     {
-                        RemainResources = placeHolder.UpgradeList[0].UpgradeCost
+                        RemainResources = placeHolder.UpgradesInfo[0].UpgradeCost
                     })
                 }));
 

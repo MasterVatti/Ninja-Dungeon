@@ -17,13 +17,13 @@ namespace AccumulatedResources
                 var buildingID = building.GetComponent<IBuilding>().BuildingSettingsID;
                 var settings = MainManager.BuildingManager.GetBuildingSettings(buildingID);
                 
-                AddUIToBuilding(building,settings);
+                AddBuildingView(building,settings);
             }
 
-            MainManager.BuildingManager.OnBuildFinished += AddUIToBuilding;
+            MainManager.BuildingManager.OnBuildFinished += AddBuildingView;
         }
 
-        private void AddUIToBuilding(GameObject building, BuildingSettings setting)
+        private void AddBuildingView(GameObject building, BuildingSettings setting)
         {
             if (building.TryGetComponent(out IBuildingUIPositionHolder buildingUI))
             {
@@ -41,7 +41,7 @@ namespace AccumulatedResources
         
         private void OnDestroy()
         {
-            MainManager.BuildingManager.OnBuildFinished -= AddUIToBuilding;
+            MainManager.BuildingManager.OnBuildFinished -= AddBuildingView;
         }
     }
 }
