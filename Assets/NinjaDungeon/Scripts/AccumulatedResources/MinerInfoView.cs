@@ -1,6 +1,7 @@
 using Buildings;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace AccumulatedResources
@@ -10,21 +11,23 @@ namespace AccumulatedResources
     /// </summary>
     public class MinerInfoView  : BuildingInfoView
     {
+        [FormerlySerializedAs("_resources")]
         [SerializeField]
-        private TextMeshProUGUI _resources;
+        private TextMeshProUGUI _collectedAmount;
         
         [SerializeField]
         private Slider _progressFill;
         
+        [FormerlySerializedAs("_image")]
         [SerializeField]
-        private Image _image;
+        private Image _resourceIcon;
    
         private ResourceMiner _resourceMiner;
 
         protected override void Update()
         {
             base.Update();
-            _resources.text = _resourceMiner.CurrentResourceCount + "/" + _resourceMiner.MaxStorage;
+            _collectedAmount.text = _resourceMiner.CurrentResourceCount + "/" + _resourceMiner.MaxStorage;
             _progressFill.value = _resourceMiner.CurrentResourceCount / (float)_resourceMiner.MaxStorage;
         }
 
@@ -32,9 +35,9 @@ namespace AccumulatedResources
         {
             _resourceMiner = building.GetComponent<ResourceMiner>();
 
-            if (_image != null) // for the case when we want to use custom icon
+            if (_resourceIcon != null) // for the case when we want to use custom icon
             {
-                _image.sprite = MainManager.IconsProvider.GetResourceSprite(_resourceMiner.ExtractableResource);
+                _resourceIcon.sprite = MainManager.IconsProvider.GetResourceSprite(_resourceMiner.ExtractableResource);
             }
 
             Update();

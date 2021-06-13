@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MineSetting
   m_EditorClassIdentifier: 
   _buildingName: Mine
-  _buildingInfoView: {fileID: 8190536544479169298, guid: 12cbec2cd7cd94f28885de5aeff15ea2,
+  _buildingInfoView: {fileID: 9207125246839909262, guid: 7287f2b594bbc47a29f8c041558bdde2,
     type: 3}
   _connectedBuildings: []
   _upgradeList:

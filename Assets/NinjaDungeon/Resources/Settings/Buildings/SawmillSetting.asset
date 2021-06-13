@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SawmillSetting
   m_EditorClassIdentifier: 
   _buildingName: Sawmill
-  _buildingInfoView: {fileID: 8190536544479169298, guid: 559fa6678c05e4e4588e394f127aa907,
+  _buildingInfoView: {fileID: 9207125246839909262, guid: 559fa6678c05e4e4588e394f127aa907,
     type: 3}
   _connectedBuildings:
   - {fileID: 11400000, guid: 600f404c0c98baf4eb2eb843e8f400e4, type: 2}

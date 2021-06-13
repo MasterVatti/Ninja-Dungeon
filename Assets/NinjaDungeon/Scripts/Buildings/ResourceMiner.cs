@@ -60,9 +60,9 @@ namespace Buildings
             }
         }
 
-        private void OnTriggerStay(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
-            if (_currentResourceCount != 0)
+            if (_currentResourceCount > 0)
             {
                 MainManager.ResourceManager.AddResource(_miningResource, _currentResourceCount);
                 MiningStartTime = DateTime.UtcNow;
