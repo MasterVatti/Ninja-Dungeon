@@ -1,4 +1,5 @@
 using Enemies;
+using NinjaDungeon.Scripts.ProjectileLauncher;
 using UnityEngine;
 
 namespace ProjectileLauncher
@@ -20,17 +21,10 @@ namespace ProjectileLauncher
 
         private void Update()
         {
-            if (_attackBehaviour.IsCooldown && MainManager.EnemiesManager.Enemies.Count >= 0)
-            {
-                return;
-            }
-            
             var enemy = _nearestTargetProvider.GetNearestTarget(MainManager.EnemiesManager.Enemies, transform.position);
             
-            if (_attackBehaviour.CanAttack(enemy))
+            if (!_attackBehaviour.IsCooldown && _attackBehaviour.CanAttack(enemy))
             {
-                transform.LookAt(enemy.transform);
-                
                 _attackBehaviour.Attack(enemy);
             }
         }

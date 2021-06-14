@@ -1,4 +1,5 @@
 using System;
+using Assets.Scripts;
 using Characteristics;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -24,7 +25,7 @@ namespace ProjectileLauncher
         private Projectile _projectilePrefab;
         [SerializeField]
         protected PersonCharacteristics _personCharacteristics;
-        
+
         private float _lastShotTime;
         private float _projectileSpawnCooldown;
         
@@ -63,12 +64,34 @@ namespace ProjectileLauncher
 
         public virtual bool CanAttack(Person person)
         {
-            return person != null;
+            if (person == null)
+            {
+                return false;
+            }
+            var directionToTarget = person.transform.position - _muzzle.position;
+            TurnToTarget(directionToTarget); // TODO: Почему не разворачивает игрока? Вроде все ок сделал.(MAX).
+            
+            if (Physics.Raycast(_muzzle.position, directionToTarget.normalized, out var hit))
+            {
+                if (hit.collider.CompareTag(GlobalConstants.PLAYER_TAG) || hit.collider.CompareTag(GlobalConstants.ALLY_TAG) 
+                                                                        || hit.collider.CompareTag(GlobalConstants.ENEMY_TAG))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         protected virtual void Shoot(Vector3 direction)
         {
-            CreateProjectile(transform.position, direction,  _personCharacteristics.AttackDamage);
+            CreateProjectile(_muzzle.position, direction,  _personCharacteristics.AttackDamage);
+        }
+
+        private void TurnToTarget(Vector3 direction)
+        {
+            var rotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Lerp(transform.rotation,rotation,
+                _personCharacteristics.RotationSpeed * Time.deltaTime);
         }
     }
 }

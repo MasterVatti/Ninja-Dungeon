@@ -40,6 +40,11 @@ namespace Characteristics
             get => _attackRate;
             set => _attackRate = value;
         }
+        public float RotationSpeed
+        {
+            get => _rotationSpeed;
+            set => _rotationSpeed = value;
+        }
     
         public bool CanMove
         {
@@ -67,6 +72,8 @@ namespace Characteristics
         private int _attackDamage;
         [SerializeField]
         private float _attackRate;
+        [SerializeField]
+        private float _rotationSpeed;
     
         [Header("Bools")]
         [SerializeField]
