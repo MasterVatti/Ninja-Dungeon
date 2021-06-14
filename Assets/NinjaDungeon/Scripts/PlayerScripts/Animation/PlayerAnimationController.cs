@@ -7,26 +7,13 @@ namespace PlayerScripts.Animation
     {
         [SerializeField]
         private Animator _animator;
-        
+
         private static readonly int IsWalk = Animator.StringToHash("isWalk");
         private static readonly int Attack = Animator.StringToHash("Attack");
         
-        void Update()
+        public void RunningAnimation(bool state)
         {
-            RunningAnimation();
-        }
-
-        private void RunningAnimation()
-        {
-            var direction = InputController.GetDirection();
-            if (direction.x != 0 || direction.z != 0)
-            {
-                _animator.SetBool(IsWalk,true);
-            }
-            else
-            {
-                _animator.SetBool(IsWalk,false);
-            }
+            _animator.SetBool(IsWalk, state);
         }
 
         public void AttackAnimation()

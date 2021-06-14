@@ -29,11 +29,13 @@ namespace PlayerScripts.Movement
             var direction = InputController.GetDirection();
             if (direction.x != 0 || direction.z != 0)
             {
-                //_attackBehaviour.TurnAutoFire(false);
+                _animationController.RunningAnimation(true);
+                _attackBehaviour.TurnAutoFire(false);
             }
             else
             {
-               // _attackBehaviour.TurnAutoFire(true);
+                _animationController.RunningAnimation(false);
+                _attackBehaviour.TurnAutoFire(true);
             }
         }
         

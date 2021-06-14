@@ -68,10 +68,10 @@ namespace ProjectileLauncher
             {
                 return false;
             }
-            var directionToTarget = person.transform.position - _muzzle.position;
+            var directionToTarget = person.transform.position - transform.position;
             TurnToTarget(directionToTarget); // TODO: Почему не разворачивает игрока? Вроде все ок сделал.(MAX).
             
-            if (Physics.Raycast(_muzzle.position, directionToTarget.normalized, out var hit))
+            if (Physics.Raycast(transform.position, directionToTarget.normalized, out var hit))
             {
                 if (hit.collider.CompareTag(GlobalConstants.PLAYER_TAG) || hit.collider.CompareTag(GlobalConstants.ALLY_TAG) 
                                                                         || hit.collider.CompareTag(GlobalConstants.ENEMY_TAG))

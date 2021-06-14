@@ -26,6 +26,7 @@ namespace ProjectileLauncher
 
         private ProjectileDirectionsProvider _projectileDirectionsProvider;
         private PlayerCharacteristics _playerCharacteristics;
+        private bool _isActiveFire;
         
         protected override void Awake()
         {
@@ -36,6 +37,11 @@ namespace ProjectileLauncher
             _projectileDirectionsProvider = new ProjectileDirectionsProvider(_playerCharacteristics, _frontalBuffMuzzles);
         }
 
+        public override bool CanAttack(Person person)
+        {
+            return _isActiveFire && base.CanAttack(person);
+        }
+        
         protected override void Shoot(Vector3 direction)
         {
             StartCoroutine(ShootInAllDirections(direction));
@@ -57,6 +63,11 @@ namespace ProjectileLauncher
                 
                 yield return new WaitForSeconds(_delayBetweenProjectiles);
             }
+        }
+
+        public void TurnAutoFire(bool state)
+        {
+            _isActiveFire = state;
         }
     }
 }
