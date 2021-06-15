@@ -68,10 +68,10 @@ namespace ProjectileLauncher
             {
                 return false;
             }
-            var directionToTarget = person.transform.position - transform.position;
-            TurnToTarget(directionToTarget); // TODO: Почему не разворачивает игрока? Вроде все ок сделал.(MAX).
             
-            if (Physics.Raycast(transform.position, directionToTarget.normalized, out var hit))
+            TurnToTarget(person);
+            
+            if (Physics.Raycast(transform.position, _muzzle.transform.forward, out var hit))
             {
                 if (hit.collider.CompareTag(GlobalConstants.PLAYER_TAG) || hit.collider.CompareTag(GlobalConstants.ALLY_TAG) 
                                                                         || hit.collider.CompareTag(GlobalConstants.ENEMY_TAG))
@@ -87,9 +87,10 @@ namespace ProjectileLauncher
             CreateProjectile(_muzzle.position, direction,  _personCharacteristics.AttackDamage);
         }
 
-        private void TurnToTarget(Vector3 direction)
+        private void TurnToTarget(Person person)
         {
-            var rotation = Quaternion.LookRotation(direction);
+            var directionToTarget = person.transform.position - transform.position;
+            var rotation = Quaternion.LookRotation(directionToTarget);
             transform.rotation = Quaternion.Lerp(transform.rotation,rotation,
                 _personCharacteristics.RotationSpeed * Time.deltaTime);
         }

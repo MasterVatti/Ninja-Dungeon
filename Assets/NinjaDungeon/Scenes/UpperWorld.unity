@@ -30255,7 +30255,7 @@ PrefabInstance:
     - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 6.9e-44
+      value: 6e-44
       objectReference: {fileID: 0}
     - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
         type: 3}
@@ -30265,12 +30265,12 @@ PrefabInstance:
     - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 0
+      value: 4.4513206
       objectReference: {fileID: 0}
     - target: {fileID: 4578282453457867154, guid: 37ad16ba3eaef2741a968a2294143f7d,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 0
+      value: 7.82e-43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ad16ba3eaef2741a968a2294143f7d, type: 3}
@@ -32123,7 +32123,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 212603102, guid: d942cc7a13f47a84eb6982236acc9567, type: 3}
       propertyPath: _rotationSpeed
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 729379173542091806, guid: d942cc7a13f47a84eb6982236acc9567,
         type: 3}
