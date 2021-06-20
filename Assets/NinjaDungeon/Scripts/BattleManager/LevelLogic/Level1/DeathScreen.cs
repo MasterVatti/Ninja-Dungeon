@@ -1,29 +1,23 @@
-﻿using Assets.Scripts;
-using Assets.Scripts.Managers.ScreensManager;
+﻿using Assets.Scripts.Managers.ScreensManager;
 using DefaultNamespace;
+using Door;
 using JetBrains.Annotations;
 
 namespace NinjaDungeon.Scripts.BattleManager.LevelLogic.Level1
 {
-    public class DeathScreen : BaseScreen
+    public class DeathScreen : DungeonScreenTransition
     {
         [UsedImplicitly]
-        public void TurnOffPanel()
-        {
-            MainManager.ScreenManager.CloseTopScreen();
-        }
-
-        public override void Initialize(ScreenType screenType)
-        {
-            ScreenType = screenType;
-        }
-
-        public void GoToUpperWorld()
+        public override void OnClick()
         {
             EventBus.Publish<ISpawnHandler>(spawner => spawner.EndSpawn());
             MainManager.EnemiesManager.Enemies.Clear();
-            
-            MainManager.LoadingController.StartLoad(GlobalConstants.MAIN_SCENE_TAG);
+            MainManager.LoadingController.StartLoad(_sceneName);
+        }
+
+        public override void ApplyContext(PortalContext context)
+        {
+            _sceneName = context.SceneName;
         }
     }
 }

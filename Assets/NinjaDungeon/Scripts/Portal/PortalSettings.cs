@@ -1,4 +1,5 @@
 using System;
+using Assets.Scripts.BattleManager;
 using UnityEngine;
 
 /// <summary>
@@ -17,5 +18,4 @@ public class PortalSettings
     private string _sceneName;
     [SerializeField]
     private Vector3 _teleportPosition;
-
 }

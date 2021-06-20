@@ -14,7 +14,7 @@ namespace Door
         
         public void ShowScreenWithContext()
         {
-            var context = new DungeonDoorContext()
+            var context = new PortalContext
             {
                 RoomSettings = _settings.RoomSettings,
                 TeleportPosition = _settings.TeleportPosition

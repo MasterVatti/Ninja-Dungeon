@@ -19,6 +19,16 @@ namespace Enemies
             _enemies.Add(enemy);
             enemy.HealthBehaviour.OnDead += OnEnemyDied; 
         }
+
+        public void ClearEnemies()
+        {
+            foreach (var enemy in _enemies)
+            {
+                Destroy(enemy);
+            }
+            
+            _enemies.Clear();
+        }
         
         private void OnEnemyDied(Person person)
         {

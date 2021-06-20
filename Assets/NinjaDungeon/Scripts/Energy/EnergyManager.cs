@@ -11,7 +11,9 @@ namespace Energy
         private const string LAST_PLAY_TIME_KEY = "LastPlayTime";
         private const string ENERGY_COUNT_KEY = "EnergyCount";
 
-        public int CurrentEnergy { get; private set; } 
+        public int CurrentEnergy { get; private set; }
+        public float EnergyRecoveryTime { get; private set; }
+        public int MaximalEnergy => _maximalEnergy;
 
         [SerializeField]
         private int _maximalEnergy = 100;
@@ -48,6 +50,11 @@ namespace Energy
             {
                 _lastRestoreTime = Time.realtimeSinceStartup;
                 CurrentEnergy++;
+            }
+
+            if (CurrentEnergy < _maximalEnergy)
+            {
+                EnergyRecoveryTime = _lastRestoreTime + _oneEnergyRestoreTimeSec - Time.realtimeSinceStartup;
             }
         }
         

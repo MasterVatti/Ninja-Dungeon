@@ -1,4 +1,5 @@
 using System;
+using Assets.Scripts;
 using Characteristics;
 using ProjectileLauncher;
 using UnityEngine;
@@ -49,7 +50,10 @@ namespace Enemies
         private void Death()
         {
             OnDead?.Invoke(_person);
-            Destroy(gameObject);
+            if (!CompareTag(GlobalConstants.PLAYER_TAG))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

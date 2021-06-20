@@ -1,53 +1,64 @@
 using Assets.Scripts.Managers.ScreensManager;
+using Door;
 using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Класс отвечает за окно портала(предложение спустится в инст и наоборот) и обработку кнопки Yes
-/// </summary>
-public class PortalScreen : BaseScreenWithContext<PortalContext>
+namespace NinjaDungeon.Scripts.Portal
 {
-    [SerializeField]
-    private int _energyCost;
-    [SerializeField]
-    private Text _descriptionField;
-    
-    private string _sceneName;
-    private Vector3 _teleportPosition;
-    
-    [UsedImplicitly]
-    public void TurnOffPanel()
+    /// <summary>
+    /// Класс отвечает за окно портала(предложение спустится в инст и наоборот) и обработку кнопки Yes
+    /// </summary>
+    [RequireComponent(typeof(Animator))]
+    public class PortalScreen : DungeonScreenTransition
     {
-         MainManager.ScreenManager.CloseTopScreen();
-    }
+        [SerializeField]
+        private Text _descriptionField;
+        [SerializeField]
+        private int _energyCost;
+        [SerializeField]
+        private TextMeshProUGUI _textEnertyCost;
+
+        private PortalAnimatorController _portalAnimatorController;
     
-    public override void ApplyContext(PortalContext context)
-    {
-        _descriptionField.text = context.Description;
-        _sceneName = context.SceneName;
-        _teleportPosition = context.TeleportPosition;
-    }
-    
-    public void OnClick()
-    {
-        if (MainManager.EnergyManager.HasEnoughEnergy(_energyCost))
+        private void Start()
         {
-            MainManager.Player.transform.position = _teleportPosition;
-            MainManager.Player.transform.rotation = Quaternion.LookRotation(Vector3.forward);
-            MainManager.ScreenManager.CloseTopScreen();
-            MainManager.LoadingController.StartLoad(_sceneName);
+            var animator = GetComponent<Animator>();
+            _portalAnimatorController = new PortalAnimatorController(animator);
+
+            _textEnertyCost.text = _energyCost.ToString();
+
+            _portalAnimatorController.ChangeButtonColor(MainManager.EnergyManager.HasEnoughEnergy(_energyCost));
+        }
+    
+        [UsedImplicitly]
+        public override void OnClick()
+        {
+            if (MainManager.EnergyManager.HasEnoughEnergy(_energyCost))
+            {
+                TransitionStage();
+            }
+            else
+            {
+                MainManager.ScreenManager.CloseTopScreen();
+                MainManager.ScreenManager.OpenScreen(ScreenType.InsufficientResources);
+            }
+        }
+
+        public override void ApplyContext(PortalContext context)
+        {
+            base.ApplyContext(context);
+            _descriptionField.text = context.Description;
+        }
+    
+        protected override void TransitionStage()
+        {
+            base.TransitionStage();
+        
             MainManager.EnergyManager.DecreaseEnergy(_energyCost);
         }
-        else
-        {
-            MainManager.ScreenManager.OpenScreenWithContext(ScreenType.InformationPopupScreen, 
-                new InformationScreenContext("Energy Warning", "You don't have enough energy"));
-        }
-    }
-
-    public override void Initialize(ScreenType screenType)
-    {
-        ScreenType = screenType;
+    
+    
     }
 }

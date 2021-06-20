@@ -12,5 +12,6 @@ namespace Assets.Scripts.Managers.ScreensManager
         public string SceneName { get; set; }
         public string DifficultyLevel { get; set; }
         public Vector3 TeleportPosition { get; set; }
+        public RoomSettings RoomSettings { get; set; }
     }
 }

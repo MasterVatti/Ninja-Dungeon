@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 1824388498338098427}
   - component: {fileID: 821233814808746517}
   - component: {fileID: 4819236055989805974}
-  - component: {fileID: 4346243974487965224}
   m_Layer: 0
   m_Name: PortalPrefab
   m_TagString: Untagged
@@ -82,7 +81,7 @@ MonoBehaviour:
     _screenDescription: "\u0425\u043E\u0442\u0438\u0442\u0435 \u0441\u043F\u0443\u0441\u0442\u0438\u0442\u044C\u0441\u044F
       \u0432 \u043F\u043E\u0434\u0437\u0435\u043C\u0435\u043B\u044C\u0435?"
     _sceneName: LevelSelection
-    _teleportPosition: {x: 0, y: 0.5, z: 0}
+    _teleportPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1824388498338098427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,22 +127,6 @@ MonoBehaviour:
   _possibleEnemies:
   - {fileID: 6468529548311081048, guid: 7be291f3f1ec79348ba0aab62c8fc84a, type: 3}
   - {fileID: -7617768688791774286, guid: 41401f314877af94587ece4aa0a01dfc, type: 3}
---- !u!114 &4346243974487965224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 283214289208915664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d96a840feab6b43a314b2e39eda417, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _settings:
-    _screenDescription: 
-    _sceneName: LevelSelection
-    _teleportPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &3450469052181993017
 GameObject:
   m_ObjectHideFlags: 0

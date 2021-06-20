@@ -81,7 +81,7 @@ namespace NinjaDungeon.Scripts.BattleManager
                 //UI выигрыша Алексея
 
                 EventBus.Publish<ISpawnHandler>(spawner => spawner.EndSpawn());
-                MainManager.EnemiesManager.Enemies.Clear();
+                MainManager.EnemiesManager.ClearEnemies();
                 
                 MainManager.LoadingController.StartLoad(GlobalConstants.MAIN_SCENE_TAG); //<-- Или по кнопке Алексея
             }
@@ -101,7 +101,12 @@ namespace NinjaDungeon.Scripts.BattleManager
 
         private void PlayerDeath(Person person)
         {
-            MainManager.ScreenManager.OpenScreen(ScreenType.DeathScreen);
+            var context = new PortalContext
+            {
+                SceneName = GlobalConstants.MAIN_SCENE_TAG
+            };
+            
+            MainManager.ScreenManager.OpenScreenWithContext(ScreenType.DeathScreen, context);
         }
 
         private void OnDestroy()
