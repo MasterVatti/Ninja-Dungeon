@@ -1,5 +1,6 @@
 using Enemies;
 using NinjaDungeon.Scripts.ProjectileLauncher;
+using PlayerScripts.Animation;
 using UnityEngine;
 
 namespace ProjectileLauncher
@@ -10,6 +11,9 @@ namespace ProjectileLauncher
     [RequireComponent(typeof(IAttackBehaviour))]
     public class ProjectileLauncher : MonoBehaviour
     {
+        [SerializeField]
+        private PlayerAnimationController _playerAnimationController;
+        
         private IAttackBehaviour _attackBehaviour;
         private NearestTargetProvider _nearestTargetProvider;
 
@@ -25,7 +29,15 @@ namespace ProjectileLauncher
             
             if (!_attackBehaviour.IsCooldown && _attackBehaviour.CanAttack(enemy))
             {
-                _attackBehaviour.Attack(enemy);
+                if (_playerAnimationController != null)
+                {
+                    _playerAnimationController.AttackAnimation();
+                    _attackBehaviour.Attack(enemy);
+                }
+                else
+                {
+                    _attackBehaviour.Attack(enemy);
+                }
             }
         }
     }

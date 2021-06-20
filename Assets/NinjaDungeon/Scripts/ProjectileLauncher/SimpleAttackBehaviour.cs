@@ -1,6 +1,7 @@
 using System;
 using Assets.Scripts;
 using Characteristics;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -26,6 +27,8 @@ namespace ProjectileLauncher
         [SerializeField]
         protected PersonCharacteristics _personCharacteristics;
 
+        protected Vector3 _shootDirection;
+
         private float _lastShotTime;
         private float _projectileSpawnCooldown;
         
@@ -41,10 +44,9 @@ namespace ProjectileLauncher
         public void Attack(Person person)
         {
             _lastShotTime = Time.time;
-            var shootDirection = (person.transform.position - transform.position).normalized;
-            Shoot(shootDirection);
+            _shootDirection = (person.transform.position - transform.position).normalized;
         }
-        
+
         protected void CreateProjectile(Vector3 position, Vector3 direction, int damage, int reboundNumber = 1)
         {
             var newBullet = _bulletsPool.Get();
@@ -82,9 +84,10 @@ namespace ProjectileLauncher
             return false;
         }
 
-        protected virtual void Shoot(Vector3 direction)
+        [UsedImplicitly]
+        protected virtual void Shoot()
         {
-            CreateProjectile(_muzzle.position, direction,  _personCharacteristics.AttackDamage);
+            CreateProjectile(_muzzle.position, _shootDirection,  _personCharacteristics.AttackDamage);
         }
 
         private void TurnToTarget(Person person)

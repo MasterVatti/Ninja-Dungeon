@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Characteristics;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Serialization;
@@ -26,6 +27,7 @@ namespace ProjectileLauncher
 
         private ProjectileDirectionsProvider _projectileDirectionsProvider;
         private PlayerCharacteristics _playerCharacteristics;
+        private Vector3 _direction;
         private bool _isActiveFire;
         
         protected override void Awake()
@@ -42,17 +44,18 @@ namespace ProjectileLauncher
             return _isActiveFire && base.CanAttack(person);
         }
         
-        protected override void Shoot(Vector3 direction)
+        [UsedImplicitly]
+        protected override void Shoot()
         {
-            StartCoroutine(ShootInAllDirections(direction));
+            StartCoroutine(ShootInAllDirections());
             
             IsShoot?.Invoke();
         }
 
-        private IEnumerator ShootInAllDirections(Vector3 direction)
+        private IEnumerator ShootInAllDirections()
         {
             var muzzlePosition = _muzzle.position;
-            var fireDirections = _projectileDirectionsProvider.GetFireDirections(muzzlePosition, direction);
+            var fireDirections = _projectileDirectionsProvider.GetFireDirections(muzzlePosition, _shootDirection);
             for (int i = 0; i < _playerCharacteristics.ProjectileCount; i++)
             {
                 foreach (var transformProjectile in fireDirections)
