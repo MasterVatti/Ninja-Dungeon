@@ -1,4 +1,6 @@
 ﻿using System;
+using Assets.Scripts;
+using Assets.Scripts.BattleManager;
 using Assets.Scripts.Managers.ScreensManager;
 using Characteristics;
 using DefaultNamespace;
@@ -6,7 +8,7 @@ using Enemies;
 using Enemies.Spawner;
 using UnityEngine;
 
-namespace Assets.Scripts.BattleManager
+namespace NinjaDungeon.Scripts.BattleManager
 {
     /// <summary>
     /// Класс контролирует бой (организует)
@@ -78,7 +80,10 @@ namespace Assets.Scripts.BattleManager
 
                 //UI выигрыша Алексея
 
-                MainManager.LoadingController.StartLoad("SimpleNaturePack_Demo"); //<-- Или по кнопке Алексея
+                EventBus.Publish<ISpawnHandler>(spawner => spawner.EndSpawn());
+                MainManager.EnemiesManager.Enemies.Clear();
+                
+                MainManager.LoadingController.StartLoad(GlobalConstants.MAIN_SCENE_TAG); //<-- Или по кнопке Алексея
             }
         }
 
@@ -96,7 +101,7 @@ namespace Assets.Scripts.BattleManager
 
         private void PlayerDeath(Person person)
         {
-            MainManager.ScreenManager.OpenScreen(ScreenType.DeathScreen); //Окно смерти Игрока
+            MainManager.ScreenManager.OpenScreen(ScreenType.DeathScreen);
         }
 
         private void OnDestroy()

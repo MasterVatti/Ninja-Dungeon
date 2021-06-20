@@ -1,7 +1,9 @@
-﻿using Assets.Scripts.Managers.ScreensManager;
+﻿using Assets.Scripts;
+using Assets.Scripts.Managers.ScreensManager;
+using DefaultNamespace;
 using JetBrains.Annotations;
 
-namespace Assets.Scripts.BattleManager.Level1
+namespace NinjaDungeon.Scripts.BattleManager.LevelLogic.Level1
 {
     public class DeathScreen : BaseScreen
     {
@@ -18,6 +20,9 @@ namespace Assets.Scripts.BattleManager.Level1
 
         public void GoToUpperWorld()
         {
+            EventBus.Publish<ISpawnHandler>(spawner => spawner.EndSpawn());
+            MainManager.EnemiesManager.Enemies.Clear();
+            
             MainManager.LoadingController.StartLoad(GlobalConstants.MAIN_SCENE_TAG);
         }
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using Assets.Scripts.BattleManager;
+using NinjaDungeon.Scripts.BattleManager;
 using UnityEngine;
 
 namespace Loot

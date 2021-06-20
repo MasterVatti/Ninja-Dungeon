@@ -8,6 +8,6 @@ public class SelectionDoorUI : MonoBehaviour
     
     private void Update()
     {
-        transform.LookAt(_camera);
+        //transform.LookAt(_camera);
     }
 }

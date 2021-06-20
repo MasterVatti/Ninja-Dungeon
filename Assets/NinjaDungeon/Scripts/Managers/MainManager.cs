@@ -5,6 +5,7 @@ using Energy;
 using LoadingScene;
 using Managers;
 using Managers.ScreensManager;
+using NinjaDungeon.Scripts.BattleManager;
 using PlayerScripts.Movement;
 using UnityEngine;
 
