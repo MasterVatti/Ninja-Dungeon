@@ -1,5 +1,6 @@
 using Barracks_and_allied_behavior;
 using Characteristics;
+using NinjaDungeon.Scripts.AI;
 using Panda;
 
 namespace MagicianFolder.GolemFolder

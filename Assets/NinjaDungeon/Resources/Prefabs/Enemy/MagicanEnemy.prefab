@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 357756034995891791}
   - component: {fileID: 3560580086733799923}
   - component: {fileID: 5978981134792347142}
+  - component: {fileID: 3530103001745665312}
   m_Layer: 0
   m_Name: MagicanEnemy
   m_TagString: Enemy
@@ -292,6 +293,7 @@ MonoBehaviour:
   _golemPrefab: {fileID: 140808, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}
   _runBackDistance: 3
   _lowHealthThreshold: 30
+  _magicianAnimatorController: {fileID: 3530103001745665312}
 --- !u!65 &5730384047712595652
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -351,6 +353,18 @@ MonoBehaviour:
   _personCharacteristics: {fileID: 7054752229641767204}
   _healthBehaviour: {fileID: 7614272114896670690}
   _rigidbody: {fileID: 5116060399137525657}
+--- !u!114 &3530103001745665312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88ed2299d516a3644bb2131a0ec1e4c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &103080
 GameObject:
   m_ObjectHideFlags: 0

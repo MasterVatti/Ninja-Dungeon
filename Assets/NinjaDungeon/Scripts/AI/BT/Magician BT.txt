@@ -32,6 +32,8 @@ tree("Attack")
         sequence
             IsAtRequiredDistance(12.0)
             tree("Shot")
+            Wait(0.5)
             SetBackPoint
             MoveToDestination
             tree("Shot")
+            Wait(0.5)

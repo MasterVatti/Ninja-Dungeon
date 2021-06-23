@@ -6844,10 +6844,10 @@ MonoBehaviour:
   _wavesData:
   - _cooldown: 3
     _spawnPointsData:
-    - _enemy: {fileID: 3170371608700471106, guid: 666f33a39ddc7bb44b53fd50683beba1,
+    - _enemy: {fileID: 5978981134792347142, guid: b0297681c8568974da8dc86f4cdc853c,
         type: 3}
       _spawnPoint: {fileID: 68354541}
-    - _enemy: {fileID: 3170371608700471106, guid: 666f33a39ddc7bb44b53fd50683beba1,
+    - _enemy: {fileID: 5978981134792347142, guid: b0297681c8568974da8dc86f4cdc853c,
         type: 3}
       _spawnPoint: {fileID: 1596331809}
 --- !u!4 &207612556

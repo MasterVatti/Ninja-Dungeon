@@ -13,6 +13,7 @@ namespace ProjectileLauncher
     [RequireComponent(typeof(PersonCharacteristics))]
     public class SimpleAttackBehaviour : MonoBehaviour, IAttackBehaviour
     {
+        public event Action IsAttack;
         private const int START_BULLETS_COUNT = 10;
         
         public bool IsCooldown => _lastShotTime + _projectileSpawnCooldown > Time.time;
@@ -45,6 +46,7 @@ namespace ProjectileLauncher
         {
             _lastShotTime = Time.time;
             _shootDirection = (person.transform.position - transform.position).normalized;
+            IsAttack?.Invoke();
         }
 
         protected void CreateProjectile(Vector3 position, Vector3 direction, int damage, int reboundNumber = 1)

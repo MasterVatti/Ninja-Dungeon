@@ -1,8 +1,9 @@
 using PlayerScripts.Animation;
+using PlayerScripts.Movement;
 using ProjectileLauncher;
 using UnityEngine;
 
-namespace PlayerScripts.Movement
+namespace NinjaDungeon.Scripts.PlayerScripts.Movement
 {
     /// <summary>
     /// Отвечает за взаимодействие модулей игрока.
@@ -16,7 +17,7 @@ namespace PlayerScripts.Movement
         
         private void Awake()
         {
-            _attackBehaviour.IsShoot += _animationController.AttackAnimation;
+            _attackBehaviour.IsAttack += _animationController.AttackAnimation;
         }
 
         private void Update()
@@ -41,7 +42,7 @@ namespace PlayerScripts.Movement
         
         private void OnDestroy()
         {
-            _attackBehaviour.IsShoot -= _animationController.AttackAnimation;
+            _attackBehaviour.IsAttack -= _animationController.AttackAnimation;
         }
     }
 }

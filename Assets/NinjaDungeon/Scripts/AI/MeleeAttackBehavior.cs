@@ -1,34 +1,39 @@
+using System;
 using Characteristics;
 using Enemies;
 using ProjectileLauncher;
 using UnityEngine;
 
-/// <summary>
-/// Отвечает за атаки ближнего боя.
-/// </summary>
-public class MeleeAttackBehavior : IAttackBehaviour
+namespace NinjaDungeon.Scripts.AI
 {
-    public bool IsCooldown => _lastHitTime + _hitCooldown > Time.time;
+    /// <summary>
+    /// Отвечает за атаки ближнего боя.
+    /// </summary>
+    public class MeleeAttackBehavior : IAttackBehaviour
+    {
+        public event Action IsAttack;
+        public bool IsCooldown => _lastHitTime + _hitCooldown > Time.time;
     
-    private readonly PersonCharacteristics _personCharacteristics;
-    private readonly float _hitCooldown;
-    private float _lastHitTime;
+        private readonly PersonCharacteristics _personCharacteristics;
+        private readonly float _hitCooldown;
+        private float _lastHitTime;
 
-    public bool CanAttack(Person person)
-    {
-        return true;
-    }
+        public bool CanAttack(Person person)
+        {
+            return true;
+        }
 
-    public MeleeAttackBehavior(PersonCharacteristics personCharacteristics)
-    {
-        _personCharacteristics = personCharacteristics;
-        _hitCooldown = personCharacteristics.AttackRate;
-    }
+        public MeleeAttackBehavior(PersonCharacteristics personCharacteristics)
+        {
+            _personCharacteristics = personCharacteristics;
+            _hitCooldown = personCharacteristics.AttackRate;
+        }
 
-    public void Attack(Person person)
-    {
-        _lastHitTime = Time.time;
-        var healthBehaviour = person.GetComponent<HealthBehaviour>();
-        healthBehaviour.ApplyDamage(_personCharacteristics.AttackDamage);
+        public void Attack(Person person)
+        {
+            _lastHitTime = Time.time;
+            var healthBehaviour = person.GetComponent<HealthBehaviour>();
+            healthBehaviour.ApplyDamage(_personCharacteristics.AttackDamage);
+        }
     }
 }

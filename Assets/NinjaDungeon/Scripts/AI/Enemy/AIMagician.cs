@@ -1,5 +1,7 @@
+ using System;
  using Barracks_and_allied_behavior;
  using Characteristics;
+ using NinjaDungeon.Scripts.AnimationController.Enemy;
  using Panda;
 using ProjectileLauncher;
 using UnityEngine;
@@ -18,6 +20,8 @@ namespace MagicianFolder
         private float _runBackDistance;
         [SerializeField]
         private float _lowHealthThreshold;
+        [SerializeField]
+        private MagicianAnimatorController _magicianAnimatorController;
 
         private bool _isGolemCreated;
         
@@ -25,13 +29,12 @@ namespace MagicianFolder
         {
             _personCharacteristics.CurrentHp = _personCharacteristics.MaxHp;
             
-            MainManager.EnemiesManager.AddEnemy(GetComponent<Enemy>()); //TODO: Удалить перед мержем, эта функция в Спавн контроллере
-
             _attackBehaviour = GetComponent<IAttackBehaviour>();
             _targetProvider = GetComponent<EnemyTargetProvider>();
             _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistance);
             _movementBehavior = new MovementBehaviour(_agent);
             
+            _attackBehaviour.IsAttack += _magicianAnimatorController.AttackAnimation;
         }
         
         [Task]
@@ -60,6 +63,11 @@ namespace MagicianFolder
         private bool IsTimeToSpawnGolem()
         {
             return _personCharacteristics.CurrentHp <= _lowHealthThreshold;
+        }
+
+        private void OnDestroy()
+        {
+            _attackBehaviour.IsAttack -= _magicianAnimatorController.AttackAnimation;
         }
     }
 }

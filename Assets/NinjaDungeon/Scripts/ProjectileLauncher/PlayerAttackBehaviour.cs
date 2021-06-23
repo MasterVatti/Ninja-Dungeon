@@ -15,8 +15,6 @@ namespace ProjectileLauncher
     /// </summary>
     public class PlayerAttackBehaviour : SimpleAttackBehaviour
     {
-        public event Action IsShoot;
-        
         [FormerlySerializedAs("_muzzlesPositions")]
         [SerializeField]
         private List<Transform> _frontalBuffMuzzles;
@@ -48,8 +46,6 @@ namespace ProjectileLauncher
         protected override void Shoot()
         {
             StartCoroutine(ShootInAllDirections());
-            
-            IsShoot?.Invoke();
         }
 
         private IEnumerator ShootInAllDirections()
