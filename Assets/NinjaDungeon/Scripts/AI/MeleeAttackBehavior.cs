@@ -32,6 +32,7 @@ namespace NinjaDungeon.Scripts.AI
         public void Attack(Person person)
         {
             _lastHitTime = Time.time;
+            IsAttack?.Invoke();
             var healthBehaviour = person.GetComponent<HealthBehaviour>();
             healthBehaviour.ApplyDamage(_personCharacteristics.AttackDamage);
         }

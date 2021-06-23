@@ -20,9 +20,7 @@ namespace MagicianFolder
         private float _runBackDistance;
         [SerializeField]
         private float _lowHealthThreshold;
-        [SerializeField]
-        private MagicianAnimatorController _magicianAnimatorController;
-
+        
         private bool _isGolemCreated;
         
         private void Awake()
@@ -34,7 +32,7 @@ namespace MagicianFolder
             _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistance);
             _movementBehavior = new MovementBehaviour(_agent);
             
-            _attackBehaviour.IsAttack += _magicianAnimatorController.AttackAnimation;
+            base.Awake();
         }
         
         [Task]
@@ -64,10 +62,6 @@ namespace MagicianFolder
         {
             return _personCharacteristics.CurrentHp <= _lowHealthThreshold;
         }
-
-        private void OnDestroy()
-        {
-            _attackBehaviour.IsAttack -= _magicianAnimatorController.AttackAnimation;
-        }
+        
     }
 }

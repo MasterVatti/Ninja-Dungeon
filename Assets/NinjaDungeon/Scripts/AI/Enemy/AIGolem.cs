@@ -20,6 +20,9 @@ namespace MagicianFolder.GolemFolder
             _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistance);
             _attackBehaviour = new MeleeAttackBehavior(_personCharacteristics);
             _movementBehavior = new MovementBehaviour(_agent);
+            base.Awake();
+            
+            _agent.isStopped = true;
         }
         
         [Task]

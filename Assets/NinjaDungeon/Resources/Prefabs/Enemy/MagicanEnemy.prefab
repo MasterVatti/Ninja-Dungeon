@@ -290,10 +290,10 @@ MonoBehaviour:
   _agent: {fileID: 7387106358299319940}
   _personCharacteristics: {fileID: 7054752229641767204}
   _stopChaseDistance: 12
+  _animationController: {fileID: 3530103001745665312}
   _golemPrefab: {fileID: 140808, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}
   _runBackDistance: 3
   _lowHealthThreshold: 30
-  _magicianAnimatorController: {fileID: 3530103001745665312}
 --- !u!65 &5730384047712595652
 BoxCollider:
   m_ObjectHideFlags: 0

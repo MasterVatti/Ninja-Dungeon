@@ -1,4 +1,6 @@
+using System;
 using Characteristics;
+using NinjaDungeon.Scripts.AnimationController.Enemy;
 using Panda;
 using ProjectileLauncher;
 using UnityEngine;
@@ -17,13 +19,20 @@ namespace Barracks_and_allied_behavior
         protected PersonCharacteristics _personCharacteristics;
         [SerializeField]
         protected float _stopChaseDistance;
-
+        [SerializeField]
+        protected AIAnimationController _animationController;
+        
         protected ITargetProvider _targetProvider;
         protected ChaseBehavior _chaseBehavior;
         protected FollowBehavior _followBehavior;
         protected IAttackBehaviour _attackBehaviour;
         protected IMovementBehavior _movementBehavior;
-        
+
+        protected void Awake()
+        {
+            _attackBehaviour.IsAttack += _animationController.AttackAnimation;
+        }
+
         [Task]
         protected void MoveToDestination()
         {
