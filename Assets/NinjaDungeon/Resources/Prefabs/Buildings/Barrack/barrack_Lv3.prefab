@@ -173,13 +173,12 @@ MonoBehaviour:
       type: 3}
   - _price:
     - _type: 0
-      _amount: 1000
+      _amount: 10
     - _type: 2
       _amount: 50
     _allyIcon: {fileID: 21300000, guid: f3b7e31eb60b84b17870d0b5d926cfad, type: 3}
     _description: Knight
-    _allyPrefab: {fileID: 1672505441962123926, guid: 9a1a7ffbfc4cb0147af9fdf1e865a08e,
-      type: 3}
+    _allyPrefab: {fileID: 162860, guid: 0ae424f89c5c6ee44b688bbbc504442e, type: 3}
   - _price:
     - _type: 0
       _amount: 1000
@@ -187,8 +186,7 @@ MonoBehaviour:
       _amount: 100
     _allyIcon: {fileID: 21300000, guid: 96ff8090ed400444ca45e8ef17e76f0c, type: 3}
     _description: Soldier
-    _allyPrefab: {fileID: 1219256799547053490, guid: da322b15d8972fe45bfa45def067306f,
-      type: 3}
+    _allyPrefab: {fileID: 162860, guid: 0ae424f89c5c6ee44b688bbbc504442e, type: 3}
   _spawnPoint: {fileID: 6857115016698822840}
 --- !u!135 &6203445315498296564
 SphereCollider:

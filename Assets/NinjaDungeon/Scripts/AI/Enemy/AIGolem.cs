@@ -10,7 +10,7 @@ namespace MagicianFolder.GolemFolder
     /// </summary>
     public class AIGolem : AIBehaviour
     {
-        private void Awake()
+        private new void Awake()
         {
             _personCharacteristics.CurrentHp = _personCharacteristics.MaxHp;
             

@@ -23,7 +23,7 @@ namespace MagicianFolder
         
         private bool _isGolemCreated;
         
-        private void Awake()
+        private new void Awake()
         {
             _personCharacteristics.CurrentHp = _personCharacteristics.MaxHp;
             

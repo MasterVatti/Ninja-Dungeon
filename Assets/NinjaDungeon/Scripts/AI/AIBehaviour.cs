@@ -1,5 +1,6 @@
 using System;
 using Characteristics;
+using NinjaDungeon.Scripts.AnimationController.AIAnimatorController;
 using NinjaDungeon.Scripts.AnimationController.Enemy;
 using Panda;
 using ProjectileLauncher;

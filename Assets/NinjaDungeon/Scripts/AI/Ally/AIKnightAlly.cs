@@ -18,7 +18,7 @@ namespace Barracks_and_allied_behavior
         [SerializeField]
         private  float _guardsDistance;
         
-        private void Awake()
+        private new void Awake()
         {
             _personCharacteristics.CurrentHp = _personCharacteristics.MaxHp;
             
@@ -26,6 +26,9 @@ namespace Barracks_and_allied_behavior
             _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistance);
             _followBehavior = new FollowBehavior(_agent, _stopFollowingDistance, _guardsDistance);
             _attackBehaviour = new MeleeAttackBehavior(_personCharacteristics);
+            base.Awake();
+            
+            _agent.isStopped = true;
         }
 
         [Task]
