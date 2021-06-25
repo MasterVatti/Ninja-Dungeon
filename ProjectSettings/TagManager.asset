@@ -15,10 +15,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
+  - Wall
+  - Player
   - Item
   - PostProcessing
   - Damageable
@@ -28,6 +29,9 @@ TagManager:
   - ProjectileEnemy
   - Player
   - Enemy
+  - Projectile
+  - 
+  - 
   - 
   - 
   - 

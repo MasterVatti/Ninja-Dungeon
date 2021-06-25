@@ -465,9 +465,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resources:
   - _type: 0
-    _amount: 1000
+    _amount: 0
   - _type: 2
-    _amount: 200
+    _amount: 0
 --- !u!4 &317441906
 Transform:
   m_ObjectHideFlags: 0
@@ -637,11 +637,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973d4aeba44250b499bd5bbc64a1bb2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _battleManager: {fileID: 0}
   _joystickController: {fileID: 0}
   _loadingController: {fileID: 0}
   _resourceManager: {fileID: 317441905}
   _enemiesManager: {fileID: 150275614}
-  _energyManager: {fileID: 0}
   _screenManager: {fileID: 2022494969}
   _animationManager: {fileID: 0}
   _buildingManager: {fileID: 0}
@@ -649,6 +649,7 @@ MonoBehaviour:
   _saveLoadManager: {fileID: 0}
   _player: {fileID: 1199332488}
   _iconsProvider: {fileID: 2107725901}
+  _energyManager: {fileID: 0}
 --- !u!4 &534049961
 Transform:
   m_ObjectHideFlags: 0
@@ -946,7 +947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b22f00f3b5846d409eee145d80d44c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _team: 1
+  _team: 0
 --- !u!114 &1199332486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1334,6 +1335,7 @@ MonoBehaviour:
   _canvas: {fileID: 2022494968}
   _allScreens:
   - {fileID: 5020352128702747759, guid: 7f78e2da62a38c64ba3a3da1e5fa6131, type: 3}
+  - {fileID: 1598474132641623115, guid: 7e8d756f5abc145078187b1320d35c0c, type: 3}
 --- !u!4 &2028194293 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5582567259165157545, guid: e2cb250021ab716488e629bff7370cd9,
