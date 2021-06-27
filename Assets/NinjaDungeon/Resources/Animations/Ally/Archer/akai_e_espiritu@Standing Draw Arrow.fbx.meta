@@ -6,7 +6,22 @@ ModelImporter:
   - first:
       74: -203655887218126122
     second: mixamo.com
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Akai_MAT
+    second: {fileID: 2100000, guid: ecb8786314d786a47818bc8d5052e534, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: akai_diffuse
+    second: {fileID: 2800000, guid: 8d9afc741dc6642498fb17b317071336, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: akai_normal
+    second: {fileID: 2800000, guid: 9ba1a07b4710bf9428df92ca1024c23d, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -18,8 +33,7 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: "Avatar creation failed:\n\tTransform 'LeftEye' for human bone
-      'LeftEye' not found\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
