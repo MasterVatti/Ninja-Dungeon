@@ -42,7 +42,7 @@ namespace NinjaDungeon.Scripts.Portal
             else
             {
                 MainManager.ScreenManager.CloseTopScreen();
-                MainManager.ScreenManager.OpenScreen(ScreenType.InsufficientResources);
+                MainManager.ScreenManager.OpenScreen(ScreenType.InsufficientEnergy);
             }
         }
 

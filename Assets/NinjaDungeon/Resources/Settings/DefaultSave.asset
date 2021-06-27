@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startResources:
   - _type: 0
-    _amount: 1000
+    _amount: 10000
   - _type: 1
-    _amount: 1000
+    _amount: 10000
   - _type: 2
-    _amount: 1000
+    _amount: 10000
   _startBuildings: []
   _startPlaceHolders:
   - {fileID: 11400000, guid: cd1e6a9f37a024a46b8b7918b3a680f9, type: 2}

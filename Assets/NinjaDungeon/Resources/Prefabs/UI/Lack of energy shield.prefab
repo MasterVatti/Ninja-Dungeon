@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d3c6ac8ea1b3040b2e780e35270ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScreenType: 11
+  ScreenType: 14
 --- !u!1 &4672350964241896492
 GameObject:
   m_ObjectHideFlags: 0
