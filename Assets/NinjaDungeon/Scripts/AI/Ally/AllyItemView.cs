@@ -36,6 +36,13 @@ namespace Barracks_and_allied_behavior
         [UsedImplicitly]
         public void AllyBuyButtonClick()
         {
+            if (_barrack.IsAllyCreated)
+            {
+                MainManager.ScreenManager.OpenScreenWithContext(ScreenType.InformationPopupScreen, 
+                    new InformationScreenContext("Warning", "You cannot have more than one companion"));
+                return;
+            }
+            
             if (MainManager.ResourceManager.HasEnough(_ally.Price))
             {
                 MainManager.ResourceManager.Pay(_ally.Price);
