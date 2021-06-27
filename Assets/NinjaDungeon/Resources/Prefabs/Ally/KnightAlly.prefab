@@ -2757,7 +2757,7 @@ Transform:
   m_GameObject: {fileID: 162860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.6, y: 2.6, z: 2.6}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 419994}
   - {fileID: 459654}
@@ -2876,7 +2876,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentHP: 0
   _maxHp: 100
-  _moveSpeed: 5
+  _moveSpeed: 3.5
   _attackDamage: 10
   _attackRate: 1
   _rotationSpeed: 0
@@ -2899,8 +2899,8 @@ MonoBehaviour:
   _stopChaseDistance: 1
   _animationController: {fileID: 357931671108446543}
   _accelerateSpeed: 3
-  _stopFollowingDistance: 4
-  _guardsDistance: 2
+  _stopFollowingDistance: 5
+  _guardsDistance: 3
 --- !u!114 &357931671108446543
 MonoBehaviour:
   m_ObjectHideFlags: 0

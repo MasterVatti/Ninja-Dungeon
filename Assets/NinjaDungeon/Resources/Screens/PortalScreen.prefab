@@ -44,8 +44,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1930917441066494165}
-        m_TargetAssemblyTypeName: PortalScreen, Assembly-CSharp
+      - m_Target: {fileID: 4339283982123252225}
+        m_TargetAssemblyTypeName: Door.DungeonScreenTransition, Assembly-CSharp
         m_MethodName: TurnOffPanel
         m_Mode: 1
         m_Arguments:
@@ -55,7 +55,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!1 &1930917441066494163
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,8 +67,8 @@ GameObject:
   - component: {fileID: 1930917441066494164}
   - component: {fileID: 1930917441066494167}
   - component: {fileID: 1930917441066494166}
-  - component: {fileID: 1930917441066494165}
   - component: {fileID: -1758359496649133335}
+  - component: {fileID: 4339283982123252225}
   m_Layer: 5
   m_Name: PortalScreen
   m_TagString: Untagged
@@ -137,22 +137,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1930917441066494165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1930917441066494163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0411855bcf53d343a4989a1ccc654b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScreenType: 3
-  _descriptionField: {fileID: 8881420948034502468}
-  _textEnertyCost: {fileID: 8437742750310377733}
-  _energyCost: 30
 --- !u!95 &-1758359496649133335
 Animator:
   serializedVersion: 3
@@ -172,6 +156,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4339283982123252225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930917441066494163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0411855bcf53d343a4989a1ccc654b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScreenType: 3
+  _descriptionField: {fileID: 8881420948034502468}
+  _energyCost: 30
+  _textEnertyCost: {fileID: 8437742750310377733}
 --- !u!114 &9052460741711841086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,8 +216,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1930917441066494165}
-        m_TargetAssemblyTypeName: PortalScreen, Assembly-CSharp
+      - m_Target: {fileID: 4339283982123252225}
+        m_TargetAssemblyTypeName: NinjaDungeon.Scripts.Portal.PortalScreen, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
