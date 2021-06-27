@@ -6,6 +6,7 @@ using Panda;
 using ProjectileLauncher;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace Barracks_and_allied_behavior
 {
@@ -18,8 +19,11 @@ namespace Barracks_and_allied_behavior
         protected NavMeshAgent _agent;
         [SerializeField]
         protected PersonCharacteristics _personCharacteristics;
+        [FormerlySerializedAs("_stopChaseDistance")]
         [SerializeField]
-        protected float _stopChaseDistance;
+        protected float _stopChaseDistanceMax;
+        [SerializeField]
+        protected float _stopChaseDistanceMin;
         [SerializeField]
         protected AIAnimationController _animationController;
         
@@ -32,6 +36,11 @@ namespace Barracks_and_allied_behavior
         protected void Awake()
         {
             _attackBehaviour.IsAttack += _animationController.AttackAnimation;
+        }
+
+        private void OnDestroy()
+        {
+            _attackBehaviour.IsAttack -= _animationController.AttackAnimation;
         }
 
         [Task]

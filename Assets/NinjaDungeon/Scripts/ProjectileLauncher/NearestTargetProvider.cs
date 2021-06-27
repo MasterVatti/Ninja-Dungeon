@@ -25,7 +25,7 @@ namespace NinjaDungeon.Scripts.ProjectileLauncher
                 var target = targets[index];
                 var distanceToTarget = Vector3.Distance(target.transform.position, position);
                 
-                if (minDistance > distanceToTarget )
+                if (minDistance > distanceToTarget)
                 {
                     minDistance = distanceToTarget;
                     minIndex = index;

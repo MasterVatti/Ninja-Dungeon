@@ -16,8 +16,8 @@ namespace MagicianFolder.GolemFolder
             
             MainManager.EnemiesManager.AddEnemy(GetComponent<Enemy>());
             
-            _targetProvider = GetComponent<EnemyTargetProvider>();
-            _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistance);
+            _targetProvider = GetComponent<EnemyTargetProvider>();            
+            _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistanceMin, _stopChaseDistanceMax);
             _attackBehaviour = new MeleeAttackBehavior(_personCharacteristics);
             _movementBehavior = new MovementBehaviour(_agent);
             base.Awake();

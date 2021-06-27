@@ -28,16 +28,10 @@ namespace NinjaDungeon.Scripts.PlayerScripts.Movement
         private void RunningDetector()
         {
             var direction = InputController.GetDirection();
-            if (direction.x != 0 || direction.z != 0)
-            {
-                _animationController.RunningAnimation(true);
-                _attackBehaviour.TurnAutoFire(false);
-            }
-            else
-            {
-                _animationController.RunningAnimation(false);
-                _attackBehaviour.TurnAutoFire(true);
-            }
+            var isRun = direction.x != 0 || direction.z != 0;
+            
+            _animationController.RunningAnimation(isRun);
+            _attackBehaviour.TurnAutoFire(!isRun);
         }
         
         private void OnDestroy()

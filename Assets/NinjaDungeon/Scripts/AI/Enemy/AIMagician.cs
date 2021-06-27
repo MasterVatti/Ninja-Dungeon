@@ -29,7 +29,7 @@ namespace MagicianFolder
             
             _attackBehaviour = GetComponent<IAttackBehaviour>();
             _targetProvider = GetComponent<EnemyTargetProvider>();
-            _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistance);
+            _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistanceMin, _stopChaseDistanceMax);
             _movementBehavior = new MovementBehaviour(_agent);
             
             base.Awake();

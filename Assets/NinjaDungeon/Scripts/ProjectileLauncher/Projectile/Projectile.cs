@@ -1,6 +1,6 @@
 using System;
 using Assets.Scripts;
-using  Enemies;
+using Enemies;
 using UnityEngine;
 
 namespace ProjectileLauncher
@@ -10,8 +10,9 @@ namespace ProjectileLauncher
     /// </summary>
     public class Projectile : MonoBehaviour
     {
-        [SerializeField] 
+        [SerializeField]
         private float _projectileSpeed;
+
         [SerializeField]
         private Rigidbody _rigidbody;
 
@@ -30,6 +31,7 @@ namespace ProjectileLauncher
 
         private void Update()
         {
+            Debug.DrawLine(transform.position, transform.position + _direction * 100, Color.red);
             _rigidbody.velocity = _direction * _projectileSpeed;
         }
 
@@ -38,7 +40,7 @@ namespace ProjectileLauncher
             var healthBehaviour = collision.gameObject.GetComponent<HealthBehaviour>();
             healthBehaviour.ApplyDamage(_ownerTeam, _damage);
         }
-        
+
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag(GlobalConstants.WALL_TAG))
@@ -51,14 +53,15 @@ namespace ProjectileLauncher
                 _reboundNumber--;
                 _direction = Vector3.Reflect(_direction, collision.contacts[0].normal);
             }
-        
+
             if (collision.gameObject.CompareTag(GlobalConstants.PLAYER_TAG) ||
-                collision.gameObject.CompareTag(GlobalConstants.ALLY_TAG) || 
+                collision.gameObject.CompareTag(GlobalConstants.ALLY_TAG) ||
                 collision.gameObject.CompareTag(GlobalConstants.ENEMY_TAG))
             {
                 DealDamage(collision);
                 gameObject.SetActive(false);
             }
+
             if (collision.gameObject.CompareTag(GlobalConstants.PROJECTILE_TAG))
             {
                 gameObject.SetActive(false);

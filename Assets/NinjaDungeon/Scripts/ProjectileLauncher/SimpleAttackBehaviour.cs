@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Assets.Scripts;
 using Characteristics;
 using JetBrains.Annotations;
@@ -15,6 +16,7 @@ namespace ProjectileLauncher
     {
         public event Action IsAttack;
         private const int START_BULLETS_COUNT = 10;
+        private const int ATTACK_ANGLE_THRESHOLD = 5;
         
         public bool IsCooldown => _lastShotTime + _projectileSpawnCooldown > Time.time;
 
@@ -28,12 +30,11 @@ namespace ProjectileLauncher
         [SerializeField]
         protected PersonCharacteristics _personCharacteristics;
 
-        protected Vector3 _shootDirection;
-
         private float _lastShotTime;
         private float _projectileSpawnCooldown;
         
         private ObjectPool _bulletsPool;
+        protected Person _target;
 
         protected virtual void Awake()
         {
@@ -43,8 +44,8 @@ namespace ProjectileLauncher
 
         public void Attack(Person person)
         {
+            _target = person;
             _lastShotTime = Time.time;
-            _shootDirection = (person.transform.position - transform.position).normalized;
             IsAttack?.Invoke();
         }
 
@@ -66,28 +67,29 @@ namespace ProjectileLauncher
 
         public virtual bool CanAttack(Person person)
         {
-            if (person == null)
+            var isPersonDead = person == null;
+            if (isPersonDead)
             {
                 return false;
             }
             
             TurnToTarget(person);
             
-            if (Physics.Raycast(transform.position, _muzzle.transform.forward, out var hit))
+            var directionToTarget = (person.transform.position - transform.position).normalized;
+            var angle = Vector3.Angle(directionToTarget, transform.forward);
+            if (angle < ATTACK_ANGLE_THRESHOLD)
             {
-                if (hit.collider.CompareTag(GlobalConstants.PLAYER_TAG) || hit.collider.CompareTag(GlobalConstants.ALLY_TAG) 
-                                                                        || hit.collider.CompareTag(GlobalConstants.ENEMY_TAG))
-                {
-                    return true;
-                }
+                return true;
             }
+            
             return false;
         }
 
         [UsedImplicitly]
         protected virtual void Shoot()
         {
-            CreateProjectile(_muzzle.position, _shootDirection,  _personCharacteristics.AttackDamage);
+            var shootDirection = (_target.Chest.position - _muzzle.position).normalized;
+            CreateProjectile(_muzzle.position, shootDirection, _personCharacteristics.AttackDamage);
         }
 
         private void TurnToTarget(Person person)

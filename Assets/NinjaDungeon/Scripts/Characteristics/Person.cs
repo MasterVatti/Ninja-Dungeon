@@ -9,6 +9,7 @@ namespace Characteristics
     /// </summary>
     public class Person : MonoBehaviour
     {
+        public Transform Chest => _chest != null ? _chest : transform;
         public Rigidbody Rigidbody => _rigidbody;
         public HealthBehaviour HealthBehaviour => _healthBehaviour;
         public PersonCharacteristics PersonCharacteristics => _personCharacteristics;
@@ -19,5 +20,7 @@ namespace Characteristics
         private HealthBehaviour _healthBehaviour;
         [SerializeField]
         private Rigidbody _rigidbody;
+        [SerializeField]
+        private Transform _chest;
     }
 }

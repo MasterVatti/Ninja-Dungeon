@@ -20,7 +20,7 @@ namespace Barracks_and_allied_behavior
             _personCharacteristics.CurrentHp = _personCharacteristics.MaxHp;
             
             _targetProvider = GetComponent<ITargetProvider>();
-            _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistance);
+            _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistanceMin, _stopChaseDistanceMax);
             _followBehavior = new FollowBehavior(_agent, _stopFollowingDistance, _guardsDistance);
             _attackBehaviour = new MeleeAttackBehavior(_personCharacteristics);
         }

@@ -11,9 +11,11 @@ public class ChaseBehavior
     private readonly float _stopChaseDistance;
     private readonly NavMeshAgent _agent;
 
-    public ChaseBehavior(NavMeshAgent agent, float stopChaseDistance)
+    public ChaseBehavior(NavMeshAgent agent, float stopChaseDistanceMin, float stopChaseDistanceMax)
     {
         _agent = agent;
+        
+        var stopChaseDistance = Random.Range(stopChaseDistanceMin, stopChaseDistanceMax);
         _stopChaseDistance = stopChaseDistance;
     }
 

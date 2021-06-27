@@ -31,9 +31,12 @@ namespace ProjectileLauncher
         protected override void Awake()
         {
             base.Awake();
-            
+
+            Assert.IsNotNull(_muzzle);
+
             _playerCharacteristics = _personCharacteristics as PlayerCharacteristics;
             Assert.IsNotNull(_playerCharacteristics);
+            
             _projectileDirectionsProvider = new ProjectileDirectionsProvider(_playerCharacteristics, _frontalBuffMuzzles);
         }
 
@@ -45,13 +48,20 @@ namespace ProjectileLauncher
         [UsedImplicitly]
         protected override void Shoot()
         {
+            var isTargetDead = _target == null;
+            if (isTargetDead)
+            {
+                return;
+            }
+            
             StartCoroutine(ShootInAllDirections());
         }
 
         private IEnumerator ShootInAllDirections()
         {
             var muzzlePosition = _muzzle.position;
-            var fireDirections = _projectileDirectionsProvider.GetFireDirections(muzzlePosition, _shootDirection);
+            var shootDirection = (_target.Chest.position - muzzlePosition).normalized;
+            var fireDirections = _projectileDirectionsProvider.GetFireDirections(muzzlePosition, shootDirection);
             for (int i = 0; i < _playerCharacteristics.ProjectileCount; i++)
             {
                 foreach (var transformProjectile in fireDirections)
