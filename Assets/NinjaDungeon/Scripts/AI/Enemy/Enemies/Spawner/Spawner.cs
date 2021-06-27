@@ -15,6 +15,7 @@ namespace Enemies.Spawner
  
         private Queue<WaveController> _waves = new Queue<WaveController>();
         private WaveController _activeWave;
+        private bool _hasStopSpawn;
 
         private void Awake()
         {
@@ -23,7 +24,7 @@ namespace Enemies.Spawner
 
         private void Update()
         {
-            if (_activeWave != null && _activeWave.IsFinished)
+            if (_activeWave != null && _activeWave.IsFinished && !_hasStopSpawn)
             {
                 StartNextWave();
             }
@@ -41,9 +42,16 @@ namespace Enemies.Spawner
                 EventBus.Publish<ISpawnHandler>(spawner => spawner.EndSpawn());
             }
         }
+        
+        public void StopSpawn()
+        {
+            _hasStopSpawn = true;
+        }
 
         public void Initialize()
         {
+            _hasStopSpawn = false;
+
             foreach (WaveData wave in _wavesData)
             {
                 var waveController = new WaveController(wave);

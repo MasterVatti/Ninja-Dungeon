@@ -37,8 +37,6 @@ namespace NinjaDungeon.Scripts.BattleManager
             _healthBehaviour.OnDead += PlayerDeath;
             
             EventBus.Subscribe<ISpawnHandler>(this);
-            
-            DontDestroyOnLoad(gameObject);
         }
         
         public void EndSpawn()
@@ -79,12 +77,15 @@ namespace NinjaDungeon.Scripts.BattleManager
                 _rewardManager.GetFinalReward();
 
                 //UI выигрыша Алексея
-
-                EventBus.Publish<ISpawnHandler>(spawner => spawner.EndSpawn());
-                MainManager.EnemiesManager.ClearEnemies();
                 
                 MainManager.LoadingController.StartLoad(GlobalConstants.MAIN_SCENE_TAG); //<-- Или по кнопке Алексея
             }
+        }
+
+        public void ClearLevel()
+        {
+            _spawner.StopSpawn();
+            MainManager.EnemiesManager.ClearEnemies();
         }
 
         private void LoadLevel(LevelSettings levelSettings, Vector3 teleportPosition)

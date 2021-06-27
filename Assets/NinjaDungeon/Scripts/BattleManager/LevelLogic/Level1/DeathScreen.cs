@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Managers.ScreensManager;
-using DefaultNamespace;
 using Door;
 using JetBrains.Annotations;
 
@@ -10,8 +9,7 @@ namespace NinjaDungeon.Scripts.BattleManager.LevelLogic.Level1
         [UsedImplicitly]
         public override void OnClick()
         {
-            EventBus.Publish<ISpawnHandler>(spawner => spawner.EndSpawn());
-            MainManager.EnemiesManager.Enemies.Clear();
+            MainManager.BattleManager.ClearLevel();
             MainManager.LoadingController.StartLoad(_sceneName);
         }
 
