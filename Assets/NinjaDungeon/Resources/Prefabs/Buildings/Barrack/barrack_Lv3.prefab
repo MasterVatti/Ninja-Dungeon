@@ -186,7 +186,7 @@ MonoBehaviour:
       _amount: 100
     _allyIcon: {fileID: 21300000, guid: 96ff8090ed400444ca45e8ef17e76f0c, type: 3}
     _description: Soldier
-    _allyPrefab: {fileID: 162860, guid: 0ae424f89c5c6ee44b688bbbc504442e, type: 3}
+    _allyPrefab: {fileID: 162860, guid: 82afe91128ab31c4a978ec75014de6e4, type: 3}
   _spawnPoint: {fileID: 6857115016698822840}
 --- !u!135 &6203445315498296564
 SphereCollider:
