@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2660066435425416741}
   - component: {fileID: 2660066435425416738}
   - component: {fileID: 2660066435425416736}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: ProjectilePrefab
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5074428503354804762}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,9 +166,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5074428503354804762}
     m_Modifications:
+    - target: {fileID: 1230380500995054, guid: 25093a0593dc83043a7bc17ebba0e95d, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1522294441258966, guid: 25093a0593dc83043a7bc17ebba0e95d, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 1537593200154216, guid: 25093a0593dc83043a7bc17ebba0e95d, type: 3}
       propertyPath: m_Name
       value: Magic fire 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537593200154216, guid: 25093a0593dc83043a7bc17ebba0e95d, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601297128568620, guid: 25093a0593dc83043a7bc17ebba0e95d, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4832750714773668, guid: 25093a0593dc83043a7bc17ebba0e95d, type: 3}
       propertyPath: m_RootOrder

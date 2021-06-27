@@ -24892,6 +24892,7 @@ MonoBehaviour:
   - {fileID: 443519027576407982, guid: c1f2b98900d9a1e4e817509c15fb3a34, type: 3}
   - {fileID: 5020352128702747759, guid: 7f78e2da62a38c64ba3a3da1e5fa6131, type: 3}
   - {fileID: 6055261175351735558, guid: bf1f453ba52ef83479b7fd1f8e722575, type: 3}
+  - {fileID: 7516305533081675832, guid: 9c3e4078671f4f84d9767b759493419c, type: 3}
 --- !u!4 &1624723938
 Transform:
   m_ObjectHideFlags: 0
@@ -32144,6 +32145,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 212603100, guid: d942cc7a13f47a84eb6982236acc9567, type: 3}
+      propertyPath: _projectilePrefab
+      value: 
+      objectReference: {fileID: 2660066435425416738, guid: b77933a8c45357c468592dceafcacd0f,
+        type: 3}
     - target: {fileID: 212603102, guid: d942cc7a13f47a84eb6982236acc9567, type: 3}
       propertyPath: _attackDamage
       value: 10
@@ -32152,6 +32158,10 @@ PrefabInstance:
       propertyPath: _rotationSpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 212603107, guid: d942cc7a13f47a84eb6982236acc9567, type: 3}
+      propertyPath: _playerAnimationController
+      value: 
+      objectReference: {fileID: 576442331}
     - target: {fileID: 729379173542091806, guid: d942cc7a13f47a84eb6982236acc9567,
         type: 3}
       propertyPath: _rotationSpeed

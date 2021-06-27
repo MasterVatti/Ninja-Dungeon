@@ -28,7 +28,7 @@ namespace ProjectileLauncher
             GetDiagonalProjectileDirections(position, nearestEnemyDirection);
             GetProjectileBackDirections(position, nearestEnemyDirection);
             GetSideShellsDirections(position, nearestEnemyDirection);
-
+            
             return _projectileDirections;
         }
 

@@ -1,3 +1,4 @@
+using System;
 using Assets.Scripts;
 using  Enemies;
 using UnityEngine;
@@ -13,7 +14,8 @@ namespace ProjectileLauncher
         private float _projectileSpeed;
         [SerializeField]
         private Rigidbody _rigidbody;
-        
+
+        private Vector3 _direction;
         private int _damage;
         private int _reboundNumber;
         private Team _ownerTeam;
@@ -23,7 +25,12 @@ namespace ProjectileLauncher
             _ownerTeam = ownerTeam;
             _reboundNumber = reboundNumber;
             _damage = damage;
-            _rigidbody.velocity = direction * _projectileSpeed;
+            _direction = direction;
+        }
+
+        private void Update()
+        {
+            _rigidbody.velocity = _direction * _projectileSpeed;
         }
 
         private void DealDamage(Collision collision)
@@ -42,6 +49,7 @@ namespace ProjectileLauncher
                 }
 
                 _reboundNumber--;
+                _direction = Vector3.Reflect(_direction, collision.contacts[0].normal);
             }
         
             if (collision.gameObject.CompareTag(GlobalConstants.PLAYER_TAG) ||

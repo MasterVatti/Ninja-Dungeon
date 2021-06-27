@@ -60,7 +60,6 @@ namespace Energy
         
         private void OnDestroy()
         {
-            DontDestroyOnLoad(gameObject);
             PlayerPrefs.SetString(LAST_PLAY_TIME_KEY, DateTime.UtcNow.ToString());
             PlayerPrefs.SetInt(ENERGY_COUNT_KEY, CurrentEnergy);
         }

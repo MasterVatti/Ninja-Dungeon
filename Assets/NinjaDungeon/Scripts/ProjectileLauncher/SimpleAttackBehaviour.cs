@@ -33,7 +33,6 @@ namespace ProjectileLauncher
         private float _lastShotTime;
         private float _projectileSpawnCooldown;
         
-        // TODO: use MonoBehaviourPool from Roma's branch
         private ObjectPool _bulletsPool;
 
         protected virtual void Awake()
@@ -55,7 +54,6 @@ namespace ProjectileLauncher
             newBullet.transform.position = position;
             newBullet.transform.rotation = transform.rotation;
             
-            // TODO: use MonoBehaviourPool from Roma's branch
             if (newBullet.TryGetComponent<Projectile>(out var projectile))
             {
                 projectile.Initialize(_ownerTeam, direction, damage, reboundNumber);

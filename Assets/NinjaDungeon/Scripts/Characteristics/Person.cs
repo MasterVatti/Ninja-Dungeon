@@ -12,10 +12,7 @@ namespace Characteristics
         public Rigidbody Rigidbody => _rigidbody;
         public HealthBehaviour HealthBehaviour => _healthBehaviour;
         public PersonCharacteristics PersonCharacteristics => _personCharacteristics;
-        public BuffManager BuffManager => _buffManager;
-
-        [SerializeField]
-        private BuffManager _buffManager;
+        
         [SerializeField]
         private PersonCharacteristics _personCharacteristics;
         [SerializeField]
