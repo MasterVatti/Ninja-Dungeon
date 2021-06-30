@@ -187,6 +187,7 @@ MonoBehaviour:
     _description: Soldier
     _allyPrefab: {fileID: 162860, guid: 82afe91128ab31c4a978ec75014de6e4, type: 3}
   _spawnPoint: {fileID: 6857115016698822840}
+  _spawnOffset: {x: 0, y: 0, z: 2}
 --- !u!135 &6203445315498296564
 SphereCollider:
   m_ObjectHideFlags: 0

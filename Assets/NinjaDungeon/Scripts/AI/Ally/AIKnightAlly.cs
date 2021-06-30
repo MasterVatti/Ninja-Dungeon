@@ -27,6 +27,7 @@ namespace Barracks_and_allied_behavior
             _followBehavior = new FollowBehavior(_agent, _stopFollowingDistance, _guardsDistance);
             _attackBehaviour = new MeleeAttackBehavior(_personCharacteristics);
             base.Awake();
+            DontDestroyOnLoad(gameObject);
         }
 
         [Task]
