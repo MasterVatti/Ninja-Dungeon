@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Assets.Scripts.Managers.ScreensManager;
 using Barracks_and_allied_behavior;
 using BuildingSystem;
+using Characteristics;
 using SaveSystem;
 using UnityEngine;
 
@@ -13,7 +14,6 @@ namespace NinjaDungeon.Scripts.AI.Ally
     /// </summary>
     public class Barrack : Building<BarrackData>, IScreenOpenerWithContext
     {
-        public bool IsAllyCreated => _createdAlly != null;
         public List<AlliesSetting> Allies => _allies;
 
         [SerializeField]
@@ -22,14 +22,14 @@ namespace NinjaDungeon.Scripts.AI.Ally
         private Transform _spawnPoint;
         [SerializeField]
         private Vector3 _spawnOffset = Vector3.forward;
-
-        private GameObject _createdAlly;
+        
         private int _createdAllyID;
 
         public void CreateAlly(AlliesSetting ally)
         {
             _createdAllyID = _allies.IndexOf(ally);
-            _createdAlly = Instantiate(ally.AllyPrefab, _spawnPoint.position, Quaternion.identity);
+            var createdAlly = Instantiate(ally.AllyPrefab, _spawnPoint.position, Quaternion.identity);
+            MainManager.Player.SetAlly(createdAlly.GetComponent<Person>());
         }
 
         public void ShowScreenWithContext()
@@ -53,7 +53,8 @@ namespace NinjaDungeon.Scripts.AI.Ally
             _createdAllyID = data.ID;
             var allyPrefab = _allies[_createdAllyID].AllyPrefab;
             var spawnPoint = MainManager.Player.transform.position + _spawnOffset;
-            _createdAlly = Instantiate(allyPrefab, spawnPoint, Quaternion.identity);
+            var createdAlly = Instantiate(allyPrefab, spawnPoint, Quaternion.identity);
+            MainManager.Player.SetAlly(createdAlly.GetComponent<Person>());
         }
 
         public override void OnUpgrade(BarrackData oldBuildingState)
@@ -62,7 +63,7 @@ namespace NinjaDungeon.Scripts.AI.Ally
 
         public override BarrackData GetState()
         {
-            if (IsAllyCreated)
+            if (MainManager.Player.Ally != null)
             {
                 return new BarrackData
                 {

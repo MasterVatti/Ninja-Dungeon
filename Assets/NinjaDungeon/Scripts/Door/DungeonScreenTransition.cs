@@ -32,6 +32,9 @@ namespace Door
             MainManager.ScreenManager.CloseTopScreen();
             MainManager.LoadingController.StartLoad(_sceneName);
             MainManager.Player.transform.position = _teleportPosition;
+            MainManager.Player.TeleportAlly();
+            //TODO: не понимаю почему телепортирует не туда куда нужно.
+            //пробовал и на прямую трасформ у союзника менять.
         }
         
         public override void Initialize(ScreenType screenType)
