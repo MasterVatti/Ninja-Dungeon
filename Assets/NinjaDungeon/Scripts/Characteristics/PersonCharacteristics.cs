@@ -13,14 +13,14 @@ namespace Characteristics
             set
             {
                 _currentHP = value;
-                _currentHP = Mathf.Clamp(value, 0 , _maxHp);
+                _currentHP = Mathf.Clamp(value, 0 , _maxHP);
             }
         }
         
         public int MaxHp
         {
-            get => _maxHp;
-            set => _maxHp = value;
+            get => _maxHP;
+            set => _maxHP = value;
         }
         
         public float MoveSpeed
@@ -58,12 +58,11 @@ namespace Characteristics
             set => _canAttack = value;
         }
         
-        
         [Header("Stats")]
         [SerializeField]
         private int _currentHP;
         [SerializeField]
-        private int _maxHp;
+        private int _maxHP;
         [SerializeField]
         private float _moveSpeed;
     

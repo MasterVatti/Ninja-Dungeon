@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using BuildingSystem;
+using Characteristics;
+using ExperienceSystem;
 using Newtonsoft.Json;
 using NinjaDungeon.Scripts.Managers;
 using ResourceSystem;
@@ -40,6 +42,20 @@ namespace SaveSystem
             }
 
             return savedConstructions;
+        }
+
+        public static PlayerData SavePlayer()
+        {
+            var player = (PlayerCharacteristics)MainManager.Player.PersonCharacteristics;
+
+            var playerData = new PlayerData
+            {
+                ExperienceUpperWorld = player.ExperienceUpperWorld,
+                LevelUpperWorld = player.LevelUpperWorld,
+                MaximumExperienceLevelUpperWorld = player.MaximumExperienceLevelUpperWorld
+            };
+
+            return playerData;
         }
 
         public static IEnumerable<Resource> SaveResources()

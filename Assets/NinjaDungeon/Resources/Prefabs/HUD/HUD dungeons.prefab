@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 872461510348253129}
   - component: {fileID: 872461510348253135}
   - component: {fileID: 872461510348253128}
+  - component: {fileID: 1927176807106955545}
   m_Layer: 5
   m_Name: Stats
   m_TagString: Untagged
@@ -35,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -42.099976, y: -23.599976}
+  m_AnchoredPosition: {x: -42.1, y: -23.6}
   m_SizeDelta: {x: 0, y: 34.9905}
   m_Pivot: {x: 0.9038394, y: 0.5}
 --- !u!114 &872461510348253135
@@ -78,6 +79,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 0
+--- !u!114 &1927176807106955545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872461510348253130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3969fea3916085a4394895fbef7bb9ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceLabels:
+  - {fileID: 0}
+  _animationTime: 0
 --- !u!1 &872461510450326177
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 872461510729457008}
+  - component: {fileID: 696183614875138706}
   m_Layer: 5
   m_Name: HUD dungeons
   m_TagString: Untagged
@@ -191,6 +208,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &696183614875138706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872461510729457009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8f7250076a48ad8cfea8139f6cf9b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentLevel: {fileID: 3217206111345084689}
+  _slider: {fileID: 872461510865033177}
 --- !u!1 &872461510731253149
 GameObject:
   m_ObjectHideFlags: 0

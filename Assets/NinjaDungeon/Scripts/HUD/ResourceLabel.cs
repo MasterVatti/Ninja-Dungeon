@@ -33,7 +33,7 @@ public class ResourceLabel : MonoBehaviour
     private float _currentValue;
     private Coroutine _currentCoroutine;
     private float _elapsedTime;
-    
+
     public void SetAmount(int newAmount, float animationTime)
     {
         StopCoroutine();
