@@ -13,12 +13,11 @@ namespace Enemies.Spawner
         public bool IsFinished;
 
         private readonly WaveData _waveData;
-        private int _enemiesCount;
 
         public WaveController(WaveData waveData)
         {
+            MainManager.EnemiesManager.OnEnemyDead += OnEnemyDied;
             _waveData = waveData;
-            _enemiesCount = _waveData.SpawnPointsData.Count;
         }
 
         /// <summary>
@@ -37,21 +36,21 @@ namespace Enemies.Spawner
                 var spawnPoint = enemyWithSpawnPoint.SpawnPoint;
                 var enemy = Object.Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
                 
-                enemy.HealthBehaviour.OnDead += OnEnemyDied;
                 MainManager.EnemiesManager.AddEnemy(enemy);
 
                 await Task.Delay((int) (delayBetweenSpawns * 1000));
             }
         }
 
-        private void OnEnemyDied(Person enemy)
+        private void OnEnemyDied()
         {
-            _enemiesCount--;
-
-            if (_enemiesCount == 0)
+            if (MainManager.EnemiesManager.Enemies.Count == 0)
             {
+                Debug.Log("true");
                 IsFinished = true;
+                MainManager.EnemiesManager.OnEnemyDead -= OnEnemyDied;
             }
+            Debug.Log("false");
         }
     }
 }

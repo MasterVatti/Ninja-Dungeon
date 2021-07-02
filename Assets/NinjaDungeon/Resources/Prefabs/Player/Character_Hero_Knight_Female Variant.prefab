@@ -43,6 +43,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animationController: {fileID: 6569569414913486477}
   _attackBehaviour: {fileID: 6569569414913486476}
+--- !u!114 &1652223793287147179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4233809564738114201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bf122090a4af4540beb418d813a6d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1768671373967292504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56,6 +68,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 4233809564728713333}
+--- !u!114 &3370529553908154062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4233809564738114201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aabd24cbe2483e41be3ca3524465e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5851454566810722894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,6 +123,8 @@ MonoBehaviour:
   _healthBehaviour: {fileID: 6569569414913486472}
   _rigidbody: {fileID: 606104109711830386}
   _chest: {fileID: 4233809564737788877}
+  _experienceControllerUpperWorld: {fileID: 1652223793287147179}
+  _experienceControllerDungeon: {fileID: 8152296936373293730}
   _buffManager: {fileID: 3370529553908154062}
 --- !u!114 &6569569414913486476
 MonoBehaviour:
@@ -147,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHP: 300
-  _maxHp: 300
+  _maxHP: 300
   _moveSpeed: 6
   _attackDamage: 10
   _attackRate: 1
@@ -160,6 +186,10 @@ MonoBehaviour:
   _diagonalProjectiles: 0
   _projectileBack: 0
   _sideProjectiles: 0
+  _levelMaxUpperWorld: 25
+  _levelMaxDungeon: 10
+  _maximumExperienceLevelUpperWorld: 100
+  _maximumExperienceLevelDungeon: 50
 --- !u!114 &6569569414913486515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerAnimationController: {fileID: 6569569414913486477}
---- !u!114 &3370529553908154062
+--- !u!114 &8152296936373293730
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,7 +212,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4233809564738114201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2aabd24cbe2483e41be3ca3524465e2d, type: 3}
+  m_Script: {fileID: 11500000, guid: e3f6b8953c830574e88e51dd502eec6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!64 &2318485965713204838

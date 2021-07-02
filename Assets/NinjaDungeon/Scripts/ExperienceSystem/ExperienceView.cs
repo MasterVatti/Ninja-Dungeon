@@ -11,7 +11,6 @@ namespace ExperienceSystem
         [SerializeField]
         private Slider _slider;
         
-
         protected void ShowLevel(int currentLevel)
         {
             _currentLevel.text = currentLevel.ToString();

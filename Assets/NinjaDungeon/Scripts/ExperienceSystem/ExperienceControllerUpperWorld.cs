@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using Characteristics;
 using UnityEngine;
-//// <summary>
-///  класс контроля метода в городе
-/// </summary>
+
 namespace ExperienceSystem
 {
     [RequireComponent(typeof(PlayerCharacteristics))]

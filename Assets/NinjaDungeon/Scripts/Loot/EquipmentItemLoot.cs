@@ -1,5 +1,4 @@
 using System.Collections;
-using Assets.Scripts.BattleManager;
 using NinjaDungeon.Scripts.BattleManager;
 using UnityEngine;
 
@@ -11,7 +10,9 @@ namespace Loot
     public class EquipmentItemLoot : MonoBehaviour
     {   
         [SerializeField]
-        private float _arrivalTime = 1f;
+        private float _arrivalTimeMax = 2f; 
+        [SerializeField]
+        private float _arrivalTimeMin = 0.5f;
 
         private BattleManager _battleManager;
         private void Start()
@@ -48,12 +49,13 @@ namespace Loot
         {
             var currentTime = 0f;
             var startPosition = transform.position;
-            
-            while (currentTime < _arrivalTime)
+            var arrivalTime = Random.Range(_arrivalTimeMin, _arrivalTimeMax);
+
+            while (currentTime < arrivalTime)
             {
                 var destination = MainManager.Player.transform.position;
                 
-                transform.position = Vector3.Lerp(startPosition, destination, currentTime / _arrivalTime);
+                transform.position = Vector3.Lerp(startPosition, destination, currentTime / arrivalTime);
                 currentTime += Time.deltaTime;
                 yield return null;
             }

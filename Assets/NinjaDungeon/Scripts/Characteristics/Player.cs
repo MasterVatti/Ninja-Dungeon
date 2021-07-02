@@ -1,5 +1,6 @@
 
 using BuffSystem;
+using ExperienceSystem;
 using UnityEngine;
 
 namespace Characteristics
@@ -9,15 +10,22 @@ namespace Characteristics
         public BuffManager BuffManager => _buffManager;
         public Person Ally => _ally;
 
+        public ExperienceControllerUpperWorld ExperienceControllerUpperWorld => _experienceControllerUpperWorld;
+        public ExperienceControllerDungeon ExperienceControllerDungeon => _experienceControllerDungeon;
+        
+        [SerializeField] 
+        private ExperienceControllerUpperWorld _experienceControllerUpperWorld;
+        [SerializeField]
+        private ExperienceControllerDungeon _experienceControllerDungeon;
         [SerializeField]
         private BuffManager _buffManager;
 
+        private Person _ally;
+        
         private void Awake()
         {
             DontDestroyOnLoad(this);
         }
-
-        private Person _ally;
 
         public void SetAlly(Person ally)
         {

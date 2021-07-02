@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _arrivalTime: 1
+  "_experience\u0421ount": 10
 --- !u!54 &2702076193793632222
 Rigidbody:
   m_ObjectHideFlags: 0

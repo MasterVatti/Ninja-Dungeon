@@ -9,8 +9,6 @@ namespace ExperienceSystem
     [RequireComponent(typeof(PlayerCharacteristics))]
     public class UnlockerByLevel : MonoBehaviour
     {
-        
-    
         [SerializeField]
         private GameObject _teleportScene;
         [SerializeField]

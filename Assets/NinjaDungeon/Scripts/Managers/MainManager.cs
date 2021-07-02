@@ -1,4 +1,3 @@
-using Assets.Scripts.BattleManager;
 using Characteristics;
 using Enemies;
 using LoadingScene;
@@ -44,8 +43,10 @@ public class MainManager : Singleton<MainManager>
     {
         Player.BuffManager.StopBuff();
             
-        var characteristics = Player.PersonCharacteristics;
+        var characteristics = (PlayerCharacteristics)Player.PersonCharacteristics;
         characteristics.CurrentHp = characteristics.MaxHp;
+        characteristics.LevelDungeon = 0;
+        characteristics.ExperienceDungeon = 0;
         
         Player.gameObject.SetActive(true);
         Player.transform.localPosition = _spawnPositionPlayer;

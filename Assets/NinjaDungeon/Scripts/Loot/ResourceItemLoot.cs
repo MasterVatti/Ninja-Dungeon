@@ -1,4 +1,5 @@
 using ResourceSystem;
+using UnityEngine;
 
 namespace Loot
 {
@@ -7,6 +8,9 @@ namespace Loot
     /// </summary>
     public class ResourceItemLoot : EquipmentItemLoot
     {
+        [SerializeField]
+        private int _experienceСount;
+        
         private ResourceType _resourceType;
         private float _amount;
 
@@ -21,6 +25,7 @@ namespace Loot
 
         protected override void OnItemPickup()
         {
+            MainManager.Player.ExperienceControllerDungeon.AddExperience(_experienceСount);
             MainManager.ResourceManager.AddResource(_resourceType, (int) _amount);
         }
     }
