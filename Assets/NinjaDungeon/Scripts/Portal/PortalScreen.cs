@@ -1,6 +1,7 @@
 using Assets.Scripts.Managers.ScreensManager;
 using Door;
 using JetBrains.Annotations;
+using NinjaDungeon.Scripts.Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,14 +30,15 @@ namespace NinjaDungeon.Scripts.Portal
 
             _textEnertyCost.text = _energyCost.ToString();
 
-            _portalAnimatorController.ChangeButtonColor(MainManager.EnergyManager.HasEnoughEnergy(_energyCost));
+            _portalAnimatorController.ChangeButtonColor(UpperWorldManager.EnergyManager.HasEnoughEnergy(_energyCost));
         }
     
         [UsedImplicitly]
         public override void OnClick()
         {
-            if (MainManager.EnergyManager.HasEnoughEnergy(_energyCost))
+            if (UpperWorldManager.EnergyManager.HasEnoughEnergy(_energyCost))
             {
+                UpperWorldManager.SaveLoadManager.Save();
                 TransitionStage();
             }
             else
@@ -56,9 +58,7 @@ namespace NinjaDungeon.Scripts.Portal
         {
             base.TransitionStage();
         
-            MainManager.EnergyManager.DecreaseEnergy(_energyCost);
+            UpperWorldManager.EnergyManager.DecreaseEnergy(_energyCost);
         }
-    
-    
     }
 }

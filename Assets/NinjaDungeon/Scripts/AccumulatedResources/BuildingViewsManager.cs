@@ -1,4 +1,5 @@
 using BuildingSystem;
+using NinjaDungeon.Scripts.Managers;
 using UnityEngine;
 
 namespace AccumulatedResources
@@ -10,17 +11,17 @@ namespace AccumulatedResources
     {
         private void Start()
         {
-            var constructedBuildings = MainManager.BuildingManager.ActiveBuildings;
+            var constructedBuildings = UpperWorldManager.BuildingManager.ActiveBuildings;
             
             foreach (var building in constructedBuildings)
             {
                 var buildingID = building.GetComponent<IBuilding>().BuildingSettingsID;
-                var settings = MainManager.BuildingManager.GetBuildingSettings(buildingID);
+                var settings = UpperWorldManager.BuildingManager.GetBuildingSettings(buildingID);
                 
                 AddBuildingView(building,settings);
             }
 
-            MainManager.BuildingManager.OnBuildFinished += AddBuildingView;
+            UpperWorldManager.BuildingManager.OnBuildFinished += AddBuildingView;
         }
 
         private void AddBuildingView(GameObject building, BuildingSettings setting)
@@ -41,7 +42,7 @@ namespace AccumulatedResources
         
         private void OnDestroy()
         {
-            MainManager.BuildingManager.OnBuildFinished -= AddBuildingView;
+            UpperWorldManager.BuildingManager.OnBuildFinished -= AddBuildingView;
         }
     }
 }

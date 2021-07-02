@@ -38,7 +38,7 @@ namespace Managers
             }
         }
 
-        private void Save()
+        public void Save()
         {
             var save = new Save
             {

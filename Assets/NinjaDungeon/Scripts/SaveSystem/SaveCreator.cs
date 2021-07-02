@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BuildingSystem;
 using Newtonsoft.Json;
+using NinjaDungeon.Scripts.Managers;
 using ResourceSystem;
 
 namespace SaveSystem
@@ -12,8 +13,8 @@ namespace SaveSystem
     {
         public static IEnumerable<BuildingData> SaveConstructions()
         {
-            var buildings = MainManager.BuildingManager.ActiveBuildings;
-            var placeHolders = MainManager.BuildingManager.GetActivePlaceholders();
+            var buildings = UpperWorldManager.BuildingManager.ActiveBuildings;
+            var placeHolders = UpperWorldManager.BuildingManager.GetActivePlaceholders();
             var savedConstructions = new List<BuildingData>();
 
             foreach (var building in buildings)

@@ -16,7 +16,7 @@ namespace Loot
         private BattleManager _battleManager;
         private void Start()
         {
-            _battleManager = MainManager.BattleManager;
+            _battleManager = DungeonManager.BattleManager;
 
             if (_battleManager.HasLevelPassed)
             {
@@ -51,7 +51,7 @@ namespace Loot
             
             while (currentTime < _arrivalTime)
             {
-                var destination = MainManager.PlayerMovementController.transform.position;
+                var destination = MainManager.Player.transform.position;
                 
                 transform.position = Vector3.Lerp(startPosition, destination, currentTime / _arrivalTime);
                 currentTime += Time.deltaTime;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using JetBrains.Annotations;
+using NinjaDungeon.Scripts.Managers;
 using ResourceSystem;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ namespace BuildingSystem
             
             var building = Object.Instantiate(buildingPrefab, position, rotation);
 
-            MainManager.BuildingManager.AddNewConstructedBuilding(placeHolder, building, settings);
+            UpperWorldManager.BuildingManager.AddNewConstructedBuilding(placeHolder, building, settings);
             if (building.TryGetComponent<IBuilding>(out var buildingData))
             {
                 buildingData.OnStateLoaded(settings.ID, buildingLevel);
@@ -39,7 +40,7 @@ namespace BuildingSystem
             var buildingController = placeHolder.GetComponent<BuildingPlaceholder>();
             buildingController.Initialize(settings, requiredResources);
             
-            MainManager.BuildingManager.AddPlaceholder(placeHolder);
+            UpperWorldManager.BuildingManager.AddPlaceholder(placeHolder);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BuildingSystem;
+using NinjaDungeon.Scripts.Managers;
 using UnityEngine;
 
 public class PlaceholderViewManager : MonoBehaviour
@@ -13,14 +14,14 @@ public class PlaceholderViewManager : MonoBehaviour
     {
         _placeholderInfoViews = new Dictionary<GameObject, PlaceholderInfoView>();
         
-        var constructedPlaceholders = MainManager.BuildingManager.GetActivePlaceholders();
+        var constructedPlaceholders = UpperWorldManager.BuildingManager.GetActivePlaceholders();
         foreach (var placeholder in constructedPlaceholders)
         {
             AddPlaceholderView(placeholder);
         }
 
-        MainManager.BuildingManager.OnPlaceholderDestroyed += RemovePlaceholderView;
-        MainManager.BuildingManager.OnPlaceholderCreated += AddPlaceholderView;
+        UpperWorldManager.BuildingManager.OnPlaceholderDestroyed += RemovePlaceholderView;
+        UpperWorldManager.BuildingManager.OnPlaceholderCreated += AddPlaceholderView;
     }
 
     private void AddPlaceholderView(GameObject placeholder)
@@ -41,7 +42,7 @@ public class PlaceholderViewManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        MainManager.BuildingManager.OnPlaceholderDestroyed -= RemovePlaceholderView;
-        MainManager.BuildingManager.OnPlaceholderCreated -= AddPlaceholderView;
+        UpperWorldManager.BuildingManager.OnPlaceholderDestroyed -= RemovePlaceholderView;
+        UpperWorldManager.BuildingManager.OnPlaceholderCreated -= AddPlaceholderView;
     }
 }

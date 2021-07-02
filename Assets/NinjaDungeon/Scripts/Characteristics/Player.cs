@@ -12,6 +12,11 @@ namespace Characteristics
         [SerializeField]
         private BuffManager _buffManager;
 
+        private void Awake()
+        {
+            DontDestroyOnLoad(this);
+        }
+
         private Person _ally;
 
         public void SetAlly(Person ally)

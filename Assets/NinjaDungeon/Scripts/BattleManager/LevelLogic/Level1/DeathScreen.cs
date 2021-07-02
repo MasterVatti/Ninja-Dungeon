@@ -9,8 +9,10 @@ namespace NinjaDungeon.Scripts.BattleManager.LevelLogic.Level1
         [UsedImplicitly]
         public override void OnClick()
         {
-            MainManager.BattleManager.ClearLevel();
+            DungeonManager.BattleManager.ClearLevel();
+            TurnOffPanel();
             MainManager.LoadingController.StartLoad(_sceneName);
+            MainManager.Instance.ResetPlayer();
         }
 
         public override void ApplyContext(PortalContext context)

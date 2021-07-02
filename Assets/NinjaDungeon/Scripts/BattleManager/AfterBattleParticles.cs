@@ -8,7 +8,7 @@ public class AfterBattleParticles : MonoBehaviour
     private void Awake()
     {
         _particles.SetActive(false);
-        MainManager.BattleManager.IsLevelFinished += StartParticles;
+        DungeonManager.BattleManager.IsLevelFinished += StartParticles;
     }
 
     private void StartParticles()
@@ -18,6 +18,6 @@ public class AfterBattleParticles : MonoBehaviour
 
     private void OnDestroy()
     {
-        MainManager.BattleManager.IsLevelFinished -= StartParticles;
+        DungeonManager.BattleManager.IsLevelFinished -= StartParticles;
     }
 }

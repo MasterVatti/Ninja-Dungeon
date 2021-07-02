@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BuildingSystem;
 using Newtonsoft.Json;
+using NinjaDungeon.Scripts.Managers;
 using ResourceSystem;
 
 namespace SaveSystem
@@ -14,7 +15,7 @@ namespace SaveSystem
         {
             foreach (var building in buildings)
             {
-                var settings = MainManager.BuildingManager.GetBuildingSettings(building.SettingsID);
+                var settings = UpperWorldManager.BuildingManager.GetBuildingSettings(building.SettingsID);
 
                 var placeHolderData = JsonConvert.DeserializeObject<PlaceHolderData>(building.State);
                 if (placeHolderData?.RemainResources != null)
