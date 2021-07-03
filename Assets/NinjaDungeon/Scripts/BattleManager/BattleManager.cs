@@ -75,7 +75,7 @@ namespace NinjaDungeon.Scripts.BattleManager
                 MainManager.ScreenManager.OpenScreenWithContext(ScreenType.RewardScreen, context);
                 
                 DungeonManager.RewardManager.AccrueReward();
-                MainManager.SaveLoadManager.Save(); // TODO: Не будет сохранять ресурсы т.к. достаёт из сохраненных данных ресурсы.
+                // TODO: Не будет сохранять ресурсы т.к. достаёт из сохраненных данных ресурсы.
                 return;
             }
             

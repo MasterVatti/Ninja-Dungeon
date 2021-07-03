@@ -18,7 +18,6 @@ namespace NinjaDungeon.Scripts.StartMenu
             MainManager.Instance.ResetPlayer();
             MainManager.JoystickController.gameObject.SetActive(true);
             MainManager.LoadingController.StartLoad(GlobalConstants.MAIN_SCENE_TAG);
-            MainManager.SaveLoadManager.Load();
         }
     }
 }
