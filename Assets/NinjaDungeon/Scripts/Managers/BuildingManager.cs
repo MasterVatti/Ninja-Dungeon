@@ -25,7 +25,7 @@ namespace Managers
         [SerializeField]
         private List<GameObject> _activeBuildings = new List<GameObject>();
 
-        private void Start()
+        private void Awake()
         {
             for (var i = 0; i < _buildings.Count; i++)
             {

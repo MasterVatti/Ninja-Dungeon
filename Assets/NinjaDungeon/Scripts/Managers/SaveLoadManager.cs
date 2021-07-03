@@ -23,7 +23,7 @@ namespace Managers
         {
             var json = PlayerPrefs.GetString("save");
             var save = JsonConvert.DeserializeObject<Save>(json) ?? _saveConfig.DefaultSave;
-
+           
             var buildings = save.Buildings;
             var resources = save.Resources;
             var player = save.Player;

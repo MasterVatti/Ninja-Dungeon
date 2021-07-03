@@ -39,9 +39,8 @@ namespace Characteristics
             {
                 return;
             }
-
+            
             _ally.transform.position = transform.position + Vector3.forward;
         }
-        
     }
 }

@@ -78,6 +78,7 @@ namespace NinjaDungeon.Scripts.BattleManager
 
                 //UI выигрыша Алексея
                 
+                MainManager.Instance.ResetPlayer();
                 MainManager.LoadingController.StartLoad(GlobalConstants.MAIN_SCENE_TAG); //<-- Или по кнопке Алексея
             }
         }
