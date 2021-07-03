@@ -7,7 +7,7 @@ namespace Assets.Scripts.Managers.ScreensManager.Preview.RewardScreen
     /// Пример окна.
     /// В данном случае тестовое окно с количеством полученных монеток
     /// </summary>
-    public class RewardScreen : BaseScreenWithContext<RewardContext>
+    public class RewardScreenExample : BaseScreenWithContext<RewardContextExample>
     {
         [SerializeField]
         private Text _goldCountLabel;
@@ -22,7 +22,7 @@ namespace Assets.Scripts.Managers.ScreensManager.Preview.RewardScreen
         {
             MainManager.ScreenManager.CloseTopScreen();
         }
-        public override void ApplyContext(RewardContext context)
+        public override void ApplyContext(RewardContextExample context)
         {
             _goldCountLabel.text = context.Gold.ToString();
         }

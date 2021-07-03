@@ -20,8 +20,7 @@ namespace NinjaDungeon.Scripts.BattleManager
 
         [SerializeField]
         private RoomSettings _roomSettings;
-
-        private RewardManager _rewardManager;
+        
         private HealthBehaviour _healthBehaviour;
         private Spawner _spawner;
 
@@ -31,8 +30,7 @@ namespace NinjaDungeon.Scripts.BattleManager
         private void Awake()
         {
             _lastLevelIndex = _roomSettings.LevelSettingsList.Count - 1;
-            _rewardManager = new RewardManager();
-            
+
             _healthBehaviour = MainManager.Player.GetComponent<HealthBehaviour>();
             _healthBehaviour.OnDead += PlayerDeath;
             
@@ -65,22 +63,23 @@ namespace NinjaDungeon.Scripts.BattleManager
 
         public void GoToNextLevel(RoomSettings roomSettings, Vector3 teleportPosition)
         {
-            _rewardManager.LevelRewardAccrual(roomSettings, _currentLevelIndex);
+            DungeonManager.RewardManager.LevelRewardAccrual(roomSettings, _currentLevelIndex);
             
             _currentLevelIndex++;
             
             var nextLevelIndex = roomSettings.LevelSettingsList[_currentLevelIndex];
-            LoadLevel(nextLevelIndex, teleportPosition);
             
             if (IsLastLevelPassed())
             {
-                _rewardManager.GetFinalReward();
-
-                //UI выигрыша Алексея
+                var context = new RewardScreenContext(DungeonManager.RewardManager.GetResources());
+                MainManager.ScreenManager.OpenScreenWithContext(ScreenType.RewardScreen, context);
                 
-                MainManager.Instance.ResetPlayer();
-                MainManager.LoadingController.StartLoad(GlobalConstants.MAIN_SCENE_TAG); //<-- Или по кнопке Алексея
+                DungeonManager.RewardManager.AccrueReward();
+                MainManager.SaveLoadManager.Save(); // TODO: Не будет сохранять ресурсы т.к. достаёт из сохраненных данных ресурсы.
+                return;
             }
+            
+            LoadLevel(nextLevelIndex, teleportPosition);
         }
 
         public void ClearLevel()

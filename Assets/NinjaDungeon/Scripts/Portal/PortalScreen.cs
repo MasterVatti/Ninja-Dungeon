@@ -38,7 +38,7 @@ namespace NinjaDungeon.Scripts.Portal
         {
             if (UpperWorldManager.EnergyManager.HasEnoughEnergy(_energyCost))
             {
-                UpperWorldManager.SaveLoadManager.Save();
+                MainManager.SaveLoadManager.Save();
                 TransitionStage();
             }
             else

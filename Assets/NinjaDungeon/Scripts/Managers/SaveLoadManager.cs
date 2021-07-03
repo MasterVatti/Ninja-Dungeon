@@ -14,12 +14,7 @@ namespace Managers
         [SerializeField]
         private DefaultSaveConfig _saveConfig;
         
-        private void Awake()
-        {
-            Load();
-        }
-        
-        private void Load()
+        public void Load()
         {
             var json = PlayerPrefs.GetString("save");
             var save = JsonConvert.DeserializeObject<Save>(json) ?? _saveConfig.DefaultSave;

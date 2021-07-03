@@ -51,7 +51,7 @@ namespace Loot
             var startPosition = transform.position;
             var arrivalTime = Random.Range(_arrivalTimeMin, _arrivalTimeMax);
 
-            while (currentTime < arrivalTime)
+            while (currentTime <= arrivalTime)
             {
                 var destination = MainManager.Player.transform.position;
                 

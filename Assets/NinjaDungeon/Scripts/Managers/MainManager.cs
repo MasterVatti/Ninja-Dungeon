@@ -15,7 +15,10 @@ public class MainManager : Singleton<MainManager>
     public static Player Player => Instance._player;
     public static IconsProvider IconsProvider => Instance._iconsProvider;
     public static JoystickController JoystickController => Instance._joystickController;
-   
+    public static SaveLoadManager SaveLoadManager => Instance._saveLoadManager;
+
+    [SerializeField]
+    private SaveLoadManager _saveLoadManager;
     [SerializeField]
     private JoystickController _joystickController;
     [SerializeField]

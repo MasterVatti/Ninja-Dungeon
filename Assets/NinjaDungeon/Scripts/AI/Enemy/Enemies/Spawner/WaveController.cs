@@ -46,11 +46,9 @@ namespace Enemies.Spawner
         {
             if (MainManager.EnemiesManager.Enemies.Count == 0)
             {
-                Debug.Log("true");
                 IsFinished = true;
                 MainManager.EnemiesManager.OnEnemyDead -= OnEnemyDied;
             }
-            Debug.Log("false");
         }
     }
 }

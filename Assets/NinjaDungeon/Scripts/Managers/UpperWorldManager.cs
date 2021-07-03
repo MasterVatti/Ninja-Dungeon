@@ -11,10 +11,7 @@ namespace NinjaDungeon.Scripts.Managers
         public static AnimationManager AnimationManager => Instance._animationManager;
         public static BuildingManager BuildingManager => Instance._buildingManager;
         public static EnergyManager EnergyManager => Instance._energyManager;
-        public static SaveLoadManager SaveLoadManager => Instance._saveLoadManager;
-
-        [SerializeField]
-        private SaveLoadManager _saveLoadManager;
+       
         [SerializeField]
         private AnimationManager _animationManager;    
         [SerializeField]
