@@ -43,18 +43,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animationController: {fileID: 6569569414913486477}
   _attackBehaviour: {fileID: 6569569414913486476}
---- !u!114 &1652223793287147179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4233809564738114201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bf122090a4af4540beb418d813a6d08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1768671373967292504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +111,7 @@ MonoBehaviour:
   _healthBehaviour: {fileID: 6569569414913486472}
   _rigidbody: {fileID: 606104109711830386}
   _chest: {fileID: 4233809564737788877}
-  _experienceControllerUpperWorld: {fileID: 1652223793287147179}
+  _experienceControllerUpperWorld: {fileID: 8966709704443414123}
   _experienceControllerDungeon: {fileID: 8152296936373293730}
   _buffManager: {fileID: 3370529553908154062}
 --- !u!114 &6569569414913486476
@@ -213,6 +201,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3f6b8953c830574e88e51dd502eec6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8966709704443414123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4233809564738114201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bf122090a4af4540beb418d813a6d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!64 &2318485965713204838
