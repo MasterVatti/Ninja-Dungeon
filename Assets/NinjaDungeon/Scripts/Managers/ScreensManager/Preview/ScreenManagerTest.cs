@@ -1,7 +1,8 @@
+using Assets.Scripts.Managers.ScreensManager;
 using Assets.Scripts.Managers.ScreensManager.Preview.RewardScreen;
 using UnityEngine;
 
-namespace Assets.Scripts.Managers.ScreensManager.Preview
+namespace NinjaDungeon.Scripts.Managers.ScreensManager.Preview
 {
     /// <summary>
     /// Класс для тестирования фичи,
