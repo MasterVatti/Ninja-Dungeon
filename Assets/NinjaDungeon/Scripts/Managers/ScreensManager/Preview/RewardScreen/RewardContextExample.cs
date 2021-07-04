@@ -3,7 +3,7 @@
     /// <summary>
     /// Представляет контекст экрана RewardScreen
     /// </summary>
-    public class RewardContext : BaseContext
+    public class RewardContextExample : BaseContext
     {
         public int Gold { get; set; }
         

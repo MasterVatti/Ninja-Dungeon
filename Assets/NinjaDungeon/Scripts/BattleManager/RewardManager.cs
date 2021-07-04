@@ -1,66 +1,76 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ResourceSystem;
+using UnityEngine;
 
 namespace Assets.Scripts.BattleManager
 {
-    public class RewardManager
+    public class RewardManager : MonoBehaviour
     {
-        private Dictionary<ResourceType, List<int>> _rewardDictionary = new Dictionary<ResourceType, List<int>>();
-        private Dictionary<ResourceType, List<int>> _bonusDictionary = new Dictionary<ResourceType, List<int>>();
+        public event Action<Resource,int> OnResourceAmountChanged; 
+        
+        private const int MIN_INDEX_RESOURCE = 0;
+
+        private List<Resource> _reward;
+
+        private void Start()
+        {
+            _reward = new List<Resource>();
+        }
 
         public void LevelRewardAccrual(RoomSettings roomSettings, int currentLevelIndex)
         {
             var nextLevel = roomSettings.LevelSettingsList;
 
             var rewardList = nextLevel[currentLevelIndex].DefaultReward;
-            GetLevelReward(_rewardDictionary, rewardList);
-
+            AddReward(rewardList);
             rewardList = nextLevel[currentLevelIndex].BonusReward;
-            GetLevelReward(_bonusDictionary, rewardList);
+            AddReward(rewardList);
         }
-
-        private void GetLevelReward(Dictionary<ResourceType, List<int>> rewardDictionary, List<Resource> rewardList)
+        
+        public void AddReward(ResourceType type, int value)
         {
-            foreach (var reward in rewardList)
+            var index = GetResourceIndexByType(type);
+            var resource = _reward[index];
+            resource.Amount += value;
+            OnResourceAmountChanged?.Invoke(resource, resource.Amount);
+            _reward[index] = resource;
+        }
+        
+        private void AddReward(IEnumerable<Resource> resources)
+        {
+            foreach (var resource in resources)
             {
-                if (rewardDictionary.TryGetValue(reward.Type, out var amountList))
-                {
-                    amountList.Add(reward.Amount);
-                }
-                else
-                {
-                    amountList = new List<int>
-                    {
-                        reward.Amount
-                    };
-
-                    rewardDictionary.Add(reward.Type, amountList);
-                }
+                AddReward(resource.Type, resource.Amount);
             }
         }
-
-        public void GetFinalReward()
+        
+        private int GetResourceIndexByType(ResourceType type)
         {
-            foreach (var reward in _rewardDictionary)
-            {
-                EarnReward(reward.Key, reward.Value);
-            }
+            var index = _reward.FindIndex(resource => resource.Type == type);
 
-            foreach (var bonus in _bonusDictionary)
+            if (index < MIN_INDEX_RESOURCE)
             {
-                EarnReward(bonus.Key, bonus.Value);
+                AddResourceType(type);
+                index = GetResourceIndexByType(type);
             }
-
-            _rewardDictionary.Clear();
-            _bonusDictionary.Clear();
+            
+            return index;
         }
 
-        private void EarnReward(ResourceType type, List<int> amount)
+        private void AddResourceType(ResourceType type)
         {
-            foreach (var reward in amount)
-            {
-                MainManager.ResourceManager.AddResource(type, reward); //<-- Награда за все уровни
-            }
+            _reward.Add(new Resource { Amount = 0, Type = type });
+        }
+        
+        public List<Resource> GetResources()
+        {
+            return _reward;
+        }
+        
+        public void AccrueReward()
+        {
+            MainManager.ResourceManager.AddResource(_reward);
         }
     }
 }

@@ -1,28 +1,16 @@
-using System;
 using System.Collections;
 using System.Globalization;
 using ResourceSystem;
 using TMPro;
 using UnityEngine;
 
-[Serializable]
 public class ResourceLabel : MonoBehaviour
 {
-    public ResourceType Type
-    {
-        get => _type;
-        set => _type = value;
-    }
+    public ResourceType Type => _type;
+    public TextMeshProUGUI Label => _label;
 
-    public TextMeshProUGUI Label
-    {
-        get => _label;
-        set => _label = value;
-    }
-    
     public float СurrentValue
     {
-        get => _currentValue;
         set => _currentValue = value;
     }
     
@@ -48,7 +36,7 @@ public class ResourceLabel : MonoBehaviour
         while (_elapsedTime < animationTime)
         {
             var currentProgress = _elapsedTime / animationTime;
-            _currentValue= Mathf.Lerp(oldAmount, newAmount, currentProgress);
+            _currentValue = Mathf.Lerp(oldAmount, newAmount, currentProgress);
             Label.text =  Mathf.Round(_currentValue).ToString(CultureInfo.InvariantCulture);
             _elapsedTime += Time.deltaTime;
 

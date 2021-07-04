@@ -17,7 +17,7 @@ namespace Assets.Scripts.Managers.ScreensManager.Preview
 
         private void OnCollisionEnter(Collision other)
         {
-            var context = new RewardContext {Gold = 300};
+            var context = new RewardContextExample {Gold = 300};
             MainManager.ScreenManager.OpenScreenWithContext(ScreenType.RewardScreen,
                 context);
         }

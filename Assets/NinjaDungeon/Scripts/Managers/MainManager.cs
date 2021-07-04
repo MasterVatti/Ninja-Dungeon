@@ -17,7 +17,7 @@ public class MainManager : Singleton<MainManager>
     public static Ally Ally => Instance._ally;
     public static IconsProvider IconsProvider => Instance._iconsProvider;
     public static JoystickController JoystickController => Instance._joystickController;
-   
+  
     [SerializeField]
     private JoystickController _joystickController;
     [SerializeField]

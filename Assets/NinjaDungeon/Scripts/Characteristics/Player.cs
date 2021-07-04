@@ -35,5 +35,6 @@ namespace Characteristics
         {
             HealthBehaviour.OnDead -= _animationController.DeathAnimation;
         }
+        
     }
 }

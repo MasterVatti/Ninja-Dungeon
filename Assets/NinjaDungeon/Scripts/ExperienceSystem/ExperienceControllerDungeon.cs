@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using Assets.Scripts.Managers.ScreensManager;
 using Characteristics;
 using UnityEngine;
 //// <summary>
@@ -38,6 +38,7 @@ namespace ExperienceSystem
             _playerCharacteristics.MaximumExperienceLevelDungeon += maximumExperience;
             
             OnLevelUp?.Invoke(_playerCharacteristics.LevelDungeon);
+            MainManager.ScreenManager.OpenScreen(ScreenType.BuffScreen);
         }
 
         public override bool IsLevelMax()

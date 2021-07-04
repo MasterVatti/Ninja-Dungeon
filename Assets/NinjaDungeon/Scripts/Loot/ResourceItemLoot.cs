@@ -26,7 +26,7 @@ namespace Loot
         protected override void OnItemPickup()
         {
             MainManager.Player.ExperienceControllerDungeon.AddExperience(_experienceСount);
-            MainManager.ResourceManager.AddResource(_resourceType, (int) _amount);
+            DungeonManager.RewardManager.AddReward(_resourceType, (int) _amount);
         }
     }
 }

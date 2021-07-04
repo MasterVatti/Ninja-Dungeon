@@ -2,6 +2,7 @@
 using Assets.Scripts;
 using Assets.Scripts.BattleManager;
 using DefaultNamespace;
+using Enemies;
 using Enemies.Spawner;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ namespace NinjaDungeon.Scripts.BattleManager
 
         [SerializeField]
         private RoomSettings _roomSettings;
+        
+        private HealthBehaviour _healthBehaviour;
 
         private RewardManager _rewardManager;
         private Spawner _spawner;
@@ -58,21 +61,23 @@ namespace NinjaDungeon.Scripts.BattleManager
 
         public void GoToNextLevel(RoomSettings roomSettings, Vector3 teleportPosition)
         {
-            _rewardManager.LevelRewardAccrual(roomSettings, _currentLevelIndex);
+            DungeonManager.RewardManager.LevelRewardAccrual(roomSettings, _currentLevelIndex);
             
             _currentLevelIndex++;
             
             var nextLevelIndex = roomSettings.LevelSettingsList[_currentLevelIndex];
-            LoadLevel(nextLevelIndex, teleportPosition);
             
             if (IsLastLevelPassed())
             {
-                _rewardManager.GetFinalReward();
-
-                //TODO UI выигрыша Алексея
+                var context = new RewardScreenContext(DungeonManager.RewardManager.GetResources());
+                MainManager.ScreenManager.OpenScreenWithContext(ScreenType.RewardScreen, context);
                 
-                MainManager.LoadingController.StartLoad(GlobalConstants.MAIN_SCENE_TAG); //<-- Или по кнопке Алексея
+                DungeonManager.RewardManager.AccrueReward();
+                // TODO: Не будет сохранять ресурсы т.к. достаёт из сохраненных данных ресурсы.
+                return;
             }
+            
+            LoadLevel(nextLevelIndex, teleportPosition);
         }
 
         public void ClearLevel()

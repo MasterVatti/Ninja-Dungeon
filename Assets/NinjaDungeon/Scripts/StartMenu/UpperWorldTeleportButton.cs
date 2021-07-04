@@ -4,8 +4,14 @@ using UnityEngine;
 
 namespace NinjaDungeon.Scripts.StartMenu
 {
-    public class StartGameButton : MonoBehaviour
+    public class UpperWorldTeleportButton : MonoBehaviour
     {
+        [UsedImplicitly]
+        public void TurnOffPanel()
+        {
+            MainManager.ScreenManager.CloseTopScreen();
+        }
+        
         [UsedImplicitly]
         public void GoToUpperWorld()
         {
