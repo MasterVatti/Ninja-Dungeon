@@ -1,3 +1,4 @@
+using Characteristics;
 using PlayerScripts.Movement;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace PlayerScripts.Animation
 
         private static readonly int IsWalk = Animator.StringToHash("isWalk");
         private static readonly int Attack = Animator.StringToHash("Attack");
+        private static readonly int Death = Animator.StringToHash("Death");
         
         public void RunningAnimation(bool state)
         {
@@ -19,6 +21,11 @@ namespace PlayerScripts.Animation
         public void AttackAnimation()
         {
             _animator.SetTrigger(Attack);
+        }
+
+        public void DeathAnimation(Person person)
+        {
+            _animator.SetTrigger(Death);
         }
     }
 }

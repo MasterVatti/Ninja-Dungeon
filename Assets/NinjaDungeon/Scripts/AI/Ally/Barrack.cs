@@ -29,7 +29,7 @@ namespace NinjaDungeon.Scripts.AI.Ally
         {
             _createdAllyID = _allies.IndexOf(ally);
             var createdAlly = Instantiate(ally.AllyPrefab, _spawnPoint.position, Quaternion.identity);
-            MainManager.Player.SetAlly(createdAlly.GetComponent<Person>());
+            MainManager.Ally.SetAlly(createdAlly.GetComponent<Person>());
         }
 
         public void ShowScreenWithContext()
@@ -54,7 +54,7 @@ namespace NinjaDungeon.Scripts.AI.Ally
             var allyPrefab = _allies[_createdAllyID].AllyPrefab;
             var spawnPoint = MainManager.Player.transform.position + _spawnOffset;
             var createdAlly = Instantiate(allyPrefab, spawnPoint, Quaternion.identity);
-            MainManager.Player.SetAlly(createdAlly.GetComponent<Person>());
+            MainManager.Ally.SetAlly(createdAlly.GetComponent<Person>());
         }
 
         public override void OnUpgrade(BarrackData oldBuildingState)
@@ -63,7 +63,7 @@ namespace NinjaDungeon.Scripts.AI.Ally
 
         public override BarrackData GetState()
         {
-            if (MainManager.Player.Ally != null)
+            if (MainManager.Ally.CreatedAlly != null)
             {
                 return new BarrackData
                 {

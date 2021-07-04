@@ -1,10 +1,7 @@
 ﻿using System;
 using Assets.Scripts;
 using Assets.Scripts.BattleManager;
-using Assets.Scripts.Managers.ScreensManager;
-using Characteristics;
 using DefaultNamespace;
-using Enemies;
 using Enemies.Spawner;
 using UnityEngine;
 
@@ -22,7 +19,6 @@ namespace NinjaDungeon.Scripts.BattleManager
         private RoomSettings _roomSettings;
 
         private RewardManager _rewardManager;
-        private HealthBehaviour _healthBehaviour;
         private Spawner _spawner;
 
         private int _lastLevelIndex;
@@ -32,10 +28,7 @@ namespace NinjaDungeon.Scripts.BattleManager
         {
             _lastLevelIndex = _roomSettings.LevelSettingsList.Count - 1;
             _rewardManager = new RewardManager();
-            
-            _healthBehaviour = MainManager.Player.GetComponent<HealthBehaviour>();
-            _healthBehaviour.OnDead += PlayerDeath;
-            
+
             EventBus.Subscribe<ISpawnHandler>(this);
         }
         
@@ -76,7 +69,7 @@ namespace NinjaDungeon.Scripts.BattleManager
             {
                 _rewardManager.GetFinalReward();
 
-                //UI выигрыша Алексея
+                //TODO UI выигрыша Алексея
                 
                 MainManager.LoadingController.StartLoad(GlobalConstants.MAIN_SCENE_TAG); //<-- Или по кнопке Алексея
             }
@@ -99,22 +92,12 @@ namespace NinjaDungeon.Scripts.BattleManager
         {
             return _currentLevelIndex == _lastLevelIndex && HasLevelPassed;
         }
-
-        private void PlayerDeath(Person person)
-        {
-            var context = new PortalContext
-            {
-                SceneName = GlobalConstants.MAIN_SCENE_TAG
-            };
-            
-            MainManager.ScreenManager.OpenScreenWithContext(ScreenType.DeathScreen, context);
-        }
+        
 
         private void OnDestroy()
         {
             EventBus.Unsubscribe<ISpawnHandler>(this);
             
-            _healthBehaviour.OnDead -= PlayerDeath;
         }
     }
 }

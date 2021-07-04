@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHP: 0
-  _maxHp: 100
+  _maxHP: 100
   _moveSpeed: 3.5
   _attackDamage: 10
   _attackRate: 1
@@ -292,6 +292,7 @@ MonoBehaviour:
   _stopChaseDistanceMax: 12
   _stopChaseDistanceMin: 8
   _animationController: {fileID: 3530103001745665312}
+  _pandaBehaviour: {fileID: 4743675034957756941}
   _golemPrefab: {fileID: 140808, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}
   _runBackDistance: 3
   _lowHealthThreshold: 30
@@ -354,6 +355,7 @@ MonoBehaviour:
   _healthBehaviour: {fileID: 7614272114896670690}
   _rigidbody: {fileID: 5116060399137525657}
   _chest: {fileID: 465402}
+  _animationController: {fileID: 3530103001745665312}
 --- !u!114 &3530103001745665312
 MonoBehaviour:
   m_ObjectHideFlags: 0

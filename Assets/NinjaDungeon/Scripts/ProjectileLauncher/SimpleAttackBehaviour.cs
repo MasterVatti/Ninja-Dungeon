@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using Assets.Scripts;
 using Characteristics;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -68,7 +66,7 @@ namespace ProjectileLauncher
         public virtual bool CanAttack(Person person)
         {
             var isPersonDead = person == null;
-            if (isPersonDead)
+            if (isPersonDead && !_personCharacteristics.CanAttack)
             {
                 return false;
             }

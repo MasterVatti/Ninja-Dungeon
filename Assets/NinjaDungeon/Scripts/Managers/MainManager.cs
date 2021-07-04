@@ -3,6 +3,7 @@ using Enemies;
 using LoadingScene;
 using Managers;
 using Managers.ScreensManager;
+using NinjaDungeon.Scripts.Characteristics;
 using PlayerScripts.Movement;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class MainManager : Singleton<MainManager>
     public static EnemiesManager EnemiesManager => Instance._enemiesManager;
     public static ScreenManager ScreenManager => Instance._screenManager;
     public static Player Player => Instance._player;
+    public static Ally Ally => Instance._ally;
     public static IconsProvider IconsProvider => Instance._iconsProvider;
     public static JoystickController JoystickController => Instance._joystickController;
    
@@ -32,7 +34,9 @@ public class MainManager : Singleton<MainManager>
     private IconsProvider _iconsProvider;
     [SerializeField]
     private Vector3 _spawnPositionPlayer;
-    
+    [SerializeField]
+    private Ally _ally;
+
     private void Awake()
     {
         _player = Instantiate(_player);

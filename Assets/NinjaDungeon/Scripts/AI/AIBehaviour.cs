@@ -26,6 +26,8 @@ namespace Barracks_and_allied_behavior
         protected float _stopChaseDistanceMin;
         [SerializeField]
         protected AIAnimationController _animationController;
+        [SerializeField]
+        protected PandaBehaviour _pandaBehaviour;
         
         protected ITargetProvider _targetProvider;
         protected ChaseBehavior _chaseBehavior;
@@ -36,6 +38,14 @@ namespace Barracks_and_allied_behavior
         protected void Awake()
         {
             _attackBehaviour.IsAttack += _animationController.AttackAnimation;
+        }
+
+        protected void Update()
+        {
+            if (_personCharacteristics.CanMove)
+            {
+                _pandaBehaviour.enabled = false;
+            }
         }
 
         private void OnDestroy()

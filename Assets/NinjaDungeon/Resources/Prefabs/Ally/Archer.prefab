@@ -3097,15 +3097,14 @@ GameObject:
   - component: {fileID: 8348700401235912370}
   - component: {fileID: 2429137293685355133}
   - component: {fileID: 5636586789403889347}
-  - component: {fileID: 7289606454393282532}
   - component: {fileID: 975682431264699704}
   - component: {fileID: 648053973788909705}
-  - component: {fileID: 708161647236640954}
   - component: {fileID: 72004202742537981}
   - component: {fileID: 6774267916564663816}
   - component: {fileID: 3644442525817756070}
   - component: {fileID: 6952551125458980160}
   - component: {fileID: 9021700307115372706}
+  - component: {fileID: 6126187668490972585}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Ally
@@ -3243,22 +3242,6 @@ MonoBehaviour:
     breakPointStatuses: 
     collapsedLines: 
     btScript: 
---- !u!114 &7289606454393282532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 165754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 152adcd9a0b455242bdef016029036b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _personCharacteristics: {fileID: 975682431264699704}
-  _healthBehaviour: {fileID: 648053973788909705}
-  _rigidbody: {fileID: 8348700401235912370}
-  _chest: {fileID: 457526}
 --- !u!114 &975682431264699704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3272,7 +3255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHP: 0
-  _maxHp: 100
+  _maxHP: 0
   _moveSpeed: 5
   _attackDamage: 10
   _attackRate: 1
@@ -3292,19 +3275,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _team: 1
---- !u!114 &708161647236640954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 165754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34c2fc2026e83f54996df7e7715f6704, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _aggressionDistance: 0
 --- !u!114 &72004202742537981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3322,6 +3292,7 @@ MonoBehaviour:
   _stopChaseDistanceMax: 12
   _stopChaseDistanceMin: 11.8
   _animationController: {fileID: 3644442525817756070}
+  _pandaBehaviour: {fileID: 5636586789403889347}
   _stopFollowingDistance: 6.5
   _guardsDistance: 2
 --- !u!114 &6774267916564663816
@@ -3379,6 +3350,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aggressionDistance: 20
+--- !u!114 &6126187668490972585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b9d720bf67518d4bb13ca523faf0ba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _personCharacteristics: {fileID: 975682431264699704}
+  _healthBehaviour: {fileID: 648053973788909705}
+  _rigidbody: {fileID: 8348700401235912370}
+  _chest: {fileID: 457526}
+  _animationController: {fileID: 3644442525817756070}
 --- !u!1 &167158
 GameObject:
   m_ObjectHideFlags: 0

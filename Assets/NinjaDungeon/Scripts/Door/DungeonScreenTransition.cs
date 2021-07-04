@@ -1,5 +1,6 @@
 using Assets.Scripts.Managers.ScreensManager;
 using JetBrains.Annotations;
+using NinjaDungeon.Scripts.Characteristics;
 using UnityEngine;
 
 namespace Door
@@ -32,7 +33,11 @@ namespace Door
             MainManager.ScreenManager.CloseTopScreen();
             MainManager.LoadingController.StartLoad(_sceneName);
             MainManager.Player.transform.position = _teleportPosition;
-            MainManager.Player.TeleportAlly();
+            if (MainManager.Ally != null)
+            {
+                MainManager.Ally.TeleportAlly(_teleportPosition); 
+            }
+            
             //TODO: не понимаю почему телепортирует не туда куда нужно.
             //пробовал и на прямую трасформ у союзника менять.
         }

@@ -1,6 +1,6 @@
-
 using BuffSystem;
 using ExperienceSystem;
+using PlayerScripts.Animation;
 using UnityEngine;
 
 namespace Characteristics
@@ -8,8 +8,7 @@ namespace Characteristics
     public class Player : Person
     {
         public BuffManager BuffManager => _buffManager;
-        public Person Ally => _ally;
-
+        
         public ExperienceControllerUpperWorld ExperienceControllerUpperWorld => _experienceControllerUpperWorld;
         public ExperienceControllerDungeon ExperienceControllerDungeon => _experienceControllerDungeon;
         
@@ -19,29 +18,22 @@ namespace Characteristics
         private ExperienceControllerDungeon _experienceControllerDungeon;
         [SerializeField]
         private BuffManager _buffManager;
-
-        private Person _ally;
+        [SerializeField]
+        private PlayerAnimationController _animationController;
         
+
         private void Awake()
         {
             DontDestroyOnLoad(this);
         }
 
-        public void SetAlly(Person ally)
+        private void Start()
         {
-            _ally = ally;
-            DontDestroyOnLoad(_ally);
+            HealthBehaviour.OnDead += _animationController.DeathAnimation;
         }
-
-        public void TeleportAlly()
+        private void OnDestroy()
         {
-            if (_ally == null)
-            {
-                return;
-            }
-
-            _ally.transform.position = transform.position + Vector3.forward;
+            HealthBehaviour.OnDead -= _animationController.DeathAnimation;
         }
-        
     }
 }

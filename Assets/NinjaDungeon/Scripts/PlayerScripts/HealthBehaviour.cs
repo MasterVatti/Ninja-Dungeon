@@ -1,5 +1,6 @@
 using System;
 using Assets.Scripts;
+using Assets.Scripts.Managers.ScreensManager;
 using Characteristics;
 using ProjectileLauncher;
 using UnityEngine;
@@ -29,7 +30,9 @@ namespace Enemies
             _person.PersonCharacteristics.CurrentHp -= damage;
             if (_person.PersonCharacteristics.CurrentHp <= 0)
             {
-                Death();
+                _person.PersonCharacteristics.CanAttack = false;
+                _person.PersonCharacteristics.CanMove = false;
+                OnDead?.Invoke(_person);
             }
         }
         
@@ -43,16 +46,26 @@ namespace Enemies
             _person.PersonCharacteristics.CurrentHp -= damage;
             if (_person.PersonCharacteristics.CurrentHp <= 0)
             {
-                Death();
+                _person.PersonCharacteristics.CanAttack = false;
+                _person.PersonCharacteristics.CanMove = false;
+                OnDead?.Invoke(_person);
             }
         }
 
-        private void Death()
+        public void Death()
         {
-            OnDead?.Invoke(_person);
             if (!CompareTag(GlobalConstants.PLAYER_TAG))
             {
                 Destroy(gameObject);
+            }
+            else
+            {
+                var context = new PortalContext
+                {
+                    SceneName = GlobalConstants.MAIN_SCENE_TAG
+                };
+                
+                MainManager.ScreenManager.OpenScreenWithContext(ScreenType.DeathScreen, context);
             }
         }
     }

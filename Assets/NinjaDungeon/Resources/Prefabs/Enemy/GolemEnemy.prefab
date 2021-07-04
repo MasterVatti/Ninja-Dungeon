@@ -1940,7 +1940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHP: 0
-  _maxHp: 70
+  _maxHP: 100
   _moveSpeed: 3.5
   _attackDamage: 5
   _attackRate: 1
@@ -2008,6 +2008,7 @@ MonoBehaviour:
   _stopChaseDistanceMax: 1
   _stopChaseDistanceMin: 0.5
   _animationController: {fileID: 8472035866803249897}
+  _pandaBehaviour: {fileID: 8634107909960694660}
 --- !u!65 &1487308301776577725
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2062,7 +2063,8 @@ MonoBehaviour:
   _personCharacteristics: {fileID: 1823720720987811430}
   _healthBehaviour: {fileID: 979407499057984871}
   _rigidbody: {fileID: 7511672416631066986}
-  _chest: {fileID: 0}
+  _chest: {fileID: 417036}
+  _animationController: {fileID: 8472035866803249897}
 --- !u!114 &8472035866803249897
 MonoBehaviour:
   m_ObjectHideFlags: 0
