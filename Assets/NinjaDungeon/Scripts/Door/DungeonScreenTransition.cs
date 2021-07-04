@@ -35,11 +35,8 @@ namespace Door
             MainManager.Player.transform.position = _teleportPosition;
             if (MainManager.Ally != null)
             {
-                MainManager.Ally.TeleportAlly(_teleportPosition); 
+                MainManager.Ally.transform.position = _teleportPosition + Vector3.forward;
             }
-            
-            //TODO: не понимаю почему телепортирует не туда куда нужно.
-            //пробовал и на прямую трасформ у союзника менять.
         }
         
         public override void Initialize(ScreenType screenType)

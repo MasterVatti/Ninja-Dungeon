@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Characteristics;
+using NinjaDungeon.Scripts.Characteristics;
 using UnityEngine;
 
 namespace Enemies

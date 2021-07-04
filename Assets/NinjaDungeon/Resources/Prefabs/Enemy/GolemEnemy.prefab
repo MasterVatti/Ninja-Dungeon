@@ -1945,8 +1945,8 @@ MonoBehaviour:
   _attackDamage: 5
   _attackRate: 1
   _rotationSpeed: 3
-  _canMove: 0
-  _canAttack: 0
+  _canMove: 1
+  _canAttack: 1
 --- !u!114 &979407499057984871
 MonoBehaviour:
   m_ObjectHideFlags: 0

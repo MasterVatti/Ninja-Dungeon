@@ -20,7 +20,6 @@ namespace Characteristics
         private BuffManager _buffManager;
         [SerializeField]
         private PlayerAnimationController _animationController;
-        
 
         private void Awake()
         {

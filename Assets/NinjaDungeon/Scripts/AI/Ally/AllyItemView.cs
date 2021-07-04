@@ -37,7 +37,7 @@ namespace Barracks_and_allied_behavior
         [UsedImplicitly]
         public void AllyBuyButtonClick()
         {
-            if (MainManager.Ally.CreatedAlly != null)
+            if (MainManager.Ally != null)
             {
                 MainManager.ScreenManager.OpenScreenWithContext(ScreenType.InformationPopupScreen, 
                     new InformationScreenContext("Warning", "You cannot have more than one ally"));

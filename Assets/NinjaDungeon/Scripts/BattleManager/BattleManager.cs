@@ -1,10 +1,10 @@
 ﻿using System;
-using Assets.Scripts;
 using Assets.Scripts.BattleManager;
 using Assets.Scripts.Managers.ScreensManager;
 using DefaultNamespace;
 using Enemies;
 using Enemies.Spawner;
+using NinjaDungeon.Scripts.Characteristics;
 using UnityEngine;
 
 namespace NinjaDungeon.Scripts.BattleManager
@@ -21,8 +21,7 @@ namespace NinjaDungeon.Scripts.BattleManager
         private RoomSettings _roomSettings;
         
         private HealthBehaviour _healthBehaviour;
-
-        private RewardManager _rewardManager;
+        
         private Spawner _spawner;
 
         private int _lastLevelIndex;
@@ -31,8 +30,7 @@ namespace NinjaDungeon.Scripts.BattleManager
         private void Awake()
         {
             _lastLevelIndex = _roomSettings.LevelSettingsList.Count - 1;
-            _rewardManager = new RewardManager();
-
+            
             EventBus.Subscribe<ISpawnHandler>(this);
         }
         
@@ -92,6 +90,10 @@ namespace NinjaDungeon.Scripts.BattleManager
             MainManager.LoadingController.StartLoad(levelSettings.SceneName);
             MainManager.Player.transform.position = teleportPosition;
             MainManager.Player.transform.rotation = Quaternion.LookRotation(Vector3.forward);
+            if (MainManager.Ally != null)
+            {
+                MainManager.Ally.transform.position = teleportPosition + Vector3.forward;
+            }
         }
         
         private bool IsLastLevelPassed()

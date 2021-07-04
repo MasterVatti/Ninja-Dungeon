@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Characteristics;
+using NinjaDungeon.Scripts.Characteristics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

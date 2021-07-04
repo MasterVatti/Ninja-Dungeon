@@ -42,7 +42,7 @@ namespace Barracks_and_allied_behavior
 
         protected void Update()
         {
-            if (_personCharacteristics.CanMove)
+            if (!_personCharacteristics.CanMove)
             {
                 _pandaBehaviour.enabled = false;
             }

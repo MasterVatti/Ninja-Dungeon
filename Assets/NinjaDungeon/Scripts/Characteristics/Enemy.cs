@@ -1,12 +1,8 @@
-
-using System;
-using Enemies;
+using Characteristics;
 using NinjaDungeon.Scripts.AnimationController.AIAnimatorController;
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Characteristics
+namespace NinjaDungeon.Scripts.Characteristics
 {
     public class Enemy : Person
     {

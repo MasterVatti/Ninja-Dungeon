@@ -2743,7 +2743,7 @@ GameObject:
   - component: {fileID: 7399205835257274925}
   m_Layer: 0
   m_Name: KnightAlly
-  m_TagString: Untagged
+  m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2880,8 +2880,8 @@ MonoBehaviour:
   _attackDamage: 10
   _attackRate: 1
   _rotationSpeed: 0
-  _canMove: 0
-  _canAttack: 0
+  _canMove: 1
+  _canAttack: 1
 --- !u!114 &25439669698732691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2899,7 +2899,7 @@ MonoBehaviour:
   _stopChaseDistanceMax: 1
   _stopChaseDistanceMin: 0.5
   _animationController: {fileID: 357931671108446543}
-  _pandaBehaviour: {fileID: 0}
+  _pandaBehaviour: {fileID: 5621993722896641001}
   _accelerateSpeed: 3
   _stopFollowingDistance: 6.5
   _guardsDistance: 2

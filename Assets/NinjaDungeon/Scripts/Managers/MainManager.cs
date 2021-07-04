@@ -34,7 +34,7 @@ public class MainManager : Singleton<MainManager>
     private IconsProvider _iconsProvider;
     [SerializeField]
     private Vector3 _spawnPositionPlayer;
-    [SerializeField]
+
     private Ally _ally;
 
     private void Awake()
@@ -51,9 +51,16 @@ public class MainManager : Singleton<MainManager>
         characteristics.CurrentHp = characteristics.MaxHp;
         characteristics.LevelDungeon = 0;
         characteristics.ExperienceDungeon = 0;
-        
+
+        _player.PersonCharacteristics.CanAttack = true;
+        _player.PersonCharacteristics.CanMove = true;
         Player.gameObject.SetActive(true);
         Player.transform.localPosition = _spawnPositionPlayer;
         Player.transform.rotation = Quaternion.identity;
+    }
+    
+    public void SetAlly(Person ally)
+    {
+        _ally = (Ally) ally;
     }
 }
