@@ -1947,6 +1947,7 @@ MonoBehaviour:
   _rotationSpeed: 3
   _canMove: 1
   _canAttack: 1
+  _isDeath: 0
 --- !u!114 &979407499057984871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1973,7 +1974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _throwUpForce: 30
-  _recliningForce: 3
+  _recliningForce: 1.5
   _equipmentItems: []
   _resourceItems:
   - _dropChance: 100
@@ -2046,8 +2047,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 17.43815
-  m_Center: {x: 0, y: 1.8670973, z: -6.3711944}
+  m_Radius: 62.519955
+  m_Center: {x: 0, y: 1.8671017, z: -41.292675}
 --- !u!114 &236862083636065789
 MonoBehaviour:
   m_ObjectHideFlags: 0

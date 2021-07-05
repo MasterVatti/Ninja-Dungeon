@@ -26,6 +26,11 @@ namespace Characteristics
             DontDestroyOnLoad(this);
         }
 
+        public void ResetAnimation()
+        {
+            _animationController.ResetPlayer();
+        }
+        
         private void Start()
         {
             HealthBehaviour.OnDead += _animationController.DeathAnimation;

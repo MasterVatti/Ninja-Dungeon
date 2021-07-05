@@ -42,7 +42,7 @@ namespace PlayerScripts.Movement
 
         private void Update()
         {
-            if (!_playerCharacteristics.CanMove)
+            if (!_playerCharacteristics.CanMove || _playerCharacteristics.IsDeath)
             {
                 return;
             }

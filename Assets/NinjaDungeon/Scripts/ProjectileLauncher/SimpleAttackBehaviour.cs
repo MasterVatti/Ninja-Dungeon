@@ -65,8 +65,8 @@ namespace ProjectileLauncher
 
         public virtual bool CanAttack(Person person)
         {
-            var isPersonDead = person == null;
-            if (isPersonDead || !_personCharacteristics.CanAttack)
+            var isPersonDead = person == null || person.PersonCharacteristics.IsDeath;
+            if (isPersonDead || !_personCharacteristics.CanAttack || _personCharacteristics.IsDeath)
             {
                 return false;
             }

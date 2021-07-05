@@ -51,9 +51,9 @@ public class MainManager : Singleton<MainManager>
         characteristics.CurrentHp = characteristics.MaxHp;
         characteristics.LevelDungeon = 0;
         characteristics.ExperienceDungeon = 0;
-
-        _player.PersonCharacteristics.CanAttack = true;
-        _player.PersonCharacteristics.CanMove = true;
+        
+        _player.PersonCharacteristics.IsDeath = false;
+        _player.ResetAnimation();
         Player.gameObject.SetActive(true);
         Player.transform.localPosition = _spawnPositionPlayer;
         Player.transform.rotation = Quaternion.identity;

@@ -42,9 +42,10 @@ namespace Barracks_and_allied_behavior
 
         protected void Update()
         {
-            if (!_personCharacteristics.CanMove)
+            if (_personCharacteristics.IsDeath)
             {
                 _pandaBehaviour.enabled = false;
+                _agent.isStopped = true;
             }
         }
 

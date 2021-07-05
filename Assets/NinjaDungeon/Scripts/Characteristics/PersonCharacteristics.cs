@@ -58,6 +58,12 @@ namespace Characteristics
             set => _canAttack = value;
         }
         
+        public bool IsDeath
+        {
+            get => _isDeath;
+            set => _isDeath = value;
+        }
+        
         [Header("Stats")]
         [SerializeField]
         private int _currentHP;
@@ -79,6 +85,8 @@ namespace Characteristics
         private bool _canMove;
         [SerializeField]
         private bool _canAttack;
-        
+        [SerializeField]
+        private bool _isDeath;
+
     }
 }

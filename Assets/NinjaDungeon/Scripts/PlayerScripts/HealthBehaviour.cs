@@ -2,6 +2,7 @@ using System;
 using Assets.Scripts;
 using Assets.Scripts.Managers.ScreensManager;
 using Characteristics;
+using JetBrains.Annotations;
 using ProjectileLauncher;
 using UnityEngine;
 
@@ -27,18 +28,21 @@ namespace Enemies
 
         public void ApplyDamage(int damage)
         {
-            _person.PersonCharacteristics.CurrentHp -= damage;
-            if (_person.PersonCharacteristics.CurrentHp <= 0)
+            if (_person.PersonCharacteristics.IsDeath)
             {
-                _person.PersonCharacteristics.CanAttack = false;
-                _person.PersonCharacteristics.CanMove = false;
+                return;
+            }
+            _person.PersonCharacteristics.CurrentHp -= damage;
+            if (_person.PersonCharacteristics.CurrentHp <= 0 )
+            {
+                _person.PersonCharacteristics.IsDeath = true;
                 OnDead?.Invoke(_person);
             }
         }
         
         public void ApplyDamage(Team damageDealerTeam, int damage)
         {
-            if (damageDealerTeam == _team)
+            if (damageDealerTeam == _team || _person.PersonCharacteristics.IsDeath)
             {
                 return;
             }
@@ -46,12 +50,12 @@ namespace Enemies
             _person.PersonCharacteristics.CurrentHp -= damage;
             if (_person.PersonCharacteristics.CurrentHp <= 0)
             {
-                _person.PersonCharacteristics.CanAttack = false;
-                _person.PersonCharacteristics.CanMove = false;
+                _person.PersonCharacteristics.IsDeath = true;
                 OnDead?.Invoke(_person);
             }
         }
-
+        
+        [UsedImplicitly]
         public void Death()
         {
             if (!CompareTag(GlobalConstants.PLAYER_TAG))

@@ -39,7 +39,6 @@ namespace Enemies
             
             enemy.HealthBehaviour.OnDead -= OnEnemyDied;
             _enemies.Remove(enemy);
-            Destroy(enemy.gameObject);
             
             OnEnemyDead?.Invoke();
         }
