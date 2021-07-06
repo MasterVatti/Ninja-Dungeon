@@ -28,6 +28,8 @@ namespace Barracks_and_allied_behavior
         protected AIAnimationController _animationController;
         [SerializeField]
         protected PandaBehaviour _pandaBehaviour;
+        [SerializeField]
+        protected float _attackRange;
         
         protected ITargetProvider _targetProvider;
         protected ChaseBehavior _chaseBehavior;
@@ -71,6 +73,7 @@ namespace Barracks_and_allied_behavior
         {
             if (!_attackBehaviour.CanAttack(_targetProvider.GetTarget()) || _attackBehaviour.IsCooldown)
             {
+                Task.current.Succeed();
                 return;
             }
             

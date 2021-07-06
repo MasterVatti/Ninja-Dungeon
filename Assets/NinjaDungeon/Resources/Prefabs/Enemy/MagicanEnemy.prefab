@@ -290,8 +290,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 7387106358299319940}
   _personCharacteristics: {fileID: 7054752229641767204}
-  _stopChaseDistanceMax: 12
-  _stopChaseDistanceMin: 8
+  _stopChaseDistanceMax: 11.9
+  _stopChaseDistanceMin: 11.5
   _animationController: {fileID: 3530103001745665312}
   _pandaBehaviour: {fileID: 4743675034957756941}
   _golemPrefab: {fileID: 140808, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}

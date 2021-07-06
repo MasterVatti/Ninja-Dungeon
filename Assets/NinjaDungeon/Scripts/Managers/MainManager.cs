@@ -57,6 +57,11 @@ public class MainManager : Singleton<MainManager>
         Player.gameObject.SetActive(true);
         Player.transform.localPosition = _spawnPositionPlayer;
         Player.transform.rotation = Quaternion.identity;
+        
+        if (_ally != null)
+        {
+            _ally.PortingToPlayer(); 
+        }
     }
     
     public void SetAlly(Person ally)

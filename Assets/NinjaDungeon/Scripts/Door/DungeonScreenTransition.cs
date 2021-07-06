@@ -33,10 +33,12 @@ namespace Door
             MainManager.ScreenManager.CloseTopScreen();
             MainManager.LoadingController.StartLoad(_sceneName);
             MainManager.Player.transform.position = _teleportPosition;
+            
             if (MainManager.Ally != null)
             {
-                MainManager.Ally.transform.position = _teleportPosition + Vector3.forward;
+                MainManager.Ally.PortingToPlayer(); 
             }
+            
         }
         
         public override void Initialize(ScreenType screenType)

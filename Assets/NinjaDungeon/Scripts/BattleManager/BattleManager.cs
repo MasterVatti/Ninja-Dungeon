@@ -92,7 +92,7 @@ namespace NinjaDungeon.Scripts.BattleManager
             MainManager.Player.transform.rotation = Quaternion.LookRotation(Vector3.forward);
             if (MainManager.Ally != null)
             {
-                MainManager.Ally.transform.position = teleportPosition + Vector3.forward;
+                MainManager.Ally.PortingToPlayer();
             }
         }
         

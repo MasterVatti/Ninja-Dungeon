@@ -1,8 +1,11 @@
 using System;
 using Characteristics;
 using Enemies;
+using JetBrains.Annotations;
+using Panda;
 using ProjectileLauncher;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace NinjaDungeon.Scripts.AI
 {
@@ -17,16 +20,25 @@ namespace NinjaDungeon.Scripts.AI
         private readonly PersonCharacteristics _personCharacteristics;
         private readonly float _hitCooldown;
         private float _lastHitTime;
-
+        private readonly float _attackRange;
+        private readonly NavMeshAgent _agent;
+        
         public bool CanAttack(Person person)
         {
-            return true;
+            var isPersonDead = person == null || person.PersonCharacteristics.IsDeath;
+            var canAttack = !_personCharacteristics.CanAttack || _personCharacteristics.IsDeath;
+            var targetDistance = Vector3.Distance(person.transform.position, _agent.transform.position);
+            var isAttackDistance = targetDistance <= _attackRange;
+            return !isPersonDead && !canAttack && isAttackDistance;
         }
 
-        public MeleeAttackBehavior(PersonCharacteristics personCharacteristics)
+        public MeleeAttackBehavior(PersonCharacteristics personCharacteristics, float attackRange, NavMeshAgent agent)
         {
             _personCharacteristics = personCharacteristics;
+            _attackRange = attackRange;
+            _agent = agent;
             _hitCooldown = personCharacteristics.AttackRate;
+            
         }
 
         public void Attack(Person person)
@@ -36,5 +48,6 @@ namespace NinjaDungeon.Scripts.AI
             var healthBehaviour = person.GetComponent<HealthBehaviour>();
             healthBehaviour.ApplyDamage(_personCharacteristics.AttackDamage);
         }
+        
     }
 }

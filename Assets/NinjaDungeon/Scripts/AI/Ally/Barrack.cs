@@ -45,7 +45,7 @@ namespace NinjaDungeon.Scripts.AI.Ally
 
         protected override void OnStateLoaded(BarrackData data)
         {
-            if (data == null)
+            if (data == null || MainManager.Ally != null)
             {
                 return;
             }

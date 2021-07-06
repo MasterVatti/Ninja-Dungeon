@@ -3,7 +3,7 @@ tree("Attack")
     while IsEnemyInSight
         sequence
             tree("Chase")
-            IsAtRequiredDistance(13.0)
+            IsAtRequiredDistance(14.0)
             tree("Shoot")
                    
 tree("Shoot")

@@ -3255,13 +3255,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHP: 0
-  _maxHP: 0
+  _maxHP: 100
   _moveSpeed: 5
   _attackDamage: 10
   _attackRate: 1
   _rotationSpeed: 3
   _canMove: 1
   _canAttack: 1
+  _isDeath: 0
 --- !u!114 &648053973788909705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3293,6 +3294,7 @@ MonoBehaviour:
   _stopChaseDistanceMin: 11.8
   _animationController: {fileID: 3644442525817756070}
   _pandaBehaviour: {fileID: 5636586789403889347}
+  _attackRange: 0
   _stopFollowingDistance: 6.5
   _guardsDistance: 2
 --- !u!114 &6774267916564663816
@@ -3367,6 +3369,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 8348700401235912370}
   _chest: {fileID: 457526}
   _animationController: {fileID: 3644442525817756070}
+  _agent: {fileID: 2429137293685355133}
 --- !u!1 &167158
 GameObject:
   m_ObjectHideFlags: 0
@@ -4964,31 +4967,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4620178347958848, guid: d03c4353fda446d4f8df56d422578d64, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.24677542
+      value: 0.30970058
       objectReference: {fileID: 0}
     - target: {fileID: 4620178347958848, guid: d03c4353fda446d4f8df56d422578d64, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.24190816
+      value: -0.30359295
       objectReference: {fileID: 0}
     - target: {fileID: 4620178347958848, guid: d03c4353fda446d4f8df56d422578d64, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.64179724
+      value: -0.6097224
       objectReference: {fileID: 0}
     - target: {fileID: 4620178347958848, guid: d03c4353fda446d4f8df56d422578d64, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.6846011
+      value: 0.6634423
       objectReference: {fileID: 0}
     - target: {fileID: 4620178347958848, guid: d03c4353fda446d4f8df56d422578d64, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 130.593
+      value: 141.612
       objectReference: {fileID: 0}
     - target: {fileID: 4620178347958848, guid: d03c4353fda446d4f8df56d422578d64, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -264.784
+      value: -264.719
       objectReference: {fileID: 0}
     - target: {fileID: 4620178347958848, guid: d03c4353fda446d4f8df56d422578d64, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -85.20401
+      value: -85.26898
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d03c4353fda446d4f8df56d422578d64, type: 3}
