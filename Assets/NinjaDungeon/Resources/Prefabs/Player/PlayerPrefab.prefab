@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 606104109711830386}
-  _rotationSpeed: 3
+  _rotationSpeed: 1
 --- !u!114 &6569569414913486472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,8 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9604bc4aa00a7fe47a52484d76e9ab04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHP: 300
-  _maxHP: 300
+  _currentHP: 150
+  _maxHP: 150
   _moveSpeed: 6
   _attackDamage: 10
   _attackRate: 1
