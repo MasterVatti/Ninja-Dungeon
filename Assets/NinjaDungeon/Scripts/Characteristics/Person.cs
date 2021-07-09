@@ -40,7 +40,7 @@ namespace Characteristics
             eventData.Persons.Add(this);
         }
 
-        protected void OnDestroy()
+        protected virtual void OnDestroy()
         {
             _subscriptions?.Dispose();
             EventStreams.UserInterface.Publish(new PersonDestroyedEvent(this));
