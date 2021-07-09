@@ -1,5 +1,6 @@
 using Enemies;
 using NinjaDungeon.Scripts.HealthBarSystem;
+using SimpleEventBus.Disposables;
 using UnityEngine;
 
 namespace Characteristics
@@ -23,13 +24,25 @@ namespace Characteristics
         [SerializeField]
         private Transform _chest;
 
+        private CompositeDisposable _subscriptions;
+
         protected virtual void Start()
         {
+            _subscriptions = new CompositeDisposable()
+            {
+                EventStreams.UserInterface.Subscribe<GetAllPersonsEvent>(GetAllPersonsHandler)
+            };
             EventStreams.UserInterface.Publish(new PersonCreatedEvent(this));
+        }
+
+        private void GetAllPersonsHandler(GetAllPersonsEvent eventData)
+        {
+            eventData.Persons.Add(this);
         }
 
         protected void OnDestroy()
         {
+            _subscriptions?.Dispose();
             EventStreams.UserInterface.Publish(new PersonDestroyedEvent(this));
         }
     }

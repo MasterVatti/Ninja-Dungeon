@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Characteristics;
+using SimpleBus.Extensions;
 using SimpleEventBus.Disposables;
 using UnityEngine;
 
@@ -22,11 +23,24 @@ namespace NinjaDungeon.Scripts.HealthBarSystem
         {
             _healthBarsPool = new MonoBehaviourPool<PersonHealthBar>(_healthBarPrefab, _container);
 
-            _subscriptions = new CompositeDisposable()
+            _subscriptions = new CompositeDisposable
             {
                 EventStreams.UserInterface.Subscribe<PersonCreatedEvent>(OnPersonCreated),
                 EventStreams.UserInterface.Subscribe<PersonDestroyedEvent>(OnPersonDestroyed),
             };
+
+            CreateHealthBarForAlreadyCreatedPersons();
+        }
+
+        private void CreateHealthBarForAlreadyCreatedPersons()
+        {
+            var getAllPersonsEvent = new GetAllPersonsEvent();
+            getAllPersonsEvent.Publish(EventStreams.UserInterface);
+
+            foreach (var person in getAllPersonsEvent.Persons)
+            {
+                CreateHealthBar(person);
+            }
         }
 
         private void OnDestroy()
@@ -37,6 +51,11 @@ namespace NinjaDungeon.Scripts.HealthBarSystem
         private void OnPersonCreated(PersonCreatedEvent eventData)
         {
             var person = eventData.Person;
+            CreateHealthBar(person);
+        }
+
+        private void CreateHealthBar(Person person)
+        {
             var personHealthBar = _healthBarsPool.Take();
             personHealthBar.Initialize(person);
             _personHealthBars[person] = personHealthBar;
@@ -50,6 +69,5 @@ namespace NinjaDungeon.Scripts.HealthBarSystem
                 _healthBarsPool.Release(_personHealthBars[person]);
             }
         }
-
     }
 }
