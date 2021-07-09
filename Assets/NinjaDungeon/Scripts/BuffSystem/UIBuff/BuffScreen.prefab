@@ -93,9 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea59475b53b59f044bdd0570dc9b8592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScreenType: 9
-  _personCharacteristics: {fileID: 961365608366097261, guid: 023c32ed79838cb40ab63e3542a568da,
-    type: 3}
+  ScreenType: 10
   _buffButtons:
   - {fileID: 986950901222557777}
   - {fileID: 6586061816716549553}

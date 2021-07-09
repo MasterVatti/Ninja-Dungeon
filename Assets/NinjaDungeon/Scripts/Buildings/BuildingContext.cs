@@ -1,4 +1,5 @@
 using Barracks_and_allied_behavior;
+using NinjaDungeon.Scripts.AI.Ally;
 
 namespace Assets.Scripts.Managers.ScreensManager
 {

@@ -1826,7 +1826,7 @@ Transform:
   m_GameObject: {fileID: 140808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2.3, y: 2.3, z: 2.3}
   m_Children:
   - {fileID: 460390}
   - {fileID: 464578}
@@ -1940,13 +1940,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHP: 0
-  _maxHp: 70
+  _maxHP: 100
   _moveSpeed: 3.5
   _attackDamage: 5
   _attackRate: 1
   _rotationSpeed: 3
-  _canMove: 0
-  _canAttack: 0
+  _canMove: 1
+  _canAttack: 1
+  _isDeath: 0
 --- !u!114 &979407499057984871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1973,7 +1974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _throwUpForce: 30
-  _recliningForce: 3
+  _recliningForce: 1.5
   _equipmentItems: []
   _resourceItems:
   - _dropChance: 100
@@ -2005,9 +2006,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 4339819970305791133}
   _personCharacteristics: {fileID: 1823720720987811430}
-  _stopChaseDistanceMax: 1
-  _stopChaseDistanceMin: 0.5
+  _stopChaseDistanceMax: 2.4
+  _stopChaseDistanceMin: 2.3
   _animationController: {fileID: 8472035866803249897}
+  _pandaBehaviour: {fileID: 8634107909960694660}
+  _attackRange: 2.5
 --- !u!65 &1487308301776577725
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2045,8 +2048,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 17.43815
-  m_Center: {x: 0, y: 1.8670973, z: -6.3711944}
+  m_Radius: 62.519955
+  m_Center: {x: 0, y: 1.8671017, z: -41.292675}
 --- !u!114 &236862083636065789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2062,7 +2065,8 @@ MonoBehaviour:
   _personCharacteristics: {fileID: 1823720720987811430}
   _healthBehaviour: {fileID: 979407499057984871}
   _rigidbody: {fileID: 7511672416631066986}
-  _chest: {fileID: 0}
+  _chest: {fileID: 417036}
+  _animationController: {fileID: 8472035866803249897}
 --- !u!114 &8472035866803249897
 MonoBehaviour:
   m_ObjectHideFlags: 0

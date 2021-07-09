@@ -1,6 +1,8 @@
 using System;
 using Assets.Scripts;
+using Assets.Scripts.Managers.ScreensManager;
 using Characteristics;
+using JetBrains.Annotations;
 using ProjectileLauncher;
 using UnityEngine;
 
@@ -26,16 +28,21 @@ namespace Enemies
 
         public void ApplyDamage(int damage)
         {
-            _person.PersonCharacteristics.CurrentHp -= damage;
-            if (_person.PersonCharacteristics.CurrentHp <= 0)
+            if (_person.PersonCharacteristics.IsDeath)
             {
-                Death();
+                return;
+            }
+            _person.PersonCharacteristics.CurrentHp -= damage;
+            if (_person.PersonCharacteristics.CurrentHp <= 0 )
+            {
+                _person.PersonCharacteristics.IsDeath = true;
+                OnDead?.Invoke(_person);
             }
         }
         
         public void ApplyDamage(Team damageDealerTeam, int damage)
         {
-            if (damageDealerTeam == _team)
+            if (damageDealerTeam == _team || _person.PersonCharacteristics.IsDeath)
             {
                 return;
             }
@@ -43,16 +50,26 @@ namespace Enemies
             _person.PersonCharacteristics.CurrentHp -= damage;
             if (_person.PersonCharacteristics.CurrentHp <= 0)
             {
-                Death();
+                _person.PersonCharacteristics.IsDeath = true;
+                OnDead?.Invoke(_person);
             }
         }
-
-        private void Death()
+        
+        [UsedImplicitly]
+        public void Death()
         {
-            OnDead?.Invoke(_person);
             if (!CompareTag(GlobalConstants.PLAYER_TAG))
             {
                 Destroy(gameObject);
+            }
+            else
+            {
+                var context = new PortalContext
+                {
+                    SceneName = GlobalConstants.MAIN_SCENE_TAG
+                };
+                
+                MainManager.ScreenManager.OpenScreenWithContext(ScreenType.DeathScreen, context);
             }
         }
     }

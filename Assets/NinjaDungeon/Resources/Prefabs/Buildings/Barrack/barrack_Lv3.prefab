@@ -166,14 +166,13 @@ MonoBehaviour:
   _allies:
   - _price:
     - _type: 0
-      _amount: 1000
+      _amount: 500
     _allyIcon: {fileID: 21300000, guid: 3b3510c1053ff4f53a25096d82d82979, type: 3}
     _description: Archer
-    _allyPrefab: {fileID: 2394056606855407061, guid: 0e7753f0449641045a1850f3d7318b07,
-      type: 3}
+    _allyPrefab: {fileID: 165754, guid: 9a6b87430c6b2684aa9c1d4616d38a60, type: 3}
   - _price:
     - _type: 0
-      _amount: 10
+      _amount: 500
     - _type: 2
       _amount: 50
     _allyIcon: {fileID: 21300000, guid: f3b7e31eb60b84b17870d0b5d926cfad, type: 3}
@@ -188,6 +187,7 @@ MonoBehaviour:
     _description: Soldier
     _allyPrefab: {fileID: 162860, guid: 82afe91128ab31c4a978ec75014de6e4, type: 3}
   _spawnPoint: {fileID: 6857115016698822840}
+  _spawnOffset: {x: 0, y: 0, z: 2}
 --- !u!135 &6203445315498296564
 SphereCollider:
   m_ObjectHideFlags: 0

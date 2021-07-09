@@ -1,11 +1,11 @@
 ﻿using System;
-using Assets.Scripts;
 using Assets.Scripts.BattleManager;
 using Assets.Scripts.Managers.ScreensManager;
 using Characteristics;
 using Enemies;
 using Enemies.Spawner;
 using SimpleEventBus.Disposables;
+using NinjaDungeon.Scripts.Characteristics;
 using UnityEngine;
 
 namespace NinjaDungeon.Scripts.BattleManager
@@ -20,9 +20,9 @@ namespace NinjaDungeon.Scripts.BattleManager
 
         [SerializeField]
         private RoomSettings _roomSettings;
-
-        private RewardManager _rewardManager;
+        
         private HealthBehaviour _healthBehaviour;
+        
         private Spawner _spawner;
 
         private int _lastLevelIndex;
@@ -32,11 +32,7 @@ namespace NinjaDungeon.Scripts.BattleManager
         private void Awake()
         {
             _lastLevelIndex = _roomSettings.LevelSettingsList.Count - 1;
-            _rewardManager = new RewardManager();
-            
-            _healthBehaviour = MainManager.Player.GetComponent<HealthBehaviour>();
-            _healthBehaviour.OnDead += PlayerDeath;
-
+        
             _subscriptions = new CompositeDisposable()
             {
                 EventStreams.UserInterface.Subscribe<EndSpawnEvent>(EndSpawn),
@@ -70,21 +66,23 @@ namespace NinjaDungeon.Scripts.BattleManager
 
         public void GoToNextLevel(RoomSettings roomSettings, Vector3 teleportPosition)
         {
-            _rewardManager.LevelRewardAccrual(roomSettings, _currentLevelIndex);
+            DungeonManager.RewardManager.LevelRewardAccrual(roomSettings, _currentLevelIndex);
             
             _currentLevelIndex++;
             
             var nextLevelIndex = roomSettings.LevelSettingsList[_currentLevelIndex];
-            LoadLevel(nextLevelIndex, teleportPosition);
             
             if (IsLastLevelPassed())
             {
-                _rewardManager.GetFinalReward();
-
-                //UI выигрыша Алексея
+                var context = new RewardScreenContext(DungeonManager.RewardManager.GetResources());
+                MainManager.ScreenManager.OpenScreenWithContext(ScreenType.RewardScreen, context);
                 
-                MainManager.LoadingController.StartLoad(GlobalConstants.MAIN_SCENE_TAG); //<-- Или по кнопке Алексея
+                DungeonManager.RewardManager.AccrueReward();
+                // TODO: Не будет сохранять ресурсы т.к. достаёт из сохраненных данных ресурсы.
+                return;
             }
+            
+            LoadLevel(nextLevelIndex, teleportPosition);
         }
 
         public void ClearLevel()
@@ -98,27 +96,21 @@ namespace NinjaDungeon.Scripts.BattleManager
             MainManager.LoadingController.StartLoad(levelSettings.SceneName);
             MainManager.Player.transform.position = teleportPosition;
             MainManager.Player.transform.rotation = Quaternion.LookRotation(Vector3.forward);
+            if (MainManager.Ally != null)
+            {
+                MainManager.Ally.PortingToPlayer();
+            }
         }
         
         private bool IsLastLevelPassed()
         {
             return _currentLevelIndex == _lastLevelIndex && HasLevelPassed;
         }
-
-        private void PlayerDeath(Person person)
-        {
-            var context = new PortalContext
-            {
-                SceneName = GlobalConstants.MAIN_SCENE_TAG
-            };
-            
-            MainManager.ScreenManager.OpenScreenWithContext(ScreenType.DeathScreen, context);
-        }
+        
 
         private void OnDestroy()
         {
             _subscriptions?.Dispose();
-            _healthBehaviour.OnDead -= PlayerDeath;
         }
     }
 }

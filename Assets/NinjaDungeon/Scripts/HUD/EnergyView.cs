@@ -1,5 +1,6 @@
 using System;
 using Energy;
+using NinjaDungeon.Scripts.Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +20,7 @@ namespace HUD
 
         private void Start()
         {
-            _energyManager = MainManager.EnergyManager;
+            _energyManager = UpperWorldManager.EnergyManager;
             _sliderEnergy.maxValue = _energyManager.MaximalEnergy;
         }
         

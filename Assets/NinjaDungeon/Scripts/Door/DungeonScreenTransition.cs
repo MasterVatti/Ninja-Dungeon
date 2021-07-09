@@ -1,5 +1,6 @@
 using Assets.Scripts.Managers.ScreensManager;
 using JetBrains.Annotations;
+using NinjaDungeon.Scripts.Characteristics;
 using UnityEngine;
 
 namespace Door
@@ -32,6 +33,12 @@ namespace Door
             MainManager.ScreenManager.CloseTopScreen();
             MainManager.LoadingController.StartLoad(_sceneName);
             MainManager.Player.transform.position = _teleportPosition;
+            
+            if (MainManager.Ally != null)
+            {
+                MainManager.Ally.PortingToPlayer(); 
+            }
+            
         }
         
         public override void Initialize(ScreenType screenType)

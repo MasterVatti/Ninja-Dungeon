@@ -1,5 +1,6 @@
 using System;
 using Characteristics;
+using NinjaDungeon.Scripts.Characteristics;
 using UnityEngine;
 
 namespace Enemies.Spawner

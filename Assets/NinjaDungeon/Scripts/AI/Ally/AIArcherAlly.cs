@@ -15,14 +15,15 @@ namespace Barracks_and_allied_behavior
         [SerializeField]
         private float _guardsDistance;
     
-        private void Awake()
+        private new void Awake()
         {
             _personCharacteristics.CurrentHp = _personCharacteristics.MaxHp;
             
             _targetProvider = GetComponent<ITargetProvider>();
             _chaseBehavior = new ChaseBehavior(_agent, _stopChaseDistanceMin, _stopChaseDistanceMax);
             _followBehavior = new FollowBehavior(_agent, _stopFollowingDistance, _guardsDistance);
-            _attackBehaviour = new MeleeAttackBehavior(_personCharacteristics);
+            _attackBehaviour = GetComponent<IAttackBehaviour>();
+            base.Awake();
         }
     }
 }

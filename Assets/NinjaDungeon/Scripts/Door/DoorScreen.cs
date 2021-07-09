@@ -23,7 +23,7 @@ namespace Door
         public override void OnClick()
         {
             MainManager.ScreenManager.CloseTopScreen();
-            MainManager.BattleManager.StartBattle(_roomSettings, _teleportPosition);
+            DungeonManager.BattleManager.StartBattle(_roomSettings, _teleportPosition);
         }
     }
 }

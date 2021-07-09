@@ -16,8 +16,6 @@ namespace Managers
         [SerializeField]
         private List<Resource> _resources;
 
-        private ResourcesView _resourcesView;
-
         public bool HasEnough(ResourceType type, float value)
         {
             return _resources[GetResourceIndexByType(type)].Amount >= value;
@@ -52,6 +50,14 @@ namespace Managers
             resource.Amount += value;
             OnResourceAmountChanged?.Invoke(resource, resource.Amount);
             _resources[index] = resource;
+        }
+        
+        public void AddResource(IEnumerable<Resource> resources)
+        {
+            foreach (var resource in resources)
+            {
+                AddResource(resource.Type, resource.Amount);
+            }
         }
 
         public List<Resource> GetResources()

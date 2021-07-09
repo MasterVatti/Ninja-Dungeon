@@ -201,13 +201,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHP: 0
-  _maxHp: 100
+  _maxHP: 100
   _moveSpeed: 3.5
   _attackDamage: 10
   _attackRate: 1
   _rotationSpeed: 3
-  _canMove: 0
-  _canAttack: 0
+  _canMove: 1
+  _canAttack: 1
+  _isDeath: 0
 --- !u!114 &7614272114896670690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _throwUpForce: 30
-  _recliningForce: 3
+  _recliningForce: 1.5
   _equipmentItems: []
   _resourceItems:
   - _dropChance: 100
@@ -289,9 +290,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 7387106358299319940}
   _personCharacteristics: {fileID: 7054752229641767204}
-  _stopChaseDistanceMax: 12
-  _stopChaseDistanceMin: 8
+  _stopChaseDistanceMax: 11.9
+  _stopChaseDistanceMin: 11.5
   _animationController: {fileID: 3530103001745665312}
+  _pandaBehaviour: {fileID: 4743675034957756941}
   _golemPrefab: {fileID: 140808, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}
   _runBackDistance: 3
   _lowHealthThreshold: 30
@@ -336,8 +338,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 11.051523
-  m_Center: {x: 0, y: 1.1920671, z: -1.2835522}
+  m_Radius: 28.140095
+  m_Center: {x: 0, y: 1.1920655, z: -10.8613405}
 --- !u!114 &5978981134792347142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,6 +356,7 @@ MonoBehaviour:
   _healthBehaviour: {fileID: 7614272114896670690}
   _rigidbody: {fileID: 5116060399137525657}
   _chest: {fileID: 465402}
+  _animationController: {fileID: 3530103001745665312}
 --- !u!114 &3530103001745665312
 MonoBehaviour:
   m_ObjectHideFlags: 0

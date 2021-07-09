@@ -14,11 +14,11 @@ namespace Assets.Scripts.BattleManager
         
         private void OnTriggerEnter(Collider nextLevelCollider)
         {
-            var hasLevelPassed = MainManager.BattleManager.HasLevelPassed;
+            var hasLevelPassed = DungeonManager.BattleManager.HasLevelPassed;
             
             if (hasLevelPassed && nextLevelCollider.CompareTag(GlobalConstants.PLAYER_TAG))
             {
-                MainManager.BattleManager.GoToNextLevel(_settings.RoomSettings, _settings.TeleportPosition);
+                DungeonManager.BattleManager.GoToNextLevel(_settings.RoomSettings, _settings.TeleportPosition);
             }
         }
     }

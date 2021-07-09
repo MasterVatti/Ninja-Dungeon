@@ -44,6 +44,12 @@ namespace BuffSystem
             }
         }
 
+        public void StopBuff()
+        {
+            StopBuff(_passiveBuffs);
+            StopBuff(_updatableBuffs);
+        }
+
         private void StopBuff<T>(List<T> _buffs) where T : IPassiveBuff
         {
             foreach (var buff in _buffs)

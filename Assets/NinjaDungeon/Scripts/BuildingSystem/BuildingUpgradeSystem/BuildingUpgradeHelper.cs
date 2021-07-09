@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NinjaDungeon.Scripts.Managers;
 using ResourceSystem;
 using SaveSystem;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace BuildingSystem.BuildingUpgradeSystem
             where T : BaseBuildingState
         {
             var settingsID = building.BuildingSettingsID;
-            var settings = MainManager.BuildingManager.GetBuildingSettings(settingsID);
+            var settings = UpperWorldManager.BuildingManager.GetBuildingSettings(settingsID);
             var buildingLevel = building.CurrentBuildingLevel + 1;
             
             if (settings.UpgradesInfo.Count <= buildingLevel)
@@ -46,7 +47,7 @@ namespace BuildingSystem.BuildingUpgradeSystem
 
         private static void DestroyOldBuilding(GameObject oldBuilding)
         {
-            MainManager.BuildingManager.ActiveBuildings.Remove(oldBuilding);
+            UpperWorldManager.BuildingManager.ActiveBuildings.Remove(oldBuilding);
             Object.Destroy(oldBuilding);
         }
 

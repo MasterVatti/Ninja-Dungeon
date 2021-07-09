@@ -1,3 +1,4 @@
+using Characteristics;
 using PlayerScripts.Animation;
 using PlayerScripts.Movement;
 using ProjectileLauncher;

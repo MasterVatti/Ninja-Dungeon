@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using BuildingSystem;
+using Characteristics;
+using ExperienceSystem;
 using Newtonsoft.Json;
+using NinjaDungeon.Scripts.Managers;
 using ResourceSystem;
 
 namespace SaveSystem
@@ -14,7 +17,7 @@ namespace SaveSystem
         {
             foreach (var building in buildings)
             {
-                var settings = MainManager.BuildingManager.GetBuildingSettings(building.SettingsID);
+                var settings = UpperWorldManager.BuildingManager.GetBuildingSettings(building.SettingsID);
 
                 var placeHolderData = JsonConvert.DeserializeObject<PlaceHolderData>(building.State);
                 if (placeHolderData?.RemainResources != null)
@@ -30,6 +33,15 @@ namespace SaveSystem
                     }
                 }
             }
+        }
+
+        public static void InitializePlayer(PlayerData playerData)
+        {
+            var player = (PlayerCharacteristics)MainManager.Player.PersonCharacteristics;
+
+            player.ExperienceUpperWorld = playerData.ExperienceUpperWorld;
+            player.LevelUpperWorld = playerData.LevelUpperWorld;
+            player.MaximumExperienceLevelUpperWorld = playerData.MaximumExperienceLevelUpperWorld;
         }
 
         public static void InitializeResources(IEnumerable<Resource> resources)

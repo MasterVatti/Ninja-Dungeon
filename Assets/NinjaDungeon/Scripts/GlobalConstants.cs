@@ -1,4 +1,6 @@
-﻿namespace Assets.Scripts
+﻿using UnityEngine;
+
+namespace Assets.Scripts
 {
     /// <summary>
     /// Класс для хранения констант, которые используются во всем проекте

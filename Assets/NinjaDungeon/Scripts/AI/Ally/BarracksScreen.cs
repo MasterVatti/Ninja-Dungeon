@@ -1,5 +1,6 @@
 using Assets.Scripts.Managers.ScreensManager;
 using JetBrains.Annotations;
+using NinjaDungeon.Scripts.AI.Ally;
 using UnityEngine;
 
 namespace Barracks_and_allied_behavior

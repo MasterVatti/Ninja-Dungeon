@@ -23,9 +23,10 @@ namespace Managers
         {
             var json = PlayerPrefs.GetString("save");
             var save = JsonConvert.DeserializeObject<Save>(json) ?? _saveConfig.DefaultSave;
-
+           
             var buildings = save.Buildings;
             var resources = save.Resources;
+            var player = save.Player;
 
             if (buildings != null)
             {
@@ -36,14 +37,20 @@ namespace Managers
             {
                 SaveInitializer.InitializeResources(resources.ToList());
             }
+
+            if (player != null)
+            {
+                SaveInitializer.InitializePlayer(player);
+            }
         }
 
-        private void Save()
+        public void Save()
         {
             var save = new Save
             {
                 Resources = SaveCreator.SaveResources().ToArray(), 
-                Buildings = SaveCreator.SaveConstructions().ToArray()
+                Buildings = SaveCreator.SaveConstructions().ToArray(),
+                Player = SaveCreator.SavePlayer()
             };
             var json = JsonConvert.SerializeObject(save, Formatting.Indented);
             PlayerPrefs.SetString("save", json);

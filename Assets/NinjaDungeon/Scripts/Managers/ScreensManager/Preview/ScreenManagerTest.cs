@@ -1,7 +1,8 @@
+using Assets.Scripts.Managers.ScreensManager;
 using Assets.Scripts.Managers.ScreensManager.Preview.RewardScreen;
 using UnityEngine;
 
-namespace Assets.Scripts.Managers.ScreensManager.Preview
+namespace NinjaDungeon.Scripts.Managers.ScreensManager.Preview
 {
     /// <summary>
     /// Класс для тестирования фичи,
@@ -17,7 +18,7 @@ namespace Assets.Scripts.Managers.ScreensManager.Preview
 
         private void OnCollisionEnter(Collision other)
         {
-            var context = new RewardContext {Gold = 300};
+            var context = new RewardContextExample {Gold = 300};
             MainManager.ScreenManager.OpenScreenWithContext(ScreenType.RewardScreen,
                 context);
         }

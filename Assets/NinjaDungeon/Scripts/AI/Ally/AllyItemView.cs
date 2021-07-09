@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Assets.Scripts.Managers.ScreensManager;
 using JetBrains.Annotations;
+using NinjaDungeon.Scripts.AI.Ally;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,6 +37,13 @@ namespace Barracks_and_allied_behavior
         [UsedImplicitly]
         public void AllyBuyButtonClick()
         {
+            if (MainManager.Ally != null)
+            {
+                MainManager.ScreenManager.OpenScreenWithContext(ScreenType.InformationPopupScreen, 
+                    new InformationScreenContext("Warning", "You cannot have more than one ally"));
+                return;
+            }
+            
             if (MainManager.ResourceManager.HasEnough(_ally.Price))
             {
                 MainManager.ResourceManager.Pay(_ally.Price);

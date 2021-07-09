@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts;
+using NinjaDungeon.Scripts.Managers;
 using ResourceSystem;
 using UnityEngine;
 
@@ -76,8 +77,8 @@ namespace BuildingSystem
                     resource.Amount -= PAY_PER_TICK;
                     RequiredResource[i] = resource;
 
-                    var playerPosition = MainManager.PlayerMovementController.transform.position;
-                    MainManager.AnimationManager.ShowFlyingResource(RequiredResource[i].Type, playerPosition, transform.position);
+                    var playerPosition = MainManager.Player.transform.position;
+                    UpperWorldManager.AnimationManager.ShowFlyingResource(RequiredResource[i].Type, playerPosition, transform.position);
 
                     OnPayForBuilding?.Invoke();
                 }

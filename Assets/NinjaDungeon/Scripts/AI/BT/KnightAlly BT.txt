@@ -13,6 +13,6 @@ tree("Attack")
               
 tree("ToDamage")
     sequence
-            IsAtRequiredDistance(2.0)
+            IsAtRequiredDistance(3.0)
             Attack
               

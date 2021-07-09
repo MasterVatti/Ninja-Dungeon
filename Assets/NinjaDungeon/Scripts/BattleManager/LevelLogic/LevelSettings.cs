@@ -9,7 +9,7 @@ namespace Assets.Scripts.BattleManager
     /// Класс отвечает за настройки уровня (имя сцены, награда, бонус)
     /// </summary>
     [Serializable]
-    public class LevelSettings
+    public class  LevelSettings
     {
         public string SceneName => _sceneName;
         public List<Resource> DefaultReward => _defaultReward;
