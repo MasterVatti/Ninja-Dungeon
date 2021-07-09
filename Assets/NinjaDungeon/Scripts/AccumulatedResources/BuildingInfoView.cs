@@ -44,21 +44,11 @@ public class BuildingInfoView : MonoBehaviour
         
         if (_attachPoint != null)
         {
-            UpdateViewPosition(_currentTransform, _parent, _attachPoint);
+            _currentTransform.anchoredPosition = UIUtility.WorldToCanvasPosition(_parent, _attachPoint);
         }
         else // on case the building was destroyed
         {
             Destroy(gameObject);
         }
-    }
-
-    private static void UpdateViewPosition(RectTransform currentTransform, RectTransform parent, Transform attachPoint)
-    {
-        var worldPoint = attachPoint.transform.position;
-        
-        var screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, worldPoint);
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(parent, screenPoint, null,
-            out var localPoint);
-        currentTransform.anchoredPosition = localPoint;
     }
 }

@@ -1,5 +1,5 @@
-using BuffSystem;
 using Enemies;
+using NinjaDungeon.Scripts.HealthBarSystem;
 using UnityEngine;
 
 namespace Characteristics
@@ -22,5 +22,15 @@ namespace Characteristics
         private Rigidbody _rigidbody;
         [SerializeField]
         private Transform _chest;
+
+        protected virtual void Start()
+        {
+            EventStreams.UserInterface.Publish(new PersonCreatedEvent(this));
+        }
+
+        protected void OnDestroy()
+        {
+            EventStreams.UserInterface.Publish(new PersonDestroyedEvent(this));
+        }
     }
 }

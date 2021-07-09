@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using DefaultNamespace;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Enemies.Spawner
@@ -19,7 +17,7 @@ namespace Enemies.Spawner
 
         private void Awake()
         {
-            EventBus.Publish<ISpawnHandler>(spawner => spawner.SetSpawner(this));
+            EventStreams.UserInterface.Publish(new SetSpawnerEvent(this));
         }
 
         private void Update()
@@ -39,7 +37,7 @@ namespace Enemies.Spawner
             }
             else
             {
-                EventBus.Publish<ISpawnHandler>(spawner => spawner.EndSpawn());
+                EventStreams.UserInterface.Publish(new EndSpawnEvent());
             }
         }
         

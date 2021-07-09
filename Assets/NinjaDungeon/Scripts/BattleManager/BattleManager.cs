@@ -3,9 +3,9 @@ using Assets.Scripts;
 using Assets.Scripts.BattleManager;
 using Assets.Scripts.Managers.ScreensManager;
 using Characteristics;
-using DefaultNamespace;
 using Enemies;
 using Enemies.Spawner;
+using SimpleEventBus.Disposables;
 using UnityEngine;
 
 namespace NinjaDungeon.Scripts.BattleManager
@@ -13,7 +13,7 @@ namespace NinjaDungeon.Scripts.BattleManager
     /// <summary>
     /// Класс контролирует бой (организует)
     /// </summary>
-    public class BattleManager : MonoBehaviour, ISpawnHandler
+    public class BattleManager : MonoBehaviour
     {
         public event Action IsLevelFinished;
         public bool HasLevelPassed { get; private set; }
@@ -27,6 +27,7 @@ namespace NinjaDungeon.Scripts.BattleManager
 
         private int _lastLevelIndex;
         private int _currentLevelIndex;
+        private CompositeDisposable _subscriptions;
 
         private void Awake()
         {
@@ -35,20 +36,24 @@ namespace NinjaDungeon.Scripts.BattleManager
             
             _healthBehaviour = MainManager.Player.GetComponent<HealthBehaviour>();
             _healthBehaviour.OnDead += PlayerDeath;
-            
-            EventBus.Subscribe<ISpawnHandler>(this);
+
+            _subscriptions = new CompositeDisposable()
+            {
+                EventStreams.UserInterface.Subscribe<EndSpawnEvent>(EndSpawn),
+                EventStreams.UserInterface.Subscribe<SetSpawnerEvent>(SetSpawner)
+            };
         }
-        
-        public void EndSpawn()
+
+        private void EndSpawn(EndSpawnEvent eventData)
         {
             HasLevelPassed = true;
             
             IsLevelFinished?.Invoke();
         }
         
-        public void SetSpawner(Spawner spawner)
+        private void SetSpawner(SetSpawnerEvent eventData)
         {
-            _spawner = spawner;
+            _spawner = eventData.Spawner;
             _spawner.Initialize();
             
             HasLevelPassed = false;
@@ -112,8 +117,7 @@ namespace NinjaDungeon.Scripts.BattleManager
 
         private void OnDestroy()
         {
-            EventBus.Unsubscribe<ISpawnHandler>(this);
-            
+            _subscriptions?.Dispose();
             _healthBehaviour.OnDead -= PlayerDeath;
         }
     }
