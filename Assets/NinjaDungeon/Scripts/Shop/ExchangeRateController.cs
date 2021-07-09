@@ -36,7 +36,7 @@ namespace Shop
         public void Initialize(ExchangeRate rate, float coefficient)
         {
             _playerCoefficient = coefficient;
-            _rateCoefficient = rate.ResultResource.Amount / rate.SourceResource.Amount;
+            _rateCoefficient = (float)rate.ResultResource.Amount / rate.SourceResource.Amount;
             _rate = rate;
 
             _exchangeButton.onClick.AddListener(ExchangeButtonClicked);
