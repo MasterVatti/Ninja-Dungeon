@@ -31,12 +31,17 @@ namespace Characteristics
             _animationController.ResetPlayer();
         }
         
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             HealthBehaviour.OnDead += _animationController.DeathAnimation;
         }
-        private void OnDestroy()
+        
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
+
             HealthBehaviour.OnDead -= _animationController.DeathAnimation;
         }
         
