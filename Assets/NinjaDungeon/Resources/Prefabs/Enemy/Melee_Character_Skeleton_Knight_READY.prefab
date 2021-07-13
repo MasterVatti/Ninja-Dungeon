@@ -278,10 +278,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2136287655a0b7a4eb31474d15cce149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buffManager: {fileID: 0}
   _personCharacteristics: {fileID: 3170371608700471104}
   _healthBehaviour: {fileID: 3170371608700471105}
   _rigidbody: {fileID: 3170371608700471111}
+  _chest: {fileID: 0}
+  _animationController: {fileID: 0}
 --- !u!114 &3170371608700471107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,13 +309,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHP: 200
-  _maxHp: 200
+  _maxHP: 0
   _moveSpeed: 5
   _attackDamage: 25
   _attackRate: 5
   _rotationSpeed: 0
   _canMove: 1
   _canAttack: 1
+  _isDeath: 0
 --- !u!114 &3170371608700471105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,7 +385,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 3170371608700471132}
   _personCharacteristics: {fileID: 3980817185791911915}
-  _stopChaseDistance: 12
+  _stopChaseDistanceMax: 12
+  _stopChaseDistanceMin: 0
+  _animationController: {fileID: 0}
+  _pandaBehaviour: {fileID: 0}
+  _attackRange: 0
   _golemPrefab: {fileID: 940516286941385097, guid: 6d3b558d5923e244ea8e825658415066,
     type: 3}
   _runBackDistance: 2
@@ -413,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecaccc676b5e10f4eaf93c5e5d80ecbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aggressionDistance: 20
+  _aggressionDistance: 70
 --- !u!114 &3980817185791911915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,13 +433,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHP: 0
-  _maxHp: 100
+  _maxHP: 0
   _moveSpeed: 3.5
   _attackDamage: 5
   _attackRate: 1
   _rotationSpeed: 3
   _canMove: 0
   _canAttack: 0
+  _isDeath: 0
 --- !u!114 &2620683445362324943
 MonoBehaviour:
   m_ObjectHideFlags: 0

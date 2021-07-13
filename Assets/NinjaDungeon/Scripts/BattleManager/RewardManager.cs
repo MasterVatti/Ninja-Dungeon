@@ -11,10 +11,12 @@ namespace Assets.Scripts.BattleManager
         
         private const int MIN_INDEX_RESOURCE = 0;
 
+        private int _experienceReward;
         private List<Resource> _reward;
 
         private void Start()
         {
+            _experienceReward = 0;
             _reward = new List<Resource>();
         }
 
@@ -26,6 +28,7 @@ namespace Assets.Scripts.BattleManager
             AddReward(rewardList);
             rewardList = nextLevel[currentLevelIndex].BonusReward;
             AddReward(rewardList);
+            AddExperience(roomSettings.LevelSettingsList[currentLevelIndex].UpperWorldExperienceAward);
         }
         
         public void AddReward(ResourceType type, int value)
@@ -37,6 +40,11 @@ namespace Assets.Scripts.BattleManager
             _reward[index] = resource;
         }
         
+        public List<Resource> GetResources()
+        {
+            return _reward;
+        }
+        
         private void AddReward(IEnumerable<Resource> resources)
         {
             foreach (var resource in resources)
@@ -44,6 +52,12 @@ namespace Assets.Scripts.BattleManager
                 AddReward(resource.Type, resource.Amount);
             }
         }
+        
+        private void AddExperience(int experience)
+        {
+            _experienceReward += experience;
+        }
+
         
         private int GetResourceIndexByType(ResourceType type)
         {
@@ -63,14 +77,10 @@ namespace Assets.Scripts.BattleManager
             _reward.Add(new Resource { Amount = 0, Type = type });
         }
         
-        public List<Resource> GetResources()
-        {
-            return _reward;
-        }
-        
         public void AccrueReward()
         {
             MainManager.ResourceManager.AddResource(_reward);
+            MainManager.Player.ExperienceControllerUpperWorld.AddExperience(_experienceReward);
         }
     }
 }

@@ -5,6 +5,8 @@ using Characteristics;
 using JetBrains.Annotations;
 using ProjectileLauncher;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Assertions.Must;
 
 namespace Enemies
 {

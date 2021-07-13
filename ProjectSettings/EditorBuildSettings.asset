@@ -24,14 +24,14 @@ EditorBuildSettings:
     path: Assets/NinjaDungeon/Scenes/Dungeon/Room/Light/Level_4Light.unity
     guid: 7a311eb723232b64ca76424b4bbb8f86
   - enabled: 1
+    path: Assets/NinjaDungeon/Scenes/Dungeon/Room/Light/Level_5Light.unity
+    guid: 9382c6c0241673d4c901baccfbd00d11
+  - enabled: 1
     path: Assets/NinjaDungeon/Scenes/Dungeon/Room/Hard/Level_1Hard.unity
     guid: e295382cddeee9348a446662728f9a70
   - enabled: 1
     path: Assets/NinjaDungeon/Scenes/Dungeon/Room/Hard/Level_2Hard.unity
     guid: d7138ebcece33f54697a244873ea61ca
-  - enabled: 1
-    path: Assets/NinjaDungeon/Scenes/Dungeon/Room/Light/Level_5Light.unity
-    guid: 9382c6c0241673d4c901baccfbd00d11
   - enabled: 1
     path: Assets/NinjaDungeon/Scenes/StartScene.unity
     guid: eede91214910d8a44b5d2eb342014a2f

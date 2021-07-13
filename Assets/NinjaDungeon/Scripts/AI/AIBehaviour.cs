@@ -37,8 +37,11 @@ namespace Barracks_and_allied_behavior
         protected IAttackBehaviour _attackBehaviour;
         protected IMovementBehavior _movementBehavior;
 
+        private Collider _collider;
+
         protected void Awake()
         {
+            _collider = GetComponent<Collider>();
             _attackBehaviour.IsAttack += _animationController.AttackAnimation;
         }
 
@@ -47,6 +50,7 @@ namespace Barracks_and_allied_behavior
             if (_personCharacteristics.IsDeath)
             {
                 _pandaBehaviour.enabled = false;
+                _collider.enabled = false;
                 _agent.isStopped = true;
             }
         }

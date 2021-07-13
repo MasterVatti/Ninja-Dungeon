@@ -170,7 +170,7 @@ MonoBehaviour:
   autoReset: 1
   tickOn: 0
   sourceInfos:
-  - isFoldout: 1
+  - isFoldout: 0
     breakPoints: 
     breakPointStatuses: 
     collapsedLines: 
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecaccc676b5e10f4eaf93c5e5d80ecbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aggressionDistance: 20
+  _aggressionDistance: 1000
 --- !u!114 &4064759709907137379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +294,7 @@ MonoBehaviour:
   _stopChaseDistanceMin: 11.5
   _animationController: {fileID: 3530103001745665312}
   _pandaBehaviour: {fileID: 4743675034957756941}
+  _attackRange: 0
   _golemPrefab: {fileID: 140808, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}
   _runBackDistance: 3
   _lowHealthThreshold: 30
@@ -339,7 +340,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 28.140095
-  m_Center: {x: 0, y: 1.1920655, z: -10.8613405}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5978981134792347142
 MonoBehaviour:
   m_ObjectHideFlags: 0
