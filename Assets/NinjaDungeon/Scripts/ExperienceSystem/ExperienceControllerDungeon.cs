@@ -11,7 +11,12 @@ namespace ExperienceSystem
     public class ExperienceControllerDungeon : ExperienceController
     {
         public event Action<int> OnLevelUp;
-        
+
+        [Header("For raising the level")]
+        [Range(0, 100)]
+        [SerializeField]
+        private float _percentageRecovery;
+
         private PlayerCharacteristics _playerCharacteristics;
         
         void Start()
@@ -32,11 +37,14 @@ namespace ExperienceSystem
         public override void LevelUp()
         {
             var maximumExperience = _playerCharacteristics.MaximumExperienceLevelDungeon;
-            
+
             _playerCharacteristics.LevelDungeon++;
             _playerCharacteristics.ExperienceDungeon -= maximumExperience;
             _playerCharacteristics.MaximumExperienceLevelDungeon += maximumExperience;
             
+            var healAmount = _playerCharacteristics.MaxHp * (_percentageRecovery / 100f);
+            MainManager.Player.HealthBehaviour.HealthRecovery((int) healAmount);
+
             OnLevelUp?.Invoke(_playerCharacteristics.LevelDungeon);
             MainManager.ScreenManager.OpenScreen(ScreenType.BuffScreen);
         }

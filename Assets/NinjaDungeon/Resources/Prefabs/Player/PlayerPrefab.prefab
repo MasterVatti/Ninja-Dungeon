@@ -176,7 +176,7 @@ MonoBehaviour:
   _currentHP: 150
   _maxHP: 150
   _moveSpeed: 6
-  _attackDamage: 10
+  _attackDamage: 50
   _attackRate: 1
   _rotationSpeed: 5
   _canMove: 1
@@ -217,6 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f6b8953c830574e88e51dd502eec6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _percentageRecovery: 40
 --- !u!64 &2318485965713204838
 MeshCollider:
   m_ObjectHideFlags: 0

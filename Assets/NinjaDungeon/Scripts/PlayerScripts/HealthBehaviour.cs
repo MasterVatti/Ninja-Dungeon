@@ -39,7 +39,14 @@ namespace Enemies
                 OnDead?.Invoke(_person);
             }
         }
-        
+
+        public void HealthRecovery(int recovery)
+        {
+            var characteristics = _person.PersonCharacteristics;
+            var newHp = characteristics.CurrentHp + recovery;
+            _person.PersonCharacteristics.CurrentHp = newHp >= characteristics.MaxHp ? characteristics.MaxHp : newHp;
+        }
+
         public void ApplyDamage(Team damageDealerTeam, int damage)
         {
             if (damageDealerTeam == _team || _person.PersonCharacteristics.IsDeath)
