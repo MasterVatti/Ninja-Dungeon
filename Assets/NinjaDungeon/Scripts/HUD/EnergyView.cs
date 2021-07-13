@@ -20,7 +20,7 @@ namespace HUD
 
         private void Start()
         {
-            _energyManager = UpperWorldManager.EnergyManager;
+            _energyManager = MainManager.EnergyManager;
             _sliderEnergy.maxValue = _energyManager.MaximalEnergy;
         }
         

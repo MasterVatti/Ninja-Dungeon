@@ -1,5 +1,6 @@
 using Characteristics;
 using Enemies;
+using Energy;
 using LoadingScene;
 using Managers;
 using Managers.ScreensManager;
@@ -17,6 +18,7 @@ public class MainManager : Singleton<MainManager>
     public static Ally Ally => Instance._ally;
     public static IconsProvider IconsProvider => Instance._iconsProvider;
     public static JoystickController JoystickController => Instance._joystickController;
+    public static EnergyManager EnergyManager => Instance._energyManager;
   
     [SerializeField]
     private JoystickController _joystickController;
@@ -31,7 +33,9 @@ public class MainManager : Singleton<MainManager>
     [SerializeField]
     private Player _player; 
     [SerializeField]
-    private IconsProvider _iconsProvider;
+    private IconsProvider _iconsProvider; 
+    [SerializeField]
+    private EnergyManager _energyManager;
     [SerializeField]
     private Vector3 _spawnPositionPlayer;
 

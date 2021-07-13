@@ -18,8 +18,11 @@ namespace MagicianFolder
         private GameObject _golemPrefab;
         [SerializeField]
         private float _runBackDistance;
+        [Header("Between")]
         [SerializeField]
-        private float _lowHealthThreshold;
+        private float _lowHealthThresholdFrom = 10;
+        [SerializeField]
+        private float _lowHealthThresholdTo = 30;
         
         private bool _isGolemCreated;
         
@@ -60,7 +63,7 @@ namespace MagicianFolder
         [Task]
         private bool IsTimeToSpawnGolem()
         {
-            return _personCharacteristics.CurrentHp <= _lowHealthThreshold;
+            return _personCharacteristics.CurrentHp <= _lowHealthThresholdTo && _personCharacteristics.CurrentHp >= _lowHealthThresholdFrom;
         }
         
     }

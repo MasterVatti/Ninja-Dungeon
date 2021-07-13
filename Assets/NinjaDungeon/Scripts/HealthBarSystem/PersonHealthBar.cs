@@ -16,6 +16,7 @@ namespace NinjaDungeon.Scripts.HealthBarSystem
 
         private PersonCharacteristics _personCharacteristics;
         private int _lastHp = Int32.MinValue;
+        private int _lastMaxHp;
         private RectTransform _transform;
         private RectTransform _parent;
 
@@ -29,13 +30,15 @@ namespace NinjaDungeon.Scripts.HealthBarSystem
         public void Initialize(Person person)
         {
             _personCharacteristics = person.PersonCharacteristics;
+            _lastMaxHp = _personCharacteristics.MaxHp;
         }
 
         private void Update()
         {
             _transform.anchoredPosition = UIUtility.WorldToCanvasPosition(_parent, _personCharacteristics.transform);
             
-            if (_personCharacteristics != null && _lastHp != _personCharacteristics.CurrentHp)
+            if (_personCharacteristics != null && (_lastHp != _personCharacteristics.CurrentHp 
+                                                   || _lastMaxHp != _personCharacteristics.MaxHp))
             {
                 _currentHealth.text = $"{_personCharacteristics.CurrentHp} / " +
                                       $"{_personCharacteristics.MaxHp}";

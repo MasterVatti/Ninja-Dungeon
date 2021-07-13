@@ -20,6 +20,8 @@
         InsufficientResources = 11,
         DeathScreen = 12,
         BarrackScreen = 13,
-        InsufficientEnergy = 14
+        InsufficientEnergy = 14,
+        SettingsScreen = 15,
+        AcceptScreen = 16
     }
 }

@@ -30,13 +30,13 @@ namespace NinjaDungeon.Scripts.Portal
 
             _textEnertyCost.text = _energyCost.ToString();
 
-            _portalAnimatorController.ChangeButtonColor(UpperWorldManager.EnergyManager.HasEnoughEnergy(_energyCost));
+            _portalAnimatorController.ChangeButtonColor(MainManager.EnergyManager.HasEnoughEnergy(_energyCost));
         }
     
         [UsedImplicitly]
         public override void OnClick()
         {
-            if (UpperWorldManager.EnergyManager.HasEnoughEnergy(_energyCost))
+            if (MainManager.EnergyManager.HasEnoughEnergy(_energyCost))
             {
                 UpperWorldManager.SaveLoadManager.Save();
                 TransitionStage();
@@ -58,7 +58,7 @@ namespace NinjaDungeon.Scripts.Portal
         {
             base.TransitionStage();
         
-            UpperWorldManager.EnergyManager.DecreaseEnergy(_energyCost);
+            MainManager.EnergyManager.DecreaseEnergy(_energyCost);
         }
     }
 }

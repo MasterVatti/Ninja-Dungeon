@@ -23396,7 +23396,6 @@ GameObject:
   - component: {fileID: 1554468083}
   - component: {fileID: 1554468082}
   - component: {fileID: 1554468081}
-  - component: {fileID: 1554468080}
   - component: {fileID: 1554468085}
   m_Layer: 0
   m_Name: UpperWorldManager
@@ -23405,20 +23404,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1554468080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554468079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0851597b96b2b584ba6b06a0af0832f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maximalEnergy: 100
-  _oneEnergyRestoreTimeSec: 5
 --- !u!114 &1554468081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23507,7 +23492,6 @@ MonoBehaviour:
   _saveLoadManager: {fileID: 1554468085}
   _animationManager: {fileID: 1554468082}
   _buildingManager: {fileID: 1554468081}
-  _energyManager: {fileID: 1554468080}
 --- !u!4 &1554468084
 Transform:
   m_ObjectHideFlags: 0

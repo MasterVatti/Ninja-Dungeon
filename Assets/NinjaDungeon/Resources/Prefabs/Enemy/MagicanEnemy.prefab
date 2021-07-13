@@ -297,7 +297,8 @@ MonoBehaviour:
   _attackRange: 0
   _golemPrefab: {fileID: 140808, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}
   _runBackDistance: 3
-  _lowHealthThreshold: 30
+  _lowHealthThresholdFrom: 10
+  _lowHealthThresholdTo: 30
 --- !u!65 &5730384047712595652
 BoxCollider:
   m_ObjectHideFlags: 0

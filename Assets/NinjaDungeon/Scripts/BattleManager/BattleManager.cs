@@ -66,10 +66,13 @@ namespace NinjaDungeon.Scripts.BattleManager
 
         public void GoToNextLevel(RoomSettings roomSettings, Vector3 teleportPosition)
         {
+            if (IsLastLevelPassed())
+            {
+                return;
+            }
+
             DungeonManager.RewardManager.LevelRewardAccrual(roomSettings, _currentLevelIndex);
-            
             _currentLevelIndex++;
-            
             var nextLevelIndex = roomSettings.LevelSettingsList[_currentLevelIndex];
             
             if (IsLastLevelPassed())

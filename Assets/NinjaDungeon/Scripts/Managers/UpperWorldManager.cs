@@ -10,7 +10,6 @@ namespace NinjaDungeon.Scripts.Managers
     {
         public static AnimationManager AnimationManager => Instance._animationManager;
         public static BuildingManager BuildingManager => Instance._buildingManager;
-        public static EnergyManager EnergyManager => Instance._energyManager;
         public static SaveLoadManager SaveLoadManager => Instance._saveLoadManager;
 
         [SerializeField]
@@ -19,8 +18,6 @@ namespace NinjaDungeon.Scripts.Managers
         private AnimationManager _animationManager;    
         [SerializeField]
         private BuildingManager _buildingManager;
-        [SerializeField]
-        private EnergyManager _energyManager;
 
         private void Start()
         {
