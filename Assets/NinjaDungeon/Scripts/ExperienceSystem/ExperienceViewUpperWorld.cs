@@ -13,9 +13,9 @@ namespace ExperienceSystem
         private void Start()
         {
             _player = MainManager.Player;
-            _playerCharacteristics = (PlayerCharacteristics)_player.PersonCharacteristics;
-
-            ShowLevel(_playerCharacteristics.LevelDungeon);
+            _playerCharacteristics = (PlayerCharacteristics) _player.PersonCharacteristics;
+            ShowLevel(_playerCharacteristics.LevelUpperWorld);
+          
             _player.ExperienceControllerUpperWorld.OnLevelUp += ShowLevel;
         }
 

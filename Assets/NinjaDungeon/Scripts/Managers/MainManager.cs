@@ -19,7 +19,10 @@ public class MainManager : Singleton<MainManager>
     public static IconsProvider IconsProvider => Instance._iconsProvider;
     public static JoystickController JoystickController => Instance._joystickController;
     public static EnergyManager EnergyManager => Instance._energyManager;
-  
+    public static SaveLoadManager SaveLoadManager => Instance._saveLoadManager;
+
+    [SerializeField]
+    private SaveLoadManager _saveLoadManager;
     [SerializeField]
     private JoystickController _joystickController;
     [SerializeField]

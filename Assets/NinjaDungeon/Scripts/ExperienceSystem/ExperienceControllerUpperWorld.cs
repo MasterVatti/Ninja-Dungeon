@@ -11,18 +11,18 @@ namespace ExperienceSystem
         public event Action<int> OnLevelUp;
 
         private PlayerCharacteristics _playerCharacteristics;
-        
-        void Start()
+
+        private void Awake()
         {
             _playerCharacteristics = GetComponent<PlayerCharacteristics>();
         }
         
         public override void AddExperience(int value)
         {
-            _playerCharacteristics.ExperienceUpperWorld += value;
-
-            if (_playerCharacteristics.ExperienceUpperWorld >= _playerCharacteristics.MaximumExperienceLevelUpperWorld && !IsLevelMax())
+            var experienceUpperWorld = _playerCharacteristics.ExperienceUpperWorld + value;
+            if (experienceUpperWorld >= _playerCharacteristics.MaximumExperienceLevelUpperWorld && !IsLevelMax())
             {
+                _playerCharacteristics.ExperienceUpperWorld = experienceUpperWorld;
                 LevelUp();
             }
         }
@@ -34,8 +34,18 @@ namespace ExperienceSystem
             _playerCharacteristics.LevelUpperWorld++;
             _playerCharacteristics.ExperienceUpperWorld -= maximumExperience;
             _playerCharacteristics.MaximumExperienceLevelUpperWorld += maximumExperience;
-
             OnLevelUp?.Invoke(_playerCharacteristics.LevelUpperWorld);
+            
+            HasOverkillExperience();
+        }
+
+        private void HasOverkillExperience()
+        {
+            if (_playerCharacteristics.ExperienceUpperWorld >= _playerCharacteristics.MaximumExperienceLevelUpperWorld)
+            {
+                LevelUp();
+                HasOverkillExperience();
+            }
         }
 
         public override bool IsLevelMax()

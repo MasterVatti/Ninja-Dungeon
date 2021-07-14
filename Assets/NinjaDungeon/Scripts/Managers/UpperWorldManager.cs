@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using Characteristics;
 using Energy;
 using Managers;
 using UnityEngine;
@@ -10,17 +11,15 @@ namespace NinjaDungeon.Scripts.Managers
     {
         public static AnimationManager AnimationManager => Instance._animationManager;
         public static BuildingManager BuildingManager => Instance._buildingManager;
-        public static SaveLoadManager SaveLoadManager => Instance._saveLoadManager;
-
-        [SerializeField]
-        private SaveLoadManager _saveLoadManager;
+       
         [SerializeField]
         private AnimationManager _animationManager;    
         [SerializeField]
         private BuildingManager _buildingManager;
 
-        private void Start()
+        private void Awake()
         {
+            MainManager.SaveLoadManager.LoadAll();
             SceneManager.sceneLoaded += GoToDungeon;
         }
 

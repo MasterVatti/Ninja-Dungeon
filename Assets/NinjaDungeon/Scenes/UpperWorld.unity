@@ -23396,7 +23396,6 @@ GameObject:
   - component: {fileID: 1554468083}
   - component: {fileID: 1554468082}
   - component: {fileID: 1554468081}
-  - component: {fileID: 1554468085}
   m_Layer: 0
   m_Name: UpperWorldManager
   m_TagString: Untagged
@@ -23489,7 +23488,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161ca10b40f65194bafc43efbe443ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _saveLoadManager: {fileID: 1554468085}
   _animationManager: {fileID: 1554468082}
   _buildingManager: {fileID: 1554468081}
 --- !u!4 &1554468084
@@ -23506,19 +23504,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1554468085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554468079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48bc5048d7a44affb226562157c36502, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _saveConfig: {fileID: 11400000, guid: ae83a7f0959f5004cb46c2124e052c33, type: 2}
 --- !u!1001 &1578377126
 PrefabInstance:
   m_ObjectHideFlags: 0

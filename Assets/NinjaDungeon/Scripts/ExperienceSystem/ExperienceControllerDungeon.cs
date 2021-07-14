@@ -46,7 +46,17 @@ namespace ExperienceSystem
             MainManager.Player.HealthBehaviour.HealthRecovery((int) healAmount);
 
             OnLevelUp?.Invoke(_playerCharacteristics.LevelDungeon);
+            HasOverkillExperience();
             MainManager.ScreenManager.OpenScreen(ScreenType.BuffScreen);
+        }
+        
+        private void HasOverkillExperience()
+        {
+            if (_playerCharacteristics.ExperienceDungeon >= _playerCharacteristics.MaximumExperienceLevelDungeon)
+            {
+                LevelUp();
+                HasOverkillExperience();
+            }
         }
 
         public override bool IsLevelMax()

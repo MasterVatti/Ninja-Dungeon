@@ -319,6 +319,7 @@ GameObject:
   - component: {fileID: 70055938}
   - component: {fileID: 70055937}
   - component: {fileID: 70055939}
+  - component: {fileID: 70055940}
   m_Layer: 0
   m_Name: MainManager
   m_TagString: Untagged
@@ -338,6 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973d4aeba44250b499bd5bbc64a1bb2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _saveLoadManager: {fileID: 70055940}
   _joystickController: {fileID: 257129341}
   _loadingController: {fileID: 905458423}
   _resourceManager: {fileID: 1956070342}
@@ -383,6 +385,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maximalEnergy: 100
   _oneEnergyRestoreTimeSec: 5
+--- !u!114 &70055940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70055936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48bc5048d7a44affb226562157c36502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _saveConfig: {fileID: 11400000, guid: ae83a7f0959f5004cb46c2124e052c33, type: 2}
 --- !u!1 &195760962
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,7 +1113,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -60}
+  m_AnchoredPosition: {x: 0, y: -35}
   m_SizeDelta: {x: 400.4971, y: -174.4076}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &889525655
@@ -1707,7 +1722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.59607846}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
