@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Managers.ScreensManager;
 using HUD;
+using TMPro;
 using UnityEngine;
 
 namespace NinjaDungeon.Scripts.BattleManager
@@ -10,9 +11,13 @@ namespace NinjaDungeon.Scripts.BattleManager
         private Transform _transformCreateRewardLabel;
         [SerializeField]
         private ResourceRewardLabel _prefabRewardLabel;
+        [SerializeField]
+        private TextMeshProUGUI _textExperienceReward;
         
         public override void ApplyContext(RewardScreenContext context)
         {
+            _textExperienceReward.text = context.ExperienceReward.ToString();
+            
             foreach (var rewardedResource in context.RewardedResources)
             {
                 var rewardLabel = Instantiate(_prefabRewardLabel, _transformCreateRewardLabel);

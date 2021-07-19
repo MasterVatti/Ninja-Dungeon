@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using Assets.Scripts.BattleManager;
 using Assets.Scripts.Managers.ScreensManager;
 using Characteristics;
@@ -77,7 +78,9 @@ namespace NinjaDungeon.Scripts.BattleManager
             
             if (IsLastLevelPassed())
             {
-                var context = new RewardScreenContext(DungeonManager.RewardManager.GetResources());
+                var rewardResource = DungeonManager.RewardManager.GetResources();
+                var rewardExperience = DungeonManager.RewardManager.ExperienceReward;
+                var context = new RewardScreenContext(rewardResource, rewardExperience);
                 MainManager.ScreenManager.OpenScreenWithContext(ScreenType.RewardScreen, context);
                 
                 DungeonManager.RewardManager.AccrueReward();

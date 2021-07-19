@@ -7,7 +7,9 @@ namespace Assets.Scripts.BattleManager
 {
     public class RewardManager : MonoBehaviour
     {
-        public event Action<Resource,int> OnResourceAmountChanged; 
+        public event Action<Resource,int> OnResourceAmountChanged;
+
+        public int ExperienceReward => _experienceReward;
         
         private const int MIN_INDEX_RESOURCE = 0;
 

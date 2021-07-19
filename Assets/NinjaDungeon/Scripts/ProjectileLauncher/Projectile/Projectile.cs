@@ -33,6 +33,7 @@ namespace ProjectileLauncher
         {
             Debug.DrawLine(transform.position, transform.position + _direction * 100, Color.red);
             _rigidbody.velocity = _direction * _projectileSpeed;
+            transform.forward = _rigidbody.velocity;
         }
 
         private void DealDamage(Collision collision)
