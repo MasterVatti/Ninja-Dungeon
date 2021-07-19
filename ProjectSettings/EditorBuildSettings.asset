@@ -5,22 +5,37 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/SimpleNaturePack/Scenes/SimpleNaturePack_Demo.unity
-    guid: 5e7af4bd95ac53a4cb784a9eedf8f6f9
-  - enabled: 1
-    path: Assets/Scenes/Dungeon scene and room with enemies/DungeonTest.unity
+    path: Assets/NinjaDungeon/Scripts/BattleManager/LevelLogic/DungeonDoorsRoom.unity
     guid: 24c4de5edfcec0d4b859c69a7b627d0e
   - enabled: 1
-    path: Assets/Scenes/Dungeon scene and room with enemies/RoomLightTest.unity
-    guid: 4a943aab3f3a252408553087c3e58674
+    path: Assets/NinjaDungeon/Scenes/Dungeon/Room/LevelSelection.unity
+    guid: 91517537eba2bf6419682d62b5e58dcc
   - enabled: 1
-    path: Assets/Scenes/Dungeon scene and room with enemies/RoomNormalTest.unity
-    guid: cf472504f955f8543be48c8081cde153
+    path: Assets/NinjaDungeon/Scenes/Dungeon/Room/Light/Level_1Light.unity
+    guid: 663389016921aa64dad3549daf5b0bf1
   - enabled: 1
-    path: Assets/Scenes/Dungeon scene and room with enemies/RoomHardTest.unity
-    guid: 13a881b67b0ac8142896d98a505069d4
+    path: Assets/NinjaDungeon/Scenes/Dungeon/Room/Light/Level_2Light.unity
+    guid: 9d46718b1ea5fd74f99633b6bb02a85a
+  - enabled: 1
+    path: Assets/NinjaDungeon/Scenes/Dungeon/Room/Light/Level_3Light.unity
+    guid: 7a4b128007989ac408e594392c0beec7
+  - enabled: 1
+    path: Assets/NinjaDungeon/Scenes/Dungeon/Room/Light/Level_4Light.unity
+    guid: 7a311eb723232b64ca76424b4bbb8f86
+  - enabled: 1
+    path: Assets/NinjaDungeon/Scenes/Dungeon/Room/Light/Level_5Light.unity
+    guid: 9382c6c0241673d4c901baccfbd00d11
+  - enabled: 1
+    path: Assets/NinjaDungeon/Scenes/Dungeon/Room/Hard/Level_1Hard.unity
+    guid: e295382cddeee9348a446662728f9a70
+  - enabled: 1
+    path: Assets/NinjaDungeon/Scenes/Dungeon/Room/Hard/Level_2Hard.unity
+    guid: d7138ebcece33f54697a244873ea61ca
+  - enabled: 1
+    path: Assets/NinjaDungeon/Scenes/StartScene.unity
+    guid: eede91214910d8a44b5d2eb342014a2f
+  - enabled: 1
+    path: Assets/NinjaDungeon/Scenes/UpperWorld.unity
+    guid: b5ac1b23629a046aa897022d5d837e07
   m_configObjects: {}

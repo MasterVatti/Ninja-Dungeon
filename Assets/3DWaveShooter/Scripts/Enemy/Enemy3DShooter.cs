@@ -27,7 +27,7 @@ public class Enemy3DShooter : MonoBehaviour
 
     [Header("Components")]
     public Rigidbody rig; //Enemy's Rigidbody component.
-    public EnemyAI ai; //Enemy's EnemyAI component.
+    public EnemyAI3D ai; //Enemy's EnemyAI component.
     public AudioSource audioSource; //Enemy's Audio Source component.
     public Animator anim; //Enemy's Animator component.
     public Material defaultMaterial; //Enemy's default material.
@@ -37,7 +37,7 @@ public class Enemy3DShooter : MonoBehaviour
     {
         //Get missing components.
         if (!rig) rig = GetComponent<Rigidbody>();
-        if (!ai) ai = GetComponent<EnemyAI>();
+        if (!ai) ai = GetComponent<EnemyAI3D>();
         if (!audioSource) audioSource = GetComponent<AudioSource>();
         if (!anim)
             anim = transform.Find("EnemyModel").GetComponent<Animator>();

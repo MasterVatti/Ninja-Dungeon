@@ -1,0 +1,15 @@
+tree("Root")
+    fallback
+        tree("Attack")
+        tree("Follow")
+
+
+tree("Chase")
+        Chase
+
+tree("Follow")
+    sequence
+        while not IsEnemyInSight
+            sequence
+                IsTherePlayer
+                FollowPlayer

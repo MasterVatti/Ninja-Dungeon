@@ -1,0 +1,18 @@
+tree("Root")
+    tree("TopNode")
+//Бежит на точку к игроку.
+//Если игрок на в радиусе атаки, атакует.
+//Станится на 2 сек и опять бежит на точку к игроку.
+
+tree("TopNode")
+        sequence
+            while IsEnemyInSight
+                sequence
+                    SetTargetPosition
+                    MoveToDestination
+                    tree("Attack")
+                    Wait 0.5
+tree("Attack")
+    sequence
+        IsAtRequiredDistance(2.5)
+        Attack

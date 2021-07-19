@@ -1,0 +1,11 @@
+tree("Attack")
+  fallback  
+    while IsEnemyInSight
+        sequence
+            tree("Chase")
+            IsAtRequiredDistance(14.0)
+            tree("Shoot")
+                   
+tree("Shoot")
+    while IsEnemyInSight
+        Shooting

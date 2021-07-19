@@ -1,0 +1,18 @@
+tree("Attack")
+  fallback
+    while IsEnemyInSight
+        sequence
+            IncreaseSpeed
+            tree("Chase")
+            tree("ToDamage")
+        
+    sequence
+            not IsEnemyInSight
+            SlowDown
+            tree("Follow")  
+              
+tree("ToDamage")
+    sequence
+            IsAtRequiredDistance(3.0)
+            Attack
+              
