@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Globalization;
 using ResourceSystem;
@@ -42,6 +43,8 @@ public class ResourceLabel : MonoBehaviour
 
             yield return null;
         }
+
+        Label.text = newAmount.ToString();
         _elapsedTime = 0;
     }
 

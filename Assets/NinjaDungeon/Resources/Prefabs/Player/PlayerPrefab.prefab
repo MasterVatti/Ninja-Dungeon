@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 606104109711830386}
-  _rotationSpeed: 1
+  _rotationSpeed: 5
 --- !u!114 &6569569414913486472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentHP: 150
   _maxHP: 150
-  _moveSpeed: 6
+  _moveSpeed: 8
   _attackDamage: 50
   _attackRate: 1
   _rotationSpeed: 5

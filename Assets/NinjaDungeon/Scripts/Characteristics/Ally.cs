@@ -15,6 +15,7 @@ namespace NinjaDungeon.Scripts.Characteristics
         public void PortingToPlayer()
         {
             _agent.transform.position = MainManager.Player.transform.position - Vector3.forward;
+            
             _agent.updatePosition = false;
             _agent.updatePosition = true;
             //TODO: Тут более изящнее решение нужно найти не нравиться как выглядит.

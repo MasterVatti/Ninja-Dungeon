@@ -102,7 +102,7 @@ namespace Barracks_and_allied_behavior
         [Task]
         protected void FollowPlayer()
         {
-            _followBehavior.FollowPlayer();
+           // _followBehavior.FollowPlayer();
         }
 
         [Task]
