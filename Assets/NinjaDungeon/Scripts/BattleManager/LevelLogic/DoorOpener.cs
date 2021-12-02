@@ -13,7 +13,7 @@ namespace NinjaDungeon.Scripts.BattleManager.LevelLogic
         private void Start()
         {
             var playerCharacteristics = (PlayerCharacteristics) MainManager.Player.PersonCharacteristics;
-            if (playerCharacteristics.LevelUpperWorld >= _requiredLevel)
+            if (playerCharacteristics.LevelUpperWorld < _requiredLevel)
             {
                 _boxCollider.isTrigger = false;
             }
